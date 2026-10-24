@@ -5,6 +5,9 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useT } from "./i18n/I18nProvider";
+import { joinList, type PlainKey } from "./i18n/strings";
+import { DetailsForm, useDetails } from "./DetailsForm";
+import { fillLetter, leftovers, type Slot } from "./letterFill";
 import { PrintLetters, printLetters } from "./PrintLetters";
 import { SendGuide } from "./SendGuide";
 import type { CaseView, Letter } from "./types";
@@ -41,11 +44,31 @@ function GrowingText(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea ref={ref} rows={1} {...props} />;
 }
 
+const SLOT_KEY: Record<Exclude<Slot, "date">, PlainKey> = {
+  name: "letters.dName",
+  street: "letters.dStreet",
+  city: "letters.dCity",
+  address: "letters.dStreet",
+  phone: "letters.dPhone",
+  email: "letters.dEmail",
+  dob: "letters.dDob",
+};
+
+/** A gentle note listing the brackets still in the letter. */
+function StillMissing({ letter }: { letter: Letter }) {
+  const { t, lang } = useT();
+  const left = leftovers(letter);
+  if (!left.length) return null;
+  const names = [...new Set(left.map((x) => (x.slot && x.slot !== "date" ? t(SLOT_KEY[x.slot]).replace(/ \(.*\)$/, "") : x.label)))];
+  return <p className="letter-missing">{t("letters.stillMissing", { list: joinList(lang, names) })}</p>;
+}
+
 function LetterSheet({
   letter,
   onChange,
   readOnly,
 }: {
+  /** The letter with the patient's details already put in. */
   letter: Letter;
   onChange: (l: Letter) => void;
   readOnly: boolean;
@@ -55,9 +78,10 @@ function LetterSheet({
   const title = lang === "en" ? letter.title : t(letter.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute");
   const patientCopy = letter.bodyPatient ? [letter.subjectPatient, letter.bodyPatient].filter(Boolean).join("\n\n") : null;
   const slug = letter.kind === "assistance" ? "financial-assistance-request" : "billing-questions";
-  return (
-    <article className="letter">
-      <h3 className="letter-title">{title}</h3>
+  const spanishFirst = lang === "es" && !!patientCopy;
+
+  const english = (
+    <>
       {lang !== "en" && <p className="quiet letter-lang-note">{t("letters.sentInEnglish")}</p>}
       <label className="letter-field">
         <span>{t("letters.subject")}</span>
@@ -65,6 +89,7 @@ function LetterSheet({
           className="letter-subject"
           value={letter.subject}
           readOnly={readOnly}
+          lang="en"
           onChange={(e) => onChange({ ...letter, subject: e.target.value.replace(/\n/g, " ") })}
         />
       </label>
@@ -92,17 +117,36 @@ function LetterSheet({
           {t("letters.download")}
         </button>
       </div>
+    </>
+  );
+
+  const spanish = patientCopy && (
+    <div className="letter-patient-copy" lang="es">
+      <h4 className="letter-patient-h">{t("letters.patientCopyH")}</h4>
+      <p className="quiet">{t("letters.patientCopyNote")}</p>
+      <div className="letter-patient-text">{patientCopy}</div>
+    </div>
+  );
+
+  return (
+    <article className="letter">
+      <h3 className="letter-title">{title}</h3>
+      {spanishFirst ? (
+        <>
+          {spanish}
+          <details className="letter-english">
+            <summary>{t("letters.englishToggle")}</summary>
+            <div className="letter-english-in">{english}</div>
+          </details>
+        </>
+      ) : (
+        english
+      )}
+      <StillMissing letter={letter} />
       <button className="btn btn-big letter-print" type="button" onClick={() => printLetters(letter.kind, letter.title)}>
         {t("print.one")}
       </button>
-      {/\[[^\]\n]+\]/.test(letter.subject + letter.body) && <p className="quiet letter-print-note">{t("print.brackets")}</p>}
-      {patientCopy && (
-        <div className="letter-patient-copy" lang="es">
-          <h4 className="letter-patient-h">{t("letters.patientCopyH")}</h4>
-          <p className="quiet">{t("letters.patientCopyNote")}</p>
-          <div className="letter-patient-text">{patientCopy}</div>
-        </div>
-      )}
+      {!spanishFirst && spanish}
     </article>
   );
 }
@@ -113,10 +157,11 @@ export function Letters({ c }: { c: CaseView }) {
   const unapprove = useMutation(api.cases.unapprove);
   const [edits, setEdits] = useState<Letter[] | null>(null);
   const [busy, setBusy] = useState(false);
-  const letters = edits ?? c.letters ?? null;
+  const [details, setDetails] = useDetails(c);
+  const raw = edits ?? c.letters ?? null;
   const approved = c.status === "approved";
 
-  if (!letters) {
+  if (!raw) {
     return (
       <section className="letters">
         <h2 className="h-section">{t("letters.h")}</h2>
@@ -125,7 +170,11 @@ export function Letters({ c }: { c: CaseView }) {
     );
   }
 
+  // Everything shown, printed, copied, emailed and approved has the patient's details in it.
+  const letters = raw.map((l) => fillLetter(l, details));
+  // An edit is made to the filled text, so the details typed so far stay in the letter.
   const update = (i: number, l: Letter) => setEdits(letters.map((x, j) => (j === i ? l : x)));
+  const showDetails = !approved || letters.some((l) => leftovers(l).some((x) => x.slot && x.slot !== "date"));
 
   return (
     <section className="letters" aria-labelledby="letters-h">
@@ -159,12 +208,13 @@ export function Letters({ c }: { c: CaseView }) {
         <p className="lede">{t("letters.lede")}</p>
       )}
 
-      <PrintLetters c={c} letters={letters} />
+      {showDetails && <DetailsForm details={details} onChange={setDetails} />}
+
+      <PrintLetters c={c} letters={letters} name={details.name} />
 
       {letters.map((l, i) => (
         <LetterSheet key={l.kind + i} letter={l} onChange={(nl) => update(i, nl)} readOnly={approved} />
       ))}
-
       {!approved && (
         <button
           className="btn btn-primary btn-big"

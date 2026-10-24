@@ -232,3 +232,136 @@
     font-size: 10pt;
   }
 }
+
+/* ---------- the patient's details for the letters ---------- */
+
+.details {
+  background: var(--sheet);
+  border: 1.5px solid var(--ink-2);
+  border-radius: 10px;
+  padding: 16px 16px 6px;
+  margin: 0 0 20px;
+}
+
+.details-h {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.details-lede {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+.details-field {
+  display: block;
+  margin: 0 0 14px;
+}
+
+.details-label {
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.details-field input {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  font: inherit;
+  font-size: 19px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink-2);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.details-field input::placeholder {
+  color: var(--ink-2);
+  opacity: 0.75;
+  font-size: 17px;
+}
+
+.details-saved {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+/* Brackets still left in a letter */
+.letter-missing {
+  font-size: 17px;
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--warn);
+  background: var(--paper);
+}
+
+/* Spanish first: the English letter folds away under the Spanish copy. */
+.letter-english {
+  margin-top: 16px;
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.letter-english > summary {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.letter-english > summary::-webkit-details-marker {
+  display: none;
+}
+
+.letter-english > summary::before {
+  content: "▸";
+  flex: none;
+}
+
+.letter-english[open] > summary::before {
+  content: "▾";
+}
+
+.letter-english-in {
+  padding: 4px 14px 14px;
+}
+
+.letter-english + .letter-missing,
+.letter-patient-copy + .letter-english {
+  margin-top: 16px;
+}
+
+/* Send guide extras */
+.send-parent {
+  font-size: 17px;
+  color: var(--ink-2);
+}
+
+.send-email {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.send-email-which {
+  font-weight: 700;
+}
+
+/* Household form: example amounts read as hints, not as typed numbers. */
+.money-input input.hint-placeholder::placeholder {
+  color: var(--ink-2);
+  opacity: 0.7;
+  font-size: 17px;
+  font-weight: 400;
+}

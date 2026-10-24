@@ -1,5 +1,4 @@
 import { useT } from "./i18n/I18nProvider";
-import { PenUnderline } from "./Pen";
 import { locale } from "./i18n/strings";
 import { type CaseView, hostOf, money, questionableTotal } from "./types";
 
@@ -9,11 +8,22 @@ export function Answer({ c }: { c: CaseView }) {
   const due = c.bill?.amountDue ?? null;
   const questionable = questionableTotal(c.findings ?? []);
 
+  const h = c.household;
+  const insured = Boolean(h?.insured || c.bill?.insurancePayer);
+  const marked = (c.findings ?? []).length > 0;
+
   let big: React.ReactNode = e.headline;
-  if (e.tier === "FREE") big = <>{t("answer.freeLead")} <span className="answer-amt">$0<PenUnderline delay={200} /></span></>;
+  if (e.tier === "FREE") big = <>{t("answer.freeLead")} <span className="answer-amt">$0</span></>;
   else if (e.tier === "DISCOUNT") big = t("answer.discount");
-  else if (e.tier === "NOT_ELIGIBLE" && e.owedEstimate != null && questionable > 0)
-    big = <>{t("answer.askOffLead")} <span className="answer-amt">{money(questionable, false, lang)}</span></>;
+  else if (e.tier === "NOT_ELIGIBLE") big = t("answer.notEligible");
+
+  // Why they don't qualify, in their own numbers, then what to do instead.
+  let notEligibleWhy: string | null = null;
+  if (e.tier === "NOT_ELIGIBLE" && h) {
+    if (h.insured && h.outOfPocket12mo != null)
+      notEligibleWhy = t("answer.oopUnder", { oop: money(h.outOfPocket12mo, false, lang), income: money(h.annualIncome, false, lang) });
+    else if (!h.insured) notEligibleWhy = t("answer.incomeAbove", { income: money(h.annualIncome, false, lang), n: h.size });
+  }
 
   return (
     <section className="answer" aria-labelledby="answer-h">
@@ -21,15 +31,20 @@ export function Answer({ c }: { c: CaseView }) {
       <h1 id="answer-h" className="h-answer">
         {big}
       </h1>
-      <p className="answer-sub">
-        {e.tier === "FREE" && due != null && due > 0 && t("answer.billSays", { amount: money(due, true, lang) })}
-        {e.tier === "FREE" && t("answer.freeSub")}
-        {e.tier === "DISCOUNT" && t("answer.discountSub")}
-        {e.tier === "NOT_ELIGIBLE" && e.headline + "."}
-        {e.tier !== "FREE" && questionable > 0 && e.tier !== "NOT_ELIGIBLE" && (
-          t("answer.alsoMarked", { amount: money(questionable, false, lang) })
-        )}
-      </p>
+      {e.tier === "NOT_ELIGIBLE" ? (
+        <p className="answer-sub">
+          {notEligibleWhy && <>{notEligibleWhy} </>}
+          {marked ? t("answer.nextMarked") : t("answer.nextPlan")}
+        </p>
+      ) : (
+        <p className="answer-sub">
+          {e.tier === "FREE" && due != null && due > 0 && t("answer.billSays", { amount: money(due, true, lang) })}
+          {e.tier === "FREE" && t("answer.freeSub")}
+          {e.tier === "DISCOUNT" && t("answer.discountSub")}
+          {e.tier === "DISCOUNT" && questionable > 0 && !insured && t("answer.alsoMarked", { amount: money(questionable, false, lang) })}
+        </p>
+      )}
+      {e.tier === "DISCOUNT" && e.owedEstimate == null && <p className="answer-note">{t("answer.discountNoAmount")}</p>}
 
       <div className="receipts">
         <h2 className="receipts-h">{t("answer.why")}</h2>

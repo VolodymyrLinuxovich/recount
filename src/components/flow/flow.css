@@ -1,0 +1,184 @@
+/* One step per screen, with the main button pinned within thumb reach. */
+
+.step-screen {
+  min-height: calc(100dvh - 160px);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 170px; /* room for the pinned bar */
+}
+
+.step-top {
+  margin: 0 0 22px;
+}
+
+.step-progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.step-progress .seg {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--rule);
+}
+
+.step-progress .seg.done {
+  background: var(--ok);
+}
+
+.step-progress .seg.now {
+  background: var(--ink);
+}
+
+.step-progress-text {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.step-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(30px, 8vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+
+.step-body > p {
+  font-size: 19px;
+}
+
+.step-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--rule);
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+}
+
+.step-bar-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.step-bar .btn-big {
+  width: 100%;
+}
+
+.step-bar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.step-back {
+  all: unset;
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.step-back:focus-visible {
+  outline: 3px solid var(--focus);
+}
+
+.step-hint {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+/* When a flow screen is showing, hide the page footer: the pinned bar is the footer. */
+body:has(.step-screen) .footnote {
+  display: none;
+}
+
+/* Questions, one per screen: big controls */
+.stepper-big {
+  margin-top: 18px;
+}
+
+.stepper-big button {
+  width: 76px;
+  height: 72px;
+  font-size: 34px;
+}
+
+.stepper-big output {
+  min-width: 150px;
+  font-size: 26px;
+  line-height: 72px;
+}
+
+.money-input-big {
+  max-width: none;
+  margin-top: 18px;
+}
+
+.money-input-big,
+.money-input-big input {
+  font-size: 34px;
+}
+
+.choice-big {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.choice-big button {
+  min-height: 72px;
+  font-size: 22px;
+}
+
+.step-body .q-sub {
+  margin: 26px 0 0;
+}
+
+.bill-thumb {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  margin: 16px 0;
+}
+
+.small-print {
+  margin-top: 28px;
+  font-size: 15px;
+}
+
+/* Clean look: no receipt zigzag, no indented hints */
+.step-body .receipts::before {
+  display: none;
+}
+
+.step-body .receipts {
+  border-radius: 10px;
+}
+
+.step-body .q-check {
+  margin-left: 0;
+}
+
+.step-body .answer-amt {
+  color: var(--pen);
+}

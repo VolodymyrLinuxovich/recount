@@ -83,8 +83,8 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
 }
 
 function summary(t: T, h: Hospital) {
-  const bad = h.findings.filter((f) => f.verdict !== "ask").length;
-  return t("hosp.summary", { bad, ask: h.findings.length - bad });
+  const n = (v: AuditFinding["verdict"]) => h.findings.filter((f) => f.verdict === v).length;
+  return t("hosp.summary", { conflict: n("conflict"), likely: n("likely"), ask: n("ask") });
 }
 
 export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
@@ -108,6 +108,10 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
             ? t("hosp.none")
             : summary(t, h)}
       </p>
+
+      <Link href="/" className="btn btn-primary hospital-check-top">
+        {t("hosp.checkBill")}
+      </Link>
 
       {lang === "es" && findings.length > 0 && <p className="quiet quotes-note">{t("audit.quotesNote")}</p>}
       {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}

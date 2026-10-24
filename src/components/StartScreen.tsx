@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation } from "convex/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
@@ -11,6 +12,7 @@ import { useT } from "./i18n/I18nProvider";
 import { InstallHint } from "./install/InstallHint";
 import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
+import "./start.css";
 
 export function StartScreen() {
   const router = useRouter();
@@ -67,52 +69,93 @@ export function StartScreen() {
     }
   }
 
+  const steps = [
+    ["start.how1Title", "start.how1"],
+    ["start.how2Title", "start.how2"],
+    ["start.how3Title", "start.how3"],
+  ] as const;
+  const checks = [
+    ["start.check1Title", "start.check1"],
+    ["start.check2Title", "start.check2"],
+    ["start.check3Title", "start.check3"],
+  ] as const;
+
   return (
-    <section className="start">
-      <p className="eyebrow">{t("start.eyebrow")}</p>
-      <h1 className="promise">{t("start.promise")}</h1>
-      <p className="lede">{t("start.lede")}</p>
+    <div className="start">
+      <section className="start-hero" aria-labelledby="start-title">
+        <h1 id="start-title" className="start-title">
+          {t("start.promise")}
+        </h1>
+        <p className="start-pitch">{t("start.promise2")}</p>
 
-      <input
-        ref={input}
-        type="file"
-        accept="image/*,application/pdf"
-        capture="environment"
-        className="visually-hidden"
-        id="bill-file"
-        onChange={(e) => onFile(e.target.files?.[0])}
-      />
-      <button className="btn btn-primary btn-big" onClick={() => input.current?.click()} disabled={busy !== null}>
-        {busy === "photo" ? t("start.uploading") : t("start.photo")}
-      </button>
-      <p className="hint">{t("start.hint")}</p>
-      <button className="btn btn-quiet" onClick={onSample} disabled={busy !== null}>
-        {busy === "sample" ? t("start.sampleBusy") : t("start.sample")}
-      </button>
-      {error && (
-        <p className="error-note" role="alert">
-          {t(error)}
-        </p>
-      )}
-
-      <InstallHint />
+        <input
+          ref={input}
+          type="file"
+          accept="image/*,application/pdf"
+          capture="environment"
+          className="visually-hidden"
+          id="bill-file"
+          onChange={(e) => onFile(e.target.files?.[0])}
+        />
+        <div className="start-actions">
+          <button className="btn btn-primary start-btn" onClick={() => input.current?.click()} disabled={busy !== null}>
+            {busy === "photo" ? t("start.uploading") : t("start.photo")}
+          </button>
+          <button className="btn start-btn start-btn-2" onClick={onSample} disabled={busy !== null}>
+            {busy === "sample" ? t("start.sampleBusy") : t("start.sample")}
+          </button>
+        </div>
+        {error && (
+          <p className="error-note start-error" role="alert">
+            {t(error)}
+          </p>
+        )}
+        <p className="start-trust">{t("start.trust")}</p>
+      </section>
 
       <RecentBills />
 
-      <ol className="how">
-        <li>
-          <span className="how-n">1</span>
-          <span>{t("start.how1")}</span>
-        </li>
-        <li>
-          <span className="how-n">2</span>
-          <span>{t("start.how2")}</span>
-        </li>
-        <li>
-          <span className="how-n">3</span>
-          <span>{t("start.how3")}</span>
-        </li>
-      </ol>
-    </section>
+      <section className="start-section" aria-labelledby="start-how">
+        <h2 id="start-how" className="start-h2">
+          {t("start.howTitle")}
+        </h2>
+        <ol className="start-steps">
+          {steps.map(([title, body], i) => (
+            <li key={title}>
+              <span className="start-step-n" aria-hidden="true">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="start-h3">{t(title)}</h3>
+                <p>{t(body)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="start-section" aria-labelledby="start-check">
+        <h2 id="start-check" className="start-h2">
+          {t("start.checkTitle")}
+        </h2>
+        <ul className="start-checks">
+          {checks.map(([title, body]) => (
+            <li key={title}>
+              <h3 className="start-h3">{t(title)}</h3>
+              <p>{t(body)}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="start-audit">
+          <Link href="/audit" className="start-link">
+            {t("start.auditLink")}
+          </Link>
+        </p>
+      </section>
+
+      <div className="start-install">
+        <InstallHint />
+      </div>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ export function MyBillsLink() {
   return (
     <Link href="/bills" className="bills-link" aria-label={t("bills.linkAria", { n })}>
       {t("bills.link")}
-      <span className="bills-link-count">{n}</span>
+      <span className="bills-link-count" aria-hidden="true">({n})</span>
     </Link>
   );
 }

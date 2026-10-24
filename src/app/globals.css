@@ -261,45 +261,6 @@ a {
   gap: 10px;
 }
 
-/* ---------- start ---------- */
-
-.start .btn-big {
-  margin-top: 30px;
-}
-
-.start .hint {
-  font-size: 15px;
-  color: var(--ink-2);
-  margin: 10px 0 18px;
-}
-
-.start .btn-quiet {
-  width: 100%;
-}
-
-.how {
-  list-style: none;
-  padding: 0;
-  margin: 44px 0 0;
-  border-top: 1px solid var(--rule);
-}
-
-.how li {
-  display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule-soft);
-}
-
-.how-n {
-  font-family: var(--font-hand), cursive;
-  font-weight: 700;
-  color: var(--pen);
-  font-size: 26px;
-  line-height: 1;
-  min-width: 18px;
-}
-
 /* ---------- live steps ---------- */
 
 .steps {
@@ -1147,9 +1108,6 @@ a {
   .column {
     padding-top: 44px;
   }
-  .start .btn-quiet {
-    width: auto;
-  }
 }
 
 /* ---------- hospital policy aside ---------- */
@@ -1329,12 +1287,7 @@ body {
   outline-width: 3px;
 }
 
-/* Start page */
-.start .hint {
-  font-size: 17px;
-}
-
-.how-n,
+/* Question numbers */
 .q-n {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 600;
@@ -1782,4 +1735,164 @@ body {
 
 .policy-aside-ask .policy-aside-quote {
   text-decoration-color: var(--warn);
+}
+
+/* UX round 1: start/answer/bill */
+.promise-2 {
+  font-size: 20px;
+  color: var(--ink-2);
+  margin: 12px 0 0;
+}
+
+.answer-note {
+  font-size: 18px;
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--ok);
+  background: var(--sheet);
+}
+
+.hand-stamp-sub {
+  display: block;
+  font-size: 17px;
+  margin-top: 2px;
+}
+
+.no-price-list {
+  font-size: 18px;
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--warn);
+  border-radius: 8px;
+  background: var(--sheet);
+}
+
+.sheet-unsure {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--warn);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--warn) 8%, transparent);
+  font-size: 17px;
+}
+
+.sheet-unsure-h {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sheet-unsure ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.sheet-unsure-fix {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+}
+
+.line-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.check-mark,
+.corrected-mark {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 1px 9px;
+  border-radius: 999px;
+}
+
+.check-mark {
+  color: var(--warn);
+  border: 1.5px solid var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.corrected-mark {
+  color: var(--ok);
+  border: 1.5px solid var(--ok);
+}
+
+.line-fix-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  margin-top: 2px;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 16px;
+  color: var(--focus);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.line-fix {
+  margin-top: 8px;
+}
+
+.line-fix-input {
+  width: 100%;
+  max-width: 220px;
+  min-height: 48px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 20px;
+  border: 2px solid var(--ink-2);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.line-fix-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.line-fix-row .btn {
+  min-height: 48px;
+  font-size: 17px;
+  padding: 8px 18px;
+}
+
+.due-free {
+  margin: 8px 0 0;
+  text-align: right;
+  color: var(--ok);
+  font-size: 20px;
+}
+
+.progress-compact {
+  margin: 0;
+  padding: 8px 14px;
+}
+
+.progress-compact .progress-of {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.lang-note {
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--focus);
+  border-radius: 8px;
+  background: var(--sheet);
+}
+
+.lang-note p {
+  margin: 0 0 10px;
+  font-size: 17px;
 }

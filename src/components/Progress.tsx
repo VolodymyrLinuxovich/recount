@@ -18,6 +18,15 @@ export function Progress({ status }: { status: Status }) {
   const { t } = useT();
   const now = STEP_OF[status];
   const steps = [1, 2, 3, 4] as const;
+  // Once the answer is on screen, one quiet line so the answer is seen first.
+  if (now >= 3)
+    return (
+      <nav className="progress progress-compact" aria-label={t("progress.label")}>
+        <p className="progress-of">
+          {t("progress.of", { n: now, total: 4 })} · {now === 3 ? t("progress.short3") : t("progress.short4")}
+        </p>
+      </nav>
+    );
   return (
     <nav className="progress" aria-label={t("progress.label")}>
       <p className="progress-of">{t("progress.of", { n: now, total: 4 })}</p>

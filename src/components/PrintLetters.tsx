@@ -85,13 +85,13 @@ function layout(body: string, today: string, account: string | null): Paper {
 const subscribeNothing = () => () => {};
 
 /** Paper copies of the letters, in English, for the print stylesheet. Hidden on screen. */
-export function PrintLetters({ c, letters }: { c: CaseView; letters: Letter[] }) {
+export function PrintLetters({ c, letters, name: typed }: { c: CaseView; letters: Letter[]; name?: string }) {
   const onClient = useSyncExternalStore(subscribeNothing, () => true, () => false);
   if (!onClient) return null;
 
   // The letter goes to the hospital, so the date is written the US English way.
   const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  const name = c.bill?.patientName?.trim() || "[Your name]";
+  const name = typed?.trim() || c.bill?.patientName?.trim() || "[Your name]";
   const account = c.bill?.accountNumber?.trim() || "[account number]";
 
   return createPortal(

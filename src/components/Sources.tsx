@@ -16,12 +16,36 @@ export function Sources({ c }: { c: CaseView }) {
         </li>
         {h ? (
           <>
-            <li>
-              <span className="label">{t("src.hospital")}</span>{" "}
-              {h.source === "apify-live"
-                ? t("src.live", { date: shortDate(h.fetchedAt, lang) })
-                : t("src.saved", { date: shortDate(h.fetchedAt, lang) })}
-            </li>
+            {h.mrf ? (
+              <li>
+                <span className="label">{t("src.hospital")}</span>{" "}
+                {h.source === "apify-live"
+                  ? t("src.live", { date: shortDate(h.fetchedAt, lang) })
+                  : t("src.saved", { date: shortDate(h.fetchedAt, lang) })}
+              </li>
+            ) : (
+              <li>
+                <span className="label">{t("src.hospital")}</span>{" "}
+                {h.fap ? (
+                  <>
+                    {t("src.policyUsed")}
+                    {h.fap.url && (
+                      <>
+                        {" ("}
+                        <a href={h.fap.url} target="_blank" rel="noreferrer">
+                          {t("src.readPolicy")}
+                        </a>
+                        {")"}
+                      </>
+                    )}
+                    {". "}
+                    {t("src.noPrices")}
+                  </>
+                ) : (
+                  t("src.rulesOnly")
+                )}
+              </li>
+            )}
             {h.mrf?.url && (
               <li>
                 <span className="label">{t("src.priceFile")}</span>{" "}
@@ -31,7 +55,7 @@ export function Sources({ c }: { c: CaseView }) {
                 <span className="quiet">({hostOf(h.mrf.url)}{h.mrf.lastUpdated ? t("src.updated", { date: shortDate(h.mrf.lastUpdated, lang) }) : ""})</span>
               </li>
             )}
-            {h.fap?.url && (
+            {h.mrf && h.fap?.url && (
               <li>
                 <span className="label">{t("src.policy")}</span>{" "}
                 <a href={h.fap.url} target="_blank" rel="noreferrer">

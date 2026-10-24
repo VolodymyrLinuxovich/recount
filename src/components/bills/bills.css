@@ -222,16 +222,42 @@
 }
 
 .bills-link-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 26px;
-  height: 26px;
-  padding: 0 7px;
-  border-radius: 13px;
-  border: 1.5px solid var(--pen);
-  color: var(--pen);
-  font-size: 15px;
-  line-height: 1;
+  color: var(--ink);
+  font-weight: 600;
   text-decoration: none;
+}
+
+.bill-slip-copy {
+  margin-top: 8px;
+  min-height: 48px;
+}
+
+.bill-slip-link {
+  overflow-wrap: anywhere;
+}
+
+/* One row header at phone width: smaller wordmark, compact link and EN | ES pills. */
+@media (max-width: 480px) {
+  .masthead {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .masthead .wordmark {
+    font-size: 22px;
+  }
+  .masthead-nav {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+  .masthead .bills-link {
+    font-size: 16px;
+    gap: 3px;
+    min-height: 44px;
+  }
+  .masthead .lang-option {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 16px;
+  }
 }

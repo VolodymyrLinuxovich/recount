@@ -83,6 +83,7 @@ export function SendGuide({ c, letters }: { c: CaseView; letters: Letter[] }) {
               {t("send.inEnglish")} <span lang="en">{translate("en", "send.step1Ask")}</span>
             </p>
           )}
+          <p className="send-parent">{t("send.step1Parent")}</p>
           {phone ? (
             <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`} className="btn btn-primary btn-big send-call">
               {t("send.call")}&nbsp;<span className="send-phone">{phone}</span>
@@ -104,8 +105,13 @@ export function SendGuide({ c, letters }: { c: CaseView; letters: Letter[] }) {
               {letters.length > 1 ? t("print.all") : t("print.one")}
             </button>
             {letters.map((l) => (
-              <a key={l.kind} href={mailto(l)} className="btn btn-big">
-                {l.kind === "assistance" ? t("letters.emailAssist") : t("letters.emailDispute")}
+              <a key={l.kind} href={mailto(l)} className="btn btn-big send-email">
+                {letters.length > 1 && (
+                  <span className="send-email-which">
+                    {lang === "en" ? l.title : t(l.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute")}
+                  </span>
+                )}
+                <span>{t("letters.emailOpen")}</span>
               </a>
             ))}
           </div>

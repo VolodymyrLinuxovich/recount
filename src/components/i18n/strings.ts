@@ -20,20 +20,30 @@ const en = {
     "Not legal or medical advice. Recount checks your bill against public rules and prices; the hospital makes the final decision.",
 
   // Start page
-  "start.eyebrow": "For ER bills in San Francisco",
-  "start.promise": "Got a hospital bill you can’t pay? Let’s check it line by line, and see if you owe anything at all.",
-  "start.lede":
-    "We compare your bill with the hospital’s own published prices and California’s charity care rules. Then we draft the letters. You read them and decide. Nothing is sent for you.",
+  "start.promise": "Can’t pay a hospital bill?",
+  "start.promise2": "We’ll check it line by line, and see if you owe anything at all.",
+  "start.trust": "Free. Nothing is sent for you.",
   "start.photo": "Take a photo of your bill",
   "start.uploading": "Uploading your bill…",
-  "start.hint": "Or choose a photo or PDF you already have. Get the page that lists each charge, if you can.",
   "start.sample": "Try a sample bill",
   "start.sampleBusy": "Opening the sample…",
   "start.uploadFailed": "We couldn’t upload that file. Check your connection and try again.",
   "start.sampleFailed": "Something went wrong starting the sample. Try again.",
-  "start.how1": "We read every line and mark the ones that don’t match the hospital’s own numbers.",
-  "start.how2": "You answer three questions about your household.",
-  "start.how3": "You get a plain answer, the rule behind it, and letters ready to send.",
+  "start.howTitle": "How it works",
+  "start.how1Title": "Send your bill",
+  "start.how1": "Take a photo of the page that lists each charge. A photo or PDF you already have works too. We read every line.",
+  "start.how2Title": "Answer three questions",
+  "start.how2": "They’re about your household. They show what the hospital has to offer you.",
+  "start.how3Title": "Get your answer and letters",
+  "start.how3": "A plain answer, the rule behind it, and letters ready to send. You read them and decide.",
+  "start.checkTitle": "What we check",
+  "start.check1Title": "The hospital’s own prices",
+  "start.check1": "When the hospital publishes them, we compare each charge. Right now we have them for 4 San Francisco hospitals.",
+  "start.check2Title": "California’s charity care rules",
+  "start.check2": "State law says who gets free or discounted care, based on income and household size.",
+  "start.check3Title": "The hospital’s own policy",
+  "start.check3": "We read the financial assistance policies of 470 California hospitals and checked them against state law.",
+  "start.auditLink": "See what we found in every California hospital’s policy",
 
   // Problems with the chosen file
   "file.pdfTooBig": "That PDF is too big. Try a photo of the page with the charges.",
@@ -45,6 +55,11 @@ const en = {
   "case.opening": "Opening your bill…",
   "case.notFound": "We couldn’t find this bill.",
   "case.startAgain": "Start again",
+  "case.langNote": (v: { caseLang: "en" | "es" }) =>
+    v.caseLang === "es"
+      ? "This bill was checked in Spanish, so some text and the letters stay in Spanish. To get everything in English, check it again with English selected."
+      : "This bill was checked in English, so some text and the letters stay in English. To get everything in Spanish, check it again with Español selected.",
+  "case.checkAgain": "Check it again",
   "case.cantRead": (v: { pdf: boolean }) => (v.pdf ? "We couldn’t read this file." : "We couldn’t read this photo."),
   "case.tryAgain": "Try again",
   "case.details": "Details",
@@ -78,6 +93,71 @@ const en = {
   "hosp.notListedHint": "We’ll still check your bill with California’s rules, just without this hospital’s own policy.",
   "hosp.choosing": "Saving…",
   "hosp.failed": "That didn’t work. Try again.",
+  // One step per screen
+  "flow.back": "Back",
+  "flow.next": "Next",
+  "flow.qOf": (v: { n: number }) => `Question ${v.n} of 3`,
+  "flow.goBackIncome": "Go back and add your yearly income.",
+  "flow.notBillH": "This doesn’t look like a hospital bill.",
+  "flow.notBillBody": "Take a photo of the page from the hospital that lists each charge, or choose a PDF of it.",
+  "flow.readFailed": (v: { pdf: boolean }) =>
+    v.pdf
+      ? "Something went wrong while reading your file. Try again, or take a clear photo of the page that lists each charge."
+      : "Something went wrong while reading your photo. Try again with a clear, flat photo of the page that lists each charge.",
+  "flow.toSend": "How to send my letters",
+  "flow.seeLetters": "See my letters",
+  "flow.seeLettersWait": "See my letters (almost ready)",
+  "flow.whatWeFound": "What we found on the bill",
+  "flow.moreH": "More about this bill",
+  "flow.foundH": (v: { n: number }) =>
+    v.n === 0 ? "We checked your bill" : `We found ${v.n} ${plural(v.n, "thing", "things")} to ask about`,
+  "flow.writingH": "Writing your letters",
+  "flow.writingBody": "This takes about half a minute. You can stay on this screen.",
+  "flow.detailsH": "Your details for the letter",
+  "flow.sendH": "Send your letters",
+  "flow.seeLettersAgain": "See my letters",
+  // Found screens
+  "found.tapBill": "Tap to see your bill",
+  "found.closeBill": "Close",
+  "found.billAlt": "Your bill",
+  "found.openFile": "Open the file you uploaded",
+  "found.billSays": (v: { amount: string }) => `The bill says ${v.amount}.`,
+  "found.linesRead": (v: { n: number }) => `We read ${v.n} ${plural(v.n, "line", "lines")}.`,
+  "found.linesH": "Every line on your bill",
+  "found.colAmount": "Amount",
+  "found.fixShort": "Fix",
+  "found.fixHint": "If a number is wrong, tap it to fix it.",
+  "found.fixAria": (v: { line: number; amount: string }) => `Fix the amount on line ${v.line}, now ${v.amount}`,
+  "found.seeProblem": (v: { n: number }) => `See problem ${v.n}`,
+  "found.flagNote": "A number next to a line means we found something to ask about. Tap it to see it.",
+  "found.problemOf": (v: { i: number; n: number }) => `Problem ${v.i} of ${v.n}`,
+  "found.answerQs": "Answer 3 questions",
+  "found.backToAnswer": "Back to my answer",
+  "found.titleAbove": "Charged more than their own list price",
+  "found.titleCash": "There’s a lower cash price",
+  "found.titleDup": "Billed twice",
+  "found.titleTotal": "The lines don’t add up to the total",
+  "found.titleTotalUnsure": "The lines we read don’t add up to the total",
+  "found.titleSummary": "This is a summary bill",
+  "found.billed": "Billed",
+  "found.listPrice": "Their list price",
+  "found.cashPrice": "Cash price",
+  "found.forUnits": (v: { n: number }) => `for ${v.n} units`,
+  "found.save": (v: { amount: string }) => `You could save ${v.amount}`,
+  "found.source": "Source",
+  "found.whyAbove": "The hospital publishes a lower standard price for this same service.",
+  "found.whyCash": "The hospital publishes a lower price for people who pay for themselves. You can ask for it.",
+  "found.whyDup": (v: { a: number; b: number }) =>
+    `Lines ${v.a} and ${v.b} have the same code, date and amount. Sometimes that’s real, but often it’s a double entry.`,
+  "found.lineN": (v: { n: number }) => `Line ${v.n}`,
+  "found.sumLines": "The lines add up to",
+  "found.printedTotal": "The bill’s total",
+  "found.whyTotal": "The charges listed don’t add up to the total printed on the bill. Ask the hospital to explain the difference.",
+  "found.whyTotalUnsure":
+    "Part of your photo was hard to read, so we may have misread a number. Check each amount against your paper bill.",
+  "found.whySummary":
+    "This bill doesn’t list each charge. Ask the hospital for an itemized bill with a code for every service. You can’t check charges you can’t see.",
+
   // Progress through a bill
   "progress.label": "Your progress",
   "progress.of": (v: { n: number; total: number }) => `Step ${v.n} of ${v.total}`,
@@ -89,6 +169,8 @@ const en = {
   "progress.now2": "Look at what we marked, then answer three questions below.",
   "progress.now3": "Read your answer and your letters. Change anything, then approve.",
   "progress.now4": "Your letters are ready. Here’s how to send them.",
+  "progress.short3": "Check your letters",
+  "progress.short4": "Send your letters",
   "case.err.unavailable": (v: { pdf: boolean }) =>
     `Our bill reader is unavailable right now, so we couldn’t read your ${v.pdf ? "file" : "photo"}. Please try again in a few minutes. The sample bill on the start page still works.`,
   "case.err.notBill": (v: { pdf: boolean }) =>
@@ -115,6 +197,14 @@ const en = {
   "answer.discountSub":
     "State law caps what they can charge you at roughly what a government program would pay, usually far less than this bill.",
   "answer.alsoMarked": (v: { amount: string }) => ` We also marked up to ${v.amount} in charges worth questioning.`,
+  "answer.discountNoAmount": "We can’t say the exact amount yet. Your letter asks the hospital to tell you in writing what you’d owe.",
+  "answer.notEligible": "You likely don’t qualify for the state discount, but you can still ask.",
+  "answer.oopUnder": (v: { oop: string; income: string }) =>
+    `Your out-of-pocket medical costs (${v.oop}) are under 10% of your income (${v.income}).`,
+  "answer.incomeAbove": (v: { income: string; n: number }) =>
+    `Your income (${v.income}) is above the cutoff we found for a household of ${v.n}.`,
+  "answer.nextMarked": "Question the charges we marked below, and ask for an interest-free payment plan.",
+  "answer.nextPlan": "Ask for an interest-free payment plan, and ask if the hospital has its own help.",
   "answer.why": "Why",
   "answer.mediStrong": "Also check Medi-Cal.",
   "answer.mediBody": (v: { pct: string }) =>
@@ -151,9 +241,25 @@ const en = {
   "bill.adjustments": "Adjustments",
   "bill.youPaid": "You paid",
   "bill.owe": "They say you owe",
-  "bill.totalNote": "lines don’t add up to this",
+  "bill.totalNote": "lines don’t add up to this (check our reading too)",
+  "bill.checkPaperH": "Please check these against your paper bill:",
+  "bill.checkLine": "check this",
+  "bill.checkPaperFix": "If a number is wrong, tap Fix this amount on that line.",
+  "bill.fix": "Fix this amount",
+  "bill.fixLabel": (v: { line: number }) => `Correct amount for line ${v.line}`,
+  "bill.fixSave": "Save",
+  "bill.fixCancel": "Cancel",
+  "bill.fixSaving": "Saving…",
+  "bill.fixBad": "Type the amount as a number, like 402 or 1,234.56.",
+  "bill.fixFailed": "We couldn’t save that. Try again.",
+  "bill.corrected": "corrected by you",
   "bill.noFindings":
     "No line-level problems found against the hospital’s published prices. Financial assistance can still cover the whole bill.",
+  "bill.noPriceList":
+    "We don’t have this hospital’s price list, so we couldn’t check each charge. You can still ask for help with the whole bill.",
+  "bill.stampFree": "If they turn down free care, also question these charges",
+  "bill.stampInsured": "Could lower your bill. Insurance already adjusted it, so you may save less.",
+  "bill.dueFree": "with free care, you’d owe $0",
   "bill.cashGroupH": (v: { n: number }) => `You can ask for the cash price on ${v.n} services`,
   "bill.cashGroupBody":
     "The hospital publishes a lower price for patients who pay for themselves. As a self-pay patient, you can ask for it.",
@@ -170,7 +276,7 @@ const en = {
   "hh.h": "Three questions",
   "hh.lede":
     "California hospitals have to give free or discounted care based on household size and income. Your answers stay with this bill.",
-  "hh.needOop": "We need one more number: your out-of-pocket costs at this hospital.",
+  "hh.needOop": "We need one more number: what you and your family paid for medical care in the last 12 months.",
   "hh.q1": "How many people are in your household?",
   "hh.q1help": "You, plus anyone you support or file taxes with.",
   "hh.fewer": "One fewer person",
@@ -186,7 +292,9 @@ const en = {
   "hh.no": "No",
   "hh.yes": "Yes",
   "hh.oopLabel":
-    "How much have you paid or been billed at this hospital in the last 12 months, after insurance? Include this bill.",
+    "How much have you and your family paid for medical care in the last 12 months, after insurance? Count doctors, pharmacy, hospitals and this bill.",
+  "hh.incomeEg": "for example 32,000",
+  "hh.oopEg": "for example 4,500",
   "hh.typeOop": "Type a number, like 4500 or 4.5k.",
   "hh.checking": "Checking the rules…",
   "hh.submit": "See my answer",
@@ -207,8 +315,7 @@ const en = {
   "letters.approvedNote":
     "You approved these. Recount hasn’t sent anything. Send them yourself, by mail, email, or the hospital’s patient portal, and keep a copy.",
   "letters.callFirst": "Call billing first and ask for their mailing address or email for financial assistance:",
-  "letters.emailAssist": "Email the assistance request",
-  "letters.emailDispute": "Email the billing questions",
+  "letters.emailOpen": "Open in my email (add the address billing gives you)",
   "letters.lede": "Read them. Change anything that’s wrong, and fill in the [brackets]. Nothing goes out until you send it.",
   "letters.subject": "Subject",
   "letters.bodyLabel": (v: { title: string }) => `${v.title} text`,
@@ -221,7 +328,19 @@ const en = {
   "letters.titleDispute": "Billing questions",
   "letters.sentInEnglish": "This is the English letter that goes to the hospital.",
   "letters.patientCopyH": "What your letter says, in Spanish",
-  "letters.patientCopyNote": "Read-only. If you change the English letter above, this copy doesn’t change.",
+  "letters.patientCopyNote": "Read-only. If you change the English letter, this copy doesn’t change.",
+  "letters.englishToggle": "The English letter that is sent (you can edit it)",
+  "letters.detailsH": "Your details for the letter",
+  "letters.detailsLede": "Type your address and phone. We put them in the English letter.",
+  "letters.dName": "Your full name",
+  "letters.dStreet": "Street address",
+  "letters.dCity": "City, state, ZIP",
+  "letters.dPhone": "Phone",
+  "letters.dEmail": "Email (optional)",
+  "letters.dDob": "Date of birth (optional)",
+  "letters.dDobEg": "for example 03/14/1958",
+  "letters.dSaved": "Saved in this browser only. Nothing is sent until you send it.",
+  "letters.stillMissing": (v: { list: string }) => `Still to fill in: ${v.list}. Type it in the boxes above, or change the letter.`,
 
   // Printing, the "how to send it" guide, and the home screen tip
   "letters.change": "Change my letters",
@@ -233,6 +352,7 @@ const en = {
   "send.step1H": "Call the billing office",
   "send.step1": "Ask them:",
   "send.step1Ask": "“Where do I send a financial assistance application, and is there a form?”",
+  "send.step1Parent": "Calling for a parent? Call together, or ask billing for an authorization form.",
   "send.inEnglish": "In English:",
   "send.call": "Call",
   "send.noPhone": "The billing phone number is on your bill, usually near the top or next to “Questions?”.",
@@ -245,7 +365,7 @@ const en = {
   "send.step4": "Write the date, the name of the person you spoke to, and what they said.",
   "send.notesLabel": "Your notes",
   "send.notesPlaceholder": "Example: Called billing. Spoke to Maria. She said to mail the form to…",
-  "send.notesSaved": "Saved on this phone only.",
+  "send.notesSaved": "Saved in this browser only.",
   "send.step5H": "Apply for financial assistance",
   "send.step5": "California law gives you the right to apply. The hospital must give you its application form when you ask for it.",
   "send.policyLink": "Read the hospital’s assistance policy",
@@ -268,6 +388,10 @@ const en = {
   "src.policy": "Assistance policy",
   "src.policyLink": (v: { name: string }) => `${v.name}’s financial assistance policy`,
   "src.noMatch": "We couldn’t match this hospital, so charges weren’t compared with its price list.",
+  "src.policyUsed": "We used the hospital’s own financial assistance policy",
+  "src.readPolicy": "read from the hospital’s policy",
+  "src.noPrices": "Prices weren’t checked, because we don’t have this hospital’s price list.",
+  "src.rulesOnly": "We don’t have this hospital’s price list or policy, so we used California’s rules only.",
 
   // The hospital's own policy, next to state law (bill page)
   "policy.headBreaks": (v: { name: string | null; n: number }) =>
@@ -359,6 +483,9 @@ const en = {
 
   // Map
   "map.aria": "Map of California hospitals, colored by what we found",
+  "map.nearH": (v: { n: number }) => `${v.n} hospitals here. Pick one:`,
+  "map.close": "Close",
+  "map.nearMore": (v: { n: number }) => `Showing the ${v.n} with the most problems. To find yours, use the search box.`,
   "map.conflict": "conflicts",
   "map.likely": "likely conflicts",
   "map.ask": "worth asking",
@@ -367,19 +494,23 @@ const en = {
   // One hospital in the audit
   "hosp.unread": "We couldn’t read this hospital’s documents, so we can’t say either way.",
   "hosp.none": "No conflicts found in the documents we read.",
-  "hosp.summary": (v: { bad: number; ask: number }) => {
-    const { bad, ask } = v;
-    const askPart = `${ask} ${ask === 1 ? "is" : "are"} worth asking about`;
-    if (!bad) return `${ask} ${plural(ask, "part", "parts")} of its policies ${ask === 1 ? "is" : "are"} worth asking about.`;
-    const badPart = `${bad} ${plural(bad, "part", "parts")} of its policies ${bad === 1 ? "goes" : "go"} against California law`;
-    return ask ? `${badPart}, and ${askPart}.` : `${badPart}.`;
+  "hosp.summary": (v: { conflict: number; likely: number; ask: number }) => {
+    const { conflict, likely, ask } = v;
+    const parts = (n: number) => `${n} ${plural(n, "part", "parts")} of its policies`;
+    const askTail = ask ? ` ${ask} more ${ask === 1 ? "is" : "are"} worth asking about.` : "";
+    if (conflict) {
+      const likelyTail = likely ? ` ${likely} more likely ${likely === 1 ? "does" : "do"}.` : "";
+      return `${parts(conflict)} ${conflict === 1 ? "goes" : "go"} against California law.${likelyTail}${askTail}`;
+    }
+    if (likely) return `${parts(likely)} likely ${likely === 1 ? "goes" : "go"} against California law.${askTail}`;
+    return `${parts(ask)} ${ask === 1 ? "is" : "are"} worth asking about.`;
   },
   "hosp.theirSays": "Their policy says",
   "hosp.lawSays": "California law says",
   "hosp.seeRule": "See the rule text.",
   "hosp.docsRead": "Documents we read",
   "hosp.stateListing": "State listing",
-  "hosp.checkBill": "Got a bill from this hospital? Check it",
+  "hosp.checkBill": "Have a bill from this hospital? Check it",
 
   // Rule titles in the audit, by rule id (English matches findings.json)
   "rule.DEADLINE": "Puts a time limit on applying",
@@ -392,13 +523,20 @@ const en = {
 
   // My bills (saved on this device)
   "bills.link": "My bills",
-  "bills.linkAria": (v: { n: number }) => `My bills, ${v.n} saved on this phone`,
+  "bills.linkAria": (v: { n: number }) => `My bills, ${v.n} saved in this browser`,
   "bills.title": "Your bills",
   "bills.checkAnother": "Check another bill",
   "bills.checkFirst": "Check a bill",
-  "bills.empty": "You haven’t checked a bill on this phone yet.",
+  "bills.empty": "No bills saved in this browser.",
   "bills.emptyHint": "When you check a bill, it will show up here so you can come back to it.",
-  "bills.savedHere": "This list is saved only on this phone. On another phone or computer, open the bill’s link instead.",
+  "bills.savedHere": "Saved in this browser only. To open a bill somewhere else, use Copy link. Anyone with the link can see that bill.",
+  "bills.copyLink": "Copy link",
+  "bills.linkCopied": "Link copied",
+  "bills.copyFailed": (v: { link: string }) => `Copy this link: ${v.link}`,
+  "bills.rowFailed": "We couldn’t load this bill right now.",
+  "bills.retry": "Try again",
+  "bills.noKey": "This bill needs its private link",
+  "bills.noKeyHint": "This browser doesn’t have the bill’s private link. Open the link you saved or were sent.",
   "bills.loading": "Loading your bills…",
   "bills.recentTitle": "Your recent bills",
   "bills.seeAll": (v: { n: number }) => (v.n > 3 ? `See all ${v.n} bills` : "See all your bills"),
@@ -422,8 +560,8 @@ const en = {
   "bills.gone": "No longer available",
   "bills.goneHint": "This bill was removed or can’t be opened.",
   "bills.remove": "Remove",
-  "bills.removeFromPhone": "Remove from this phone",
-  "bills.confirmText": "Remove this bill from the list on this phone? You can still open it again from its link.",
+  "bills.removeFromPhone": "Remove from this list",
+  "bills.confirmText": "Remove this bill from the list in this browser? You can still open it again from its link.",
   "bills.confirmYes": "Yes, remove",
   "bills.confirmNo": "Keep it",
 };
@@ -439,20 +577,30 @@ const es: Dict = {
   footer:
     "Esto no es asesoría legal ni médica. Recount compara su factura con reglas y precios públicos. El hospital toma la decisión final.",
 
-  "start.eyebrow": "Para facturas de sala de emergencias en San Francisco",
-  "start.promise": "¿Tiene una factura del hospital que no puede pagar? Vamos a revisarla línea por línea, para ver si de verdad debe algo.",
-  "start.lede":
-    "Comparamos su factura con los precios que publica el propio hospital y con las reglas de atención caritativa de California. Después preparamos las cartas. Usted las lee y decide. No enviamos nada por usted.",
+  "start.promise": "¿No puede pagar una factura del hospital?",
+  "start.promise2": "La revisamos línea por línea y vemos si de verdad debe algo.",
+  "start.trust": "Gratis. No enviamos nada por usted.",
   "start.photo": "Tome una foto de su factura",
   "start.uploading": "Subiendo su factura…",
-  "start.hint": "O elija una foto o un PDF que ya tenga. Si puede, use la página que muestra cada cargo.",
   "start.sample": "Probar con una factura de ejemplo",
   "start.sampleBusy": "Abriendo el ejemplo…",
   "start.uploadFailed": "No pudimos subir ese archivo. Revise su conexión e intente de nuevo.",
   "start.sampleFailed": "Algo salió mal al abrir el ejemplo. Intente de nuevo.",
-  "start.how1": "Leemos cada línea y marcamos las que no coinciden con los números del propio hospital.",
-  "start.how2": "Usted contesta tres preguntas sobre su hogar.",
-  "start.how3": "Recibe una respuesta clara, la regla que la respalda y cartas listas para enviar.",
+  "start.howTitle": "Cómo funciona",
+  "start.how1Title": "Mande su factura",
+  "start.how1": "Tome una foto de la página que muestra cada cargo. También sirve una foto o un PDF que ya tenga. Leemos cada línea.",
+  "start.how2Title": "Conteste tres preguntas",
+  "start.how2": "Son sobre su hogar. Así sabemos qué le tiene que ofrecer el hospital.",
+  "start.how3Title": "Reciba su respuesta y sus cartas",
+  "start.how3": "Una respuesta clara, la regla que la respalda y cartas listas para enviar. Usted las lee y decide.",
+  "start.checkTitle": "Qué revisamos",
+  "start.check1Title": "Los precios del propio hospital",
+  "start.check1": "Cuando el hospital los publica, comparamos cada cargo. Por ahora los tenemos para 4 hospitales de San Francisco.",
+  "start.check2Title": "Las reglas de atención caritativa de California",
+  "start.check2": "La ley estatal dice quién recibe atención gratis o con descuento, según sus ingresos y el tamaño de su hogar.",
+  "start.check3Title": "La política del propio hospital",
+  "start.check3": "Leímos las políticas de asistencia financiera de 470 hospitales de California y las comparamos con la ley estatal.",
+  "start.auditLink": "Vea lo que encontramos en la política de cada hospital de California",
 
   "file.pdfTooBig": "Ese PDF es demasiado grande. Pruebe con una foto de la página con los cargos.",
   "file.notImage": "Elija una foto o un PDF de su factura.",
@@ -462,6 +610,11 @@ const es: Dict = {
   "case.opening": "Abriendo su factura…",
   "case.notFound": "No encontramos esta factura.",
   "case.startAgain": "Empezar de nuevo",
+  "case.langNote": (v) =>
+    v.caseLang === "en"
+      ? "Esta factura se revisó en inglés, así que parte del texto y las cartas siguen en inglés. Para tener todo en español, revísela otra vez con Español seleccionado."
+      : "Esta factura se revisó en español, así que parte del texto y las cartas siguen en español. Para tener todo en inglés, revísela otra vez con English seleccionado.",
+  "case.checkAgain": "Revisarla otra vez",
   "case.cantRead": (v) => (v.pdf ? "No pudimos leer este archivo." : "No pudimos leer esta foto."),
   "case.tryAgain": "Intentar de nuevo",
   "case.details": "Detalles",
@@ -494,6 +647,70 @@ const es: Dict = {
   "hosp.notListedHint": "Igual revisaremos su factura con las reglas de California, solo que sin la política propia de este hospital.",
   "hosp.choosing": "Guardando…",
   "hosp.failed": "No funcionó. Intente de nuevo.",
+  "flow.back": "Atrás",
+  "flow.next": "Siguiente",
+  "flow.qOf": (v) => `Pregunta ${v.n} de 3`,
+  "flow.goBackIncome": "Regrese y escriba su ingreso anual.",
+  "flow.notBillH": "Esto no parece una factura del hospital.",
+  "flow.notBillBody": "Tome una foto de la página del hospital que muestra cada cargo, o elija un PDF de esa página.",
+  "flow.readFailed": (v) =>
+    v.pdf
+      ? "Algo salió mal al leer su archivo. Intente de nuevo, o tome una foto clara de la página que muestra cada cargo."
+      : "Algo salió mal al leer su foto. Intente de nuevo con una foto clara y plana de la página que muestra cada cargo.",
+  "flow.toSend": "Cómo enviar mis cartas",
+  "flow.seeLetters": "Ver mis cartas",
+  "flow.seeLettersWait": "Ver mis cartas (casi listas)",
+  "flow.whatWeFound": "Lo que encontramos en la factura",
+  "flow.moreH": "Más sobre esta factura",
+  "flow.foundH": (v) =>
+    v.n === 0 ? "Revisamos su factura" : `Encontramos ${v.n} ${v.n === 1 ? "cosa" : "cosas"} que puede preguntar`,
+  "flow.writingH": "Estamos escribiendo sus cartas",
+  "flow.writingBody": "Tarda más o menos medio minuto. Puede quedarse en esta pantalla.",
+  "flow.detailsH": "Sus datos para la carta",
+  "flow.sendH": "Envíe sus cartas",
+  "flow.seeLettersAgain": "Ver mis cartas",
+  // Found screens
+  "found.tapBill": "Toque para ver su factura",
+  "found.closeBill": "Cerrar",
+  "found.billAlt": "Su factura",
+  "found.openFile": "Abrir el archivo que subió",
+  "found.billSays": (v) => `La factura dice ${v.amount}.`,
+  "found.linesRead": (v) => `Leímos ${v.n} ${plural(v.n, "línea", "líneas")}.`,
+  "found.linesH": "Todas las líneas de su factura",
+  "found.colAmount": "Monto",
+  "found.fixShort": "Corregir",
+  "found.fixHint": "Si un número está mal, tóquelo para corregirlo.",
+  "found.fixAria": (v) => `Corregir el monto de la línea ${v.line}, ahora ${v.amount}`,
+  "found.seeProblem": (v) => `Ver el problema ${v.n}`,
+  "found.flagNote": "Un número junto a una línea quiere decir que encontramos algo que preguntar. Tóquelo para verlo.",
+  "found.problemOf": (v) => `Problema ${v.i} de ${v.n}`,
+  "found.answerQs": "Responder 3 preguntas",
+  "found.backToAnswer": "Volver a mi respuesta",
+  "found.titleAbove": "Le cobraron más que su propio precio de lista",
+  "found.titleCash": "Hay un precio en efectivo más bajo",
+  "found.titleDup": "Cobrado dos veces",
+  "found.titleTotal": "Las líneas no suman el total",
+  "found.titleTotalUnsure": "Las líneas que leímos no suman el total",
+  "found.titleSummary": "Esta es una factura resumida",
+  "found.billed": "Cobrado",
+  "found.listPrice": "Su precio de lista",
+  "found.cashPrice": "Precio en efectivo",
+  "found.forUnits": (v) => `por ${v.n} unidades`,
+  "found.save": (v) => `Podría ahorrar ${v.amount}`,
+  "found.source": "Fuente",
+  "found.whyAbove": "El hospital publica un precio estándar más bajo para este mismo servicio.",
+  "found.whyCash": "El hospital publica un precio más bajo para quienes pagan por su cuenta. Usted puede pedirlo.",
+  "found.whyDup": (v) =>
+    `Las líneas ${v.a} y ${v.b} tienen el mismo código, fecha y monto. A veces es correcto, pero muchas veces es un cobro repetido.`,
+  "found.lineN": (v) => `Línea ${v.n}`,
+  "found.sumLines": "Las líneas suman",
+  "found.printedTotal": "El total de la factura",
+  "found.whyTotal": "Los cargos de la lista no suman el total impreso en la factura. Pida al hospital que le explique la diferencia.",
+  "found.whyTotalUnsure":
+    "Parte de su foto era difícil de leer, así que quizás leímos mal un número. Compare cada monto con su factura en papel.",
+  "found.whySummary":
+    "Esta factura no muestra cada cargo. Pida al hospital una factura detallada con un código para cada servicio. No se pueden revisar cargos que no se ven.",
+
   "progress.label": "Su avance",
   "progress.of": (v: { n: number; total: number }) => `Paso ${v.n} de ${v.total}`,
   "progress.1": "Leemos su factura",
@@ -504,6 +721,8 @@ const es: Dict = {
   "progress.now2": "Vea lo que marcamos y luego responda las tres preguntas de abajo.",
   "progress.now3": "Lea su respuesta y sus cartas. Cambie lo que necesite y luego apruébelas.",
   "progress.now4": "Sus cartas están listas. Así puede enviarlas.",
+  "progress.short3": "Revise sus cartas",
+  "progress.short4": "Envíe sus cartas",
   "case.err.unavailable": (v) =>
     `Nuestro lector de facturas no está disponible en este momento, así que no pudimos leer ${v.pdf ? "su archivo" : "su foto"}. Intente de nuevo en unos minutos. La factura de ejemplo de la página de inicio sí funciona.`,
   "case.err.notBill": (v) =>
@@ -528,6 +747,14 @@ const es: Dict = {
   "answer.discountSub":
     "La ley estatal limita lo que le pueden cobrar a más o menos lo que pagaría un programa del gobierno. Casi siempre es mucho menos que esta factura.",
   "answer.alsoMarked": (v) => ` También marcamos hasta ${v.amount} en cargos que vale la pena cuestionar.`,
+  "answer.discountNoAmount":
+    "Todavía no podemos decir la cantidad exacta. Su carta le pide al hospital que le diga por escrito cuánto debería.",
+  "answer.notEligible": "Probablemente no califica para el descuento estatal, pero aún puede pedirlo.",
+  "answer.oopUnder": (v) => `Sus gastos médicos de su bolsillo (${v.oop}) son menos del 10% de su ingreso (${v.income}).`,
+  "answer.incomeAbove": (v) =>
+    `Su ingreso (${v.income}) está por encima del límite que encontramos para un hogar de ${v.n} ${plural(v.n, "persona", "personas")}.`,
+  "answer.nextMarked": "Cuestione los cargos que marcamos abajo y pida un plan de pagos sin intereses.",
+  "answer.nextPlan": "Pida un plan de pagos sin intereses y pregunte si el hospital tiene su propia ayuda.",
   "answer.why": "Por qué",
   "answer.mediStrong": "Revise también Medi-Cal.",
   "answer.mediBody": (v) =>
@@ -563,9 +790,25 @@ const es: Dict = {
   "bill.adjustments": "Ajustes",
   "bill.youPaid": "Usted pagó",
   "bill.owe": "Dicen que usted debe",
-  "bill.totalNote": "las líneas no suman esto",
+  "bill.totalNote": "las líneas no suman esto (revise también nuestra lectura)",
+  "bill.checkPaperH": "Por favor compare esto con su factura en papel:",
+  "bill.checkLine": "revise esto",
+  "bill.checkPaperFix": "Si un número está mal, toque Corregir esta cantidad en esa línea.",
+  "bill.fix": "Corregir esta cantidad",
+  "bill.fixLabel": (v) => `Cantidad correcta para la línea ${v.line}`,
+  "bill.fixSave": "Guardar",
+  "bill.fixCancel": "Cancelar",
+  "bill.fixSaving": "Guardando…",
+  "bill.fixBad": "Escriba la cantidad como número, por ejemplo 402 o 1,234.56.",
+  "bill.fixFailed": "No pudimos guardarlo. Intente de nuevo.",
+  "bill.corrected": "corregido por usted",
   "bill.noFindings":
     "No encontramos problemas en las líneas al compararlas con los precios publicados del hospital. La asistencia financiera todavía puede cubrir toda la factura.",
+  "bill.noPriceList":
+    "No tenemos la lista de precios de este hospital, así que no pudimos revisar cada cargo. Aun así puede pedir ayuda con toda la factura.",
+  "bill.stampFree": "Si le niegan la atención gratuita, cuestione también estos cargos",
+  "bill.stampInsured": "Podría bajar su factura. Su seguro ya la ajustó, así que el ahorro puede ser menor.",
+  "bill.dueFree": "con atención gratuita, debería $0",
   "bill.cashGroupH": (v: { n: number }) => `Puede pedir el precio en efectivo para ${v.n} servicios`,
   "bill.cashGroupBody":
     "El hospital publica un precio más bajo para los pacientes que pagan por su cuenta. Como paciente sin seguro que paga por su cuenta, usted puede pedirlo.",
@@ -581,7 +824,7 @@ const es: Dict = {
   "hh.h": "Tres preguntas",
   "hh.lede":
     "Los hospitales de California tienen que dar atención gratuita o con descuento según el tamaño del hogar y los ingresos. Sus respuestas se quedan solo con esta factura.",
-  "hh.needOop": "Nos falta un número: lo que usted ha pagado de su bolsillo en este hospital.",
+  "hh.needOop": "Nos falta un número: lo que usted y su familia pagaron por atención médica en los últimos 12 meses.",
   "hh.q1": "¿Cuántas personas hay en su hogar?",
   "hh.q1help": "Usted, más las personas que mantiene o con quienes declara impuestos.",
   "hh.fewer": "Una persona menos",
@@ -596,7 +839,9 @@ const es: Dict = {
   "hh.no": "No",
   "hh.yes": "Sí",
   "hh.oopLabel":
-    "En los últimos 12 meses, ¿cuánto ha pagado o le han cobrado en este hospital, después del seguro? Incluya esta factura.",
+    "¿Cuánto han pagado usted y su familia por atención médica en los últimos 12 meses, después del seguro? Cuente médicos, farmacia, hospitales y esta factura.",
+  "hh.incomeEg": "por ejemplo 32,000",
+  "hh.oopEg": "por ejemplo 4,500",
   "hh.typeOop": "Escriba un número, como 4500 o 4.5k.",
   "hh.checking": "Revisando las reglas…",
   "hh.submit": "Ver mi respuesta",
@@ -617,8 +862,7 @@ const es: Dict = {
     "Usted aprobó estas cartas. Recount no ha enviado nada. Envíelas usted por correo postal, correo electrónico o el portal de pacientes del hospital. Guarde una copia.",
   "letters.callFirst":
     "Primero llame a facturación. Pida la dirección postal o el correo electrónico para la asistencia financiera:",
-  "letters.emailAssist": "Enviar la solicitud por email",
-  "letters.emailDispute": "Enviar las preguntas por email",
+  "letters.emailOpen": "Abrir en mi correo (agregue la dirección que le dé facturación)",
   "letters.lede": "Léalas. Corrija lo que esté mal y llene los [corchetes]. Nada sale hasta que usted lo envíe.",
   "letters.subject": "Asunto",
   "letters.bodyLabel": (v) => `Texto de: ${v.title}`,
@@ -631,7 +875,19 @@ const es: Dict = {
   "letters.titleDispute": "Preguntas sobre los cargos",
   "letters.sentInEnglish": "Esta es la carta en inglés que se envía al hospital.",
   "letters.patientCopyH": "Lo que dice su carta",
-  "letters.patientCopyNote": "Solo para leer. Si cambia la carta en inglés de arriba, esta copia no cambia.",
+  "letters.patientCopyNote": "Solo para leer. Si cambia la carta en inglés, esta copia no cambia.",
+  "letters.englishToggle": "La carta en inglés que se envía (puede editarla)",
+  "letters.detailsH": "Sus datos para la carta",
+  "letters.detailsLede": "Escriba su dirección y teléfono. Los ponemos en la carta en inglés.",
+  "letters.dName": "Su nombre completo",
+  "letters.dStreet": "Dirección (calle y número)",
+  "letters.dCity": "Ciudad, estado y código postal",
+  "letters.dPhone": "Teléfono",
+  "letters.dEmail": "Correo electrónico (opcional)",
+  "letters.dDob": "Fecha de nacimiento (opcional)",
+  "letters.dDobEg": "por ejemplo 03/14/1958 (mes/día/año)",
+  "letters.dSaved": "Se guarda solo en este navegador. Nada sale hasta que usted lo envíe.",
+  "letters.stillMissing": (v) => `Falta llenar: ${v.list}. Escríbalo en los cuadros de arriba, o cambie la carta.`,
 
   // Printing, the "how to send it" guide, and the home screen tip
   "letters.change": "Cambiar mis cartas",
@@ -643,6 +899,7 @@ const es: Dict = {
   "send.step1H": "Llame a la oficina de facturación",
   "send.step1": "Pregunte (puede pedir un intérprete en español):",
   "send.step1Ask": "“¿A dónde mando una solicitud de asistencia financiera? ¿Hay un formulario?”",
+  "send.step1Parent": "¿Llama por su mamá o papá? Llamen juntos, o pida un formulario de autorización.",
   "send.inEnglish": "Si habla en inglés, diga:",
   "send.call": "Llamar al",
   "send.noPhone": "El teléfono de facturación está en su factura, casi siempre arriba o junto a “Questions?”.",
@@ -655,7 +912,7 @@ const es: Dict = {
   "send.step4": "Anote la fecha, el nombre de la persona con quien habló y lo que le dijo.",
   "send.notesLabel": "Sus notas",
   "send.notesPlaceholder": "Ejemplo: Llamé a facturación. Hablé con María. Me dijo que mande el formulario a…",
-  "send.notesSaved": "Se guardan solo en este teléfono.",
+  "send.notesSaved": "Se guardan solo en este navegador.",
   "send.step5H": "Pida la asistencia financiera",
   "send.step5": "La ley de California le da derecho a pedir ayuda. El hospital tiene que darle su formulario de solicitud cuando usted lo pida.",
   "send.policyLink": "Lea la política de asistencia del hospital",
@@ -677,6 +934,10 @@ const es: Dict = {
   "src.policy": "Política de asistencia",
   "src.policyLink": (v) => `Política de asistencia financiera de ${v.name}`,
   "src.noMatch": "No pudimos identificar este hospital, así que no comparamos los cargos con su lista de precios.",
+  "src.policyUsed": "Usamos la política de asistencia financiera del propio hospital",
+  "src.readPolicy": "leída de la política del hospital",
+  "src.noPrices": "No revisamos los precios, porque no tenemos la lista de precios de este hospital.",
+  "src.rulesOnly": "No tenemos la lista de precios ni la política de este hospital, así que solo usamos las reglas de California.",
 
   "policy.headBreaks": (v) =>
     `Atención: la propia política ${v.name ? `de ${v.name}` : "del hospital"} no cumple con ${v.n === 1 ? "una regla estatal" : `${v.n} reglas estatales`}.`,
@@ -767,6 +1028,9 @@ const es: Dict = {
   "audit.dataFrom": (v) => ` Datos del ${v.date}.`,
 
   "map.aria": "Mapa de los hospitales de California, con colores según lo que encontramos",
+  "map.nearH": (v: { n: number }) => `${v.n} hospitales aquí. Elija uno:`,
+  "map.close": "Cerrar",
+  "map.nearMore": (v: { n: number }) => `Mostramos los ${v.n} con más problemas. Para encontrar el suyo, use el buscador.`,
   "map.conflict": "no cumple",
   "map.likely": "probablemente no cumple",
   "map.ask": "vale la pena preguntar",
@@ -775,15 +1039,21 @@ const es: Dict = {
   "hosp.unread": "No pudimos leer los documentos de este hospital, así que no podemos decir ni que sí ni que no.",
   "hosp.none": "No encontramos conflictos en los documentos que leímos.",
   "hosp.summary": (v) => {
-    const { bad, ask } = v;
-    if (!bad)
-      return ask === 1
-        ? "Vale la pena preguntar por una parte de sus políticas."
-        : `Vale la pena preguntar por ${ask} partes de sus políticas.`;
-    const badPart =
-      bad === 1 ? "Una parte de sus políticas va en contra de la ley de California" : `${bad} partes de sus políticas van en contra de la ley de California`;
-    if (!ask) return `${badPart}.`;
-    return `${badPart}. También vale la pena preguntar por ${ask === 1 ? "otra parte" : `otras ${ask} partes`}.`;
+    const { conflict, likely, ask } = v;
+    const askTail = ask ? ` También vale la pena preguntar por ${ask === 1 ? "otra parte" : `otras ${ask} partes`}.` : "";
+    if (conflict) {
+      const head =
+        conflict === 1
+          ? "Una parte de sus políticas va en contra de la ley de California."
+          : `${conflict} partes de sus políticas van en contra de la ley de California.`;
+      const likelyTail = likely ? (likely === 1 ? " Otra parte probablemente tampoco cumple." : ` Otras ${likely} probablemente tampoco cumplen.`) : "";
+      return `${head}${likelyTail}${askTail}`;
+    }
+    if (likely)
+      return `Probablemente ${likely} ${plural(likely, "parte", "partes")} de sus políticas no ${plural(likely, "cumple", "cumplen")} con la ley de California.${askTail}`;
+    return ask === 1
+      ? "Vale la pena preguntar por una parte de sus políticas."
+      : `Vale la pena preguntar por ${ask} partes de sus políticas.`;
   },
   "hosp.theirSays": "La política del hospital dice",
   "hosp.lawSays": "La ley de California dice",
@@ -801,13 +1071,20 @@ const es: Dict = {
   "audit.quotesNote": "Las citas de las políticas y de la ley están en inglés, tal como están escritas.",
 
   "bills.link": "Mis facturas",
-  "bills.linkAria": (v) => `Mis facturas, ${v.n} ${plural(v.n, "guardada", "guardadas")} en este teléfono`,
+  "bills.linkAria": (v) => `Mis facturas, ${v.n} ${plural(v.n, "guardada", "guardadas")} en este navegador`,
   "bills.title": "Sus facturas",
   "bills.checkAnother": "Revisar otra factura",
   "bills.checkFirst": "Revisar una factura",
-  "bills.empty": "Todavía no ha revisado ninguna factura en este teléfono.",
+  "bills.empty": "No hay facturas guardadas en este navegador.",
   "bills.emptyHint": "Cuando revise una factura, aparecerá aquí para que pueda volver a verla.",
-  "bills.savedHere": "Esta lista se guarda solo en este teléfono. En otro teléfono o computadora, abra el enlace de la factura.",
+  "bills.savedHere": "Se guarda solo en este navegador. Para abrir una factura en otro lugar, use Copiar enlace. Cualquier persona con el enlace puede ver esa factura.",
+  "bills.copyLink": "Copiar enlace",
+  "bills.linkCopied": "Enlace copiado",
+  "bills.copyFailed": (v) => `Copie este enlace: ${v.link}`,
+  "bills.rowFailed": "No pudimos cargar esta factura ahora.",
+  "bills.retry": "Intentar de nuevo",
+  "bills.noKey": "Esta factura necesita su enlace privado",
+  "bills.noKeyHint": "Este navegador no tiene el enlace privado de la factura. Abra el enlace que guardó o que le mandaron.",
   "bills.loading": "Cargando sus facturas…",
   "bills.recentTitle": "Sus facturas recientes",
   "bills.seeAll": (v) => (v.n > 3 ? `Ver las ${v.n} facturas` : "Ver todas sus facturas"),
@@ -831,8 +1108,8 @@ const es: Dict = {
   "bills.gone": "Ya no está disponible",
   "bills.goneHint": "Esta factura se borró o no se puede abrir.",
   "bills.remove": "Quitar",
-  "bills.removeFromPhone": "Quitar de este teléfono",
-  "bills.confirmText": "¿Quitar esta factura de la lista de este teléfono? Todavía puede abrirla con su enlace.",
+  "bills.removeFromPhone": "Quitar de esta lista",
+  "bills.confirmText": "¿Quitar esta factura de la lista de este navegador? Todavía puede abrirla con su enlace.",
   "bills.confirmYes": "Sí, quitar",
   "bills.confirmNo": "Dejarla",
 };

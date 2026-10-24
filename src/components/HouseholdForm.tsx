@@ -7,6 +7,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { useT } from "./i18n/I18nProvider";
 import { joinList, type PlainKey } from "./i18n/strings";
 import { type CaseView, money } from "./types";
+import "./letters.css";
 
 /** Read "28k", "$28,000", "28000" or "1.2m" as dollars. Anything else is not a number. */
 const toNumber = (s: string) => {
@@ -106,7 +107,8 @@ export function HouseholdForm({
             id="income"
             inputMode="text"
             autoComplete="off"
-            placeholder="32,000"
+            className="hint-placeholder"
+            placeholder={t("hh.incomeEg")}
             value={income}
             onChange={(e) => setIncome(e.target.value)}
           />
@@ -141,7 +143,7 @@ export function HouseholdForm({
             </label>
             <div className="money-input">
               <span aria-hidden>$</span>
-              <input id="oop" inputMode="numeric" autoComplete="off" placeholder="4,500" value={oop} onChange={(e) => setOop(e.target.value)} />
+              <input id="oop" className="hint-placeholder" inputMode="numeric" autoComplete="off" placeholder={t("hh.oopEg")} value={oop} onChange={(e) => setOop(e.target.value)} />
             </div>
             {oop.trim() !== "" && (
               <p className={`q-check ${oopN == null ? "q-check-bad" : ""}`} aria-live="polite">

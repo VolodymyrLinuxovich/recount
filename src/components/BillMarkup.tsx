@@ -1,6 +1,9 @@
 "use client";
 
+import { useMutation } from "convex/react";
 import { useState } from "react";
+import { api } from "../../convex/_generated/api";
+import type { Id } from "../../convex/_generated/dataModel";
 import { useT } from "./i18n/I18nProvider";
 import type { Lang, T } from "./i18n/strings";
 import { PenCircle, PenStrike, PenUnderline } from "./Pen";
@@ -32,6 +35,91 @@ function noteFor(t: T, lang: Lang, f: Finding, lineIndex: number): { note: strin
   }
 }
 
+/** Read "$1,234.56", "1234.56" or "402" as dollars. Anything else is not a number. */
+const toMoney = (s: string) => {
+  const m = s.trim().replace(/[$,\s]/g, "").match(/^(\d+(?:\.\d{1,2})?)$/);
+  return m ? Number(m[1]) : null;
+};
+
+/** "Fix this amount": an inline box to correct a misread charge before the questions are answered. */
+function LineFix({ c, index, charge }: { c: CaseView; index: number; charge: number }) {
+  const { t } = useT();
+  const correctLine = useMutation(api.cases.correctLine);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<"bill.fixBad" | "bill.fixFailed" | null>(null);
+  const inputId = `fix-${index}`;
+
+  if (!open)
+    return (
+      <button
+        type="button"
+        className="line-fix-link"
+        onClick={() => {
+          setValue(charge.toFixed(2));
+          setError(null);
+          setOpen(true);
+        }}
+      >
+        {t("bill.fix")}
+      </button>
+    );
+
+  async function save() {
+    const n = toMoney(value);
+    if (n == null) return setError("bill.fixBad");
+    setBusy(true);
+    setError(null);
+    try {
+      await correctLine({ id: c._id as Id<"cases">, token: c.token, index, charge: n });
+      setOpen(false);
+    } catch (e) {
+      setError(/check the amount/i.test(String(e)) ? "bill.fixBad" : "bill.fixFailed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <form
+      className="line-fix"
+      onSubmit={(e) => {
+        e.preventDefault();
+        void save();
+      }}
+    >
+      <label htmlFor={inputId} className="visually-hidden">
+        {t("bill.fixLabel", { line: index + 1 })}
+      </label>
+      <input
+        id={inputId}
+        className="line-fix-input"
+        inputMode="decimal"
+        autoComplete="off"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        aria-invalid={error === "bill.fixBad"}
+        aria-describedby={error ? `${inputId}-err` : undefined}
+        autoFocus
+      />
+      <div className="line-fix-row">
+        <button type="submit" className="btn btn-primary" disabled={busy}>
+          {busy ? t("bill.fixSaving") : t("bill.fixSave")}
+        </button>
+        <button type="button" className="btn btn-quiet" onClick={() => setOpen(false)} disabled={busy}>
+          {t("bill.fixCancel")}
+        </button>
+      </div>
+      {error && (
+        <p id={`${inputId}-err`} className="error-note" role="alert">
+          {t(error)}
+        </p>
+      )}
+    </form>
+  );
+}
+
 export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }) {
   const { t, lang } = useT();
   const bill = c.bill!;
@@ -54,6 +142,14 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
   const flaggedOrder = [...marks.keys()].sort((a, b) => a - b);
   const delayFor = (i: number) => 300 + 350 * Math.max(0, flaggedOrder.indexOf(i));
   const totalDelay = 300 + 350 * flaggedOrder.length;
+  const free = c.eligibility?.tier === "FREE";
+  const insured = Boolean(bill.insurancePayer || c.household?.insured);
+  const noPriceList = !c.hospital?.mrf;
+  const canFix = c.status === "needs_household" && Boolean(c.token);
+  // What the reader wasn't sure of, and which lines it names ("line 3 may be 412.00").
+  const unsure = bill.unreadable ?? [];
+  const unsureLines = new Set<number>();
+  for (const u of unsure) for (const m of u.matchAll(/\b(?:line|l[ií]nea)s?\s*#?(\d+)/gi)) unsureLines.add(Number(m[1]) - 1);
 
   return (
     <section className="bill-section" aria-labelledby="bill-h">
@@ -79,8 +175,15 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
           )}
           {findings.length > 0 && (
             <p className="hand-stamp" aria-hidden>
-              {t("bill.stamp", { n: findings.length })}
-              {questionable > 0 && t("bill.stampUpTo", { amount: money(questionable, false, lang) })}
+              {free ? (
+                t("bill.stampFree")
+              ) : (
+                <>
+                  {t("bill.stamp", { n: findings.length })}
+                  {questionable > 0 && !insured && t("bill.stampUpTo", { amount: money(questionable, false, lang) })}
+                  {insured && <span className="hand-stamp-sub">{t("bill.stampInsured")}</span>}
+                </>
+              )}
             </p>
           )}
         </div>
@@ -117,6 +220,18 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
           </dl>
         </div>
 
+        {unsure.length > 0 && (
+          <div className="sheet-unsure" role="note">
+            <p className="sheet-unsure-h">{t("bill.checkPaperH")}</p>
+            <ul>
+              {unsure.map((u, i) => (
+                <li key={i}>{u}</li>
+              ))}
+            </ul>
+            {canFix && <p className="sheet-unsure-fix">{t("bill.checkPaperFix")}</p>}
+          </div>
+        )}
+
         {summary && (
           <div className="sheet-summary">
             <span className="margin-n">{summary.n}</span>
@@ -152,6 +267,15 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
                       .join("  ·  ")}
                   </div>
                   {strike && <PenStrike delay={d} />}
+                  {(unsureLines.has(i) || (l as { corrected?: boolean }).corrected) && (
+                    <div className="line-flags">
+                      {unsureLines.has(i) && !(l as { corrected?: boolean }).corrected && (
+                        <span className="check-mark">{t("bill.checkLine")}</span>
+                      )}
+                      {(l as { corrected?: boolean }).corrected && <span className="corrected-mark">{t("bill.corrected")}</span>}
+                    </div>
+                  )}
+                  {canFix && <LineFix key={`${i}-${l.charge}`} c={c} index={i} charge={l.charge} />}
                   {m.map((x) => (
                     <a key={x.finding.id + i} href={`#finding-${x.n}`} className="margin-note">
                       <span className="margin-n">{x.n}</span>
@@ -199,6 +323,7 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
             </div>
           )}
         </dl>
+        {free && bill.amountDue != null && bill.amountDue > 0 && <p className="hand due-free">{t("bill.dueFree")}</p>}
         {totalFinding && (
           <a href={`#finding-${totalFinding.n}`} className="margin-note totals-note">
             <span className="margin-n">{totalFinding.n}</span>
@@ -207,10 +332,11 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
         )}
       </div>
 
-      {findings.length === 0 ? (
-        <p className="quiet">{t("bill.noFindings")}</p>
-      ) : (
+      {noPriceList && <p className="no-price-list">{t("bill.noPriceList")}</p>}
+      {findings.length > 0 ? (
         <FindingList numbered={numbered} lines={bill.lines} />
+      ) : (
+        !noPriceList && <p className="quiet">{t("bill.noFindings")}</p>
       )}
     </section>
   );

@@ -4,9 +4,9 @@ import { type Lang, useT } from "./I18nProvider";
 import "./i18n.css";
 
 // Each name is written in its own language, so people can find theirs whatever the page shows.
-const OPTIONS: { lang: Lang; name: string }[] = [
-  { lang: "en", name: "English" },
-  { lang: "es", name: "Español" },
+const OPTIONS: { lang: Lang; name: string; short: string }[] = [
+  { lang: "en", name: "English", short: "EN" },
+  { lang: "es", name: "Español", short: "ES" },
 ];
 
 export function LanguageToggle() {
@@ -20,9 +20,10 @@ export function LanguageToggle() {
           lang={o.lang}
           className="lang-option"
           aria-pressed={lang === o.lang}
+          aria-label={o.name}
           onClick={() => setLang(o.lang)}
         >
-          {o.name}
+          {o.short}
         </button>
       ))}
     </div>

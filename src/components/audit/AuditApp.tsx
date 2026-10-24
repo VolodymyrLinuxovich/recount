@@ -13,6 +13,19 @@ async function loadAudit(): Promise<{ audit: Audit; sample: boolean }> {
   return { audit: await res.json(), sample: true };
 }
 
+/** Words to search by: lowercase, no punctuation, "st" read as "saint", "&" as "and". */
+function searchWords(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => (w === "st" ? "saint" : w));
+}
+
 const keyFromHash = () => {
   const m = typeof window !== "undefined" ? window.location.hash.match(/^#h=(.+)$/) : null;
   return m ? decodeURIComponent(m[1]) : null;
@@ -47,9 +60,19 @@ export function AuditApp() {
 
   const matches = useMemo(() => {
     if (!data || q.trim().length < 2) return [];
-    const needle = q.trim().toLowerCase();
+    const words = searchWords(q);
+    if (!words.length) return [];
     return data.audit.hospitals
-      .filter((h) => `${h.name} ${h.city ?? ""} ${h.county ?? ""}`.toLowerCase().includes(needle))
+      .map((h) => {
+        const name = searchWords(h.name);
+        const all = [...name, ...searchWords(`${h.city ?? ""} ${h.county ?? ""}`)];
+        const hit = (w: string, pool: string[]) => pool.some((x) => x.startsWith(w));
+        if (!words.every((w) => hit(w, all))) return null;
+        return { h, score: words.filter((w) => hit(w, name)).length };
+      })
+      .filter((x) => x !== null)
+      .sort((a, b) => b.score - a.score || a.h.name.localeCompare(b.h.name))
+      .map((x) => x.h)
       .slice(0, 8);
   }, [data, q]);
 
@@ -72,13 +95,16 @@ export function AuditApp() {
   const selectedKey = resolveKey(audit.hospitals, selected);
   const hospital = audit.hospitals.find((h) => h.key === selectedKey) ?? null;
 
-  const severity = (h: (typeof audit.hospitals)[number]) =>
-    h.findings.reduce((a, f) => a + (f.verdict === "conflict" ? 3 : f.verdict === "likely" ? 2 : 1), 0);
+  // Most conflict and likely flags first, then most flags of any kind, then by name.
+  type H = (typeof audit.hospitals)[number];
+  const serious = (h: H) => h.findings.filter((f) => f.verdict === "conflict" || f.verdict === "likely").length;
+  const byFlags = (a: H, b: H) =>
+    serious(b) - serious(a) || b.findings.length - a.findings.length || displayName(a.name).localeCompare(displayName(b.name));
   // The map only helps when we know where the hospitals are.
   const showMap = audit.hospitals.filter((h) => h.lat != null && h.lon != null).length >= 3;
   const mostFlagged = showMap
-    ? audit.hospitals.filter(isFlagged).sort((a, b) => severity(b) - severity(a)).slice(0, 5)
-    : [...audit.hospitals].sort((a, b) => severity(b) - severity(a));
+    ? audit.hospitals.filter(isFlagged).sort(byFlags).slice(0, 5)
+    : [...audit.hospitals].sort(byFlags);
 
   const ruleRows = audit.rules
     .map((r) => {
