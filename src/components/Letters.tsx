@@ -10,10 +10,10 @@ import { DetailsForm, useDetails } from "./DetailsForm";
 import { fillLetter, leftovers, type Slot } from "./letterFill";
 import { PrintLetters, printLetters } from "./PrintLetters";
 import { SendGuide } from "./SendGuide";
-import type { CaseView, Letter } from "./types";
+import type { CaseView, ComplaintLetter, Letter } from "./types";
 
 // What gets copied, downloaded and emailed is the English letter for the hospital.
-function asText(l: Letter) {
+function asText(l: Letter | ComplaintLetter) {
   return `Subject: ${l.subject}\n\n${l.body}\n`;
 }
 
@@ -56,7 +56,7 @@ export const SLOT_KEY: Record<Exclude<Slot, "date">, PlainKey> = {
 };
 
 /** A gentle note listing the brackets still in the letter. */
-export function StillMissing({ letter }: { letter: Letter }) {
+export function StillMissing({ letter }: { letter: Letter | ComplaintLetter }) {
   const { t, lang } = useT();
   const left = leftovers(letter);
   if (!left.length) return null;
@@ -64,7 +64,7 @@ export function StillMissing({ letter }: { letter: Letter }) {
   return <p className="letter-missing">{t("letters.stillMissing", { list: joinList(lang, names) })}</p>;
 }
 
-export function LetterSheet({
+export function LetterSheet<L extends Letter | ComplaintLetter>({
   letter,
   onChange,
   readOnly,
@@ -73,15 +73,18 @@ export function LetterSheet({
   /** One letter per screen: the screen shows the title, and the actions are small. */
   inFlow?: boolean;
   /** The letter with the patient's details already put in. */
-  letter: Letter;
-  onChange: (l: Letter) => void;
+  letter: L;
+  onChange: (l: L) => void;
   readOnly: boolean;
 }) {
   const { t, lang } = useT();
   const [copied, setCopied] = useState(false);
-  const title = lang === "en" ? letter.title : t(letter.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute");
+  const title =
+    lang === "en"
+      ? letter.title
+      : t(letter.kind === "assistance" ? "letters.titleAssist" : letter.kind === "complaint" ? "after.complaintTitle" : "letters.titleDispute");
   const patientCopy = letter.bodyPatient ? [letter.subjectPatient, letter.bodyPatient].filter(Boolean).join("\n\n") : null;
-  const slug = letter.kind === "assistance" ? "financial-assistance-request" : "billing-questions";
+  const slug = letter.kind === "assistance" ? "financial-assistance-request" : letter.kind === "complaint" ? "hcai-complaint" : "billing-questions";
   const spanishFirst = lang === "es" && !!patientCopy;
 
   const english = (
@@ -147,13 +150,16 @@ export function LetterSheet({
         english
       )}
       <StillMissing letter={letter} />
-      <button
-        className={inFlow ? "btn btn-quiet letter-print" : "btn btn-big letter-print"}
-        type="button"
-        onClick={() => printLetters(letter.kind, letter.title)}
-      >
-        {t("print.one")}
-      </button>
+      {/* The complaint isn't one of the bill's printable letters; it's copied or downloaded instead. */}
+      {letter.kind !== "complaint" && (
+        <button
+          className={inFlow ? "btn btn-quiet letter-print" : "btn btn-big letter-print"}
+          type="button"
+          onClick={() => printLetters(letter.kind as Letter["kind"], letter.title)}
+        >
+          {t("print.one")}
+        </button>
+      )}
       {!spanishFirst && spanish}
     </article>
   );

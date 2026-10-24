@@ -173,7 +173,7 @@ export function fillText(text: string, d: Details, today = usToday()): string {
     .join("\n");
 }
 
-export function fillLetter(l: Letter, d: Details): Letter {
+export function fillLetter<L extends Pick<Letter, "subject" | "body" | "subjectPatient" | "bodyPatient">>(l: L, d: Details): L {
   const today = usToday();
   return {
     ...l,
@@ -186,7 +186,7 @@ export function fillLetter(l: Letter, d: Details): Letter {
 }
 
 /** The brackets still in the letter: the detail it asks for (if one of ours) and its text. */
-export function leftovers(l: Letter): { slot: Slot | null; label: string }[] {
+export function leftovers(l: Pick<Letter, "subject" | "body">): { slot: Slot | null; label: string }[] {
   const seen = new Set<string>();
   const out: { slot: Slot | null; label: string }[] = [];
   for (const m of `${l.subject}\n${l.body}`.matchAll(BRACKET)) {

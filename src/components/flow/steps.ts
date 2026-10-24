@@ -1,7 +1,7 @@
 // Which screens a bill has, in order, given what the backend has done so far.
 import type { CaseView } from "../types";
 
-export type StepId = string; // "reading" | "hospital" | "found" | "finding-N" | "q1" | "q2" | "q3" | "answer" | "details" | "letter-N" | "send" | "more"
+export type StepId = string; // "reading" | "hospital" | "found" | "finding-N" | "q1" | "q2" | "q3" | "answer" | "details" | "letter-N" | "send" | "after" | "outcome" | "complaint" | "more"
 
 export type Phase = 1 | 2 | 3 | 4;
 
@@ -29,7 +29,8 @@ export function stepsFor(c: CaseView): StepId[] {
   const redo = ["q1", "q2", "q3"]; // "Change my answers" before approving
   if (s === "drafting" || (s === "ready" && !letters.length)) return ["answer", "letters-wait", ...found, ...redo, "more"];
   if (s === "ready") return ["answer", "details", ...letters, ...found, ...redo, "more"];
-  return ["send", "answer", "details", ...letters, ...found, "more"]; // approved
+  // Approved: how to send, what happens next, and a complaint to the state if the hospital says no.
+  return ["send", "after", "outcome", ...(c.followUp ? ["complaint"] : []), "answer", "details", ...letters, ...found, "more"];
 }
 
 /** The screen to land on for a status when the link doesn't name one. */
@@ -43,6 +44,6 @@ export function homeStep(c: CaseView): StepId {
 export function phaseOf(step: StepId): Phase {
   if (step === "reading" || step === "hospital") return 1;
   if (step === "found" || step.startsWith("finding-") || step.startsWith("q")) return 2;
-  if (step === "send") return 4;
+  if (step === "send" || step === "after" || step === "outcome" || step === "complaint") return 4;
   return 3;
 }

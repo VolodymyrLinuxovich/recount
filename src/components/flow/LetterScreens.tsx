@@ -287,6 +287,7 @@ export function SendStep({ c, go }: ScreenProps) {
     <StepFrame
       phase={4}
       title={t("flow.sendH")}
+      primary={{ label: t("after.open"), onClick: () => go("after") }}
       secondary={{ label: t("flow.seeLettersAgain"), onClick: () => go("letter-0") }}
     >
       <SendGuide c={c} letters={letters} steps={steps} />

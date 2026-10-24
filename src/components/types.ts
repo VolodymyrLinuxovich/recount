@@ -4,10 +4,21 @@ import type { Finding, FindingKind } from "../../convex/lib/checks";
 import type { Eligibility, Basis } from "../../convex/lib/eligibility";
 import type { HospitalRef } from "../../convex/lib/hospital";
 import type { Letter } from "../../convex/lib/letters";
+import type { ComplaintLetter, Outcome } from "../../convex/lib/complaint";
 
 import { type Lang, locale } from "./i18n/strings";
 
-export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter };
+export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter, ComplaintLetter, Outcome };
+
+/** After sending: what the hospital did, and the complaint to the state (convex/followUp.ts). */
+export interface FollowUp {
+  outcome: Outcome;
+  sentOn: string | null;
+  status: "drafting" | "ready" | "approved";
+  letter?: ComplaintLetter;
+  source?: "claude" | "template";
+  approvedAt?: number;
+}
 
 export type Status = "reading" | "confirm_hospital" | "needs_household" | "drafting" | "ready" | "approved" | "error";
 
@@ -44,6 +55,9 @@ export interface CaseView {
   letters?: Letter[];
   lettersSource?: "claude" | "template";
   approvedAt?: number;
+  /** The day the patient wants to check in on their request, YYYY-MM-DD. */
+  checkInOn?: string;
+  followUp?: FollowUp;
   error?: string;
   steps: Step[];
   /** Added on the phone, never sent by the backend. */

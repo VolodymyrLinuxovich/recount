@@ -1,0 +1,114 @@
+/* After sending: what happens next, the check-in day, and the complaint to the state. */
+
+.fu-rules {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.fu-rule {
+  border-top: 1px solid var(--rule);
+  padding-top: var(--sp-4);
+}
+
+.fu-h {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  margin: 0 0 var(--sp-2);
+}
+
+.fu-p {
+  font-size: var(--fs-base);
+  color: var(--ink-2);
+  margin: 0 0 var(--sp-2);
+}
+
+.fu-src {
+  display: inline-block;
+  margin-top: var(--sp-1);
+}
+
+.fu-remind,
+.fu-file {
+  margin-top: var(--sp-6);
+  padding: var(--sp-4);
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  background: var(--sheet);
+}
+
+.fu-date {
+  display: grid;
+  gap: var(--sp-1);
+  margin-top: var(--sp-3);
+}
+
+.fu-date input {
+  font: inherit;
+  font-size: var(--fs-base);
+  min-height: 52px;
+  max-width: 280px;
+  padding: 0 var(--sp-3);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  background: var(--sheet);
+  color: var(--ink);
+}
+
+.fu-date input:focus-visible {
+  outline: 2.5px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.fu-date input[aria-invalid="true"] {
+  border-color: var(--warn);
+}
+
+.fu-remind-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+.fu-status:empty {
+  display: none;
+}
+
+.fu-status {
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+}
+
+/* Three long answers: one per row, so they stay readable at large text sizes. */
+.fu-choices {
+  grid-template-columns: 1fr;
+}
+
+.fu-choices button {
+  text-align: left;
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.fu-sent {
+  margin-top: var(--sp-5);
+}
+
+.fu-address {
+  font-style: normal;
+  display: grid;
+  margin: 0 0 var(--sp-3);
+  padding-left: var(--sp-3);
+  border-left: 3px solid var(--rule);
+  font-size: var(--fs-base);
+}
+
+.fu-links {
+  display: grid;
+  gap: var(--sp-2);
+  font-size: var(--fs-base);
+}
