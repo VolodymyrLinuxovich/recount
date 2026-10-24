@@ -15,6 +15,7 @@ export type BillLine = z.infer<typeof BillLine>;
 export const ParsedBill = z.object({
   hospitalName: z.string().nullable(),
   hospitalWebsite: z.string().nullable().describe("Only if printed on the bill"),
+  hospitalAddress: z.string().nullable().describe("Hospital street address with city, as printed"),
   billingPhone: z.string().nullable(),
   accountNumber: z.string().nullable(),
   patientName: z.string().nullable(),

@@ -2,21 +2,82 @@ import { v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
+import type { Doc, Id } from "./_generated/dataModel";
+import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { FPL } from "./lib/reference";
+import { HOSPITALS, tokens } from "./lib/statewide";
+
+// ---- access: each case has a random secret kept only on the patient's phone ----
+
+const Token = v.optional(v.string());
+
+async function owned(ctx: QueryCtx | MutationCtx, id: Id<"cases">, token: string | undefined): Promise<Doc<"cases"> | null> {
+  const c = await ctx.db.get(id);
+  if (!c) return null;
+  // Cases made before tokens existed have none; every new case requires its token.
+  if (c.token && c.token !== token) return null;
+  return c;
+}
+
+async function mustOwn(ctx: MutationCtx, id: Id<"cases">, token: string | undefined): Promise<Doc<"cases">> {
+  const c = await owned(ctx, id, token);
+  if (!c) throw new Error("Case not found");
+  return c;
+}
+
+/** Simple fixed-window limit shared by everyone, to stop runaway uploads. */
+async function limit(ctx: MutationCtx, key: string, max: number, windowMs: number) {
+  const now = Date.now();
+  const row = await ctx.db.query("limits").withIndex("by_key", (q) => q.eq("key", key)).first();
+  if (!row || now - row.windowStart > windowMs) {
+    if (row) await ctx.db.patch(row._id, { windowStart: now, count: 1 });
+    else await ctx.db.insert("limits", { key, windowStart: now, count: 1 });
+    return;
+  }
+  if (row.count >= max) throw new Error("Too many uploads right now. Please try again in a minute.");
+  await ctx.db.patch(row._id, { count: row.count + 1 });
+}
 
 export const generateUploadUrl = mutation({
   args: {},
-  handler: async (ctx) => ctx.storage.generateUploadUrl(),
+  handler: async (ctx) => {
+    await limit(ctx, "upload", 60, 60_000);
+    return ctx.storage.generateUploadUrl();
+  },
 });
 
-export const create = mutation({
-  args: {
-    fileId: v.optional(v.id("_storage")),
-    fileType: v.optional(v.string()),
-    sample: v.boolean(),
-    lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
-  },
+const CreateArgs = {
+  fileId: v.optional(v.id("_storage")),
+  fileType: v.optional(v.string()),
+  sample: v.boolean(),
+  lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
+};
+
+/** Start a case. Returns its id and the secret token the phone must keep (needed for every later call). */
+export const start = mutation({
+  args: CreateArgs,
   handler: async (ctx, args) => {
+    await limit(ctx, "create", 60, 60_000);
+    const token = crypto.randomUUID();
+    const id = await ctx.db.insert("cases", {
+      createdAt: Date.now(),
+      status: "reading",
+      sample: args.sample,
+      fileId: args.fileId,
+      fileType: args.fileType,
+      lang: args.lang,
+      token,
+    });
+    await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });
+    return { id, token };
+  },
+});
+
+/** Older form of start without a token. Kept so existing clients work; new code should use start. */
+export const create = mutation({
+  args: CreateArgs,
+  handler: async (ctx, args) => {
+    await limit(ctx, "create", 60, 60_000);
     const id = await ctx.db.insert("cases", {
       createdAt: Date.now(),
       status: "reading",
@@ -31,16 +92,18 @@ export const create = mutation({
 });
 
 export const get = query({
-  args: { id: v.id("cases") },
-  handler: async (ctx, { id }) => {
-    const c = await ctx.db.get(id);
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await owned(ctx, id, token);
     if (!c) return null;
     const steps = await ctx.db
       .query("steps")
       .withIndex("by_case", (q) => q.eq("caseId", id))
       .collect();
     const fileUrl = c.fileId ? await ctx.storage.getUrl(c.fileId) : null;
-    return { ...c, steps, fileUrl };
+    const { token: _secret, ...rest } = c;
+    void _secret;
+    return { ...rest, steps, fileUrl };
   },
 });
 
@@ -48,14 +111,15 @@ export const get = query({
 export const submitHousehold = mutation({
   args: {
     id: v.id("cases"),
+    token: Token,
     size: v.number(),
     annualIncome: v.number(),
     insured: v.boolean(),
     outOfPocket12mo: v.optional(v.number()),
   },
-  handler: async (ctx, { id, ...h }) => {
-    const c = await ctx.db.get(id);
-    if (!c || !c.bill) throw new Error("Bill not read yet");
+  handler: async (ctx, { id, token, ...h }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (!c.bill) throw new Error("Bill not read yet");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new Error("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
     await ctx.db.patch(id, { household: h, eligibility, status: "drafting", letters: undefined });
@@ -73,12 +137,65 @@ const LetterV = v.object({
 });
 
 export const approve = mutation({
-  args: { id: v.id("cases"), letters: v.array(LetterV) },
-  handler: async (ctx, { id, letters }) => {
-    const c = await ctx.db.get(id);
-    if (!c || (c.status !== "ready" && c.status !== "approved")) throw new Error("Letters aren't ready yet");
+  args: { id: v.id("cases"), token: Token, letters: v.array(LetterV) },
+  handler: async (ctx, { id, token, letters }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status !== "ready" && c.status !== "approved") throw new Error("Letters aren't ready yet");
     if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new Error("Letter too long");
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
+  },
+});
+
+/** Undo an approval so the patient can edit the letters again. */
+export const unapprove = mutation({
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status !== "approved") return;
+    await ctx.db.patch(id, { status: "ready", approvedAt: undefined });
+  },
+});
+
+/** The patient picks their hospital from the candidates (or key = null: "not listed"). */
+export const confirmHospital = mutation({
+  args: { id: v.id("cases"), token: Token, key: v.union(v.string(), v.null()) },
+  handler: async (ctx, { id, token, key }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status !== "confirm_hospital") throw new Error("This bill isn't waiting for a hospital choice");
+    if (key !== null && !HOSPITALS.some((h) => h.key === key)) throw new Error("Unknown hospital");
+    await ctx.db.patch(id, { status: "reading" });
+    await ctx.scheduler.runAfter(0, internal.agent.continueCheck, { caseId: id, key });
+  },
+});
+
+/** Delete a bill: the case, its agent log, and the uploaded file. */
+export const remove = mutation({
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await owned(ctx, id, token);
+    if (!c) return;
+    for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
+    if (c.fileId) await ctx.storage.delete(c.fileId);
+    await ctx.db.delete(id);
+  },
+});
+
+/** Search every California hospital on file by name or city (for "my hospital isn't listed"). */
+export const searchHospitals = query({
+  args: { q: v.string() },
+  handler: async (_ctx, { q }) => {
+    const words = tokens(q);
+    const raw = q.trim().toLowerCase();
+    if (!words.length && raw.length < 2) return [];
+    return HOSPITALS.map((h) => {
+      const hay = `${h.names.join(" ")} ${h.city ?? ""}`.toLowerCase();
+      const hits = words.filter((w) => hay.includes(w)).length;
+      const score = (words.length ? hits / words.length : 0) + (h.city && raw.includes(h.city.toLowerCase()) ? 0.3 : 0);
+      return { key: h.key, name: h.name, city: h.city, score };
+    })
+      .filter((x) => x.score > 0.5)
+      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+      .slice(0, 8);
   },
 });
 

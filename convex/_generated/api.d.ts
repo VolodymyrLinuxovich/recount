@@ -18,6 +18,7 @@ import type * as lib_lang from "../lib/lang.js";
 import type * as lib_letters from "../lib/letters.js";
 import type * as lib_reference from "../lib/reference.js";
 import type * as lib_sample from "../lib/sample.js";
+import type * as lib_statewide from "../lib/statewide.js";
 
 import type {
   ApiFromModules,
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   "lib/letters": typeof lib_letters;
   "lib/reference": typeof lib_reference;
   "lib/sample": typeof lib_sample;
+  "lib/statewide": typeof lib_statewide;
 }>;
 
 /**
