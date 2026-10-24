@@ -30,13 +30,13 @@ export function parseDollars(s: string): number | null {
 
 // ---------- 1. Reading ----------
 
-export function ReadingStep({ c }: ScreenProps) {
+export function ReadingStep({ c, go }: ScreenProps) {
   const { t } = useT();
   if (c.status === "error") {
     const pdf = c.fileType === "application/pdf";
     const notBill = /NOT_A_BILL|not a hospital|not a medical/i.test(c.error ?? "");
     return (
-      <StepFrame phase={1} title={notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: t("case.tryAgain"), href: "/" }}>
+      <StepFrame phase={1} title={notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
         <p>{notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf)}</p>
         <details className="log-details">
           <summary>{t("case.details")}</summary>
@@ -264,8 +264,9 @@ export function AnswerStep({ c, back, go }: ScreenProps) {
 
 export function MoreStep({ c, back }: ScreenProps) {
   const { t } = useT();
+  const phase = c.status === "approved" ? 4 : c.status === "error" || c.status === "reading" ? 1 : phaseOf("more");
   return (
-    <StepFrame phase={phaseOf("more")} title={t("flow.moreH")} onBack={back}>
+    <StepFrame phase={phase} title={t("flow.moreH")} onBack={back}>
       <div className="more">
         <Sources c={c} />
         {c.token && <BillTools id={c._id} token={c.token} />}
