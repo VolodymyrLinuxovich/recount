@@ -1262,7 +1262,7 @@ const es: Dict = {
   "audit.rulesH": "Lo que encontramos, regla por regla",
   "audit.rulesSub": "Número de hospitales con una política que va en contra de cada regla.",
   "audit.toAsk": (v) => ` +${v.n} para preguntar`,
-  "audit.ruleCounts": (v) => ` · ${v.conflict} no ${plural(v.conflict, "cumple", "cumplen")}, ${v.likely} ${plural(v.likely, "probable", "probables")}`,
+  "audit.ruleCounts": (v) => ` · ${v.conflict} no ${plural(v.conflict, "cumple", "cumplen")}, ${v.likely} probablemente no`,
   "audit.methodH": "Cómo lo hicimos",
   "audit.method1":
     "Tomamos los documentos de política de cada hospital de la base de datos de hospitales del estado (HCAI) y los leímos completos. Cuando una frase coincidía con una de las reglas de arriba, la marcamos y la revisamos junto con el texto que la rodea.",
