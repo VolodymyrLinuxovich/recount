@@ -159,27 +159,13 @@ flowchart LR
 
 ## How It Works
 
-1. **Read the bill.** Claude turns the photo or PDF into a strict schema: code, description, date, quantity, charge,
-   total. It copies only what is printed. Blurry fields are listed so the patient can check them, any amount can be
-   corrected on screen, and a photo that isn't a bill is rejected instead of guessed at.
-2. **Find the hospital.** The name and address are matched against all **470** hospitals in the state registry. When the
-   match is unclear, the patient picks from a short list. Bills from outside California are told so.
-3. **Check every line against the hospital's own numbers.** Plain code, not a model. It flags duplicate lines (same
-   code, date and amount), charges above the published gross charge, charges above the discounted cash price for
-   self-pay patients, and lines that don't add up to the printed total. One overpriced line is one finding, with both
-   published numbers as evidence.
-4. **Apply the law to this household.** Three questions: household size, yearly income, insured. Rules compute income as
-   a percent of the **2026 federal poverty guideline** and compare it with the **hospital's own free care cutoff** (read
-   from its filed policy for **441 of 470** hospitals) and the **400% state floor**. The model never decides
-   eligibility. Each answer lists the rule and links to it.
-5. **Warn about the hospital's own policy.** If the statewide audit found a problem in this hospital's policy, the
-   patient sees the exact sentence next to the law. "Conflict", "likely conflict" and "worth asking" are worded
-   differently, and only the first two go into the letters.
-6. **Draft the letters.** Claude writes a financial assistance request and, if there are findings, a billing dispute,
-   using only the facts on screen. The letters stay in English for the billing office. In Spanish mode the patient
-   reads a Spanish copy first. The patient edits, fills in name and address, and approves.
-7. **Send it yourself.** A send screen walks through calling billing (one tap), mailing or emailing the letter, and what
-   to keep. Recount has no send code.
+<div align="center">
+
+<img src="docs/how-it-works.gif" alt="Recount on a phone: try the sample bill, see each problem, answer three questions, get a plain answer, approve the letters, send them yourself" width="360"/>
+
+<sub>The real app at phone size, recorded on the live site with the sample bill.</sub>
+
+</div>
 
 **Where Claude is used, and where it is not**
 
