@@ -1,0 +1,99 @@
+{
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-40017782",
+  "patientName": "Alex Rivera",
+  "statementDate": "2026-10-01",
+  "serviceDate": "2026-09-12",
+  "insurancePayer": null,
+  "insurancePaid": 0,
+  "adjustments": 0,
+  "patientPaid": 0,
+  "totalCharges": 13053.0,
+  "amountDue": 13053.0,
+  "isItemized": true,
+  "lines": [
+    {
+      "date": "2026-09-12",
+      "code": "99284",
+      "revCode": "0450",
+      "description": "HC ER EX/TX RM LEVEL IV",
+      "quantity": 1,
+      "charge": 6084.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "80053",
+      "revCode": "0301",
+      "description": "HC COMPREHENSIVE METABOLIC PANEL",
+      "quantity": 1,
+      "charge": 528.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "85025",
+      "revCode": "0305",
+      "description": "HC CBC PLATELETS & DIFF",
+      "quantity": 1,
+      "charge": 269.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "85025",
+      "revCode": "0305",
+      "description": "HC CBC PLATELETS & DIFF",
+      "quantity": 1,
+      "charge": 269.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "71046",
+      "revCode": "0320",
+      "description": "HC CHEST ANY 2 VIEWS",
+      "quantity": 1,
+      "charge": 402.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "70450",
+      "revCode": "0351",
+      "description": "HC CT BRAIN WO CONTR",
+      "quantity": 1,
+      "charge": 4830.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "96374",
+      "revCode": "0260",
+      "description": "HC IV PUSH (INFUSION <= 15 MIN)",
+      "quantity": 1,
+      "charge": 419.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "J2405",
+      "revCode": "0636",
+      "description": "ONDANSETRON HCL INJ 1 MG",
+      "quantity": 4,
+      "charge": 112.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "J7050",
+      "revCode": "0258",
+      "description": "NORMAL SALINE SOLUTION 250 CC",
+      "quantity": 1,
+      "charge": 95.0
+    },
+    {
+      "date": "2026-09-12",
+      "code": "36415",
+      "revCode": "0300",
+      "description": "VENIPUNCTURE ROUTINE",
+      "quantity": 1,
+      "charge": 45.0
+    }
+  ],
+  "unreadable": []
+}
