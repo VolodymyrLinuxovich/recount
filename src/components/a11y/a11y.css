@@ -177,7 +177,7 @@
 }
 
 /* Phones: "Aa" alone so the masthead stays one row; the word stays as the button's name. */
-@media (max-width: 440px) {
+@container masthead (max-width: 25rem) {
   .masthead .vision-word {
     position: absolute;
     width: 1px;
@@ -243,6 +243,21 @@ html[data-contrast="hv-dark"] {
 html[data-contrast] body {
   background: var(--paper);
   color: var(--ink);
+}
+
+/* Some screens set their own accent (the start page and onboarding use a deep teal).
+   In high visibility every element takes the accent from <html> instead, so accent text
+   is yellow on black or navy on white everywhere, never teal on black. */
+html[data-contrast] body * {
+  --accent: inherit;
+  --accent-soft: inherit;
+  --primary: inherit;
+  --on-primary: inherit;
+}
+
+/* White on the salmon "pen" fill is too faint on black: use the page color for the text. */
+html[data-contrast="hv-dark"] .btn-danger-fill {
+  color: var(--paper);
 }
 
 /* No shadows, no tints, no translucency. */

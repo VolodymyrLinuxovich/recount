@@ -40,6 +40,30 @@ export function CaseFlow({ c }: { c: CaseView }) {
     if (wanted && !steps.includes(wanted)) go(step, true, true);
   }, [c, go, wanted, steps, step]);
 
+  // Every screen change (Next/Back, and the moves the bill makes by itself: reading done,
+  // answer ready, hospital picker, letters written) puts focus on the new title and says it.
+  // A screen that focused something itself (a text box) keeps it, and focus the patient put
+  // somewhere else on purpose (the helper, the masthead) is never taken away.
+  const screenRef = useRef<HTMLDivElement>(null);
+  const announceRef = useRef<HTMLParagraphElement>(null);
+  const shownStep = useRef<string | null>(null);
+  useEffect(() => {
+    const prev = shownStep.current;
+    shownStep.current = step;
+    if (prev === null || prev === step) return; // first screen: the page load already announces it
+    const screen = screenRef.current;
+    const title = screen?.querySelector<HTMLElement>("h1");
+    if (!screen || !title) return;
+    if (!title.hasAttribute("tabindex")) title.tabIndex = -1;
+    const a = document.activeElement;
+    const lost = !a || a === document.body || !a.isConnected;
+    if (lost) title.focus({ preventScroll: true });
+    // Moving focus to the title reads it; otherwise say it in the live region.
+    const said = document.activeElement === title;
+    const live = announceRef.current;
+    if (live) live.textContent = said ? "" : (title.textContent ?? "").trim();
+  }, [step]);
+
   const i = steps.indexOf(step);
   const props: ScreenProps = {
     c,
@@ -51,9 +75,12 @@ export function CaseFlow({ c }: { c: CaseView }) {
 
   // Keyed by step so each screen arrives fresh and can slide in (see useStep and flow.css).
   return (
-    <div className="step-anim" key={step} data-step={step}>
-      <Screen step={step} props={props} />
-    </div>
+    <>
+      <div className="step-anim" key={step} data-step={step} ref={screenRef}>
+        <Screen step={step} props={props} />
+      </div>
+      <p className="visually-hidden step-announce" aria-live="polite" ref={announceRef} />
+    </>
   );
 }
 

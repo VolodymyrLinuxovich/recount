@@ -98,7 +98,7 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
   return (
     <article className="hospital" aria-labelledby="hospital-h">
       <p className="eyebrow">{place(h, lang) || "California"}</p>
-      <h2 id="hospital-h" className="h-hospital">
+      <h2 id="hospital-h" className="h-hospital" tabIndex={-1}>
         {displayName(h.name)}
       </h2>
       <p className={`hospital-verdict verdict-text-${w}`}>

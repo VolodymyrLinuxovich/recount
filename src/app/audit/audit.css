@@ -10,6 +10,11 @@
   margin-top: var(--sp-8);
 }
 
+/* The search and map follow the intro closely, so the map starts on a phone's first screen. */
+.audit.stack-lg > header + section {
+  margin-top: var(--sp-6);
+}
+
 .wide {
   width: min(1040px, calc(100vw - 32px));
   position: relative;
@@ -52,18 +57,71 @@
   max-width: 38em;
 }
 
-/* ---------- map ---------- */
+/* "What we checked": the six rules and the scope, folded under the one-line intro. */
+.audit-what {
+  margin-top: var(--sp-4);
+  max-width: 38em;
+}
+
+.audit-what summary {
+  display: list-item;
+  width: fit-content;
+  padding: var(--sp-2) 0;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+.audit-what ul {
+  margin: var(--sp-2) 0 0;
+  padding-left: 1.25em;
+}
+
+.audit-what li + li {
+  margin-top: var(--sp-1);
+}
+
+.audit-what p {
+  margin: var(--sp-3) 0 0;
+  color: var(--ink-2);
+}
+
+/* ---------- map ----------
+   Search comes first in the page (and in Tab order), then the map, then "Most flags".
+   On wide screens the map takes the left column and the search and list stack on the right. */
 
 .map-and-search {
   display: grid;
-  gap: var(--sp-6);
+  gap: var(--sp-5);
+  grid-template-areas: "find" "map" "more";
+}
+
+.map-and-search > .finder {
+  grid-area: find;
+}
+
+.map-and-search > .ca-map {
+  grid-area: map;
+}
+
+.map-and-search > .finder-more {
+  grid-area: more;
+}
+
+.finder-more:empty {
+  display: none;
 }
 
 @media (min-width: 900px) {
   .map-and-search {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "map find" "map more";
     align-items: start;
-    gap: var(--sp-7);
+    gap: var(--sp-5) var(--sp-7);
   }
 }
 
@@ -668,4 +726,9 @@
 
 .method p {
   margin: 0 0 var(--sp-4);
+}
+
+/* "Most flags" sits under the map now; the grid gap spaces it. */
+.finder-more .most {
+  margin-top: 0;
 }

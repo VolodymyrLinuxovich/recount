@@ -168,7 +168,7 @@
 
 /* Phones: just the mascot, like the "Aa" button beside it, so the masthead stays one row.
    Its accessible name is still "Ask Lupa". */
-@media (max-width: 519.98px) {
+@container masthead (max-width: 32.5rem) {
   .helper-mast-btn {
     padding: 0;
     width: 48px;

@@ -194,6 +194,22 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
     if (wasOpen.current) (lastTrigger() ?? launcherRef.current)?.focus();
   }, [open, modal]);
 
+  // Escape closes the chat wherever focus is while it is open (even if focus fell to the page
+  // body, e.g. after a suggestion was sent). Keys inside the panel are handled by onPanelKey;
+  // another open dialog (like Display) gets its own Escape first.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key !== "Escape" || e.defaultPrevented) return;
+      const target = e.target instanceof Element ? e.target : null;
+      if (target && panelRef.current?.contains(target)) return;
+      if (target?.closest('[role="dialog"], [role="alertdialog"]')) return;
+      setHelperOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   // Keep the newest message in view as replies stream in.
   const lastLen = messages?.[messages.length - 1]?.content.length ?? 0;
   useEffect(() => {
@@ -215,6 +231,12 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
     setSending(false);
     if (err) setErrorState({ e: err, key: ctxKey });
     else setDraft("");
+  }
+
+  // The chips disappear once a question is sent, so keep keyboard focus in the chat: on the input.
+  function askFromChip(text: string) {
+    inputRef.current?.focus({ preventScroll: true });
+    void ask(text);
   }
 
   function onSubmit(e: FormEvent) {
@@ -336,7 +358,7 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
             <div className="helper-suggest">
               <p className="helper-suggest-title">{t("helper.suggestTitle")}</p>
               {qs.map((k) => (
-                <button key={k} type="button" className="helper-chip" onClick={() => void ask(t(k))} disabled={busy}>
+                <button key={k} type="button" className="helper-chip" onClick={() => askFromChip(t(k))} disabled={busy}>
                   {t(k)}
                 </button>
               ))}

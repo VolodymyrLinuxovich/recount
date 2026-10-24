@@ -2,7 +2,7 @@
 
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { forgetCase, privateLink } from "./bills/myBills";
@@ -18,6 +18,15 @@ export function BillTools({ id, token }: { id: string; token: string }) {
   const [asking, setAsking] = useState(false);
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
+  // The confirmation replaces the Delete button: focus follows it in, and comes back on "Keep it".
+  const askRef = useRef<HTMLParagraphElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const wasAsking = useRef(false);
+  useEffect(() => {
+    if (asking) askRef.current?.focus();
+    else if (wasAsking.current) triggerRef.current?.focus();
+    wasAsking.current = asking;
+  }, [asking]);
 
   async function copy() {
     try {
@@ -59,12 +68,17 @@ export function BillTools({ id, token }: { id: string; token: string }) {
         <p className="more-body">{t("more.deleteBody")}</p>
         <div>
           {!asking ? (
-            <button className="btn btn-danger more-btn" onClick={() => setAsking(true)}>
+            <button ref={triggerRef} className="btn btn-danger more-btn" onClick={() => setAsking(true)}>
               {t("case.delete")}
             </button>
           ) : (
-            <div role="alertdialog" aria-labelledby="del-q" className="bill-delete-ask">
-              <p id="del-q">{t("case.deleteAsk")}</p>
+            <div
+              role="alertdialog"
+              aria-labelledby="del-q"
+              className="bill-delete-ask"
+              onKeyDown={(e) => e.key === "Escape" && !busy && setAsking(false)}
+            >
+              <p id="del-q" ref={askRef} tabIndex={-1}>{t("case.deleteAsk")}</p>
               <div className="more-btns">
                 <button className="btn btn-primary btn-danger-fill" onClick={del} disabled={busy}>
                   {busy ? t("case.deleting") : t("case.deleteYes")}

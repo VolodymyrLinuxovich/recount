@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import { useT } from "../i18n/I18nProvider";
 import { type Hospital, type Worst, displayName, verdictLabel, worst } from "./data";
@@ -51,6 +51,63 @@ export function CaMap({
   const [near, setNear] = useState<{ list: typeof placed; total: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
+  // Each dot's hit circle is at least 26 screen pixels across, however small the map is drawn.
+  const [hitR, setHitR] = useState(11);
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => {
+      const m = svg.getScreenCTM();
+      if (m && m.a > 0) setHitR(Math.max(11, 13 / m.a));
+    });
+    ro.observe(svg);
+    return () => ro.disconnect();
+  }, []);
+
+  // Keyboard: the map is one Tab stop. The arrow keys move to the nearest dot in that
+  // direction, Enter or Space opens it, Home and End go to the first and last.
+  const [current, setCurrent] = useState<string | null>(null);
+  const active = placed.find((p) => p.h.key === current) ?? sel ?? placed[0];
+  const dotRefs = useRef(new Map<string, SVGGElement>());
+  function moveTo(key: string) {
+    setCurrent(key);
+    dotRefs.current.get(key)?.focus();
+  }
+  function onDotKey(e: KeyboardEvent<SVGGElement>, from: (typeof placed)[number]) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onSelect(from.h.key);
+      return;
+    }
+    if (e.key === "Home" || e.key === "End") {
+      e.preventDefault();
+      const byPlace = [...placed].sort((a, b) => a.xy[1] - b.xy[1] || a.xy[0] - b.xy[0]);
+      moveTo((e.key === "Home" ? byPlace[0] : byPlace[byPlace.length - 1]).h.key);
+      return;
+    }
+    const dir = { ArrowRight: [1, 0], ArrowLeft: [-1, 0], ArrowDown: [0, 1], ArrowUp: [0, -1] }[e.key];
+    if (!dir) return;
+    e.preventDefault();
+    const [x0, y0] = from.xy;
+    let best: (typeof placed)[number] | null = null;
+    let bestScore = Infinity;
+    for (const p of placed) {
+      if (p === from) continue;
+      const dx = p.xy[0] - x0;
+      const dy = p.xy[1] - y0;
+      const along = dx * dir[0] + dy * dir[1];
+      if (along <= 0.01) continue; // not in that direction
+      const across = Math.abs(dx * dir[1] - dy * dir[0]);
+      // Closest ahead, preferring dots in line with the arrow over ones off to the side.
+      const score = along + across * 2;
+      if (score < bestScore) {
+        bestScore = score;
+        best = p;
+      }
+    }
+    if (best) moveTo(best.h.key);
+  }
+
   function tap(e: React.MouseEvent<SVGSVGElement>) {
     const svg = svgRef.current;
     if (!svg) return;
@@ -77,13 +134,19 @@ export function CaMap({
         {placed.map(({ h, w, xy: [x, y] }) => (
           <g
             key={h.key}
+            ref={(el) => {
+              if (el) dotRefs.current.set(h.key, el);
+              else dotRefs.current.delete(h.key);
+            }}
             className={`dot dot-${w}`}
             role="button"
-            tabIndex={0}
+            tabIndex={active?.h.key === h.key ? 0 : -1}
             aria-label={`${displayName(h.name)}: ${verdictLabel(w, lang)}`}
-            onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect(h.key))}
+            aria-describedby="map-keys"
+            onFocus={() => setCurrent(h.key)}
+            onKeyDown={(e) => onDotKey(e, placed.find((p) => p.h.key === h.key)!)}
           >
-            <circle cx={x} cy={y} r={11} className="dot-hit" />
+            <circle cx={x} cy={y} r={hitR} className="dot-hit" />
             <circle cx={x} cy={y} r={w === "none" ? 3.2 : w === "conflict" ? 6 : 4.6} className="dot-mark" />
           </g>
         ))}
@@ -91,6 +154,9 @@ export function CaMap({
           <circle className="dot-ring" cx={sel.xy[0]} cy={sel.xy[1]} r={11} />
         )}
       </svg>
+      <p id="map-keys" className="visually-hidden">
+        {t("a11y.mapKeys")}
+      </p>
       {near && (
         <div className="map-near" role="dialog" aria-label={t("map.nearH", { n: near.total })}>
           <div className="map-near-head">
@@ -106,6 +172,8 @@ export function CaMap({
                   onClick={() => {
                     setNear(null);
                     onSelect(h.key);
+                    // The list closes: keep keyboard focus on the map, on that hospital's dot.
+                    moveTo(h.key);
                   }}
                 >
                   <i className={`dot-key dot-${w}`} aria-hidden />

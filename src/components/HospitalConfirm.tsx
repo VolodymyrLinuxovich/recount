@@ -30,16 +30,35 @@ export function HospitalConfirm({ c }: { c: CaseView }) {
   }
 
   const candidates = c.hospitalCandidates ?? [];
-  const shown = deferred.length >= 2 ? (results ?? []) : candidates;
+  const searching = deferred.length >= 2;
+  const shown = searching ? (results ?? []) : candidates;
 
   return (
     <section className="hosp-pick" aria-labelledby="hosp-h">
       <p className="eyebrow">{t("hosp.eyebrow")}</p>
-      <h1 id="hosp-h" className="h-section hosp-h">
+      <h1 id="hosp-h" className="h-section hosp-h" tabIndex={-1}>
         {t("hosp.h")}
       </h1>
       {c.bill?.hospitalName && <p className="hosp-printed">&ldquo;{c.bill.hospitalName}&rdquo;</p>}
       <p className="lede">{t("hosp.lede")}</p>
+
+      <label className="hosp-search-label" htmlFor="hosp-search">
+        {t("a11y.hospSearch")}
+      </label>
+      <input
+        id="hosp-search"
+        className="hosp-search"
+        type="search"
+        autoComplete="off"
+        placeholder={t("hosp.searchPlaceholder")}
+        value={q}
+        aria-describedby="hosp-count"
+        onChange={(e) => setQ(e.target.value)}
+      />
+      {/* Says how many matches the search found, without moving focus. */}
+      <p id="hosp-count" className="visually-hidden" aria-live="polite">
+        {searching && results ? t("a11y.hospCount", { n: results.length }) : ""}
+      </p>
 
       <ul className="hosp-list">
         {shown.map((h) => (
@@ -54,18 +73,6 @@ export function HospitalConfirm({ c }: { c: CaseView }) {
         {deferred.length >= 2 && results && results.length === 0 && <li className="quiet">{t("hosp.noResults")}</li>}
       </ul>
 
-      <label className="hosp-search-label" htmlFor="hosp-search">
-        {t("hosp.searchLabel")}
-      </label>
-      <input
-        id="hosp-search"
-        className="hosp-search"
-        type="search"
-        autoComplete="off"
-        placeholder={t("hosp.searchPlaceholder")}
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-      />
 
       <button className="btn btn-quiet hosp-none" onClick={() => choose(null)} disabled={busy !== null}>
         {busy === "none" ? t("hosp.choosing") : t("hosp.notListed")}

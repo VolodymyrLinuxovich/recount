@@ -90,9 +90,18 @@ export function StepFrame({
     const bar = barRef.current;
     const screen = screenRef.current;
     if (!bar || !screen || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(() => screen.style.setProperty("--bar-h", `${bar.offsetHeight}px`));
+    // Also on <html>, whose scroll-padding keeps a focused control from landing under the bar.
+    const root = document.documentElement;
+    const ro = new ResizeObserver(() => {
+      const h = `${bar.offsetHeight}px`;
+      screen.style.setProperty("--bar-h", h);
+      root.style.setProperty("--bar-h", h);
+    });
     ro.observe(bar);
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+      root.style.removeProperty("--bar-h");
+    };
   }, []);
 
   const back: Action | undefined = onBack ? { label: t("flow.back"), onClick: onBack } : undefined;

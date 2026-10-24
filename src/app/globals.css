@@ -113,6 +113,16 @@ a {
 
 /* ---------- page frame ---------- */
 
+/* The flow's bar is pinned to the bottom (StepFrame measures it into --bar-h on <html>).
+   Scroll padding keeps a control reached with Tab from landing under it (WCAG 2.4.11). */
+html:has(.step-bar) {
+  scroll-padding-bottom: calc(var(--bar-h, 0px) + var(--sp-3));
+}
+
+html:has(.step-bar) :is(a[href], button, input, select, textarea, summary, [tabindex]) {
+  scroll-margin-bottom: var(--sp-3);
+}
+
 .page {
   min-height: 100dvh;
   display: flex;
@@ -124,10 +134,16 @@ a {
 
 /* ---------- masthead: one row at every width ----------
    Mark + wordmark on the left; My bills, EN | ES, Aa and the helper on the right.
-   Every control is at least 44px. On phones the controls fold to icons, and below 400px
-   the word "Recount" folds into the mark when the row would overflow. */
+   Every control is at least 44px. The breakpoints are container queries in rem on the
+   masthead itself, so they follow its real width at any zoom and with Large text
+   (which raises the root font size), not the viewport's pixels.
+   - The word "Recount" folds away by itself whenever the row is short (see .wordmark).
+   - Below 40.5rem (Spanish) or 35rem (English), "My bills" folds to its icon and count.
+   - Below 32.5rem every control folds to its icon, as on phones.
+   (32.5rem is the old 520px phone breakpoint at standard text size.) */
 
 .masthead {
+  container: masthead / inline-size;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,16 +154,25 @@ a {
   border-bottom: 1px solid var(--rule);
 }
 
+/* The mark and the word sit on one flex line of fixed height. When the row can't hold
+   the word, it wraps onto a second line that is clipped, so only the mark stays. The
+   link keeps its name ("Recount") either way. */
 .wordmark {
+  --wm-h: max(44px, 2.75rem);
+  --mark-h: 2rem;
   display: inline-flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-2);
-  min-width: 0;
-  min-height: 44px;
+  align-content: flex-start;
+  column-gap: var(--sp-2);
+  min-width: 44px;
+  height: var(--wm-h);
+  overflow: hidden;
   font-family: var(--font-display), Georgia, serif;
   font-size: var(--fs-lg);
   font-weight: 600;
-  line-height: 1;
+  line-height: var(--wm-h);
   letter-spacing: -0.01em;
   white-space: nowrap;
   text-decoration: none;
@@ -157,7 +182,13 @@ a {
 .wordmark-mark {
   flex: none;
   width: auto;
-  height: 2rem;
+  height: var(--mark-h);
+  /* Centered in the 44px line even when the word has wrapped away. */
+  margin-block: calc((var(--wm-h) - var(--mark-h)) / 2);
+}
+
+.wordmark-text {
+  flex: none;
 }
 
 .masthead-nav {
@@ -168,21 +199,8 @@ a {
   gap: var(--sp-2);
 }
 
-@media (max-width: 519.98px) {
-  .masthead {
-    gap: var(--sp-1);
-  }
-  .wordmark {
-    gap: var(--sp-2);
-    font-size: var(--fs-base);
-  }
-  .wordmark-mark {
-    height: 1.625rem;
-  }
-  .masthead-nav {
-    gap: var(--sp-1);
-  }
-  /* Icon + count; the link keeps its full name ("My bills, 2 saved in this browser"). */
+/* "My bills": icon + count; the link keeps its full name ("My bills, 2 saved in this browser"). */
+@container masthead (max-width: 35rem) {
   .masthead .bills-link {
     position: relative;
     width: 44px;
@@ -201,6 +219,39 @@ a {
   .masthead .bills-link-text {
     display: none;
   }
+}
+
+/* The same, sooner, for the longer Spanish labels. */
+@container masthead (max-width: 40.5rem) {
+  .masthead:lang(es) .bills-link {
+    position: relative;
+    width: 44px;
+    padding: 0;
+  }
+  .masthead:lang(es) .bills-link-count {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    min-width: 1.375rem;
+    padding: 0.1em 0.3em;
+    font-size: var(--fs-xs);
+    line-height: 1.1;
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+  .masthead:lang(es) .bills-link-text {
+    display: none;
+  }
+}
+
+/* Phone row: every control is its icon (the helper and Aa buttons fold in helper.css and a11y.css). */
+@container masthead (max-width: 32.5rem) {
+  .wordmark {
+    --mark-h: 1.625rem;
+    font-size: var(--fs-base);
+  }
+  .masthead-nav {
+    gap: var(--sp-1);
+  }
   .masthead .lang-option {
     min-width: 44px;
     min-height: 44px;
@@ -214,19 +265,6 @@ a {
     min-height: 44px;
     padding: 0;
     justify-content: center;
-  }
-}
-
-/* Not enough room for the word: the mark alone stays as the home link ("Recount"). */
-@media (max-width: 374.98px) {
-  .masthead:has(.bills-link) .wordmark-text {
-    display: none;
-  }
-}
-
-@media (max-width: 519.98px) {
-  html[data-text="large"] .masthead:has(.bills-link) .wordmark-text {
-    display: none;
   }
 }
 

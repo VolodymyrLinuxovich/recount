@@ -97,6 +97,9 @@ export function StartScreen() {
       capture="environment"
       className="visually-hidden"
       id="bill-file"
+      // The visible "Take a photo" / "Upload" buttons open it; it's not a Tab stop of its own.
+      tabIndex={-1}
+      aria-hidden="true"
       onChange={(e) => onFile(e.target.files?.[0])}
     />
   );

@@ -5,6 +5,10 @@ import { useT } from "../i18n/I18nProvider";
 import { CaMap } from "./CaMap";
 import { type Audit, displayName, isFlagged, longDate, place, resolveKey, ruleTitle, worst } from "./data";
 import { HospitalView } from "./HospitalView";
+import type { PlainKey } from "../i18n/strings";
+
+/** The six rules, listed under "What we checked". */
+const WHAT: PlainKey[] = ["audit.what1", "audit.what2", "audit.what3", "audit.what4", "audit.what5", "audit.what6"];
 
 async function loadAudit(): Promise<{ audit: Audit; sample: boolean }> {
   const real = await fetch("/audit/findings.json", { cache: "no-cache" }).catch(() => null);
@@ -51,11 +55,22 @@ export function AuditApp() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  const select = (key: string) => {
+  const [announce, setAnnounce] = useState("");
+  /**
+   * Open a hospital. From a list (search results, most flags) focus moves to its name, since
+   * the list may be gone. From the map, focus stays on the dot so the arrows keep working,
+   * and a polite message says which hospital opened below.
+   */
+  const select = (key: string, from: "map" | "list" = "list") => {
     setSelected(key);
     setQ("");
     history.replaceState(null, "", `#h=${encodeURIComponent(key)}`);
-    requestAnimationFrame(() => viewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    const h = data?.audit.hospitals.find((x) => x.key === key);
+    setAnnounce(from === "map" && h ? t("a11y.mapShowing", { name: displayName(h.name) }) : "");
+    requestAnimationFrame(() => {
+      if (from === "list") document.getElementById("hospital-h")?.focus({ preventScroll: true });
+      viewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const matches = useMemo(() => {
@@ -145,21 +160,32 @@ export function AuditApp() {
             </>
           )}
         </h1>
-        <p className="lede">
-          {t("audit.lede", {
-            checked: audit.hospitalsChecked,
-            sf: sfOnly,
-            listed: audit.hospitalsTotal > audit.hospitalsChecked ? audit.hospitalsTotal : null,
-          })}
-        </p>
+        <p className="lede">{t("audit.introShort")}</p>
+        <details className="audit-what">
+          <summary>{t("audit.whatH")}</summary>
+          <ul>
+            {WHAT.map((k) => (
+              <li key={k}>{t(k)}</li>
+            ))}
+          </ul>
+          <p>
+            {t("audit.lede", {
+              checked: audit.hospitalsChecked,
+              sf: sfOnly,
+              listed: audit.hospitalsTotal > audit.hospitalsChecked ? audit.hospitalsTotal : null,
+            })}
+          </p>
+        </details>
       </header>
 
       <section aria-labelledby="map-h" className="wide">
         <h2 id="map-h" className="visually-hidden">
           {t("audit.map")}
         </h2>
+        <p className="visually-hidden map-announce" aria-live="polite">
+          {announce}
+        </p>
         <div className={showMap ? "map-and-search" : "search-only"}>
-          {showMap && <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={select} />}
           <div className="finder">
             <label className="h-section" htmlFor="find">
               {t("audit.find")}
@@ -190,6 +216,10 @@ export function AuditApp() {
               </ul>
             )}
             {showMap && <p className="quiet find-hint">{t("audit.tapDot")}</p>}
+          </div>
+          {/* Search first in reading and Tab order; on wide screens the map sits to its left. */}
+          {showMap && <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={(key) => select(key, "map")} />}
+          <div className="finder-more">
             {q.trim().length < 2 && mostFlagged.length > 0 && (
               <div className="most">
                 <h3 className="most-h">{showMap ? t("audit.mostFlags") : t("audit.checkedList")}</h3>
