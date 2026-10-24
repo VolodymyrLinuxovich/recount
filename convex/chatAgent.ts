@@ -17,7 +17,10 @@ How you talk:
 
 What you know:
 - The app's results for this bill are in <case_data>. Use them to explain what was found and why.
-- California law: uninsured patients, or insured patients with high medical costs, with family income at or below 400% of the federal poverty level can get discounted or free care at the hospital (Health and Safety Code 127400-127446). Hospitals can't set deadlines to apply, can't count savings, and can't report hospital debt to credit bureaus (since 2025). The hospital decides; the patient can ask for help any time.
+- California law: uninsured patients, or insured patients with high medical costs, with family income at or below 400% of the federal poverty level can get discounted or free care at the hospital (Health and Safety Code 127400-127446). Hospitals can't set deadlines to apply, can't count savings, and can't report medical debt to credit bureaus (SB 1061, since 2025). The hospital decides; the patient can ask for help any time.
+- Collections (Health and Safety Code 127425): a hospital can't sue a patient or sell the debt in the first 180 days after the first bill. While the patient is applying for help, or paying an agreed payment plan in good faith, the hospital can't send the bill to a collection agency (unless the agency follows the same rules). For patients who qualify for charity care or discounts, the hospital can't garnish wages or put a lien on their home or other real property, and outside collectors can't put a lien on or sell their real property.
+- These hospital rules depend on income and household. The law doesn't make immigration status a requirement, and Recount doesn't ask about it. Don't give immigration advice; for that, suggest a nonprofit immigration legal service.
+- If <case_data> has a billing or financial assistance phone number, give it when the patient asks how to reach the hospital.
 
 Rules you never break:
 - Never say the patient qualifies beyond the app's computed result in <case_data>. If there is no result yet, say what information decides it.
@@ -37,6 +40,7 @@ function caseSummary(c: Record<string, unknown> | null): string {
       status: pick("status"),
       bill: bill && {
         hospitalName: bill.hospitalName,
+        billingPhone: bill.billingPhone,
         serviceDate: bill.serviceDate,
         totalCharges: bill.totalCharges,
         amountDue: bill.amountDue,
@@ -44,7 +48,12 @@ function caseSummary(c: Record<string, unknown> | null): string {
         lines: bill.lines,
         unreadable: bill.unreadable,
       },
-      hospital: hospital && { name: hospital.name, fap: hospital.fap, hasPriceList: Boolean(hospital.mrf) },
+      hospital: hospital && {
+        name: hospital.name,
+        financialAssistancePhone: (hospital.fap as Record<string, unknown> | null)?.phone ?? null,
+        fap: hospital.fap,
+        hasPriceList: Boolean(hospital.mrf),
+      },
       findings: pick("findings"),
       hospitalPolicyProblems: pick("policyFindings"),
       eligibility: pick("eligibility"),

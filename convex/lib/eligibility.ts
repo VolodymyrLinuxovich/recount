@@ -145,8 +145,8 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       basis.push({
         rule: t("Hospital policy", "Política del hospital"),
         text: t(
-          "We couldn't read this hospital's free-care cutoff, so we only show the state floor. You may still qualify for free care.",
-          "No pudimos leer el límite de atención gratuita de este hospital, así que solo mostramos el mínimo estatal. Aún podría calificar para atención gratuita.",
+          "We couldn't confirm this hospital's free-care cutoff from its policy, so we only show the state floor. You may still qualify for free care, and your letter asks for free care too.",
+          "No pudimos confirmar el límite de atención gratuita de este hospital en su política, así que solo mostramos el mínimo estatal. Aún podría calificar para atención gratuita, y su carta también la pide.",
         ),
       });
     }
