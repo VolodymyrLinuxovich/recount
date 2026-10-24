@@ -335,3 +335,10 @@
 .bill-slip-delete .error-note {
   margin: 0 0 var(--sp-3);
 }
+
+/* "Check in on Nov 23": the day the patient picked to see if the hospital answered. */
+.bill-slip-checkin {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+}

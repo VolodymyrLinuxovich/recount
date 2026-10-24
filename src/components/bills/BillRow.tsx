@@ -59,6 +59,7 @@ function LiveRow({ id, token, addedAt, inAccount }: { id: string; token?: string
       <p className="bill-slip-status-row">
         <span className={`bill-pill bill-tone-${tone}`}>{t(`bills.status.${c.status}`)}</span>
       </p>
+      {c.status === "approved" && c.checkInOn && <p className="bill-slip-checkin">{t("bills.checkIn", { date: shortDate(c.checkInOn, lang) })}</p>}
       {inAccount && <p className="bill-slip-acct">✓ {t("bills.inAccount")}</p>}
       {(tier || flags) && (
         <p className="bill-slip-facts">
