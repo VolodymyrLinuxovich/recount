@@ -33,11 +33,16 @@ export const viewport: Viewport = {
   ],
 };
 
+// The server sends English. For a Spanish reader, keep the page hidden until the Spanish text is in
+// (I18nProvider removes the class), so nobody sees English flash first. A timer shows it regardless.
+const LANG_SCRIPT = `try{var l=localStorage.getItem("recount.lang");if(l!=="en"&&l!=="es"){var n=(navigator.languages&&navigator.languages[0])||navigator.language||"";l=n.toLowerCase().indexOf("es")===0?"es":"en"}if(l==="es"){var d=document.documentElement,st=document.createElement("style");st.textContent="html.i18n-wait body{opacity:0}";document.head.appendChild(st);d.lang="es";d.classList.add("i18n-wait");setTimeout(function(){d.classList.remove("i18n-wait")},3000)}}catch(e){}`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
         {/* Display settings (text size, contrast) before first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: LANG_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: VISION_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: REVEAL_SCRIPT }} />
       </head>
