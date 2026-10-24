@@ -6,8 +6,11 @@ import { useParams } from "next/navigation";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { Answer } from "./Answer";
+import { useRememberCase } from "./bills/myBills";
 import { BillMarkup } from "./BillMarkup";
 import { HouseholdForm } from "./HouseholdForm";
+import { useT } from "./i18n/I18nProvider";
+import type { T } from "./i18n/strings";
 import { Letters } from "./Letters";
 import { PolicyAside } from "./PolicyAside";
 import { Sources } from "./Sources";
@@ -17,14 +20,16 @@ import type { CaseView } from "./types";
 export function CaseScreen() {
   const { id } = useParams<{ id: string }>();
   const c = useQuery(api.cases.get, { id: id as Id<"cases"> }) as CaseView | null | undefined;
+  useRememberCase(id, c);
+  const { t } = useT();
 
-  if (c === undefined) return <p className="quiet">Opening your bill…</p>;
+  if (c === undefined) return <p className="quiet">{t("case.opening")}</p>;
   if (c === null)
     return (
       <section>
-        <h1 className="h-answer">We couldn&rsquo;t find this bill.</h1>
+        <h1 className="h-answer">{t("case.notFound")}</h1>
         <p>
-          <Link href="/">Start again</Link>
+          <Link href="/">{t("case.startAgain")}</Link>
         </p>
       </section>
     );
@@ -33,13 +38,13 @@ export function CaseScreen() {
     const isPdf = c.fileType === "application/pdf";
     return (
       <section className="stack">
-        <h1 className="h-answer">We couldn&rsquo;t read this {isPdf ? "file" : "photo"}.</h1>
-        <p>{plainError(c.error, isPdf)}</p>
+        <h1 className="h-answer">{t("case.cantRead", { pdf: isPdf })}</h1>
+        <p>{plainError(t, c.error, isPdf)}</p>
         <Link href="/" className="btn btn-primary">
-          Try again
+          {t("case.tryAgain")}
         </Link>
         <details className="log-details">
-          <summary>Details</summary>
+          <summary>{t("case.details")}</summary>
           <StepLog steps={c.steps.map((s) => (s.state === "running" ? { ...s, state: "error" as const } : s))} />
         </details>
       </section>
@@ -49,11 +54,11 @@ export function CaseScreen() {
   if (c.status === "reading" || !c.bill) {
     return (
       <section className="stack">
-        <p className="eyebrow">Recounting</p>
-        <h1 className="h-answer">Going through your bill, line by line.</h1>
+        <p className="eyebrow">{t("case.eyebrow")}</p>
+        <h1 className="h-answer">{t("case.reading")}</h1>
         {c.fileUrl && c.fileType?.startsWith("image/") && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={c.fileUrl} alt="Your bill" className="photo photo-reading" />
+          <img src={c.fileUrl} alt={t("case.photoAlt")} className="photo photo-reading" />
         )}
         <StepLog steps={c.steps} live />
       </section>
@@ -71,7 +76,7 @@ export function CaseScreen() {
 
       <PolicyAside
         findings={c.policyFindings ?? []}
-        hospitalName={c.hospital?.name ?? c.bill.hospitalName ?? "The hospital"}
+        hospitalName={c.hospital?.name ?? c.bill.hospitalName ?? null}
         hospitalKey={c.hospital?.key ?? null}
         inLetter={Boolean(c.letters?.length)}
       />
@@ -84,7 +89,7 @@ export function CaseScreen() {
 
       <Sources c={c} />
       <details className="log-details">
-        <summary>What Recount did</summary>
+        <summary>{t("case.log")}</summary>
         <StepLog steps={c.steps} />
       </details>
     </div>
@@ -92,12 +97,9 @@ export function CaseScreen() {
 }
 
 /** Turn a backend error into one plain sentence for the patient. */
-function plainError(raw: string | undefined, isPdf: boolean) {
-  const what = isPdf ? "file" : "photo";
+function plainError(t: T, raw: string | undefined, isPdf: boolean) {
   const r = (raw ?? "").toLowerCase();
-  if (/api key|credit|rate limit|overloaded|529|503|unavailable/.test(r))
-    return `Our bill reader is unavailable right now, so we couldn't read your ${what}. Please try again in a few minutes. The sample bill on the start page still works.`;
-  if (/not a hospital|not a medical|no lines|empty/.test(r))
-    return `This doesn't look like a hospital bill. Try a ${what} of the page that lists each charge.`;
-  return `Something went wrong while reading your ${what}. Try again with a clear, flat ${what} of the page that lists each charge.`;
+  if (/api key|credit|rate limit|overloaded|529|503|unavailable/.test(r)) return t("case.err.unavailable", { pdf: isPdf });
+  if (/not a hospital|not a medical|no lines|empty/.test(r)) return t("case.err.notBill", { pdf: isPdf });
+  return t("case.err.generic", { pdf: isPdf });
 }

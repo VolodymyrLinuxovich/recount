@@ -1228,3 +1228,303 @@ a {
   color: var(--ink-2);
   text-align: center;
 }
+
+/* =====================================================================
+   Comfortable reading (older readers first). These override the rules
+   above: larger type, stronger contrast, bigger targets, no tilted or
+   handwritten text for anything a person needs to read.
+   ===================================================================== */
+
+:root {
+  --ink-2: #3d4250;
+  --rule: #cfc4ae;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink-2: #cdc6b8;
+    --rule: #4a463e;
+  }
+}
+
+body {
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.page {
+  max-width: 680px;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 0 12px;
+}
+
+.wordmark {
+  font-size: 26px;
+}
+
+.masthead-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footnote {
+  font-size: 16px;
+}
+
+/* Labels: readable sentence case, not tiny capitals. */
+.eyebrow,
+.versus-label,
+.receipts-h,
+.letter-field span {
+  font-family: var(--font-body), Georgia, serif;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.label {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0;
+  padding: 3px 11px;
+}
+
+.lede,
+.answer-sub {
+  font-size: 20px;
+}
+
+.h-section {
+  font-size: 28px;
+}
+
+/* Buttons: big and plain. */
+.btn {
+  font-size: 19px;
+  min-height: 56px;
+  padding: 12px 20px;
+}
+
+.btn-big {
+  min-height: 66px;
+  font-size: 21px;
+}
+
+.btn-quiet {
+  border-color: var(--ink-2);
+}
+
+:focus-visible {
+  outline-width: 3px;
+}
+
+/* Start page */
+.start .hint {
+  font-size: 17px;
+}
+
+.how-n,
+.q-n {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+/* Live steps */
+.step-label {
+  font-size: 19px;
+}
+
+.step-detail {
+  font-size: 16.5px;
+}
+
+/* The recounted bill */
+.sheet-meta {
+  font-size: 15px;
+  font-family: var(--font-body), Georgia, serif;
+}
+
+.line-desc {
+  font-size: 18px;
+}
+
+.line-charge,
+.totals dd {
+  font-size: 17px;
+}
+
+.line-codes {
+  font-size: 14px;
+}
+
+.line-no {
+  font-size: 14px;
+}
+
+.totals dt {
+  font-size: 17px;
+}
+
+.totals .due dd {
+  font-size: 19px;
+}
+
+/* Red-pen notes stay red, but in a plain bold face and level, so they're easy to read. */
+.margin-note {
+  transform: none;
+  animation-name: rise;
+  align-items: flex-start;
+}
+
+.margin-note .hand,
+.sheet-summary .hand {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  padding-top: 1px;
+}
+
+.margin-n {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  width: 26px;
+  height: 26px;
+}
+
+.hand-stamp {
+  transform: none;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.finding-title {
+  font-size: 21px;
+}
+
+.finding-detail,
+.evidence,
+.receipt p,
+.aside,
+.a-explain {
+  font-size: 18px;
+}
+
+.evidence dd {
+  font-size: 16px;
+}
+
+.src {
+  font-size: 15px;
+}
+
+.confidence {
+  font-size: 16.5px;
+}
+
+/* Questions */
+.q-label {
+  font-size: 21px;
+}
+
+.q-help,
+.q-check,
+.q-missing {
+  font-size: 17px;
+}
+
+.stepper button {
+  width: 64px;
+  height: 60px;
+  font-size: 30px;
+}
+
+.stepper output {
+  min-width: 130px;
+  font-size: 22px;
+  line-height: 60px;
+}
+
+.money-input,
+.money-input input {
+  font-size: 30px;
+}
+
+.choice button {
+  min-width: 120px;
+  min-height: 60px;
+  font-size: 20px;
+}
+
+.choice button[aria-pressed="true"]::before {
+  content: "\2713\00a0";
+}
+
+/* Answer */
+.receipt-rule {
+  font-size: 18px;
+}
+
+/* Letters */
+.letter-body {
+  font-size: 18px;
+}
+
+.letter-title {
+  font-size: 22px;
+}
+
+.phone {
+  font-size: 24px;
+}
+
+/* Policy warning box */
+.policy-aside {
+  transform: none;
+  border-radius: 10px;
+}
+
+.policy-aside-h {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--pen);
+}
+
+.policy-aside-quote,
+.policy-aside-law {
+  font-size: 18px;
+}
+
+.policy-aside-cite,
+.policy-aside-foot {
+  font-size: 16.5px;
+}
+
+.sources {
+  font-size: 17px;
+}
+
+.log-details summary {
+  font-size: 18px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}

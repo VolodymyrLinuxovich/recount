@@ -1,5 +1,7 @@
 // Shape of public/audit/findings.json, produced by the statewide policy audit.
 
+import { type Lang, locale, translate } from "../i18n/strings";
+
 export type Verdict = "conflict" | "likely" | "ask";
 export type DocType = "charity_care" | "discount_payment" | "debt_collection" | "application" | "application_discount";
 
@@ -57,30 +59,20 @@ export function worst(h: Hospital): Worst {
 
 export const isFlagged = (h: Hospital) => h.findings.some((f) => f.verdict === "conflict" || f.verdict === "likely");
 
-export const VERDICT_LABEL: Record<Worst, string> = {
-  conflict: "conflicts with the law",
-  likely: "likely conflicts",
-  ask: "worth asking about",
-  none: "no conflicts found",
-};
+export const verdictLabel = (w: Worst, lang: Lang) => translate(lang, `verdict.${w}`);
 
-export const DOC_LABEL: Record<string, string> = {
-  charity_care: "Charity care policy",
-  discount_payment: "Discount payment policy",
-  debt_collection: "Debt collection policy",
-  application: "Application form",
-  application_discount: "Discount application form",
-};
+export const docLabel = (doc: string, lang: Lang) => translate(lang, "doc.label", { doc });
 
-export function longDate(iso: string | null | undefined) {
-  if (!iso) return "date not stated";
+export function longDate(iso: string | null | undefined, lang: Lang) {
+  if (!iso) return translate(lang, "date.notStated");
   const d = new Date(iso.length === 10 ? `${iso}T12:00:00` : iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString(locale(lang), { month: "short", day: "numeric", year: "numeric" });
 }
 
-export function place(h: Hospital) {
-  return [h.city, h.county && `${h.county} County`].filter(Boolean).join(", ");
+/** "Fresno, Fresno County" / "Fresno, Condado de Fresno". */
+export function place(h: Hospital, lang: Lang) {
+  return [h.city, h.county && translate(lang, "place.county", { county: h.county })].filter(Boolean).join(", ");
 }
 
 // The bill flow links here with its own short hospital key; map those to audit keys.

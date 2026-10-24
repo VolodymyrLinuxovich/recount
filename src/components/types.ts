@@ -5,6 +5,8 @@ import type { Eligibility, Basis } from "../../convex/lib/eligibility";
 import type { HospitalRef } from "../../convex/lib/hospital";
 import type { Letter } from "../../convex/lib/letters";
 
+import { type Lang, locale } from "./i18n/strings";
+
 export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter };
 
 export type Status = "reading" | "needs_household" | "drafting" | "ready" | "approved" | "error";
@@ -20,6 +22,8 @@ export interface Step {
 export interface CaseView {
   _id: string;
   status: Status;
+  /** Language the backend wrote this case's text in. */
+  lang?: Lang;
   sample: boolean;
   fileType?: string;
   fileUrl: string | null;
@@ -37,14 +41,14 @@ export interface CaseView {
   steps: Step[];
 }
 
-export const money = (x: number, cents = true) =>
-  `$${x.toLocaleString("en-US", { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 })}`;
+export const money = (x: number, cents = true, lang: Lang = "en") =>
+  `$${x.toLocaleString(locale(lang), { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 })}`;
 
-export function shortDate(iso: string | null | undefined) {
+export function shortDate(iso: string | null | undefined, lang: Lang = "en") {
   if (!iso) return "";
   const d = new Date(iso.length === 10 ? `${iso}T12:00:00` : iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString(locale(lang), { month: "short", day: "numeric", year: "numeric" });
 }
 
 /** Money a patient could question, counting each bill line once (its largest finding). */

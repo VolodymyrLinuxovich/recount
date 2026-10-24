@@ -5,15 +5,20 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { RecentBills } from "./bills/RecentBills";
+import { rememberCase } from "./bills/myBills";
+import { useT } from "./i18n/I18nProvider";
+import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
 
 export function StartScreen() {
   const router = useRouter();
+  const { t, lang } = useT();
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
   const create = useMutation(api.cases.create);
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<null | "photo" | "sample">(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<PlainKey | null>(null);
 
   async function upload(file: Blob): Promise<Id<"_storage">> {
     const url = await generateUploadUrl();
@@ -30,10 +35,11 @@ export function StartScreen() {
     try {
       const { blob, type } = await prepareFile(file);
       const fileId = await upload(blob);
-      const id = await create({ fileId, fileType: type, sample: false });
+      const id = await create({ fileId, fileType: type, sample: false, lang });
+      rememberCase(id);
       router.push(`/case/${id}`);
     } catch (e) {
-      setError(e instanceof FileProblem ? e.message : "We couldn't upload that file. Check your connection and try again.");
+      setError(e instanceof FileProblem ? e.key : "start.uploadFailed");
       setBusy(null);
       if (input.current) input.current.value = "";
     }
@@ -51,24 +57,20 @@ export function StartScreen() {
         fileId = await upload(blob);
         fileType = blob.type || "image/png";
       }
-      const id = await create({ fileId, fileType, sample: true });
+      const id = await create({ fileId, fileType, sample: true, lang });
+      rememberCase(id);
       router.push(`/case/${id}`);
     } catch {
-      setError("Something went wrong starting the sample. Try again.");
+      setError("start.sampleFailed");
       setBusy(null);
     }
   }
 
   return (
     <section className="start">
-      <p className="eyebrow">For ER bills in San Francisco</p>
-      <h1 className="promise">
-        Got a hospital bill you can&rsquo;t pay? Let&rsquo;s check it line by line, and see if you owe anything at all.
-      </h1>
-      <p className="lede">
-        We compare your bill with the hospital&rsquo;s own published prices and California&rsquo;s charity care rules.
-        Then we draft the letters. You read them and decide. Nothing is sent for you.
-      </p>
+      <p className="eyebrow">{t("start.eyebrow")}</p>
+      <h1 className="promise">{t("start.promise")}</h1>
+      <p className="lede">{t("start.lede")}</p>
 
       <input
         ref={input}
@@ -80,30 +82,32 @@ export function StartScreen() {
         onChange={(e) => onFile(e.target.files?.[0])}
       />
       <button className="btn btn-primary btn-big" onClick={() => input.current?.click()} disabled={busy !== null}>
-        {busy === "photo" ? "Uploading your bill…" : "Take a photo of your bill"}
+        {busy === "photo" ? t("start.uploading") : t("start.photo")}
       </button>
-      <p className="hint">Or choose a photo or PDF you already have. Get the page that lists each charge, if you can.</p>
+      <p className="hint">{t("start.hint")}</p>
       <button className="btn btn-quiet" onClick={onSample} disabled={busy !== null}>
-        {busy === "sample" ? "Opening the sample…" : "Try a sample bill"}
+        {busy === "sample" ? t("start.sampleBusy") : t("start.sample")}
       </button>
       {error && (
         <p className="error-note" role="alert">
-          {error}
+          {t(error)}
         </p>
       )}
+
+      <RecentBills />
 
       <ol className="how">
         <li>
           <span className="how-n">1</span>
-          <span>We read every line and mark the ones that don&rsquo;t match the hospital&rsquo;s own numbers.</span>
+          <span>{t("start.how1")}</span>
         </li>
         <li>
           <span className="how-n">2</span>
-          <span>You answer three questions about your household.</span>
+          <span>{t("start.how2")}</span>
         </li>
         <li>
           <span className="how-n">3</span>
-          <span>You get a plain answer, the rule behind it, and letters ready to send.</span>
+          <span>{t("start.how3")}</span>
         </li>
       </ol>
     </section>

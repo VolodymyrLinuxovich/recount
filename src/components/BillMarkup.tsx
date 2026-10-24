@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "./i18n/I18nProvider";
+import type { Lang, T } from "./i18n/strings";
 import { PenCircle, PenStrike, PenUnderline } from "./Pen";
 import { type CaseView, type Finding, hostOf, money, questionableTotal, shortDate } from "./types";
 
@@ -11,18 +13,19 @@ interface LineMark {
   note: string;
 }
 
-function noteFor(f: Finding, lineIndex: number): { note: string; strike: boolean } | null {
+function noteFor(t: T, lang: Lang, f: Finding, lineIndex: number): { note: string; strike: boolean } | null {
   switch (f.kind) {
     case "DUPLICATE_LINE": {
       const [first, dup] = f.lines;
-      if (lineIndex === dup) return { strike: true, note: `same as line ${first + 1}? take off ${money(f.amount, false)}` };
-      return { strike: false, note: `listed again on line ${dup + 1}` };
+      if (lineIndex === dup) return { strike: true, note: t("bill.dupThis", { line: first + 1, amount: money(f.amount, false, lang) }) };
+      return { strike: false, note: t("bill.dupOther", { line: dup + 1 }) };
     }
     case "ABOVE_LIST_PRICE":
-      return { strike: false, note: `${money(f.amount, false)} over their own list price` };
+      return { strike: false, note: t("bill.aboveList", { amount: money(f.amount, false, lang) }) };
     case "CASH_PRICE_GAP": {
-      const cash = f.evidence.find((e) => /cash/i.test(e.label))?.value;
-      return { strike: false, note: cash ? `cash price is ${cash} a unit` : `ask for the cash price` };
+      // Evidence labels arrive in the case's language ("Published cash price" / "...en efectivo").
+      const cash = f.evidence.find((e) => /cash|efectivo|contado/i.test(e.label))?.value;
+      return { strike: false, note: cash ? t("bill.cashIs", { cash }) : t("bill.askCash") };
     }
     default:
       return null;
@@ -30,6 +33,7 @@ function noteFor(f: Finding, lineIndex: number): { note: string; strike: boolean
 }
 
 export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }) {
+  const { t, lang } = useT();
   const bill = c.bill!;
   const [showPhoto, setShowPhoto] = useState(false);
   const numbered = findings.map((f, i) => ({ f, n: i + 1 }));
@@ -37,7 +41,7 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
   const marks = new Map<number, LineMark[]>();
   for (const { f, n } of numbered) {
     for (const i of f.lines) {
-      const m = noteFor(f, i);
+      const m = noteFor(t, lang, f, i);
       if (!m) continue;
       marks.set(i, [...(marks.get(i) ?? []), { n, finding: f, ...m }]);
     }
@@ -55,9 +59,9 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
     <section className="bill-section" aria-labelledby="bill-h">
       <div className="section-head">
         <h2 id="bill-h" className="h-section">
-          Your bill, recounted
+          {t("bill.h")}
         </h2>
-        <span className="label">{c.billSource === "claude" ? "read by Claude from your photo" : "sample bill source data"}</span>
+        <span className="label">{c.billSource === "claude" ? t("bill.srcClaude") : t("bill.srcSample")}</span>
       </div>
 
       {c.fileUrl && (
@@ -65,18 +69,18 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
           {isImage ? (
             <button className={`photo-btn ${showPhoto ? "open" : ""}`} onClick={() => setShowPhoto((s) => !s)} aria-expanded={showPhoto}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={c.fileUrl} alt="The bill you uploaded" className="photo" />
-              <span className="photo-toggle">{showPhoto ? "Show less" : c.sample ? "The sample bill. Tap to see all of it" : "Your photo. Tap to see all of it"}</span>
+              <img src={c.fileUrl} alt={t("bill.photoAlt")} className="photo" />
+              <span className="photo-toggle">{showPhoto ? t("bill.showLess") : c.sample ? t("bill.tapSample") : t("bill.tapPhoto")}</span>
             </button>
           ) : (
             <a href={c.fileUrl} target="_blank" rel="noreferrer" className="link">
-              Open the file you uploaded
+              {t("bill.openFile")}
             </a>
           )}
           {findings.length > 0 && (
             <p className="hand-stamp" aria-hidden>
-              {findings.length} {findings.length === 1 ? "thing" : "things"} to ask about
-              {questionable > 0 && <> · up to {money(questionable, false)}</>}
+              {t("bill.stamp", { n: findings.length })}
+              {questionable > 0 && t("bill.stampUpTo", { amount: money(questionable, false, lang) })}
             </p>
           )}
         </div>
@@ -84,30 +88,30 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
 
       <div className="sheet">
         <div className="sheet-head">
-          <div className="sheet-hospital">{bill.hospitalName ?? "Hospital name not printed"}</div>
+          <div className="sheet-hospital">{bill.hospitalName ?? t("bill.noName")}</div>
           <dl className="sheet-meta">
             {bill.patientName && (
               <>
-                <dt>Patient</dt>
+                <dt>{t("bill.patient")}</dt>
                 <dd>{bill.patientName}</dd>
               </>
             )}
             {bill.accountNumber && (
               <>
-                <dt>Account</dt>
+                <dt>{t("bill.account")}</dt>
                 <dd>{bill.accountNumber}</dd>
               </>
             )}
             {bill.serviceDate && (
               <>
-                <dt>Visit</dt>
-                <dd>{shortDate(bill.serviceDate)}</dd>
+                <dt>{t("bill.visit")}</dt>
+                <dd>{shortDate(bill.serviceDate, lang)}</dd>
               </>
             )}
             {bill.statementDate && (
               <>
-                <dt>Statement</dt>
-                <dd>{shortDate(bill.statementDate)}</dd>
+                <dt>{t("bill.statement")}</dt>
+                <dd>{shortDate(bill.statementDate, lang)}</dd>
               </>
             )}
           </dl>
@@ -116,7 +120,7 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
         {summary && (
           <div className="sheet-summary">
             <span className="margin-n">{summary.n}</span>
-            <span className="hand">Summary bill. Ask for the itemized one.</span>
+            <span className="hand">{t("bill.summary")}</span>
           </div>
         )}
 
@@ -133,12 +137,17 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
                   <div className="line-top">
                     <span className="line-desc">{l.description}</span>
                     <span className="line-charge">
-                      {money(l.charge)}
+                      {money(l.charge, true, lang)}
                       {circle && <PenCircle delay={d} />}
                     </span>
                   </div>
                   <div className="line-codes">
-                    {[l.date && l.date !== bill.serviceDate && shortDate(l.date), l.code && `code ${l.code}`, l.revCode && `rev ${l.revCode}`, l.quantity !== 1 && `qty ${l.quantity}`]
+                    {[
+                      l.date && l.date !== bill.serviceDate && shortDate(l.date, lang),
+                      l.code && t("bill.code", { code: l.code }),
+                      l.revCode && t("bill.rev", { code: l.revCode }),
+                      l.quantity !== 1 && t("bill.qty", { n: l.quantity }),
+                    ]
                       .filter(Boolean)
                       .join("  ·  ")}
                   </div>
@@ -158,51 +167,48 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
         <dl className="totals">
           {bill.totalCharges != null && (
             <div className={totalFinding ? "flagged" : ""}>
-              <dt>Total charges</dt>
+              <dt>{t("bill.total")}</dt>
               <dd>
-                {money(bill.totalCharges)}
+                {money(bill.totalCharges, true, lang)}
                 {totalFinding && <PenUnderline delay={totalDelay} />}
               </dd>
             </div>
           )}
           {bill.insurancePaid > 0 && (
             <div>
-              <dt>Insurance paid</dt>
-              <dd>−{money(bill.insurancePaid)}</dd>
+              <dt>{t("bill.insurancePaid")}</dt>
+              <dd>−{money(bill.insurancePaid, true, lang)}</dd>
             </div>
           )}
           {bill.adjustments > 0 && (
             <div>
-              <dt>Adjustments</dt>
-              <dd>−{money(bill.adjustments)}</dd>
+              <dt>{t("bill.adjustments")}</dt>
+              <dd>−{money(bill.adjustments, true, lang)}</dd>
             </div>
           )}
           {bill.patientPaid > 0 && (
             <div>
-              <dt>You paid</dt>
-              <dd>−{money(bill.patientPaid)}</dd>
+              <dt>{t("bill.youPaid")}</dt>
+              <dd>−{money(bill.patientPaid, true, lang)}</dd>
             </div>
           )}
           {bill.amountDue != null && (
             <div className="due">
-              <dt>They say you owe</dt>
-              <dd>{money(bill.amountDue)}</dd>
+              <dt>{t("bill.owe")}</dt>
+              <dd>{money(bill.amountDue, true, lang)}</dd>
             </div>
           )}
         </dl>
         {totalFinding && (
           <a href={`#finding-${totalFinding.n}`} className="margin-note totals-note">
             <span className="margin-n">{totalFinding.n}</span>
-            <span className="hand">lines don&rsquo;t add up to this</span>
+            <span className="hand">{t("bill.totalNote")}</span>
           </a>
         )}
       </div>
 
       {findings.length === 0 ? (
-        <p className="quiet">
-          No line-level problems found against the hospital&rsquo;s published prices. Financial assistance can still cover
-          the whole bill.
-        </p>
+        <p className="quiet">{t("bill.noFindings")}</p>
       ) : (
         <ol className="findings">
           {numbered.map(({ f, n }) => (
@@ -232,8 +238,8 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
                   </dl>
                 )}
                 <p className="confidence">
-                  {f.confidence === "high" ? "Based on the hospital's published number." : "Worth asking. It may have a reason."}
-                  {f.amount > 0 && <> Could take off {money(f.amount)}.</>}
+                  {f.confidence === "high" ? t("bill.confHigh") : t("bill.confCheck")}
+                  {f.amount > 0 && t("bill.couldTakeOff", { amount: money(f.amount, true, lang) })}
                 </p>
               </div>
             </li>

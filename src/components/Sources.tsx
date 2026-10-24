@@ -1,37 +1,41 @@
+import { useT } from "./i18n/I18nProvider";
 import { type CaseView, hostOf, shortDate } from "./types";
 
 export function Sources({ c }: { c: CaseView }) {
+  const { t, lang } = useT();
   const h = c.hospital;
   return (
     <section className="sources" aria-labelledby="src-h">
       <h2 id="src-h" className="h-small">
-        Where these numbers come from
+        {t("src.h")}
       </h2>
       <ul>
         <li>
-          <span className="label">Bill</span>{" "}
-          {c.billSource === "claude" ? "Read by Claude from the file you uploaded. Check names and amounts." : "Sample bill, loaded from its source data."}
+          <span className="label">{t("src.bill")}</span>{" "}
+          {c.billSource === "claude" ? t("src.billClaude") : t("src.billSample")}
         </li>
         {h ? (
           <>
             <li>
-              <span className="label">Hospital data</span>{" "}
-              {h.source === "apify-live" ? `Fetched live ${shortDate(h.fetchedAt)}.` : `Saved lookup from ${shortDate(h.fetchedAt)}, not fetched just now.`}
+              <span className="label">{t("src.hospital")}</span>{" "}
+              {h.source === "apify-live"
+                ? t("src.live", { date: shortDate(h.fetchedAt, lang) })
+                : t("src.saved", { date: shortDate(h.fetchedAt, lang) })}
             </li>
             {h.mrf?.url && (
               <li>
-                <span className="label">Price file</span>{" "}
+                <span className="label">{t("src.priceFile")}</span>{" "}
                 <a href={h.mrf.url} target="_blank" rel="noreferrer">
-                  {h.name}&rsquo;s published standard charges
+                  {t("src.priceLink", { name: h.name })}
                 </a>{" "}
-                <span className="quiet">({hostOf(h.mrf.url)}{h.mrf.lastUpdated ? `, updated ${shortDate(h.mrf.lastUpdated)}` : ""})</span>
+                <span className="quiet">({hostOf(h.mrf.url)}{h.mrf.lastUpdated ? t("src.updated", { date: shortDate(h.mrf.lastUpdated, lang) }) : ""})</span>
               </li>
             )}
             {h.fap?.url && (
               <li>
-                <span className="label">Assistance policy</span>{" "}
+                <span className="label">{t("src.policy")}</span>{" "}
                 <a href={h.fap.url} target="_blank" rel="noreferrer">
-                  {h.name}&rsquo;s financial assistance policy
+                  {t("src.policyLink", { name: h.name })}
                 </a>
               </li>
             )}
@@ -43,8 +47,7 @@ export function Sources({ c }: { c: CaseView }) {
           </>
         ) : (
           <li>
-            <span className="label">Hospital data</span> We couldn&rsquo;t match this hospital, so charges weren&rsquo;t compared with
-            its price list.
+            <span className="label">{t("src.hospital")}</span> {t("src.noMatch")}
           </li>
         )}
       </ul>

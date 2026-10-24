@@ -4,8 +4,10 @@ import { useMutation } from "convex/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { useT } from "./i18n/I18nProvider";
 import type { CaseView, Letter } from "./types";
 
+// What gets copied, downloaded and emailed is the English letter for the hospital.
 function asText(l: Letter) {
   return `Subject: ${l.subject}\n\n${l.body}\n`;
 }
@@ -46,13 +48,17 @@ function LetterSheet({
   onChange: (l: Letter) => void;
   readOnly: boolean;
 }) {
+  const { t, lang } = useT();
   const [copied, setCopied] = useState(false);
+  const title = lang === "en" ? letter.title : t(letter.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute");
+  const patientCopy = letter.bodyPatient ? [letter.subjectPatient, letter.bodyPatient].filter(Boolean).join("\n\n") : null;
   const slug = letter.kind === "assistance" ? "financial-assistance-request" : "billing-questions";
   return (
     <article className="letter">
-      <h3 className="letter-title">{letter.title}</h3>
+      <h3 className="letter-title">{title}</h3>
+      {lang !== "en" && <p className="quiet letter-lang-note">{t("letters.sentInEnglish")}</p>}
       <label className="letter-field">
-        <span>Subject</span>
+        <span>{t("letters.subject")}</span>
         <GrowingText
           className="letter-subject"
           value={letter.subject}
@@ -64,7 +70,8 @@ function LetterSheet({
         className="letter-body"
         value={letter.body}
         readOnly={readOnly}
-        aria-label={`${letter.title} text`}
+        lang="en"
+        aria-label={t("letters.bodyLabel", { title })}
         onChange={(e) => onChange({ ...letter, body: e.target.value })}
       />
       <div className="row">
@@ -77,17 +84,25 @@ function LetterSheet({
             setTimeout(() => setCopied(false), 1800);
           }}
         >
-          {copied ? "Copied" : "Copy"}
+          {copied ? t("letters.copied") : t("letters.copy")}
         </button>
         <button className="btn btn-quiet" type="button" onClick={() => download(`${slug}.txt`, asText(letter))}>
-          Download .txt
+          {t("letters.download")}
         </button>
       </div>
+      {patientCopy && (
+        <div className="letter-patient-copy" lang="es">
+          <h4 className="letter-patient-h">{t("letters.patientCopyH")}</h4>
+          <p className="quiet">{t("letters.patientCopyNote")}</p>
+          <div className="letter-patient-text">{patientCopy}</div>
+        </div>
+      )}
     </article>
   );
 }
 
 export function Letters({ c }: { c: CaseView }) {
+  const { t } = useT();
   const approve = useMutation(api.cases.approve);
   const [edits, setEdits] = useState<Letter[] | null>(null);
   const [busy, setBusy] = useState(false);
@@ -98,8 +113,8 @@ export function Letters({ c }: { c: CaseView }) {
   if (!letters) {
     return (
       <section className="letters">
-        <h2 className="h-section">Your letters</h2>
-        <p className="quiet pulse">Writing your letters…</p>
+        <h2 className="h-section">{t("letters.h")}</h2>
+        <p className="quiet pulse">{t("letters.writing")}</p>
       </section>
     );
   }
@@ -111,20 +126,17 @@ export function Letters({ c }: { c: CaseView }) {
     <section className="letters" aria-labelledby="letters-h">
       <div className="section-head">
         <h2 id="letters-h" className="h-section">
-          {approved ? "Ready to send" : "Your letters"}
+          {approved ? t("letters.ready") : t("letters.h")}
         </h2>
-        <span className="label">{c.lettersSource === "claude" ? "written by Claude" : "standard template"}</span>
+        <span className="label">{c.lettersSource === "claude" ? t("letters.srcClaude") : t("letters.srcTemplate")}</span>
       </div>
 
       {approved ? (
         <div className="send">
-          <p>
-            You approved these. Recount hasn&rsquo;t sent anything. Send them yourself, by mail, email, or the
-            hospital&rsquo;s patient portal, and keep a copy.
-          </p>
+          <p>{t("letters.approvedNote")}</p>
           {phone && (
             <p>
-              Call billing first and ask for their mailing address or email for financial assistance:{" "}
+              {t("letters.callFirst")}{" "}
               <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`} className="phone">
                 {phone}
               </a>
@@ -133,13 +145,13 @@ export function Letters({ c }: { c: CaseView }) {
           <div className="row">
             {letters.map((l) => (
               <a key={l.kind} href={mailto(l)} className="btn btn-primary">
-                Email the {l.kind === "assistance" ? "assistance request" : "billing questions"}
+                {l.kind === "assistance" ? t("letters.emailAssist") : t("letters.emailDispute")}
               </a>
             ))}
           </div>
         </div>
       ) : (
-        <p className="lede">Read them. Change anything that&rsquo;s wrong, and fill in the [brackets]. Nothing goes out until you send it.</p>
+        <p className="lede">{t("letters.lede")}</p>
       )}
 
       {letters.map((l, i) => (
@@ -160,7 +172,7 @@ export function Letters({ c }: { c: CaseView }) {
             }
           }}
         >
-          {busy ? "Saving…" : "These look right. Approve"}
+          {busy ? t("letters.saving") : t("letters.approve")}
         </button>
       )}
     </section>

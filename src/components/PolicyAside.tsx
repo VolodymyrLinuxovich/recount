@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useT } from "./i18n/I18nProvider";
+import type { PlainKey } from "./i18n/strings";
 import { shortDate } from "./types";
 
 export interface PolicyFinding {
@@ -10,53 +12,20 @@ export interface PolicyFinding {
   docUrl: string | null;
   effectiveDate: string | null;
   explanation: string;
+  /** English original of `explanation` when the case is in Spanish. */
+  explanationEn?: string;
 }
 
-// One plain line per state rule, with the section it comes from.
-const LAW: Record<string, { title: string; line: string; cite: string; url: string }> = {
-  DEADLINE: {
-    title: "No deadline to apply",
-    line: "Hospitals can't set a time limit for applying for financial assistance.",
-    cite: "Health & Safety Code 127405",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
-  },
-  ASSETS: {
-    title: "No asset test",
-    line: "Hospitals can't count your savings or other assets when deciding if you qualify.",
-    cite: "Health & Safety Code 127405",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
-  },
-  INCOME_PROOF: {
-    title: "Simple proof of income",
-    line: "Hospitals can only ask for recent pay stubs or tax returns as proof of income.",
-    cite: "Health & Safety Code 127405",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
-  },
-  CREDIT_REPORTING: {
-    title: "No credit reporting",
-    line: "Hospitals can't report this kind of medical debt to credit agencies.",
-    cite: "Health & Safety Code 127425",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127425.",
-  },
-  LIENS: {
-    title: "No liens on your home",
-    line: "Hospitals can't put a lien on a patient's real property to collect.",
-    cite: "Health & Safety Code 127425",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127425.",
-  },
-  MEDICAL_FIRST: {
-    title: "No Medi-Cal-first rule",
-    line: "Hospitals can't make you apply for Medi-Cal or other coverage before they'll consider you.",
-    cite: "Health & Safety Code 127405",
-    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
-  },
-};
+const HSC = (n: string) => `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=${n}.`;
 
-const DOC: Record<string, string> = {
-  charity_care: "charity care policy",
-  discount_payment: "discount payment policy",
-  debt_collection: "debt collection policy",
-  application: "application form",
+// One plain line per state rule (text in i18n/strings.ts), with the section it comes from.
+const LAW: Record<string, { line: PlainKey; cite: string; url: string }> = {
+  DEADLINE: { line: "law.DEADLINE", cite: "Health & Safety Code 127405", url: HSC("127405") },
+  ASSETS: { line: "law.ASSETS", cite: "Health & Safety Code 127405", url: HSC("127405") },
+  INCOME_PROOF: { line: "law.INCOME_PROOF", cite: "Health & Safety Code 127405", url: HSC("127405") },
+  CREDIT_REPORTING: { line: "law.CREDIT_REPORTING", cite: "Health & Safety Code 127425", url: HSC("127425") },
+  LIENS: { line: "law.LIENS", cite: "Health & Safety Code 127425", url: HSC("127425") },
+  MEDICAL_FIRST: { line: "law.MEDICAL_FIRST", cite: "Health & Safety Code 127405", url: HSC("127405") },
 };
 
 export function PolicyAside({
@@ -66,15 +35,16 @@ export function PolicyAside({
   inLetter,
 }: {
   findings: PolicyFinding[];
-  hospitalName: string;
+  hospitalName: string | null;
   hospitalKey: string | null;
   inLetter: boolean;
 }) {
+  const { t, lang } = useT();
   if (!findings.length) return null;
   const firm = findings.filter((f) => f.verdict !== "ask");
   const head = firm.length
-    ? `Heads up: ${hospitalName}'s own policy breaks ${firm.length === 1 ? "a state rule" : `${firm.length} state rules`}.`
-    : `Heads up: part of ${hospitalName}'s own policy is unclear under state law.`;
+    ? t("policy.headBreaks", { name: hospitalName, n: firm.length })
+    : t("policy.headUnclear", { name: hospitalName });
 
   return (
     <aside className="policy-aside" aria-labelledby="policy-aside-h">
@@ -87,23 +57,27 @@ export function PolicyAside({
           return (
             <li key={f.rule + i}>
               <div className="versus-label">
-                Their {DOC[f.docType] ?? "policy"} says
-                {f.verdict === "likely" && " (likely conflict)"}
-                {f.verdict === "ask" && " (worth asking about)"}
+                {t("policy.theirSays", { doc: f.docType })}
+                {f.verdict === "likely" && t("policy.likely")}
+                {f.verdict === "ask" && t("policy.ask")}
               </div>
               <blockquote className="policy-aside-quote">&ldquo;{f.quote}&rdquo;</blockquote>
               <div className="policy-aside-cite">
                 {f.docUrl ? (
                   <a href={f.page != null ? `${f.docUrl}#page=${f.page}` : f.docUrl} target="_blank" rel="noreferrer">
-                    Policy PDF{f.page != null && <>, page {f.page}</>}
+                    {t("policy.pdf")}
+                    {f.page != null && t("policy.page", { n: f.page })}
                   </a>
                 ) : (
-                  <span>Policy{f.page != null && <>, page {f.page}</>}</span>
+                  <span>
+                    {t("policy.policy")}
+                    {f.page != null && t("policy.page", { n: f.page })}
+                  </span>
                 )}
-                <span className="quiet"> · effective {f.effectiveDate ? shortDate(f.effectiveDate) : "date not stated"}</span>
+                <span className="quiet"> · {t("doc.effective", { date: f.effectiveDate ? shortDate(f.effectiveDate, lang) : null })}</span>
               </div>
               <p className="policy-aside-law">
-                <strong>California law:</strong> {law ? law.line : f.explanation}{" "}
+                <strong>{t("policy.lawLabel")}</strong> {law ? t(law.line) : f.explanation}{" "}
                 {law && (
                   <a href={law.url} target="_blank" rel="noreferrer" className="src">
                     {law.cite}
@@ -115,13 +89,9 @@ export function PolicyAside({
         })}
       </ol>
       <p className="policy-aside-foot">
-        {firm.length > 0 &&
-          (inLetter ? "We've added " : "We'll add ") +
-            (firm.length === findings.length
-              ? firm.length === 1 ? "this to your letter. " : "these to your letter. "
-              : `the ${firm.length === 1 ? "rule it breaks" : `${firm.length} rules it breaks`} to your letter. `)}
+        {firm.length > 0 && t("policy.foot", { added: inLetter, firm: firm.length, total: findings.length })}
         <Link href={hospitalKey ? `/audit#h=${encodeURIComponent(hospitalKey)}` : "/audit"}>
-          See what we found in other hospitals&rsquo; policies
+          {t("policy.seeOthers")}
         </Link>
       </p>
     </aside>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useT } from "../i18n/I18nProvider";
 import { CaMap } from "./CaMap";
 import { type Audit, displayName, isFlagged, longDate, place, resolveKey, worst } from "./data";
 import { HospitalView } from "./HospitalView";
@@ -18,6 +19,7 @@ const keyFromHash = () => {
 };
 
 export function AuditApp() {
+  const { t, lang } = useT();
   const [data, setData] = useState<{ audit: Audit; sample: boolean } | null>(null);
   const [failed, setFailed] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -51,8 +53,8 @@ export function AuditApp() {
       .slice(0, 8);
   }, [data, q]);
 
-  if (failed) return <p className="error-note">We couldn&rsquo;t load the audit data.</p>;
-  if (!data) return <p className="quiet">Loading the statewide audit…</p>;
+  if (failed) return <p className="error-note">{t("audit.loadFailed")}</p>;
+  if (!data) return <p className="quiet">{t("audit.loading")}</p>;
 
   const { audit, sample } = data;
   // Describe exactly the set of hospitals in the file, never more.
@@ -60,11 +62,10 @@ export function AuditApp() {
   const counties = new Set(audit.hospitals.map((h) => h.county).filter(Boolean));
   const sfOnly = !statewide && counties.size === 1 && counties.has("San Francisco");
   const scopeHeadline = statewide
-    ? `We read the financial assistance policies of every California hospital (${audit.hospitalsChecked} of ${audit.hospitalsTotal}).`
+    ? t("audit.scopeAll", { checked: audit.hospitalsChecked, total: audit.hospitalsTotal })
     : sfOnly
-      ? "We read the financial assistance policies of San Francisco\u2019s hospitals."
-      : `We read the financial assistance policies of ${audit.hospitalsChecked} California hospitals.`;
-  const scopeNoun = sfOnly ? "San Francisco hospitals" : "California hospitals";
+      ? t("audit.scopeSf")
+      : t("audit.scopeSome", { n: audit.hospitalsChecked });
 
   const confirmed = audit.hospitals.filter((h) => h.findings.some((f) => f.verdict === "conflict")).length;
   const likelyOnly = audit.hospitals.filter(isFlagged).length - confirmed;
@@ -97,73 +98,75 @@ export function AuditApp() {
     <div className="audit stack-lg">
       {sample && (
         <p className="sample-banner" role="note">
-          Sample data. These hospitals are made up; the real audit results will replace them.
+          {t("audit.sample")}
         </p>
       )}
 
       <header>
-        <p className="eyebrow">Hospital policy audit · {longDate(audit.generatedAt)}</p>
+        <p className="eyebrow">{t("audit.eyebrow", { date: longDate(audit.generatedAt, lang) })}</p>
         <h1 className="h-answer audit-headline">
           {scopeHeadline}{" "}
           {confirmed > 0 ? (
             <>
-              <span className="audit-n">{confirmed}</span> of them {confirmed === 1 ? "conflicts" : "conflict"} with state law.
-              {likelyOnly > 0 && <> {likelyOnly} more likely {likelyOnly === 1 ? "does" : "do"}.</>}
+              <span className="audit-n">{confirmed}</span>
+              {t("audit.conflictTail", { n: confirmed })}
+              {likelyOnly > 0 && t("audit.likelyMore", { n: likelyOnly })}
             </>
           ) : (
             <>
-              <span className="audit-n">{likelyOnly}</span> of them likely {likelyOnly === 1 ? "conflicts" : "conflict"} with state law.
+              <span className="audit-n">{likelyOnly}</span>
+              {t("audit.likelyTail", { n: likelyOnly })}
             </>
           )}
         </h1>
         <p className="lede">
-          We checked the current charity care, discount, and debt collection policies of {audit.hospitalsChecked} {scopeNoun}
-          {audit.hospitalsTotal > audit.hospitalsChecked && <> (of {audit.hospitalsTotal} listed)</>}, from the state&rsquo;s
-          hospital database, against the rules in force since 2025: no deadlines to
-          apply, no asset tests, simple proof of income, no credit reporting, no liens on homes, no Medi-Cal-first
-          requirement. Every flag quotes the policy next to the law.
+          {t("audit.lede", {
+            checked: audit.hospitalsChecked,
+            sf: sfOnly,
+            listed: audit.hospitalsTotal > audit.hospitalsChecked ? audit.hospitalsTotal : null,
+          })}
         </p>
       </header>
 
       <section aria-labelledby="map-h" className="wide">
         <h2 id="map-h" className="visually-hidden">
-          Map
+          {t("audit.map")}
         </h2>
         <div className={showMap ? "map-and-search" : "search-only"}>
           {showMap && <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={select} />}
           <div className="finder">
             <label className="h-section" htmlFor="find">
-              Find your hospital
+              {t("audit.find")}
             </label>
             <input
               id="find"
               className="find-input"
               type="search"
-              placeholder="Name, city, or county"
+              placeholder={t("audit.findPlaceholder")}
               value={q}
               onChange={(e) => setQ(e.target.value)}
               autoComplete="off"
             />
             {q.trim().length >= 2 && (
               <ul className="find-results" aria-live="polite">
-                {matches.length === 0 && <li className="quiet">No hospital by that name in our list.</li>}
+                {matches.length === 0 && <li className="quiet">{t("audit.noMatch")}</li>}
                 {matches.map((h) => (
                   <li key={h.key}>
                     <button onClick={() => select(h.key)}>
                       <i className={`dot-key dot-${worst(h)}`} aria-hidden />
                       <span>
                         <span className="find-name">{displayName(h.name)}</span>
-                        <span className="find-place">{place(h)}</span>
+                        <span className="find-place">{place(h, lang)}</span>
                       </span>
                     </button>
                   </li>
                 ))}
               </ul>
             )}
-            {showMap && <p className="quiet find-hint">Or tap a dot on the map.</p>}
+            {showMap && <p className="quiet find-hint">{t("audit.tapDot")}</p>}
             {q.trim().length < 2 && mostFlagged.length > 0 && (
               <div className="most">
-                <div className="versus-label">{showMap ? "Most flags" : "Hospitals we checked"}</div>
+                <div className="versus-label">{showMap ? t("audit.mostFlags") : t("audit.checkedList")}</div>
                 <ul className="find-results">
                   {mostFlagged.map((h) => (
                     <li key={h.key}>
@@ -172,7 +175,7 @@ export function AuditApp() {
                         <span>
                           <span className="find-name">{displayName(h.name)}</span>
                           <span className="find-place">
-                            {[place(h), h.findings.length ? `${h.findings.length} ${h.findings.length === 1 ? "flag" : "flags"}` : "no conflicts found"]
+                            {[place(h, lang), h.findings.length ? t("audit.flags", { n: h.findings.length }) : t("audit.noConflicts")]
                             .filter(Boolean)
                             .join(" · ")}
                           </span>
@@ -193,9 +196,9 @@ export function AuditApp() {
 
       <section aria-labelledby="rules-h" className="wide">
         <h2 id="rules-h" className="h-section">
-          What we found, rule by rule
+          {t("audit.rulesH")}
         </h2>
-        <p className="quiet">Number of hospitals with a policy that goes against each rule.</p>
+        <p className="quiet">{t("audit.rulesSub")}</p>
         <ul className="rule-rows">
           {ruleRows.map(({ r, c, total }) => (
             <li key={r.id}>
@@ -203,7 +206,7 @@ export function AuditApp() {
                 <span className="rule-title">{r.title}</span>
                 <span className="rule-count">
                   {c.conflict + c.likely}
-                  {c.ask > 0 && <span className="quiet"> +{c.ask} to ask</span>}
+                  {c.ask > 0 && <span className="quiet">{t("audit.toAsk", { n: c.ask })}</span>}
                 </span>
               </div>
               <div className="rule-bar" aria-hidden>
@@ -217,8 +220,7 @@ export function AuditApp() {
                 </a>
                 {total > 0 && (
                   <span className="quiet">
-                    {" "}
-                    · {c.conflict} conflict, {c.likely} likely
+                    {t("audit.ruleCounts", { conflict: c.conflict, likely: c.likely })}
                   </span>
                 )}
               </div>
@@ -229,21 +231,15 @@ export function AuditApp() {
 
       <section aria-labelledby="method-h" className="method">
         <h2 id="method-h" className="h-small">
-          How we did this
+          {t("audit.methodH")}
         </h2>
-        <p>
-          We took each hospital&rsquo;s policy documents from the state&rsquo;s hospital database (HCAI) and read them in
-          full. When a sentence matched one of the rules above, we flagged it and reviewed it together with the text
-          around it.
-        </p>
-        <p>
-          Flags are reviewed with the surrounding text; &lsquo;likely&rsquo; and &lsquo;worth asking&rsquo; are not legal
-          conclusions. Policies change; we show each document&rsquo;s effective date.
-        </p>
+        <p>{t("audit.method1")}</p>
+        <p>{t("audit.method2")}</p>
         <p className="quiet">
           {audit.hospitalsChecked >= audit.hospitalsTotal
-            ? `Checked all ${audit.hospitalsChecked} hospitals in our list.`
-            : `Checked ${audit.hospitalsChecked} of ${audit.hospitalsTotal} hospitals.`} Data from {longDate(audit.generatedAt)}.
+            ? t("audit.checkedAll", { n: audit.hospitalsChecked })
+            : t("audit.checkedSome", { checked: audit.hospitalsChecked, total: audit.hospitalsTotal })}
+          {t("audit.dataFrom", { date: longDate(audit.generatedAt, lang) })}
         </p>
       </section>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { type Hospital, type Worst, VERDICT_LABEL, displayName, worst } from "./data";
+import { useT } from "../i18n/I18nProvider";
+import { type Hospital, type Worst, displayName, verdictLabel, worst } from "./data";
 
 // A simplified outline of California as [lon, lat] points, drawn like a sketch on paper.
 const OUTLINE: [number, number][] = [
@@ -37,6 +38,7 @@ export function CaMap({
   selected: string | null;
   onSelect: (key: string) => void;
 }) {
+  const { t, lang } = useT();
   const placed = hospitals
     .filter((h) => h.lat != null && h.lon != null)
     .map((h) => ({ h, w: worst(h), xy: project(h.lon!, h.lat!) }))
@@ -46,7 +48,7 @@ export function CaMap({
 
   return (
     <figure className="ca-map">
-      <svg viewBox={`-6 -6 ${W + 12} ${H + 12}`} role="group" aria-label="Map of California hospitals, colored by what we found">
+      <svg viewBox={`-6 -6 ${W + 12} ${H + 12}`} role="group" aria-label={t("map.aria")}>
         <path d={PATH} className="ca-outline" />
         {placed.map(({ h, w, xy: [x, y] }) => (
           <g
@@ -54,7 +56,7 @@ export function CaMap({
             className={`dot dot-${w}`}
             role="button"
             tabIndex={0}
-            aria-label={`${displayName(h.name)}: ${VERDICT_LABEL[w]}`}
+            aria-label={`${displayName(h.name)}: ${verdictLabel(w, lang)}`}
             onClick={() => onSelect(h.key)}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect(h.key))}
           >
@@ -71,10 +73,10 @@ export function CaMap({
         )}
       </svg>
       <figcaption className="map-legend">
-        <span><i className="dot-key dot-conflict" /> conflicts</span>
-        <span><i className="dot-key dot-likely" /> likely conflicts</span>
-        <span><i className="dot-key dot-ask" /> worth asking</span>
-        <span><i className="dot-key dot-none" /> none found</span>
+        <span><i className="dot-key dot-conflict" /> {t("map.conflict")}</span>
+        <span><i className="dot-key dot-likely" /> {t("map.likely")}</span>
+        <span><i className="dot-key dot-ask" /> {t("map.ask")}</span>
+        <span><i className="dot-key dot-none" /> {t("map.none")}</span>
       </figcaption>
     </figure>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Answer } from "./Answer";
 import { BillMarkup } from "./BillMarkup";
 import { HouseholdForm } from "./HouseholdForm";
+import { useT } from "./i18n/I18nProvider";
 import { Letters } from "./Letters";
 import { Sources } from "./Sources";
 import { StepLog } from "./StepLog";
@@ -133,9 +134,26 @@ const answered: CaseView = {
   ],
 };
 
+// What the backend adds to each letter when the case is in Spanish.
+const PATIENT_COPY: Record<string, { subjectPatient: string; bodyPatient: string }> = {
+  assistance: {
+    subjectPatient: "Solicitud de asistencia financiera, cuenta SAMPLE-40017782",
+    bodyPatient:
+      "A la oficina de facturación:\n\nLes escribo sobre la cuenta SAMPLE-40017782 por mi visita del 12 de septiembre de 2026.\n\nNo tengo seguro médico. En mi hogar somos 2 personas y ganamos unos $28,000 al año. Por favor, evalúen mi caso para asistencia financiera según su política y el Código de Salud y Seguridad de California 127400 a 127446.\n\nPor favor, no manden esta cuenta a cobranza mientras la revisan.\n\nGracias,\n[Su nombre]\n[Su dirección]",
+  },
+  dispute: {
+    subjectPatient: "Preguntas sobre cargos, cuenta SAMPLE-40017782",
+    bodyPatient:
+      "A la oficina de facturación:\n\nTengo preguntas sobre tres cargos de mi factura.\n\n1. La línea 5 repite la línea 3, un panel metabólico completo de $486.00.\n2. La línea 6 cobra $1,934.00 por unidad. Su cargo estándar publicado es $471.00.\n\nPor favor, corrijan o expliquen estos cargos.\n\nGracias,\n[Su nombre]",
+  },
+};
+
 export function Preview() {
+  const { t, lang } = useT();
   const [view, setView] = useState<"steps" | "bill" | "ready" | "approved">("bill");
-  const c = view === "approved" ? { ...answered, status: "approved" as const } : view === "ready" ? answered : base;
+  const withLang: CaseView =
+    lang === "es" ? { ...answered, lang, letters: answered.letters!.map((l) => ({ ...l, ...PATIENT_COPY[l.kind] })) } : answered;
+  const c = view === "approved" ? { ...withLang, status: "approved" as const } : view === "ready" ? withLang : base;
   return (
     <div className="stack-lg">
       <div className="row" style={{ fontSize: 14 }}>
@@ -147,8 +165,8 @@ export function Preview() {
       </div>
       {view === "steps" ? (
         <section className="stack">
-          <p className="eyebrow">Recounting</p>
-          <h1 className="h-answer">Going through your bill, line by line.</h1>
+          <p className="eyebrow">{t("case.eyebrow")}</p>
+          <h1 className="h-answer">{t("case.reading")}</h1>
           <StepLog steps={[...base.steps.slice(0, 2), { _id: "4", key: "check", label: "Checking 6 charges against the hospital's own prices", state: "running" }]} live />
         </section>
       ) : (

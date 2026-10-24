@@ -494,3 +494,72 @@
   max-width: 640px;
   margin: 0 auto;
 }
+
+/* Comfortable reading overrides */
+.sample-banner {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 16px;
+}
+
+.verdict {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  transform: none;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.a-rule {
+  font-size: 22px;
+}
+
+.policy-quote,
+.law-quote {
+  font-size: 18px;
+}
+
+.versus-cite,
+.rule-cite {
+  font-size: 16px;
+}
+
+.map-legend {
+  font-size: 16px;
+}
+
+.dot-key {
+  width: 14px;
+  height: 14px;
+}
+
+.find-input {
+  font-size: 20px;
+  min-height: 60px;
+}
+
+.find-name {
+  font-size: 19px;
+}
+
+.find-place {
+  font-size: 16px;
+}
+
+.find-results button {
+  min-height: 60px;
+}
+
+.rule-title {
+  font-size: 19px;
+}
+
+.hospital-verdict {
+  font-size: 20px;
+}
+
+.hospital-docs ul,
+.method {
+  font-size: 18px;
+}

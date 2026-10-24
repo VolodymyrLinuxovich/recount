@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
+import { Footer } from "@/components/Footer";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Masthead } from "@/components/Masthead";
 import "./globals.css";
@@ -33,10 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="page">
             <Masthead />
             <main className="column">{children}</main>
-            <footer className="footnote">
-              Not legal or medical advice. Recount checks your bill against public rules and prices; the hospital
-              makes the final decision.
-            </footer>
+            <Footer />
           </div>
           </I18nProvider>
         </ConvexClientProvider>
