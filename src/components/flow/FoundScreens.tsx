@@ -204,6 +204,55 @@ function LineRow({
   );
 }
 
+/* ---------- "which amount is on your bill?" ---------- */
+
+type AmountCheckItem = { index: number; first: number; second: number };
+
+/** Two reads of one line disagreed: the patient looks at the paper and taps the right amount. */
+function AmountCheck({ c, check }: { c: CaseView; check: AmountCheckItem }) {
+  const { t, lang } = useT();
+  const correctLine = useMutation(api.cases.correctLine);
+  const [busy, setBusy] = useState<number | null>(null);
+  const [failed, setFailed] = useState(false);
+  const line = c.bill?.lines[check.index];
+  if (!line) return null;
+  const first = money(check.first, true, lang);
+  const second = money(check.second, true, lang);
+
+  async function pick(charge: number) {
+    setBusy(charge);
+    setFailed(false);
+    try {
+      await correctLine({ id: c._id as Id<"cases">, token: c.token, index: check.index, charge });
+    } catch {
+      setFailed(true);
+      setBusy(null);
+    }
+  }
+
+  return (
+    <li className="amt-check">
+      <p className="amt-check-line">
+        {t("amt.line", { n: check.index + 1 })} <span lang={billLang(lang)}>{line.description}</span>
+      </p>
+      <p className="amt-check-q">{t("amt.q", { first, second })}</p>
+      <div className="choice amt-check-choice">
+        {[check.first, check.second].map((v) => (
+          <button key={v} type="button" onClick={() => pick(v)} disabled={busy !== null}>
+            {busy === v ? t("bill.fixSaving") : money(v, true, lang)}
+          </button>
+        ))}
+      </div>
+      <p className="found-quiet">{t("amt.neither")}</p>
+      {failed && (
+        <p className="error-note" role="alert">
+          {t("bill.fixFailed")}
+        </p>
+      )}
+    </li>
+  );
+}
+
 /* ---------- "what we found" ---------- */
 
 export function FoundStep({ c, next, back, go }: ScreenProps) {
@@ -212,7 +261,13 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
   const screens = findingScreens(c);
   const n = screens.length;
   // Notes from the reader, without internal field names like "hospitalAddress: …".
-  const unsure = (bill.unreadable ?? []).map((u) => u.replace(/^[a-z]+[A-Z][A-Za-z]*(\[\d+\])?(\.[A-Za-z]+)?\s*:\s*/, "")).filter(Boolean);
+  const checks = canFix(c) ? (bill.amountChecks ?? []).filter((x) => bill.lines[x.index]) : [];
+  const asked = new Set(checks.map((x) => x.index));
+  // The "second look" notes repeat the amount question below, so they're left out while it's open.
+  const unsure = (bill.unreadable ?? [])
+    .map((u) => u.replace(/^[a-z]+[A-Z][A-Za-z]*(\[\d+\])?(\.[A-Za-z]+)?\s*:\s*/, ""))
+    .filter(Boolean)
+    .filter((u) => !(/second look|segunda lectura/i.test(u) && [...unsureLines([u])].some((i) => asked.has(i))));
   const unsureSet = unsureLines(unsure);
   const name = c.hospital?.name ?? bill.hospitalName;
 
@@ -258,6 +313,20 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
           <p className="found-quiet">{t("found.linesRead", { n: bill.lines.length })}</p>
         </div>
       </div>
+
+      {checks.length > 0 && (
+        <section className="found-box found-box-check amt-checks" aria-labelledby="amt-h">
+          <h2 id="amt-h" className="found-box-h">
+            {t("amt.h", { n: checks.length })}
+          </h2>
+          <p className="found-quiet">{t("amt.why")}</p>
+          <ul>
+            {checks.map((x) => (
+              <AmountCheck key={`${x.index}-${x.first}-${x.second}`} c={c} check={x} />
+            ))}
+          </ul>
+        </section>
+      )}
 
       {unsure.length > 0 && (
         <div className="found-box found-box-check" role="note">

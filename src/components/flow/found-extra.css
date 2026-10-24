@@ -8,3 +8,27 @@
   line-height: var(--lh-snug);
   color: var(--ink);
 }
+
+/* "Which amount is on your bill?" */
+.amt-checks ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-3) 0 0;
+  display: grid;
+  gap: var(--sp-4);
+}
+.amt-check {
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--rule);
+}
+.amt-check-line {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.amt-check-q {
+  margin: var(--sp-1) 0 var(--sp-3);
+}
+.amt-check-choice {
+  margin-bottom: var(--sp-2);
+}
