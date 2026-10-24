@@ -145,7 +145,10 @@ export const approve = mutation({
     if (c.status !== "ready" && c.status !== "approved") throw new Error("Letters aren't ready yet");
     if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new Error("Letter too long");
     // Placeholders the patient must fill in before a letter can go out.
-    const left = [...new Set(letters.flatMap((l) => (l.body + " " + l.subject).match(/\[[^\]\n]{2,40}\]/g) ?? []))];
+    // A signature line is signed by hand on paper, so it never blocks approval.
+    const left = [...new Set(letters.flatMap((l) => (l.body + " " + l.subject).match(/\[[^\]\n]{2,40}\]/g) ?? []))].filter(
+      (b) => !/signature|firma|sign here/i.test(b),
+    );
     if (left.length) throw new Error(`FILL_IN: Please fill in ${left.join(", ")} before approving.`);
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
   },
