@@ -56,7 +56,8 @@ const googleOn = !!(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET
 const google = Google({
   // Mark the email verified only when Google says so.
   profile(p) {
-    return { id: p.sub, name: p.name, email: String(p.email ?? "").toLowerCase(), image: p.picture, emailVerified: p.email_verified === true };
+    const name = String(p.name || [p.given_name, p.family_name].filter(Boolean).join(" ")).trim().slice(0, 120) || undefined;
+    return { id: p.sub, name, email: String(p.email ?? "").toLowerCase(), image: p.picture, emailVerified: p.email_verified === true };
   },
 });
 
