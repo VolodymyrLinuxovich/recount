@@ -176,7 +176,9 @@ export const correctLine = mutation({
       (u) => !oldAmounts.some((a) => u.includes(a)) && !/\b(total|sum|add up|suma|total)\b/i.test(u),
     );
     const correctedLines = [...new Set([...(c.bill.correctedLines ?? []), index])];
-    const bill = { ...c.bill, lines, unreadable, correctedLines };
+    // The patient settled this line, so its "second look" question is answered.
+    const amountChecks = (c.bill.amountChecks ?? []).filter((x: { index: number }) => x.index !== index);
+    const bill = { ...c.bill, lines, unreadable, correctedLines, amountChecks };
     const findings = checkBill(bill, c.hospital ?? null, isLang(c.lang) ? c.lang : "en");
     await ctx.db.patch(id, { bill, findings });
   },

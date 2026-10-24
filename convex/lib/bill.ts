@@ -8,7 +8,8 @@ export const BillLine = z.object({
   revCode: z.string().nullable().describe("4-digit revenue code if printed, else null"),
   description: z.string().describe("Line description as printed"),
   quantity: z.number().describe("Units; 1 if not printed"),
-  charge: z.number().describe("Total charge for this line in dollars"),
+  chargePrinted: z.string().describe("The charge exactly as printed on this line, character for character (e.g. \"3,694.00\"). Copy it; don't calculate."),
+  charge: z.number().describe("Same amount as a number. Must equal chargePrinted."),
 });
 export type BillLine = z.infer<typeof BillLine>;
 
@@ -33,4 +34,7 @@ export const ParsedBill = z.object({
   lines: z.array(BillLine),
   unreadable: z.array(z.string()).describe("Parts of the bill you could not read with confidence"),
 });
-export type ParsedBill = z.infer<typeof ParsedBill>;
+export type ParsedBill = z.infer<typeof ParsedBill> & {
+  /** Lines where a second look at a blurry photo read a different amount. Set by the app, never by the model; the bill keeps the first reading until the patient confirms. */
+  amountChecks?: { index: number; first: number; second: number }[];
+};

@@ -31,7 +31,7 @@ function bill(lines: ParsedBill["lines"], extra: Partial<ParsedBill> = {}): Pars
   };
 }
 
-const L = (code: string, charge: number, qty = 1) => ({ date: "2026-09-12", code, revCode: null, description: code, quantity: qty, charge });
+const L = (code: string, charge: number, qty = 1) => ({ date: "2026-09-12", code, revCode: null, description: code, quantity: qty, chargePrinted: charge.toFixed(2), charge });
 
 describe("checkBill", () => {
   it("flags a duplicate line once", () => {
