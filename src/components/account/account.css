@@ -404,3 +404,12 @@
   height: 1px;
   background: var(--rule);
 }
+
+.acct-note {
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+  background: var(--rc-brand-tint);
+  font-size: var(--fs-sm);
+}

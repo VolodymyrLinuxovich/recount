@@ -20,6 +20,8 @@ export function safeNext(raw: string | null): string | null {
   return raw;
 }
 
+const hasCode = () => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("code");
+
 export function AccountScreen() {
   const { t } = useT();
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -28,7 +30,6 @@ export function AccountScreen() {
   const wasOut = useRef(false);
   // Back from Google: the sign-in code is still being exchanged while the URL carries ?code=.
   const [fromGoogle] = useState(() => typeof window !== "undefined" && googlePending());
-  const [googleFailed, setGoogleFailed] = useState(false);
 
   // Signed in from this page with somewhere to go back to (the bill they were on): go there.
   useEffect(() => {
@@ -39,12 +40,11 @@ export function AccountScreen() {
       return;
     }
     wasOut.current = true;
-    // Still signed out after coming back from Google, with no code left to exchange: it was cancelled or failed.
-    if (fromGoogle && !new URLSearchParams(window.location.search).has("code")) {
-      clearGooglePending();
-      setGoogleFailed(true);
-    }
+    if (fromGoogle && !hasCode()) clearGooglePending();
   }, [isAuthenticated, isLoading, next, router, fromGoogle]);
+
+  // Still signed out after coming back from Google, with no code left to exchange: cancelled or failed.
+  const googleFailed = fromGoogle && !isLoading && !isAuthenticated && !hasCode();
 
   if (isLoading) return <p className="quiet">{fromGoogle ? t("acct.googleChecking") : t("acct.loading")}</p>;
 
@@ -79,6 +79,7 @@ function SignedIn({ next }: { next: string | null }) {
       <p className="acct-lede">
         {t("acct.signedInAs")} <strong className="acct-email">{me?.accountEmail ?? "…"}</strong>
       </p>
+      {me?.otherAccount && <p className="acct-note">{t(me.signInMethod === "google" ? "acct.otherPassword" : "acct.otherGoogle")}</p>}
       <ClaimNote />
       <div className="acct-row">
         <Link href={next ?? "/bills"} className="rc-btn acct-wide">

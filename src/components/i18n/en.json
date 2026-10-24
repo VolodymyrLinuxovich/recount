@@ -825,5 +825,8 @@
   "acct.googleBusy": "Opening Google…",
   "acct.googleFailed": "Google sign-in didn’t finish. Please try again, or use your email below.",
   "acct.orEmail": "or use email",
-  "acct.googleChecking": "Finishing Google sign-in…"
+  "acct.googleChecking": "Finishing Google sign-in…",
+  "acct.errGoogle": "This email signs in with Google. Please use Continue with Google.",
+  "acct.otherPassword": "You also have an account that signs in with a password for this email. Bills saved there stay in that account.",
+  "acct.otherGoogle": "You also have an account that signs in with Google for this email. Bills saved there stay in that account."
 }

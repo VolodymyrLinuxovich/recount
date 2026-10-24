@@ -825,5 +825,8 @@
   "acct.googleBusy": "Abriendo Google…",
   "acct.googleFailed": "No se pudo entrar con Google. Inténtelo de nuevo o use su correo abajo.",
   "acct.orEmail": "o use su correo",
-  "acct.googleChecking": "Terminando de entrar con Google…"
+  "acct.googleChecking": "Terminando de entrar con Google…",
+  "acct.errGoogle": "Este correo entra con Google. Por favor, use Continuar con Google.",
+  "acct.otherPassword": "También tiene una cuenta con este correo que entra con contraseña. Las facturas guardadas allí siguen en esa cuenta.",
+  "acct.otherGoogle": "También tiene una cuenta con este correo que entra con Google. Las facturas guardadas allí siguen en esa cuenta."
 }
