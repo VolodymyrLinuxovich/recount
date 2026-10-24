@@ -251,7 +251,7 @@ export function CaseFlow({ t, id, token, onHome }) {
       case "done":
         return {
           back: onHome,
-          body: <Done t={t} c={c} letters={drafts || c.letters || []} />,
+          body: <Done t={t} c={c} id={id} token={token} letters={drafts || c.letters || []} />,
           primary: { label: t.changeLetters, busy, onPress: () => run(() => unapprove({ id, token })) },
           secondary: deleteButton,
         };
@@ -583,7 +583,11 @@ function LetterEditor({ t, es, index, count, letter, onChange, err }) {
 }
 
 // ---------- 5. Done ----------
-function Done({ t, c, letters }) {
+// The follow-up (check-in day, complaint to the state) lives in the web app for now.
+const WEB = "https://recount-nu.vercel.app";
+const HCAI_COMPLAINT_URL = "https://hcai.ca.gov/affordability/hospital-fair-billing-program/hospital-bill-complaint-program/";
+
+function Done({ t, c, id, token, letters }) {
   const billing = c.bill?.billingPhone;
   const assist = c.hospital?.fap?.phone;
   const tel = (p) => openUrl("tel:" + p.replace(/[^0-9+]/g, ""));
@@ -613,6 +617,11 @@ function Done({ t, c, letters }) {
       </View>
       <P muted style={{ marginTop: 10 }}>{t.sendMail}</P>
       {c.hospital?.fap?.applicationUrl ? <LinkText label={c.hospital.fap.applicationUrl} onPress={() => openUrl(c.hospital.fap.applicationUrl)} /> : null}
+      <View style={{ height: 18 }} />
+      <H2>{t.afterTitle}</H2>
+      <P>{t.afterBody}</P>
+      <Button kind="secondary" label={t.afterOpen} onPress={() => openUrl(`${WEB}/case/${id}#t=${token}&s=after`)} />
+      <LinkText label={t.afterHcai} onPress={() => openUrl(HCAI_COMPLAINT_URL)} />
     </>
   );
 }
