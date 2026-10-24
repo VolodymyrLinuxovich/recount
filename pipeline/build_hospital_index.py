@@ -26,6 +26,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "actor"))
 from src.fpl import extract_thresholds, find_phones  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "pipeline"))
+from fpl_guard import checked_free  # noqa: E402
+
 CORPUS = ROOT / "audit" / "corpus"
 OUT = ROOT / "convex" / "lib" / "hospitalIndex.json"
 
@@ -77,6 +80,8 @@ def main() -> None:
             text += "\n" + doc_text(dp)
         th = extract_thresholds(text) if text else {"freeCareMaxFplPct": None, "discountMaxFplPct": None, "discountHasNoFplCap": False, "quotes": []}
         quote = {q["kind"]: q["text"] for q in th["quotes"]}
+        # Keep a free-care cutoff only if its own quote shows that exact free tier (see fpl_guard.py).
+        th["freeCareMaxFplPct"] = checked_free(th["freeCareMaxFplPct"], quote.get("freeCare"))
         phones = find_phones(text) if text else []
         phone = phones[0][1] if phones else None
         found["free"] += th["freeCareMaxFplPct"] is not None

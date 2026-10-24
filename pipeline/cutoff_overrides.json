@@ -1,0 +1,29 @@
+{
+  "note": "Hand-checked corrections from the independent spot-check (docs/AUDIT-SPOTCHECK.md). Each value is backed by the verbatim quote from the hospital's own filed policy.",
+  "hospitals": {
+    "palomar-medical-center": {
+      "freeCareMaxFplPct": 250,
+      "freeQuote": "Patients or their guarantors who earn 250% or less of the FPG. Guidelines (based on the date of discharge of the most recent admission being considered) are eligible for Full Charity Care: a write-off of 100% of charges.",
+      "discountMaxFplPct": 400,
+      "discountQuote": "Patients or their guarantors who earn between 251% and 400% of the current Federal Poverty Guidelines (based on the date of discharge of the most recent admission being considered) are eligible for Discounted Partial",
+      "reason": "Full charity tier is 250%; 251-400% get discounted care."
+    },
+    "palomar-medical-center-poway": {
+      "freeCareMaxFplPct": 250,
+      "freeQuote": "Patients or their guarantors who earn 250% or less of the FPG. Guidelines (based on the date of discharge of the most recent admission being considered) are eligible for Full Charity Care: a write-off of 100% of charges.",
+      "discountMaxFplPct": 400,
+      "discountQuote": "Patients or their guarantors who earn between 251% and 400% of the current Federal Poverty Guidelines (based on the date of discharge of the most recent admission being considered) are eligible for Discounted Partial",
+      "reason": "Same policy as Palomar Medical Center."
+    },
+    "mammoth-hospital": {
+      "discountMaxFplPct": 450,
+      "discountQuote": "401-450% of the Federal Poverty Level 60% of charges 60% of remaining patient responsibility",
+      "reason": "Discount tiers run to 450%."
+    },
+    "college-medical-center-south-campus-d-p-aph": {
+      "discountMaxFplPct": 400,
+      "discountQuote": "with the sliding scale of decreasing percentage write-offs for incomes up to 400% of the federal poverty guideline",
+      "reason": "Sliding-scale discounts up to 400%."
+    }
+  }
+}

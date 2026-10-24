@@ -145,3 +145,23 @@ describe("statewide hospital matching", () => {
     expect(kaiser.candidates[0].city).toBe("Oakland");
   });
 });
+
+import indexData from "../convex/lib/hospitalIndex.json";
+
+describe("hospital index: free-care cutoffs", () => {
+  // A free-care cutoff of 400% whose own quote gives FULL charity only up to ~200% would tell
+  // a patient at 300% they owe $0. That must never ship again.
+  it("never sets a free cutoff at or above 400% when its quote shows a lower free tier", () => {
+    const pat = /([12]\d\d)\s*%[^%]{0,60}(Full Charity|free care|100\s*%)/i;
+    const bad = (indexData as { hospitals: { name: string; fap: { freeCareMaxFplPct: number | null; freeQuote: string | null } }[] }).hospitals
+      .filter((h) => (h.fap.freeCareMaxFplPct ?? 0) >= 400 && h.fap.freeQuote && pat.test(h.fap.freeQuote))
+      .map((h) => h.name);
+    expect(bad).toEqual([]);
+  });
+  it("every free cutoff appears in its own quote", () => {
+    const missing = (indexData as { hospitals: { name: string; fap: { freeCareMaxFplPct: number | null; freeQuote: string | null } }[] }).hospitals
+      .filter((h) => h.fap.freeCareMaxFplPct != null && !(h.fap.freeQuote ?? "").includes(String(Math.round(h.fap.freeCareMaxFplPct))))
+      .map((h) => h.name);
+    expect(missing).toEqual([]);
+  });
+});
