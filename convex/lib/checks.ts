@@ -143,16 +143,25 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null, lang: Lang 
   if (bill.totalCharges != null && bill.lines.length > 0) {
     const sum = r2(bill.lines.reduce((a, l) => a + l.charge, 0));
     if (Math.abs(sum - bill.totalCharges) > 1) {
+      // If parts of the photo were hard to read, the gap is more likely our misreading than the hospital's math.
+      const unsure = bill.unreadable.length > 0;
       out.push({
         id: "total",
         kind: "TOTAL_MISMATCH",
         lines: [],
-        amount: Math.max(0, r2(bill.totalCharges - sum)),
-        title: t("The lines don't add up to the total", "Las líneas no suman el total"),
-        detail: t(
-          `The listed charges add up to ${money(sum)}, but the bill says total charges are ${money(bill.totalCharges)}.`,
-          `Los cargos de la lista suman ${money(sum)}, pero la factura dice que el total es ${money(bill.totalCharges)}.`,
-        ),
+        amount: unsure ? 0 : Math.max(0, r2(bill.totalCharges - sum)),
+        title: unsure
+          ? t("The lines we read don't add up to the total", "Las líneas que leímos no suman el total")
+          : t("The lines don't add up to the total", "Las líneas no suman el total"),
+        detail: unsure
+          ? t(
+              `The charges we read add up to ${money(sum)}, but the bill says ${money(bill.totalCharges)}. Part of the photo was hard to read, so we may have misread a number. Please check each amount against your bill.`,
+              `Los cargos que leímos suman ${money(sum)}, pero la factura dice ${money(bill.totalCharges)}. Parte de la foto era difícil de leer, así que quizás leímos mal un número. Por favor compare cada monto con su factura.`,
+            )
+          : t(
+              `The listed charges add up to ${money(sum)}, but the bill says total charges are ${money(bill.totalCharges)}.`,
+              `Los cargos de la lista suman ${money(sum)}, pero la factura dice que el total es ${money(bill.totalCharges)}.`,
+            ),
         evidence: [
           { label: t("Sum of lines", "Suma de las líneas"), value: money(sum) },
           { label: t("Printed total", "Total impreso"), value: money(bill.totalCharges) },

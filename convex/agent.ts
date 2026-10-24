@@ -34,7 +34,7 @@ function hasClaude() {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
-async function readWithClaude(blob: Blob, mediaType: string): Promise<ParsedBill> {
+async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promise<ParsedBill> {
   const client = new Anthropic();
   const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
   const media =
@@ -47,7 +47,7 @@ async function readWithClaude(blob: Blob, mediaType: string): Promise<ParsedBill
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
     output_config: { effort: "high", format: betaZodOutputFormat(ParsedBill) },
-    messages: [{ role: "user", content: [media, { type: "text", text: READ_PROMPT }] }],
+    messages: [{ role: "user", content: [media, { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }] }],
   });
   if (res.stop_reason === "refusal") throw new Error("The model declined to read this file.");
   if (!res.parsed_output) throw new Error("Couldn't read the bill into a structured form.");
@@ -214,7 +214,7 @@ export const readAndCheck = internalAction({
         const blob = await ctx.storage.get(c.fileId);
         if (!blob) throw new Error("Uploaded file is missing");
         try {
-          bill = await readWithClaude(blob, c.fileType ?? blob.type ?? "image/jpeg");
+          bill = await readWithClaude(blob, c.fileType ?? blob.type ?? "image/jpeg", lang);
         } catch (e) {
           if (!c.sample) throw e;
           bill = SAMPLE_BILL;
@@ -226,6 +226,9 @@ export const readAndCheck = internalAction({
         billSource = "sample-source";
       } else {
         throw new Error(t("Reading photos needs the Claude API key on the server.", "Para leer fotos se necesita la clave de Claude en el servidor."));
+      }
+      if (bill.isMedicalBill === false || (bill.lines.length === 0 && /not a (hospital|medical)/i.test(bill.unreadable.join(" ")))) {
+        throw new Error(t("NOT_A_BILL: This is not a hospital or medical bill.", "NOT_A_BILL: Esto no es una factura de hospital ni médica (not a hospital or medical bill)."));
       }
       const n = bill.lines.length;
       await step(
@@ -299,7 +302,7 @@ const LETTER_PROMPT = `Write the letters a patient will send to a hospital billi
 - "assistance": a request for financial assistance (charity care / discount payment) under the hospital's policy and California Health & Safety Code 127400-127446. Ask them to screen the patient, to send the application if one is needed, and to hold the account from collections while it is reviewed.
 - If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
 - "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
-- If "patientLanguage" is "es", also give a faithful Spanish translation of each letter in subjectPatient/bodyPatient so the patient understands what they sign. Otherwise set them to null.
+- If "patientLanguage" is "es", also give a faithful Spanish translation of each letter: subjectPatient translates ONLY the subject line, bodyPatient translates the body. Otherwise set them to null.
 Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] for anything the patient must fill in (signature, address). Sign as the patient.`;
 
 export const draftLetters = internalAction({

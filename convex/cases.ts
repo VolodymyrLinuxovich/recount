@@ -2,6 +2,8 @@ import { v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
+import { checkBill } from "./lib/checks";
+import { isLang } from "./lib/lang";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { FPL } from "./lib/reference";
@@ -143,6 +145,24 @@ export const approve = mutation({
     if (c.status !== "ready" && c.status !== "approved") throw new Error("Letters aren't ready yet");
     if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new Error("Letter too long");
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
+  },
+});
+
+/**
+ * The patient fixes an amount we misread (e.g. a blurry photo). Updates that line and
+ * re-runs the deterministic checks. Only before the household questions, so the answer
+ * and letters are always built from the corrected bill.
+ */
+export const correctLine = mutation({
+  args: { id: v.id("cases"), token: Token, index: v.number(), charge: v.number() },
+  handler: async (ctx, { id, token, index, charge }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status !== "needs_household") throw new Error("You can fix amounts before answering the questions");
+    if (!c.bill || index < 0 || index >= c.bill.lines.length || !(charge >= 0) || charge > 10_000_000) throw new Error("Check the amount");
+    const lines = c.bill.lines.map((l: { charge: number }, i: number) => (i === index ? { ...l, charge, corrected: true } : l));
+    const bill = { ...c.bill, lines };
+    const findings = checkBill(bill, c.hospital ?? null, isLang(c.lang) ? c.lang : "en");
+    await ctx.db.patch(id, { bill, findings });
   },
 });
 
