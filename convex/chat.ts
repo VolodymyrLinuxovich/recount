@@ -4,7 +4,7 @@
 // Safety rules live in the system prompt AND in what we pass: the case data goes in as
 // clearly marked data, never as instructions, because bill text is untrusted.
 
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
@@ -37,8 +37,8 @@ export const send = mutation({
   handler: async (ctx, { sessionId, caseId, token, lang, content }) => {
     const text = content.trim().slice(0, MAX_MESSAGE);
     if (!text) return;
-    if (sessionId.length < 16 || sessionId.length > 100) throw new Error("Bad session");
-    if (caseId && !(await caseIfOwned(ctx, caseId, token))) throw new Error("Case not found");
+    if (sessionId.length < 16 || sessionId.length > 100) throw new ConvexError("Bad session");
+    if (caseId && !(await caseIfOwned(ctx, caseId, token))) throw new ConvexError("Case not found");
 
     // Per-conversation limit: 20 questions per 10 minutes.
     const recent = await ctx.db
@@ -47,10 +47,10 @@ export const send = mutation({
       .collect();
     const now = Date.now();
     if (recent.filter((m) => m.role === "user" && now - m.at < 10 * 60_000).length >= 20) {
-      throw new Error(lang === "es" ? "Demasiadas preguntas seguidas. Espere unos minutos." : "Too many questions in a row. Please wait a few minutes.");
+      throw new ConvexError(lang === "es" ? "Demasiadas preguntas seguidas. Espere unos minutos." : "Too many questions in a row. Please wait a few minutes.");
     }
     if (recent.some((m) => m.role === "assistant" && m.pending)) {
-      throw new Error(lang === "es" ? "Espere a que termine la respuesta." : "Please wait for the answer to finish.");
+      throw new ConvexError(lang === "es" ? "Espere a que termine la respuesta." : "Please wait for the answer to finish.");
     }
 
     await ctx.db.insert("chatMessages", { sessionId, caseId, role: "user", content: text, at: now, pending: false });
