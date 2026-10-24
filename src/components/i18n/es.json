@@ -753,8 +753,8 @@
   "acct.errLong": "Esa contraseña es demasiado larga.",
   "acct.errNoPassword": "Escriba su contraseña.",
   "acct.errWrong": "El correo o la contraseña no son correctos.",
-  "acct.errTooMany": "Demasiados intentos. Espere unos minutos, por favor.",
-  "acct.errExists": "Ya hay una cuenta con este correo. Toque “Entrar”.",
+  "acct.errTooMany": "Demasiados intentos. Espere unos minutos y vuelva a intentarlo.",
+  "acct.errExists": "Ya existe una cuenta con este correo. Por favor, entre a su cuenta.",
   "acct.errNetwork": "No pudimos conectar con Recount. Revise su conexión e intente de nuevo.",
   "acct.errSignUp": "No pudimos crear la cuenta. Intente de nuevo, por favor.",
   "acct.errSave": "No pudimos guardar sus datos. Intente de nuevo, por favor.",
@@ -819,5 +819,6 @@
   "amt.why": "Leímos su factura dos veces y obtuvimos números diferentes. Mire su factura en papel y toque el monto que ve.",
   "amt.line": "Línea {n}:",
   "amt.q": "Leímos {first}. Una segunda lectura dio {second}. ¿Cuál aparece en su factura?",
-  "amt.neither": "¿Ninguno de los dos? Toque el monto en la lista de abajo para escribirlo."
+  "amt.neither": "¿Ninguno de los dos? Toque el monto en la lista de abajo para escribirlo.",
+  "acct.toSignIn": "Entrar con este correo"
 }

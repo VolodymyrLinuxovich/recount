@@ -18,11 +18,13 @@ export function AuthCard({ startIn = "signUp" }: { startIn?: Mode }) {
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [exists, setExists] = useState(false);
   const uid = useId();
 
   const pick = (m: Mode) => {
     setMode(m);
     setError(null);
+    setExists(false);
   };
 
   async function submit(e: FormEvent) {
@@ -37,7 +39,9 @@ export function AuthCard({ startIn = "signUp" }: { startIn?: Mode }) {
       await signIn("password", { email: em, password, flow: mode });
       // The page switches to "Your account" once the sign-in handshake finishes.
     } catch (err) {
-      setError(authError(t, err, mode));
+      const msg = authError(t, err, mode);
+      setError(msg);
+      setExists(msg === t("acct.errExists"));
       setBusy(false);
     }
   }
@@ -101,6 +105,14 @@ export function AuthCard({ startIn = "signUp" }: { startIn?: Mode }) {
         {error && (
           <p className="error-note acct-error" role="alert">
             {error}
+            {exists && mode === "signUp" && (
+              <>
+                {" "}
+                <button type="button" className="link-btn" onClick={() => pick("signIn")}>
+                  {t("acct.toSignIn")}
+                </button>
+              </>
+            )}
           </p>
         )}
         <button type="submit" className="rc-btn rc-btn--block acct-submit" disabled={busy}>

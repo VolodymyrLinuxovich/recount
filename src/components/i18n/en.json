@@ -753,8 +753,8 @@
   "acct.errLong": "That password is too long.",
   "acct.errNoPassword": "Please enter your password.",
   "acct.errWrong": "Email or password is wrong.",
-  "acct.errTooMany": "Too many tries. Please wait a few minutes.",
-  "acct.errExists": "There’s already an account with this email. Tap “Sign in” instead.",
+  "acct.errTooMany": "Too many tries. Please wait a few minutes and try again.",
+  "acct.errExists": "An account with this email already exists. Please sign in.",
   "acct.errNetwork": "We couldn’t reach Recount. Check your connection and try again.",
   "acct.errSignUp": "We couldn’t create the account. Please try again.",
   "acct.errSave": "We couldn’t save your details. Please try again.",
@@ -819,5 +819,6 @@
   "amt.why": "We read your bill twice and got different numbers. Look at your paper bill and tap the amount you see.",
   "amt.line": "Line {n}:",
   "amt.q": "We read {first}. A second look read {second}. Which is on your bill?",
-  "amt.neither": "Neither one? Tap the amount in the list below to type it."
+  "amt.neither": "Neither one? Tap the amount in the list below to type it.",
+  "acct.toSignIn": "Sign in with this email"
 }
