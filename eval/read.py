@@ -9,7 +9,12 @@ that final bill; <id>.reads.json keeps both raw reads.
   python -I read.py                      # every out/bill-*.png -> preds/<id>.parsed.json
   python -I read.py --only bill-001 bill-002 --pdf
 
-Needs ANTHROPIC_API_KEY (or an `ant auth login` profile). Bills already read are skipped
+Needs ANTHROPIC_API_KEY (or an `ant auth login` profile). To read with an Azure OpenAI deployment
+instead, as the app does with MODEL_PROVIDER=azure (convex/lib/model.ts):
+
+  python -I read.py --provider azure --env ../.env.azure --dst preds-azure
+
+The env file needs AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY and AZURE_OPENAI_DEPLOYMENT. Bills already read are skipped
 unless --force. Keep READ_PROMPT, COLUMN_PROMPT, the settings and the schema in sync with
 convex/agent.ts and convex/lib/bill.ts.
 """
@@ -27,6 +32,9 @@ import json
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+import urllib.error
+import urllib.request
 
 import anthropic
 
@@ -103,7 +111,48 @@ def money(s: str) -> float | None:
         return None
 
 
-def ask(client: anthropic.Anthropic, path: Path, prompt: str, schema: dict, max_tokens: int) -> dict:
+class Azure:
+    """Azure OpenAI chat completions with a JSON schema, the same request as the app's azure adapter."""
+
+    def __init__(self, env_file: Path):
+        e = {}
+        for line in env_file.read_text().splitlines():
+            if "=" in line and not line.strip().startswith("#"):
+                k, v = line.split("=", 1)
+                e[k.strip()] = v.strip().strip('"').strip("'")
+        self.base = e["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        self.key = e["AZURE_OPENAI_API_KEY"]
+        self.model = e.get("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1-mini")
+        self.version = e.get("AZURE_OPENAI_API_VERSION", "2024-10-21")
+
+    def ask(self, path: Path, prompt: str, schema: dict, max_tokens: int) -> dict:
+        data = base64.standard_b64encode(path.read_bytes()).decode()
+        media = ({"type": "file", "file": {"filename": path.name, "file_data": f"data:application/pdf;base64,{data}"}}
+                 if path.suffix == ".pdf" else {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{data}"}})
+        body = {"max_completion_tokens": max_tokens,
+                "messages": [{"role": "user", "content": [media, {"type": "text", "text": prompt}]}],
+                "response_format": {"type": "json_schema", "json_schema": {"name": "output", "schema": schema, "strict": True}}}
+        url = f"{self.base}/openai/deployments/{self.model}/chat/completions?api-version={self.version}"
+        req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "api-key": self.key})
+        for attempt in range(5):
+            try:
+                with urllib.request.urlopen(req, timeout=180) as r:
+                    j = json.loads(r.read())
+                break
+            except urllib.error.HTTPError as e:
+                if e.code == 429 and attempt < 4:
+                    time.sleep(2 ** attempt * 5)
+                    continue
+                raise RuntimeError(f"Azure {e.code}: {e.read()[:200].decode(errors='replace')}")
+        msg = j["choices"][0]["message"]
+        if msg.get("refusal"):
+            raise RuntimeError("model declined to read this file")
+        return json.loads(msg["content"])
+
+
+def ask(client, path: Path, prompt: str, schema: dict, max_tokens: int) -> dict:
+    if isinstance(client, Azure):
+        return client.ask(path, prompt, schema, max_tokens)
     data = base64.standard_b64encode(path.read_bytes()).decode()
     if path.suffix == ".pdf":
         media = {"type": "document", "source": {"type": "base64", "media_type": "application/pdf", "data": data}}
@@ -178,9 +227,13 @@ def main() -> None:
     ap.add_argument("--pdf", action="store_true", help="send the PDF instead of the PNG when a bill has one")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("-j", type=int, default=4, help="parallel requests")
+    ap.add_argument("--provider", choices=["anthropic", "azure"], default="anthropic")
+    ap.add_argument("--env", type=Path, help="env file with the Azure keys (for --provider azure)")
     a = ap.parse_args()
     a.dst.mkdir(exist_ok=True)
-    client = anthropic.Anthropic()
+    if a.provider == "azure" and not a.env:
+        raise SystemExit("--provider azure needs --env <file with AZURE_OPENAI_* keys>")
+    client = Azure(a.env) if a.provider == "azure" else anthropic.Anthropic()
 
     jobs = []
     for tp in sorted(a.src.glob("bill-*.truth.json")):
@@ -200,7 +253,7 @@ def main() -> None:
     try:
         save(jobs[0][2], *read_one(client, jobs[0][1]))
         print(f"{jobs[0][0]}: ok", flush=True)
-    except (anthropic.AuthenticationError, anthropic.PermissionDeniedError, anthropic.BadRequestError) as e:
+    except (anthropic.AuthenticationError, anthropic.PermissionDeniedError, anthropic.BadRequestError, RuntimeError) as e:
         raise SystemExit(f"first request failed, stopping: {e}")
 
     def run(job):

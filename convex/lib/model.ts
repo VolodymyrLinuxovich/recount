@@ -8,11 +8,13 @@
 //   MODEL_<TASK>_PROVIDER   per task: READ, COLUMN, LETTERS, CHAT
 //   MODEL_<TASK>_NAME
 //   MODEL_FALLBACK_PROVIDER / MODEL_FALLBACK_NAME   used if the first provider throws
+//   MODEL_<TASK>_FALLBACK_PROVIDER / _NAME          a fallback for one task only
 // Provider settings:
 //   anthropic: ANTHROPIC_API_KEY
 //   openai:    OPENAI_API_KEY, OPENAI_BASE_URL (default https://api.openai.com/v1); any
 //              OpenAI-compatible endpoint works, including Azure AI Foundry's /models endpoint
-//   azure:     AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_API_VERSION
+//   azure:     AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_API_VERSION (default
+//              2024-10-21), AZURE_OPENAI_DEPLOYMENT (the default deployment, e.g. gpt-4.1-mini)
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
@@ -41,8 +43,10 @@ export type Run = {
 const DEFAULT_MODEL: Record<Provider, string> = {
   anthropic: "claude-opus-5-5",
   openai: "gpt-5",
-  azure: "gpt-5",
+  azure: "gpt-4.1-mini",
 };
+
+const defaultModel = (p: Provider) => (p === "azure" ? env("AZURE_OPENAI_DEPLOYMENT") : undefined) ?? DEFAULT_MODEL[p];
 
 const isProvider = (p: string | undefined): p is Provider => p === "anthropic" || p === "openai" || p === "azure";
 
@@ -59,9 +63,12 @@ export function choose(task: Task): { primary: Choice; fallback: Choice | null }
   const tp = env(`MODEL_${T}_PROVIDER`);
   const gp = env("MODEL_PROVIDER");
   const provider: Provider = isProvider(tp) ? tp : isProvider(gp) ? gp : "anthropic";
-  const model = env(`MODEL_${T}_NAME`) ?? (provider === (isProvider(gp) ? gp : "anthropic") ? env("MODEL_NAME") : undefined) ?? DEFAULT_MODEL[provider];
-  const fp = env("MODEL_FALLBACK_PROVIDER");
-  const fallback = isProvider(fp) ? { provider: fp, model: env("MODEL_FALLBACK_NAME") ?? DEFAULT_MODEL[fp] } : null;
+  const model = env(`MODEL_${T}_NAME`) ?? (provider === (isProvider(gp) ? gp : "anthropic") ? env("MODEL_NAME") : undefined) ?? defaultModel(provider);
+  const tfp = env(`MODEL_${T}_FALLBACK_PROVIDER`);
+  const gfp = env("MODEL_FALLBACK_PROVIDER");
+  const fp = isProvider(tfp) ? tfp : isProvider(gfp) ? gfp : undefined;
+  const fname = isProvider(tfp) ? env(`MODEL_${T}_FALLBACK_NAME`) : env("MODEL_FALLBACK_NAME");
+  const fallback = fp ? { provider: fp, model: fname ?? defaultModel(fp) } : null;
   return { primary: { provider, model }, fallback: fallback && (fallback.provider !== provider || fallback.model !== model) ? fallback : null };
 }
 
