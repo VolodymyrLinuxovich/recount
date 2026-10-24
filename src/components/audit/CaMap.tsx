@@ -1,6 +1,6 @@
 "use client";
 
-import { type Hospital, type Worst, VERDICT_LABEL, worst } from "./data";
+import { type Hospital, type Worst, VERDICT_LABEL, displayName, worst } from "./data";
 
 // A simplified outline of California as [lon, lat] points, drawn like a sketch on paper.
 const OUTLINE: [number, number][] = [
@@ -54,12 +54,12 @@ export function CaMap({
             className={`dot dot-${w}`}
             role="button"
             tabIndex={0}
-            aria-label={`${h.name}: ${VERDICT_LABEL[w]}`}
+            aria-label={`${displayName(h.name)}: ${VERDICT_LABEL[w]}`}
             onClick={() => onSelect(h.key)}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect(h.key))}
           >
             <circle cx={x} cy={y} r={11} className="dot-hit" />
-            <circle cx={x} cy={y} r={w === "none" ? 3.2 : 4.6} className="dot-mark" />
+            <circle cx={x} cy={y} r={w === "none" ? 3.2 : w === "conflict" ? 6 : 4.6} className="dot-mark" />
           </g>
         ))}
         {sel && (

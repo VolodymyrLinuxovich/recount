@@ -1,31 +1,42 @@
 import Link from "next/link";
 import { hostOf } from "../types";
-import { type AuditFinding, DOC_LABEL, type DocType, type Hospital, type Rule, VERDICT_LABEL, longDate, place, worst } from "./data";
+import { type AuditFinding, DOC_LABEL, type DocType, type Hospital, type Rule, VERDICT_LABEL, displayName, longDate, place, worst } from "./data";
 
-const AROUND = 180; // characters of context to keep on each side of the quote
+// A sentence ends at . ; or : followed by a space and a capital letter (or the end), so "$5.00" and "704.10" don't count.
+const SENTENCE_END = /[.;:](?=\s+[A-Z("“]|\s*$)/g;
 
-/** Show the surrounding text, trimmed near the quote, with the flagged sentence marked in red pen. */
+/** The sentence just before the quote, or nothing if it's long or a list fragment. */
+function lead(before: string) {
+  const text = before.replace(/(\s|^)[(]?[a-z0-9]{1,2}[.)]\s*$/i, "").trimEnd();
+  if (!/[.;:]$/.test(text)) return "…";
+  const ends = [...text.slice(0, -1).matchAll(SENTENCE_END)].map((m) => m.index! + 1);
+  const from = ends.length ? ends[ends.length - 1] : 0;
+  const last = text.slice(from).trim();
+  if (!last || last.length > 160 || !/^[A-Z("“]/.test(last)) return "…";
+  return (from > 0 ? "…" : "") + last + " ";
+}
+
+/** The rest of the quote's sentence and the next one, kept short. */
+function tail(after: string) {
+  const text = after.trimEnd();
+  if (!text) return "";
+  const ends = [...text.matchAll(SENTENCE_END)].map((m) => m.index! + 1);
+  let cut = ends.find((e) => e > 0) ?? text.length;
+  const second = ends.find((e) => e > cut);
+  if (second && second <= 220) cut = second;
+  if (cut > 260) return text.slice(0, 240).replace(/\s+\S*$/, "") + " …";
+  return text.slice(0, cut) + (cut < text.length ? " …" : "");
+}
+
+/** Show the flagged sentence in red pen, with a little of the text around it. */
 function InContext({ f }: { f: AuditFinding }) {
   const at = f.context.indexOf(f.quote);
   if (at < 0) return <mark className="policy-mark">{f.quote}</mark>;
-  let before = f.context.slice(0, at);
-  let after = f.context.slice(at + f.quote.length);
-  if (before.length > AROUND) {
-    const cut = before.slice(-AROUND);
-    const sentence = cut.search(/[.;:]\s+\S/);
-    before = "…" + (sentence >= 0 ? cut.slice(sentence + 1).trimStart() + " " : cut.replace(/^\S*\s/, ""));
-    before = before.replace(/\s+$/, " ");
-  }
-  if (after.length > AROUND) {
-    const cut = after.slice(0, AROUND);
-    const end = cut.lastIndexOf(". ");
-    after = (end > 20 ? cut.slice(0, end + 1) : cut.replace(/\s\S*$/, "")) + " …";
-  }
   return (
     <>
-      {before}
+      {lead(f.context.slice(0, at))}
       <mark className="policy-mark">{f.quote}</mark>
-      {after}
+      {tail(f.context.slice(at + f.quote.length))}
     </>
   );
 }
@@ -89,10 +100,14 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
     <article className="hospital" aria-labelledby="hospital-h">
       <p className="eyebrow">{place(h) || "California"}</p>
       <h2 id="hospital-h" className="h-hospital">
-        {h.name}
+        {displayName(h.name)}
       </h2>
       <p className={`hospital-verdict verdict-text-${w}`}>
-        {w === "none" ? "No conflicts found in the documents we read." : summary(h)}
+        {h.checked === false
+          ? "We couldn't read this hospital's documents, so we can't say either way."
+          : w === "none"
+            ? "No conflicts found in the documents we read."
+            : summary(h)}
       </p>
 
       {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}

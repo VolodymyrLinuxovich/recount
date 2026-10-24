@@ -1,7 +1,7 @@
 // Shape of public/audit/findings.json, produced by the statewide policy audit.
 
 export type Verdict = "conflict" | "likely" | "ask";
-export type DocType = "charity_care" | "discount_payment" | "debt_collection" | "application";
+export type DocType = "charity_care" | "discount_payment" | "debt_collection" | "application" | "application_discount";
 
 export interface Rule {
   id: string;
@@ -31,6 +31,8 @@ export interface Hospital {
   lat: number | null;
   lon: number | null;
   detailUrl: string;
+  /** False when none of the hospital's documents could be read. */
+  checked?: boolean;
   docs: Partial<Record<DocType, { url: string; effectiveDate: string | null }>>;
   findings: AuditFinding[];
 }
@@ -62,11 +64,12 @@ export const VERDICT_LABEL: Record<Worst, string> = {
   none: "no conflicts found",
 };
 
-export const DOC_LABEL: Record<DocType, string> = {
+export const DOC_LABEL: Record<string, string> = {
   charity_care: "Charity care policy",
   discount_payment: "Discount payment policy",
   debt_collection: "Debt collection policy",
   application: "Application form",
+  application_discount: "Discount application form",
 };
 
 export function longDate(iso: string | null | undefined) {
@@ -93,4 +96,31 @@ export function resolveKey(hospitals: Hospital[], key: string | null): string | 
   if (hospitals.some((h) => h.key === key)) return key;
   for (const k of ALIASES[key] ?? []) if (hospitals.some((h) => h.key === k)) return k;
   return null;
+}
+
+// State data spells names in capitals. Show them in normal case, keeping acronyms.
+const ACRONYMS = new Set(["AHMC", "APH", "BHC", "CA", "CHOC", "CPMC", "HCA", "II", "III", "IV", "KPC", "LAC", "LLC", "MC", "PIH", "UC", "UCI", "UCLA", "UCSD", "UCSF", "USC", "VA"]);
+const SMALL = new Set(["and", "at", "for", "of", "the", "in", "on"]);
+
+function caseWord(w: string, first: boolean): string {
+  if (!w) return w;
+  const bare = w.replace(/[^A-Za-z]/g, "");
+  if (ACRONYMS.has(bare.toUpperCase()) || bare === "L" && w.includes(".")) return w.toUpperCase();
+  const lower = w.toLowerCase();
+  if (!first && SMALL.has(lower)) return lower;
+  return lower.replace(/^([^a-z]*)([a-z])/, (_, p: string, c: string) => p + c.toUpperCase());
+}
+
+export function displayName(name: string): string {
+  if (name !== name.toUpperCase()) return name; // already mixed case
+  return name
+    .split(/\s+/)
+    .map((w, i) =>
+      w
+        .split(/([-+/])/)
+        .map((part) => (/^[-+/]$/.test(part) ? part : caseWord(part, i === 0)))
+        .join(""),
+    )
+    .join(" ")
+    .replace(/'S\b/g, "'s");
 }

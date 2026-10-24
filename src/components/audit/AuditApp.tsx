@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CaMap } from "./CaMap";
-import { type Audit, isFlagged, longDate, place, resolveKey, worst } from "./data";
+import { type Audit, displayName, isFlagged, longDate, place, resolveKey, worst } from "./data";
 import { HospitalView } from "./HospitalView";
 
 async function loadAudit(): Promise<{ audit: Audit; sample: boolean }> {
-  const real = await fetch("/audit/findings.json", { cache: "no-store" }).catch(() => null);
+  const real = await fetch("/audit/findings.json", { cache: "no-cache" }).catch(() => null);
   if (real?.ok && real.headers.get("content-type")?.includes("json")) return { audit: await real.json(), sample: false };
-  const res = await fetch("/audit/findings.sample.json", { cache: "no-store" });
+  const res = await fetch("/audit/findings.sample.json", { cache: "no-cache" });
   return { audit: await res.json(), sample: true };
 }
 
@@ -152,7 +152,7 @@ export function AuditApp() {
                     <button onClick={() => select(h.key)}>
                       <i className={`dot-key dot-${worst(h)}`} aria-hidden />
                       <span>
-                        <span className="find-name">{h.name}</span>
+                        <span className="find-name">{displayName(h.name)}</span>
                         <span className="find-place">{place(h)}</span>
                       </span>
                     </button>
@@ -170,7 +170,7 @@ export function AuditApp() {
                       <button onClick={() => select(h.key)} aria-current={h.key === selectedKey || undefined}>
                         <i className={`dot-key dot-${worst(h)}`} aria-hidden />
                         <span>
-                          <span className="find-name">{h.name}</span>
+                          <span className="find-name">{displayName(h.name)}</span>
                           <span className="find-place">
                             {[place(h), h.findings.length ? `${h.findings.length} ${h.findings.length === 1 ? "flag" : "flags"}` : "no conflicts found"]
                             .filter(Boolean)
