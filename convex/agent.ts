@@ -2,6 +2,7 @@
 
 import { filePart, modelReady, structured, type Run } from "./lib/model";
 import type { Kind } from "./lib/pipeline";
+import { inventedAmounts } from "./lib/letterCheck";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -537,7 +538,14 @@ export const draftLetters = internalAction({
       ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
       ...(lang === "es" ? { title: l.kind === "assistance" ? "Solicitud de ayuda financiera" : "Preguntas sobre la factura" } : {}),
     }));
-    await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready" } });
+    // Rule check: every dollar amount in the letters must come from the facts.
+    const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null });
+    await step(ctx, caseId, "letters-check",
+      odd.length
+        ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)
+        : t("Every dollar amount in your letters matches your bill and our checks", "Cada monto en dólares de sus cartas coincide con su factura y nuestras revisiones"),
+      odd.length ? "warn" : "done");
+    await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready", ...(odd.length ? { letterFlags: odd } : { letterFlags: undefined }) } });
     await step(ctx, caseId, "letters",
       lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
       "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."), lettersSource === "claude" ? "ai" : "rule");

@@ -1,6 +1,7 @@
 "use node";
 
 import { chat, modelReady, type ChatMessage, type Run } from "./lib/model";
+import { safetyOn, textIsSafe } from "./lib/safety";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { internalAction } from "./_generated/server";
@@ -87,6 +88,14 @@ export const reply = internalAction({
       .filter((m) => m._id !== replyId && m.content)
       .map((m) => ({ role: m.role, content: m.content }));
     if (!messages.length || messages[messages.length - 1].role !== "user") return;
+    const offTopic =
+      lang === "es"
+        ? "Solo puedo ayudar con preguntas sobre su factura del hospital y la ayuda financiera."
+        : "I can only help with questions about your hospital bill and financial assistance.";
+    if (!(await textIsSafe(messages[messages.length - 1].content))) {
+      await ctx.runMutation(internal.chat.write, { id: replyId, content: offTopic, pending: false });
+      return;
+    }
 
     const system = `${SYSTEM}\n\nPatient's language: ${lang === "es" ? "Spanish" : "English"}.\n\n<case_data>\n${caseSummary(c as Record<string, unknown> | null)}\n</case_data>`;
     let text = "";
@@ -100,8 +109,9 @@ export const reply = internalAction({
     let timer: ReturnType<typeof setInterval> | undefined;
     try {
       const record = caseId ? (r: Run) => ctx.runMutation(internal.cases.recordRun, { caseId, ...r }).then(() => {}) : undefined;
-      // Push partial text a few times a second so the phone shows typing.
-      timer = setInterval(() => {
+      // Push partial text a few times a second so the phone shows typing. With the safety check on,
+      // the reply is shown only after it's checked.
+      if (!safetyOn()) timer = setInterval(() => {
         if (text.length > lastWrite) {
           lastWrite = text.length;
           void push(text, true);
@@ -109,6 +119,7 @@ export const reply = internalAction({
       }, 400);
       const res = await chat({ task: "chat", system, messages, maxTokens: 2000, onText: (t) => (text = t) }, record);
       text = res.refused ? sorry : res.text;
+      if (safetyOn() && !(await textIsSafe(text))) text = offTopic;
     } catch {
       // fall through to the final write
     } finally {
