@@ -276,3 +276,17 @@ export const saveHospital = internalMutation({
     else await ctx.db.insert("hospitals", { key, data, fetchedAt: Date.now() });
   },
 });
+
+/** Admin cleanup (CLI/dashboard only): delete a case, its step log, its chat and its file. */
+export const adminRemove = internalMutation({
+  args: { id: v.id("cases") },
+  handler: async (ctx, { id }) => {
+    const c = await ctx.db.get(id);
+    if (!c) return "not found";
+    for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
+    for (const m of await ctx.db.query("chatMessages").collect()) if (m.caseId === id) await ctx.db.delete(m._id);
+    if (c.fileId) await ctx.storage.delete(c.fileId);
+    await ctx.db.delete(id);
+    return "deleted";
+  },
+});
