@@ -60,14 +60,17 @@ export interface MatchResult {
   candidates: Candidate[];
 }
 
-export function matchHospital(name: string | null, address: string | null): MatchResult {
+export function matchHospital(name: string | null, address: string | null, patientAddress: string | null = null): MatchResult {
   const q = tokens(name ?? "");
   const where = (address ?? "").toLowerCase();
+  const home = (patientAddress ?? "").toLowerCase();
   if (!q.length && !where) return { confident: null, candidates: [] };
   const scored: Candidate[] = HOSPITALS.map((h) => {
     let s = Math.max(0, ...h.match.map((m) => similarity(q, m.split(" "))));
     if (h.city && where.includes(h.city.toLowerCase())) s += 0.15;
     if (h.address && where && where.includes(h.address.toLowerCase().split(",")[0].slice(0, 12))) s += 0.2;
+    // Ties (e.g. "Kaiser Permanente" with no campus): prefer the hospital in the patient's own city.
+    if (h.city && home.includes(h.city.toLowerCase())) s += 0.1;
     return { key: h.key, name: h.name, city: h.city, score: Math.round(s * 100) / 100 };
   })
     .filter((c) => c.score >= 0.3)

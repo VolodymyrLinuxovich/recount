@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
@@ -23,7 +23,7 @@ async function owned(ctx: QueryCtx | MutationCtx, id: Id<"cases">, token: string
 
 async function mustOwn(ctx: MutationCtx, id: Id<"cases">, token: string | undefined): Promise<Doc<"cases">> {
   const c = await owned(ctx, id, token);
-  if (!c) throw new Error("Case not found");
+  if (!c) throw new ConvexError("Case not found");
   return c;
 }
 
@@ -36,7 +36,7 @@ async function limit(ctx: MutationCtx, key: string, max: number, windowMs: numbe
     else await ctx.db.insert("limits", { key, windowStart: now, count: 1 });
     return;
   }
-  if (row.count >= max) throw new Error("Too many uploads right now. Please try again in a minute.");
+  if (row.count >= max) throw new ConvexError("Too many uploads right now. Please try again in a minute.");
   await ctx.db.patch(row._id, { count: row.count + 1 });
 }
 
@@ -121,8 +121,8 @@ export const submitHousehold = mutation({
   },
   handler: async (ctx, { id, token, ...h }) => {
     const c = await mustOwn(ctx, id, token);
-    if (!c.bill) throw new Error("Bill not read yet");
-    if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new Error("Check household size and income");
+    if (!c.bill) throw new ConvexError("Bill not read yet");
+    if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
     await ctx.db.patch(id, { household: h, eligibility, status: "drafting", letters: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: id });
@@ -142,14 +142,14 @@ export const approve = mutation({
   args: { id: v.id("cases"), token: Token, letters: v.array(LetterV) },
   handler: async (ctx, { id, token, letters }) => {
     const c = await mustOwn(ctx, id, token);
-    if (c.status !== "ready" && c.status !== "approved") throw new Error("Letters aren't ready yet");
-    if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new Error("Letter too long");
+    if (c.status !== "ready" && c.status !== "approved") throw new ConvexError("Letters aren't ready yet");
+    if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new ConvexError("Letter too long");
     // Placeholders the patient must fill in before a letter can go out.
     // A signature line is signed by hand on paper, so it never blocks approval.
     const left = [...new Set(letters.flatMap((l) => (l.body + " " + l.subject).match(/\[[^\]\n]{2,40}\]/g) ?? []))].filter(
       (b) => !/signature|firma|sign here/i.test(b),
     );
-    if (left.length) throw new Error(`FILL_IN: Please fill in ${left.join(", ")} before approving.`);
+    if (left.length) throw new ConvexError(`FILL_IN: Please fill in ${left.join(", ")} before approving.`);
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
   },
 });
@@ -163,10 +163,17 @@ export const correctLine = mutation({
   args: { id: v.id("cases"), token: Token, index: v.number(), charge: v.number() },
   handler: async (ctx, { id, token, index, charge }) => {
     const c = await mustOwn(ctx, id, token);
-    if (c.status !== "needs_household") throw new Error("You can fix amounts before answering the questions");
-    if (!c.bill || index < 0 || index >= c.bill.lines.length || !(charge >= 0) || charge > 10_000_000) throw new Error("Check the amount");
+    if (c.status !== "needs_household") throw new ConvexError("You can fix amounts before answering the questions");
+    if (!c.bill || index < 0 || index >= c.bill.lines.length || !(charge >= 0) || charge > 10_000_000) throw new ConvexError("Check the amount");
+    const oldCharge = c.bill.lines[index].charge as number;
     const lines = c.bill.lines.map((l: { charge: number }, i: number) => (i === index ? { ...l, charge, corrected: true } : l));
-    const bill = { ...c.bill, lines };
+    // Notes about the old amount or the total no longer describe the bill the patient corrected.
+    const oldAmounts = [oldCharge.toFixed(2), oldCharge.toLocaleString("en-US"), String(oldCharge)];
+    const unreadable = (c.bill.unreadable as string[]).filter(
+      (u) => !oldAmounts.some((a) => u.includes(a)) && !/\b(total|sum|add up|suma|total)\b/i.test(u),
+    );
+    const correctedLines = [...new Set([...(c.bill.correctedLines ?? []), index])];
+    const bill = { ...c.bill, lines, unreadable, correctedLines };
     const findings = checkBill(bill, c.hospital ?? null, isLang(c.lang) ? c.lang : "en");
     await ctx.db.patch(id, { bill, findings });
   },
@@ -187,8 +194,8 @@ export const confirmHospital = mutation({
   args: { id: v.id("cases"), token: Token, key: v.union(v.string(), v.null()) },
   handler: async (ctx, { id, token, key }) => {
     const c = await mustOwn(ctx, id, token);
-    if (c.status !== "confirm_hospital") throw new Error("This bill isn't waiting for a hospital choice");
-    if (key !== null && !HOSPITALS.some((h) => h.key === key)) throw new Error("Unknown hospital");
+    if (c.status !== "confirm_hospital") throw new ConvexError("This bill isn't waiting for a hospital choice");
+    if (key !== null && !HOSPITALS.some((h) => h.key === key)) throw new ConvexError("Unknown hospital");
     await ctx.db.patch(id, { status: "reading" });
     await ctx.scheduler.runAfter(0, internal.agent.continueCheck, { caseId: id, key });
   },

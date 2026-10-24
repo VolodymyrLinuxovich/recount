@@ -249,7 +249,7 @@ export const readAndCheck = internalAction({
         await finishCheck(ctx, caseId, bill, known.key, lang);
         return;
       }
-      const m = matchHospital(bill.hospitalName, bill.hospitalAddress ?? null);
+      const m = matchHospital(bill.hospitalName, bill.hospitalAddress ?? null, bill.patientAddress ?? null);
       if (m.confident) {
         await finishCheck(ctx, caseId, bill, m.confident.key, lang);
         return;
@@ -348,6 +348,11 @@ export const draftLetters = internalAction({
             ...(lang === "es" && l.bodyPatient ? { subjectPatient: l.subjectPatient ?? undefined, bodyPatient: l.bodyPatient } : {}),
           }));
           lettersSource = "claude";
+          if (lang === "es") {
+            // Subjects are short and fixed; use our own Spanish wording so the model can't garble them.
+            const fixed = templateLetters(facts, "es");
+            letters = letters.map((l) => ({ ...l, subjectPatient: fixed.find((f) => f.kind === l.kind)?.subjectPatient ?? l.subjectPatient }));
+          }
         }
       } catch (e) {
         await step(ctx, caseId, "letters", t("Model unavailable, used our standard letters", "El modelo no está disponible; usamos nuestras cartas estándar"), "warn", String(e).slice(0, 200));

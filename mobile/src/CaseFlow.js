@@ -74,7 +74,7 @@ export function CaseFlow({ t, id, token, onHome }) {
     try {
       await fn();
     } catch (e) {
-      setErr(String(e?.message || e).replace(/^.*Uncaught Error:\s*/s, "").split("\n")[0].replace(/^FILL_IN:\s*/, ""));
+      setErr(String(typeof e?.data === "string" ? e.data : e?.message || e).replace(/^.*Uncaught (Convex)?Error:\s*/s, "").split("\n")[0].replace(/^FILL_IN:\s*/, ""));
     } finally {
       setBusy(false);
     }
