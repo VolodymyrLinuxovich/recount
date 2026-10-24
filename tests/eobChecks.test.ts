@@ -405,3 +405,26 @@ describe("EOB dates", () => {
     expect([e.serviceDateFrom, e.serviceDateTo, e.lines[0].date]).toEqual(["2026-08-08", "2026-08-09", "2026-08-08"]);
   });
 });
+
+import { EobRead, fromEobRead } from "../convex/lib/eob";
+describe("EOB read form", () => {
+  it("turns blank text into null and emergency into a boolean", () => {
+    const r = EobRead.parse({
+      isEob: true, payer: "Golden Bear", planType: "", memberName: "", memberId: "M1", claimNumber: "", providerName: "ZSFG",
+      serviceDateFrom: "2026-08-08", serviceDateTo: "", network: "in", emergency: "unknown", claimStatus: "processed",
+      totalBilled: 100, totalAllowed: null, totalPlanPaid: 50, totalPatientOwes: 25, appealDeadline: "", appealAddress: "", insurerPhone: "",
+      lines: [{ date: "", code: "99284", description: "ER visit", billed: 100, allowed: null, planPaid: 50, patientOwes: 25, notCovered: 0, remark: "" }],
+      unreadable: [],
+    });
+    const e = fromEobRead(r);
+    expect([e.planType, e.claimNumber, e.serviceDateTo, e.emergency, e.lines[0].date, e.lines[0].remark]).toEqual([null, null, null, null, null, null]);
+    expect([e.payer, e.memberId, e.lines[0].code, e.totalAllowed]).toEqual(["Golden Bear", "M1", "99284", null]);
+    expect(fromEobRead({ ...r, emergency: "yes" }).emergency).toBe(true);
+  });
+  it("keeps few nullable fields, so the model's structured output accepts it", () => {
+    const json = JSON.stringify(z.toJSONSchema(EobRead));
+    const unions = (json.match(/"anyOf"|"type":\[/g) ?? []).length;
+    expect(unions).toBeLessThanOrEqual(15);
+  });
+});
+import { z } from "zod";
