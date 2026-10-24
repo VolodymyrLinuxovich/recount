@@ -21,6 +21,11 @@ export const SAMPLE_URL = "https://recount-nu.vercel.app/sample-bill.png";
 async function uploadFile(generateUploadUrl, uri, type) {
   let contentType = type || "image/jpeg";
   if (Platform.OS === "web") {
+    if (contentType.startsWith("image/")) {
+      // Phone photos can be over 10 MB; shrink them like the native path does.
+      uri = (await manipulateAsync(uri, [{ resize: { width: 1600 } }], { compress: 0.75, format: SaveFormat.JPEG })).uri;
+      contentType = "image/jpeg";
+    }
     const blob = await (await fetch(uri)).blob();
     const res = await fetch(await generateUploadUrl(), { method: "POST", headers: { "Content-Type": contentType }, body: blob });
     if (!res.ok) throw new Error(`Upload failed (${res.status})`);

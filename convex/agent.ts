@@ -410,10 +410,20 @@ export const readAndCheck = internalAction({
       await finishCheck(ctx, caseId, bill, null, lang);
     } catch (e) {
       await step(ctx, caseId, "error", t("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
-      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: String(e).slice(0, 300) } });
+      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: patientError(e, t) } });
     }
   },
 });
+
+/** Our own errors (CODE: text) go to the patient as they are; anything else gets a plain message. */
+function patientError(e: unknown, t: (en: string, es: string) => string): string {
+  const raw = String(e).replace(/^Error:\s*/, "");
+  if (/^[A-Z_]{4,}:/.test(raw)) return raw.slice(0, 300);
+  if (/exceeds|too large|maximum/i.test(raw)) {
+    return t("RETAKE: This file is too large for us to read. Please take a new photo, or send a smaller file.", "RETAKE: Este archivo es demasiado grande. Tome otra foto o envíe un archivo más pequeño.");
+  }
+  return t("Something went wrong while reading your bill. Please try again.", "Algo salió mal al leer su factura. Inténtelo de nuevo.");
+}
 
 /** Runs after the patient picks their hospital (key) or says it isn't listed (null). */
 export const continueCheck = internalAction({
@@ -426,7 +436,7 @@ export const continueCheck = internalAction({
       await finishCheck(ctx, caseId, c.bill as ParsedBill, key, lang);
     } catch (e) {
       await step(ctx, caseId, "error", pick(lang)("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
-      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: String(e).slice(0, 300) } });
+      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: patientError(e, pick(lang)) } });
     }
   },
 });
@@ -527,6 +537,7 @@ export const draftLetters = internalAction({
       subject: resolveFilledBrackets(l.subject),
       body: resolveFilledBrackets(l.body),
       ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
+      ...(lang === "es" ? { title: l.kind === "assistance" ? "Solicitud de ayuda financiera" : "Preguntas sobre la factura" } : {}),
     }));
     await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready" } });
     await step(ctx, caseId, "letters",
