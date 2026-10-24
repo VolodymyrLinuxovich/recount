@@ -20,7 +20,7 @@ export interface Letter {
 
 export interface LetterFacts {
   bill: ParsedBill;
-  hospital: { name: string; policyUrl: string | null } | null;
+  hospital: { name: string; policyUrl: string | null; address?: string | null } | null;
   findings: Finding[];
   findingsEn?: Finding[]; // English findings for the hospital letter when the patient reads Spanish
   policyFindings?: { rule: string; verdict: string; quote: string; effectiveDate: string | null }[];
@@ -63,6 +63,7 @@ export function lawLine(rule: string, lang: Lang): string | null {
 function parts(f: LetterFacts) {
   return {
     hosp: f.hospital?.name ?? f.bill.hospitalName ?? "[Hospital name]",
+    hospAddr: f.hospital?.address ?? f.bill.hospitalAddress ?? null,
     acct: f.bill.accountNumber ?? "[account number]",
     patient: f.bill.patientName ?? "[Your name]",
     dos: f.bill.serviceDate ?? "[date of service]",
@@ -80,6 +81,7 @@ function assistanceEn(f: LetterFacts): Letter {
     title: "Financial assistance request",
     subject: `Request for financial assistance, account ${p.acct}`,
     body: [
+      ...(p.hospAddr ? [p.hosp, p.hospAddr, ``] : []),
       `To the ${p.hosp} Patient Financial Services office,`,
       ``,
       `I am requesting financial assistance for my account ${p.acct} (date of service ${p.dos}).`,
@@ -108,6 +110,7 @@ function assistanceEs(f: LetterFacts): Pick<Letter, "subjectPatient" | "bodyPati
   return {
     subjectPatient: `Solicitud de asistencia financiera, cuenta ${p.acct}`,
     bodyPatient: [
+      ...(p.hospAddr ? [p.hosp, p.hospAddr, ``] : []),
       `A la oficina de Servicios Financieros para Pacientes de ${p.hosp}:`,
       ``,
       `Solicito asistencia financiera para mi cuenta ${p.acct} (fecha del servicio ${p.dos}).`,
@@ -136,6 +139,7 @@ function disputeEn(f: LetterFacts): Letter | null {
     title: "Billing questions",
     subject: `Questions about charges on account ${p.acct}`,
     body: [
+      ...(p.hospAddr ? [p.hosp, p.hospAddr, ``] : []),
       `To the ${p.hosp} billing office,`,
       ``,
       `I reviewed my bill for account ${p.acct} and have questions about these charges:`,
@@ -155,6 +159,7 @@ function disputeEs(f: LetterFacts): Pick<Letter, "subjectPatient" | "bodyPatient
   return {
     subjectPatient: `Preguntas sobre los cargos de la cuenta ${p.acct}`,
     bodyPatient: [
+      ...(p.hospAddr ? [p.hosp, p.hospAddr, ``] : []),
       `A la oficina de facturación de ${p.hosp}:`,
       ``,
       `Revisé mi factura de la cuenta ${p.acct} y tengo preguntas sobre estos cargos:`,

@@ -21,6 +21,7 @@ export default defineSchema({
     billSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
     hospital: v.optional(v.any()),
     hospitalKey: v.optional(v.string()),
+    hospitalHint: v.optional(v.string()),
     hospitalCandidates: v.optional(v.any()),
     token: v.optional(v.string()),
     findings: v.optional(v.any()),

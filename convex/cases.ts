@@ -54,6 +54,8 @@ const CreateArgs = {
   fileType: v.optional(v.string()),
   sample: v.boolean(),
   lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
+  /** A hospital key (HCAI slug) the patient came from, e.g. the audit page. Settles unclear matches. */
+  hospitalHint: v.optional(v.string()),
 };
 
 /** Start a case. Returns its id and the secret token the phone must keep (needed for every later call). */
@@ -69,6 +71,7 @@ export const start = mutation({
       fileId: args.fileId,
       fileType: args.fileType,
       lang: args.lang,
+      hospitalHint: args.hospitalHint,
       token,
     });
     await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });

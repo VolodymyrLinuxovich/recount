@@ -17,6 +17,16 @@ import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } fro
 import { SAMPLE_BILL } from "./lib/sample";
 import { byKey, matchHospital, refFromIndex } from "./lib/statewide";
 
+/** Registry address for a known SF hospital key (its HCAI slug is in KNOWN_HOSPITALS). */
+function hcaiAddress(key: string): string | null {
+  const k = KNOWN_HOSPITALS.find((h) => h.key === key);
+  for (const slug of k?.hcai ?? []) {
+    const h = byKey(slug);
+    if (h?.address) return h.address;
+  }
+  return null;
+}
+
 const MODEL = "claude-opus-5-5";
 
 const READ_PROMPT = `This is a hospital bill a patient photographed or uploaded. Transcribe it into the schema.
@@ -113,6 +123,37 @@ async function liveLookup(known: Known, codes: string[]): Promise<HospitalRef | 
  * snapshot or an earlier live lookup), use it right away and refresh live in the background,
  * so the patient doesn't wait on a ~10 s crawl. Only with no saved data do we wait for the live run.
  */
+const Amounts = z.object({
+  charges: z.array(z.number()).describe("The charge on each listed line, in the same order, read again carefully"),
+});
+
+/**
+ * Second, focused read of just the amounts. Used only when the lines we read don't add up to
+ * the bill's printed total. We accept the new reading only if it then adds up exactly, so a
+ * misread digit (a 6 read as a 4) gets fixed without guessing.
+ */
+async function recheckAmounts(blob: Blob, mediaType: string, bill: ParsedBill): Promise<number[] | null> {
+  const client = new Anthropic();
+  const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
+  const media =
+    mediaType === "application/pdf"
+      ? ({ type: "document", source: { type: "base64", media_type: "application/pdf", data } } as const)
+      : ({ type: "image", source: { type: "base64", media_type: mediaType as "image/png" | "image/jpeg" | "image/webp", data } } as const);
+  const listed = bill.lines.map((l, i) => `${i + 1}. code ${l.code ?? "-"} | ${l.description} | read as ${l.charge}`).join("\n");
+  const res = await client.beta.messages.parse({
+    model: MODEL,
+    max_tokens: 8000,
+    betas: ["server-side-fallback-2026-07-01"],
+    fallbacks: "default",
+    output_config: { effort: "high", format: betaZodOutputFormat(Amounts) },
+    messages: [{ role: "user", content: [media, { type: "text", text: `These lines were read from this bill, but they add up to ${bill.lines.reduce((a, l) => a + l.charge, 0).toFixed(2)} while the bill's printed total charges are ${bill.totalCharges}. Look closely at each line's charge on the image (watch for 6/4, 1/7, 3/8, 5/6 confusions) and return every line's charge, in order. Do not change the number of lines.\n${listed}` }] }],
+  });
+  const charges = res.parsed_output?.charges;
+  if (!charges || charges.length !== bill.lines.length) return null;
+  const sum = charges.reduce((a, b) => a + b, 0);
+  return bill.totalCharges != null && Math.abs(sum - bill.totalCharges) <= 1 ? charges : null;
+}
+
 async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
   const t = pick(lang);
   const cached = await ctx.runQuery(internal.cases.cachedHospital, { key: known.key });
@@ -257,6 +298,17 @@ export const readAndCheck = internalAction({
         if (!blob) throw new Error("Uploaded file is missing");
         try {
           bill = await readWithClaude(blob, c.fileType ?? blob.type ?? "image/jpeg", lang);
+          const sum = bill.lines.reduce((a, l) => a + l.charge, 0);
+          if (bill.lines.length && bill.totalCharges != null && Math.abs(sum - bill.totalCharges) > 1) {
+            await step(ctx, caseId, "read", t("Double-checking the amounts", "Revisando de nuevo los montos"), "running");
+            const fixed = await recheckAmounts(blob, c.fileType ?? blob.type ?? "image/jpeg", bill).catch(() => null);
+            if (fixed) {
+              const changed = bill.lines.map((l, i) => (l.charge !== fixed[i] ? i : -1)).filter((i) => i >= 0);
+              bill = { ...bill, lines: bill.lines.map((l, i) => ({ ...l, charge: fixed[i] })) };
+              // Notes about misread amounts no longer apply once the lines add up.
+              if (changed.length) bill = { ...bill, unreadable: bill.unreadable.filter((u) => !/total|sum|add up|amount|monto|suma/i.test(u)) };
+            }
+          }
         } catch (e) {
           if (!c.sample) throw e;
           bill = SAMPLE_BILL;
@@ -296,6 +348,9 @@ export const readAndCheck = internalAction({
 
       // 2. Which hospital? Known SF hospitals first, then every California hospital on file.
       const known = KNOWN_HOSPITALS.find((h) => bill.hospitalName && h.match.test(bill.hospitalName));
+      // A hint (e.g. the patient came from that hospital's audit page) settles an unclear match,
+      // but never overrides a bill that clearly names a different hospital.
+      const hint = c.hospitalHint && (byKey(c.hospitalHint) || KNOWN_HOSPITALS.some((k) => k.key === c.hospitalHint)) ? c.hospitalHint : null;
       if (known) {
         await finishCheck(ctx, caseId, bill, known.key, lang);
         return;
@@ -303,6 +358,10 @@ export const readAndCheck = internalAction({
       const m = matchHospital(bill.hospitalName, bill.hospitalAddress ?? null, bill.patientAddress ?? null);
       if (m.confident) {
         await finishCheck(ctx, caseId, bill, m.confident.key, lang);
+        return;
+      }
+      if (hint && (!m.candidates.length || m.candidates.some((x) => x.key === hint))) {
+        await finishCheck(ctx, caseId, bill, hint, lang);
         return;
       }
       if (m.candidates.length) {
@@ -354,7 +413,7 @@ const LETTER_PROMPT = `Write the letters a patient will send to a hospital billi
 - If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
 - "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
 - If "patientLanguage" is "es", also give a faithful Spanish translation of each letter: subjectPatient translates ONLY the subject line, bodyPatient translates the body. Otherwise set them to null.
-Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] ONLY for values you don't know, as short placeholders with no colon and no value inside, like "[Your street address]" or "[Signature]". When a value is known (for example the patient's name from the bill), write it plainly, never inside brackets. Sign as the patient.`;
+Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Address the letter to the hospital's mailing address from the facts when it's given. Use [brackets] ONLY for values you don't know, as short placeholders with no colon and no value inside, like "[Your street address]" or "[Signature]". When a value is known (for example the patient's name from the bill), write it plainly, never inside brackets. Sign as the patient.`;
 
 export const draftLetters = internalAction({
   args: { caseId: v.id("cases") },
@@ -367,7 +426,14 @@ export const draftLetters = internalAction({
     const hospitalRef = (c.hospital ?? null) as HospitalRef | null;
     const facts = {
       bill,
-      hospital: hospitalRef ? { name: hospitalRef.name, policyUrl: hospitalRef.fap?.url ?? null } : null,
+      hospital: hospitalRef
+        ? {
+            name: hospitalRef.name,
+            policyUrl: hospitalRef.fap?.url ?? null,
+            // Mailing address: the one printed on the bill, else the state registry's.
+            address: bill.hospitalAddress ?? byKey(c.hospitalKey ?? "")?.address ?? hcaiAddress(hospitalRef.key),
+          }
+        : null,
       findings: (c.findings ?? []) as Finding[],
       // The hospital letter quotes findings in English even when the patient reads Spanish.
       findingsEn: lang === "es" ? checkBill(bill, hospitalRef, "en") : undefined,
