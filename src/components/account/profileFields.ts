@@ -51,3 +51,11 @@ export function toServer(d: Details) {
     dob: d.dob.trim() ? dobToIso(d.dob) : "",
   };
 }
+
+/** The birthday picker: the date input's value (YYYY-MM-DD, or "" when the typed date isn't a real one), and its range. */
+export const dobPickerValue = (dob: string) => (normalDob(dob) ? dobToIso(dob) : "");
+export const DOB_MIN = "1920-01-01";
+export const dobMax = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};

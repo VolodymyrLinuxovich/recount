@@ -828,5 +828,7 @@
   "acct.googleChecking": "Finishing Google sign-in…",
   "acct.errGoogle": "This email signs in with Google. Please use Continue with Google.",
   "acct.otherPassword": "You also have an account that signs in with a password for this email. Bills saved there stay in that account.",
-  "acct.otherGoogle": "You also have an account that signs in with Google for this email. Bills saved there stay in that account."
+  "acct.otherGoogle": "You also have an account that signs in with Google for this email. Bills saved there stay in that account.",
+  "acct.or": "or",
+  "letters.dDobPick": "Tap to pick the date from a calendar."
 }

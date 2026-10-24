@@ -54,7 +54,6 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
           {t("acct.googleFailed")}
         </p>
       )}
-      <GoogleButton next={next} />
       <div className="acct-tabs" role="group" aria-label={t("acct.modeLabel")}>
         <button type="button" className="acct-tab" aria-pressed={mode === "signUp"} onClick={() => pick("signUp")}>
           {t("acct.tabCreate")}
@@ -126,6 +125,7 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
           {busy ? t("acct.working") : mode === "signUp" ? t("acct.create") : t("acct.signInBtn")}
         </button>
       </form>
+      <GoogleButton next={next} />
       {mode === "signIn" && <p className="acct-quiet">{t("acct.noForgot")}</p>}
     </section>
   );

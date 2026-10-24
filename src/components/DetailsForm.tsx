@@ -1,6 +1,7 @@
 "use client";
 
 import { useConvexAuth } from "convex/react";
+import { DOB_MIN, dobMax, dobPickerValue, isoToDob } from "./account/profileFields";
 import { useEffect, useRef, useState } from "react";
 import { useAccountProfile } from "./account/useAccountProfile";
 import { useT } from "./i18n/I18nProvider";
@@ -145,10 +146,10 @@ export function DetailsForm({
         )}
         <input
           id={id}
-          value={details[k]}
+          value={k === "dob" ? dobPickerValue(details.dob) : details[k]}
           onChange={(e) => {
             setEdited((x) => ({ ...x, [k]: true }));
-            onChange({ ...details, [k]: e.target.value });
+            onChange({ ...details, [k]: k === "dob" ? isoToDob(e.target.value) : e.target.value });
           }}
           onBlur={() => {
             setLeft((x) => ({ ...x, [k]: true }));
@@ -182,7 +183,7 @@ export function DetailsForm({
       {field("zip", "letters.dZip", "required", { autoComplete: "postal-code", inputMode: "numeric", maxLength: 10 }, "letters.hintZip", "details-zip")}
       {field("phone", "letters.dPhone", "required", { autoComplete: "tel", type: "tel", inputMode: "tel" }, "letters.hintPhone")}
       {field("email", "letters.dEmail", "optional", { autoComplete: "email", type: "email", inputMode: "email" })}
-      {field("dob", "letters.dDob", "optional", { autoComplete: "bday" }, "letters.dDobEg")}
+      {field("dob", "letters.dDob", "optional", { autoComplete: "bday", type: "date", min: DOB_MIN, max: dobMax() }, "letters.dDobPick")}
       {onRemember ? (
         <label className="details-remember">
           <input type="checkbox" checked={!!remember} onChange={(e) => onRemember(e.target.checked)} />

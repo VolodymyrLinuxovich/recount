@@ -7,7 +7,7 @@ import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
 import { checkDetails, type Details, normalDob } from "../letterFill";
 import { saveError } from "./errors";
-import { fromServer, toServer } from "./profileFields";
+import { DOB_MIN, dobMax, dobPickerValue, fromServer, isoToDob, toServer } from "./profileFields";
 import "../letters.css";
 
 type Field = keyof Details;
@@ -19,7 +19,7 @@ const FIELDS: { k: Field; label: PlainKey; hint?: PlainKey; attrs: React.InputHT
   { k: "zip", label: "letters.dZip", hint: "letters.hintZip", attrs: { autoComplete: "postal-code", inputMode: "numeric", maxLength: 10 }, cls: "details-zip" },
   { k: "phone", label: "letters.dPhone", hint: "letters.hintPhone", attrs: { autoComplete: "tel", type: "tel", inputMode: "tel" } },
   { k: "email", label: "letters.dEmail", attrs: { autoComplete: "email", type: "email", inputMode: "email" } },
-  { k: "dob", label: "letters.dDob", hint: "letters.dDobEg", attrs: { autoComplete: "bday" } },
+  { k: "dob", label: "letters.dDob", hint: "letters.dDobPick", attrs: { autoComplete: "bday", type: "date", min: DOB_MIN, max: dobMax() } },
 ];
 
 const BAD: Partial<Record<Field, PlainKey>> = {
@@ -44,7 +44,10 @@ export function ProfileForm() {
 
   if (profile === undefined) return <p className="quiet">{t("acct.loading")}</p>;
 
-  const d = edits ?? fromServer(profile);
+  // Nothing saved yet: start from the account itself (the name and email Google gave us, or the sign-in email).
+  const acct = profile as { accountName?: string | null; accountEmail?: string | null } | null;
+  const saved = fromServer(profile);
+  const d = edits ?? { ...saved, name: saved.name || (acct?.accountName ?? ""), email: saved.email || (acct?.accountEmail ?? "") };
   // Only typos matter here: nothing is required on the account.
   const problems = checkDetails(d);
   const bad = (k: Field) => problems[k] === "bad" && (tried || left[k]) ? t(BAD[k]!) : null;
@@ -94,9 +97,9 @@ export function ProfileForm() {
             <input
               id={id}
               lang="en"
-              value={d[k]}
+              value={k === "dob" ? dobPickerValue(d.dob) : d[k]}
               onChange={(e) => {
-                setD({ ...d, [k]: e.target.value });
+                setD({ ...d, [k]: k === "dob" ? isoToDob(e.target.value) : e.target.value });
                 setState("idle");
               }}
               onBlur={() => {
