@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
-import Link from "next/link";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
+import { I18nProvider } from "@/components/i18n/I18nProvider";
+import { Masthead } from "@/components/Masthead";
 import "./globals.css";
 
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"], axes: ["SOFT", "opsz"] });
@@ -28,18 +29,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable} ${hand.variable}`}>
       <body>
         <ConvexClientProvider>
+          <I18nProvider>
           <div className="page">
-            <header className="masthead">
-              <Link href="/" className="wordmark">
-                Recount
-              </Link>
-            </header>
+            <Masthead />
             <main className="column">{children}</main>
             <footer className="footnote">
               Not legal or medical advice. Recount checks your bill against public rules and prices; the hospital
               makes the final decision.
             </footer>
           </div>
+          </I18nProvider>
         </ConvexClientProvider>
       </body>
     </html>
