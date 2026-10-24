@@ -41,7 +41,7 @@ export function StartScreen() {
     try {
       const { blob, type } = await prepareFile(file);
       const fileId = await upload(blob);
-      const { id, token } = await start({ fileId, fileType: type, sample: false, lang });
+      const { id, token } = await start({ fileId, fileType: type, sample: false, lang, ...hospitalHint() });
       rememberCase(id, token);
       router.push(`/case/${id}#t=${token}`);
       // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
@@ -66,7 +66,7 @@ export function StartScreen() {
         fileId = await upload(blob);
         fileType = blob.type || "image/png";
       }
-      const { id, token } = await start({ fileId, fileType, sample: true, lang });
+      const { id, token } = await start({ fileId, fileType, sample: true, lang, ...hospitalHint() });
       rememberCase(id, token);
       router.push(`/case/${id}#t=${token}`);
       // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
@@ -145,4 +145,11 @@ export function StartScreen() {
       )}
     </>
   );
+}
+
+/** "/?hospital=<key>" (from a hospital's audit page) tells the reader which hospital to expect. */
+function hospitalHint(): { hospitalHint?: string } {
+  if (typeof window === "undefined") return {};
+  const key = new URLSearchParams(window.location.search).get("hospital");
+  return key && /^[a-z0-9_-]{2,120}$/.test(key) ? { hospitalHint: key } : {};
 }
