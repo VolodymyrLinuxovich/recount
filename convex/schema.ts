@@ -50,6 +50,13 @@ export default defineSchema({
     /** After sending: what the hospital did and the complaint to HCAI (see convex/followUp.ts). */
     followUp: v.optional(v.any()),
     error: v.optional(v.string()),
+    /** The insurance Explanation of Benefits, if the patient added one (see lib/eob.ts, docs/EOB.md). */
+    eobFileId: v.optional(v.id("_storage")),
+    eobFileType: v.optional(v.string()),
+    eobStatus: v.optional(v.union(v.literal("reading"), v.literal("done"), v.literal("error"))),
+    eob: v.optional(v.any()), // ParsedEob
+    eobSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
+    eobError: v.optional(v.string()),
   }).index("by_owner", ["ownerId", "createdAt"]),
   steps: defineTable({
     caseId: v.id("cases"),
