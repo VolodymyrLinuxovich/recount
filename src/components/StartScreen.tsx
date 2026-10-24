@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { FileProblem, prepareFile } from "./prepareFile";
 
 export function StartScreen() {
   const router = useRouter();
@@ -27,12 +28,14 @@ export function StartScreen() {
     setBusy("photo");
     setError(null);
     try {
-      const fileId = await upload(file);
-      const id = await create({ fileId, fileType: file.type || "image/jpeg", sample: false });
+      const { blob, type } = await prepareFile(file);
+      const fileId = await upload(blob);
+      const id = await create({ fileId, fileType: type, sample: false });
       router.push(`/case/${id}`);
-    } catch {
-      setError("We couldn't upload that file. Check your connection and try again.");
+    } catch (e) {
+      setError(e instanceof FileProblem ? e.message : "We couldn't upload that file. Check your connection and try again.");
       setBusy(null);
+      if (input.current) input.current.value = "";
     }
   }
 

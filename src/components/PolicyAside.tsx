@@ -115,7 +115,11 @@ export function PolicyAside({
         })}
       </ol>
       <p className="policy-aside-foot">
-        {firm.length > 0 && (inLetter ? "We've added this to your letter. " : "We'll add this to your letter. ")}
+        {firm.length > 0 &&
+          (inLetter ? "We've added " : "We'll add ") +
+            (firm.length === findings.length
+              ? firm.length === 1 ? "this to your letter. " : "these to your letter. "
+              : `the ${firm.length === 1 ? "rule it breaks" : `${firm.length} rules it breaks`} to your letter. `)}
         <Link href={hospitalKey ? `/audit#h=${encodeURIComponent(hospitalKey)}` : "/audit"}>
           See what we found in other hospitals&rsquo; policies
         </Link>

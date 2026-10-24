@@ -6,10 +6,15 @@ import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import type { CaseView } from "./types";
 
+/** Read "28k", "$28,000", "28000" or "1.2m" as dollars. Anything else is not a number. */
 const toNumber = (s: string) => {
-  const n = Number(s.replace(/[^0-9.]/g, ""));
-  return s.trim() === "" || Number.isNaN(n) ? null : n;
+  const t = s.trim().toLowerCase().replace(/[$,\s]/g, "");
+  const m = t.match(/^(\d+(?:\.\d+)?)(k|m)?$/);
+  if (!m) return null;
+  const n = Number(m[1]) * (m[2] === "k" ? 1_000 : m[2] === "m" ? 1_000_000 : 1);
+  return Number.isFinite(n) ? Math.round(n) : null;
 };
+const dollars = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 export function HouseholdForm({
   id,
@@ -31,6 +36,11 @@ export function HouseholdForm({
   const incomeN = toNumber(income);
   const oopN = toNumber(oop);
   const ready = incomeN != null && insured !== null && (!insured || oopN != null);
+  const missing = [
+    incomeN == null && (income.trim() ? "check the income amount" : "add your yearly income"),
+    insured === null && "answer the insurance question",
+    insured && oopN == null && (oop.trim() ? "check the out-of-pocket amount" : "add your out-of-pocket costs"),
+  ].filter(Boolean) as string[];
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -89,13 +99,22 @@ export function HouseholdForm({
           <span aria-hidden>$</span>
           <input
             id="income"
-            inputMode="numeric"
+            inputMode="text"
             autoComplete="off"
             placeholder="32,000"
             value={income}
             onChange={(e) => setIncome(e.target.value)}
           />
         </div>
+        {income.trim() !== "" && (
+          <p className={`q-check ${incomeN == null ? "q-check-bad" : ""}`} aria-live="polite">
+            {incomeN == null
+              ? "Type a number, like 32000 or 32k."
+              : incomeN < 2000
+                ? `That's ${dollars(incomeN)} a year. If you meant thousands, type ${incomeN}k.`
+                : `${dollars(incomeN)} a year`}
+          </p>
+        )}
       </div>
 
       <fieldset className="q">
@@ -120,13 +139,19 @@ export function HouseholdForm({
               <span aria-hidden>$</span>
               <input id="oop" inputMode="numeric" autoComplete="off" placeholder="4,500" value={oop} onChange={(e) => setOop(e.target.value)} />
             </div>
+            {oop.trim() !== "" && (
+              <p className={`q-check ${oopN == null ? "q-check-bad" : ""}`} aria-live="polite">
+                {oopN == null ? "Type a number, like 4500 or 4.5k." : dollars(oopN)}
+              </p>
+            )}
           </div>
         )}
       </fieldset>
 
       <button className="btn btn-primary btn-big" type="submit" disabled={!ready || busy}>
-        {busy ? "Checking the rules…" : "See what I owe"}
+        {busy ? "Checking the rules…" : "See my answer"}
       </button>
+      {!ready && missing.length > 0 && <p className="q-missing">To continue, {missing.join(" and ")}.</p>}
       {error && (
         <p className="error-note" role="alert">
           {error}

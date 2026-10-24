@@ -66,7 +66,7 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
             <button className={`photo-btn ${showPhoto ? "open" : ""}`} onClick={() => setShowPhoto((s) => !s)} aria-expanded={showPhoto}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={c.fileUrl} alt="The bill you uploaded" className="photo" />
-              <span className="photo-toggle">{showPhoto ? "Show less" : "Your photo. Tap to see all of it"}</span>
+              <span className="photo-toggle">{showPhoto ? "Show less" : c.sample ? "The sample bill. Tap to see all of it" : "Your photo. Tap to see all of it"}</span>
             </button>
           ) : (
             <a href={c.fileUrl} target="_blank" rel="noreferrer" className="link">

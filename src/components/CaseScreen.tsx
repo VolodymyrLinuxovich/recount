@@ -30,14 +30,18 @@ export function CaseScreen() {
     );
 
   if (c.status === "error") {
+    const isPdf = c.fileType === "application/pdf";
     return (
       <section className="stack">
-        <h1 className="h-answer">We couldn&rsquo;t finish reading this bill.</h1>
-        <p>{c.error ?? "Something went wrong."}</p>
-        <StepLog steps={c.steps} />
+        <h1 className="h-answer">We couldn&rsquo;t read this {isPdf ? "file" : "photo"}.</h1>
+        <p>{plainError(c.error, isPdf)}</p>
         <Link href="/" className="btn btn-primary">
           Try again
         </Link>
+        <details className="log-details">
+          <summary>Details</summary>
+          <StepLog steps={c.steps.map((s) => (s.state === "running" ? { ...s, state: "error" as const } : s))} />
+        </details>
       </section>
     );
   }
@@ -85,4 +89,15 @@ export function CaseScreen() {
       </details>
     </div>
   );
+}
+
+/** Turn a backend error into one plain sentence for the patient. */
+function plainError(raw: string | undefined, isPdf: boolean) {
+  const what = isPdf ? "file" : "photo";
+  const r = (raw ?? "").toLowerCase();
+  if (/api key|credit|rate limit|overloaded|529|503|unavailable/.test(r))
+    return `Our bill reader is unavailable right now, so we couldn't read your ${what}. Please try again in a few minutes. The sample bill on the start page still works.`;
+  if (/not a hospital|not a medical|no lines|empty/.test(r))
+    return `This doesn't look like a hospital bill. Try a ${what} of the page that lists each charge.`;
+  return `Something went wrong while reading your ${what}. Try again with a clear, flat ${what} of the page that lists each charge.`;
 }
