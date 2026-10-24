@@ -199,6 +199,7 @@ const en = {
   "found.cashPrice": "Cash price",
   "found.forUnits": (v: { n: number }) => `for ${v.n} units`,
   "found.save": (v: { amount: string }) => `You could save ${v.amount}`,
+  "found.saveInsured": "Could lower your bill. Insurance already adjusted it, so you may save less.",
   "found.source": "Source",
   "found.whyAbove": "The hospital publishes a lower standard price for this same service.",
   "found.whyCash": "The hospital publishes a lower price for people who pay for themselves. You can ask for it.",
@@ -436,6 +437,7 @@ const en = {
   "send.step1Parent": "Calling for a parent? Call together, or ask for an authorization form.",
   "send.inEnglish": "In English:",
   "send.call": "Call",
+  "send.callFromPhone": (v: { phone: string }) => `Call ${v.phone} from your phone.`,
   "send.noPhone": "The billing phone number is on your bill, usually near the top or next to “Questions?”.",
   "send.reachedQ": "Did you reach them?",
   "send.reachedYes": "Yes, I talked to them",
@@ -527,11 +529,14 @@ const en = {
     return verb + `the ${v.firm === 1 ? "rule it breaks" : `${v.firm} rules it breaks`} to your letter. `;
   },
   "policy.seeOthers": "See what we found in other hospitals’ policies",
+  "policy.cites": (v: { added: boolean }) => (v.added ? "Your letter cites them." : "Your letter will cite them."),
+  "policy.seeThem": (v: { n: number }) => `See them (${v.n} more)`,
+  "policy.hideThem": "Show fewer",
   "law.DEADLINE": "Hospitals can’t set a time limit for applying for financial assistance.",
   "law.ASSETS": "Hospitals can’t count your savings or other assets when deciding if you qualify.",
   "law.INCOME_PROOF": "Hospitals can only ask for recent pay stubs or tax returns as proof of income.",
   "law.CREDIT_REPORTING": "Hospitals can’t report this kind of medical debt to credit agencies.",
-  "law.LIENS": "Hospitals can’t put a lien on a patient’s real property to collect.",
+  "law.LIENS": "If you qualify for charity or discount care, the hospital can’t put a lien on your home or other real property to collect.",
   "law.MEDICAL_FIRST": "Hospitals can’t make you apply for Medi-Cal or other coverage before they’ll consider you.",
 
   // Shared by the bill page and the audit
@@ -569,7 +574,7 @@ const en = {
   "audit.likelyMore": (v: { n: number }) => ` ${v.n} more likely ${plural(v.n, "does", "do")}.`,
   "audit.likelyTail": (v: { n: number }) => ` of them likely ${plural(v.n, "conflicts", "conflict")} with state law.`,
   "audit.lede": (v: { checked: number; sf: boolean; listed: number | null }) =>
-    `We checked the current charity care, discount, and debt collection policies of ${v.checked} ${v.sf ? "San Francisco hospitals" : "California hospitals"}${v.listed != null ? ` (of ${v.listed} listed)` : ""}, from the state’s hospital database, against the rules in force since 2025: no deadlines to apply, no asset tests, simple proof of income, no credit reporting, no liens on homes, no Medi-Cal-first requirement. Every flag quotes the policy next to the law.`,
+    `We checked the current charity care, discount, and debt collection policies of ${v.checked} ${v.sf ? "San Francisco hospitals" : "California hospitals"}${v.listed != null ? ` (of ${v.listed} listed)` : ""}, from the state’s hospital database, against the rules in force since 2025: no deadlines to apply, no asset tests, simple proof of income, no credit reporting, no liens on the homes of patients who qualify for help, no Medi-Cal-first requirement. Every flag quotes the policy next to the law.`,
   "audit.map": "Map",
   "audit.find": "Find your hospital",
   "audit.findPlaceholder": "Name, city, or county",
@@ -888,6 +893,7 @@ const es: Dict = {
   "found.cashPrice": "Precio sin seguro",
   "found.forUnits": (v) => `por ${v.n} unidades`,
   "found.save": (v) => `Podría ahorrar ${v.amount}`,
+  "found.saveInsured": "Podría bajar su factura. Su seguro ya la ajustó, así que el ahorro puede ser menor.",
   "found.source": "Fuente",
   "found.whyAbove": "El hospital publica un precio estándar más bajo para este mismo servicio.",
   "found.whyCash": "El hospital publica un precio más bajo para quienes pagan por su cuenta. Usted puede pedirlo.",
@@ -1119,6 +1125,7 @@ const es: Dict = {
   "send.step1Parent": "¿Llama por su mamá o papá? Llamen juntos, o pida un formulario de autorización.",
   "send.inEnglish": "Si habla en inglés, diga:",
   "send.call": "Llamar al",
+  "send.callFromPhone": (v) => `Llame al ${v.phone} desde su teléfono.`,
   "send.noPhone": "El teléfono de facturación está en su factura, casi siempre arriba o junto a “Questions?”.",
   "send.reachedQ": "¿Pudo hablar con ellos?",
   "send.reachedYes": "Sí, hablé con ellos",
@@ -1208,12 +1215,15 @@ const es: Dict = {
     return `${verb} a su carta ${v.firm === 1 ? "la regla que no cumple" : `las ${v.firm} reglas que no cumple`}. `;
   },
   "policy.seeOthers": "Vea lo que encontramos en las políticas de otros hospitales",
+  "policy.cites": (v) => (v.added ? "Su carta las menciona." : "Su carta las va a mencionar."),
+  "policy.seeThem": (v) => `Verlas (${v.n} más)`,
+  "policy.hideThem": "Mostrar menos",
   "law.DEADLINE": "Los hospitales no pueden poner un plazo para solicitar asistencia financiera.",
   "law.ASSETS": "Los hospitales no pueden contar sus ahorros ni otros bienes para decidir si usted califica.",
   "law.INCOME_PROOF":
     "Como prueba de ingresos, los hospitales solo pueden pedir talones de pago recientes o declaraciones de impuestos.",
   "law.CREDIT_REPORTING": "Los hospitales no pueden reportar este tipo de deuda médica a las agencias de crédito.",
-  "law.LIENS": "Los hospitales no pueden usar su casa o su terreno para cobrar la deuda (esto se llama gravamen).",
+  "law.LIENS": "Si usted califica para atención caritativa o con descuento, el hospital no puede usar su casa o su terreno para cobrar la deuda (esto se llama gravamen).",
   "law.MEDICAL_FIRST":
     "Los hospitales no pueden obligarle a solicitar Medi-Cal u otra cobertura antes de considerar su caso.",
 
@@ -1251,7 +1261,7 @@ const es: Dict = {
     v.n === 1 ? " Y es probable que otro más tampoco cumpla." : ` Y es probable que otros ${v.n} tampoco cumplan.`,
   "audit.likelyTail": (v) => ` de ellos probablemente no ${plural(v.n, "cumple", "cumplen")} con la ley estatal.`,
   "audit.lede": (v) =>
-    `Revisamos las políticas actuales de atención caritativa, de descuento y de cobro de deudas de ${v.checked} ${v.sf ? "hospitales de San Francisco" : "hospitales de California"}${v.listed != null ? ` (de ${v.listed} en la lista)` : ""}, tomadas de la base de datos de hospitales del estado. Las comparamos con las reglas vigentes desde 2025: no hay plazo para solicitar, no se revisan los bienes, la prueba de ingresos es sencilla, no se reporta a las agencias de crédito, no hay gravámenes sobre la vivienda y no se exige solicitar Medi-Cal primero. Cada alerta cita la política junto a la ley.`,
+    `Revisamos las políticas actuales de atención caritativa, de descuento y de cobro de deudas de ${v.checked} ${v.sf ? "hospitales de San Francisco" : "hospitales de California"}${v.listed != null ? ` (de ${v.listed} en la lista)` : ""}, tomadas de la base de datos de hospitales del estado. Las comparamos con las reglas vigentes desde 2025: no hay plazo para solicitar, no se revisan los bienes, la prueba de ingresos es sencilla, no se reporta a las agencias de crédito, no hay gravámenes sobre la vivienda de quienes califican para ayuda y no se exige solicitar Medi-Cal primero. Cada alerta cita la política junto a la ley.`,
   "audit.map": "Mapa",
   "audit.find": "Busque su hospital",
   "audit.findPlaceholder": "Nombre, ciudad o condado",
