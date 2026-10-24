@@ -139,8 +139,10 @@ const LetterV = v.object({
 });
 
 export const approve = mutation({
-  args: { id: v.id("cases"), token: Token, letters: v.array(LetterV) },
-  handler: async (ctx, { id, token, letters }) => {
+  // requireFilled: the client asks us to refuse letters with [placeholders] left. Opt-in so older
+  // clients that let people skip fields keep working.
+  args: { id: v.id("cases"), token: Token, letters: v.array(LetterV), requireFilled: v.optional(v.boolean()) },
+  handler: async (ctx, { id, token, letters, requireFilled }) => {
     const c = await mustOwn(ctx, id, token);
     if (c.status !== "ready" && c.status !== "approved") throw new ConvexError("Letters aren't ready yet");
     if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new ConvexError("Letter too long");
@@ -149,7 +151,7 @@ export const approve = mutation({
     const left = [...new Set(letters.flatMap((l) => (l.body + " " + l.subject).match(/\[[^\]\n]{2,40}\]/g) ?? []))].filter(
       (b) => !/signature|firma|sign here/i.test(b),
     );
-    if (left.length) throw new ConvexError(`FILL_IN: Please fill in ${left.join(", ")} before approving.`);
+    if (requireFilled && left.length) throw new ConvexError(`FILL_IN: Please fill in ${left.join(", ")} before approving.`);
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
   },
 });

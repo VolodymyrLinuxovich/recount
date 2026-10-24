@@ -60,7 +60,8 @@ def title_case(name: str) -> str:
             out.append(w)
         else:
             out.append(w[:1].upper() + w[1:])
-    return " ".join(out)
+    # Capitalize after "/" and "-" too (Oakland/Richmond, Herrick-Campus).
+    return re.sub(r"([/-])([a-z])", lambda m: m.group(1) + m.group(2).upper(), " ".join(out))
 
 
 def main() -> None:

@@ -74,7 +74,7 @@ export function CaseFlow({ t, id, token, onHome }) {
     try {
       await fn();
     } catch (e) {
-      setErr(String(typeof e?.data === "string" ? e.data : e?.message || e).replace(/^.*Uncaught (Convex)?Error:\s*/s, "").split("\n")[0].replace(/^FILL_IN:\s*/, ""));
+      setErr(String(typeof e?.data === "string" ? e.data : e?.message || e).replace(/^.*Uncaught (Convex)?Error:\s*/s, "").split("\n")[0].replace(/^[A-Z_]{4,}:\s*/, ""));
     } finally {
       setBusy(false);
     }
@@ -93,12 +93,15 @@ export function CaseFlow({ t, id, token, onHome }) {
     view = { back: onHome, body: <H1>{t.gone}</H1>, primary: { label: t.home, onPress: onHome } };
   } else if (status === "error") {
     const notBill = /NOT_A_BILL/.test(c.error || "");
+    const retake = /RETAKE/.test(c.error || "");
+    const outside = /OUT_OF_STATE/.test(c.error || "");
+    const plain = (c.error || "").replace(/^(Error:\s*)?[A-Z_]{4,}:\s*/, "");
     view = {
       back: onHome,
       body: (
         <>
-          <H1>{notBill ? t.notABill : t.errorTitle}</H1>
-          <P muted>{notBill ? t.notABillBody : c.error}</P>
+          <H1>{notBill ? t.notABill : retake ? t.retakeTitle : outside ? t.outOfStateTitle : t.errorTitle}</H1>
+          <P muted>{notBill ? t.notABillBody : plain}</P>
         </>
       ),
       primary: { label: t.tryAgain, onPress: () => remove({ id, token }).catch(() => {}).finally(() => { forgetBill(id); onHome(); }) },

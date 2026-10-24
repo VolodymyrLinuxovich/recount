@@ -22,7 +22,8 @@ const MODEL = "claude-opus-5-5";
 const READ_PROMPT = `This is a hospital bill a patient photographed or uploaded. Transcribe it into the schema.
 Rules:
 - Copy codes, descriptions, dates and amounts exactly as printed. Never guess a CPT/HCPCS code that isn't printed; use null.
-- If a number is blurry or cut off, put your best reading in the field AND name that field in "unreadable".
+- If a number is blurry or cut off, put your best reading in the field AND add a short plain-English note to "unreadable" that a patient can understand (e.g. "The amount on the CT scan line is blurry"). Never use field names like hospitalAddress or insurancePaid in the notes.
+- If you can't read the individual charges at all, return no lines rather than guessing.
 - Payments and adjustments are positive numbers.
 - If this is not a hospital or medical bill, return empty lines and say so in "unreadable".`;
 
@@ -102,8 +103,13 @@ async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known,
       if (items[0]) {
         const live = fromActor(items[0] as Record<string, unknown>, known.key, known.name);
         // The Actor may miss the policy cutoff; keep the reviewed snapshot's policy facts in that case.
-        const snapFap = SNAPSHOTS[known.key]?.fap ?? null;
-        const ref = live.fap?.freeCareMaxFplPct != null || !snapFap ? live : { ...live, fap: snapFap };
+        const snap = SNAPSHOTS[known.key] ?? null;
+        const snapFap = snap?.fap ?? null;
+        // Live rows can come from a different variant of a code (setting, modifier, per-unit vs per-line).
+        // Our snapshot rows were checked by hand, so for any code both have, the snapshot wins.
+        const prices = { ...(live.mrf?.prices ?? {}), ...(snap?.mrf?.prices ?? {}) };
+        const merged = { ...live, mrf: live.mrf ? { ...live.mrf, prices } : snap?.mrf ?? null };
+        const ref = merged.fap?.freeCareMaxFplPct != null || !snapFap ? merged : { ...merged, fap: snapFap };
         await ctx.runMutation(internal.cases.saveHospital, { key: known.key, data: ref });
         await step(ctx, caseId, "hospital", t(`Read ${known.name}'s price file and policy live`, `Leímos en vivo el archivo de precios y la política de ${known.name}`), "done", ref.mrf?.url ?? undefined);
         return ref;
@@ -185,10 +191,18 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
     lang === "es" ? { ...f, explanationEn: f.explanation, explanation: lawLine(f.rule, "es") ?? f.explanation } : f,
   );
   if (policyFindings.length) {
-    const bad = policyFindings.filter((f) => f.verdict !== "ask").length;
-    const ask = policyFindings.length - bad;
-    const en = [bad ? `${bad} conflict${bad === 1 ? "" : "s"} with California law` : "", ask ? `${ask} worth asking about` : ""].filter(Boolean).join(", ");
-    const es = [bad ? `${bad} conflicto${bad === 1 ? "" : "s"} con la ley de California` : "", ask ? `${ask} que vale preguntar` : ""].filter(Boolean).join(" y ");
+    const n = (v: string) => policyFindings.filter((f) => f.verdict === v).length;
+    const [bad, likely, ask] = [n("conflict"), n("likely"), n("ask")];
+    const en = [
+      bad ? `${bad} conflict${bad === 1 ? "" : "s"} with California law` : "",
+      likely ? `${likely} likely conflict${likely === 1 ? "" : "s"}` : "",
+      ask ? `${ask} worth asking about` : "",
+    ].filter(Boolean).join(", ");
+    const es = [
+      bad ? `${bad} conflicto${bad === 1 ? "" : "s"} con la ley de California` : "",
+      likely ? `${likely} posible${likely === 1 ? "" : "s"} conflicto${likely === 1 ? "" : "s"}` : "",
+      ask ? `${ask} que vale preguntar` : "",
+    ].filter(Boolean).join(", ");
     await step(ctx, caseId, "policy", t(`${hospital!.name}'s own policy: ${en}`, `Política de ${hospital!.name}: ${es}`),
       "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
   }
@@ -226,6 +240,14 @@ export const readAndCheck = internalAction({
         billSource = "sample-source";
       } else {
         throw new Error(t("Reading photos needs the Claude API key on the server.", "Para leer fotos se necesita la clave de Claude en el servidor."));
+      }
+      if (bill.lines.length === 0 && bill.isMedicalBill !== false && !/not a (hospital|medical)/i.test(bill.unreadable.join(" "))) {
+        throw new Error(t("RETAKE: We couldn't read the charges on this photo. Please take a new photo in good light, flat and close enough to read.", "RETAKE: No pudimos leer los cargos en esta foto. Tome otra foto con buena luz, plana y de cerca."));
+      }
+      const addr = `${bill.hospitalAddress ?? ""}`;
+      const stateMatch = addr.match(/,\s*([A-Z]{2})\s*\d{5}/) ?? addr.match(/\b(Nevada|Oregon|Arizona|Washington|Texas|New York)\b/i);
+      if (stateMatch && !/^(CA|California)$/i.test(stateMatch[1])) {
+        throw new Error(t("OUT_OF_STATE: Recount covers California hospitals. This bill looks like it's from another state, where different rules apply.", "OUT_OF_STATE: Recount cubre hospitales de California. Esta factura parece ser de otro estado, donde aplican otras reglas."));
       }
       if (bill.isMedicalBill === false || (bill.lines.length === 0 && /not a (hospital|medical)/i.test(bill.unreadable.join(" ")))) {
         throw new Error(t("NOT_A_BILL: This is not a hospital or medical bill.", "NOT_A_BILL: Esto no es una factura de hospital ni médica (not a hospital or medical bill)."));
