@@ -108,8 +108,9 @@
 }
 
 .approved-h {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 800;
   font-size: var(--fs-2xl);
   line-height: var(--lh-tight);
   margin: 0 0 var(--sp-3);

@@ -4,8 +4,8 @@
   min-height: calc(100dvh - 160px);
   display: flex;
   flex-direction: column;
-  /* Room for the pinned bar; StepFrame measures the bar into --bar-h. */
-  padding-bottom: calc(var(--bar-h, 190px) + 24px);
+  /* The footer below leaves the room for the pinned bar (StepFrame measures it into --bar-h). */
+  padding-bottom: var(--sp-5);
 }
 
 .step-top {
@@ -23,8 +23,8 @@
 .step-progress .seg {
   position: relative;
   height: 6px;
-  border-radius: 3px;
-  background: var(--rule);
+  border-radius: 999px;
+  background: var(--rc-bg-2);
   overflow: hidden;
 }
 
@@ -33,7 +33,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--ink);
+  background: var(--primary);
   transform: scaleX(0);
   transform-origin: left center;
   transition:
@@ -42,7 +42,7 @@
 }
 
 .step-progress .seg.done::after {
-  background: var(--ok);
+  background: var(--primary);
   transform: scaleX(1);
 }
 
@@ -58,8 +58,8 @@
 }
 
 .step-title {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
   font-size: var(--fs-2xl);
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
@@ -86,6 +86,7 @@
   z-index: 20;
   background: var(--paper);
   border-top: 1px solid var(--rule);
+  box-shadow: 0 -10px 30px -24px rgb(42 0 77 / 0.35);
   padding: 12px max(var(--gutter), env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom))
     max(var(--gutter), env(safe-area-inset-left));
 }
@@ -114,7 +115,7 @@
   width: auto;
   margin: 0;
   padding: var(--sp-2) var(--sp-4);
-  border-radius: 12px;
+  border-radius: var(--r-btn);
   font-size: var(--fs-base);
   font-weight: 600;
   line-height: var(--lh-tight);
@@ -124,7 +125,7 @@
   touch-action: manipulation;
   transition:
     transform var(--motion-press) var(--ease-out),
-    filter var(--motion-press) var(--ease-out),
+    box-shadow 120ms var(--ease-out),
     background-color 150ms var(--ease-out);
 }
 
@@ -147,15 +148,25 @@
 }
 
 .bar-secondary {
-  background: transparent;
+  background: var(--sheet);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 1.5px solid var(--control-edge);
+  box-shadow: inset 0 -2px 0 rgb(42 0 77 / 0.06), 0 1px 2px rgb(42 0 77 / 0.08);
 }
 
 .bar-primary {
   background: var(--primary);
   color: var(--on-primary);
-  border: 2px solid var(--primary);
+  border: 1.5px solid var(--primary);
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.18), 0 1px 2px rgb(42 0 77 / 0.12);
+}
+
+.step-bar .bar-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--primary) 88%, var(--ink));
+}
+
+.step-bar .bar-secondary:hover:not(:disabled) {
+  background: var(--rc-bg-2);
 }
 
 .bar-arrow {
@@ -163,23 +174,24 @@
   line-height: 1;
 }
 
-/* Pressed: a quick darken and a slight shrink, so a tap is felt. */
+/* Pressed: the face sinks 1px and the edge flattens, so a tap is felt. */
 .step-bar .bar-btn:active:not(:disabled) {
-  transform: scale(0.98);
-  filter: brightness(0.92);
+  transform: translateY(1px) scale(0.985);
+  box-shadow: inset 0 2px 3px rgb(0 0 0 / 0.2);
 }
 
 .step-bar .bar-secondary:active:not(:disabled) {
-  background: var(--rule-soft);
+  border-color: var(--primary);
+  box-shadow: inset 0 2px 3px rgb(42 0 77 / 0.08);
 }
 
-/* Disabled stays readable: dashed outline instead of a washed-out fill. */
+/* Disabled stays readable: a quiet tinted face with full-strength text, not a washed-out fill. */
 .step-bar .bar-btn:disabled {
   opacity: 1;
-  background: transparent;
+  background: var(--rc-bg-2);
   color: var(--ink-2);
-  border-style: dashed;
-  border-color: var(--ink-2);
+  border-color: var(--rule);
+  box-shadow: none;
   cursor: default;
 }
 
@@ -282,8 +294,15 @@ html:is([data-text="large"], [data-contrast]) .step-bar .bar-back {
 }
 
 
-/* When a flow screen is showing, hide the page footer: the pinned bar is the footer. */
+/* When a flow screen is showing, the pinned bar is the footer: the legal note hides, and only
+   the quiet "Text size and contrast" button stays, with room left under it for the bar. */
 body:has(.step-screen) .footnote {
+  border-top: 0;
+  padding-top: 0;
+  padding-bottom: calc(var(--bar-h, 190px) + var(--sp-4));
+}
+
+body:has(.step-screen) .footnote-text {
   display: none;
 }
 
@@ -336,7 +355,7 @@ body:has(.step-screen) .footnote {
   max-height: 200px;
   object-fit: cover;
   object-position: top;
-  border-radius: 10px;
+  border-radius: var(--r-control);
   border: 1px solid var(--rule);
   margin: var(--sp-4) 0;
 }
@@ -352,15 +371,16 @@ body:has(.step-screen) .footnote {
 }
 
 .step-body .receipts {
-  border-radius: 10px;
+  border-radius: var(--r-card);
 }
 
 .step-body .q-check {
   margin-left: 0;
 }
 
+/* The answer's figure is money saved ($0 owed), so it is the success green. */
 .step-body .answer-amt {
-  color: var(--pen);
+  color: var(--ok);
 }
 
 /* ---------- moving between screens (DESIGN-RESEARCH B5) ----------

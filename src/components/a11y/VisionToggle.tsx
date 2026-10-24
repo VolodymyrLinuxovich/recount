@@ -17,8 +17,12 @@ const CONTRAST: { value: Contrast; key: PlainKey }[] = [
   { value: "hv-dark", key: "a11y.hvDark" },
 ];
 
-/** "Aa Display" in the masthead: opens a small sheet with text size and contrast choices. */
-export function VisionToggle() {
+/**
+ * "Text size and contrast" in the footer: a quiet text button that opens a small sheet with
+ * text size and contrast choices. The phone menu has the same control (variant "menu", whose
+ * sheet opens in place). The system "more contrast" setting still turns it on by itself.
+ */
+export function VisionToggle({ variant = "footer" }: { variant?: "footer" | "menu" }) {
   const { t } = useT();
   const v = useSyncExternalStore(subscribeVision, getVision, getServerVision);
   const [open, setOpen] = useState(false);
@@ -53,7 +57,7 @@ export function VisionToggle() {
   };
 
   return (
-    <div className="vision" ref={wrap}>
+    <div className={`vision vision--${variant}`} ref={wrap}>
       <button
         ref={button}
         type="button"
@@ -62,10 +66,10 @@ export function VisionToggle() {
         aria-controls={panelId}
         onClick={() => setOpen((o) => !o)}
       >
-        <span className="vision-aa" aria-hidden="true">
-          A+
-        </span>
-        <span className="vision-word">{t("a11y.open")}</span>
+        <svg className="vision-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 18 L8 6 L13 18 M4.8 14 H11.2 M15 18 L18 11 L21 18 M15.9 16 H20.1" />
+        </svg>
+        <span>{t("a11y.open")}</span>
       </button>
       {open && (
         <div className="vision-panel" id={panelId} role="dialog" aria-label={t("a11y.title")}>

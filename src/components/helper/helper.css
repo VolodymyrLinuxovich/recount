@@ -2,141 +2,78 @@
    Lupa, the helper: mascot, launcher and chat panel.
    ===================================================================== */
 
-/* ---------- mascot ---------- */
+/* ---------- mascot: the lens avatar (Mascot.tsx) ---------- */
 
 .lupa {
   display: block;
   flex: none;
   overflow: visible;
-  --lupa-cheek: #e7a184;
 }
 
-.lupa-lens {
-  fill: var(--sheet);
-  stroke: var(--ink);
-  stroke-width: 4;
+.lupa-glass {
+  fill: var(--rc-brand-tint);
 }
 
-.lupa-tint {
-  fill: var(--accent);
-  opacity: 0.07;
-}
-
-.lupa-glint {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  opacity: 0.45;
+.lupa-ring {
+  stroke: var(--rc-brand);
 }
 
 .lupa-handle {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 9;
-  stroke-linecap: round;
+  stroke: var(--rc-brand-deep);
 }
 
-.lupa-collar {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 7;
-  stroke-linecap: round;
+.lupa-spark {
+  fill: var(--rc-brand);
 }
 
-.lupa-eye {
-  fill: var(--ink);
-}
-
-.lupa-line {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.lupa--small .lupa-line {
-  stroke-width: 3.2;
-}
-
-.lupa-hand {
-  fill: var(--sheet);
-  stroke: var(--ink);
-  stroke-width: 2;
-  stroke-linejoin: round;
-}
-
-.lupa-cheek {
-  fill: var(--lupa-cheek);
-  opacity: 0.5;
-}
-
-.lupa--small .lupa-cheek {
-  opacity: 0.35;
-}
-
-.lupa-dots circle {
-  fill: var(--accent);
+.lupa-glint {
+  fill: #ffffff;
+  opacity: 0;
+  /* The lens center (21, 21) in the 4 4 40 40 viewBox. */
+  transform-origin: 17px 17px;
 }
 
 @media (prefers-color-scheme: dark) {
-  .lupa {
-    --lupa-cheek: #d98f73;
+  .lupa-handle {
+    stroke: var(--rc-lilac);
   }
-  .lupa-tint {
-    opacity: 0.12;
-  }
-  .lupa-cheek {
-    opacity: 0.22;
+  .lupa-glint {
+    fill: var(--rc-ink);
   }
 }
 
-/* Motion: kept quiet on purpose. A slow blink when idle, an opacity pulse while thinking.
-   No bounce, no sway. Everything stops under reduced motion. */
-.lupa-eyes {
-  transform-box: view-box;
-  transform-origin: 27px 26px;
-}
-
-.lupa-eyes--up {
-  transform: translate(1.4px, -1.2px);
-}
-
+/* Thinking: a glint sweeps the glass and the ring breathes. Idle is still. */
 @media (prefers-reduced-motion: no-preference) {
-  .lupa--idle .lupa-eyes,
-  .lupa--wave .lupa-eyes {
-    animation: lupa-blink 4.2s infinite;
+  .lupa--think .lupa-glint {
+    animation: lupa-glint 1.6s var(--rc-ease-out) infinite;
   }
-  .lupa-dots circle {
-    animation: lupa-dot 1.6s ease-in-out infinite;
-  }
-  .lupa-dots circle:nth-child(2) {
-    animation-delay: 0.25s;
-  }
-  .lupa-dots circle:nth-child(3) {
-    animation-delay: 0.5s;
+  .lupa--think .lupa-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lupa-pulse 1.6s ease-in-out infinite;
   }
 }
 
-@keyframes lupa-blink {
-  0%,
-  93%,
-  100% {
-    transform: scaleY(1);
+@keyframes lupa-glint {
+  0% {
+    opacity: 0.8;
+    transform: rotate(35deg) translateX(-16px);
   }
-  96% {
-    transform: scaleY(0.12);
+  70%,
+  100% {
+    opacity: 0.8;
+    transform: rotate(35deg) translateX(34px);
   }
 }
 
-@keyframes lupa-dot {
+@keyframes lupa-pulse {
   0%,
   100% {
-    opacity: 0.25;
+    opacity: 1;
   }
   50% {
-    opacity: 1;
+    opacity: 0.55;
   }
 }
 
@@ -166,12 +103,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Phones: just the mascot, like the "Aa" button beside it, so the masthead stays one row.
+/* Phones: just the lens, like the menu button beside it, so the masthead stays one row.
    Its accessible name is still "Ask Lupa". */
 @container masthead (max-width: 32.5rem) {
   .helper-mast-btn {
     padding: 0;
-    width: 48px;
+    width: 50px;
     justify-content: center;
   }
   .helper-mast-text {
@@ -244,7 +181,7 @@
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(29, 34, 48, 0.4);
+  background: rgb(42 0 77 / 0.4);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease-in, visibility 0s linear 0.2s;
@@ -269,7 +206,7 @@
   background: var(--paper);
   color: var(--ink);
   border-radius: 16px 16px 0 0;
-  box-shadow: 0 -10px 40px -12px rgba(20, 15, 5, 0.45);
+  box-shadow: 0 -10px 40px -12px rgb(42 0 77 / 0.35);
   transform: translateY(100%);
   visibility: hidden;
   transition: transform 0.2s ease-in, visibility 0s linear 0.2s;

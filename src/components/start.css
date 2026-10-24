@@ -1,18 +1,9 @@
-/* Start page. One accent (deep teal) for links and step numbers; the primary
-   button stays ink; --pen red is kept for money we might save, so none here. */
+/* Start page. One accent (brand purple) for links and step numbers; the primary
+   button is the brand fill; red is only for problems, so none here. */
 
 .start {
-  --accent: #1f5f66;
-  --accent-soft: rgba(31, 95, 102, 0.1);
   font-size: var(--fs-base);
   line-height: var(--lh-body);
-}
-
-@media (prefers-color-scheme: dark) {
-  .start {
-    --accent: #7fc4cb;
-    --accent-soft: rgba(127, 196, 203, 0.12);
-  }
 }
 
 :where(.start) p {
@@ -26,9 +17,8 @@
 }
 
 .start-title {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-variation-settings: "SOFT" 50, "opsz" 72;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
   font-size: var(--fs-2xl);
   line-height: var(--lh-tight);
   letter-spacing: -0.015em;

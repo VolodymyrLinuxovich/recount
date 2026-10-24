@@ -378,7 +378,8 @@
   margin: var(--sp-4) 0 0;
   font-size: var(--fs-md);
   font-weight: 700;
-  color: var(--pen);
+  /* Money saved: the success green, never the problem red. */
+  color: var(--ok);
 }
 
 .found-why {

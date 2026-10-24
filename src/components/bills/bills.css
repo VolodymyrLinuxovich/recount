@@ -10,11 +10,10 @@
 }
 
 .bills-title {
-  font-family: var(--font-display), Georgia, serif;
-  font-variation-settings: "SOFT" 50, "opsz" 72;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: var(--fs-2xl);
   line-height: var(--lh-tight);
-  font-weight: 500;
+  font-weight: 800;
   letter-spacing: -0.015em;
   margin: var(--sp-2) 0 0;
 }

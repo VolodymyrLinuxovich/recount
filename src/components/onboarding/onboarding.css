@@ -1,17 +1,5 @@
 /* "Before you start" screens. Built on the flow's step classes (flow.css);
-   one accent (teal) for icons and progress, no pen red. */
-
-.onb {
-  --accent: #1f5f66;
-  --accent-soft: rgba(31, 95, 102, 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  .onb {
-    --accent: #7fc4cb;
-    --accent-soft: rgba(127, 196, 203, 0.12);
-  }
-}
+   one accent (brand purple) for icons and progress, no pen red. */
 
 .onb .onb-top {
   margin: calc(-1 * var(--sp-3)) 0 var(--sp-1);

@@ -1,17 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible_Next, Fraunces } from "next/font/google";
+import { Lexend, Plus_Jakarta_Sans } from "next/font/google";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { Footer } from "@/components/Footer";
 import { HelperChat } from "@/components/helper/HelperChat";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Masthead } from "@/components/Masthead";
 import { VISION_SCRIPT } from "@/components/a11y/vision";
+import { REVEAL_SCRIPT } from "@/components/motion/revealScript";
 import "./globals.css";
 
-// Fraunces only for the h1 and the wordmark (32px and up); everything else, numbers included,
-// is Atkinson Hyperlegible Next (DESIGN-RESEARCH B1).
-const display = Fraunces({ variable: "--font-display", subsets: ["latin"], axes: ["SOFT", "opsz"] });
-const body = Atkinson_Hyperlegible_Next({ variable: "--font-body", subsets: ["latin", "latin-ext"] });
+// Plus Jakarta Sans (600 to 800) for headings, the wordmark and big figures; Lexend, built for
+// reading ease, for body text and controls. Money uses tabular figures (globals.css).
+const display = Plus_Jakarta_Sans({
+  variable: "--font-display",
+  subsets: ["latin", "latin-ext"],
+  weight: ["600", "700", "800"],
+});
+const body = Lexend({ variable: "--font-body", subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
   title: "Recount",
@@ -23,8 +28,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f1e7" },
-    { media: "(prefers-color-scheme: dark)", color: "#1b1a17" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#13002a" },
   ],
 };
 
@@ -34,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* Display settings (text size, contrast) before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: VISION_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_SCRIPT }} />
       </head>
       <body>
         <ConvexClientProvider>
