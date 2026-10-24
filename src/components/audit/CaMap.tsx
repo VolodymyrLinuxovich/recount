@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+
 import { useT } from "../i18n/I18nProvider";
 import { type Hospital, type Worst, displayName, verdictLabel, worst } from "./data";
 
@@ -45,10 +47,32 @@ export function CaMap({
     // Worst verdicts are drawn last so they sit on top.
     .sort((a, b) => ORDER.indexOf(a.w) - ORDER.indexOf(b.w));
   const sel = placed.find((p) => p.h.key === selected);
+  // A tap on a crowded spot lists every hospital near it instead of guessing.
+  const [near, setNear] = useState<{ list: typeof placed; total: number } | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  function tap(e: React.MouseEvent<SVGSVGElement>) {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const m = svg.getScreenCTM();
+    if (!m) return;
+    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+    // About 22 screen pixels, in map units.
+    const r = 22 / m.a;
+    const hits = placed
+      .map((p) => ({ p, d: Math.hypot(p.xy[0] - pt.x, p.xy[1] - pt.y) }))
+      .filter((x) => x.d <= r)
+      .sort((a, b) => ORDER.indexOf(b.p.w) - ORDER.indexOf(a.p.w) || a.d - b.d)
+      .map((x) => x.p);
+    if (hits.length === 1) {
+      setNear(null);
+      onSelect(hits[0].h.key);
+    } else if (hits.length > 1) setNear({ list: hits.slice(0, 8), total: hits.length });
+  }
 
   return (
     <figure className="ca-map">
-      <svg viewBox={`-6 -6 ${W + 12} ${H + 12}`} role="group" aria-label={t("map.aria")}>
+      <svg ref={svgRef} viewBox={`-6 -6 ${W + 12} ${H + 12}`} role="group" aria-label={t("map.aria")} onClick={tap}>
         <path d={PATH} className="ca-outline" />
         {placed.map(({ h, w, xy: [x, y] }) => (
           <g
@@ -57,7 +81,6 @@ export function CaMap({
             role="button"
             tabIndex={0}
             aria-label={`${displayName(h.name)}: ${verdictLabel(w, lang)}`}
-            onClick={() => onSelect(h.key)}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect(h.key))}
           >
             <circle cx={x} cy={y} r={11} className="dot-hit" />
@@ -72,6 +95,35 @@ export function CaMap({
           />
         )}
       </svg>
+      {near && (
+        <div className="map-near" role="dialog" aria-label={t("map.nearH", { n: near.total })}>
+          <div className="map-near-head">
+            <span>{t("map.nearH", { n: near.total })}</span>
+            <button className="map-near-close" onClick={() => setNear(null)} aria-label={t("map.close")}>
+              ×
+            </button>
+          </div>
+          <ul>
+            {near.list.map(({ h, w }) => (
+              <li key={h.key}>
+                <button
+                  onClick={() => {
+                    setNear(null);
+                    onSelect(h.key);
+                  }}
+                >
+                  <i className={`dot-key dot-${w}`} aria-hidden />
+                  <span>
+                    <span className="find-name">{displayName(h.name)}</span>
+                    <span className="find-place">{verdictLabel(w, lang)}</span>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {near.total > near.list.length && <p className="quiet map-near-more">{t("map.nearMore", { n: near.list.length })}</p>}
+        </div>
+      )}
       <figcaption className="map-legend">
         <span><i className="dot-key dot-conflict" /> {t("map.conflict")}</span>
         <span><i className="dot-key dot-likely" /> {t("map.likely")}</span>

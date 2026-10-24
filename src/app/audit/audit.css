@@ -568,3 +568,57 @@
   font-size: clamp(30px, 7.4vw, 44px);
   line-height: 1.15;
 }
+
+/* Tap on a crowded spot: list the hospitals there */
+.map-near {
+  margin-top: 10px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.map-near-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.map-near-close {
+  all: unset;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.map-near ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.map-near li {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.map-near li button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 6px 2px;
+  cursor: pointer;
+}
+
+.map-near li button:focus-visible {
+  outline: 3px solid var(--focus);
+}
+.map-near-more { font-size: 16px; margin: 8px 0 4px; }
