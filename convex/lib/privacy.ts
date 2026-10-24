@@ -4,6 +4,7 @@
 import { choose, type Provider, type Task } from "./model";
 import { safetyOn } from "./safety";
 import { searchOn } from "./search";
+import { docIntelOn } from "./docIntel";
 
 /** Which outside services this deployment sends data to, by purpose. */
 export function processors() {
@@ -14,6 +15,7 @@ export function processors() {
     openAI: uses("openai", all),
     contentSafety: safetyOn(),
     search: searchOn(),
+    docIntel: docIntelOn(),
   };
 }
 
@@ -34,6 +36,7 @@ function modelLine(): string {
   if (p.azureOpenAI) line += " Microsoft may keep data sent to Azure OpenAI for up to 30 days to check for abuse.";
   if (p.search) line += " To find passages in hospitals' public policies, each chat question (and the hospital's name) is sent to Microsoft Azure: Azure OpenAI turns it into a search and Azure AI Search runs it.";
   if (p.contentSafety) line += " Each chat message and reply is also checked by Microsoft's Azure AI Content Safety service.";
+  if (p.docIntel) line += " The bill image is also sent to Microsoft's Azure AI Document Intelligence, which reads the charges a second time so code can compare the two reads.";
   line += " When we look up a hospital's prices, our Apify Actor receives only the hospital's name and website and the billing codes on the bill, never the patient's name, account or income.";
   return line;
 }

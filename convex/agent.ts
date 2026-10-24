@@ -3,6 +3,7 @@
 import { filePart, modelReady, structured, type Run } from "./lib/model";
 import type { Kind } from "./lib/pipeline";
 import { inventedAmounts } from "./lib/letterCheck";
+import { DOCINTEL_MODEL, analyzeLayout, docIntelOn, linesFromTables } from "./lib/docIntel";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -152,6 +153,20 @@ const ChargesColumn = z.object({
  * sometimes do. Returns amounts in line order, or null if it can't be used.
  */
 async function readChargesColumn(blob: Blob, mediaType: string, record: (r: Run) => Promise<void>): Promise<number[] | null> {
+  // With Azure AI Document Intelligence on, the second read is OCR and table detection: a different
+  // method from a different vendor. If it fails or finds no table, fall back to the Claude column read.
+  if (docIntelOn()) {
+    const t0 = Date.now();
+    try {
+      const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
+      const lines = linesFromTables(await analyzeLayout(data));
+      const run: Run = { task: "column", provider: "azure-docintel", model: DOCINTEL_MODEL, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: lines.length > 0, fallbackUsed: false };
+      await record(lines.length ? run : { ...run, error: "no line-item table found" });
+      if (lines.length) return lines.map((l) => l.charge);
+    } catch (e) {
+      await record({ task: "column", provider: "azure-docintel", model: DOCINTEL_MODEL, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: false, error: String(e).slice(0, 200) });
+    }
+  }
   const res = await structured(
     {
       task: "column",

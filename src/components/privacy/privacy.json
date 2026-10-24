@@ -38,7 +38,8 @@
       "fallback": "If Claude is unavailable, the facts for your letters and your questions to Lupa go to Microsoft's Azure OpenAI Service instead.",
       "retention": "Microsoft may keep data sent to Azure OpenAI for up to 30 days to check for abuse.",
       "search": "To find passages in hospitals' public policies, each question to Lupa and the hospital's name are sent to Microsoft Azure (Azure OpenAI and Azure AI Search).",
-      "safety": "Each message to Lupa and each reply is also checked by Microsoft's Azure AI Content Safety service."
+      "safety": "Each message to Lupa and each reply is also checked by Microsoft's Azure AI Content Safety service.",
+      "docIntel": "Your bill image is also sent to Microsoft's Azure AI Document Intelligence, which reads the charges a second time so we can compare the two reads."
     }
   },
   "es": {
@@ -80,7 +81,8 @@
       "fallback": "Si Claude no está disponible, los datos para sus cartas y sus preguntas a Lupa se envían al servicio Azure OpenAI de Microsoft.",
       "retention": "Microsoft puede guardar los datos enviados a Azure OpenAI hasta 30 días para detectar abusos.",
       "search": "Para encontrar partes de las políticas públicas de los hospitales, cada pregunta a Lupa y el nombre del hospital se envían a Microsoft Azure (Azure OpenAI y Azure AI Search).",
-      "safety": "Cada mensaje a Lupa y cada respuesta también pasan por el servicio Azure AI Content Safety de Microsoft."
+      "safety": "Cada mensaje a Lupa y cada respuesta también pasan por el servicio Azure AI Content Safety de Microsoft.",
+      "docIntel": "La imagen de su factura también se envía al servicio Azure AI Document Intelligence de Microsoft, que lee los cargos una segunda vez para que podamos comparar las dos lecturas."
     }
   }
 }
