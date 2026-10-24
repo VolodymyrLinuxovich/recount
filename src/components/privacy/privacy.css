@@ -1,0 +1,45 @@
+.privacy {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--sp-6, 24px) 0 var(--sp-8, 64px);
+}
+
+.privacy-h {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-2xl, 2.25rem);
+  line-height: 1.1;
+  margin: 0 0 var(--sp-3, 12px);
+}
+
+.privacy-lede {
+  font-size: var(--fs-md, 1.375rem);
+  color: var(--ink-2);
+  margin: 0 0 var(--sp-6, 24px);
+}
+
+.privacy-sec {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card, 20px);
+  padding: var(--sp-5, 20px) var(--sp-5, 20px);
+  margin-bottom: var(--sp-4, 16px);
+}
+
+.privacy-sec h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-lg, 1.5rem);
+  margin: 0 0 var(--sp-2, 8px);
+}
+
+.privacy-sec p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.privacy-note {
+  color: var(--ink-2);
+  font-size: var(--fs-sm, 1rem);
+  margin: var(--sp-5, 20px) 0;
+}

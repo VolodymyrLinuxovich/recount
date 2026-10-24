@@ -1,0 +1,16 @@
+.footnote-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3, 12px) var(--sp-5, 20px);
+  margin-top: var(--sp-2, 8px);
+}
+
+.footnote-links a {
+  color: var(--ink-2);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-underline-offset: 3px;
+}

@@ -1,0 +1,30 @@
+{
+  "en": {
+    "title": "Privacy",
+    "lede": "What Recount keeps, who sees it, and how to delete it. In plain words.",
+    "updated": "These facts match how the app works today.",
+    "sections": [
+      { "h": "What we store", "p": "In our database (Convex): the bill photo or PDF you upload, what we read from it (hospital, charges, account number, and the patient's name and address if they're printed), your answers to the questions (household size, yearly income, insurance, medical costs), the letters, the steps the app took, and your questions to Lupa. Long numbers that look like Social Security or account numbers are removed from Lupa messages before they're stored." },
+      { "h": "Who helps process it", "p": "To read your bill, write your letters and answer your questions, the bill image and the facts about your bill are sent to Anthropic's Claude API. Anthropic handles that data under its own commercial terms and retention policy. To look up a hospital's prices, our Apify Actor receives only the hospital's name, website and the billing codes on the bill. Never your name, account number or income. The web app is hosted on Vercel." },
+      { "h": "Who can see it", "p": "There are no accounts. A bill opens only with its private link, which holds a secret key kept on your phone. The small Recount team can see the database to run and fix the service." },
+      { "h": "What we never do", "p": "We don't sell or share your information. We don't send anything to the hospital: you send your own letters. We never ask for payment, a Social Security number or bank details." },
+      { "h": "How long we keep it", "p": "Until you delete it. There is no automatic deletion yet." },
+      { "h": "How to delete it", "p": "Open the bill and tap \"Delete this bill\". It removes the bill, the photo, the steps and its Lupa chat from our database right away. Copies Anthropic may hold follow Anthropic's policy, not ours." }
+    ],
+    "back": "Back to Recount"
+  },
+  "es": {
+    "title": "Privacidad",
+    "lede": "Qué guarda Recount, quién lo ve y cómo borrarlo. En palabras sencillas.",
+    "updated": "Estos datos corresponden a cómo funciona la aplicación hoy.",
+    "sections": [
+      { "h": "Qué guardamos", "p": "En nuestra base de datos (Convex): la foto o el PDF de la factura que usted sube, lo que leemos de ella (el hospital, los cargos, el número de cuenta, y el nombre y la dirección del paciente si aparecen), sus respuestas a las preguntas (cuántas personas hay en su hogar, ingreso anual, seguro, gastos médicos), las cartas, los pasos que hizo la aplicación y sus preguntas a Lupa. Los números largos que parecen de Seguro Social o de cuenta se borran de los mensajes a Lupa antes de guardarlos." },
+      { "h": "Quién nos ayuda a procesarlo", "p": "Para leer su factura, escribir sus cartas y responder sus preguntas, la imagen de la factura y los datos de la factura se envían a la API de Claude de Anthropic. Anthropic trata esos datos según sus propios términos comerciales y su política de retención. Para buscar los precios de un hospital, nuestro Actor de Apify recibe solo el nombre del hospital, su sitio web y los códigos de facturación. Nunca su nombre, su número de cuenta ni su ingreso. La aplicación web está alojada en Vercel." },
+      { "h": "Quién puede verlo", "p": "No hay cuentas. Una factura solo se abre con su enlace privado, que tiene una clave secreta guardada en su teléfono. El pequeño equipo de Recount puede ver la base de datos para operar y arreglar el servicio." },
+      { "h": "Lo que nunca hacemos", "p": "No vendemos ni compartimos su información. No enviamos nada al hospital: usted envía sus propias cartas. Nunca le pedimos pagos, número de Seguro Social ni datos bancarios." },
+      { "h": "Cuánto tiempo lo guardamos", "p": "Hasta que usted lo borre. Todavía no hay borrado automático." },
+      { "h": "Cómo borrarlo", "p": "Abra la factura y toque \"Borrar esta factura\". Se borran de nuestra base de datos, de inmediato, la factura, la foto, los pasos y su chat con Lupa. Las copias que Anthropic pueda tener siguen la política de Anthropic, no la nuestra." }
+    ],
+    "back": "Volver a Recount"
+  }
+}
