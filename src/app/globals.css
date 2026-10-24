@@ -351,9 +351,11 @@ a {
   cursor: default;
 }
 
+/* One color for every primary action, matching the step bar. */
 .btn-primary {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary, #fff);
 }
 
 .btn-quiet {

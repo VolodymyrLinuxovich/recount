@@ -63,7 +63,7 @@ export function VisionToggle() {
         onClick={() => setOpen((o) => !o)}
       >
         <span className="vision-aa" aria-hidden="true">
-          Aa
+          A+
         </span>
         <span className="vision-word">{t("a11y.open")}</span>
       </button>
