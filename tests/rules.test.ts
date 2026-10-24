@@ -165,3 +165,14 @@ describe("hospital index: free-care cutoffs", () => {
     expect(missing).toEqual([]);
   });
 });
+
+import { FPL as FPL_2026, SNAPSHOTS } from "../convex/lib/reference";
+
+describe("demo path", () => {
+  it("ZSFG keeps its hand-verified 138% free-care cutoff, so a 1-person $20,000 household gets FREE", () => {
+    expect(SNAPSHOTS.zsfg.fap?.freeCareMaxFplPct).toBe(138);
+    const e = assess({ size: 1, annualIncome: 20000, insured: false }, FPL_2026, SNAPSHOTS.zsfg, 12741);
+    expect(e.tier).toBe("FREE");
+    expect(e.fplPct).toBeCloseTo(125.3, 1);
+  });
+});
