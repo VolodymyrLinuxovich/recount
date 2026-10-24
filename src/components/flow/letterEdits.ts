@@ -1,7 +1,7 @@
 "use client";
 
-// The patient's changes to the letters, kept for this tab while they move between letter screens.
-// sessionStorage, per bill; tied to the drafted letters so a new draft starts clean.
+// The patient's changes to the letters, kept on this device while they move between letter screens.
+// localStorage, per bill, so they survive reopening the link; cleared on approve; tied to the drafted letters so a new draft starts clean.
 import { useState } from "react";
 import { fillLetter, type Details } from "../letterFill";
 import type { CaseView, Letter } from "../types";
@@ -14,7 +14,7 @@ const basis = (letters: Letter[]) => letters.map((l) => `${l.kind}:${l.subject.l
 function read(c: CaseView): Letter[] | null {
   if (typeof window === "undefined" || !c.letters?.length) return null;
   try {
-    const raw = window.sessionStorage.getItem(key(c._id));
+    const raw = window.localStorage.getItem(key(c._id));
     if (!raw) return null;
     const data = JSON.parse(raw) as { basis?: string; letters?: Letter[] };
     if (data.basis !== basis(c.letters) || !Array.isArray(data.letters) || data.letters.length !== c.letters.length) return null;
@@ -26,8 +26,8 @@ function read(c: CaseView): Letter[] | null {
 
 function write(c: CaseView, letters: Letter[] | null) {
   try {
-    if (!letters || !c.letters) window.sessionStorage.removeItem(key(c._id));
-    else window.sessionStorage.setItem(key(c._id), JSON.stringify({ basis: basis(c.letters), letters }));
+    if (!letters || !c.letters) window.localStorage.removeItem(key(c._id));
+    else window.localStorage.setItem(key(c._id), JSON.stringify({ basis: basis(c.letters), letters }));
   } catch {
     // Storage blocked: the edits stay on this screen only.
   }

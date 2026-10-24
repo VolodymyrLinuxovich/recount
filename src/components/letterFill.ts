@@ -4,7 +4,9 @@ import type { Letter } from "./types";
 export interface Details {
   name: string;
   street: string;
+  /** City and state, like "Los Angeles, CA". */
   city: string;
+  zip: string;
   phone: string;
   email: string;
   dob: string;
@@ -12,7 +14,44 @@ export interface Details {
 
 export type Slot = keyof Details | "address" | "date";
 
-export const EMPTY_DETAILS: Details = { name: "", street: "", city: "", phone: "", email: "", dob: "" };
+export const EMPTY_DETAILS: Details = { name: "", street: "", city: "", zip: "", phone: "", email: "", dob: "" };
+
+/** Details from storage (this bill's or the saved profile), keeping only known text fields. */
+export function cleanDetails(data: unknown): Partial<Details> | null {
+  if (!data || typeof data !== "object") return null;
+  const out: Partial<Details> = {};
+  for (const k of Object.keys(EMPTY_DETAILS) as (keyof Details)[]) {
+    const v = (data as Record<string, unknown>)[k];
+    if (typeof v === "string") out[k] = v;
+  }
+  // Older saves kept the ZIP at the end of "City, state, ZIP".
+  const m = !out.zip && out.city ? /^(.*?)[,\s]+(\d{5}(?:-\d{4})?)\s*$/.exec(out.city) : null;
+  if (m) {
+    out.city = m[1];
+    out.zip = m[2];
+  }
+  return out;
+}
+
+/** What the details screen needs before the letters can go on. */
+export const REQUIRED: (keyof Details)[] = ["name", "street", "city", "zip", "phone"];
+
+export const phoneDigits = (s: string) => {
+  const d = s.replace(/\D/g, "");
+  return d.length === 11 && d.startsWith("1") ? d.slice(1) : d;
+};
+export const phoneOk = (s: string) => phoneDigits(s).length === 10;
+export const zipOk = (s: string) => /^\d{5}(-?\d{4})?$/.test(s.trim());
+
+/** Each field's problem: missing (required and empty), bad (typed but not right), or null. */
+export function checkDetails(d: Details): Partial<Record<keyof Details, "missing" | "bad">> {
+  const out: Partial<Record<keyof Details, "missing" | "bad">> = {};
+  for (const k of REQUIRED) if (!d[k].trim()) out[k] = "missing";
+  if (d.phone.trim() && !phoneOk(d.phone)) out.phone = "bad";
+  if (d.zip.trim() && !zipOk(d.zip)) out.zip = "bad";
+  if (d.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim())) out.email = "bad";
+  return out;
+}
 
 const key = (id: string) => `recount.details.${id}`;
 
@@ -20,14 +59,7 @@ export function readDetails(id: string): Partial<Details> | null {
   try {
     const raw = window.localStorage.getItem(key(id));
     if (!raw) return null;
-    const data: unknown = JSON.parse(raw);
-    if (!data || typeof data !== "object") return null;
-    const out: Partial<Details> = {};
-    for (const k of Object.keys(EMPTY_DETAILS) as (keyof Details)[]) {
-      const v = (data as Record<string, unknown>)[k];
-      if (typeof v === "string") out[k] = v;
-    }
-    return out;
+    return cleanDetails(JSON.parse(raw));
   } catch {
     return null;
   }
@@ -59,6 +91,7 @@ export function slotOf(label: string): Slot | null {
   if (/\b(e ?mail|correo electronico)\b/.test(x)) return "email";
   if (/\b(date of birth|dob|birth ?date|birthday|fecha de nacimiento)\b/.test(x)) return "dob";
   if (/\b(phone|telephone|cell|mobile|telefono|celular)\b/.test(x)) return "phone";
+  if (/^(your )?(zip|zip code|postal code|codigo postal)$/.test(x)) return "zip";
   const addr = /\b(address|street|direccion|calle)\b/.test(x);
   const city = /\b(city|state|zip|zip code|postal|ciudad|estado|codigo postal)\b/.test(x);
   if (addr && city) return "address";
@@ -71,10 +104,14 @@ export function slotOf(label: string): Slot | null {
   return null;
 }
 
+const cityLine = (d: Details) => [d.city.trim().replace(/,\s*$/, ""), d.zip.trim()].filter(Boolean).join(" ");
+
 function valueFor(slot: Slot, d: Details, today: string): string {
   switch (slot) {
     case "address":
-      return [d.street.trim(), d.city.trim()].filter(Boolean).join(", ");
+      return [d.street.trim(), cityLine(d)].filter(Boolean).join(", ");
+    case "city":
+      return cityLine(d);
     case "date":
       return today;
     default:
@@ -91,10 +128,15 @@ const DROP = "\u0000";
 /** Put the patient's details into the matching [brackets]. Brackets with nothing to put in stay,
  * except optional ones (email, date of birth): their line is left out of the letter. */
 export function fillText(text: string, d: Details, today = usToday()): string {
+  // "[Address]" next to its own "[City, State ZIP]" line is only the street, or the city shows twice.
+  const slots = new Set([...text.matchAll(BRACKET)].map((m) => slotOf(m[1])));
+  const cityApart = slots.has("city");
+  const zipApart = slots.has("zip");
   const filled = text.replace(BRACKET, (whole, label: string) => {
-    const slot = slotOf(label);
+    let slot = slotOf(label);
     if (!slot) return whole;
-    const v = valueFor(slot, d, today);
+    if (slot === "address" && cityApart) slot = "street";
+    const v = slot === "city" && zipApart ? d.city.trim() : valueFor(slot, d, today);
     if (v) return v;
     return OPTIONAL.includes(slot) ? DROP : whole;
   });
@@ -128,7 +170,7 @@ export function leftovers(l: Letter): { slot: Slot | null; label: string }[] {
   const out: { slot: Slot | null; label: string }[] = [];
   for (const m of `${l.subject}\n${l.body}`.matchAll(BRACKET)) {
     // A signature is written by hand on the paper, so it isn't something to fill in here.
-    if (/signature|firma/i.test(m[1])) continue;
+    if (/signature|firma|sign here/i.test(m[1])) continue;
     const slot = slotOf(m[1]);
     // Optional details (email, date of birth) are never "missing".
     if (slot && OPTIONAL.includes(slot)) continue;

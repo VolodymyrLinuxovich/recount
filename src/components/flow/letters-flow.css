@@ -59,31 +59,110 @@
 }
 
 
-/* The send guide inside the flow: no box and ink numbers, not red. */
-.step-body .send {
-  border: 0;
-  background: none;
-  padding: 0;
+.flow-fill-hint {
+  margin: 12px 0 0;
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 30em;
 }
 
-.step-body .send-h {
-  display: none;
+/* ---------- "Your letters are ready": a check that draws itself ---------- */
+
+.approved-moment {
+  min-height: 52dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 0;
+  animation: approved-in 260ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
-.step-body .send-n {
-  border-color: var(--ink);
-  color: var(--ink);
+.approved-check {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 24px;
 }
 
-.step-body .send-ask {
-  border-left-color: var(--ink-2);
+.approved-ring,
+.approved-mark {
+  fill: none;
+  stroke: var(--ok);
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.step-body .send .btn-big {
-  min-height: 56px;
+.approved-ring {
+  stroke-width: 5;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 327;
+  animation: approved-draw 400ms cubic-bezier(0.2, 0, 0, 1) 60ms forwards;
 }
 
-/* On the send screen the pinned bar already has the Call button. */
-.step-body .send-call {
-  display: none;
+.approved-mark {
+  stroke-width: 7;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: approved-draw 300ms cubic-bezier(0.2, 0, 0, 1) 300ms forwards;
+}
+
+.approved-h {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(32px, 8vw, 40px);
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.approved-p {
+  font-size: 19px;
+  color: var(--ink-2);
+  max-width: 22em;
+  margin: 0;
+}
+
+@keyframes approved-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes approved-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approved-moment {
+    animation: none;
+  }
+  .approved-ring,
+  .approved-mark {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.sg-change {
+  margin: 24px 0 0;
+  text-align: center;
+}
+
+.flow-failed {
+  margin: 16px 0 0;
+  padding: 12px 0 0 12px;
+  border-left: 4px solid var(--pen);
+}
+
+.flow-failed .error-note {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
 }

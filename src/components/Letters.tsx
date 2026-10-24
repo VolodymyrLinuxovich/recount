@@ -44,10 +44,11 @@ function GrowingText(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea ref={ref} rows={1} {...props} />;
 }
 
-const SLOT_KEY: Record<Exclude<Slot, "date">, PlainKey> = {
+export const SLOT_KEY: Record<Exclude<Slot, "date">, PlainKey> = {
   name: "letters.dName",
   street: "letters.dStreet",
   city: "letters.dCity",
+  zip: "letters.dZip",
   address: "letters.dStreet",
   phone: "letters.dPhone",
   email: "letters.dEmail",
