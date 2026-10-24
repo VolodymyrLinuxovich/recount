@@ -171,3 +171,36 @@
 .approved-h:focus {
   outline: none;
 }
+
+/* "Is this bill for you or for someone else?", then a quiet line that says which, with Change. */
+.details-who {
+  margin-top: var(--sp-5);
+}
+
+.details-who-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--sp-2);
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-base);
+  color: var(--ink-2);
+}
+
+.details-who-change {
+  min-height: 44px;
+  padding: 0 var(--sp-1);
+  border: 0;
+  background: none;
+  color: var(--accent, var(--ink));
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.details-who-change:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

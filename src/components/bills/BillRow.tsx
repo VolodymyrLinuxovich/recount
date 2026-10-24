@@ -1,27 +1,28 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import Link from "next/link";
-import { Component, useState, type ReactNode } from "react";
+import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { useT } from "../i18n/I18nProvider";
 import { money, shortDate, type CaseView } from "../types";
 import { forgetCase, privateLink } from "./myBills";
 import "./bills.css";
+import "../account/account.css";
 
 type Row = CaseView & { createdAt?: number };
 
-export function BillRow({ id, token, addedAt }: { id: string; token?: string; addedAt: number }) {
+export function BillRow({ id, token, addedAt, inAccount }: { id: string; token?: string; addedAt: number; inAccount?: boolean }) {
   if (!/^[0-9a-z]{25,40}$/.test(id)) return <GoneRow id={id} />;
   return (
     <RowBoundary fallback={(retry) => <FailedRow id={id} retry={retry} />}>
-      <LiveRow id={id} token={token} addedAt={addedAt} />
+      <LiveRow id={id} token={token} addedAt={addedAt} inAccount={inAccount} />
     </RowBoundary>
   );
 }
 
-function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: number }) {
+function LiveRow({ id, token, addedAt, inAccount }: { id: string; token?: string; addedAt: number; inAccount?: boolean }) {
   const { t, lang } = useT();
   const c = useQuery(api.cases.get, { id: id as Id<"cases">, token }) as Row | null | undefined;
 
@@ -58,6 +59,7 @@ function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: 
       <p className="bill-slip-status-row">
         <span className={`bill-pill bill-tone-${tone}`}>{t(`bills.status.${c.status}`)}</span>
       </p>
+      {inAccount && <p className="bill-slip-acct">✓ {t("bills.inAccount")}</p>}
       {(tier || flags) && (
         <p className="bill-slip-facts">
           {tier && <span className="bill-slip-tier">{tier}</span>}
@@ -69,8 +71,10 @@ function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: 
       </Link>
       <div className="bill-slip-tools">
         {token && <CopyLink id={id} token={token} />}
-        <RemoveControl id={id} />
+        {/* An account bill stays listed while signed in, so "hide from this list" would do nothing. */}
+        {!inAccount && <RemoveControl id={id} />}
       </div>
+      {token && <DeleteControl id={id} token={token} name={name} />}
     </li>
   );
 }
@@ -187,6 +191,77 @@ function RemoveControl({ id }: { id: string }) {
           {t("bills.confirmNo")}
         </button>
       </div>
+    </div>
+  );
+}
+
+/** Delete the bill for good (its photo, answers and letters), unlike Hide, which only clears this list. */
+function DeleteControl({ id, token, name }: { id: string; token: string; name: string }) {
+  const { t } = useT();
+  const remove = useMutation(api.cases.remove);
+  const [asking, setAsking] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
+  // The question replaces the button: focus follows it in, and comes back on "Keep it".
+  const askRef = useRef<HTMLParagraphElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const wasAsking = useRef(false);
+  useEffect(() => {
+    if (asking) askRef.current?.focus();
+    else if (wasAsking.current) triggerRef.current?.focus();
+    wasAsking.current = asking;
+  }, [asking]);
+
+  async function del() {
+    setBusy(true);
+    setFailed(false);
+    try {
+      await remove({ id: id as Id<"cases">, token });
+      forgetCase(id);
+    } catch {
+      setFailed(true);
+      setBusy(false);
+    }
+  }
+
+  const qid = `del-q-${id}`;
+  return (
+    <div className="bill-slip-delete">
+      {!asking ? (
+        <button
+          ref={triggerRef}
+          type="button"
+          className="bill-slip-text-btn bill-slip-delete-btn"
+          aria-label={`${t("case.delete")}: ${name}`}
+          onClick={() => setAsking(true)}
+        >
+          {t("case.delete")}
+        </button>
+      ) : (
+        <div
+          role="alertdialog"
+          aria-labelledby={qid}
+          className="bill-slip-confirm bill-slip-confirm-del"
+          onKeyDown={(e) => e.key === "Escape" && !busy && setAsking(false)}
+        >
+          <p id={qid} ref={askRef} tabIndex={-1}>
+            {t("case.deleteAsk")}
+          </p>
+          <div className="bill-slip-confirm-btns">
+            <button type="button" className="btn btn-primary btn-danger-fill" onClick={del} disabled={busy}>
+              {busy ? t("case.deleting") : t("case.deleteYes")}
+            </button>
+            <button type="button" className="btn btn-quiet" onClick={() => setAsking(false)} disabled={busy}>
+              {t("case.deleteNo")}
+            </button>
+          </div>
+        </div>
+      )}
+      {failed && (
+        <p className="error-note" role="alert">
+          {t("case.deleteFailed")}
+        </p>
+      )}
     </div>
   );
 }

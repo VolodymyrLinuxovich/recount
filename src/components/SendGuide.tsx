@@ -143,6 +143,8 @@ export function SendGuide({
   }, [ask]);
 
   const phone = c.bill?.billingPhone ?? c.hospital?.fap?.phone ?? null;
+  // Insured: an appeal with the insurer can take weeks, and the hold covers that too.
+  const insured = !!c.bill?.insurancePayer?.trim() || !!c.household?.insured;
   const policyUrl = c.hospital?.fap?.url ?? null;
   const applicationUrl = c.hospital?.fap?.applicationUrl ?? null;
   const mailto = (l: Letter) =>
@@ -447,6 +449,7 @@ export function SendGuide({
             {lang !== "en" && (
               <p className="quiet sg-small">{t("send.step3Ask")}</p>
             )}
+            {insured && <p className="sg-p sg-insured">{t("send.insuredHold")}</p>}
             {doneButton("pause", t("send.step3Btn"))}
           </>,
         )}

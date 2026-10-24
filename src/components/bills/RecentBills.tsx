@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { BillRow } from "./BillRow";
 import { useT } from "../i18n/I18nProvider";
-import { useMyBills } from "./myBills";
+import { useAllBills } from "../account/useAllBills";
 import "./bills.css";
 
 
 export function RecentBills() {
   const { t } = useT();
-  const bills = useMyBills();
+  const { bills } = useAllBills();
   if (bills.length === 0) return null;
   return (
     <section className="recent-bills" aria-labelledby="recent-bills-title">
@@ -18,7 +18,7 @@ export function RecentBills() {
       </h2>
       <ul className="bill-slips">
         {bills.slice(0, 3).map((b) => (
-          <BillRow key={b.id} id={b.id} token={b.token} addedAt={b.addedAt} />
+          <BillRow key={b.id} id={b.id} token={b.token} addedAt={b.addedAt} inAccount={b.inAccount} />
         ))}
       </ul>
       <Link href="/bills" className="btn btn-quiet bills-see-all">

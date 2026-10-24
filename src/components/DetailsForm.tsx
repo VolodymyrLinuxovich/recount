@@ -1,6 +1,8 @@
 "use client";
 
+import { useConvexAuth } from "convex/react";
 import { useEffect, useRef, useState } from "react";
+import { useAccountProfile } from "./account/useAccountProfile";
 import { useT } from "./i18n/I18nProvider";
 import { joinList, type PlainKey } from "./i18n/strings";
 import { checkDetails, type Details, EMPTY_DETAILS, normalDob, readDetails, saveDetails } from "./letterFill";
@@ -10,6 +12,27 @@ import "./letters.css";
 
 type Field = keyof Details;
 export type DetailsSource = "bill" | "profile";
+/** Whose bill this is: the patient's own, or someone they're helping. */
+export type Who = "self" | "other";
+
+const whoKey = (id: string) => `recount.who.${id}`;
+
+export function readWho(id: string): Who | null {
+  try {
+    const v = window.localStorage.getItem(whoKey(id));
+    return v === "self" || v === "other" ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveWho(id: string, w: Who) {
+  try {
+    window.localStorage.setItem(whoKey(id), w);
+  } catch {
+    // Storage is blocked; the choice holds for this visit.
+  }
+}
 
 const NEED: Partial<Record<Field, PlainKey>> = {
   name: "letters.needName",
@@ -48,6 +71,7 @@ export function DetailsForm({
   remember,
   onRemember,
   tried = 0,
+  forOther = false,
 }: {
   details: Details;
   onChange: (d: Details) => void;
@@ -60,8 +84,11 @@ export function DetailsForm({
   onRemember?: (on: boolean) => void;
   /** Counts taps on Next while something is missing: show every error and go to the first. */
   tried?: number;
+  /** The bill is someone else's: the copy talks about "the patient", not "you". */
+  forOther?: boolean;
 }) {
   const { t } = useT();
+  const signedIn = useConvexAuth().isAuthenticated;
   // A field's error shows once the patient typed in it and left it, or after they tapped Next.
   // Tabbing through an empty field, or a prefilled value, shows nothing.
   const [edited, setEdited] = useState<Partial<Record<Field, boolean>>>({});
@@ -136,6 +163,8 @@ export function DetailsForm({
           aria-invalid={err ? true : undefined}
           aria-describedby={described}
           {...attrs}
+          // Someone else's bill: the browser's autofill would put in the helper's own address.
+          autoComplete={forOther ? "off" : attrs.autoComplete}
         />
       </div>
     );
@@ -144,10 +173,10 @@ export function DetailsForm({
   return (
     <section ref={box} className={bare ? "details details-bare" : "details"} aria-label={t("letters.detailsH")}>
       {!bare && <h3 className="details-h">{t("letters.detailsH")}</h3>}
-      <p className="details-lede">{t("letters.detailsLede")}</p>
-      {sources.includes("bill") && <p className="details-from">{t("letters.fromBill")}</p>}
+      <p className="details-lede">{t(forOther ? "letters.detailsLedeOther" : "letters.detailsLede")}</p>
+      {sources.includes("bill") && <p className="details-from">{t(forOther ? "letters.fromBillOther" : "letters.fromBill")}</p>}
       {sources.includes("profile") && <p className="details-from">{t("letters.fromProfile")}</p>}
-      {field("name", "letters.dName", "required", { autoComplete: "name" })}
+      {field("name", forOther ? "letters.dNameOther" : "letters.dName", "required", { autoComplete: "name" })}
       {field("street", "letters.dStreet", "required", { autoComplete: "street-address" })}
       {field("city", "letters.dCity", "required", { autoComplete: "address-level2" }, "letters.hintCity")}
       {field("zip", "letters.dZip", "required", { autoComplete: "postal-code", inputMode: "numeric", maxLength: 10 }, "letters.hintZip", "details-zip")}
@@ -158,8 +187,8 @@ export function DetailsForm({
         <label className="details-remember">
           <input type="checkbox" checked={!!remember} onChange={(e) => onRemember(e.target.checked)} />
           <span>
-            <span className="details-remember-h">{t("letters.remember")}</span>
-            <span className="quiet details-remember-hint">{t("letters.rememberHint")}</span>
+            <span className="details-remember-h">{t(signedIn ? "letters.rememberAccount" : "letters.remember")}</span>
+            <span className="quiet details-remember-hint">{t(signedIn ? "letters.rememberAccountHint" : "letters.rememberHint")}</span>
           </span>
         </label>
       ) : (
@@ -197,10 +226,35 @@ export function splitAddress(raw: string): Pick<Details, "street" | "city" | "zi
 function fromBill(c: CaseView): Partial<Details> {
   const out: Partial<Details> = {};
   const name = c.bill?.patientName?.trim() ?? "";
-  if (name && !/[[\]]/.test(name)) out.name = name;
+  if (name && !/[[\]]/.test(name)) out.name = nameCase(name);
   const addr = c.bill?.patientAddress?.trim() ?? "";
   if (addr && !/[[\]]/.test(addr)) Object.assign(out, splitAddress(addr));
   return out;
+}
+
+// Lowercase in a name, unless it starts the name: "Maria de la Cruz", "Ludwig van Beethoven".
+const PARTICLES = new Set(["de", "del", "la", "las", "los", "y", "da", "das", "do", "dos", "di", "van", "von", "der", "den", "du", "le"]);
+const ROMAN = /^(?:i{1,3}|iv|v|vi{0,3}|ix|x)$/;
+
+/**
+ * "MARIA HERNANDEZ" (bills print names in capitals) → "Maria Hernandez". Keeps "McDonald", "O'Brien",
+ * "Garcia-Lopez" and "III" sensible. A name that already has lowercase letters is left as typed.
+ */
+export function nameCase(raw: string): string {
+  if (!/\p{Lu}/u.test(raw) || /\p{Ll}/u.test(raw)) return raw;
+  let i = 0;
+  return raw.replace(/[\p{L}\p{M}'’]+/gu, (word) => {
+    const first = i++ === 0;
+    const w = word.toLowerCase();
+    if (ROMAN.test(w) && !first) return w.toUpperCase();
+    if (!first && PARTICLES.has(w)) return w;
+    const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
+    // O'Brien, D'Angelo: a capital after the apostrophe too.
+    const apos = /^(\p{L})(['’])(\p{L}.*)$/u.exec(w);
+    if (apos) return apos[1].toUpperCase() + apos[2] + cap(apos[3]);
+    if (/^mc\p{L}{2,}$/u.test(w)) return "Mc" + cap(w.slice(2));
+    return cap(w);
+  });
 }
 
 const filled = (d: Partial<Details> | null) =>
@@ -215,7 +269,8 @@ export function useDetails(c: CaseView) {
     if (typeof window === "undefined") return { details: EMPTY_DETAILS, sources: [] as DetailsSource[] };
     const saved = filled(readDetails(c._id));
     const bill = filled(fromBill(c));
-    const profile = filled(readProfile());
+    // Someone else's bill: the saved profile is the helper's own details, so it stays out.
+    const profile = readWho(c._id) === "other" ? {} : filled(readProfile());
     const details = { ...EMPTY_DETAILS, ...profile, ...bill, ...saved };
     const sources: DetailsSource[] = [];
     const keys = Object.keys(EMPTY_DETAILS) as Field[];
@@ -224,6 +279,20 @@ export function useDetails(c: CaseView) {
     return { details, sources };
   });
   const [details, setDetails] = useState<Details>(start.details);
+  // Signed in: the account's details arrive after the first render. They fill only what wasn't typed for
+  // this bill and isn't on the bill (they take the place of this device's saved profile).
+  const account = useAccountProfile();
+  const [fromAccount, setFromAccount] = useState<boolean | null>(null);
+  if (fromAccount === null && account.profile) {
+    // Once, when they first arrive (state set during render, so there's no flash of the old values).
+    const p = account.profile;
+    const saved = filled(readDetails(c._id));
+    const bill = filled(fromBill(c));
+    const keys = readWho(c._id) === "other" ? [] : (Object.keys(EMPTY_DETAILS) as Field[]).filter((k) => p[k] && !saved[k] && !bill[k]);
+    setFromAccount(keys.length > 0);
+    if (keys.length) setDetails((cur) => ({ ...cur, ...Object.fromEntries(keys.map((k) => [k, p[k]])) }));
+  }
+  const sources: DetailsSource[] = fromAccount && !start.sources.includes("profile") ? [...start.sources, "profile"] : start.sources;
   const change = (d: Details) => {
     setDetails(d);
     saveDetails(c._id, d);
@@ -231,8 +300,16 @@ export function useDetails(c: CaseView) {
   /** Keep what's on screen for this bill, and for next time if the patient wants. */
   const keep = (remember: boolean) => {
     saveDetails(c._id, details);
+    // The sample's made-up patient never becomes anyone's profile, and doesn't wipe a real one.
+    if (c.sample) return;
+    // Signed in, "next time" means the account (any device). Unticking leaves the account's details alone.
+    if (account.signedIn) {
+      if (remember) account.save(details);
+      return;
+    }
     if (remember) saveProfile(details);
-    else clearProfile();
+    // Unticking for someone else's bill means "don't keep theirs", not "forget mine".
+    else if (readWho(c._id) !== "other") clearProfile();
   };
-  return [details, change, { sources: start.sources, keep }] as const;
+  return [details, change, { sources, keep }] as const;
 }

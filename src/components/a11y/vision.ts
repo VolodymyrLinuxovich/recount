@@ -1,9 +1,9 @@
 // Display settings ("Display / Pantalla"): text size and contrast, saved per device in
-// localStorage ("recount.a11y") and applied on <html> as data-text and data-contrast.
+// localStorage ("recount.a11y") and applied on <html> as data-text ("large" | "largest") and data-contrast.
 // The inline script in the root layout applies the saved choice before the first paint.
 // With nothing saved, a system "more contrast" setting turns on Large + black on white.
 
-export type TextSize = "standard" | "large";
+export type TextSize = "standard" | "large" | "largest";
 export type Contrast = "standard" | "hv-light" | "hv-dark";
 
 export interface Vision {
@@ -17,7 +17,7 @@ const STANDARD: Vision = { text: "standard", contrast: "standard" };
 const MORE: Vision = { text: "large", contrast: "hv-light" };
 
 /** Runs in <head> before paint. Kept tiny and self-contained (no imports). */
-export const VISION_SCRIPT = `(function(){var d=document.documentElement,v=null;try{v=JSON.parse(localStorage.getItem("${VISION_KEY}")||"null")}catch(e){}if(!v&&window.matchMedia&&matchMedia("(prefers-contrast: more)").matches)v={text:"large",contrast:"hv-light"};if(!v)return;if(v.text==="large")d.setAttribute("data-text","large");if(v.contrast==="hv-light"||v.contrast==="hv-dark")d.setAttribute("data-contrast",v.contrast)})()`;
+export const VISION_SCRIPT = `(function(){var d=document.documentElement,v=null;try{v=JSON.parse(localStorage.getItem("${VISION_KEY}")||"null")}catch(e){}if(!v&&window.matchMedia&&matchMedia("(prefers-contrast: more)").matches)v={text:"large",contrast:"hv-light"};if(!v)return;if(v.text==="large"||v.text==="largest")d.setAttribute("data-text",v.text);if(v.contrast==="hv-light"||v.contrast==="hv-dark")d.setAttribute("data-contrast",v.contrast)})()`;
 
 let current: Vision | null = null;
 const listeners = new Set<() => void>();
@@ -25,7 +25,7 @@ const listeners = new Set<() => void>();
 function clean(v: Partial<Vision> | null): Vision | null {
   if (!v || typeof v !== "object") return null;
   return {
-    text: v.text === "large" ? "large" : "standard",
+    text: v.text === "large" || v.text === "largest" ? v.text : "standard",
     contrast: v.contrast === "hv-light" || v.contrast === "hv-dark" ? v.contrast : "standard",
   };
 }
@@ -44,7 +44,7 @@ function read(): Vision {
 
 function apply(v: Vision) {
   const d = document.documentElement;
-  if (v.text === "large") d.dataset.text = "large";
+  if (v.text !== "standard") d.dataset.text = v.text;
   else delete d.dataset.text;
   if (v.contrast !== "standard") d.dataset.contrast = v.contrast;
   else delete d.dataset.contrast;

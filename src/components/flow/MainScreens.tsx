@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
+import { SaveOffer } from "../account/SaveOffer";
 import { Answer } from "../Answer";
 import { BillTools } from "../BillTools";
 import { plainError } from "../CaseScreen";
@@ -268,6 +269,7 @@ export function AnswerStep({ c, back, go }: ScreenProps) {
         hospitalKey={c.hospitalKey ?? c.hospital?.key ?? null}
         inLetter={Boolean(c.letters?.length)}
       />
+      <SaveOffer sample={c.sample} />
       <div className="step-links">
         {(c.status === "drafting" || c.status === "ready") && (
           <button className="link-btn" onClick={() => go("q1")}>

@@ -299,3 +299,39 @@
   text-align: center;
   font-size: var(--fs-sm);
 }
+
+/* "Delete this bill": for good, so it sits apart from Copy link and Hide, in the pen color. */
+.bill-slip-delete {
+  border-top: 1px solid var(--rule-soft);
+  margin-top: var(--sp-1);
+}
+
+.bill-slip-text-btn.bill-slip-delete-btn {
+  color: var(--pen);
+}
+
+.bill-slip-text-btn.bill-slip-delete-btn:hover {
+  color: var(--pen);
+  text-decoration-thickness: 2px;
+}
+
+.bill-slip-delete .bill-slip-confirm {
+  border-top: 0;
+}
+
+.bill-slip-confirm-del p {
+  font-weight: 600;
+}
+
+.bill-slip-confirm-del p:focus {
+  outline: none;
+}
+
+.bill-slip-confirm-del p:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.bill-slip-delete .error-note {
+  margin: 0 0 var(--sp-3);
+}

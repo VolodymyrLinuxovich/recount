@@ -9,6 +9,7 @@ import "./a11y.css";
 const TEXT: { value: TextSize; key: PlainKey }[] = [
   { value: "standard", key: "a11y.standard" },
   { value: "large", key: "a11y.large" },
+  { value: "largest", key: "a11y.largest" },
 ];
 
 const CONTRAST: { value: Contrast; key: PlainKey }[] = [
@@ -76,7 +77,7 @@ export function VisionToggle({ variant = "footer" }: { variant?: "footer" | "men
           <p className="vision-title">{t("a11y.title")}</p>
           <fieldset className="vision-group">
             <legend>{t("a11y.textSize")}</legend>
-            <div className="vision-options">
+            <div className="vision-options vision-options-3">
               {TEXT.map((o) => (
                 <label key={o.value} className="vision-option">
                   <input

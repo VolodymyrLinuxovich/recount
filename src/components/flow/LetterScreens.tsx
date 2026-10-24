@@ -6,14 +6,14 @@ import { ConvexError } from "convex/values";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
-import { DetailsForm, useDetails, useDetailsMissing } from "../DetailsForm";
+import { DetailsForm, readWho, saveWho, useDetails, useDetailsMissing, type Who } from "../DetailsForm";
 import { useT } from "../i18n/I18nProvider";
 import { joinList } from "../i18n/strings";
-import { leftovers } from "../letterFill";
+import { EMPTY_DETAILS, leftovers, saveDetails } from "../letterFill";
 import { LetterSheet, SLOT_KEY } from "../Letters";
 import { PrintLetters } from "../PrintLetters";
 import { SendGuide, useSendSteps } from "../SendGuide";
-import type { Letter } from "../types";
+import type { CaseView, Letter } from "../types";
 import { forApproval, useLetters } from "./letterEdits";
 import { StepFrame } from "./StepFrame";
 import type { ScreenProps } from "./types";
@@ -31,47 +31,102 @@ export function LettersWaitStep({ back }: ScreenProps) {
 
 export function DetailsStep({ c, next, back }: ScreenProps) {
   const { t } = useT();
-  const [details, setDetails, { sources, keep }] = useDetails(c);
-  const [remember, setRemember] = useState(true);
-  const [tried, setTried] = useState(0);
   // Only the patient's own details count here; amounts or dates of service are theirs to check in the letter.
   const asks = (c.letters ?? []).some((l) => leftovers(l).some((x) => x.slot && x.slot !== "date"));
+  // Whose bill it is decides what we prefill and what we offer to keep. Asked once per bill.
+  const [who, setWho] = useState<Who | null>(() => (typeof window === "undefined" ? null : readWho(c._id)));
+  const [asking, setAsking] = useState(false);
+
+  if (!asks)
+    return (
+      <StepFrame phase={3} title={t("flow.detailsH")} primary={{ label: t("flow.next"), onClick: next }} onBack={back}>
+        <p className="flow-note">{t("flow.detailsNone")}</p>
+      </StepFrame>
+    );
+
+  if (!who || asking) {
+    const choose = (w: Who) => {
+      // A different person: start over from the bill, not from what was typed for the other one.
+      if (who && who !== w) saveDetails(c._id, EMPTY_DETAILS);
+      saveWho(c._id, w);
+      setWho(w);
+      setAsking(false);
+    };
+    return (
+      <StepFrame phase={3} title={t("flow.detailsWhoH")} onBack={asking ? () => setAsking(false) : back}>
+        <p className="flow-note">{t("flow.detailsWhoHint")}</p>
+        <div className="choice choice-big details-who" role="group" aria-label={t("flow.detailsWhoH")}>
+          <button type="button" aria-pressed={who === "self"} onClick={() => choose("self")}>
+            {t("flow.detailsWhoSelf")}
+          </button>
+          <button type="button" aria-pressed={who === "other"} onClick={() => choose("other")}>
+            {t("flow.detailsWhoOther")}
+          </button>
+        </div>
+      </StepFrame>
+    );
+  }
+
+  // Keyed by whose bill it is, so the prefill is worked out again after a change.
+  return <DetailsFill key={who} c={c} who={who} next={next} back={back} onChangeWho={() => setAsking(true)} />;
+}
+
+function DetailsFill({
+  c,
+  who,
+  next,
+  back,
+  onChangeWho,
+}: {
+  c: CaseView;
+  who: Who;
+  next: () => void;
+  back?: () => void;
+  onChangeWho: () => void;
+}) {
+  const { t } = useT();
+  const [details, setDetails, { sources, keep }] = useDetails(c);
+  // Someone else's details are only kept for next time when the helper asks for it.
+  const [remember, setRemember] = useState(who === "self");
+  const [tried, setTried] = useState(0);
   const missing = useDetailsMissing(details);
   return (
     <StepFrame
       phase={3}
-      title={t("flow.detailsH")}
+      title={t(who === "other" ? "flow.detailsHOther" : "flow.detailsH")}
       primary={{
         label: t("flow.next"),
         onClick: () => {
           // Nothing goes on with a field missing: show what's needed and go to the first one.
-          if (asks && missing) return setTried((n) => n + 1);
-          if (asks) keep(remember);
+          if (missing) return setTried((n) => n + 1);
+          keep(remember);
           next();
         },
       }}
       onBack={back}
     >
-      {asks ? (
-        <>
-          {tried > 0 && missing && (
-            <p className="details-summary" role="alert">
-              {missing}
-            </p>
-          )}
-          <DetailsForm
-            details={details}
-            onChange={setDetails}
-            bare
-            sources={sources}
-            remember={remember}
-            onRemember={setRemember}
-            tried={tried}
-          />
-        </>
-      ) : (
-        <p className="flow-note">{t("flow.detailsNone")}</p>
+      <p className="details-who-line">
+        <span>{t(who === "other" ? "flow.detailsForOther" : "flow.detailsForSelf")}</span>{" "}
+        <button type="button" className="details-who-change" onClick={onChangeWho}>
+          {t("flow.detailsWhoChange")}
+        </button>
+      </p>
+      {tried > 0 && missing && (
+        <p className="details-summary" role="alert">
+          {missing}
+        </p>
       )}
+      <DetailsForm
+        details={details}
+        onChange={setDetails}
+        bare
+        sources={sources}
+        // The sample's made-up patient isn't kept for the next bill, so there's nothing to tick.
+        remember={c.sample ? undefined : remember}
+        onRemember={c.sample ? undefined : setRemember}
+        tried={tried}
+        forOther={who === "other"}
+      />
     </StepFrame>
   );
 }

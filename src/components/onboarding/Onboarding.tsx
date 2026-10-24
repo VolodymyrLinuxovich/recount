@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { flushSync } from "react-dom";
+import { getServerVision, getVision, setVision, subscribeVision } from "../a11y/vision";
 import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
 import { IconBill, IconCard, IconCheck, IconHome, IconLetter, PhotoTips } from "./Icons";
@@ -104,6 +105,7 @@ export function Onboarding({
         </ul>
         <p className="onb-note">{t("onboard.helpTime")}</p>
         {path === "sample" && <p className="onb-note">{t("onboard.sampleNote")}</p>}
+        <BiggerText />
       </>
     );
   } else if (step === 1) {
@@ -186,5 +188,26 @@ export function Onboarding({
         </div>
       </div>
     </div>
+  );
+}
+
+/** "Want bigger text?": the Display setting's text size, one tap, for people who'd never find the footer. */
+function BiggerText() {
+  const { t } = useT();
+  const v = useSyncExternalStore(subscribeVision, getVision, getServerVision);
+  const on = v.text !== "standard";
+  return (
+    <p className="onb-bigger">
+      <span>{t("onboard.biggerQ")}</span>
+      <button
+        type="button"
+        className="onb-bigger-btn"
+        aria-pressed={on}
+        onClick={() => setVision({ ...v, text: on ? "standard" : "large" })}
+      >
+        {on && <span aria-hidden="true">✓ </span>}
+        {t("onboard.biggerBtn")}
+      </button>
+    </p>
   );
 }

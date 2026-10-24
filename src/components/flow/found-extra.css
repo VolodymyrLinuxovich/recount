@@ -1,0 +1,10 @@
+/* Additions to found.css (kept apart while found.css is being reworked). */
+
+/* "If this is a mistake, you'd owe about $X": an insured patient's duplicate, as a plain figure. */
+.found-owe {
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  color: var(--ink);
+}

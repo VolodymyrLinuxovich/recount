@@ -200,10 +200,10 @@
    html[data-text="large"] raises the root font size (globals.css), so every rem-based
    type and space token grows by 1.2. No zoom: layouts reflow at the real viewport width. */
 
-/* Largest: 125% root (19px body reads at about 24px). Every rule keyed on html[data-text]
-   (flow.css's stacked step bar, for one) applies to both sizes. */
+/* Largest: 140% root (19px body reads at about 27px), a clear step above Large (120%).
+   Every rule keyed on html[data-text] (flow.css's stacked step bar, for one) applies to both sizes. */
 html[data-text="largest"] {
-  font-size: 125%;
+  font-size: 140%;
 }
 
 /* ---------- High visibility (B2) ---------- */

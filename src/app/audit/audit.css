@@ -1283,3 +1283,16 @@ html[data-contrast] .audit .verdict-likely {
     white-space: nowrap;
   }
 }
+
+/* Very large text and long Spanish words must never push the page sideways. */
+.a-hero-copy,
+.a-hero-side {
+  min-width: 0;
+}
+
+.a-h1,
+.a-fig-label,
+.a-fig-sub {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}

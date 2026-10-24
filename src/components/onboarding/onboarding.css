@@ -154,3 +154,36 @@
   font-weight: 600;
 }
 
+
+/* "Want bigger text? [Larger text]": small, under the intro, so it doesn't compete with Next. */
+.onb-body > .onb-bigger {
+  margin: var(--sp-5) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-base);
+  color: var(--ink-2);
+}
+
+.onb-bigger-btn {
+  min-height: 44px;
+  padding: 0 var(--sp-4);
+  border: 1.5px solid var(--control-edge, var(--rule));
+  border-radius: 999px;
+  background: var(--sheet);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.onb-bigger-btn[aria-pressed="true"] {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.onb-bigger-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

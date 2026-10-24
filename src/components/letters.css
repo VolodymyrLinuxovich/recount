@@ -869,3 +869,10 @@
   font-weight: 600;
   color: var(--pen);
 }
+
+/* Step 3, insured patients: the hold also covers an insurance appeal. */
+.sg-p.sg-insured {
+  margin-top: var(--sp-3);
+  padding-left: var(--sp-3);
+  border-left: 3px solid var(--accent);
+}

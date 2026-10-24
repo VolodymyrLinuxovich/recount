@@ -2,7 +2,7 @@
 
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { RecentBills } from "./bills/RecentBills";
@@ -25,6 +25,29 @@ export function StartScreen() {
   const [busy, setBusy] = useState<null | "photo" | "sample">(null);
   const [error, setError] = useState<PlainKey | null>(null);
   const [onboard, setOnboard] = useState<OnboardPath | null>(null);
+  // While a bill is on its way: the picture to show, how far along it is.
+  const [getting, setGetting] = useState<Getting | null>(null);
+  // A second tap (or a double tap) must not start a second bill: React state lands a render too late.
+  const running = useRef(false);
+  const previewUrl = useRef<string | null>(null);
+
+  function freePreview() {
+    if (previewUrl.current) URL.revokeObjectURL(previewUrl.current);
+    previewUrl.current = null;
+  }
+
+  function reset() {
+    running.current = false;
+    freePreview();
+    setGetting(null);
+    setBusy(null);
+    setOnboard(null);
+  }
+
+  // Next keeps this page alive in the background after we leave for the bill; its effects clean up then.
+  // Resetting there means coming back shows a fresh start, while the "getting" screen stays up until we've left.
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only touches refs and state setters
+  useEffect(() => () => reset(), []);
 
   async function upload(file: Blob): Promise<Id<"_storage">> {
     const url = await generateUploadUrl();
@@ -35,28 +58,37 @@ export function StartScreen() {
   }
 
   async function onFile(file: File | undefined) {
-    if (!file) return;
+    if (!file || running.current) return;
+    running.current = true;
     setBusy("photo");
     setError(null);
+    freePreview();
+    const pdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+    if (!pdf && file.type.startsWith("image/")) previewUrl.current = URL.createObjectURL(file);
+    setGetting({ preview: previewUrl.current, pdf, stage: 0 });
     try {
       const { blob, type } = await prepareFile(file);
+      setGetting((g) => g && { ...g, stage: 1 });
       const fileId = await upload(blob);
+      setGetting((g) => g && { ...g, stage: 2 });
       const { id, token } = await start({ fileId, fileType: type, sample: false, lang, ...hospitalHint() });
       rememberCase(id, token);
+      setGetting((g) => g && { ...g, stage: 3 });
       router.push(`/case/${id}#t=${token}`);
-      // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
-      setBusy(null);
-      setOnboard(null);
     } catch (e) {
       setError(e instanceof FileProblem ? e.key : /too many/i.test(String(e)) ? "start.busy" : "start.uploadFailed");
-      setBusy(null);
+      reset();
       if (input.current) input.current.value = "";
     }
   }
 
   async function onSample() {
+    if (running.current) return;
+    running.current = true;
     setBusy("sample");
     setError(null);
+    freePreview();
+    setGetting({ preview: "/sample-bill.png", pdf: false, stage: 1 });
     try {
       let fileId: Id<"_storage"> | undefined;
       let fileType: string | undefined;
@@ -66,15 +98,14 @@ export function StartScreen() {
         fileId = await upload(blob);
         fileType = blob.type || "image/png";
       }
+      setGetting((g) => g && { ...g, stage: 2 });
       const { id, token } = await start({ fileId, fileType, sample: true, lang, ...hospitalHint() });
       rememberCase(id, token);
+      setGetting((g) => g && { ...g, stage: 3 });
       router.push(`/case/${id}#t=${token}`);
-      // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
-      setBusy(null);
-      setOnboard(null);
     } catch (e) {
       setError(/too many/i.test(String(e)) ? "start.busy" : "start.sampleFailed");
-      setBusy(null);
+      reset();
     }
   }
 
@@ -100,10 +131,12 @@ export function StartScreen() {
 
   // First visit: a short "before you start" before the camera opens or the sample starts.
   function photoTap() {
+    if (running.current) return;
     if (hasOnboarded("photo")) input.current?.click();
     else setOnboard("photo");
   }
   function sampleTap() {
+    if (running.current) return;
     if (hasOnboarded("sample")) onSample();
     else setOnboard("sample");
   }
@@ -127,7 +160,7 @@ export function StartScreen() {
   return (
     <>
       {fileInput}
-      {onboardingEl ?? (
+      {getting ? <GettingBill {...getting} /> : onboardingEl ?? (
         <div className="start">
           <Landing
             actions={{
@@ -144,6 +177,59 @@ export function StartScreen() {
         </div>
       )}
     </>
+  );
+}
+
+interface Getting {
+  /** An object URL for a photo, the sample's own image, or null for a PDF. */
+  preview: string | null;
+  pdf: boolean;
+  /** 0 preparing, 1 sending, 2 opening the bill, 3 done. */
+  stage: 0 | 1 | 2 | 3;
+}
+
+const STAGE_PCT = [12, 45, 80, 100];
+
+/** "We're getting your bill": the whole screen, from the moment a photo is picked until the bill opens. */
+function GettingBill({ preview, pdf, stage }: Getting) {
+  const { t } = useT();
+  const title = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    title.current?.focus({ preventScroll: true });
+  }, []);
+  const pct = STAGE_PCT[stage];
+  return (
+    <section className="getting" aria-busy="true">
+      <div className="getting-pic">
+        {preview ? (
+          // An object URL of the patient's own photo: next/image can't optimize it.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={preview} alt={t("start.gettingAlt")} className="getting-img" />
+        ) : (
+          <svg className="getting-doc" viewBox="0 0 32 32" role="img" aria-label={t(pdf ? "start.gettingPdf" : "start.gettingAlt")}>
+            <path d="M8 4h12l5 5v19H8z" />
+            <path d="M20 4v5h5M12 14h9M12 18h9M12 22h6" />
+          </svg>
+        )}
+      </div>
+      <h1 className="getting-h" ref={title} tabIndex={-1}>
+        {t("start.gettingH")}
+      </h1>
+      <div
+        className="getting-bar"
+        role="progressbar"
+        aria-label={t("start.gettingProgress")}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={pct}
+      >
+        <span className="getting-fill" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="getting-p" role="status">
+        {t("start.gettingBody")}
+      </p>
+    </section>
   );
 }
 
