@@ -2,15 +2,30 @@ import Link from "next/link";
 import { hostOf } from "../types";
 import { type AuditFinding, DOC_LABEL, type DocType, type Hospital, type Rule, VERDICT_LABEL, longDate, place, worst } from "./data";
 
-/** Show the surrounding text with the flagged sentence marked in red pen. */
+const AROUND = 180; // characters of context to keep on each side of the quote
+
+/** Show the surrounding text, trimmed near the quote, with the flagged sentence marked in red pen. */
 function InContext({ f }: { f: AuditFinding }) {
   const at = f.context.indexOf(f.quote);
   if (at < 0) return <mark className="policy-mark">{f.quote}</mark>;
+  let before = f.context.slice(0, at);
+  let after = f.context.slice(at + f.quote.length);
+  if (before.length > AROUND) {
+    const cut = before.slice(-AROUND);
+    const sentence = cut.search(/[.;:]\s+\S/);
+    before = "…" + (sentence >= 0 ? cut.slice(sentence + 1).trimStart() + " " : cut.replace(/^\S*\s/, ""));
+    before = before.replace(/\s+$/, " ");
+  }
+  if (after.length > AROUND) {
+    const cut = after.slice(0, AROUND);
+    const end = cut.lastIndexOf(". ");
+    after = (end > 20 ? cut.slice(0, end + 1) : cut.replace(/\s\S*$/, "")) + " …";
+  }
   return (
     <>
-      {f.context.slice(0, at)}
+      {before}
       <mark className="policy-mark">{f.quote}</mark>
-      {f.context.slice(at + f.quote.length)}
+      {after}
     </>
   );
 }

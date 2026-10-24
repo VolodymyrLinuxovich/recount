@@ -27,6 +27,7 @@ export interface CaseView {
   billSource?: "claude" | "sample-source";
   hospital?: HospitalRef | null;
   findings?: Finding[];
+  policyFindings?: import("./PolicyAside").PolicyFinding[];
   household?: { size: number; annualIncome: number; insured: boolean; outOfPocket12mo?: number };
   eligibility?: Eligibility;
   letters?: Letter[];

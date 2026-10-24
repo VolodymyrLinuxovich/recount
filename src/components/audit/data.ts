@@ -79,3 +79,18 @@ export function longDate(iso: string | null | undefined) {
 export function place(h: Hospital) {
   return [h.city, h.county && `${h.county} County`].filter(Boolean).join(", ");
 }
+
+// The bill flow links here with its own short hospital key; map those to audit keys.
+const ALIASES: Record<string, string[]> = {
+  zsfg: ["priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center"],
+  ucsf: ["ucsf-medical-center"],
+  cpmc: ["california-pacific-medical-center-van-ness-campus", "cpmc_vanness"],
+  saintfrancis: ["st-francis-memorial-hospital", "stfrancis_hyde"],
+};
+
+export function resolveKey(hospitals: Hospital[], key: string | null): string | null {
+  if (!key) return null;
+  if (hospitals.some((h) => h.key === key)) return key;
+  for (const k of ALIASES[key] ?? []) if (hospitals.some((h) => h.key === k)) return k;
+  return null;
+}

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CaMap } from "./CaMap";
-import { type Audit, isFlagged, longDate, place, worst } from "./data";
+import { type Audit, isFlagged, longDate, place, resolveKey, worst } from "./data";
 import { HospitalView } from "./HospitalView";
 
 async function loadAudit(): Promise<{ audit: Audit; sample: boolean }> {
@@ -56,7 +56,8 @@ export function AuditApp() {
 
   const { audit, sample } = data;
   const flagged = audit.hospitals.filter(isFlagged).length;
-  const hospital = audit.hospitals.find((h) => h.key === selected) ?? null;
+  const selectedKey = resolveKey(audit.hospitals, selected);
+  const hospital = audit.hospitals.find((h) => h.key === selectedKey) ?? null;
 
   const severity = (h: (typeof audit.hospitals)[number]) =>
     h.findings.reduce((a, f) => a + (f.verdict === "conflict" ? 3 : f.verdict === "likely" ? 2 : 1), 0);
@@ -106,7 +107,7 @@ export function AuditApp() {
           Map
         </h2>
         <div className="map-and-search">
-          <CaMap hospitals={audit.hospitals} selected={selected} onSelect={select} />
+          <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={select} />
           <div className="finder">
             <label className="h-section" htmlFor="find">
               Find your hospital
@@ -143,7 +144,7 @@ export function AuditApp() {
                 <ul className="find-results">
                   {mostFlagged.map((h) => (
                     <li key={h.key}>
-                      <button onClick={() => select(h.key)} aria-current={h.key === selected || undefined}>
+                      <button onClick={() => select(h.key)} aria-current={h.key === selectedKey || undefined}>
                         <i className={`dot-key dot-${worst(h)}`} aria-hidden />
                         <span>
                           <span className="find-name">{h.name}</span>

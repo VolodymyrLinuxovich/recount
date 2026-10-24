@@ -9,6 +9,7 @@ import { Answer } from "./Answer";
 import { BillMarkup } from "./BillMarkup";
 import { HouseholdForm } from "./HouseholdForm";
 import { Letters } from "./Letters";
+import { PolicyAside } from "./PolicyAside";
 import { Sources } from "./Sources";
 import { StepLog } from "./StepLog";
 import type { CaseView } from "./types";
@@ -63,6 +64,13 @@ export function CaseScreen() {
       {c.eligibility && !askHousehold && <Answer c={c} />}
 
       <BillMarkup c={c} findings={findings} />
+
+      <PolicyAside
+        findings={c.policyFindings ?? []}
+        hospitalName={c.hospital?.name ?? c.bill.hospitalName ?? "The hospital"}
+        hospitalKey={c.hospital?.key ?? null}
+        inLetter={Boolean(c.letters?.length)}
+      />
 
       {askHousehold ? (
         <HouseholdForm id={c._id} prior={c.household} needsOutOfPocket={c.eligibility?.tier === "NEEDS_INFO"} />

@@ -1151,3 +1151,63 @@ a {
     width: auto;
   }
 }
+
+/* ---------- hospital policy aside ---------- */
+
+.policy-aside {
+  border: 2px solid var(--pen);
+  border-radius: 14px 10px 16px 9px;
+  padding: 14px 16px 12px;
+  background: var(--pen-soft);
+  transform: rotate(-0.4deg);
+}
+
+.policy-aside-h {
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+.policy-aside-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.policy-aside-list li {
+  padding: 10px 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--pen) 35%, transparent);
+}
+
+.policy-aside .versus-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 4px;
+}
+
+.policy-aside-quote {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+  text-decoration: underline wavy var(--pen);
+  text-decoration-thickness: 1.2px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+}
+
+.policy-aside-cite {
+  font-size: 14.5px;
+  margin-top: 6px;
+}
+
+.policy-aside-law {
+  margin: 8px 0 0;
+  font-size: 16.5px;
+}
+
+.policy-aside-foot {
+  margin: 10px 0 0;
+  font-size: 16px;
+}
