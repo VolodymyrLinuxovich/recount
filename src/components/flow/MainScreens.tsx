@@ -66,10 +66,16 @@ export function ReadingStep({ c, go }: ScreenProps) {
 
 // ---------- 1b. Which hospital ----------
 
-export function HospitalStep({ c }: ScreenProps) {
+export function HospitalStep({ c, go }: ScreenProps) {
+  const { t } = useT();
   return (
     <StepFrame phase={1}>
       <HospitalConfirm c={c} />
+      <div className="step-links">
+        <button className="link-btn" onClick={() => go("more")}>
+          {t("flow.moreLink")}
+        </button>
+      </div>
     </StepFrame>
   );
 }

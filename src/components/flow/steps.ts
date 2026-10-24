@@ -20,8 +20,8 @@ export function stepsFor(c: CaseView): StepId[] {
   const s = c.status;
   // A bill we couldn't read can still be deleted from "More".
   if (s === "error") return ["reading", "more"];
-  if (s === "reading" || !c.bill) return s === "confirm_hospital" ? ["hospital"] : ["reading"];
-  if (s === "confirm_hospital") return ["hospital"];
+  if (s === "confirm_hospital") return ["hospital", "more"];
+  if (s === "reading" || !c.bill) return ["reading"];
   const found = ["found", ...findingScreens(c).map((_, i) => `finding-${i}`)];
   if (s === "needs_household" || c.eligibility?.tier === "NEEDS_INFO") return [...found, "q1", "q2", "q3", "more"];
   const letters = (c.letters ?? []).map((_, i) => `letter-${i}`);
