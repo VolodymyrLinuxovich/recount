@@ -3,8 +3,6 @@
 // Drafts the complaint to HCAI. The model writes from the case's facts only; if it's unavailable
 // or fails, the fixed template in lib/complaint.ts is used. Either way the patient reviews,
 // fills any [blanks], approves, and files it themselves.
-import Anthropic from "@anthropic-ai/sdk";
-import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -12,11 +10,11 @@ import { internalAction } from "./_generated/server";
 import type { FollowUp } from "./followUp";
 import type { ParsedBill } from "./lib/bill";
 import { COMPLAINT_LAW, HCAI_ADDRESS, quotesEligibility, templateComplaint, type ComplaintFacts } from "./lib/complaint";
+import { inventedAmounts } from "./lib/letterCheck";
 import { lawLine, resolveFilledBrackets } from "./lib/letters";
+import { modelReady, structured, type Run } from "./lib/model";
 import { type Lang, isLang, pick } from "./lib/lang";
 import { byKey } from "./lib/statewide";
-
-const MODEL = "claude-opus-5-5";
 
 const Out = z.object({
   subject: z.string(),
@@ -59,7 +57,7 @@ export const draftComplaint = internalAction({
     await ctx.runMutation(internal.cases.step, { caseId, key: "complaint", label: t("Writing your complaint", "Escribiendo su queja"), state: "running" });
     let letter = template;
     let source: "claude" | "template" = "template";
-    if (process.env.ANTHROPIC_API_KEY) {
+    if (modelReady("letters")) {
       try {
         const forModel = {
           programAddress: HCAI_ADDRESS.join(", "),
@@ -81,16 +79,21 @@ export const draftComplaint = internalAction({
           attachments: ["hospital bill", "financial assistance request", "recent pay stubs or tax returns", ...(f.outcome === "denied" ? ["the denial letter, if received"] : []), ...(f.outcome === "collections" ? ["the collection notice"] : [])],
           patientLanguage: lang,
         };
-        const res = await new Anthropic().beta.messages.parse({
-          model: MODEL,
-          max_tokens: 6000,
-          betas: ["server-side-fallback-2026-07-01"],
-          fallbacks: "default",
-          output_config: { effort: "low", format: betaZodOutputFormat(Out) },
-          messages: [{ role: "user", content: `${PROMPT}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
-        });
-        const o = res.stop_reason !== "refusal" ? res.parsed_output : null;
-        if (o?.body) {
+        const record = async (r: Run) => {
+          await ctx.runMutation(internal.cases.recordRun, { caseId, ...r });
+        };
+        const res = await structured(
+          { task: "letters", parts: [{ type: "text", text: `${PROMPT}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }], schema: Out, maxTokens: 6000 },
+          record,
+        );
+        const o = res.refused ? null : res.data;
+        // Rule check: a complaint to the state must not name a dollar amount that isn't in the facts.
+        const odd = o?.body ? inventedAmounts([o.subject, o.body], { forModel, template: [template.subject, template.body] }) : [];
+        if (odd.length) {
+          await ctx.runMutation(internal.cases.step, {
+            caseId, key: "complaint", label: t("The draft named an amount not on your bill, so we used our standard complaint", "El borrador mencionaba un monto que no está en su factura; usamos nuestra queja estándar"), state: "warn",
+          });
+        } else if (o?.body) {
           letter = {
             ...template,
             subject: o.subject || template.subject,
