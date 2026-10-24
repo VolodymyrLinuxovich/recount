@@ -15,7 +15,7 @@ export interface Household {
   size: number;
   annualIncome: number;
   insured: boolean;
-  /** Out-of-pocket medical costs at this hospital in the last 12 months (incl. this bill), insured patients only. */
+  /** The family's out-of-pocket medical costs in the last 12 months, anywhere (incl. this bill). Insured patients only. */
   outOfPocket12mo?: number;
 }
 
@@ -75,7 +75,7 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
   // Who the state law covers: uninsured patients, or insured patients with high medical costs.
   if (h.insured) {
     if (h.outOfPocket12mo == null) {
-      return result("NEEDS_INFO", t("We need your out-of-pocket costs from the last 12 months", "Necesitamos sus gastos médicos de su bolsillo de los últimos 12 meses"), null, false);
+      return result("NEEDS_INFO", t("We need your family's medical costs from the last 12 months", "Necesitamos los gastos médicos de su familia de los últimos 12 meses"), null, false);
     }
     const highCosts = h.outOfPocket12mo > 0.1 * h.annualIncome;
     const oop = usd(h.outOfPocket12mo);
@@ -83,17 +83,17 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       rule: t("High medical costs", "Gastos médicos altos"),
       text: highCosts
         ? t(
-            `You paid or owe ${oop} out of pocket, more than 10% of your income. California treats that as high medical costs.`,
-            `Usted pagó o debe ${oop} de su bolsillo, más del 10% de su ingreso. California lo considera gastos médicos altos.`,
+            `Your family's medical costs in the last 12 months (${oop}, not paid by insurance) are more than 10% of your income. California treats that as high medical costs.`,
+            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) son más del 10% de su ingreso. California lo considera gastos médicos altos.`,
           )
         : t(
-            `You paid or owe ${oop} out of pocket, which is not more than 10% of your income, so the high-cost rule doesn't apply.`,
-            `Usted pagó o debe ${oop} de su bolsillo, que no es más del 10% de su ingreso, así que la regla de gastos altos no aplica.`,
+            `Your family's medical costs in the last 12 months (${oop}, not paid by insurance) are not more than 10% of your income, so the high-cost rule doesn't apply.`,
+            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) no son más del 10% de su ingreso, así que la regla de gastos altos no aplica.`,
           ),
       source: HSC_127400,
     });
     if (!highCosts) {
-      return result("NOT_ELIGIBLE", t("Insured without high medical costs: the state program doesn't apply", "Con seguro y sin gastos médicos altos: el programa estatal no aplica"), null, false);
+      return result("NOT_ELIGIBLE", t("With insurance and medical costs under 10% of income, the state program doesn't cover this bill. You can still ask the hospital.", "Con seguro y gastos médicos de menos del 10% de su ingreso, el programa estatal no cubre esta factura. Aún puede preguntarle al hospital."), null, false);
     }
   }
 

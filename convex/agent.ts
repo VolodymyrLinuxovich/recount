@@ -12,7 +12,7 @@ import { checkBill, potentialSavings, type Finding } from "./lib/checks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
 import { lawLine, templateLetters, type Letter } from "./lib/letters";
-import { type Lang, isLang, pick } from "./lib/lang";
+import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL } from "./lib/sample";
 import { byKey, matchHospital, refFromIndex } from "./lib/statewide";
@@ -162,7 +162,10 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
       t("We'll use California's rules only, without this hospital's own policy or prices.", "Usaremos solo las reglas de California, sin la política ni los precios de este hospital."));
   }
   const n = bill.lines.length;
-  await step(ctx, caseId, "check", t(`Checking ${n} charges`, `Revisando ${n} cargos`), "running");
+  const priced = Boolean(hospital?.mrf);
+  await step(ctx, caseId, "check",
+    priced ? t(`Checking ${n} charges against the hospital's own prices`, `Comparando ${n} cargos con los precios del propio hospital`)
+      : t(`Checking ${n} charges for repeats and totals`, `Revisando ${n} cargos para ver repeticiones y totales`), "running");
   const findings: Finding[] = checkBill(bill, hospital, lang);
   const total = potentialSavings(findings);
   const k = findings.length;
@@ -172,16 +175,21 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
     "check",
     k ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar`) : t("No line-level problems found", "No encontramos problemas en las líneas"),
     "done",
-    total > 0 ? t(`Up to $${total.toFixed(2)} in questionable charges`, `Hasta $${total.toFixed(2)} en cargos dudosos`) : undefined,
+    [
+      total > 0 ? t(`Up to ${money(total)} in questionable charges.`, `Hasta ${money(total)} en cargos dudosos.`) : "",
+      priced ? "" : t("We don't have this hospital's price list, so we couldn't check each charge against its prices.", "No tenemos la lista de precios de este hospital, así que no pudimos comparar cada cargo con sus precios."),
+    ].filter(Boolean).join(" ") || undefined,
   );
   // What our statewide audit found in this hospital's own policy.
   const policyFindings = (hospital ? policyFindingsFor(hospital.key) : []).map((f) =>
     lang === "es" ? { ...f, explanationEn: f.explanation, explanation: lawLine(f.rule, "es") ?? f.explanation } : f,
   );
   if (policyFindings.length) {
-    const m = policyFindings.length;
-    await step(ctx, caseId, "policy",
-      t(`${hospital!.name}'s own policy has ${m} problem${m === 1 ? "" : "s"} under California law`, `La propia política de ${hospital!.name} tiene ${m} problema${m === 1 ? "" : "s"} según la ley de California`),
+    const bad = policyFindings.filter((f) => f.verdict !== "ask").length;
+    const ask = policyFindings.length - bad;
+    const en = [bad ? `${bad} conflict${bad === 1 ? "" : "s"} with California law` : "", ask ? `${ask} worth asking about` : ""].filter(Boolean).join(", ");
+    const es = [bad ? `${bad} conflicto${bad === 1 ? "" : "s"} con la ley de California` : "", ask ? `${ask} que vale preguntar` : ""].filter(Boolean).join(" y ");
+    await step(ctx, caseId, "policy", t(`${hospital!.name}'s own policy: ${en}`, `Política de ${hospital!.name}: ${es}`),
       "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
   }
   await ctx.runMutation(internal.cases.patch, {
@@ -292,7 +300,7 @@ const LETTER_PROMPT = `Write the letters a patient will send to a hospital billi
 - If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
 - "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
 - If "patientLanguage" is "es", also give a faithful Spanish translation of each letter in subjectPatient/bodyPatient so the patient understands what they sign. Otherwise set them to null.
-Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] for anything the patient must fill in (signature, address). Sign as the patient.`;
+Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] for anything the patient must fill in (signature, address). Sign as the patient.`;
 
 export const draftLetters = internalAction({
   args: { caseId: v.id("cases") },
