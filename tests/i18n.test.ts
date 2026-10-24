@@ -42,7 +42,7 @@ describe("format", () => {
 describe("composed messages", () => {
   it("builds the hospital summary from its parts", () => {
     expect(translate("en", "hosp.summary", { conflict: 1, likely: 2, ask: 1 })).toBe(
-      "1 part of its policies goes against California law. 2 more likely do. 1 more is worth asking about.",
+      "1 part of its policies conflicts with California law. 2 more likely do. 1 more is worth asking about.",
     );
     expect(translate("en", "policy.foot", { added: true, firm: 2, total: 2 })).toBe("We’ve added these to your letter. ");
   });
