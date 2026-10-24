@@ -6,30 +6,25 @@ import { api } from "../../../convex/_generated/api";
 import { useT } from "../i18n/I18nProvider";
 import "./account.css";
 
-/** The account button at the right of the header, on every width: "Sign in" (a person icon on phones), or your initial. */
+/** The account button in the header's right corner, like a profile picture: a round silhouette signed out, your initial signed in. */
 export function AccountButton() {
   const { t } = useT();
   const { isAuthenticated, isLoading } = useConvexAuth();
   const me = useQuery(api.profile.get, isAuthenticated ? {} : "skip");
-  if (isAuthenticated) {
-    const initial = (me?.accountEmail ?? "").trim().charAt(0).toUpperCase() || "•";
-    return (
-      <Link href="/account" className="acct-bar acct-bar-in" aria-label={t("acct.yours")} title={t("acct.yours")}>
-        <span className="acct-avatar" aria-hidden="true">
+  const label = isAuthenticated ? t("acct.yours") : t("acct.signIn");
+  const initial = (me?.accountEmail ?? "").trim().charAt(0).toUpperCase();
+  return (
+    <Link href="/account" className="acct-pic" aria-label={label} title={label} data-loading={isLoading || undefined}>
+      {isAuthenticated && initial ? (
+        <span className="acct-pic-in" aria-hidden="true">
           {initial}
         </span>
-      </Link>
-    );
-  }
-  return (
-    <Link href="/account" className="acct-bar" aria-label={t("acct.signIn")} data-loading={isLoading || undefined}>
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" />
-      </svg>
-      <span className="acct-bar-text" aria-hidden="true">
-        {t("acct.signIn")}
-      </span>
+      ) : (
+        <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <circle cx="20" cy="15" r="7.5" />
+          <path d="M5 40c1-9 6.5-14 15-14s14 5 15 14z" />
+        </svg>
+      )}
     </Link>
   );
 }

@@ -116,7 +116,6 @@ export function Masthead() {
         <div className="masthead-nav">
           <LanguageToggle />
           <HelperButton />
-          <AccountButton />
           <button
             ref={menuBtn}
             type="button"
@@ -130,6 +129,7 @@ export function Masthead() {
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
+          <AccountButton />
         </div>
       </div>
       <nav id="site-menu" className="masthead-menu" aria-label={t("nav.menu")} hidden={!open}>
