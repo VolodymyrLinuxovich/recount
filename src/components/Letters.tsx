@@ -64,12 +64,34 @@ export function StillMissing({ letter }: { letter: Letter }) {
   return <p className="letter-missing">{t("letters.stillMissing", { list: joinList(lang, names) })}</p>;
 }
 
+/** "$1,234.50" as a letter might write it: with or without cents. */
+function amountForms(n: number): string[] {
+  const whole = Math.round(n * 100) % 100 === 0;
+  const base = n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return whole ? [`$${base}`, `$${n.toLocaleString("en-US", { maximumFractionDigits: 0 })}`] : [`$${base}`];
+}
+
+/** The letter check found amounts it couldn't match to the bill: name the ones in this letter, before approval. */
+function FlaggedAmounts({ flags, text }: { flags: number[]; text: string }) {
+  const { t, lang } = useT();
+  const here = flags.filter((n) => amountForms(n).some((f) => new RegExp(`${f.replace(/[$.,]/g, (c) => `\\${c}`)}(?![\\d,])`).test(text)));
+  if (!here.length) return null;
+  return (
+    <p className="letter-flags" role="note">
+      {t("letters.flagged", { list: joinList(lang, here.map((n) => amountForms(n)[0])) })}
+    </p>
+  );
+}
+
 export function LetterSheet({
   letter,
   onChange,
   readOnly,
   inFlow = false,
+  flags = [],
 }: {
+  /** Dollar amounts the letter check couldn't match to the bill (case.letterFlags). */
+  flags?: number[];
   /** One letter per screen: the screen shows the title, and the actions are small. */
   inFlow?: boolean;
   /** The letter with the patient's details already put in. */
@@ -97,6 +119,7 @@ export function LetterSheet({
           onChange={(e) => onChange({ ...letter, subject: e.target.value.replace(/\n/g, " ") })}
         />
       </label>
+      <FlaggedAmounts flags={flags} text={`${letter.subject}\n${letter.body}`} />
       <GrowingText
         className="letter-body"
         value={letter.body}
@@ -221,7 +244,7 @@ export function Letters({ c }: { c: CaseView }) {
       <PrintLetters c={c} letters={letters} name={details.name} />
 
       {letters.map((l, i) => (
-        <LetterSheet key={l.kind + i} letter={l} onChange={(nl) => update(i, nl)} readOnly={approved} />
+        <LetterSheet key={l.kind + i} letter={l} onChange={(nl) => update(i, nl)} readOnly={approved} flags={(c as { letterFlags?: number[] }).letterFlags ?? []} />
       ))}
       {!approved && (
         <button

@@ -876,3 +876,13 @@
   padding-left: var(--sp-3);
   border-left: 3px solid var(--accent);
 }
+
+/* The letter check couldn't match an amount to the bill: ask the patient to look before approving. */
+.letter-flags {
+  margin: 0 0 var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 4px solid var(--warn);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--warn) 12%, var(--sheet));
+  font-weight: 600;
+}

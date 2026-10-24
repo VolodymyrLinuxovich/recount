@@ -916,5 +916,6 @@
   "how.mayNot5": "Aprobar una carta",
   "how.modelsH": "Modelos que usamos ahora",
   "how.modelsLede": "Cada paso con IA pasa por una sola capa de modelos, así que el modelo se puede cambiar sin cambiar la aplicación. Si el modelo principal falla, otro de respaldo lo reemplaza.",
-  "how.backup": "Respaldo:"
+  "how.backup": "Respaldo:",
+  "letters.flagged": "Por favor compare {list} en esta carta con su factura. No pudimos encontrarlo en su factura ni en nuestras revisiones. Cámbielo o bórrelo si está mal."
 }

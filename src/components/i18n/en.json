@@ -916,5 +916,6 @@
   "how.mayNot5": "Approve a letter",
   "how.modelsH": "Models in use right now",
   "how.modelsLede": "Each AI step goes through one model layer, so the model can be changed without changing the app. If the main model fails, a backup takes over.",
-  "how.backup": "Backup:"
+  "how.backup": "Backup:",
+  "letters.flagged": "Please check {list} in this letter against your bill. We couldn't match it to your bill or our checks. Change or delete it if it's wrong."
 }
