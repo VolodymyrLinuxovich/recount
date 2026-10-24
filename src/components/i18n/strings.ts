@@ -411,7 +411,7 @@ const en = {
   "letters.needPhone": "your phone number",
   "letters.needPhoneBad": "a 10-digit phone number",
   "letters.needZipBad": "a 5-digit ZIP code",
-  "letters.needDobBad": "your date of birth like 04/23/1958, or leave it empty",
+  "letters.needDobBad": "a date of birth like 04/23/1958",
   "letters.errDob": "Enter the date like 04/23/1958 (month/day/year), or leave it empty.",
   "letters.needList": (v: { list: string }) => `To go on, add ${v.list}.`,
   "letters.remember": "Use these details for the next bill on this device",
@@ -709,6 +709,19 @@ const en = {
   "helper.sensitive": "Please don’t type a Social Security number or bank details here. Lupa doesn’t need them, so this wasn’t sent.",
   "helper.person": "Talk to a person",
   "helper.personHint": "Health Consumer Alliance gives free help to California patients.",
+  // a11y
+  "a11y.hospSearch": "Search by hospital name or city",
+  "a11y.hospCount": (v: { n: number }) => `${v.n} ${plural(v.n, "hospital", "hospitals")} found`,
+  "a11y.mapKeys": "Use the arrow keys to move between hospitals, and Enter to open one.",
+  "a11y.mapShowing": (v: { name: string }) => `Showing ${v.name}. The details are below the map.`,
+  "audit.introShort": "We compared each hospital’s policy with six California rules.",
+  "audit.whatH": "What we checked",
+  "audit.what1": "No deadline to apply for financial help.",
+  "audit.what2": "No test of savings or other assets.",
+  "audit.what3": "Proof of income limited to pay stubs or tax returns.",
+  "audit.what4": "No reporting of medical debt to credit agencies.",
+  "audit.what5": "No liens on the homes of patients who qualify for help.",
+  "audit.what6": "Patients can’t be required to apply for Medi-Cal first.",
 };
 
 type En = typeof en;
@@ -1101,7 +1114,7 @@ const es: Dict = {
   "letters.needPhone": "su teléfono",
   "letters.needPhoneBad": "un teléfono de 10 dígitos",
   "letters.needZipBad": "un código postal de 5 dígitos",
-  "letters.needDobBad": "su fecha de nacimiento como 04/23/1958, o déjela vacía",
+  "letters.needDobBad": "una fecha de nacimiento como 04/23/1958",
   "letters.errDob": "Escriba la fecha así: 04/23/1958 (mes/día/año), o déjela vacía. También sirve 23/04/1958.",
   "letters.needList": (v) => `Para seguir, escriba ${v.list}.`,
   "letters.remember": "Usar estos datos en la próxima factura en este dispositivo",
@@ -1400,6 +1413,19 @@ const es: Dict = {
   "helper.sensitive": "Por favor, no escriba aquí su número de Seguro Social ni datos de su banco. Lupa no los necesita, así que no se envió.",
   "helper.person": "Hablar con una persona",
   "helper.personHint": "Health Consumer Alliance ayuda gratis a pacientes de California.",
+  // a11y
+  "a11y.hospSearch": "Busque por nombre del hospital o ciudad",
+  "a11y.hospCount": (v) => `${v.n} ${plural(v.n, "hospital encontrado", "hospitales encontrados")}`,
+  "a11y.mapKeys": "Use las flechas para moverse entre hospitales y Enter para abrir uno.",
+  "a11y.mapShowing": (v) => `Mostrando ${v.name}. Los detalles están debajo del mapa.`,
+  "audit.introShort": "Comparamos la política de cada hospital con seis reglas de California.",
+  "audit.whatH": "Qué revisamos",
+  "audit.what1": "Sin fecha límite para pedir ayuda financiera.",
+  "audit.what2": "Sin revisar sus ahorros u otros bienes.",
+  "audit.what3": "Prueba de ingresos limitada a talones de pago o declaraciones de impuestos.",
+  "audit.what4": "Sin reportar deudas médicas a las agencias de crédito.",
+  "audit.what5": "Sin gravámenes sobre la vivienda de los pacientes que califican para ayuda.",
+  "audit.what6": "No se puede exigir que primero solicite Medi-Cal.",
 };
 
 const DICTS: Record<Lang, Dict> = { en, es };

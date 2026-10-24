@@ -9,5 +9,5 @@ export interface ScreenProps {
   /** Go to the previous screen, if there is one. */
   back?: () => void;
   /** Jump to a named screen. */
-  go: (step: string) => void;
+  go: (step: string, replace?: boolean) => void;
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { useT } from "./i18n/I18nProvider";
 import type { PlainKey } from "./i18n/strings";
 import { shortDate } from "./types";
@@ -41,7 +44,11 @@ export function PolicyAside({
   inLetter: boolean;
 }) {
   const { t, lang } = useT();
+  const [open, setOpen] = useState(false);
   if (!findings.length) return null;
+  // Two or more: a summary line, the first finding in full, and the rest behind "See them".
+  const many = findings.length >= 2;
+  const shown = many && !open ? findings.slice(0, 1) : findings;
   const firm = findings.filter((f) => f.verdict !== "ask");
   const conflicts = findings.filter((f) => f.verdict === "conflict").length;
   const head = conflicts
@@ -55,8 +62,9 @@ export function PolicyAside({
       <h2 id="policy-aside-h" className="policy-aside-h">
         {head}
       </h2>
-      <ol className="policy-aside-list">
-        {findings.map((f, i) => {
+      {many && firm.length > 0 && <p className="policy-aside-sum">{t("policy.cites", { added: inLetter })}</p>}
+      <ol className="policy-aside-list" id="policy-aside-list">
+        {shown.map((f, i) => {
           const law = LAW[f.rule];
           return (
             <li key={f.rule + i}>
@@ -92,8 +100,19 @@ export function PolicyAside({
           );
         })}
       </ol>
+      {many && (
+        <button
+          type="button"
+          className="policy-aside-more"
+          aria-expanded={open}
+          aria-controls="policy-aside-list"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? t("policy.hideThem") : t("policy.seeThem", { n: findings.length - 1 })}
+        </button>
+      )}
       <p className="policy-aside-foot">
-        {firm.length > 0 && t("policy.foot", { added: inLetter, firm: firm.length, total: findings.length })}
+        {!many && firm.length > 0 && t("policy.foot", { added: inLetter, firm: firm.length, total: findings.length })}
         <Link href={hospitalKey ? `/audit#h=${encodeURIComponent(hospitalKey)}` : "/audit"}>
           {t("policy.seeOthers")}
         </Link>

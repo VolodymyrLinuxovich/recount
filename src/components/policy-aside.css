@@ -95,3 +95,26 @@
   font-family: var(--font-ui);
   font-size: var(--fs-sm);
 }
+
+.policy-aside-sum {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-base);
+  color: var(--ink-2);
+}
+
+.policy-aside-more {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  margin: var(--sp-1) 0 var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  font: inherit;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ink);
+  background: transparent;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  cursor: pointer;
+}

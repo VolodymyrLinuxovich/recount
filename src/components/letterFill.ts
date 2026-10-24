@@ -41,6 +41,23 @@ export const phoneDigits = (s: string) => {
   return d.length === 11 && d.startsWith("1") ? d.slice(1) : d;
 };
 export const phoneOk = (s: string) => phoneDigits(s).length === 10;
+/**
+ * A date of birth as MM/DD/YYYY, the way a US billing office reads it, or null if it isn't a real date.
+ * "/", "-" or "." all work. When the first number can't be a month (23/04/1958), it's read as day/month,
+ * the way most Spanish speakers write it.
+ */
+export function normalDob(s: string): string | null {
+  const m = /^\s*(\d{1,2})\s*[/.-]\s*(\d{1,2})\s*[/.-]\s*(\d{4})\s*$/.exec(s);
+  if (!m) return null;
+  let [mo, d] = [Number(m[1]), Number(m[2])];
+  const y = Number(m[3]);
+  if (mo > 12 && d <= 12) [mo, d] = [d, mo];
+  const date = new Date(y, mo - 1, d);
+  const real = date.getFullYear() === y && date.getMonth() === mo - 1 && date.getDate() === d;
+  if (!real || y < 1900 || date > new Date()) return null;
+  return `${String(mo).padStart(2, "0")}/${String(d).padStart(2, "0")}/${y}`;
+}
+
 export const zipOk = (s: string) => /^\d{5}(-?\d{4})?$/.test(s.trim());
 
 /** Each field's problem: missing (required and empty), bad (typed but not right), or null. */
@@ -49,6 +66,7 @@ export function checkDetails(d: Details): Partial<Record<keyof Details, "missing
   for (const k of REQUIRED) if (!d[k].trim()) out[k] = "missing";
   if (d.phone.trim() && !phoneOk(d.phone)) out.phone = "bad";
   if (d.zip.trim() && !zipOk(d.zip)) out.zip = "bad";
+  if (d.dob.trim() && !normalDob(d.dob)) out.dob = "bad";
   if (d.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim())) out.email = "bad";
   return out;
 }

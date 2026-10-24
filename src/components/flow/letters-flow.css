@@ -166,3 +166,7 @@
   font-size: var(--fs-base);
   font-weight: 600;
 }
+
+.approved-h:focus {
+  outline: none;
+}

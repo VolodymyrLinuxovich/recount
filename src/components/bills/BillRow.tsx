@@ -75,6 +75,29 @@ function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: 
   );
 }
 
+/** The clipboard API, or the old select-and-copy where it's blocked (some in-app browsers, http). */
+async function copyText(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    try {
+      const el = document.createElement("textarea");
+      el.value = text;
+      el.setAttribute("readonly", "");
+      el.style.position = "fixed";
+      el.style.opacity = "0";
+      document.body.appendChild(el);
+      el.select();
+      const ok = document.execCommand("copy");
+      el.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+}
+
 function CopyLink({ id, token }: { id: string; token: string }) {
   const { t } = useT();
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
@@ -85,17 +108,17 @@ function CopyLink({ id, token }: { id: string; token: string }) {
         type="button"
         className="bill-slip-text-btn"
         onClick={async () => {
-          try {
-            await navigator.clipboard.writeText(link);
+          if (await copyText(link)) {
             setState("copied");
             setTimeout(() => setState("idle"), 2000);
-          } catch {
-            setState("failed");
-          }
+          } else setState("failed");
         }}
       >
-        {state === "copied" ? t("bills.linkCopied") : t("bills.copyLink")}
+        {state === "copied" ? `✓ ${t("bills.linkCopied")}` : t("bills.copyLink")}
       </button>
+      <span className="visually-hidden" role="status">
+        {state === "copied" ? t("bills.linkCopied") : ""}
+      </span>
       {state === "failed" && <p className="bill-slip-quiet bill-slip-link">{t("bills.copyFailed", { link })}</p>}
     </>
   );

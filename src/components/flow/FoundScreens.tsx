@@ -132,7 +132,9 @@ function LineRow({
       <div className="found-line-row">
         <span className="found-line-no">{index + 1}</span>
         <div className="found-line-main">
-          <span className="found-line-desc">{line.description}</span>
+          <span className="found-line-desc" lang={billLang(lang)}>
+            {line.description}
+          </span>
           {(badges.length > 0 || unsure || corrected) && (
             <span className="found-line-tags">
               {badges.map((b) => (
@@ -335,11 +337,25 @@ function Versus({ left, right }: { left: { label: string; value: string }; right
   );
 }
 
-function Confidence({ f, amount }: { f: Finding; amount: number }) {
+/** Bill text is printed in English; on a Spanish page it says so for screen readers (WCAG 3.1.2). */
+const billLang = (lang: string) => (lang === "en" ? undefined : "en");
+
+/** Insurance already adjusted the bill, so the gap to a published price overstates what the patient pays. */
+const isInsured = (c: CaseView) => !!c.bill?.insurancePayer?.trim() || !!c.household?.insured;
+
+function Save({ c, amount }: { c: CaseView; amount: number }) {
   const { t, lang } = useT();
+  if (amount <= 0) return null;
+  return (
+    <p className="found-save">{isInsured(c) ? t("found.saveInsured") : t("found.save", { amount: money(amount, true, lang) })}</p>
+  );
+}
+
+function Confidence({ c, f, amount }: { c: CaseView; f: Finding; amount: number }) {
+  const { t } = useT();
   return (
     <>
-      {amount > 0 && <p className="found-save">{t("found.save", { amount: money(amount, true, lang) })}</p>}
+      <Save c={c} amount={amount} />
       <p className="found-quiet">{f.confidence === "high" ? t("bill.confHigh") : t("bill.confCheck")}</p>
     </>
   );
@@ -366,7 +382,9 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
     const shown = cash ? (cashTotal ?? billed - f.amount) : (listTotal ?? billed - f.amount);
     return (
       <div className="found-card">
-        <p className="found-card-name">{line?.description}</p>
+        <p className="found-card-name" lang={billLang(lang)}>
+          {line?.description}
+        </p>
         <p className="found-quiet">{t("found.lineN", { n: f.lines[0] + 1 })}</p>
         <Versus
           left={{ label: t("found.billed"), value: money(billed, true, lang) }}
@@ -380,7 +398,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
         {!cash && cashTotal != null && listTotal != null && cashTotal < listTotal && (
           <p className="found-quiet">{t("found.cashToo", { amount: money(cashTotal, true, lang) })}</p>
         )}
-        <Confidence f={f} amount={f.amount} />
+        <Confidence c={c} f={f} amount={f.amount} />
         <p className="found-why">{cash ? t("found.whyCash") : t("found.whyAbove")}</p>
       </div>
     );
@@ -390,12 +408,14 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
     const [a, b] = f.lines;
     return (
       <div className="found-card">
-        <p className="found-card-name">{line?.description}</p>
+        <p className="found-card-name" lang={billLang(lang)}>
+          {line?.description}
+        </p>
         <Versus
           left={{ label: t("found.lineN", { n: a + 1 }), value: money(lines[a]?.charge ?? f.amount, true, lang) }}
           right={{ label: t("found.lineN", { n: b + 1 }), value: money(lines[b]?.charge ?? f.amount, true, lang) }}
         />
-        <Confidence f={f} amount={f.amount} />
+        <Confidence c={c} f={f} amount={f.amount} />
         <p className="found-why">{t("found.whyDup", { a: a + 1, b: b + 1 })}</p>
       </div>
     );
@@ -409,7 +429,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
         {sum && printed && (
           <Versus left={{ label: t("found.sumLines"), value: sum.value }} right={{ label: t("found.printedTotal"), value: printed.value }} />
         )}
-        <Confidence f={f} amount={f.amount} />
+        <Confidence c={c} f={f} amount={f.amount} />
         <p className="found-why">{unsure ? t("found.whyTotalUnsure") : t("found.whyTotal")}</p>
       </div>
     );
@@ -419,7 +439,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
   return (
     <div className="found-card">
       <p className="found-why">{f.kind === "NOT_ITEMIZED" ? t("found.whySummary") : f.detail}</p>
-      <Confidence f={f} amount={f.amount} />
+      <Confidence c={c} f={f} amount={f.amount} />
     </div>
   );
 }
@@ -464,7 +484,7 @@ function CashGroup({ c, items }: { c: CaseView; items: Finding[] }) {
             const billed = line?.charge ?? 0;
             return (
               <tr key={f.id}>
-                <td>{line?.description ?? ""}</td>
+                <td lang={billLang(lang)}>{line?.description ?? ""}</td>
                 <td>{money(billed, true, lang)}</td>
                 <td>{money(Math.max(0, billed - f.amount), true, lang)}</td>
               </tr>
@@ -473,7 +493,7 @@ function CashGroup({ c, items }: { c: CaseView; items: Finding[] }) {
         </tbody>
       </table>
       <SourceLink url={src} />
-      {total > 0 && <p className="found-save">{t("found.save", { amount: money(total, true, lang) })}</p>}
+      <Save c={c} amount={total} />
       <p className="found-quiet">{t("bill.confHigh")}</p>
     </div>
   );

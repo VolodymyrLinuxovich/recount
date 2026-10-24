@@ -16,7 +16,9 @@ const notesKey = (id: string) => `recount.notes.${id}`;
 
 function readDone(id: string): StepKey[] {
   try {
-    const data: unknown = JSON.parse(window.localStorage.getItem(stepsKey(id)) ?? "[]");
+    const data: unknown = JSON.parse(
+      window.localStorage.getItem(stepsKey(id)) ?? "[]",
+    );
     return Array.isArray(data) ? ORDER.filter((k) => data.includes(k)) : [];
   } catch {
     return [];
@@ -25,7 +27,8 @@ function readDone(id: string): StepKey[] {
 
 function writeDone(id: string, done: StepKey[]) {
   try {
-    if (done.length) window.localStorage.setItem(stepsKey(id), JSON.stringify(done));
+    if (done.length)
+      window.localStorage.setItem(stepsKey(id), JSON.stringify(done));
     else window.localStorage.removeItem(stepsKey(id));
   } catch {
     // Storage is blocked; the ticks stay for this visit.
@@ -43,14 +46,21 @@ function readNotes(id: string) {
 /** Which send steps are ticked for this bill, kept in this browser. */
 export function useSendSteps(id: string) {
   // The guide renders only after the case loads in the browser, so storage is there to read.
-  const [done, setDone] = useState<StepKey[]>(() => (typeof window === "undefined" ? [] : readDone(id)));
+  const [done, setDone] = useState<StepKey[]>(() =>
+    typeof window === "undefined" ? [] : readDone(id),
+  );
   const set = (k: StepKey, on: boolean) => {
     const next = ORDER.filter((x) => (x === k ? on : done.includes(x)));
     setDone(next);
     writeDone(id, next);
     return next;
   };
-  return { done, set, total: ORDER.length, allDone: done.length === ORDER.length };
+  return {
+    done,
+    set,
+    total: ORDER.length,
+    allDone: done.length === ORDER.length,
+  };
 }
 
 function Tick({ done }: { done: boolean }) {
@@ -65,7 +75,9 @@ function Tick({ done }: { done: boolean }) {
 /** Call notes, kept only in this browser. */
 function Notes({ id }: { id: string }) {
   const { t } = useT();
-  const [text, setText] = useState(() => (typeof window === "undefined" ? "" : readNotes(id)));
+  const [text, setText] = useState(() =>
+    typeof window === "undefined" ? "" : readNotes(id),
+  );
   return (
     <label className="send-notes">
       <span className="send-notes-label">{t("send.noteLabel")}</span>
@@ -76,7 +88,8 @@ function Notes({ id }: { id: string }) {
         onChange={(e) => {
           setText(e.target.value);
           try {
-            if (e.target.value) window.localStorage.setItem(notesKey(id), e.target.value);
+            if (e.target.value)
+              window.localStorage.setItem(notesKey(id), e.target.value);
             else window.localStorage.removeItem(notesKey(id));
           } catch {
             // Storage is blocked; the notes stay on screen for this visit.
@@ -105,10 +118,14 @@ export function SendGuide({
   const { t, lang } = useT();
   const own = useSendSteps(c._id);
   const { done, set, total, allDone } = given ?? own;
-  const [open, setOpen] = useState<StepKey | null>(() => ORDER.find((k) => !done.includes(k)) ?? null);
+  const [open, setOpen] = useState<StepKey | null>(
+    () => ORDER.find((k) => !done.includes(k)) ?? null,
+  );
   const [ask, setAsk] = useState(false);
   const [later, setLater] = useState(false);
-  const [showNote, setShowNote] = useState(() => typeof window !== "undefined" && !!readNotes(c._id));
+  const [showNote, setShowNote] = useState(
+    () => typeof window !== "undefined" && !!readNotes(c._id),
+  );
   const calling = useRef(false);
   const askRef = useRef<HTMLDivElement>(null);
 
@@ -116,7 +133,10 @@ export function SendGuide({
   const reveal = (el: Element | null) => {
     if (!el) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ block: "nearest", behavior: still ? "auto" : "smooth" });
+    el.scrollIntoView({
+      block: "nearest",
+      behavior: still ? "auto" : "smooth",
+    });
   };
   useEffect(() => {
     if (ask) reveal(askRef.current);
@@ -125,9 +145,16 @@ export function SendGuide({
   const phone = c.bill?.billingPhone ?? c.hospital?.fap?.phone ?? null;
   const policyUrl = c.hospital?.fap?.url ?? null;
   const applicationUrl = c.hospital?.fap?.applicationUrl ?? null;
-  const mailto = (l: Letter) => `mailto:?subject=${encodeURIComponent(l.subject)}&body=${encodeURIComponent(l.body)}`;
+  const mailto = (l: Letter) =>
+    `mailto:?subject=${encodeURIComponent(l.subject)}&body=${encodeURIComponent(l.body)}`;
   const nameOf = (l: Letter) =>
-    lang === "en" ? l.title : t(l.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute");
+    lang === "en"
+      ? l.title
+      : t(
+          l.kind === "assistance"
+            ? "letters.titleAssist"
+            : "letters.titleDispute",
+        );
 
   // After tapping Call, the phone app takes over. When the patient comes back to this page, ask how it went.
   useEffect(() => {
@@ -151,7 +178,10 @@ export function SendGuide({
   };
   const openStep = (k: StepKey | null) => {
     setOpen(k);
-    if (k) requestAnimationFrame(() => reveal(document.getElementById(`sg-card-${k}`)));
+    if (k)
+      requestAnimationFrame(() =>
+        reveal(document.getElementById(`sg-card-${k}`)),
+      );
   };
 
   const titles: Record<StepKey, string> = {
@@ -172,7 +202,11 @@ export function SendGuide({
     const isOpen = open === k;
     const bodyId = `sg-${k}`;
     return (
-      <li key={k} id={`sg-card-${k}`} className={`sg-card${isDone ? " done" : ""}${isOpen ? " open" : ""}`}>
+      <li
+        key={k}
+        id={`sg-card-${k}`}
+        className={`sg-card${isDone ? " done" : ""}${isOpen ? " open" : ""}`}
+      >
         <div className="sg-head">
           <button
             type="button"
@@ -213,7 +247,11 @@ export function SendGuide({
         {t("send.undo")}
       </button>
     ) : (
-      <button type="button" className="btn btn-big sg-done-btn" onClick={() => mark(k, true)}>
+      <button
+        type="button"
+        className="btn btn-big sg-done-btn"
+        onClick={() => mark(k, true)}
+      >
         <span aria-hidden="true">✓</span>&nbsp;{label}
       </button>
     );
@@ -221,7 +259,9 @@ export function SendGuide({
   return (
     <div className="sg">
       <div className="sg-progress" role="status">
-        <span className="sg-progress-text">{t("send.progress", { n: done.length, total })}</span>
+        <span className="sg-progress-text">
+          {t("send.progress", { n: done.length, total })}
+        </span>
         <span className="sg-progress-bar" aria-hidden="true">
           <span style={{ width: `${(done.length / total) * 100}%` }} />
         </span>
@@ -230,7 +270,13 @@ export function SendGuide({
 
       {allDone && (
         <div className="sg-all">
-          <svg viewBox="0 0 52 52" width="52" height="52" aria-hidden="true" className="sg-all-check">
+          <svg
+            viewBox="0 0 52 52"
+            width="52"
+            height="52"
+            aria-hidden="true"
+            className="sg-all-check"
+          >
             <circle cx="26" cy="26" r="23" />
             <path d="M15 27l7.5 7.5L37.5 19" />
           </svg>
@@ -251,26 +297,50 @@ export function SendGuide({
             <p className="send-ask">{t("send.step1Ask")}</p>
             {lang !== "en" && (
               <p className="quiet send-ask-en">
-                {t("send.inEnglish")} <span lang="en">{translate("en", "send.step1Ask")}</span>
+                {t("send.inEnglish")}{" "}
+                <span lang="en">{translate("en", "send.step1Ask")}</span>
               </p>
             )}
             {phone ? (
-              <a
-                href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
-                className="btn btn-primary btn-big sg-call"
-                onClick={() => {
-                  calling.current = true;
-                  setAsk(false);
-                  setLater(false);
-                }}
-              >
-                {t("send.call")}&nbsp;<span className="send-phone">{phone}</span>
-              </a>
+              <>
+                {/* A computer can't place the call: show the number to dial from a phone (CSS picks one). */}
+                <p className="sg-call-desk">
+                  {t("send.callFromPhone", { phone: "\u0000" })
+                    .split("\u0000")
+                    .map((part, i) =>
+                      i === 0
+                        ? part
+                        : [
+                            <strong key="n" className="sg-call-num">
+                              {phone}
+                            </strong>,
+                            part,
+                          ],
+                    )}
+                </p>
+                <a
+                  href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
+                  className="btn btn-primary btn-big sg-call"
+                  onClick={() => {
+                    calling.current = true;
+                    setAsk(false);
+                    setLater(false);
+                  }}
+                >
+                  {t("send.call")}&nbsp;
+                  <span className="send-phone">{phone}</span>
+                </a>
+              </>
             ) : (
               <p className="quiet">{t("send.noPhone")}</p>
             )}
             {ask && (
-              <div className="sg-ask" ref={askRef} role="group" aria-label={t("send.reachedQ")}>
+              <div
+                className="sg-ask"
+                ref={askRef}
+                role="group"
+                aria-label={t("send.reachedQ")}
+              >
                 <p className="sg-ask-q">{t("send.reachedQ")}</p>
                 <div className="sg-ask-row">
                   <button
@@ -301,13 +371,23 @@ export function SendGuide({
             {showNote ? (
               <Notes id={c._id} />
             ) : (
-              <button type="button" className="sg-undo" onClick={() => setShowNote(true)}>
+              <button
+                type="button"
+                className="sg-undo"
+                onClick={() => setShowNote(true)}
+              >
                 {t("send.addNote")}
               </button>
             )}
             <p className="quiet sg-small">{t("send.step1Parent")}</p>
             {done.includes("call") ? (
-              <button type="button" className="btn btn-big sg-done-btn" onClick={() => openStep(ORDER.find((x) => !done.includes(x)) ?? null)}>
+              <button
+                type="button"
+                className="btn btn-big sg-done-btn"
+                onClick={() =>
+                  openStep(ORDER.find((x) => !done.includes(x)) ?? null)
+                }
+              >
                 {t("flow.next")}
               </button>
             ) : (
@@ -322,7 +402,11 @@ export function SendGuide({
           <>
             <p className="sg-p">{t("send.step2")}</p>
             {letters.length > 1 && (
-              <button type="button" className="btn btn-big sg-print-all" onClick={() => printLetters("all", "Letters")}>
+              <button
+                type="button"
+                className="btn btn-big sg-print-all"
+                onClick={() => printLetters("all", "Letters")}
+              >
                 {t("print.all")}
               </button>
             )}
@@ -331,7 +415,11 @@ export function SendGuide({
                 <li key={l.kind} className="sg-letter">
                   <span className="sg-letter-name">{nameOf(l)}</span>
                   <span className="sg-letter-btns">
-                    <button type="button" className="btn btn-quiet" onClick={() => printLetters(l.kind, l.title)}>
+                    <button
+                      type="button"
+                      className="btn btn-quiet"
+                      onClick={() => printLetters(l.kind, l.title)}
+                    >
                       {t("send.print")}
                     </button>
                     <a href={mailto(l)} className="btn btn-quiet">
@@ -356,7 +444,9 @@ export function SendGuide({
             <p className="send-ask" lang="en">
               {translate("en", "send.step3Ask")}
             </p>
-            {lang !== "en" && <p className="quiet sg-small">{t("send.step3Ask")}</p>}
+            {lang !== "en" && (
+              <p className="quiet sg-small">{t("send.step3Ask")}</p>
+            )}
             {doneButton("pause", t("send.step3Btn"))}
           </>,
         )}
@@ -369,13 +459,31 @@ export function SendGuide({
             {(applicationUrl || policyUrl) && (
               <div className="sg-links">
                 {applicationUrl && (
-                  <a href={applicationUrl} target="_blank" rel="noreferrer" className="sg-link">
-                    {t("send.applicationLink")} ↗<span className="visually-hidden"> {t("send.opensNew")}</span>
+                  <a
+                    href={applicationUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="sg-link"
+                  >
+                    {t("send.applicationLink")} ↗
+                    <span className="visually-hidden">
+                      {" "}
+                      {t("send.opensNew")}
+                    </span>
                   </a>
                 )}
                 {policyUrl && (
-                  <a href={policyUrl} target="_blank" rel="noreferrer" className="sg-link">
-                    {t("send.policyLink")} ↗<span className="visually-hidden"> {t("send.opensNew")}</span>
+                  <a
+                    href={policyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="sg-link"
+                  >
+                    {t("send.policyLink")} ↗
+                    <span className="visually-hidden">
+                      {" "}
+                      {t("send.opensNew")}
+                    </span>
                   </a>
                 )}
               </div>

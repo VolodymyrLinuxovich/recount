@@ -3,7 +3,7 @@
 // Phase 3 and 4: the patient's details, one letter per screen, then how to send them.
 import { useMutation } from "convex/react";
 import { ConvexError } from "convex/values";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { DetailsForm, useDetails, useDetailsMissing } from "../DetailsForm";
@@ -33,6 +33,7 @@ export function DetailsStep({ c, next, back }: ScreenProps) {
   const { t } = useT();
   const [details, setDetails, { sources, keep }] = useDetails(c);
   const [remember, setRemember] = useState(true);
+  const [tried, setTried] = useState(0);
   // Only the patient's own details count here; amounts or dates of service are theirs to check in the letter.
   const asks = (c.letters ?? []).some((l) => leftovers(l).some((x) => x.slot && x.slot !== "date"));
   const missing = useDetailsMissing(details);
@@ -43,16 +44,31 @@ export function DetailsStep({ c, next, back }: ScreenProps) {
       primary={{
         label: t("flow.next"),
         onClick: () => {
+          // Nothing goes on with a field missing: show what's needed and go to the first one.
+          if (asks && missing) return setTried((n) => n + 1);
           if (asks) keep(remember);
           next();
         },
-        disabled: asks && !!missing,
-        hint: asks ? missing : null,
       }}
       onBack={back}
     >
       {asks ? (
-        <DetailsForm details={details} onChange={setDetails} bare sources={sources} remember={remember} onRemember={setRemember} />
+        <>
+          {tried > 0 && missing && (
+            <p className="details-summary" role="alert">
+              {missing}
+            </p>
+          )}
+          <DetailsForm
+            details={details}
+            onChange={setDetails}
+            bare
+            sources={sources}
+            remember={remember}
+            onRemember={setRemember}
+            tried={tried}
+          />
+        </>
       ) : (
         <p className="flow-note">{t("flow.detailsNone")}</p>
       )}
@@ -81,14 +97,19 @@ function fillInMessage(err: unknown): string | null {
 /** The moment after approving: a check that draws itself, then on to sending. Nothing is sent here. */
 function ApprovedMoment({ onContinue }: { onContinue: () => void }) {
   const { t } = useT();
+  const h = useRef<HTMLHeadingElement>(null);
+  // Moving focus to the heading is what announces the moment to screen readers.
+  useEffect(() => h.current?.focus(), []);
   return (
     <StepFrame phase={4} primary={{ label: t("done.continue"), onClick: onContinue }}>
-      <div className="approved-moment" role="status">
+      <div className="approved-moment">
         <svg className="approved-check" viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
           <circle cx="60" cy="60" r="52" className="approved-ring" />
           <path d="M36 62l16 16 32-34" className="approved-mark" />
         </svg>
-        <h1 className="approved-h">{t("done.h")}</h1>
+        <h1 className="approved-h" ref={h} tabIndex={-1}>
+          {t("done.h")}
+        </h1>
         <p className="approved-p">{t("done.line")}</p>
       </div>
     </StepFrame>
@@ -108,7 +129,8 @@ export function LetterStep({ c, index, next, back, go }: ScreenProps & { index: 
   const approved = c.status === "approved";
   const blanks = useBlanks(letters, index);
   const letter = letters[index];
-  if (moment) return <ApprovedMoment onContinue={() => go("send")} />;
+  // Continue replaces this letter's entry, so Back from the send screen doesn't land on an approved letter.
+  if (moment) return <ApprovedMoment onContinue={() => go("send", true)} />;
   if (!letter) return <StepFrame phase={3} onBack={back} />;
 
   const last = index === letters.length - 1;

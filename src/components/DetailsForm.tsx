@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useT } from "./i18n/I18nProvider";
 import { joinList, type PlainKey } from "./i18n/strings";
-import { checkDetails, type Details, EMPTY_DETAILS, readDetails, saveDetails } from "./letterFill";
+import { checkDetails, type Details, EMPTY_DETAILS, normalDob, readDetails, saveDetails } from "./letterFill";
 import { clearProfile, readProfile, saveProfile } from "./profile";
 import type { CaseView } from "./types";
 import "./letters.css";
@@ -19,15 +19,22 @@ const NEED: Partial<Record<Field, PlainKey>> = {
   phone: "letters.needPhone",
 };
 
+const BAD: Record<"phone" | "zip" | "dob", PlainKey> = {
+  phone: "letters.needPhoneBad",
+  zip: "letters.needZipBad",
+  dob: "letters.needDobBad",
+};
+
 /** What still stops the patient from going on, as a sentence, or null when the details are complete. */
 export function useDetailsMissing(details: Details): string | null {
   const { t, lang } = useT();
   const problems = checkDetails(details);
-  // A typo in the optional email is shown by the field but doesn't stop anyone.
-  const blocking = (Object.keys(problems) as Field[]).filter((k) => NEED[k]);
+  // A typo in the optional email is shown by the field but doesn't stop anyone. A date of birth that
+  // isn't a date does: it would go into the letter as typed.
+  const blocking = (Object.keys(problems) as Field[]).filter((k) => NEED[k] || k === "dob");
   if (!blocking.length) return null;
   const names = blocking.map((k) =>
-    problems[k] === "bad" ? t(k === "phone" ? "letters.needPhoneBad" : "letters.needZipBad") : t(NEED[k]!),
+    problems[k] === "bad" ? t(BAD[k as "phone" | "zip" | "dob"]) : t(NEED[k]!),
   );
   return t("letters.needList", { list: joinList(lang, names) });
 }
@@ -40,6 +47,7 @@ export function DetailsForm({
   sources = [],
   remember,
   onRemember,
+  tried = 0,
 }: {
   details: Details;
   onChange: (d: Details) => void;
@@ -50,18 +58,31 @@ export function DetailsForm({
   /** "Use these details next time", when the screen offers it. */
   remember?: boolean;
   onRemember?: (on: boolean) => void;
+  /** Counts taps on Next while something is missing: show every error and go to the first. */
+  tried?: number;
 }) {
   const { t } = useT();
-  // Errors show once a field has been left, so nobody is scolded while still typing.
-  const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
+  // A field's error shows once the patient typed in it and left it, or after they tapped Next.
+  // Tabbing through an empty field, or a prefilled value, shows nothing.
+  const [edited, setEdited] = useState<Partial<Record<Field, boolean>>>({});
+  const [left, setLeft] = useState<Partial<Record<Field, boolean>>>({});
   const problems = checkDetails(details);
+  const box = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!tried) return;
+    const first = box.current?.querySelector<HTMLInputElement>('input[aria-invalid="true"]');
+    first?.focus();
+    first?.scrollIntoView({ block: "center" });
+  }, [tried]);
 
   const error = (k: Field): string | null => {
     const p = problems[k];
-    if (!p || !touched[k]) return null;
+    if (!p || !(tried || (edited[k] && left[k]))) return null;
     if (p === "missing") return t("letters.errMissing", { what: t(NEED[k]!) });
     if (k === "phone") return t("letters.errPhone");
     if (k === "zip") return t("letters.errZip");
+    if (k === "dob") return t("letters.errDob");
     return t("letters.errEmail");
   };
 
@@ -98,8 +119,18 @@ export function DetailsForm({
         <input
           id={id}
           value={details[k]}
-          onChange={(e) => onChange({ ...details, [k]: e.target.value })}
-          onBlur={() => setTouched((x) => ({ ...x, [k]: true }))}
+          onChange={(e) => {
+            setEdited((x) => ({ ...x, [k]: true }));
+            onChange({ ...details, [k]: e.target.value });
+          }}
+          onBlur={() => {
+            setLeft((x) => ({ ...x, [k]: true }));
+            // Write the date the way the letter needs it: 23/04/1958 becomes 04/23/1958.
+            if (k === "dob" && details.dob.trim()) {
+              const n = normalDob(details.dob);
+              if (n && n !== details.dob) onChange({ ...details, dob: n });
+            }
+          }}
           lang="en"
           required={need === "required"}
           aria-invalid={err ? true : undefined}
@@ -111,7 +142,7 @@ export function DetailsForm({
   };
 
   return (
-    <section className={bare ? "details details-bare" : "details"} aria-label={t("letters.detailsH")}>
+    <section ref={box} className={bare ? "details details-bare" : "details"} aria-label={t("letters.detailsH")}>
       {!bare && <h3 className="details-h">{t("letters.detailsH")}</h3>}
       <p className="details-lede">{t("letters.detailsLede")}</p>
       {sources.includes("bill") && <p className="details-from">{t("letters.fromBill")}</p>}
