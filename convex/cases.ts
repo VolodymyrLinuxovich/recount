@@ -63,9 +63,21 @@ export const submitHousehold = mutation({
   },
 });
 
+const LetterV = v.object({
+  kind: v.union(v.literal("assistance"), v.literal("dispute")),
+  title: v.string(),
+  subject: v.string(),
+  body: v.string(),
+  subjectPatient: v.optional(v.string()),
+  bodyPatient: v.optional(v.string()),
+});
+
 export const approve = mutation({
-  args: { id: v.id("cases"), letters: v.any() },
+  args: { id: v.id("cases"), letters: v.array(LetterV) },
   handler: async (ctx, { id, letters }) => {
+    const c = await ctx.db.get(id);
+    if (!c || (c.status !== "ready" && c.status !== "approved")) throw new Error("Letters aren't ready yet");
+    if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new Error("Letter too long");
     await ctx.db.patch(id, { letters, status: "approved", approvedAt: Date.now() });
   },
 });

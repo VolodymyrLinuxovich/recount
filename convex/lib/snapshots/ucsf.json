@@ -240,10 +240,12 @@
   }
  },
  "fap": {
-  "url": null,
-  "freeCareMaxFplPct": null,
+  "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead",
+  "freeCareMaxFplPct": 400,
   "discountMaxFplPct": null,
-  "quotes": [],
+  "quotes": [
+   "Family Income at or below 400% of the Federal Poverty Level (FPL)"
+  ],
   "phone": null,
   "applicationUrl": null
  },

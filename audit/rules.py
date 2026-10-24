@@ -100,7 +100,7 @@ RULES: list[Rule] = [
     Rule(
         id="CREDIT_REPORTING",
         title="Reports hospital debt to credit bureaus",
-        cite="HSC 127425(f), as amended by AB 2297 and SB 1061",
+        cite="SB 1061 (2024), as summarized in HCAI PIL 24-03",
         url=PIL_24_03,
         law_quote="Reporting adverse information about a patient's hospital debt to a consumer credit reporting agency is no longer allowed.",
         doc_types=("debt_collection", "charity_care", "discount_payment"),

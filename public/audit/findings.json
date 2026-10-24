@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T10:17+00:00",
+ "generatedAt": "2026-10-24T10:34+00:00",
  "hospitalsTotal": 470,
  "hospitalsChecked": 463,
  "packetsReviewed": 980,
@@ -22,7 +22,7 @@
   {
    "id": "CREDIT_REPORTING",
    "title": "Reports hospital debt to credit bureaus",
-   "cite": "HSC 127425(f), as amended by AB 2297 and SB 1061",
+   "cite": "SB 1061 (2024), as summarized in HCAI PIL 24-03",
    "url": "https://hcai.ca.gov/document/pil-24-03",
    "lawQuote": "Reporting adverse information about a patient's hospital debt to a consumer credit reporting agency is no longer allowed."
   },
