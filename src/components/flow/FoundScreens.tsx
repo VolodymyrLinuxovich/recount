@@ -355,6 +355,15 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
     const cash = f.kind === "CASH_PRICE_GAP";
     const qty = line && line.quantity > 1 ? line.quantity : 1;
     const billed = line?.charge ?? 0;
+    // Published prices are per unit in the evidence. One finding can carry both the list and the cash price.
+    const unit = (re: RegExp) => {
+      const v = f.evidence.find((e) => re.test(e.label))?.value;
+      const n = v ? Number(v.replace(/[^0-9.]/g, "")) : NaN;
+      return Number.isFinite(n) && n > 0 ? n * qty : null;
+    };
+    const listTotal = unit(/gross|list|lista|bruto/i);
+    const cashTotal = unit(/cash|efectivo/i);
+    const shown = cash ? (cashTotal ?? billed - f.amount) : (listTotal ?? billed - f.amount);
     return (
       <div className="found-card">
         <p className="found-card-name">{line?.description}</p>
@@ -363,11 +372,14 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
           left={{ label: t("found.billed"), value: money(billed, true, lang) }}
           right={{
             label: cash ? t("found.cashPrice") : t("found.listPrice"),
-            value: money(Math.max(0, billed - f.amount), true, lang),
+            value: money(Math.max(0, shown), true, lang),
             note: qty > 1 ? t("found.forUnits", { n: qty }) : undefined,
             src: f.evidence.find((e) => e.source)?.source,
           }}
         />
+        {!cash && cashTotal != null && listTotal != null && cashTotal < listTotal && (
+          <p className="found-quiet">{t("found.cashToo", { amount: money(cashTotal, true, lang) })}</p>
+        )}
         <Confidence f={f} amount={f.amount} />
         <p className="found-why">{cash ? t("found.whyCash") : t("found.whyAbove")}</p>
       </div>

@@ -35,11 +35,15 @@ export function ReadingStep({ c, go }: ScreenProps) {
   const { t } = useT();
   if (c.status === "error") {
     const pdf = c.fileType === "application/pdf";
-    const notBill = /NOT_A_BILL|not a hospital|not a medical/i.test(c.error ?? "");
+    const raw = c.error ?? "";
+    const notBill = /NOT_A_BILL|not a hospital|not a medical/i.test(raw);
+    const code = raw.match(/\b(RETAKE|OUT_OF_STATE|NOT_A_BILL):\s*/)?.[1];
+    // The backend writes these messages in the case's language: show them as they are.
+    const said = code ? raw.slice(raw.indexOf(code) + code.length + 1).trim() : null;
     return (
-      <StepFrame phase={1} title={notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
-        <p>{notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf)}</p>
-        {!notBill && (
+      <StepFrame phase={1} title={code === "RETAKE" ? t("flow.retakeH") : code === "OUT_OF_STATE" ? t("flow.outOfStateH") : notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: code === "RETAKE" ? t("flow.retake") : t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
+        <p>{said || (notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf))}</p>
+        {!code && !notBill && (
           <details className="log-details">
             <summary>{t("case.details")}</summary>
             <StepLog steps={c.steps.map((s) => (s.state === "running" ? { ...s, state: "error" as const } : s))} />
