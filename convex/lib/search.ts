@@ -4,6 +4,7 @@
 // (for the query embedding) are set; otherwise Lupa answers from the case data alone, as before.
 //   AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_KEY, AZURE_SEARCH_INDEX (default recount-policies)
 //   AZURE_OPENAI_EMBEDDING_DEPLOYMENT (default text-embedding-3-small)
+import { timeoutSignal } from "./timeout";
 
 export type Passage = { hospital: string; rule: string; verdict: string; text: string; url: string };
 
@@ -21,7 +22,7 @@ async function embed(text: string): Promise<number[] | null> {
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": env("AZURE_OPENAI_API_KEY")! },
     body: JSON.stringify({ input: text.slice(0, 4000) }),
-    signal: AbortSignal.timeout(5000),
+    signal: timeoutSignal(5000),
   });
   if (!res.ok) return null;
   const j = (await res.json()) as { data?: { embedding: number[] }[] };
@@ -47,7 +48,7 @@ export async function policyPassages(question: string, hospitalKeys: string[], k
         ...(filter ? { filter } : {}),
         ...(vector ? { vectorQueries: [{ kind: "vector", vector, fields: "vector", k }] } : {}),
       }),
-      signal: AbortSignal.timeout(5000),
+      signal: timeoutSignal(5000),
     });
     if (!res.ok) return [];
     const j = (await res.json()) as { value?: { hospitalName: string; rule: string; verdict: string; text: string; url: string }[] };

@@ -6,6 +6,7 @@
 // Patients describe injuries ("I was shot", "I fell off a ladder"), so violence in a patient's
 // message is never blocked. Signs of self-harm get a crisis message with 988 and 911, never a
 // refusal. Hate and sexual content are blocked.
+import { timeoutSignal } from "./timeout";
 
 export type Verdict = "ok" | "crisis" | "blocked";
 
@@ -20,7 +21,7 @@ async function analyze(text: string): Promise<Record<string, number> | null> {
       method: "POST",
       headers: { "Content-Type": "application/json", "Ocp-Apim-Subscription-Key": process.env.AZURE_CONTENT_SAFETY_KEY! },
       body: JSON.stringify({ text: text.slice(0, 10000), outputType: "EightSeverityLevels" }),
-      signal: AbortSignal.timeout(5000),
+      signal: timeoutSignal(5000),
     });
     if (!res.ok) return null;
     const j = (await res.json()) as { categoriesAnalysis?: { category: string; severity?: number }[] };

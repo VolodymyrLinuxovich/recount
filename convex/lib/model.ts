@@ -18,6 +18,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
+import { timeoutSignal } from "./timeout";
 
 export type Task = "read" | "column" | "letters" | "chat";
 export type Provider = "anthropic" | "openai" | "azure";
@@ -165,7 +166,7 @@ function openaiContent(parts: Part[]) {
 }
 
 async function postJson(url: string, headers: Record<string, string>, body: unknown, stream = false): Promise<Response> {
-  const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body), signal: AbortSignal.timeout(TIMEOUT_MS) });
+  const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body), signal: timeoutSignal(TIMEOUT_MS) });
   if (!res.ok) throw new Error(`Model API ${res.status}: ${(await res.text()).slice(0, 200)}`);
   void stream;
   return res;
