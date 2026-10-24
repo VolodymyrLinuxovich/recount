@@ -362,7 +362,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
       return Number.isFinite(n) && n > 0 ? n * qty : null;
     };
     const listTotal = unit(/gross|list|lista|bruto/i);
-    const cashTotal = unit(/cash|efectivo/i);
+    const cashTotal = unit(/cash|efectivo|sin seguro/i);
     const shown = cash ? (cashTotal ?? billed - f.amount) : (listTotal ?? billed - f.amount);
     return (
       <div className="found-card">
