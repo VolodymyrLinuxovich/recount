@@ -13,6 +13,7 @@ export const BillLine = z.object({
 export type BillLine = z.infer<typeof BillLine>;
 
 export const ParsedBill = z.object({
+  isMedicalBill: z.boolean().describe("False if this is not a hospital or medical bill (e.g. a store receipt)"),
   hospitalName: z.string().nullable(),
   hospitalWebsite: z.string().nullable().describe("Only if printed on the bill"),
   hospitalAddress: z.string().nullable().describe("Hospital street address with city, as printed"),

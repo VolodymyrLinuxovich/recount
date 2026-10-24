@@ -25,7 +25,7 @@ const base: CaseView = {
   ],
   bill: {
     hospitalName: "Zuckerberg San Francisco General Hospital and Trauma Center",
-    hospitalWebsite: null, hospitalAddress: null,
+    isMedicalBill: true, hospitalWebsite: null, hospitalAddress: null,
     billingPhone: "(628) 206-8448",
     accountNumber: "SAMPLE-40017782",
     patientName: "Alex Rivera",
