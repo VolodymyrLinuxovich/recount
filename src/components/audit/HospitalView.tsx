@@ -53,6 +53,16 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
   );
 }
 
+function summary(h: Hospital) {
+  const bad = h.findings.filter((f) => f.verdict !== "ask").length;
+  const ask = h.findings.length - bad;
+  const parts = [];
+  if (bad) parts.push(`${bad} ${bad === 1 ? "part" : "parts"} of its policies ${bad === 1 ? "goes" : "go"} against California law`);
+  if (ask) parts.push(`${ask} ${ask === 1 ? "is" : "are"} worth asking about`);
+  if (!bad) return `${ask} ${ask === 1 ? "part" : "parts"} of its policies ${ask === 1 ? "is" : "are"} worth asking about.`;
+  return parts.join(", and ") + ".";
+}
+
 export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
   const w = worst(h);
   const byId = new Map(rules.map((r) => [r.id, r]));
@@ -67,9 +77,7 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
         {h.name}
       </h2>
       <p className={`hospital-verdict verdict-text-${w}`}>
-        {w === "none"
-          ? "No conflicts found in the documents we read."
-          : `${h.findings.length} ${h.findings.length === 1 ? "thing" : "things"} in its policies ${w === "ask" ? "worth asking about" : h.findings.length === 1 ? "that goes against California law" : "that go against California law"}.`}
+        {w === "none" ? "No conflicts found in the documents we read." : summary(h)}
       </p>
 
       {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}
