@@ -21,7 +21,8 @@
    "revCode": "0450",
    "description": "ER EXAM/TREATMENT ROOM LEVEL IV",
    "quantity": 1,
-   "charge": 6084
+   "charge": 6084,
+   "chargePrinted": "6,084.00"
   },
   {
    "date": "2026-09-12",
@@ -29,7 +30,8 @@
    "revCode": "0350",
    "description": "CT BRAIN WITHOUT CONTRAST",
    "quantity": 1,
-   "charge": 4403
+   "charge": 4403,
+   "chargePrinted": "4,403.00"
   },
   {
    "date": "2026-09-12",
@@ -37,7 +39,8 @@
    "revCode": "0320",
    "description": "X-RAY CHEST 2 VIEWS",
    "quantity": 1,
-   "charge": 482
+   "charge": 482,
+   "chargePrinted": "482.00"
   },
   {
    "date": "2026-09-12",
@@ -45,7 +48,8 @@
    "revCode": "0301",
    "description": "COMPREHENSIVE METABOLIC PANEL",
    "quantity": 1,
-   "charge": 528
+   "charge": 528,
+   "chargePrinted": "528.00"
   },
   {
    "date": "2026-09-12",
@@ -53,7 +57,8 @@
    "revCode": "0305",
    "description": "CBC WITH PLATELETS & DIFF",
    "quantity": 1,
-   "charge": 269
+   "charge": 269,
+   "chargePrinted": "269.00"
   },
   {
    "date": "2026-09-12",
@@ -61,7 +66,8 @@
    "revCode": "0305",
    "description": "CBC WITH PLATELETS & DIFF",
    "quantity": 1,
-   "charge": 269
+   "charge": 269,
+   "chargePrinted": "269.00"
   },
   {
    "date": "2026-09-12",
@@ -69,7 +75,8 @@
    "revCode": "0730",
    "description": "EKG TRACING ONLY",
    "quantity": 1,
-   "charge": 287
+   "charge": 287,
+   "chargePrinted": "287.00"
   },
   {
    "date": "2026-09-12",
@@ -77,7 +84,8 @@
    "revCode": "0450",
    "description": "IV PUSH SINGLE OR INITIAL DRUG",
    "quantity": 1,
-   "charge": 419
+   "charge": 419,
+   "chargePrinted": "419.00"
   }
  ],
  "unreadable": [],

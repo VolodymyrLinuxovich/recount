@@ -32,6 +32,7 @@ const MODEL = "claude-opus-5-5";
 const READ_PROMPT = `This is a hospital bill a patient photographed or uploaded. Transcribe it into the schema.
 Rules:
 - Copy codes, descriptions, dates and amounts exactly as printed. Never guess a CPT/HCPCS code that isn't printed; use null.
+- Each line's charge is the amount printed on that line, nothing else. Never adjust or recompute a line so the lines add up to the printed total: bills often contain arithmetic errors, and a total that doesn't match its lines is exactly what the patient needs us to find. Report the printed total as printed, too.
 - If a number is blurry or cut off, put your best reading in the field AND add a short plain-English note to "unreadable" that a patient can understand (e.g. "The amount on the CT scan line is blurry"). Never use field names like hospitalAddress or insurancePaid in the notes.
 - If you can't read the individual charges at all, return no lines rather than guessing.
 - Payments and adjustments are positive numbers.
@@ -67,12 +68,21 @@ async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promis
     max_tokens: 16000,
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
-    output_config: { effort: "medium", format: betaZodOutputFormat(ParsedBill) },
+    output_config: { effort: "low", format: betaZodOutputFormat(ParsedBill) },
     messages: [{ role: "user", content: [media, { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }] }],
   });
   if (res.stop_reason === "refusal") throw new Error("The model declined to read this file.");
   if (!res.parsed_output) throw new Error("Couldn't read the bill into a structured form.");
-  const bill = res.parsed_output;
+  // The printed text is the source of truth for each amount: parse it ourselves instead of
+  // trusting a number the model might have "fixed" to make the lines add up.
+  const parsed = res.parsed_output;
+  const bill = {
+    ...parsed,
+    lines: parsed.lines.map((l) => {
+      const fromText = Number(String(l.chargePrinted ?? "").replace(/[^0-9.\-]/g, ""));
+      return Number.isFinite(fromText) && /\d/.test(l.chargePrinted ?? "") ? { ...l, charge: fromText } : l;
+    }),
+  };
   // Bills print names in capitals; letters read better as "Maria Hernandez".
   return { ...bill, patientName: bill.patientName ? niceName(bill.patientName) : null };
 }
@@ -135,35 +145,34 @@ async function liveLookup(known: Known, codes: string[]): Promise<HospitalRef | 
  * snapshot or an earlier live lookup), use it right away and refresh live in the background,
  * so the patient doesn't wait on a ~10 s crawl. Only with no saved data do we wait for the live run.
  */
-const Amounts = z.object({
-  charges: z.array(z.number()).describe("The charge on each listed line, in the same order, read again carefully"),
+const ChargesColumn = z.object({
+  charges: z.array(z.string()).describe("Each line item's charge exactly as printed, top to bottom"),
 });
 
 /**
- * Second, focused read of just the amounts. Used only when the lines we read don't add up to
- * the bill's printed total. We accept the new reading only if it then adds up exactly, so a
- * misread digit (a 6 read as a 4) gets fixed without guessing.
+ * A narrow second read: copy only the CHARGES column of the line-item table. Asked about nothing
+ * else (no totals), it has no reason to "fix" a line so the lines add up, which full-bill reads
+ * sometimes do. Returns amounts in line order, or null if it can't be used.
  */
-async function recheckAmounts(blob: Blob, mediaType: string, bill: ParsedBill): Promise<number[] | null> {
+async function readChargesColumn(blob: Blob, mediaType: string): Promise<number[] | null> {
   const client = new Anthropic();
   const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
   const media =
     mediaType === "application/pdf"
       ? ({ type: "document", source: { type: "base64", media_type: "application/pdf", data } } as const)
       : ({ type: "image", source: { type: "base64", media_type: mediaType as "image/png" | "image/jpeg" | "image/webp", data } } as const);
-  const listed = bill.lines.map((l, i) => `${i + 1}. code ${l.code ?? "-"} | ${l.description} | read as ${l.charge}`).join("\n");
   const res = await client.beta.messages.parse({
     model: MODEL,
-    max_tokens: 8000,
+    max_tokens: 4000,
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
-    output_config: { effort: "high", format: betaZodOutputFormat(Amounts) },
-    messages: [{ role: "user", content: [media, { type: "text", text: `These lines were read from this bill, but they add up to ${bill.lines.reduce((a, l) => a + l.charge, 0).toFixed(2)} while the bill's printed total charges are ${bill.totalCharges}. Look closely at each line's charge on the image (watch for 6/4, 1/7, 3/8, 5/6 confusions) and return every line's charge, in order. Do not change the number of lines.\n${listed}` }] }],
+    output_config: { effort: "low", format: betaZodOutputFormat(ChargesColumn) },
+    messages: [{ role: "user", content: [media, { type: "text", text: "Copy the CHARGES column of the itemized line table, top to bottom across all pages, exactly as printed, one string per line item. Only the line items: no totals, payments or amount due." }] }],
   });
-  const charges = res.parsed_output?.charges;
-  if (!charges || charges.length !== bill.lines.length) return null;
-  const sum = charges.reduce((a, b) => a + b, 0);
-  return bill.totalCharges != null && Math.abs(sum - bill.totalCharges) <= 1 ? charges : null;
+  const raw = res.parsed_output?.charges;
+  if (!raw) return null;
+  const nums = raw.map((x) => Number(x.replace(/[^0-9.\-]/g, "")));
+  return nums.every((n) => Number.isFinite(n)) ? nums : null;
 }
 
 async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
@@ -309,16 +318,32 @@ export const readAndCheck = internalAction({
         const blob = await ctx.storage.get(c.fileId);
         if (!blob) throw new Error("Uploaded file is missing");
         try {
-          bill = await readWithClaude(blob, c.fileType ?? blob.type ?? "image/jpeg", lang);
-          const sum = bill.lines.reduce((a, l) => a + l.charge, 0);
-          if (bill.lines.length && bill.totalCharges != null && Math.abs(sum - bill.totalCharges) > 1) {
-            await step(ctx, caseId, "read", t("Double-checking the amounts", "Revisando de nuevo los montos"), "running");
-            const fixed = await recheckAmounts(blob, c.fileType ?? blob.type ?? "image/jpeg", bill).catch(() => null);
-            if (fixed) {
-              const changed = bill.lines.map((l, i) => (l.charge !== fixed[i] ? i : -1)).filter((i) => i >= 0);
-              bill = { ...bill, lines: bill.lines.map((l, i) => ({ ...l, charge: fixed[i] })) };
-              // Notes about misread amounts no longer apply once the lines add up.
-              if (changed.length) bill = { ...bill, unreadable: bill.unreadable.filter((u) => !/total|sum|add up|amount|monto|suma/i.test(u)) };
+          // Two reads in parallel (no extra wait): the full bill, and a narrow copy of just the CHARGES
+          // column. A full read sometimes "fixes" a line so the lines match the printed total, which
+          // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
+          // literal column copy AND show the patient both numbers to check against the paper bill.
+          const type = c.fileType ?? blob.type ?? "image/jpeg";
+          const [first, column] = await Promise.all([readWithClaude(blob, type, lang), readChargesColumn(blob, type).catch(() => null)]);
+          bill = first;
+          if (column && column.length === first.lines.length) {
+            const disagree = first.lines
+              .map((l, i) => ({ index: i, first: column[i], second: l.charge }))
+              .filter((x) => Math.abs(x.first - x.second) > 0.005);
+            if (disagree.length) {
+              bill = {
+                ...bill,
+                lines: first.lines.map((l, i) => ({ ...l, charge: column[i] })),
+                amountChecks: disagree,
+                unreadable: [
+                  ...bill.unreadable,
+                  ...disagree.map((x) =>
+                    t(
+                      `Line ${x.index + 1}: we read $${x.first.toFixed(2)}, but a second look read $${x.second.toFixed(2)}. Please check this amount on your bill.`,
+                      `Línea ${x.index + 1}: leímos $${x.first.toFixed(2)}, pero una segunda lectura dio $${x.second.toFixed(2)}. Por favor revise este monto en su factura.`,
+                    ),
+                  ),
+                ],
+              } as ParsedBill;
             }
           }
         } catch (e) {
