@@ -130,11 +130,6 @@ const STATS: { big: PlainKey; text: PlainKey; src?: { name: string; href: string
       href: "https://www.oag.ca.gov/news/press-releases/attorney-general-bonta-issues-consumer-alert-following-reports-hospitals-failing",
     },
   },
-  {
-    big: "landing.stat3Big",
-    text: "landing.stat3",
-    src: { name: "KFF Health News", href: "https://kffhealthnews.org/news/article/charity-care-settlement-debt-relief-patient-refunds-santa-clara-california/" },
-  },
   { big: "landing.stat4Big", text: "landing.stat4" },
 ];
 

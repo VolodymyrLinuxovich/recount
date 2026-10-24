@@ -68,6 +68,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = lang;
+    // The page was kept hidden for a Spanish reader until this point (see LANG_SCRIPT in layout.tsx).
+    if (lang === getSnapshot()) document.documentElement.classList.remove("i18n-wait");
   }, [lang]);
 
   const t = useCallback<T>((key, vars) => translate(lang, key, vars), [lang]);

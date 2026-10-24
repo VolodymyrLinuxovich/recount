@@ -248,7 +248,7 @@ export function LetterStep({ c, index, next, back, go }: ScreenProps & { index: 
     >
       {approved && <p className="flow-note">{t("flow.approvedNote")}</p>}
       <div className="flow-letter">
-        <LetterSheet letter={letter} onChange={(l) => update(index, l)} readOnly={approved} inFlow />
+        <LetterSheet letter={letter} onChange={(l) => update(index, l)} readOnly={approved} inFlow flags={(c as { letterFlags?: number[] }).letterFlags ?? []} />
       </div>
       {!approved && leftovers(letter).length > 0 && <p className="flow-fill-hint">{t("letters.fillHint")}</p>}
       <PrintLetters c={c} letters={letters} name={details.name} />

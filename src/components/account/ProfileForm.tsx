@@ -7,7 +7,7 @@ import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
 import { checkDetails, type Details, normalDob } from "../letterFill";
 import { saveError } from "./errors";
-import { fromServer, toServer } from "./profileFields";
+import { DOB_MIN, dobMax, dobPickerValue, fromServer, isoToDob, toServer } from "./profileFields";
 import "../letters.css";
 
 type Field = keyof Details;
@@ -19,7 +19,7 @@ const FIELDS: { k: Field; label: PlainKey; hint?: PlainKey; attrs: React.InputHT
   { k: "zip", label: "letters.dZip", hint: "letters.hintZip", attrs: { autoComplete: "postal-code", inputMode: "numeric", maxLength: 10 }, cls: "details-zip" },
   { k: "phone", label: "letters.dPhone", hint: "letters.hintPhone", attrs: { autoComplete: "tel", type: "tel", inputMode: "tel" } },
   { k: "email", label: "letters.dEmail", attrs: { autoComplete: "email", type: "email", inputMode: "email" } },
-  { k: "dob", label: "letters.dDob", hint: "letters.dDobEg", attrs: { autoComplete: "bday" } },
+  { k: "dob", label: "letters.dDob", hint: "letters.dDobPick", attrs: { autoComplete: "bday", type: "date", min: DOB_MIN, max: dobMax() } },
 ];
 
 const BAD: Partial<Record<Field, PlainKey>> = {
@@ -30,7 +30,7 @@ const BAD: Partial<Record<Field, PlainKey>> = {
 };
 
 /** "Your details for letters": the same fields as the letter form, all optional here. */
-export function ProfileForm() {
+export function ProfileForm({ onDone, onCancel }: { onDone?: () => void; onCancel?: () => void } = {}) {
   const { t } = useT();
   const profile = useQuery(api.profile.get);
   const save = useMutation(api.profile.set);
@@ -44,7 +44,9 @@ export function ProfileForm() {
 
   if (profile === undefined) return <p className="quiet">{t("acct.loading")}</p>;
 
-  const d = edits ?? fromServer(profile);
+  // Nothing saved yet: start from the account itself (the name and email Google gave us, or the sign-in email).
+  const saved = fromServer(profile);
+  const d = edits ?? { ...saved, name: saved.name || (profile?.accountName ?? ""), email: saved.email || (profile?.accountEmail ?? "") };
   // Only typos matter here: nothing is required on the account.
   const problems = checkDetails(d);
   const bad = (k: Field) => problems[k] === "bad" && (tried || left[k]) ? t(BAD[k]!) : null;
@@ -62,6 +64,7 @@ export function ProfileForm() {
     try {
       await save(toServer(d));
       setState("saved");
+      onDone?.();
     } catch (err) {
       setError(saveError(t, err));
       setState("idle");
@@ -94,9 +97,9 @@ export function ProfileForm() {
             <input
               id={id}
               lang="en"
-              value={d[k]}
+              value={k === "dob" ? dobPickerValue(d.dob) : d[k]}
               onChange={(e) => {
-                setD({ ...d, [k]: e.target.value });
+                setD({ ...d, [k]: k === "dob" ? isoToDob(e.target.value) : e.target.value });
                 setState("idle");
               }}
               onBlur={() => {
@@ -121,6 +124,11 @@ export function ProfileForm() {
       <button type="submit" className="rc-btn rc-btn--block acct-submit" disabled={state === "saving"}>
         {state === "saving" ? t("acct.saving") : t("acct.saveDetails")}
       </button>
+      {onCancel && (
+        <button type="button" className="rc-btn rc-btn--secondary rc-btn--block" onClick={onCancel} disabled={state === "saving"}>
+          {t("acct.cancelEdit")}
+        </button>
+      )}
       <p className="acct-quiet" role="status">
         {state === "saved" ? `✓ ${t("acct.saved")}` : t("acct.detailsNote")}
       </p>

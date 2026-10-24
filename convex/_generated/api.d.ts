@@ -24,12 +24,19 @@ import type * as lib_complaint from "../lib/complaint.js";
 import type * as lib_eligibility from "../lib/eligibility.js";
 import type * as lib_hospital from "../lib/hospital.js";
 import type * as lib_lang from "../lib/lang.js";
+import type * as lib_letterCheck from "../lib/letterCheck.js";
 import type * as lib_letters from "../lib/letters.js";
+import type * as lib_model from "../lib/model.js";
+import type * as lib_pipeline from "../lib/pipeline.js";
 import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
+import type * as lib_safety from "../lib/safety.js";
 import type * as lib_sample from "../lib/sample.js";
+import type * as lib_search from "../lib/search.js";
 import type * as lib_statewide from "../lib/statewide.js";
+import type * as lib_timeout from "../lib/timeout.js";
 import type * as lib_user from "../lib/user.js";
+import type * as pipeline from "../pipeline.js";
 import type * as profile from "../profile.js";
 
 import type {
@@ -55,12 +62,19 @@ declare const fullApi: ApiFromModules<{
   "lib/eligibility": typeof lib_eligibility;
   "lib/hospital": typeof lib_hospital;
   "lib/lang": typeof lib_lang;
+  "lib/letterCheck": typeof lib_letterCheck;
   "lib/letters": typeof lib_letters;
+  "lib/model": typeof lib_model;
+  "lib/pipeline": typeof lib_pipeline;
   "lib/privacy": typeof lib_privacy;
   "lib/reference": typeof lib_reference;
+  "lib/safety": typeof lib_safety;
   "lib/sample": typeof lib_sample;
+  "lib/search": typeof lib_search;
   "lib/statewide": typeof lib_statewide;
+  "lib/timeout": typeof lib_timeout;
   "lib/user": typeof lib_user;
+  pipeline: typeof pipeline;
   profile: typeof profile;
 }>;
 

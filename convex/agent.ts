@@ -1,7 +1,8 @@
 "use node";
 
-import Anthropic from "@anthropic-ai/sdk";
-import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
+import { filePart, modelReady, structured, type Run } from "./lib/model";
+import type { Kind } from "./lib/pipeline";
+import { inventedAmounts } from "./lib/letterCheck";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -27,8 +28,6 @@ function hcaiAddress(key: string): string | null {
   return null;
 }
 
-const MODEL = "claude-opus-5-5";
-
 const READ_PROMPT = `This is a hospital bill a patient photographed or uploaded. Transcribe it into the schema.
 Rules:
 - Copy codes, descriptions, dates and amounts exactly as printed. Never guess a CPT/HCPCS code that isn't printed; use null.
@@ -38,12 +37,15 @@ Rules:
 - Payments and adjustments are positive numbers.
 - If this is not a hospital or medical bill, return empty lines and say so in "unreadable".`;
 
-async function step(ctx: ActionCtx, caseId: Id<"cases">, key: string, label: string, state: "running" | "done" | "warn" | "error", detail?: string) {
-  await ctx.runMutation(internal.cases.step, { caseId, key, label, state, detail });
+async function step(ctx: ActionCtx, caseId: Id<"cases">, key: string, label: string, state: "running" | "done" | "warn" | "error", detail?: string, kind?: Kind) {
+  await ctx.runMutation(internal.cases.step, { caseId, key, label, state, detail, kind });
 }
 
-function hasClaude() {
-  return Boolean(process.env.ANTHROPIC_API_KEY);
+/** Saves one model call's record on the case (provider, model, time, tokens; never the content). */
+function recorder(ctx: ActionCtx, caseId: Id<"cases">) {
+  return async (r: Run) => {
+    await ctx.runMutation(internal.cases.recordRun, { caseId, ...r });
+  };
 }
 
 /** "MARIA HERNANDEZ" -> "Maria Hernandez"; names already in mixed case are left alone. */
@@ -56,26 +58,21 @@ function niceName(name: string): string {
     .trim();
 }
 
-async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promise<ParsedBill> {
-  const client = new Anthropic();
-  const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
-  const media =
-    mediaType === "application/pdf"
-      ? ({ type: "document", source: { type: "base64", media_type: "application/pdf", data } } as const)
-      : ({ type: "image", source: { type: "base64", media_type: mediaType as "image/png" | "image/jpeg" | "image/webp", data } } as const);
-  const res = await client.beta.messages.parse({
-    model: MODEL,
-    max_tokens: 16000,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
-    output_config: { effort: "low", format: betaZodOutputFormat(ParsedBill) },
-    messages: [{ role: "user", content: [media, { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }] }],
-  });
-  if (res.stop_reason === "refusal") throw new Error("The model declined to read this file.");
-  if (!res.parsed_output) throw new Error("Couldn't read the bill into a structured form.");
+async function readBill(blob: Blob, mediaType: string, lang: Lang, record: (r: Run) => Promise<void>): Promise<ParsedBill> {
+  const res = await structured(
+    {
+      task: "read",
+      parts: [await filePart(blob, mediaType), { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }],
+      schema: ParsedBill,
+      maxTokens: 16000,
+    },
+    record,
+  );
+  if (res.refused) throw new Error("The model declined to read this file.");
+  if (!res.data) throw new Error("Couldn't read the bill into a structured form.");
   // The printed text is the source of truth for each amount: parse it ourselves instead of
   // trusting a number the model might have "fixed" to make the lines add up.
-  const parsed = res.parsed_output;
+  const parsed = res.data;
   const bill = {
     ...parsed,
     lines: parsed.lines.map((l) => {
@@ -154,22 +151,17 @@ const ChargesColumn = z.object({
  * else (no totals), it has no reason to "fix" a line so the lines add up, which full-bill reads
  * sometimes do. Returns amounts in line order, or null if it can't be used.
  */
-async function readChargesColumn(blob: Blob, mediaType: string): Promise<number[] | null> {
-  const client = new Anthropic();
-  const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
-  const media =
-    mediaType === "application/pdf"
-      ? ({ type: "document", source: { type: "base64", media_type: "application/pdf", data } } as const)
-      : ({ type: "image", source: { type: "base64", media_type: mediaType as "image/png" | "image/jpeg" | "image/webp", data } } as const);
-  const res = await client.beta.messages.parse({
-    model: MODEL,
-    max_tokens: 4000,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
-    output_config: { effort: "low", format: betaZodOutputFormat(ChargesColumn) },
-    messages: [{ role: "user", content: [media, { type: "text", text: "Copy the CHARGES column of the itemized line table, top to bottom across all pages, exactly as printed, one string per line item. Only the line items: no totals, payments or amount due." }] }],
-  });
-  const raw = res.parsed_output?.charges;
+async function readChargesColumn(blob: Blob, mediaType: string, record: (r: Run) => Promise<void>): Promise<number[] | null> {
+  const res = await structured(
+    {
+      task: "column",
+      parts: [await filePart(blob, mediaType), { type: "text", text: "Copy the CHARGES column of the itemized line table, top to bottom across all pages, exactly as printed, one string per line item. Only the line items: no totals, payments or amount due." }],
+      schema: ChargesColumn,
+      maxTokens: 4000,
+    },
+    record,
+  );
+  const raw = res.data?.charges;
   if (!raw) return null;
   const nums = raw.map((x) => Number(x.replace(/[^0-9.\-]/g, "")));
   return nums.every((n) => Number.isFinite(n)) ? nums : null;
@@ -314,7 +306,7 @@ export const readAndCheck = internalAction({
       await step(ctx, caseId, "read", t("Reading your bill", "Leyendo su factura"), "running");
       let bill: ParsedBill;
       let billSource: "claude" | "sample-source" = "claude";
-      if (c.fileId && hasClaude()) {
+      if (c.fileId && modelReady("read")) {
         const blob = await ctx.storage.get(c.fileId);
         if (!blob) throw new Error("Uploaded file is missing");
         try {
@@ -323,7 +315,7 @@ export const readAndCheck = internalAction({
           // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
           // literal column copy AND show the patient both numbers to check against the paper bill.
           const type = c.fileType ?? blob.type ?? "image/jpeg";
-          const [first, column] = await Promise.all([readWithClaude(blob, type, lang), readChargesColumn(blob, type).catch(() => null)]);
+          const [first, column] = await Promise.all([readBill(blob, type, lang, recorder(ctx, caseId)), readChargesColumn(blob, type, recorder(ctx, caseId)).catch(() => null)]);
           bill = first;
           if (column && column.length === first.lines.length) {
             const disagree = first.lines
@@ -345,6 +337,11 @@ export const readAndCheck = internalAction({
                 ],
               } as ParsedBill;
             }
+            await step(ctx, caseId, "compare-reads",
+              disagree.length ? t("The two reads disagree on some amounts", "Las dos lecturas no coinciden en algunos montos") : t("Both reads agree on every amount", "Las dos lecturas coinciden en todos los montos"),
+              disagree.length ? "warn" : "done");
+          } else {
+            await step(ctx, caseId, "compare-reads", t("Couldn't compare a second read; please check the amounts", "No pudimos comparar una segunda lectura; revise los montos"), "warn");
           }
         } catch (e) {
           if (!c.sample) throw e;
@@ -380,6 +377,7 @@ export const readAndCheck = internalAction({
           : t(`Loaded the sample bill (${n} lines) from its source data`, `Cargamos la factura de ejemplo (${n} líneas) desde sus datos`),
         bill.unreadable.length ? "warn" : "done",
         bill.unreadable.length ? t(`Please double-check: ${bill.unreadable.join("; ")}`, `Por favor revise: ${bill.unreadable.join("; ")}`) : undefined,
+        billSource === "claude" ? "ai" : "rule",
       );
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { bill, billSource } });
 
@@ -491,26 +489,27 @@ export const draftLetters = internalAction({
     await step(ctx, caseId, "letters", t("Writing your letters", "Escribiendo sus cartas"), "running");
     let letters: Letter[] | null = null;
     let lettersSource: "claude" | "template" = "template";
-    if (hasClaude()) {
+    if (modelReady("letters")) {
       try {
-        const client = new Anthropic();
+        const record = recorder(ctx, caseId);
         const forModel = { ...facts, findings: facts.findingsEn ?? facts.findings, findingsEn: undefined, patientLanguage: lang };
         const kinds: ("assistance" | "dispute")[] = facts.findings.length ? ["assistance", "dispute"] : ["assistance"];
         // One call per letter, in parallel: about half the wait of writing both in one reply.
         const results = await Promise.all(
           kinds.map((kind) =>
-            client.beta.messages.parse({
-              model: MODEL,
-              max_tokens: 8000,
-              betas: ["server-side-fallback-2026-07-01"],
-              fallbacks: "default",
-              output_config: { effort: "low", format: betaZodOutputFormat(Letters) },
-              messages: [{ role: "user", content: `${LETTER_PROMPT}\n\nWrite ONLY the "${kind}" letter (an array with exactly one letter).\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
-            }),
+            structured(
+              {
+                task: "letters",
+                parts: [{ type: "text", text: `${LETTER_PROMPT}\n\nWrite ONLY the "${kind}" letter (an array with exactly one letter).\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
+                schema: Letters,
+                maxTokens: 8000,
+              },
+              record,
+            ),
           ),
         );
         const got = results.flatMap((res, i) =>
-          res.stop_reason !== "refusal" && res.parsed_output?.letters?.[0] ? [{ ...res.parsed_output.letters[0], kind: kinds[i] }] : [],
+          !res.refused && res.data?.letters?.[0] ? [{ ...res.data.letters[0], kind: kinds[i] }] : [],
         );
         if (got.length === kinds.length) {
           letters = got.map((l) => ({
@@ -539,9 +538,16 @@ export const draftLetters = internalAction({
       ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
       ...(lang === "es" ? { title: l.kind === "assistance" ? "Solicitud de ayuda financiera" : "Preguntas sobre la factura" } : {}),
     }));
-    await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready" } });
+    // Rule check: every dollar amount in the letters must come from the facts.
+    const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null });
+    await step(ctx, caseId, "letters-check",
+      odd.length
+        ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)
+        : t("Every dollar amount in your letters matches your bill and our checks", "Cada monto en dólares de sus cartas coincide con su factura y nuestras revisiones"),
+      odd.length ? "warn" : "done");
+    await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready", ...(odd.length ? { letterFlags: odd } : { letterFlags: undefined }) } });
     await step(ctx, caseId, "letters",
       lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
-      "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."));
+      "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."), lettersSource === "claude" ? "ai" : "rule");
   },
 });

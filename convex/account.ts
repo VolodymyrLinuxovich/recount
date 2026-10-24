@@ -13,6 +13,7 @@ export const remove = mutation({
       if (deleteBills) {
         for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(s._id);
         for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(m._id);
+        for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(r._id);
         if (c.fileId) await ctx.storage.delete(c.fileId);
         await ctx.db.delete(c._id);
       } else {

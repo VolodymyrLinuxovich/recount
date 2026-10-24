@@ -1,0 +1,273 @@
+/* "How Recount decides": the pipeline, step by step, with who does each one. */
+
+.kind {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.kind-rule {
+  background: color-mix(in srgb, var(--ok) 14%, var(--sheet));
+  color: var(--ok);
+}
+.kind-ai {
+  background: var(--rc-brand-tint);
+  color: var(--primary);
+}
+.kind-you {
+  background: color-mix(in srgb, #b45309 14%, var(--sheet));
+  color: #92400e;
+}
+
+.how {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+.how-h1 {
+  margin: var(--sp-2) 0 var(--sp-3);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+.how-lede {
+  margin: 0 0 var(--sp-5);
+  font-size: var(--fs-lg, 1.15rem);
+  color: var(--ink-2);
+}
+.how-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  margin: 0 0 var(--sp-6);
+  padding: 0;
+  list-style: none;
+}
+.how-legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+
+.how-steps {
+  margin: 0 0 var(--sp-7);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--sp-3);
+}
+.how-step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--rule);
+  border-left-width: 5px;
+  border-radius: 14px;
+  background: var(--sheet);
+}
+.how-step-rule {
+  border-left-color: var(--ok);
+}
+.how-step-ai {
+  border-left-color: var(--primary);
+}
+.how-step-you {
+  border-left-color: #b45309;
+}
+.how-step-n {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--rc-bg-2);
+  font-weight: 800;
+  color: var(--ink);
+}
+.how-step-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+}
+.how-step-h {
+  margin: 0;
+  font-size: var(--fs-lg, 1.15rem);
+  line-height: 1.3;
+}
+.how-step-body p {
+  margin: var(--sp-1) 0 0;
+  color: var(--ink-2);
+}
+
+.how-why {
+  margin: 0 0 var(--sp-6);
+  padding: var(--sp-5);
+  border-radius: 14px;
+  background: var(--rc-bg-2);
+}
+.how-why h2 {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-lg, 1.2rem);
+}
+.how-why ul {
+  margin: 0;
+  padding-left: var(--sp-5);
+  display: grid;
+  gap: var(--sp-2);
+}
+.how-end {
+  display: grid;
+  gap: var(--sp-3);
+  justify-items: center;
+  margin-bottom: var(--sp-6);
+}
+.how-link {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* The step log on a bill: the label sits under the step's text. */
+.step .kind {
+  margin-top: 4px;
+}
+
+@media (max-width: 420px) {
+  .how-step {
+    padding: var(--sp-4);
+    gap: var(--sp-3);
+  }
+}
+
+/* ---------- "Who did what" on a bill ---------- */
+.who-sum {
+  display: grid;
+  gap: var(--sp-2);
+  margin: var(--sp-2) 0 var(--sp-3);
+  padding: 0;
+  list-style: none;
+}
+.who-sum li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.who-runs {
+  margin: 0 0 var(--sp-3);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.who-run {
+  display: grid;
+  gap: 2px;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.who-task {
+  font-weight: 700;
+}
+.who-model {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.who-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.who-flag {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--rc-bg-2);
+  font-weight: 600;
+}
+.who-flag-bad {
+  color: var(--pen);
+}
+
+/* ---------- /how: models in use, and what the AI may and may not do ---------- */
+.how-models,
+.how-limits {
+  margin: 0 0 var(--sp-6);
+}
+.how-models h2,
+.how-limits h2 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-lg, 1.2rem);
+}
+.how-models > p {
+  margin: 0 0 var(--sp-3);
+  color: var(--ink-2);
+}
+.how-model-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.how-model-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.how-model-list b {
+  font-weight: 700;
+}
+.how-model-list code {
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.how-model-backup {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+@media (max-width: 520px) {
+  .how-model-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+.how-limit-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--sp-3);
+}
+.how-limit-col {
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--sheet);
+}
+.how-limit-col h3 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-base);
+}
+.how-limit-col ul {
+  margin: 0;
+  padding-left: var(--sp-5);
+  display: grid;
+  gap: 4px;
+}
+.how-limit-no h3 {
+  color: var(--pen);
+}

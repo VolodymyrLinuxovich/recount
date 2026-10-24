@@ -348,3 +348,264 @@
 .acct-pic[data-loading] {
   visibility: hidden;
 }
+
+/* ---------- Continue with Google (Google's own button look) ---------- */
+
+.acct-google {
+  margin-top: var(--sp-4);
+}
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--sp-4);
+  border: 1px solid #747775;
+  border-radius: 999px;
+  background: #fff;
+  color: #1f1f1f;
+  font-family: "Roboto", var(--font-ui), system-ui, sans-serif;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.google-btn:hover:not(:disabled) {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.25);
+}
+.google-btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.google-btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.google-btn span {
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.acct-or {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: 0 0 var(--sp-4);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.acct-or::before,
+.acct-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.acct-note {
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+  background: var(--rc-brand-tint);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- the profile menu (header) ---------- */
+
+.acct-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+button.acct-pic {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.acct-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 60;
+  width: min(280px, calc(100vw - 32px));
+  padding: var(--sp-2);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--sheet);
+  box-shadow: 0 12px 32px rgba(42, 0, 77, 0.16);
+  animation: acct-menu-in 0.16s ease-out;
+}
+@keyframes acct-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .acct-menu {
+    animation: none;
+  }
+}
+.acct-menu-who {
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--sp-1);
+}
+.acct-menu-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.acct-menu-email {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.acct-menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--sp-3);
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.acct-menu-item:hover,
+.acct-menu-item:focus-visible {
+  background: var(--rc-bg-2);
+}
+.acct-menu-out {
+  color: var(--pen);
+}
+.acct-menu-out:hover,
+.acct-menu-out:focus-visible {
+  background: color-mix(in srgb, var(--pen) 10%, transparent);
+}
+
+/* ---------- the profile page ---------- */
+
+.acct-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+@media (max-width: 520px) {
+  .acct-hero-pic {
+    width: 56px !important;
+    height: 56px !important;
+    font-size: 1.4rem !important;
+  }
+}
+.acct-hero-pic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+.acct-hero-text {
+  min-width: 0;
+}
+.acct-hero-name {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: var(--fs-xl, 1.5rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.acct-hero-email {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  overflow-wrap: break-word;
+}
+.acct-hero-via {
+  margin: 4px 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.acct-facts {
+  margin: var(--sp-3) 0 var(--sp-4);
+  display: grid;
+}
+.acct-fact {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-top: 1px solid var(--rule);
+}
+.acct-fact:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.acct-fact dt {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  padding-top: 2px;
+}
+.acct-fact dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+.acct-fact-none {
+  color: var(--ink-2);
+  font-weight: 400 !important;
+  font-style: italic;
+}
+@media (max-width: 520px) {
+  .acct-fact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+.acct-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  height: 1.6em;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--rc-brand-tint);
+  color: var(--primary);
+  font-size: 0.75em;
+  vertical-align: middle;
+}
+.acct-bills {
+  margin: var(--sp-3) 0 var(--sp-4);
+}
+.acct-signout-btn {
+  background: var(--sheet) !important;
+  color: var(--pen) !important;
+  border: 1.5px solid var(--pen) !important;
+}
+.acct-profile-page .rc-btn--block + .rc-btn--block {
+  margin-top: var(--sp-2);
+}
+
+.acct-hero.rc-card {
+  padding: var(--sp-4) var(--sp-5);
+}
+.acct-card .bill-slips.acct-bills {
+  margin: var(--sp-3) 0 var(--sp-4);
+}

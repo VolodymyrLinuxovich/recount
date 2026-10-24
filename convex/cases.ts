@@ -10,6 +10,7 @@ import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { FPL } from "./lib/reference";
 import { HOSPITALS, tokens } from "./lib/statewide";
+import { kindOf } from "./lib/pipeline";
 
 // ---- access: each case has a random secret kept only on the patient's phone ----
 
@@ -100,7 +101,9 @@ export const get = query({
     const { token: _secret, ownerId, ...rest } = c;
     void _secret;
     const userId = ownerId ? await currentUser(ctx) : null;
-    return { ...rest, steps, fileUrl, mine: !!ownerId && userId === ownerId };
+    const runs = await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect();
+    const agentRuns = runs.map(({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }) => ({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }));
+    return { ...rest, steps, fileUrl, agentRuns, mine: !!ownerId && userId === ownerId };
   },
 });
 
@@ -215,6 +218,7 @@ export const remove = mutation({
     if (!c) return;
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
+    for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     await ctx.db.delete(id);
   },
@@ -251,6 +255,26 @@ export const patch = internalMutation({
   handler: async (ctx, { id, fields }) => ctx.db.patch(id, fields),
 });
 
+/** Log one model call for a case (see lib/model.ts). */
+export const recordRun = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    task: v.string(),
+    provider: v.string(),
+    model: v.string(),
+    ms: v.number(),
+    inputTokens: v.union(v.number(), v.null()),
+    outputTokens: v.union(v.number(), v.null()),
+    ok: v.boolean(),
+    fallbackUsed: v.boolean(),
+    error: v.optional(v.string()),
+  },
+  handler: async (ctx, a) => {
+    if (!(await ctx.db.get(a.caseId))) return;
+    await ctx.db.insert("agentRuns", { ...a, at: Date.now() });
+  },
+});
+
 export const step = internalMutation({
   args: {
     caseId: v.id("cases"),
@@ -258,12 +282,14 @@ export const step = internalMutation({
     label: v.string(),
     detail: v.optional(v.string()),
     state: v.union(v.literal("running"), v.literal("done"), v.literal("warn"), v.literal("error")),
+    kind: v.optional(v.union(v.literal("rule"), v.literal("ai"), v.literal("person"))),
   },
   handler: async (ctx, a) => {
+    a = { ...a, kind: a.kind ?? kindOf(a.key) };
     const existing = (await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", a.caseId)).collect()).find(
       (s) => s.key === a.key,
     );
-    if (existing) await ctx.db.patch(existing._id, { label: a.label, detail: a.detail, state: a.state });
+    if (existing) await ctx.db.patch(existing._id, { label: a.label, detail: a.detail, state: a.state, kind: a.kind });
     else await ctx.db.insert("steps", { ...a, at: Date.now() });
   },
 });
@@ -290,6 +316,7 @@ export const adminRemove = internalMutation({
     if (!c) return "not found";
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
+    for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     await ctx.db.delete(id);
     return "deleted";

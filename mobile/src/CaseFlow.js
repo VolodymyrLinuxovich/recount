@@ -220,12 +220,19 @@ export function CaseFlow({ t, id, token, onHome }) {
           body: <Answer t={t} e={c.eligibility} />,
           primary:
             status === "ready" || status === "approved"
-              ? { label: t.seeLetters, onPress: () => { setLetterIndex(0); go("details"); } }
+              ? {
+                  label: t.seeLetters,
+                  onPress: () => {
+                    // Start with the name printed on the bill; the patient can change it.
+                    if (!details.name && c.bill?.patientName) setDetails({ ...details, name: c.bill.patientName });
+                    setLetterIndex(0);
+                    go("details");
+                  },
+                }
               : { label: t.draftingLetters, busy: true },
         };
       case "details": {
-        // Prefill the name printed on the bill.
-        const d = details.name || !c.bill?.patientName ? details : { ...details, name: c.bill.patientName };
+        const d = details;
         const problems = checkDetails(d);
         const ok = !Object.keys(problems).length;
         return {
@@ -238,7 +245,16 @@ export function CaseFlow({ t, id, token, onHome }) {
               setDetailsTried(true);
               if (!ok) return;
               AsyncStorage.setItem(DETAILS_KEY, JSON.stringify(d)).catch(() => {});
-              setDrafts((drafts || []).map((l) => fillLetter(l, d)));
+              // The letters already use the name printed on the bill; use the patient's name instead.
+              const billName = (c.bill?.patientName || "").trim();
+              const newName = d.name.trim();
+              const rename = (txt) => (txt && billName && newName && billName !== newName ? txt.split(billName).join(newName) : txt);
+              setDrafts(
+                // Start from the letters as written, so changing a detail twice still works.
+                (c.letters || drafts || []).map((l) =>
+                  fillLetter({ ...l, subject: rename(l.subject), body: rename(l.body), bodyPatient: rename(l.bodyPatient), subjectPatient: rename(l.subjectPatient) }, d),
+                ),
+              );
               setLetterIndex(0);
               go("letter");
             },
@@ -604,7 +620,7 @@ function MoneyInput({ value, onChange }) {
         keyboardType="number-pad"
         autoFocus
         placeholder="0"
-        placeholderTextColor="#d9d2ea"
+        placeholderTextColor="#958cad"
       />
     </View>
   );

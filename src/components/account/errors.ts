@@ -21,6 +21,7 @@ export function authError(t: T, e: unknown, flow: "signIn" | "signUp"): string {
   const raw = rawError(e);
   if (KNOWN[raw]) return t(KNOWN[raw]);
   if (/too ?many/i.test(raw)) return t("acct.errTooMany");
+  if (/signs in with Google/i.test(raw)) return t("acct.errGoogle");
   if (/already exists/i.test(raw)) return t("acct.errExists");
   if (/network|fetch|offline|connection/i.test(raw)) return t("acct.errNetwork");
   return flow === "signIn" ? t("acct.errWrong") : t("acct.errSignUp");

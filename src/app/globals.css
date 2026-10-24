@@ -1773,3 +1773,8 @@ delete ---------- */
   background: var(--rc-bg-2);
   color: var(--ink);
 }
+
+/* Spanish readers: hidden for the moment before the Spanish text is in, instead of seeing English first. */
+html.i18n-wait body {
+  opacity: 0;
+}
