@@ -11,6 +11,7 @@
 import type * as account from "../account.js";
 import type * as agent from "../agent.js";
 import type * as auth from "../auth.js";
+import type * as authCheck from "../authCheck.js";
 import type * as cases from "../cases.js";
 import type * as chat from "../chat.js";
 import type * as chatAgent from "../chatAgent.js";
@@ -25,6 +26,7 @@ import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
 import type * as lib_sample from "../lib/sample.js";
 import type * as lib_statewide from "../lib/statewide.js";
+import type * as lib_user from "../lib/user.js";
 import type * as profile from "../profile.js";
 
 import type {
@@ -37,6 +39,7 @@ declare const fullApi: ApiFromModules<{
   account: typeof account;
   agent: typeof agent;
   auth: typeof auth;
+  authCheck: typeof authCheck;
   cases: typeof cases;
   chat: typeof chat;
   chatAgent: typeof chatAgent;
@@ -51,6 +54,7 @@ declare const fullApi: ApiFromModules<{
   "lib/reference": typeof lib_reference;
   "lib/sample": typeof lib_sample;
   "lib/statewide": typeof lib_statewide;
+  "lib/user": typeof lib_user;
   profile: typeof profile;
 }>;
 
