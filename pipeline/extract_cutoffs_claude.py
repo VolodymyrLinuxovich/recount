@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from build_hospital_index import doc_text  # noqa: E402
+from fpl_guard import free_cutoff  # noqa: E402
 
 INDEX = ROOT / "convex" / "lib" / "hospitalIndex.json"
 CORPUS = ROOT / "audit" / "corpus" / "hospitals.json"
@@ -65,6 +66,22 @@ def quote_ok(quote: str | None, value: float | None, text: str) -> bool:
     return bool(re.search(rf"(?<!\d){re.escape(str(v))}\s*(%|percent)", quote, re.I))
 
 
+def apply_overrides(data: dict) -> None:
+    """Hand-checked corrections (pipeline/cutoff_overrides.json), each backed by a verbatim quote."""
+    path = ROOT / "pipeline" / "cutoff_overrides.json"
+    if not path.exists():
+        return
+    fixes = json.loads(path.read_text())["hospitals"]
+    for h in data["hospitals"]:
+        fix = fixes.get(h["key"])
+        if not fix:
+            continue
+        for k in ("freeCareMaxFplPct", "freeQuote", "discountMaxFplPct", "discountQuote"):
+            if k in fix:
+                h["fap"][k] = fix[k]
+        h["fap"]["method"] = "manual"
+
+
 def main() -> None:
     import anthropic
 
@@ -97,7 +114,9 @@ def main() -> None:
         changed = False
         # "full or partial" doesn't prove FREE care at that income; don't promise it.
         ambiguous = bool(r["freeQuote"] and re.search(r"full or partial|partial or full", r["freeQuote"], re.I))
-        if quote_ok(r["freeQuote"], r["freeCareMaxFplPct"], text) and not ambiguous:
+        # The quote must also show that exact number as the FREE tier (not a discount tier).
+        tier_ok = free_cutoff(r["freeQuote"]) == (int(r["freeCareMaxFplPct"]) if r["freeCareMaxFplPct"] is not None else None)
+        if quote_ok(r["freeQuote"], r["freeCareMaxFplPct"], text) and not ambiguous and tier_ok:
             fap["freeCareMaxFplPct"], fap["freeQuote"] = r["freeCareMaxFplPct"], r["freeQuote"]
             changed = True
         if fap["discountMaxFplPct"] is None and not fap["discountNoCap"]:
@@ -111,6 +130,7 @@ def main() -> None:
             fap["method"] = "claude"
             filled += 1
             print(f"{h['name']}: free <= {fap['freeCareMaxFplPct']}, discount <= {fap['discountMaxFplPct']}{' (no cap)' if fap['discountNoCap'] else ''}")
+    apply_overrides(data)
     INDEX.write_text(json.dumps(data, separators=(",", ":")))
     have = sum(h["fap"]["freeCareMaxFplPct"] is not None for h in data["hospitals"])
     print(f"filled {filled}; free-care cutoff now known for {have} of {len(data['hospitals'])}")

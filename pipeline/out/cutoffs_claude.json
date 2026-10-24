@@ -530,5 +530,2098 @@
   "discountMaxFplPct": 500,
   "discountNoCap": false,
   "discountQuote": "Hospital may also extend Discount Payment Assistance to otherwise eligible patients whose Family Income is above 400% and at or below 500% of the most recent Federal Poverty Guidelines, in accordance with Hospital's written discount schedule or calculation worksheet."
+ },
+ "ahmc-anaheim-regional-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "CFO for exceptions 201 to 400 percent FPL Discount Payment (Partial Charity Care) Not to exceed AGB."
+ },
+ "ahmc-seton-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "CFO for exceptions 201 to 400 percent FPL Discount Payment (Partial Charity Care) Not to exceed AGB."
+ },
+ "ahmc-seton-medical-center-coastside": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discount Payment is available to uninsured patients and patients with high medical costs whose family income exceeds 200 percent but does not exceed 400 percent FPL."
+ },
+ "alhambra-hospital-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient & Cash Discounted Price A patient whose family income is below or equal to the Charity Care Criteria equal to or less than 250% of the Federal Poverty (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty- guidelines or by calling Patient Financial Services at 626-458-4779.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Other Cash Discounted Patient A patient whose family income is above 401% of the FPL qualifies for partial pay for services provided."
+ },
+ "aliso-ridge-behavioral-health-llc": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "3/27/2026 FULL FREE CARE Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "alta-bates-summit-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "alta-bates-summit-medical-center-summit-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "alta-bates-summit-medical-center-alta-bates-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "alta-bates-summit-medical-center-herrick-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "alvarado-parkway-institute-b-h-s": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured p atients with a family income at or below 400% of the FPL qualify for a full waiver of charges. b.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured patients with a family income at or below 400% of the FPL qualify for a discounted rate (e.g., Medicare rate). c."
+ },
+ "anaheim-community-hospital-llc": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients who have no third-party source of payment, such as an insurance company or government program, for any portion of their medical expenses or have a family income at or below 400% of the federal poverty level."
+ },
+ "anaheim-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an Uninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less than 200% of the current applicable federal poverty guideline (\"FPG\"), and (3) has established qualification in accordance with the requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG, and (4) has established qualification in accordance with the requirements contained in this policy."
+ },
+ "arrowhead-regional-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "The patient has a Family income that does not exceed 400% of the Federal Poverty Level (FPL).",
+  "discountMaxFplPct": 550,
+  "discountNoCap": false,
+  "discountQuote": "T he patient\u2019s Family income is between 401% and 550% FPL; and 2."
+ },
+ "aurora-behavioral-healthcare-santa-rosa-llc": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Patients who are covered by insurance but have (i) family income at or below 400% of the federal poverty level; or (ii) medical expenses for themselves or their family (incurred at the hospital affiliate or paid to other providers in the past 12 months) that exceed 10% of the patient\u2019s family income."
+ },
+ "aurora-charter-oak": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL FREE CARE Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "aurora-las-encinas-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL FREE CARE Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "aurora-san-diego": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL FREE CARE Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "bakersfield-behavorial-healthcare-hospital-llc": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients who have no third-party source of payment, such as an insurance company or government program, for any portion of their medical expenses and have a family income at or below 400% of the federal poverty level."
+ },
+ "bakersfield-memorial-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "barlow-respiratory-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Charity Care (free care) is available to patients whose Family Income is at or below 250 percent of the then-current Federal Poverty Level Guidelines and who are self-pay patients or patients with high medical costs.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Discounted Care is available to Financially Qualified Patients whose Family Income is at or below 400 percent of the Federal Poverty Level and who do not qualify for Charity Care."
+ },
+ "barstow-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Eligibility Charity Care is available to any Financially Qualified Patient, meaning a patient whose family income is at or below 400 percent of the Federal Poverty Level and who:",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) an Uninsured/Self- pay Patient or a Patient with High Medical Costs; and (2) a patient who has a family income that does not exceed 400% of the federal poverty level."
+ },
+ "barton-memorial-hospital": {
+  "freeCareMaxFplPct": 249,
+  "freeQuote": "Patients are eligible for Charity Care if their Family Income is at or less than 249% of the Federal Poverty Level (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients are eligible for Discount ed Care if they are (1) uninsured, or i f they are insured with remaining out of pocket costs , and (2) with Family Income between 250% and 400% of the Federal Poverty Level (FPL)."
+ },
+ "bear-valley-community-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Income 200% or less FPL will be granted full (100%) charity care (free care)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Benefit Amount -Discounted Payments for uninsured/self-pay Applicants qualifying income is 201% but no greater than 400% the FPL benefit, including family income, is as follows: i."
+ },
+ "bhc-alhambra-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care \u2013 Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Self-Pay Discount - Self-Pay Patients with gross incomes exceeding 400% of the FPL will owe no more than the applicable private pay inpatient or outpatient discounted reimbursement rate, or stated co-pay amount, whichever is less."
+ },
+ "california-hospital-medical-center-los-angeles": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "california-pacific-medical-center-davies-campus-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "california-pacific-medical-center-mission-bernal-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "california-pacific-medical-center-van-ness-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "canyon-ridge-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care\u2013 Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services. b.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of Self-Pay charges for Medically Necessary Services."
+ },
+ "casa-colina-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If a patient\u2019s family income is 200% or less of the FPL, then e ntire amount of the bill will be forgiven.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If family income is between 201% and 400% of the Federal Poverty Level, then a portion of the bill may be forgiven."
+ },
+ "catalina-island-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Income 200% or less FPL shall be granted full (100%) charity care (free care) for a 12-month period.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Income 201%-400% of FPL Guidelines discounted to not exceed the maximum amount a patient would reasonably be expected to pay based on Medicare or Medi-Cal rates, whichever is greater."
+ },
+ "cedars-sinai-marina-del-rey-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care will be made available to patients whose family income is at or below 400% of FPL.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose income ranges between 401% to 600% of FPL qualify for a Discount Payment."
+ },
+ "cedars-sinai-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care will be made available to patients whose family income is at or below 400% of FPL.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose income ranges between 401% to 600% of FPL qualify for a Discount Payment."
+ },
+ "centinela-hospital-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level;"
+ },
+ "central-valley-specialty-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "chapman-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an U ninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less that 200% of the current applicable federal poverty guideline (\u201cFPG\u201d) and (3) has established qualification in accordance with requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG; and (4) who has established qualification in acc ordance with requirements contained in this policy."
+ },
+ "childrens-healthcare-organization-of-northern-ca-pediatric-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is available under the separate 200% FPL criteria below.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients who are uninsured OR have high medical costs and whose family income is at or below 400% of the Federal Poverty Level (FPL) are eligible to apply for discount payment."
+ },
+ "childrens-hospital-at-mission": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured or underinsured patients whose household income, as determined in accordance with the Assistance Application, is less than or equal to 400% of the poverty guidelines, will receive care, free of charge.",
+  "discountMaxFplPct": 550,
+  "discountNoCap": false,
+  "discountQuote": "For uninsured patients with household incomes between 451% and 550% of the Federal Poverty Level, CHOC may provide a discounted Private Pay Fee Schedule, whereby the allowable medical expense would be equivalent to a 50% discount off billed charges."
+ },
+ "childrens-hospital-of-los-angeles": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose Gross Monthly Household Income is at or below 400% of the Federal Poverty Level and who satisfy the other requirements of this Policy are eligible to receive Charity Care (a waiver of the patient\u2019s financial obligation for the entire amount of gross charges for services for services rendered by CHLA).",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose Gross Monthly Household Income is above 400% but at or below 600% of the Federal Poverty Level and who satisfy the other requirements of this policy are eligible to receive services from CHLA at a discount such that their patient liability amount after the discount will not exceed the amounts generally billed to patients with insurance (\u201cAmounts Generally Billed or AGB\u201d)."
+ },
+ "chinese-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "A n Eligible Patient is eligible for Charity Care if he/she/they is a Self-Pay Patient and have a Patient Family Income that is 200% or less of the Federal Poverty Level.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Page 4 of 11 845 JACKSON STREET, SAN FRANCISCO, CA 94133 A patient whose current Patient Family Income (defined above) does not exceed 400 percent of the Federal Poverty Level, and who also meets one of the following two criteria: a."
+ },
+ "chino-valley-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family Income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "city-of-hope-helford-clinical-research-hospital": {
+  "freeCareMaxFplPct": 600,
+  "freeQuote": "At o r below FPL of 600%: may apply for Financial Assistance and receive free care. i.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "city-of-hope-orange-county-cancer-specialty-hospital": {
+  "freeCareMaxFplPct": 600,
+  "freeQuote": "At o r below FPL of 600%: may apply for Financial Assistance and receive free care. i.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "coalinga-regional-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "coast-plaza-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "ELIGIBILITY CATEGORY INCOME Uninsured \u2264200% FPL Insured with High Medical Costs \u2264200% FPL To qualify for Free Care, the patient will apply for and submit the documentation required, as set forth in the se Policies.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "ELIGIBILITY CATEGORY INCOME DISCOUNTED BALANCE Uninsured 200.01% to 400 % FPL Medicare Rate Insured with High Medical Costs 200.01% to 400 % FPL Medicare Rate VI."
+ },
+ "college-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "If the patient\u2019s income is 400% or less of the FPL, the entire hospital bill will be written-off, regardless of net worth or size of bill.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "4 OF 7 450% of the FPL, then a portion of the hospital bill is written-off based upon a sliding scale, regardless of net worth or size of bill, as follows: a."
+ },
+ "college-hospital-costa-mesa": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "All uninsured patients whose income is 400% or less of the FPL, will have their entire hospital bill written-off, regardless of net worth or size of bill.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "If the patient\u2019s income is between 401% and 450% of the FPL, then a portion of the hospital bill is written-off based upon a sliding scale, regardless of net worth or size of bill, as follows: a."
+ },
+ "colorado-river-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Uninsured patients, patients with high medical costs, or their guarantors earning 200% of the FPL or less will be granted Charity Care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured patients or patients with high medical costs, or their guarantors (responsible parties), earning between 201% and 400% of the Federal Poverty Level (FPL) are eligible for an AB 1020 Discount."
+ },
+ "colusa-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "community-behavioral-health-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Who are Uninsured, as defined above; and Who have a family income at or below 400% of the most recent Federal Poverty Level (FPL); or 2.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Patient has a family income between 401% and 450% of the FPL."
+ },
+ "community-hospital-of-huntington-park": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "ELIGIBILITY CATEGORY INCOME Uninsured \u2264200% FPL Insured with High Medical Costs \u2264200% FPL To qualify for Free Care, the patient will apply for and submit the documentation required, as set forth in the se Policies.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "ELIGIBILITY CATEGORY INCOME DISCOUNTED BALANCE Uninsured 200.01% to 400 % FPL Medicare Rate Insured with High Medical Costs 200.01% to 400 % FPL Medicare Rate VI."
+ },
+ "community-hospital-of-san-bernardino": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) A ny patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) A ny Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "contra-costa-regional-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients are financially qualified to obtain fully discounted medical care when their family income is at or below 400% of the federal poverty level and their net assets do not exceed $2,000 for an individual or $3,000 per family.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured patients are financially qualified to obtain a discount on their medical bills when their family income is at or below 400% of the federal poverty level."
+ },
+ "corona-regional-medical-center-magnolia": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "corona-regional-medical-center-main": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "cottage-rehabilitation-hospital": {
+  "freeCareMaxFplPct": 500,
+  "freeQuote": "Uninsured Patients and patients with High Medical Costs with a Household Income equal to or less than 500% of FPL are eligible for 100% Financial Assistance.",
+  "discountMaxFplPct": 700,
+  "discountNoCap": false,
+  "discountQuote": "Discounted care is available for patients with a Household Income up to 700% of the FPL, taking into consideration Number of Family Members (and not considering Monetary Assets)."
+ },
+ "dameron-hospital": {
+  "freeCareMaxFplPct": 150,
+  "freeQuote": "The Hospital will provide its Charity Care Program to Financially Qualified Patients who are unable to pay, regardless of insurance status, provided that the patient's income falls below 150 percent of the Federal Poverty Level.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "The Hospital shall limit the expected payment for Emergency Medical Care and other Medically Necessary Services provided by the Hospital to Self-Pay Patients whose documented income is between 150 percent and 400 percent, inclusive, of the Federal Poverty Level, to the amount of payment the Hospital would expect, in good faith, to receive for providing the services from Medicare or Medi-Cal, whichever is greater, and in no event more than the \"amounts generally billed\" (\"AGB\") as determined under Section 501(r) of the Internal Revenue Code."
+ },
+ "del-amo-behavioral-health-system": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care\u2013 Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services. b.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive a partial charity write-off of all Self-Pay charges for Medically Necessary Services."
+ },
+ "desert-regional-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "desert-valley-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level;"
+ },
+ "docs-surgical-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "DOCS Surgical Hospital will provide a full charitable deduction for applicants whose qualifying income is at 200% or less of the unit value(s) established by the Department of Health and Human Services\u2019 (HHS) Poverty Guidelines.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If your income is between 200% to 400% of the Federal Poverty Income Guidelines you may qualify for partial Charity Care."
+ },
+ "doctors-hospital-of-manteca": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "doctors-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "doctors-medical-center-behavioral-health-department": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "dominican-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "east-los-angeles-doctors-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "ELIGIBILITY CATEGORY INCOME Uninsured \u2264200% FPL Insured with High Medical Costs \u2264200% FPL To qualify for Free Care, the patient will apply for and submit the documentation required, as set forth in the se Policies.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "ELIGIBILITY CATEGORY INCOME DISCOUNTED BALANCE Uninsured 200.01% to 400 % FPL Medicare Rate Insured with High Medical Costs 200.01% to 400 % FPL Medicare Rate VI."
+ },
+ "eden-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "el-camino-health": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Eligibility for Financial Assistance (Charity Care) ECH provides full Charity Care to uninsured patients whose family incomes are at or below 400% of the FPL or patients with high medical costs whose family incomes are at or below 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "el-camino-hospital-d-p-aph": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Eligibility for Financial Assistance (Charity Care) ECH provides full Charity Care to uninsured patients whose family incomes are at or below 400% of the FPL or patients with high medical costs whose family incomes are at or below 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "el-camino-hospital-los-gatos": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Eligibility for Financial Assistance (Charity Care) ECH provides full Charity Care to uninsured patients whose family incomes are at or below 400% of the FPL or patients with high medical costs whose family incomes are at or below 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "emanate-health-foothill-presbyterian-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients with an income level at 200% or less of the FPL, will have the entire hospital bill written off regardless of net worth or size of bill;",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with an income level of 201% to 400% of the FPL, will have a portion of the hospital bill written off, based on the sliding scale set forth below regardless of net worth or size of bill:"
+ },
+ "emanate-health-inter-community-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients with an income level at 200% or less of the FPL, will have the entire hospital bill written off regardless of net worth or size of bill;",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with an income level of 201% to 400% of the FPL, will have a portion of the hospital bill written off, based on the sliding scale set forth below regardless of net worth or size of bill:"
+ },
+ "emanate-health-queen-of-the-valley-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients with an income level at 200% or less of the FPL, will have the entire hospital bill written off regardless of net worth or size of bill;",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with an income level of 201% to 400% of the FPL, will have a portion of the hospital bill written off, based on the sliding scale set forth below regardless of net worth or size of bill:"
+ },
+ "emanuel-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "encino-hospital-medical-center": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "enloe-health": {
+  "freeCareMaxFplPct": 150,
+  "freeQuote": "Financial assistance discounts will be granted using the following criteria: o If family income is less than 150 percent FPL:",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "100 percent of Medicare fee schedule, or the self-pay discount of 55% whichever is less. o If family income is 401 percent to 450 percent FPL, and current cumulative patient out-of-pocket amounts are greater than $15,000:"
+ },
+ "enloe-medical-center-cohasset": {
+  "freeCareMaxFplPct": 150,
+  "freeQuote": "Financial assistance discounts will be granted using the following criteria: o If family income is less than 150 percent FPL:",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "100 percent of Medicare fee schedule, or the self-pay discount of 55% whichever is less. o If family income is 401 percent to 450 percent FPL, and current cumulative patient out-of-pocket amounts are greater than $15,000:"
+ },
+ "enloe-rehabilitation-center": {
+  "freeCareMaxFplPct": 150,
+  "freeQuote": "Financial assistance discounts will be granted using the following criteria: o If family income is less than 150 percent FPL:",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "100 percent of Medicare fee schedule, or the self-pay discount of 55% whichever is less. o If family income is 401 percent to 450 percent FPL, and current cumulative patient out-of-pocket amounts are greater than $15,000:"
+ },
+ "fremont-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care\u2013 Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive a partial charity write-off of all Self-Pay charges for Medically Necessary Services."
+ },
+ "french-hospital-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "garden-grove-hospital-and-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family Income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "garfield-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "CFO for exceptions 201 to 400 percent FPL Discount Payment (Partial Charity Care) Not to exceed AGB."
+ },
+ "glendale-memorial-hospital-and-health-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "glendora-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Full Charity-Free Care For patients whose family income is at or below (200%) of the Federal Poverty Level, their entire bill will be written off.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients and Patients with High Medical Costs who do not qualify for Charity Care/Free Care and whose Patient Family Incomes are at or below 400% of FPL are eligible to receive a discount for Eligible Services received by the patient and an extended payment plan."
+ },
+ "glenn-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "goleta-valley-cottage-hospital": {
+  "freeCareMaxFplPct": 500,
+  "freeQuote": "Uninsured Patients and patients with High Medical Costs with a Household Income equal to or less than 500% of FPL are eligible for 100% Financial Assistance.",
+  "discountMaxFplPct": 700,
+  "discountNoCap": false,
+  "discountQuote": "Discounted care is available for patients with a Household Income up to 700% of the FPL, taking into consideration Number of Family Members (and not considering Monetary Assets)."
+ },
+ "good-samaritan-hospital-bakersfield": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care INCOME QUALIFICATIONS Any uninsured or underinsured patient whose family income is less than 400% of the current federal poverty level (FPG) and is unable to pay his or her Hospital bill shall be considered eligible for financial assistance.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "grossmont-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "healdsburg-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for financial assistance 100% write-off on patient responsibility amounts.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Providence will provide free or discounted hospital services to qualified low income, uninsured and underinsured patients, and patients with high medical costs who are at or below 400% of the FPL, when the ability to pay for services is a barrier to accessing medically necessary emergency and other hospital care and no alternative source of coverage has been identified."
+ },
+ "healthbridge-childrens-hospital-orange": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Free care for eligible services for qualifying patients with family income <= 200% FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with family income <= 400% FPL are eligible for Discount Payment Assistance."
+ },
+ "hemet-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an Uninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less than 200% of the current applicable federal poverty guideline (\"FPG\"), and (3) has established qualification in accordance with the requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG, and (4) has established qualification in accordance with the requirements contained in this policy."
+ },
+ "heritage-oaks-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care\u2013 Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive a partial charity write-off of all Self-Pay charges for Medically Necessary Services."
+ },
+ "hi-desert-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "hoag-hospital-irvine": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL."
+ },
+ "hoag-memorial-hospital-presbyterian": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL."
+ },
+ "hoag-orthopedic-institute": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Free care is offered to patients with family income of 200% or less of FPL and discounted care is offered to patients with family income of 201% to 400% of FPL."
+ },
+ "hollywood-presbyterian-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Whose Family Incomes are at or below 200% of the most recent Federal Poverty Income Guidelines (Exhibit A); and b.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "For patients whose Family Incomes are between 350% and greater of the most recent Federal Poverty Income Guidelines (Exhibit A), HPMC shall limit expected payments for Covered Services to an amount equal to five percent (5%) of HPMC\u2019s undiscounted charges for the Covered Services provided to the patient less any payments made by the patient."
+ },
+ "huntington-beach-hospital": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "huntington-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care will be made available to patients whose family income is at or below 400% of FPL.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose income ranges between 401% to 600% of FPL qualify for a Discount Payment."
+ },
+ "el-centro-regional-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "An Eligible Patient with Family income at 200% or less of the established poverty income level, based upon current FPL Guidelines, is eligible for Full Charity Care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "An Eligible Patient with Family income between 201% and 400% of the established poverty income level, based upon current FPL Guidelines, is eligible for Discount Payment."
+ },
+ "jerold-phelps-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care Program To be considered for \u201ccharity care\u201d, the patient\u2019s family income must be at or below 400% of the current Federal Poverty Level (FPL).",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Discount Payment and Extended Payment Plans To be considered for Discounted and Extended Payment Plans, the patient\u2019s family income maybe at or above 400% of the current Federal Poverty Level (FPL)."
+ },
+ "john-c-fremont-healthcare-district": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If the patient\u2019s family income is 200% or less of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance Program qualification requirements, the entire (100%) patient liability portion of the bill for services will be written off.",
+  "discountMaxFplPct": 350,
+  "discountNoCap": false,
+  "discountQuote": "If the patient\u2019s family income is between 201% and 350% of the established poverty income lev el, based upon current FPL Guidelines, and the patient meets all other Financial Assistance Program qualification requirements, the following will apply:"
+ },
+ "john-f-kennedy-memorial-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "john-muir-behavioral-health-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "A patient without third-party coverage (and ineligible for coverage under State, County, and other programs), will be entitled to free Medically Necessary Hospital Services under this Policy if the sum of the following is at or below 400% of the FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "john-muir-medical-center-concord-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "A patient without third-party coverage (and ineligible for coverage under State, County, and other programs), will be entitled to free Medically Necessary Hospital Services under this Policy if the sum of the following is at or below 400% of the FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "john-muir-medical-center-walnut-creek-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "A patient without third-party coverage (and ineligible for coverage under State, County, and other programs), will be entitled to free Medically Necessary Hospital Services under this Policy if the sum of the following is at or below 400% of the FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "kaweah-health-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care A full write-off of all balances due from a patient, whether the patient is insured, underinsured or self-pay, shall be granted to those financially qualified patients whose family income is up to 200% of the Federal Poverty Level published on the Department of Health and Human Service\u2019s website and in effect at the time the patient was first billed.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care will be granted to Financially Qualified Patients whose Family Income is between 201% and 600% of the Federal Poverty Level published on the Department of Health and Human Service\u2019s and in effect at the time the patient was first billed."
+ },
+ "kaweah-health-mental-health-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care A full write-off of all balances due from a patient, whether the patient is insured, underinsured or self-pay, shall be granted to those financially qualified patients whose family income is up to 200% of the Federal Poverty Level published on the Department of Health and Human Service\u2019s website and in effect at the time the patient was first billed.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care will be granted to Financially Qualified Patients whose Family Income is between 201% and 600% of the Federal Poverty Level published on the Department of Health and Human Service\u2019s and in effect at the time the patient was first billed."
+ },
+ "keck-hospital-of-usc": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "For income levels at or below 200% of FPL, the entire hospital bill will be forgiven.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Payment Limited, expected payment for emergency and medically necessary services to a discounted rate for financially qualified patients whose income is between 201 and 400%, inclusive, of the Federal Poverty Level."
+ },
+ "kentfield-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the Federal Poverty Level (FPL); and, 2.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "kentfield-hospital-san-francisco": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the Federal Poverty Level (FPL); and, 2.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "kern-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Below 200% of FPL would be eligible for full discount to charity care, above 200%, but not more than 400% of the FPL, would be eligible to receive services at the rates of payment received from Medicare.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Refer to policy, POL-KMWP100. d) Clients whose income is above 200% but not more than 400% of the FPL would be eligible to receive services at the rates of payment received from Medicare (DRG for inpatient admissions and NTE payment for services provided to financially qualified patient to the amount of payment the hospital would expect, in good faith, to receive for providing services from Medicare or Medi-Cal, whichever is greater."
+ },
+ "kindred-hospital-baldwin-park": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-los-angeles": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-ontario": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-riverside": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-san-diego": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-san-francisco-bay-area": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-san-gabriel-valley": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-santa-ana": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-south-bay": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-brea": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-paramount": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-rancho": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "kindred-hospital-westminster": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "la-palma-intercommunity-hospital": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "laguna-honda-hospital-and-rehabilitation-center": {
+  "freeCareMaxFplPct": 138,
+  "freeQuote": "A patient\u2019s household income may not exceed 138% of the Federal poverty level.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": "A patient\u2019s household income may be at or above 139% of the FPL."
+ },
+ "langley-porter-psychiatric-institute": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care Discount 1.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL); or 3."
+ },
+ "lompoc-valley-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If an uninsured or High Medical Costs patient\u2019s family income is 200% or less of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance qualification requirements, the patient qualifies for full charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If an uninsured patient\u2019s family income is between 201% and 400% of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance qualification requirements, the following will apply:"
+ },
+ "los-angeles-community-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Low Income Financial Assistance Patient A patient whose family income is above the Charity Care threshold but equal to or below 400% of the Federal Poverty Level (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic mobility/poverty-guidelines or by calling Patient Financial Services at 562 -293-3200."
+ },
+ "los-angeles-community-hospital-at-bellflower": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Low Income Financial Assistance Patient A patient whose family income is above the Charity Care threshold but equal to or below 400% of the Federal Poverty Level (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic mobility/poverty-guidelines or by calling Patient Financial Services at 562 -293-3200."
+ },
+ "lucile-packard-childrens-hospital-stanford": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patient has Family Income not in excess of 400% of the most recent Federal Poverty Guidelines 3."
+ },
+ "mad-river-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Self-pay patients and patients with High Medical Costs whose Family Income is at or below 400% of the Federal Poverty Level are eligible for Charity Care under this Policy when the applicable eligibility requirements are met.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients at or below 400% FPL are eligible for the statutory Discount Payment if they are not receiving the more generous Charity Care benefit."
+ },
+ "madera-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600%of the FPL are eligible to receive services at discounted rates."
+ },
+ "marian-regional-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "marian-regional-medical-center-arroyo-grande": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "marinhealth-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full charity care (no payment) is for all patients at 400% or less of the FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "mark-twain-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "marshall-medical-center": {
+  "freeCareMaxFplPct": 149,
+  "freeQuote": "Charity Care 149% FPL and below patient has zero liability",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Level 4 Discounted Payment Insured and Uninsured 350% - 450% FPL responsible for 100% of AGB"
+ },
+ "martin-luther-king-jr-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family gross income is between 0-400 % of FPL in effect at the time of the determination are eligible for charity care (i.e., free care).",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose gross income is above 400% of FPL and up to and including 450% of FPL in effect at the time of the determination are eligible to receive discounted care."
+ },
+ "mayers-memorial-hospital": {
+  "freeCareMaxFplPct": 75,
+  "freeQuote": "The patient\u2019s household income does not exceed 75% of the Federal Poverty Level; and iv.",
+  "discountMaxFplPct": 350,
+  "discountNoCap": false,
+  "discountQuote": "127405(2), Mayers Memorial Hospital has established eligibility levels for financial assistance and charity care at less than 350 percent of the federal poverty level as appropriate to maintain its financial and operational integrity."
+ },
+ "memorial-hospital-los-banos": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "memorial-hospital-of-gardena": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "ELIGIBILITY CATEGORY INCOME Uninsured \u2264200% FPL Insured with High Medical Costs \u2264200% FPL To qualify for Free Care, the patient will apply for and submit the documentation required, as set forth in the se Policies.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "ELIGIBILITY CATEGORY INCOME DISCOUNTED BALANCE Uninsured 200.01% to 400 % FPL Medicare Rate Insured with High Medical Costs 200.01% to 400 % FPL Medicare Rate VI."
+ },
+ "memorial-medical-center-modesto": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "memorialcare-long-beach-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "MHS will assign a patient\u2019s current balance to presumptive eligibility without a Financial Assistance Program application if MHS can reasonably determine that (i) the patient\u2019s estimated household income is less than or equal to 250% of the current FPL guidelines",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(2) The patient\u2019s household income is less than or equal to 400% of the current FPL guidelines; and (3) The patient does not qualify for Full Financial Assistance."
+ },
+ "memorialcare-miller-childrens-womens-hospital-long-beach": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "MHS will assign a patient\u2019s current balance to presumptive eligibility without a Financial Assistance Program application if MHS can reasonably determine that (i) the patient\u2019s estimated household income is less than or equal to 250% of the current FPL guidelines",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(2) The patient\u2019s household income is less than or equal to 400% of the current FPL guidelines; and (3) The patient does not qualify for Full Financial Assistance."
+ },
+ "memorialcare-orange-coast-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "MHS will assign a patient\u2019s current balance to presumptive eligibility without a Financial Assistance Program application if MHS can reasonably determine that (i) the patient\u2019s estimated household income is less than or equal to 250% of the current FPL guidelines",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(2) The patient\u2019s household income is less than or equal to 400% of the current FPL guidelines; and (3) The patient does not qualify for Full Financial Assistance."
+ },
+ "memorialcare-saddleback-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "MHS will assign a patient\u2019s current balance to presumptive eligibility without a Financial Assistance Program application if MHS can reasonably determine that (i) the patient\u2019s estimated household income is less than or equal to 250% of the current FPL guidelines",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(2) The patient\u2019s household income is less than or equal to 400% of the current FPL guidelines; and (3) The patient does not qualify for Full Financial Assistance."
+ },
+ "menifee-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an U ninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less that 200% of the current applicable federal poverty guideline (\u201cFPG\u201d) and (3) has established qualification in accordance with requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG; and (4) who has established qualification in acc ordance with requirements contained in this policy."
+ },
+ "mercy-general-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-hospital-bakersfield": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-hospital-of-folsom": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-medical-center-merced": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-medical-center-redding": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-medical-center-mt-shasta": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-san-juan-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mercy-southwest-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "methodist-hospital-of-sacramento": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "mills-health-center-d-p-aph": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "mills-peninsula-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "mission-community-hospital-panorama-campus": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "The patient has a Family income that does not exceed 400% of the Federal Poverty Level (\u201cFPL\u201d).",
+  "discountMaxFplPct": 550,
+  "discountNoCap": false,
+  "discountQuote": "The patient\u2019s Family income is between 401% and 550% FPL; and 2."
+ },
+ "monrovia-memorial-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "montclair-hospital-medical-center": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "mountains-community-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If an uninsured patient\u2019s family income is 200% or less of the FPL at the time of the first billing, and the patient meets all other Financial Assistance qualification requirements, the patient qualifies for full charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If an uninsured patient\u2019s family income is between 201% and 400% of the FPL at the time of first billing, and the patient meets all other Financial Assistance qualification requirements, the following will apply:"
+ },
+ "natividad-medical-center": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Charity Care patients are Self-Pay or patients with High Medical Costs who are at or below one hundred percent (100%) of the current FPL and have received services from Natividad for the treatment of life-threatening emergent conditions.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Financial assistance that provides an allowance off billed charges, applied after application process has been completed and approved for Self-Pay Patients at or below four hundred percent (400%) of the FPL and who do not meet the circumstances for Charity Care."
+ },
+ "northbay-medical-center": {
+  "freeCareMaxFplPct": 138,
+  "freeQuote": "Financial assistance will be granted using the following criteria: a) If family income is 138% of the FPL or less:",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Charity Care with free care to the patient. b) If family income is 139% to 400% of the FPL:"
+ },
+ "northbay-vacavalley-hospital": {
+  "freeCareMaxFplPct": 138,
+  "freeQuote": "Financial assistance will be granted using the following criteria: a) If family income is 138% of the FPL or less:",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Charity Care with free care to the patient. b) If family income is 139% to 400% of the FPL:"
+ },
+ "northridge-hospital-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "norwalk-community-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Low Income Financial Assistance Patient A patient whose family income is above the Charity Care threshold but equal to or below 400% of the Federal Poverty Level (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic mobility/poverty-guidelines or by calling Patient Financial Services at 562 -293-3200."
+ },
+ "novato-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "oconnor-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Free care (which is available to eligible patients with family incomes at or below 400% of the Federal Poverty Level, as further described in this policy).",
+  "discountMaxFplPct": 650,
+  "discountNoCap": false,
+  "discountQuote": "Any charge for care that is reduced but not free (which is available to eligible patients with family incomes above 400% but below 650% of the Federal Poverty Level, as further described in this policy)."
+ },
+ "orange-county-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an Uninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less than 200% of the current applicable federal poverty guideline (\"FPG\"), and (3) has established qualification in accordance with the requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG, and (4) has established qualification in accordance with the requirements contained in this policy."
+ },
+ "palmdale-regional-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "palo-verde-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Patients with income at or below 100% of the federal poverty level are eligible for Paloverde Hospital Free Charity Care Program.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with combined income at or below 400% of federal poverty level and are uninsured or Under-Insured will be eligible to apply for the Palo Verde (discount payment) Financial Assistance Program Template Updated:"
+ },
+ "palomar-rehabilitation-institute": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "This policy only applies to uninsured patients or patients with high medical costs who are at or below 400 percent of the federal poverty level."
+ },
+ "paradise-valley-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "A self-pay patient qualifies for the Discount Payment Program if the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level."
+ },
+ "paradise-valley-hsp-d-p-aph-bayview-beh-hlth": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family Income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "petaluma-valley-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "pih-health-hospital-downey": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Patient applications that show that family income at or below 100% of Federal Poverty Guidelines (FPL) will be approved for no-cost to the patient.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patient applications that show that family income between 101 % and 400% FPL will be granted the lessor of the self-pay rate or discounts as outlined below."
+ },
+ "pih-health-good-samaritan-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Patient applications that show that family income at or below 100% of Federal Poverty Guidelines (FPL) will be approved for no-cost to the patient.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patient applications that show that family income between 101 % and 400% FPL will be granted the lessor of the self-pay rate or discounts as outlined below."
+ },
+ "pih-health-whittier-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Patient applications that show that family income at or below 100% of Federal Poverty Guidelines (FPL) will be approved for no-cost to the patient.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patient applications that show that family income between 101 % and 400% FPL will be granted the lessor of the self-pay rate or discounts as outlined below."
+ },
+ "pioneers-memorial-healthcare-district": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Free care is available for an uninsured or underinsured patient whose family income is 200% or less of federal poverty guidelines.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted payment is available for insured, uninsured, and patients between 201% and 400% of the federal poverty guidelines."
+ },
+ "plumas-district-hospital": {
+  "freeCareMaxFplPct": 138,
+  "freeQuote": "Only patients with income at or below 138% FPL are eligible for Charity Care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with income between 139% and 400% FPL may be eligible for Discount Payment."
+ },
+ "pomona-valley-hospital-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "ELIGIBILITY CATEGORY INCOME Uninsured <400% FPL Insured with Out-of-pocket costs <400% FPL All patients who are eligible for Charity Care within this policy will receive full free when the patient\u2019s family income is at or less than 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "providence-cedars-sinai-tarzana-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-holy-cross-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-little-company-of-mary-mc-san-pedro": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-little-company-of-mary-medical-center-torrance": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-mission-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-mission-hospital-laguna-beach": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-queen-of-the-valley-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-redwood-memorial-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-saint-joseph-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-santa-rosa-memorial-hospital-montgomery": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-santa-rosa-memorial-hospital-sotoyome": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-st-joseph-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-st-joseph-hospital-eureka": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-st-jude-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "providence-st-mary-medical-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "childrens-hospital-of-orange-county": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured or underinsured patients whose household income, as determined in accordance with the Assistance Application, is less than or equal to 400% of the poverty guidelines, will receive care, free of charge.",
+  "discountMaxFplPct": 550,
+  "discountNoCap": false,
+  "discountQuote": "For uninsured patients with household incomes between 451% and 550% of the Federal Poverty Level, CHOC may provide a discounted Private Pay Fee Schedule, whereby the allowable medical expense would be equivalent to a 50% discount off billed charges."
+ },
+ "rady-childrens-hospital-san-diego": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "4.5 FREE/FULL CHARITY CARE 4.5.1 Self-Pay Patients whose patient/Family Income does not exceed 400% of the FPL will receive Charity Care 4.5.2 Non-medically necessary services that are purely cosmetic in nature are only eligible for Charity Care in Rady Children\u2019s sole discretion.",
+  "discountMaxFplPct": 550,
+  "discountNoCap": false,
+  "discountQuote": "FPL Discount Rate Up to 400% 100% Charity Care Up to 450% 75% Discounted Payment Up to 550% 50% Discounted Payment The discount rate for Uninsured Patients will apply to charges based upon Rady Children\u2019s Charge Description Master."
+ },
+ "redlands-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "\u201cCharity Care\u201d means free care provided to a patient whose responsible party has an income that does not exceed 400% of the \u201cFederal Poverty Level\u201d or \u201cFPL\u201d (as defined below).",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "All Self- Pay Patients or Underinsured Patients who have ability to pay and whose income exceeds 400% FPL will receive the standard Self -Pay Discount."
+ },
+ "regional-medical-center-of-san-jose": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Free care (which is available to eligible patients with family incomes at or below 400% of the Federal Poverty Level, as further described in this policy).",
+  "discountMaxFplPct": 649,
+  "discountNoCap": false,
+  "discountQuote": "Family Income between 550% \u2013 649% of the Federal Poverty Level 25% Discounted Payment"
+ },
+ "resnick-neuropsychiatric-hospital-at-ucla": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Self-Pay Patients with Patient's Family incomes not exceeding 400% of the FPL will be eligible for a 100% Charity Care discount on services rendered and billed by the Hospital for emergency and Medically Necessary Care.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "S elf-Pay Patients with Patient's Family incomes between 400% to 450% of FPL may be eligible for a Discounted payment on services rendered and billed by the Hospital for emergency and Medically Necessary Care."
+ },
+ "river-vista-behavioral-health": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "All self-pay patients with income level at or below 100% of the FPL who meet the eligibility requirements of this policy shall qualify for a one hundred percent (100%) Char ity care adjustment for eligible medical necessary services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "All self-pay patients with income level between 251% and 400% of the FPL will have their stay discounted to the Medicare or Medi-Cal rate for the stay, whichever is greater."
+ },
+ "ronald-reagan-ucla-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Self-Pay Patients with Patient's Family incomes not exceeding 400% of the FPL will be eligible for a 100% Charity Care discount on services rendered and billed by the Hospital for emergency and Medically Necessary Care.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "S elf-Pay Patients with Patient's Family incomes between 400% to 450% of FPL may be eligible for a Discounted payment on services rendered and billed by the Hospital for emergency and Medically Necessary Care."
+ },
+ "sacramento-behavioral-healthcare-hospital-llc": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL FREE CARE Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "saint-johns-health-center": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Annual family income, adjusted for family size, is at or below 300% of the current FPL guidelines, The patient is determined to be financially indigent and qualifies for Charity Care 100% write-off on patient responsibility amounts for Eligible Services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Annual family income, adjusted for family size, is between 301% and 400% of the current FPL guidelines, The patient is eligible for a Discounted Payment of 83% off original charges on patient responsibility amounts for Eligible Services, and in no event will be charged in excess of AGB."
+ },
+ "san-antonio-regional-hospital": {
+  "freeCareMaxFplPct": 300,
+  "freeQuote": "Families with income up to 300% of the Federal Poverty Guideline (FPG) receive hospital services at no cost to the patient.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients with income between 301% and 400% of FPG qualify for discounted care based on a sliding scale."
+ },
+ "san-dimas-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family Income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "san-gabriel-valley-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discount Payment is available to uninsured patients and patients with high medical costs whose family income exceeds 200 percent but does not exceed 400 percent FPL."
+ },
+ "san-gorgonio-memorial-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Hospital services provided at no cost to patients with household income at or below 200% FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Reduced charges for patients with household income between 201%\u2013 400% FPL."
+ },
+ "san-joaquin-general-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patient Responsibility after Charity Care and Discount Payment adjustment: < 200% of the current FPL:",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Eligibility for the Discount Payment adjustment will be based on medical necessity, and Family Income up to 400% of the current FPL guidelines, posted annually to the Federal Register."
+ },
+ "san-joaquin-valley-rehabilitation-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "The basic standard for full Charity Care write-off will be 100% of the most recent Federal Poverty Guidelines.",
+  "discountMaxFplPct": 350,
+  "discountNoCap": false,
+  "discountQuote": "The income eligibility criterion is defined as the patient\u2019s family income that is at or below 350% of the FPL."
+ },
+ "san-ramon-regional-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "san-ramon-regional-medical-center-south-building": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Means an Uninsured Patient with an annual Income below 200% of the Federal Poverty Level, unless applicable state law (as set forth in an addendum to this Policy) establishes a higher threshold for financial indigence.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, Reduction or Waiver of Copayments or Deductibles, and Cash Pay Rate policies."
+ },
+ "santa-barbara-cottage-hospital": {
+  "freeCareMaxFplPct": 500,
+  "freeQuote": "Uninsured Patients and patients with High Medical Costs with a Household Income equal to or less than 500% of FPL are eligible for 100% Financial Assistance.",
+  "discountMaxFplPct": 700,
+  "discountNoCap": false,
+  "discountQuote": "Discounted care is available for patients with a Household Income up to 700% of the FPL, taking into consideration Number of Family Members (and not considering Monetary Assets)."
+ },
+ "santa-clara-valley-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Free care (which is available to eligible patients with family incomes at or below 400% of the Federal Poverty Level, as further described in this policy).",
+  "discountMaxFplPct": 650,
+  "discountNoCap": false,
+  "discountQuote": "Any charge for care that is reduced but not free (which is available to eligible patients with family incomes above 400% but below 650% of the Federal Poverty Level, as further described in this policy)."
+ },
+ "santa-monica-ucla-medical-center-and-orthopaedic-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Self-Pay Patients with Patient's Family incomes not exceeding 400% of the FPL will be eligible for a 100% Charity Care discount on services rendered and billed by the Hospital for emergency and Medically Necessary Care.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "S elf-Pay Patients with Patient's Family incomes between 400% to 450% of FPL may be eligible for a Discounted payment on services rendered and billed by the Hospital for emergency and Medically Necessary Care."
+ },
+ "santa-ynez-valley-cottage-hospital": {
+  "freeCareMaxFplPct": 500,
+  "freeQuote": "Uninsured Patients and patients with High Medical Costs with a Household Income equal to or less than 500% of FPL are eligible for 100% Financial Assistance.",
+  "discountMaxFplPct": 700,
+  "discountNoCap": false,
+  "discountQuote": "Discounted care is available for patients with a Household Income up to 700% of the FPL, taking into consideration Number of Family Members (and not considering Monetary Assets)."
+ },
+ "sequoia-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "sharp-chula-vista-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sharp-coronado-hospital-and-healthcare-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sharp-mary-birch-hospital-for-women-and-newborns": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sharp-memorial-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sharp-mesa-vista-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients with family income at or below 400% of the Federal Poverty Level (FPL) qualify for free care (Charity Care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "shasta-regional-medical-center": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family Income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "sherman-oaks-hospital": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(i) the patient\u2019s Family income does not exceed 450% of the Federal Poverty Level;",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient has a Family income at or below four hundred fifty percent (450%) of the Federal Poverty Level; and (ii) the patient has high medical costs that exceed the lesser of:"
+ },
+ "sierra-nevada-memorial-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "sierra-view-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care A full write - off of all balances due from a patient, whether the patient is insured, underinsured or self - pay, shall be granted to those financially qualified patients whose family income is up to 200% of the Federal Poverty Guidelines.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Discounted Care will be granted to financially qualified patients earning between 201% and 400% of the Federal Poverty Level based on the most recent Federal Poverty Guidelines."
+ },
+ "sonoma-specialty-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients whose family income is at or below 400% of the FPL may receive free care.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose family income is at or above 400% of the FPL but no more than 600% of the FPL are eligible to receive services at discounted rates."
+ },
+ "sonoma-valley-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patients with household income at or below 400% of the Federal Poverty Guidelines (FPG) who qualify for Charity Care will receive a 100% reduction of charges for medically necessary hospital services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "south-coast-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an U ninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less that 200% of the current applicable federal poverty guideline (\u201cFPG\u201d) and (3) has established qualification in accordance with requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG; and (4) who has established qualification in acc ordance with requirements contained in this policy."
+ },
+ "southern-california-hospital-at-culver-city": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Low Income Financial Assistance Patient A patient whose family income is above the Charity Care threshold but equal to or below 400% of the Federal Poverty Level (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic mobility/poverty-guidelines or by calling Patient Financial Services at 562 -293-3200."
+ },
+ "southern-california-hospital-at-van-nuys-d-p-aph": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Low Income Financial Assistance Patient A patient whose family income is above the Charity Care threshold but equal to or below 400% of the Federal Poverty Level (FPL) available at: https://aspe.hhs.gov/topics/poverty-economic mobility/poverty-guidelines or by calling Patient Financial Services at 562 -293-3200."
+ },
+ "southwest-healthcare-system-wildomar": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "southwest-healthcare-system-murrieta": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "st-bernardine-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-elizabeth-community-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-francis-medical-center": {
+  "freeCareMaxFplPct": 450,
+  "freeQuote": "(2) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance, as determined and documented by the Hospital; and (3) the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level.",
+  "discountMaxFplPct": 600,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient\u2019s Family Income does not exceed 600% of the Federal Poverty Level ;(ii) the patient does not have third party coverage from a health insurer, health care service plan, union trust plan, Medicare, or Medi-Cal; and (iii) the patient\u2019s injury is not a compensable injury for purposes of workers\u2019 compensation, automobile insurance, or other insurance as determined and documented by the Hospital."
+ },
+ "st-johns-hospital-camarillo": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-johns-regional-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-josephs-behavioral-health-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-josephs-medical-center-of-stockton": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-louise-regional-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Free care (which is available to eligible patients with family incomes at or below 400% of the Federal Poverty Level, as further described in this policy).",
+  "discountMaxFplPct": 650,
+  "discountNoCap": false,
+  "discountQuote": "Any charge for care that is reduced but not free (which is available to eligible patients with family incomes above 400% but below 650% of the Federal Poverty Level, as further described in this policy)."
+ },
+ "st-mary-medical-center-long-beach": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care (Up to 250% of the FPL) Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Additional Uninsured Discount (Greater than 400% and Less than or Equal to 500% of the FPL) Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
+ },
+ "st-rose-hospital": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(i) a Self-Pay Patient or a Patient with High Medical Costs; and (ii) a patient whose Family Income does not exceed 400% of the Federal Poverty Level."
+ },
+ "stanford-health-care": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured Patients and Patients with High Medical Costs with annualized Family Incomes not in excess of 400% of the Federal Poverty Guidelines may be eligible for Charity Care.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "stanford-health-care-2": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured Patients and Patients with High Medical Costs with annualized Family Incomes not in excess of 400% of the Federal Poverty Guidelines may be eligible for Charity Care.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "stanford-health-care-tri-valley": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured Patients and Patients with High Medical Costs with annualized Family Incomes not in excess of 400% of the Federal Poverty Guidelines may be eligible for Charity Care.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "stanford-health-care-tri-valley-2": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured Patients and Patients with High Medical Costs with annualized Family Incomes not in excess of 400% of the Federal Poverty Guidelines may be eligible for Charity Care.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sutter-amador-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sutter-auburn-faith-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-center-for-psychiatry": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-coast-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-davis-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-delta-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-lakeside-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sutter-maternity-and-surgery-center-of-santa-cruz": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-medical-center-sacramento": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-roseville-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-santa-rosa-regional-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sutter-solano-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "sutter-surgical-hospital-north-valley": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "sutter-tracy-community-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Financial Assistance Category Patient Eligibility Category Available Discount FULL CHARITY Patient is an Uninsured Full write-off of all CARE Patient with a family income charges for (as defined below) at or below 400% of the most recent FPL.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "HIGH MEDICAL \u25aa Patient is an Insured A write-off of the COST Patient with a family Patient CHARITY income (as defined Responsibility CARE (for below) at or below 400% amount for Hospital Insured of the most recent FPL;"
+ },
+ "tahoe-forest-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If the patient's family income is at or below 200% or less of the current FPL, and the patient meets all other Financial Assistance Program qualification requirements, the patient will be granted Full Charity Care for Emergency Services provided.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If the patient's family income is between 201% and 400% of the current FPL, and the patient meets all other Financial Assistance Program qualification requirements, the patient will be granted Discount Payment for Emergency Services provided in accordance with the following: i."
+ },
+ "temecula-valley-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Charity Care - Self-Pay Patients with a verified Family Income at or below 400% of the most recent FPL will receive a full write-off of all charges for Medically Necessary Services.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Partial Discount - Self-Pay Patients with a verified Family Income between 401% and 500% of the most recent FPL will receive an additional uninsured discount of all Self-Pay charges for Medically Necessary Services."
+ },
+ "torrance-memorial-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care will be made available to patients whose family income is at or below 200% of FPL.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose income ranges between 201% to 450% of FPL qualify for a Discount Payment."
+ },
+ "totally-kids-rehabilitation-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care TKRH will provide charity care to uninsured applicants whose qualifying income is at 200% or less of the unit value(s) established by the Department of Health and Human Services (HHS) Poverty Guidelines.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "TKRH will provide a discount for uninsured patients and patients with high medical costs whose family income does not exceed 400% of the federal poverty level."
+ },
+ "tri-city-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full Charity Care All patients with family income at or below 400% of the most recent Federal Poverty Level (FPL).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "High Medical Cost (for Insured Patients) Patients with insurance and family income at or below 400% of FPL, and whose medical bills for themselves or family in the past 12 months are more than 10% of family income."
+ },
+ "trinity-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "A self-pay patient with a family income at or below 100% of the Federal Poverty Level, at the time of first billing.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "A self-pay patient with a family income between 101% up to and including 400% of the Federal Poverty Level at the time of first billing."
+ },
+ "uc-davis-rehabilitation-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "High Medical Cost patients with third party coverage who are below 400 percent of the FPL with medical costs in excess of 10 percent of the patient\u2019s family annual income will be extended a 100 percent discount payment on services rendered.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "This policy only applies to uninsured patients or patients with high medical costs who are at or below 400 percent of the federal poverty level."
+ },
+ "uci-health-fountain-valley": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "After evaluation of a patient\u2019s application, patients who qualify as Financially Indigent (an annual Income below 200% of the Federal Poverty Level) will be afforded Charity Care Discounts of 100% of the Facility\u2019s Gross Charges, less any applicable copayment or amount previously paid by the patient or any third-party for that care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Uninsured Patients, Patients with High Medical Costs, and those who are at or below 400% of the federal poverty level, shall be eligible for either full or partial discounts under Tenet\u2019s Charity Care program, implementation of Tenet\u2019s Compact with Uninsured Patients (the \u201cCompact\u201d), and Cash Pay Rate policies."
+ },
+ "los-alamitos-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "C. \u201cCharity Care Patient\u201d \u2013 A Charity Care patient is a financially eligible self-pay patient who received medically necessary care and the family income is at or below 400% of the Federal Poverty Level (FPL).",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Patient is awarded Presumptive Charity 100% write-off of patient out of pocket amount due Uninsured Discount Patient is uninsured but is not at or below 400% of the Federal Poverty Level (FPL) 50% discount off professional charges for facility-based providers 70% discount off total hospital charges B."
+ },
+ "university-of-california-irvine-medical-center": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients whose income is at or below 400% of the federal poverty level will be eligible for some kind of assistance."
+ },
+ "west-hills-hospital-and-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Self-Pay Patients with Patient's Family incomes not exceeding 400% of the FPL will be eligible for a 100% Charity Care discount on services rendered and billed by the Hospital for emergency and Medically Necessary Care.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "S elf-Pay Patients with Patient's Family incomes between 400% to 450% of FPL may be eligible for a Discounted payment on services rendered and billed by the Hospital for emergency and Medically Necessary Care."
+ },
+ "ucsf-benioff-childrens-hospital-oakland": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "st-marys-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "st-francis-memorial-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "ucsf-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "ucsf-medical-center-at-mission-bay": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "ucsf-medical-center-at-mount-zion": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient High Medical Cost Charity Care 1.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "university-of-california-davis-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "High Medical Cost Patients with third party coverage who are below 400 percent of the FPL with medical costs in excess of 10 percent of the patient\u2019s family annual income, and who have not received a discount as a result of third-party coverage for the services to be billed, will be extended a 100 percent charity care adjustment on services rendered.",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "usc-arcadia-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "For income levels at or below 200% of FPL, the entire hospital bill will be forgiven.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Payment Limited, expected payment for emergency and medically necessary services to a discounted rate for financially qualified patients whose income is between 201 and 400%, inclusive, of the Federal Poverty Level."
+ },
+ "usc-kenneth-norris-jr-cancer-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "For income levels at or below 200% of FPL, the entire hospital bill will be forgiven.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Payment Limited, expected payment for emergency and medically necessary services to a discounted rate for financially qualified patients whose income is between 201 and 400%, inclusive, of the Federal Poverty Level."
+ },
+ "usc-verdugo-hills-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "For income levels at or below 200% of FPL, the entire hospital bill will be forgiven.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Payment Limited, expected payment for emergency and medically necessary services to a discounted rate for financially qualified patients whose income is between 201 and 400%, inclusive, of the Federal Poverty Level."
+ },
+ "valley-childrens-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Valley Children's will provide charity care to uninsured applicants whose qualifying income is at 200% or less of the unit value(s) established by the Department of Health and Human Services' (HHS) Poverty Guidelines updated periodically in the Federal Register by the U.S.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Valley Children's will provide a discount for uninsured patients and patients with high medical costs whose income for the last twelve (12) months does not exceed 400% of the of the unit value(s) established by the Department of Health and Human Services' (HHS) Poverty Guidelines (federal poverty level) updated periodically in the Federal Register by the U.S."
+ },
+ "valley-presbyterian-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "An individual shall be determined to be unable to pay for their care where such family\u2019s annual income falls at or below 400% of the Federal Poverty Guidelines (FPG), and provided the individual does not have other cash, assets or resources sufficient to pay for such care under this policy, or where such individual is otherwise qualified under this policy.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Patients whose income exceeds 400% of the Federal Poverty Level (FPL) may be eligible to receive discounts based on the VPH Charity Care & Discounted Care policy."
+ },
+ "ventura-county-medical-center": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Generally, patients with family income between 0% to 100% of the Federal Poverty Level will be eligible for a discount of 100%.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Patients with family income greater than 400% of the Federal Poverty Level may be eligible for a partial discount based on income level."
+ },
+ "ventura-county-medical-center-santa-paula-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Generally, patients with family income between 0% to 100% of the Federal Poverty Level will be eligible for a discount of 100%.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Patients with family income greater than 400% of the Federal Poverty Level may be eligible for a partial discount based on income level."
+ },
+ "ventura-county-medical-center-inpatient-d-p-aph": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "Generally, patients with family income between 0% to 100% of the Federal Poverty Level will be eligible for a discount of 100%.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "Patients with family income greater than 400% of the Federal Poverty Level may be eligible for a partial discount based on income level."
+ },
+ "victor-valley-global-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity care is defined as medically necessary inpatient or outpatient hospital services provided at no cost to a patient who (1) is an U ninsured Patient or a Patient with High Medical Costs, (2) has an income equal to or less that 200% of the current applicable federal poverty guideline (\u201cFPG\u201d) and (3) has established qualification in accordance with requirements contained in this policy.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "(1) desires assistance with paying their hospital bill, (2) is Uninsured or is a Patient with High Medical Costs, (3) has an income from 201% to 400% of the applicable FPG; and (4) who has established qualification in acc ordance with requirements contained in this policy."
+ },
+ "kindred-hospital-la-mirada": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "The full amount of patient or guarantor responsibility for hospital charges will be determined to be Charity Care for a patient whose family income is at or below 200% of the current federal poverty level, adjusted for family size.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Fifty percent of patient or guarantor responsibility for hospital charges will be determined to be Financial Assistance for a patient whose family income is between 301% and 400% of the current federal poverty level, adjusted for family size."
+ },
+ "washington-hospital-fremont": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Washington Hospital shall limit expected payment for services it provides to a patient at or below 400 percent of the FPL eligible under this Policy to the amount of payment Washington Hospital would expect, in good faith, to receive for providing services from Medicare, Medi -Cal, Healthy Families, or another government-sponsored health program of health benefits in which Washington Hospital participates, whichever is greater."
+ },
+ "watsonville-community-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Patients earning at or below 250% of the federal poverty level will be eligible for charity care (free care).",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Patients earning above 250% and up to 400% of the federal poverty level will be eligible for discounted payment (reduced but not free care) ."
+ },
+ "west-anaheim-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "(3) the patient\u2019s Family Income does not exceed 400% of the Federal Poverty Level.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "(i) the patient\u2019s Family Income does not exceed 450% of the Federal Poverty Level;"
+ },
+ "whittier-hospital-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Patients who are uninsured or underinsured for the relevant medically necessary services and whose family income is at or below 200 percent of the Federal Poverty Level will be eligible for a 100 percent write-off under AHMC charity care.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discount Payment is available to uninsured patients and patients with high medical costs whose family income exceeds 200 percent but does not exceed 400 percent FPL."
+ },
+ "woodland-memorial-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Any patient whose Family Income is at or below 250% of the FPL, including, without limitation, any Uninsured patient or Patient with High Medical Costs, is eligible to receive Charity Care equal to a 100% discount from his or her account balance for eligible services provided to the patient after payment, if any, by any third party(ies).",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Any Uninsured Patient who has a Family Income above 400% but at or below 500% of FPL is eligible to receive Discounted Care for eligible services received by the patient and an extended payment plan."
  }
 }
