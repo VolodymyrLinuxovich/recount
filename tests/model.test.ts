@@ -51,3 +51,17 @@ describe("pipeline map", () => {
     expect(PIPELINE.filter((p) => p.kind === "ai").map((p) => p.key)).toEqual(["read", "read-column", "letters", "chat"]);
   });
 });
+
+import { dollarsIn, inventedAmounts } from "../convex/lib/letterCheck";
+describe("letter amount check", () => {
+  const facts = { bill: { lines: [{ charge: 3694 }, { charge: 72 }], totalCharges: 5006 }, findings: [{ amount: 54, detail: "The lines add up to $5,060.00" }], eligibility: { fplPercent: 138, cutoff: 62_640 } };
+  it("reads dollar amounts", () => {
+    expect(dollarsIn("We owe $3,694.00 and $72, not $5,006.10")).toEqual([3694, 72, 5006.1]);
+  });
+  it("passes amounts that come from the facts", () => {
+    expect(inventedAmounts(["Line charged $3,694.00. Lines add up to $5,060.00 but the total says $5,006."], facts)).toEqual([]);
+  });
+  it("flags an amount the facts don't have", () => {
+    expect(inventedAmounts(["You were overcharged $1,250.00 and owe $72."], facts)).toEqual([1250]);
+  });
+});

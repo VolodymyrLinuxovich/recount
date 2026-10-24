@@ -43,6 +43,7 @@ export default defineSchema({
     eligibility: v.optional(v.any()),
     letters: v.optional(v.any()),
     lettersSource: v.optional(v.union(v.literal("claude"), v.literal("template"))),
+    letterFlags: v.optional(v.array(v.number())), // dollar amounts in the letters not found in the facts
     approvedAt: v.optional(v.number()),
     error: v.optional(v.string()),
   }).index("by_owner", ["ownerId", "createdAt"]),
