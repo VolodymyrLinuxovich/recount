@@ -1,5 +1,24 @@
 # Accounts security review (2026-10-24)
 
+## Retest on main b70f9e4: H1, M1 and L4 fixed
+
+I reran the same scripts on local dev, which was serving b70f9e4. Staging is not deployed yet.
+
+| Finding | After b70f9e4 |
+|---|---|
+| H1 sign-up bypass | `flow: "signUp"` for an existing email is refused with "An account with this email already exists. Please sign in.", with the wrong password (30 of 30) **and** the right one. A locked account stays locked |
+| M1 stale login after delete | Old JWT: `profile.get` returns `null`, `profile.set` throws "Please sign in first.", `mine` returns `[]`. `cases.start` still works, but the bill has no owner (an anonymous bill with its own link) |
+| L4 `ownerId` | `cases.get` now returns `mine: true/false` and no `ownerId` |
+| Everything else | Same results as before: no IDOR on cases, claim, chat or profile; `deleteBills` true and false both behave as described |
+
+Note on the suggested H1 fix below: `Password`'s `profile()` is called without `await`, so the check can't live there. b70f9e4 wraps the provider's `authorize` instead (`convex/auth.ts`), which works. `getAuthUserId` is now called only inside `convex/lib/user.ts` `currentUser()`.
+
+**Staging (avid-lion-854, main a1dda20): same result.** I tested against the backend directly, not through the UI. Sign-up for an existing email is refused (20 of 20 guesses, plus the right password) and a locked account stays locked. `flow: "reset"` is refused. No IDOR on get, remove, unapprove, submitHousehold, claim, chat or profile. A stale JWT after delete is refused by profile and `mine`, and `cases.start` with it makes an unowned bill. `deleteBills` true and false both work. Both test accounts and all 3 test bills were deleted through the public functions and checked gone.
+
+Still open (low): L1 lockout of someone else's account (now the only way back in is waiting), L2 timing enumeration, L3 first claim wins, L5 shared limits, L6 `authRateLimits` rows left after delete.
+
+The original review follows.
+
 Scope: the optional accounts in `~/Code/recount` main at `d5ee092`: `convex/auth.ts`, `auth.config.ts`, `http.ts`, `cases.ts` (owner access, `claim`, `mine`), `chat.ts`, `profile.ts`, `account.ts`, `schema.ts`, `lib/privacy.ts`. The auth library is `@convex-dev/auth` 0.0.96, which is the latest on npm.
 
 How: code reading plus live tests on local dev (`http://127.0.0.1:3210`) with `ConvexHttpClient`, calling the same public functions the UI calls. I made three test accounts, signed them up and deleted them, and removed every test case with `cases:adminRemove`. One orphan `profiles` row ("Ghost", from finding M1) is still on dev, because no function can delete it. Remove it in the dashboard. No code was edited.

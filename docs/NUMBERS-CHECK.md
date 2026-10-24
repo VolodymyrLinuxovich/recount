@@ -78,3 +78,23 @@ Code spot checks, all true:
 One wording risk: "We don't sell or **share** your information" sits next to "sent to Anthropic's Claude API". These are processors, but a judge may notice. "We don't sell your information or share it with anyone except the services that run Recount" is safer.
 
 The page isn't deployed yet (404), so this matters only once it ships.
+
+## Follow-up (10/24 evening)
+
+- **Fixed in README (de):** "up to 90 MB", "conflicts with state law", the lien ban scoped to patients who qualify, and a note that 24 of 24 tests the rules.
+- **Fixed in DEVPOST (06):** "up to 90 MB" / "some over 90 MB". The privacy lines no longer cite a /privacy page.
+- **Still a deploy gap**, rechecked live:
+  - `/privacy` and `/account` both return 404.
+  - The live home page still says "break state law". The "conflicts" wording exists only in recount-ui.
+  - DEVPOST now opens with a "CHECK BEFORE SUBMITTING" note (from 1d) listing the account sentences to cut if accounts aren't live. README already says "No accounts", which matches the live site. If accounts ship, README lines 37, 248 and 320 must change.
+- **Placeholder:** DEVPOST line 11 still has `[STORY: …]`. Fill it in or delete it before submitting.
+
+## Live recheck after a1dda20 deploy
+
+- `/privacy`, `/account` and `/audit` all return 200. "Sign in" now appears in the header.
+- **Home page:** "14 conflict with state law" and "up to 138%" (twice). No "break" or "below 138%" left.
+- **JS bundles (/audit + Spanish):** "conflicts with state law" plurals, "Conflicts with state law", and "no cumple(n) con la ley (estatal / de California)". No "break(s) the law" wording anywhere.
+- **/privacy:** matches `privacy.ts`. The sell/share line now reads "We don't sell your information. We only share it with the services above that run the app." Small typo: there is no space before "We don't send" ("app.We").
+- **Now stale:**
+  - README lines 37 ("No account"), 248 ("Privacy without accounts") and 320 ("No accounts") contradict the live optional accounts.
+  - DEVPOST's "CHECK BEFORE SUBMITTING" note is resolved. Keep the account sentences and delete the note.
