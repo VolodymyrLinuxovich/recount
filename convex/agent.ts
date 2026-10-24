@@ -13,7 +13,7 @@ import { checkBill, type Finding } from "./lib/checks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
 import { templateLetters, type Letter } from "./lib/letters";
-import { KNOWN_HOSPITALS, SNAPSHOTS } from "./lib/reference";
+import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL } from "./lib/sample";
 
 const MODEL = "claude-opus-5-5";
@@ -140,7 +140,12 @@ export const readAndCheck = internalAction({
         "done",
         total > 0 ? `Up to $${total.toFixed(2)} in questionable charges` : undefined,
       );
-      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { hospital, findings, status: "needs_household" } });
+      // 4. What our statewide audit found in this hospital's own policy.
+      const policyFindings = hospital ? policyFindingsFor(hospital.key) : [];
+      if (policyFindings.length) {
+        await step(ctx, caseId, "policy", `${hospital!.name}'s own policy has ${policyFindings.length} problem${policyFindings.length === 1 ? "" : "s"} under California law`, "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
+      }
+      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { hospital, findings, policyFindings, status: "needs_household" } });
     } catch (e) {
       await step(ctx, caseId, "error", "Something went wrong", "error", String(e).slice(0, 300));
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: String(e).slice(0, 300) } });
@@ -161,6 +166,7 @@ const Letters = z.object({
 
 const LETTER_PROMPT = `Write the letters a patient will send to a hospital billing office, using ONLY the facts in the JSON below.
 - "assistance": a request for financial assistance (charity care / discount payment) under the hospital's policy and California Health & Safety Code 127400-127446. Ask them to screen the patient, to send the application if one is needed, and to hold the account from collections while it is reviewed.
+- If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
 - "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
 Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] for anything the patient must fill in (signature, address). Sign as the patient.`;
 
@@ -173,6 +179,7 @@ export const draftLetters = internalAction({
       bill: c.bill as ParsedBill,
       hospital: c.hospital ? { name: (c.hospital as HospitalRef).name, policyUrl: (c.hospital as HospitalRef).fap?.url ?? null } : null,
       findings: (c.findings ?? []) as Finding[],
+      policyFindings: (c.policyFindings ?? []) as PolicyFinding[],
       eligibility: c.eligibility as Eligibility,
       household: c.household,
     };

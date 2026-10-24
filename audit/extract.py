@@ -12,6 +12,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import sys
 import time
 import warnings
@@ -60,10 +61,21 @@ def stats(path):
     return n, chars, (n == 0 or chars / n < MIN_CHARS_PER_PAGE)
 
 
-def county_lookup():
-    """Optional zip->county map if raw/zip_county.json exists (not required)."""
-    p = os.path.join(RAW, "zip_county.json")
-    return json.load(open(p)) if os.path.exists(p) else {}
+# HCAI (OSHPD) facility IDs are 106 + 2-digit county code (CA counties in alphabetical order) + 4 digits.
+COUNTIES = ["Alameda", "Alpine", "Amador", "Butte", "Calaveras", "Colusa", "Contra Costa", "Del Norte",
+            "El Dorado", "Fresno", "Glenn", "Humboldt", "Imperial", "Inyo", "Kern", "Kings", "Lake", "Lassen",
+            "Los Angeles", "Madera", "Marin", "Mariposa", "Mendocino", "Merced", "Modoc", "Mono", "Monterey",
+            "Napa", "Nevada", "Orange", "Placer", "Plumas", "Riverside", "Sacramento", "San Benito",
+            "San Bernardino", "San Diego", "San Francisco", "San Joaquin", "San Luis Obispo", "San Mateo",
+            "Santa Barbara", "Santa Clara", "Santa Cruz", "Shasta", "Sierra", "Siskiyou", "Solano", "Sonoma",
+            "Stanislaus", "Sutter", "Tehama", "Trinity", "Tulare", "Tuolumne", "Ventura", "Yolo", "Yuba"]
+
+
+def county_of(hcai_id):
+    m = re.fullmatch(r"106(\d\d)\d{4}", (hcai_id or "").strip())
+    if m and 1 <= int(m.group(1)) <= 58:
+        return COUNTIES[int(m.group(1)) - 1]
+    return None
 
 
 def main():
@@ -74,24 +86,29 @@ def main():
     os.makedirs(TEXT, exist_ok=True)
     crawl = json.load(open(os.path.join(RAW, "crawl.json")))
     hospitals = crawl["hospitals"]
-    zc = county_lookup()
 
-    jobs = []
+    os.makedirs(os.path.join(RAW, "text"), exist_ok=True)
+    # identical files appear under different uuids (system-wide policies): extract once per sha256
+    jobs, seen, sha_users = [], set(), {}
     for h in hospitals:
         for t, d in h["latest"].items():
             dl = (d or {}).get("download") or {}
-            if d and not dl.get("error"):
-                pdf = os.path.join(RAW, "pdf", f"{h['slug']}__{t}.pdf")
-                txt = os.path.join(TEXT, f"{h['slug']}__{t}.json")
-                stale = os.path.exists(txt) and os.path.getmtime(txt) < os.path.getmtime(pdf)
-                if os.path.exists(pdf) and dl.get("is_pdf") and (a.force or stale or not os.path.exists(txt)):
-                    jobs.append((pdf, txt))
-    print(f"extracting {len(jobs)} PDFs", file=sys.stderr)
+            if not d or dl.get("error") or not dl.get("is_pdf"):
+                continue
+            sha_users.setdefault(dl["sha256"], set()).add(h["slug"])
+            if dl["sha256"] in seen:
+                continue
+            seen.add(dl["sha256"])
+            pdf = os.path.join(RAW, "pdf", f"{d['id']}.pdf")
+            cache = os.path.join(RAW, "text", f"{dl['sha256']}.json")
+            if os.path.exists(pdf) and (a.force or not os.path.exists(cache)):
+                jobs.append((pdf, cache))
+    print(f"extracting {len(jobs)} unique PDFs ({len(seen)} distinct files)", file=sys.stderr)
     errs = {}
     with ProcessPoolExecutor(6) as ex:
-        for (pdf, txt), r in zip(jobs, ex.map(extract, jobs, chunksize=4)):
+        for (pdf, cache), r in zip(jobs, ex.map(extract, jobs, chunksize=2)):
             if r["error"]:
-                errs[txt] = r["error"]
+                errs[cache] = r["error"]
 
     out, failures = [], list(crawl["errors"])
     counts = {"hospitals": len(hospitals), "docs_found": 0, "docs_downloaded": 0, "docs_text": 0,
@@ -107,9 +124,12 @@ def main():
             bt = counts["by_type"].setdefault(t, {"found": 0, "text": 0, "needs_ocr": 0})
             bt["found"] += 1
             dl = d.get("download") or {}
-            pdf = os.path.join(RAW, "pdf", f"{h['slug']}__{t}.pdf")
+            pdf = os.path.join(RAW, "pdf", f"{d['id']}.pdf")
+            cache = os.path.join(RAW, "text", f"{dl.get('sha256')}.json")
             txt = os.path.join(TEXT, f"{h['slug']}__{t}.json")
-            rec = {"url": d["url"], "label": d["label"], "effective_date": d["effective_date"],
+            rec = {"url": d["url"], "attachment_id": d["id"], "sha256": dl.get("sha256"), "label": d["label"],
+                   "effective_date": d["effective_date"],
+                   "shared_by_hospitals": len(sha_users.get(dl.get("sha256"), ())) or None,
                    "pdf_path": os.path.relpath(pdf, HERE) if os.path.exists(pdf) else None,
                    "text_path": None, "pages": None, "chars": None, "needs_ocr": None,
                    "error": dl.get("error")}
@@ -119,11 +139,13 @@ def main():
                     rec["error"] = f"not a PDF (content-type {dl.get('content_type')})"
                     counts["not_pdf"] += 1
                     failures.append({"slug": h["slug"], "stage": "extract", "type": t, "error": rec["error"]})
-                elif txt in errs or not os.path.exists(txt):
-                    rec["error"] = errs.get(txt, "no text output")
+                elif cache in errs or not os.path.exists(cache):
+                    rec["error"] = errs.get(cache, "no text output")
                     counts["extract_failed"] += 1
                     failures.append({"slug": h["slug"], "stage": "extract", "type": t, "error": rec["error"]})
                 else:
+                    if a.force or not os.path.exists(txt) or os.path.getmtime(txt) < os.path.getmtime(cache):
+                        shutil.copyfile(cache, txt)
                     n, chars, ocr = stats(txt)
                     rec.update(text_path=os.path.relpath(txt, HERE), pages=n, chars=chars, needs_ocr=ocr)
                     counts["docs_text"] += 1
@@ -133,10 +155,10 @@ def main():
                         bt["needs_ocr"] += 1
             docs[t] = rec
         out.append({
-            "key": h["slug"], "name": h.get("name") or h["list_name"], "license": h.get("license"),
+            "key": h["slug"], "name": h["list_name"], "license": h.get("license"),
             "hcai_id": h.get("hcai_id"), "license_type": h.get("license_type"),
             "address": h.get("address"), "street": h.get("street"), "city": h.get("city"),
-            "zip": h.get("zip"), "county": zc.get(h.get("zip") or ""),
+            "zip": h.get("zip"), "county": county_of(h.get("hcai_id")),
             "lat": h.get("lat"), "lon": h.get("lon"),
             "aliases": h.get("aliases"), "detail_url": h["detail_url"], "archive_url": h.get("archive_url"),
             "n_documents_listed": len(h["documents"]), "docs": docs,
@@ -173,7 +195,9 @@ def main():
         "- `hospitals.json`: one record per hospital (key = HCAI slug), docs keyed by type.",
         "- `text/<slug>__<type>.json`: `{pages: [{n, text}]}` from pypdf.",
         "- `summary.json`: counts + failure list.",
-        "- PDFs and cached pages live in `../raw/` (gitignored).", "",
+        "- PDFs (`raw/pdf/<attachment uuid>.pdf`), per-sha256 text cache and detail pages live in `../raw/` (gitignored).",
+        "- Many hospitals in one system file the identical PDF (often under different uuids); "
+        "`shared_by_hospitals` counts hospitals whose doc has the same sha256.", "",
         "## Rerun", "", "```",
         "cd audit && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt",
         ".venv/bin/python -I crawl.py --geocode   # resume-safe; --limit N for a dry run, --refresh-list to re-list",

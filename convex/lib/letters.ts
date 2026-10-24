@@ -15,6 +15,7 @@ interface Facts {
   bill: ParsedBill;
   hospital: { name: string; policyUrl: string | null } | null;
   findings: Finding[];
+  policyFindings?: { rule: string; verdict: string; quote: string; effectiveDate: string | null }[];
   eligibility: Eligibility;
   household?: { size: number; annualIncome: number; insured: boolean };
 }
@@ -43,6 +44,7 @@ export function templateLetters(f: Facts): Letter[] {
       ``,
       `Please screen me for charity care and discount payment under your financial assistance policy and California Health and Safety Code sections 127400 to 127446. If you need an application or documents, please send them to me.`,
       ``,
+      ...policyNotes(f),
       `While my request is reviewed, please do not send this account to collections or report it to a credit agency.`,
       ``,
       `Thank you,`,
@@ -73,4 +75,23 @@ export function templateLetters(f: Facts): Letter[] {
     });
   }
   return out;
+}
+
+const LAW_LINE: Record<string, string> = {
+  DEADLINE: "California law does not allow time limits for applying (Health and Safety Code 127405).",
+  ASSETS: "California law does not allow hospitals to consider a patient's monetary assets (Health and Safety Code 127405(b)).",
+  INCOME_PROOF: "California law limits required income documents to recent pay stubs or tax returns (Health and Safety Code 127405(e)).",
+  CREDIT_REPORTING: "California law no longer allows reporting hospital debt to credit agencies (Health and Safety Code 127425).",
+  LIENS: "California law does not allow liens on a patient's real property (Health and Safety Code 127425).",
+  MEDICAL_FIRST: "California law does not allow requiring an application for other coverage first (Health and Safety Code 127405(b)).",
+};
+
+function policyNotes(f: Facts): string[] {
+  const items = (f.policyFindings ?? []).filter((p) => p.verdict !== "ask" && LAW_LINE[p.rule]);
+  if (!items.length) return [];
+  return [
+    "I noticed your policy says:",
+    ...items.map((p) => `"${p.quote}" ${LAW_LINE[p.rule]} Please apply state law to my request.`),
+    "",
+  ];
 }

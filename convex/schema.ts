@@ -19,6 +19,7 @@ export default defineSchema({
     billSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
     hospital: v.optional(v.any()),
     findings: v.optional(v.any()),
+    policyFindings: v.optional(v.any()),
     household: v.optional(v.any()),
     eligibility: v.optional(v.any()),
     letters: v.optional(v.any()),

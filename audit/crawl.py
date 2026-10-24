@@ -13,6 +13,7 @@ Usage:  .venv/bin/python -I crawl.py [--limit N] [--geocode] [--refresh-list]
 Downloaded files are untrusted data: they are only parsed, never executed.
 """
 import argparse
+import hashlib
 import html
 import json
 import os
@@ -191,27 +192,30 @@ def get_detail(h):
 
 
 # ---------------------------------------------------------------- phase 3
-def get_pdf(job):
-    slug, typ, doc = job
-    dest = os.path.join(RAW, "pdf", f"{slug}__{typ}.pdf")
+def get_pdf(doc_id):
+    """Download one attachment by its uuid (many hospitals in a system share one file)."""
+    url = f"https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id={doc_id}"
+    dest = os.path.join(RAW, "pdf", f"{doc_id}.pdf")
     meta = dest + ".meta.json"
     if os.path.exists(dest) and os.path.exists(meta):
         m = json.load(open(meta))
-        if m.get("id") == doc["id"]:
-            return slug, typ, m
+        if "sha256" not in m:
+            m["sha256"] = hashlib.sha256(open(dest, "rb").read()).hexdigest()
+            json.dump(m, open(meta, "w"))
+        return doc_id, m
     try:
-        ctype = fetch(doc["url"], dest)
+        ctype = fetch(url, dest)
         with open(dest, "rb") as f:
             head = f.read(1024)
-        m = {"id": doc["id"], "content_type": ctype, "bytes": os.path.getsize(dest),
+        sha = hashlib.sha256(open(dest, "rb").read()).hexdigest()
+        m = {"id": doc_id, "content_type": ctype, "bytes": os.path.getsize(dest), "sha256": sha,
              "is_pdf": b"%PDF" in head, "error": None}
     except Exception as e:
-        m = {"id": doc["id"], "error": f"{type(e).__name__}: {e}"}
         if os.path.exists(dest):
             os.remove(dest)
-        return slug, typ, m  # don't cache failures
+        return doc_id, {"id": doc_id, "error": f"{type(e).__name__}: {e}"}  # failures not cached
     json.dump(m, open(meta, "w"))
-    return slug, typ, m
+    return doc_id, m
 
 
 # ---------------------------------------------------------------- phase 4
@@ -239,6 +243,32 @@ def geocode(hospitals):
                 cache[addr] = res
             if i % 50 == 0:
                 json.dump(cache, open(path, "w"), indent=0)
+    json.dump(cache, open(path, "w"), indent=0)
+
+    # Fallback for Census misses: OSM Nominatim, 1 request/second per its usage policy.
+    misses = [a for a, g in cache.items() if g.get("lat") is None and not g.get("nominatim_tried")]
+    log(f"geocode: {len(misses)} Census misses -> Nominatim")
+    for addr in misses:
+        street = re.sub(r"\s*-\d{4}$", "", addr)
+        q = urllib.parse.urlencode({"q": street, "format": "json", "limit": 1, "countrycodes": "us"})
+        try:
+            r = json.loads(fetch(f"https://nominatim.openstreetmap.org/search?{q}", tries=2, timeout=30))
+            if not r:  # retry with just city + zip
+                m = re.search(r",\s*([^,]+),\s*CA\s*(\d{5})", street)
+                if m:
+                    time.sleep(1.1)
+                    q = urllib.parse.urlencode({"q": f"{m.group(1)}, CA {m.group(2)}", "format": "json", "limit": 1})
+                    r = json.loads(fetch(f"https://nominatim.openstreetmap.org/search?{q}", tries=2, timeout=30))
+                    if r:
+                        r[0]["display_name"] = "APPROX (city/zip): " + r[0]["display_name"]
+            if r:
+                cache[addr] = {"lat": float(r[0]["lat"]), "lon": float(r[0]["lon"]),
+                               "matched": "nominatim: " + r[0]["display_name"]}
+            else:
+                cache[addr]["nominatim_tried"] = True
+        except Exception as e:
+            log(f"nominatim error {addr}: {e}")
+        time.sleep(1.1)
     json.dump(cache, open(path, "w"), indent=0)
     for h in hospitals:
         g = cache.get(h.get("address") or "")
@@ -273,20 +303,27 @@ def main():
                 log(f"detail {i}/{len(idx)}")
     log(f"details done: {len(hospitals)} ok, {len(errors)} failed")
 
-    jobs = [(h["slug"], t, d) for h in hospitals for t, d in h["latest"].items() if d]
+    ids = sorted({d["id"] for h in hospitals for d in h["latest"].values() if d})
+    log(f"{len(ids)} unique attachments to fetch")
     status = {}
     with ThreadPoolExecutor(WORKERS) as ex:
-        for i, (slug, typ, m) in enumerate(ex.map(get_pdf, jobs)):
-            status[(slug, typ)] = m
-            if m.get("error"):
-                errors.append({"slug": slug, "stage": "pdf", "type": typ, "error": m["error"]})
+        for i, (doc_id, m) in enumerate(ex.map(get_pdf, ids)):
+            status[doc_id] = m
             if i % 100 == 0:
-                log(f"pdf {i}/{len(jobs)}")
+                log(f"pdf {i}/{len(ids)}")
+    users = {}
     for h in hospitals:
         for t, d in h["latest"].items():
             if d:
-                d["download"] = status.get((h["slug"], t))
-    log(f"pdfs done: {len(jobs)} jobs, {sum(1 for e in errors if e['stage'] == 'pdf')} failed")
+                users.setdefault(d["id"], set()).add(h["slug"])
+    for h in hospitals:
+        for t, d in h["latest"].items():
+            if d:
+                d["download"] = status.get(d["id"])
+                d["shared_by_hospitals"] = len(users[d["id"]])
+                if d["download"].get("error"):
+                    errors.append({"slug": h["slug"], "stage": "pdf", "type": t, "error": d["download"]["error"]})
+    log(f"pdfs done: {len(ids)} files, {sum(1 for e in errors if e['stage'] == 'pdf')} failed")
 
     if a.geocode:
         geocode(hospitals)

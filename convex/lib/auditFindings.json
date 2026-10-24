@@ -1,0 +1,87 @@
+{
+ "generatedAt": "2026-10-24T10:04+00:00",
+ "hospitals": {
+  "zsfg": [
+   {
+    "rule": "INCOME_PROOF",
+    "verdict": "conflict",
+    "quote": "Patients without an accepted verifiable source of income will be determined ineligible.",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143",
+    "effectiveDate": "2025-11-14",
+    "explanation": "The policy turns away patients who cannot show a verifiable income source. California law limits income proof to recent pay stubs or tax returns and does not let a hospital deny help just because a patient has no verifiable income."
+   }
+  ],
+  "ucsf": [
+   {
+    "rule": "DEADLINE",
+    "verdict": "likely",
+    "quote": "should make best efforts to submit a completed Financial Assistance application form within 240 days",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead",
+    "effectiveDate": "2026-01-16",
+    "explanation": "The policy asks patients to apply within 240 days of the first bill, though it says best efforts and allows extensions. California law says hospitals cannot set any time limit for applying."
+   }
+  ],
+  "ucsf_missionbay": [
+   {
+    "rule": "DEADLINE",
+    "verdict": "likely",
+    "quote": "should make best efforts to submit a completed Financial Assistance application form within 240 days",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb",
+    "effectiveDate": "2026-01-16",
+    "explanation": "The policy asks patients to apply within 240 days of the first bill, though it says best efforts and allows extensions. California law says hospitals cannot set any time limit for applying."
+   }
+  ],
+  "stfrancis_hyde": [
+   {
+    "rule": "DEADLINE",
+    "verdict": "likely",
+    "quote": "should make best efforts to submit a completed Financial Assistance application form within 240 days",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50",
+    "effectiveDate": "2026-01-16",
+    "explanation": "The policy asks patients to apply within 240 days of the first bill, though it says best efforts and allows extensions. California law says hospitals cannot set any time limit for applying."
+   }
+  ],
+  "stmarys": [
+   {
+    "rule": "DEADLINE",
+    "verdict": "likely",
+    "quote": "should make best efforts to submit a completed Financial Assistance application form within 240 days",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585",
+    "effectiveDate": "2026-01-16",
+    "explanation": "The policy asks patients to apply within 240 days of the first bill, though it says best efforts and allows extensions. California law says hospitals cannot set any time limit for applying."
+   }
+  ],
+  "kaiser_sf": [
+   {
+    "rule": "DEADLINE",
+    "verdict": "ask",
+    "quote": "The patient may submit the missing information within 30 days",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa",
+    "effectiveDate": "2025-02-27",
+    "explanation": "The policy gives 30 days to send missing paperwork and says help may be denied if it is incomplete. Ask whether you can still send it later or reapply, since the law bars time limits on applying."
+   },
+   {
+    "rule": "CREDIT_REPORTING",
+    "verdict": "ask",
+    "quote": "Unpaid patient bills in California will not have credit reporting performed other than as permitted California Insurance Code \u00a7 10112.75.",
+    "page": 1,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa",
+    "effectiveDate": "2025-02-27",
+    "explanation": "The policy says California bills are not reported to credit bureaus, but it keeps an exception. Ask the hospital whether it ever reports California patients' hospital debt, since state law now bans this."
+   }
+  ]
+ }
+}

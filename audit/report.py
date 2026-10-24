@@ -101,6 +101,11 @@ def main() -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(out, indent=1))
 
+    # Compact copy for the backend, so a patient's case can cite its hospital's policy problems.
+    compact = {h["key"]: [{k: f[k] for k in ("rule", "verdict", "quote", "page", "docType", "docUrl", "effectiveDate", "explanation")}
+                          for f in h["findings"]] for h in hospitals if h["findings"]}
+    (ROOT / "convex" / "lib" / "auditFindings.json").write_text(json.dumps({"generatedAt": out["generatedAt"], "hospitals": compact}, indent=1))
+
     worst = Counter()
     per_rule = Counter()
     for h in hospitals:
