@@ -1,7 +1,8 @@
 """Merge reviewed packets into the audit results the app shows.
 
 Reads audit/review/packets.jsonl and every audit/review/decisions/*.jsonl, keeps only
-decisions whose quote is really in the policy text, and writes:
+decisions whose quote is really in the policy text (the milder verdict wins when reviewers
+disagree; decisions in override_*.jsonl, from manual spot-checks, win outright), and writes:
   public/audit/findings.json   per-hospital findings for the /audit page
   audit/results/summary.md     counts by rule and verdict, plus the conflict list
 
@@ -27,6 +28,7 @@ RANK = {"conflict": 3, "likely": 2, "ask": 1, "complies": 0}
 
 def load_decisions(packets: dict[str, dict]) -> dict[str, dict]:
     best: dict[str, dict] = {}
+    override: dict[str, dict] = {}
     for f in sorted(DECISIONS.glob("*.jsonl")):
         for line in f.read_text().splitlines():
             if not line.strip():
@@ -35,10 +37,16 @@ def load_decisions(packets: dict[str, dict]) -> dict[str, dict]:
             p = packets.get(d.get("id"))
             if not p or not valid(d, p):
                 continue
+            # override_*.jsonl holds corrections made after a manual spot-check of the policy;
+            # they replace the review agents' verdicts for that sentence.
+            if f.name.startswith("override_"):
+                override[d["id"]] = d
+                continue
             # If two reviewers disagree, keep the milder verdict: we'd rather miss than accuse.
             old = best.get(d["id"])
             if old is None or RANK[d["verdict"]] < RANK[old["verdict"]]:
                 best[d["id"]] = d
+    best.update(override)
     return best
 
 

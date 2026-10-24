@@ -1,17 +1,7 @@
 {
- "generatedAt": "2026-10-24T10:34+00:00",
+ "generatedAt": "2026-10-24T12:48+00:00",
  "hospitals": {
   "adventist-health-and-rideout": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=58189e9c-5459-460d-a995-fb2aaf3d67cd",
-    "effectiveDate": "2025-05-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -35,16 +25,6 @@
   ],
   "adventist-health-bakersfield": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=17a3f272-446b-4498-9491-9ac75b335f86",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -66,16 +46,6 @@
    }
   ],
   "adventist-health-clearlake": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4026bc9b-8cb3-4d94-be43-f206f70050f0",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -99,16 +69,6 @@
   ],
   "adventist-health-delano": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=40f2e072-b49e-43ed-a89f-a631adf3d42a",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -130,16 +90,6 @@
    }
   ],
   "adventist-health-glendale": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=80db2d16-03b5-43f0-ade6-9d17c0fe944b",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -163,16 +113,6 @@
   ],
   "adventist-health-hanford": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=0412baaf-44c7-4b25-b404-3b3f3d0f7616",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -194,16 +134,6 @@
    }
   ],
   "adventist-health-howard-memorial": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c308e425-1442-4eda-b87b-bc31a3eb92b6",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -227,16 +157,6 @@
   ],
   "adventist-health-lodi-memorial": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c4c9a4dd-dfb9-4791-8aaf-ec6064487543",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -258,16 +178,6 @@
    }
   ],
   "adventist-health-mendocino-coast": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e00452b4-ecb3-4117-9efa-0df9188c8cdf",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -291,16 +201,6 @@
   ],
   "adventist-health-reedley": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=62e16e3e-dfc6-4549-a849-7e44f7323940",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -322,16 +222,6 @@
    }
   ],
   "adventist-health-selma": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=15a1f7da-d075-4418-8dd9-2b90bc7f43b6",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -355,16 +245,6 @@
   ],
   "tenet-health-central-coast-sierra-vista-regional-medical-center": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e0e94250-b1e2-4f15-85e2-523757f1032c",
-    "effectiveDate": "2025-11-03",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -386,16 +266,6 @@
    }
   ],
   "adventist-health-simi-valley": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d97e00c1-98ee-4290-8eb1-087fb146e0d1",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -419,16 +289,6 @@
   ],
   "adventist-health-sonora-fairview": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b5d636e3-8eea-412f-96e6-d22bdf7ec276",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -450,16 +310,6 @@
    }
   ],
   "adventist-health-sonora-greenley": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=43cb74d8-4dcf-473c-a834-1fbad117fd2d",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -483,16 +333,6 @@
   ],
   "bakersfield-heart-hospital": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4230eb68-38e2-4352-955c-25d6e22d9573",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -514,16 +354,6 @@
    }
   ],
   "adventist-health-st-helena": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8025d55d-a3bb-422d-8fbd-fdb2206a94e3",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -547,16 +377,6 @@
   ],
   "adventist-health-tehachapi-valley": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=73063c36-bcf2-4fb5-a3dd-b2bcef8af74d",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -578,16 +398,6 @@
    }
   ],
   "adventist-health-tulare": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f97a7561-d41a-4d4c-bf2d-5d876da5eedd",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -611,16 +421,6 @@
   ],
   "tenet-health-central-coast-twin-cities-community-hospital": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7b0b2c27-e9fc-4b45-b39a-1d51ae20281d",
-    "effectiveDate": "2025-11-03",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -642,16 +442,6 @@
    }
   ],
   "adventist-health-ukiah-valley": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a1266baf-6a9f-4920-8bef-71f71b79f47c",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -675,16 +465,6 @@
   ],
   "adventist-health-vallejo": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=af349ce3-cdef-49da-bb4c-219912ac783a",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -707,16 +487,6 @@
   ],
   "adventist-health-white-memorial": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9e697b3c-7e2a-4074-b576-7a417aa5b3a1",
-    "effectiveDate": "2025-05-12",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "ask",
     "quote": "Application Period \u2013 means the period during which Adventist Health must accept and process a Rural Health Clinic Discounts Application",
@@ -738,16 +508,6 @@
    }
   ],
   "adventist-health-white-memorial-montebello": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate, attachments/seizures",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4c198804-745e-4ae0-be34-bcb46bf77ade",
-    "effectiveDate": "2025-04-25",
-    "explanation": "The policy lists foreclosures on real estate and liens among collection actions its agencies may pursue. California law bans liens on a patient's real property, and the policy does not exclude them."
-   },
    {
     "rule": "DEADLINE",
     "verdict": "ask",
@@ -791,16 +551,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=540fc7d0-65a8-4a8a-a656-7f474dbd7758",
     "effectiveDate": "2026-07-22",
     "explanation": "This lists credit reporting as a collection action hospitals may take. It does not clearly say this hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosing on real property",
-    "page": 1,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=540fc7d0-65a8-4a8a-a656-7f474dbd7758",
-    "effectiveDate": "2026-07-22",
-    "explanation": "This lists liens and foreclosure as collection actions hospitals may take. It does not clearly say this hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "alta-bates-summit-medical-center": [
@@ -813,16 +563,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=349b9db7-f48b-4bfe-bd3a-1acb48b494fd",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=349b9db7-f48b-4bfe-bd3a-1acb48b494fd",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "alta-bates-summit-medical-center-summit-campus": [
@@ -835,16 +575,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cf059e63-335e-48ad-9578-bc18ab4f56f1",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cf059e63-335e-48ad-9578-bc18ab4f56f1",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "alta-bates-summit-medical-center-alta-bates-campus": [
@@ -857,16 +587,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5c07ef78-b9df-4cf1-a4c7-85655df893e9",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5c07ef78-b9df-4cf1-a4c7-85655df893e9",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "alta-bates-summit-medical-center-herrick-campus": [
@@ -879,16 +599,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d29b7894-2e8d-471a-abc0-e7684cfb26f7",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d29b7894-2e8d-471a-abc0-e7684cfb26f7",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "alvarado-parkway-institute-b-h-s": [
@@ -903,14 +613,14 @@
     "explanation": "The charity application asks for your savings and checking balances. California law says hospitals cannot consider your savings when deciding eligibility."
    },
    {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "liens on primary residences for low- income patients",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a4d6e172-d51e-4e82-8206-e2d0d84d79b3",
-    "effectiveDate": "2026-05-08",
-    "explanation": "This only bans liens on a primary home for low income patients. Ask whether the hospital or its agencies ever place liens on other property, which California law bans."
+    "rule": "INCOME_PROOF",
+    "verdict": "likely",
+    "quote": "PLEASE INCLUDE BANK STATEMENT AND LAST YEAR'S TAX RETURN",
+    "page": 2,
+    "docType": "application",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=108bdf76-5bf5-4363-9e5e-723c50b4c76c",
+    "effectiveDate": "2024-01-01",
+    "explanation": "The form asks you to include a bank statement as well as a tax return. State law limits income proof to recent pay stubs or tax returns."
    }
   ],
   "anaheim-community-hospital-llc": [
@@ -949,16 +659,6 @@
   ],
   "aurora-behavioral-healthcare-santa-rosa-llc": [
    {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ae7025d4-01eb-4dd2-ae13-4ea80538bd49",
-    "effectiveDate": "2025-08-28",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "the monetary asset documentation collected for the discount payment or free care eligibility determination",
@@ -969,29 +669,7 @@
     "explanation": "This sentence suggests the hospital collects asset papers for eligibility. Ask whether your savings are counted, since California law says they cannot be."
    }
   ],
-  "aurora-charter-oak": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ea52c472-d9c7-4ede-964e-a0e5b19b58e2",
-    "effectiveDate": "2025-12-16",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
-   }
-  ],
   "aurora-las-encinas-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3f568c55-15dd-49cc-97b2-f4a9d94e9ab9",
-    "effectiveDate": "2025-08-29",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -1003,41 +681,7 @@
     "explanation": "This sentence suggests the hospital collects asset papers for eligibility. Ask whether your savings are counted, since California law says they cannot be."
    }
   ],
-  "aurora-san-diego": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=fd72c183-ca97-4a1d-a267-c50ba327c47d",
-    "effectiveDate": "2025-10-10",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
-   }
-  ],
-  "aurora-vista-del-mar-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 1,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4a52e2a8-1e48-4266-a292-8313a6a81146",
-    "effectiveDate": "2025-09-02",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
-   }
-  ],
   "bakersfield-memorial-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ffd6a9d5-cef6-4f6c-a1f0-672aa327966e",
-    "effectiveDate": "2026-08-18",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -1063,16 +707,6 @@
   ],
   "california-hospital-medical-center-los-angeles": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=58d12fd5-6e1a-4fdf-a561-a5ce301357a7",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -1093,16 +727,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cd2cbfd9-4457-4978-bc77-e31afa3a5387",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cd2cbfd9-4457-4978-bc77-e31afa3a5387",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "california-pacific-medical-center-mission-bernal-campus": [
@@ -1115,16 +739,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1a2af6e5-b65e-4be0-be8b-adc8d1bdcc86",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1a2af6e5-b65e-4be0-be8b-adc8d1bdcc86",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "california-pacific-medical-center-van-ness-campus": [
@@ -1137,16 +751,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=84dee8e4-309f-4be0-b998-a9ae401e42ed",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=84dee8e4-309f-4be0-b998-a9ae401e42ed",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "california-rehabilitation-institute-llc": [
@@ -1176,13 +780,13 @@
   "centinela-hospital-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ecbcc730-3165-4181-a1b8-fa010bd59039",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "childrens-hospital-of-los-angeles": [
@@ -1210,13 +814,13 @@
    },
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 13,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9b855b00-91a4-490e-91b4-e985cc8a6cdc",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    },
    {
     "rule": "ASSETS",
@@ -1275,16 +879,6 @@
   ],
   "community-hospital-of-san-bernardino": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a22bea3e-d1cb-4813-b524-289ae55939df",
-    "effectiveDate": "2026-03-16",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "likely",
     "quote": "o Reporting adverse information about the individual to consumer credit bureaus.",
@@ -1303,18 +897,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a22bea3e-d1cb-4813-b524-289ae55939df",
     "effectiveDate": "2026-03-16",
     "explanation": "This defines an application period that ends 240 or 365 days after care. Ask whether late applications are still accepted in California, since state law bans application deadlines."
-   }
-  ],
-  "community-hospital-of-the-monterey-peninsula": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "Liens may be filed , but no foreclosures may be initiated except in very rare circumstances",
-    "page": 11,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4ba08704-c97f-45f0-ab53-48f298bdfd4e",
-    "effectiveDate": "2026-10-15",
-    "explanation": "The policy allows liens and, in rare cases, foreclosure on property other than your main home. California law bans liens on any real property you own."
    }
   ],
   "contra-costa-regional-medical-center": [
@@ -1339,6 +921,16 @@
     "explanation": "You must apply within 180 days of the first bill. California law forbids time limits on applying."
    },
    {
+    "rule": "CREDIT_REPORTING",
+    "verdict": "likely",
+    "quote": "within 180 days of initial billing, report adverse information to a consumer credit reporting agency",
+    "page": 4,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=aa6b57e7-3362-49a9-9a6b-5f4168b3ae9b",
+    "effectiveDate": "2022-04-01",
+    "explanation": "The policy only bars credit reporting in the first 180 days after billing, which implies the hospital or its collectors may report you after that. California law no longer allows reporting hospital debt to credit bureaus at all."
+   },
+   {
     "rule": "LIENS",
     "verdict": "likely",
     "quote": "If allowed by client \u2013 conduct a search for real property for consideration of lien filing",
@@ -1349,14 +941,14 @@
     "explanation": "Collectors may look for a deceased patient's real property to place a lien. California law bans liens on real property."
    },
    {
-    "rule": "CREDIT_REPORTING",
-    "verdict": "ask",
-    "quote": "Limits on Debt Collection Neither CCRMC and HCs, the assignee of an account, nor a collection agency may, within 180 days of initial billing, report adverse information to a consumer credit reporting agency concerning, or commence a civil action against, a patient who lacks coverage or provides information that he or she may be a patient with high medical costs.",
-    "page": 4,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=aa6b57e7-3362-49a9-9a6b-5f4168b3ae9b",
+    "rule": "INCOME_PROOF",
+    "verdict": "likely",
+    "quote": "and statements from financial institutions",
+    "page": 2,
+    "docType": "application_discount",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c906f4fa-9077-40cc-a0ca-c91274813c0e",
     "effectiveDate": "2022-04-01",
-    "explanation": "This bans credit reporting only during the first 180 days. Ask whether the hospital reports later, since California law now bans it at any time."
+    "explanation": "The policy lists bank statements as income documents. State law limits income proof to recent pay stubs or tax returns."
    }
   ],
   "del-amo-behavioral-health-system": [
@@ -1374,13 +966,13 @@
   "desert-valley-hospital": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=79b480b9-86a7-4391-bd22-5defee893a9f",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "docs-surgical-hospital": [
@@ -1396,16 +988,6 @@
    }
   ],
   "dominican-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5fca98e1-fef0-43e4-8cba-d38e98de8524",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -1449,16 +1031,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=428eb054-f97f-4497-a008-b925efca2c49",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=428eb054-f97f-4497-a008-b925efca2c49",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "eisenhower-medical-center": [
@@ -1542,13 +1114,13 @@
   "encino-hospital-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=991345bf-1225-4a06-bc84-3841976272b5",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "fairchild-medical-center": [
@@ -1564,16 +1136,6 @@
    }
   ],
   "french-hospital-medical-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=58fc3bfe-50df-48bb-a720-801b467008f8",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -1594,19 +1156,19 @@
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=889c3c9c-8a0c-4306-aed8-da40d9a3a8c8",
     "effectiveDate": "2026-01-29",
-    "explanation": "The text allows liens but does not say they reach real property, and it requires compliance with state rules. Liens on settlements could be permitted."
+    "explanation": "The policy lets collection agencies ask to file liens but does not say what kind or whether eligible patients are excluded. Ask the hospital if a lien could be placed on your home."
    }
   ],
   "garden-grove-hospital-and-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b4cbfff8-605b-414f-a527-628d10f2cf44",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "gateways-hospital-and-mental-health-center": [
@@ -1644,16 +1206,6 @@
    }
   ],
   "glendale-memorial-hospital-and-health-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=63f4c120-8889-48eb-b4b5-729a5a4a03b3",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -1697,16 +1249,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2bca0063-1e03-46bd-aa9e-8c1b308db8cf",
     "effectiveDate": "2023-04-01",
     "explanation": "The policy lists credit reporting as a collection action it defines but does not say whether it uses it. Ask the hospital to confirm it never reports your hospital debt to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6711b700-7de9-4c5f-ba54-e4cff87cb4f2",
-    "effectiveDate": "2023-04-01",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
    }
   ],
   "henry-mayo-newhall-hospital": [
@@ -1719,16 +1261,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=abc36a06-fe53-4512-8530-3c7bc6d4a29a",
     "effectiveDate": "2026-09-11",
     "explanation": "You get 30 days to send missing papers, and the hospital may deny an incomplete application after a reasonable time. Ask whether you can still finish or reapply later."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "will have a lien filed against the patient\u2019s estate",
-    "page": 4,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ca985ffd-71e6-4f38-b7e7-b27d570e7d89",
-    "effectiveDate": "2026-09-11",
-    "explanation": "For deceased patients the hospital files a lien on the estate, which could include a home. Families should ask whether this ever reaches real property."
    }
   ],
   "henry-mayo-newhall-memorial-hospital-d-p-aph": [
@@ -1741,16 +1273,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=84689b9e-5f5a-4370-afe1-fcef6e67a0c4",
     "effectiveDate": "2026-09-11",
     "explanation": "You get 30 days to send missing papers, and the hospital may deny an incomplete application after a reasonable time. Ask whether you can still finish or reapply later."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "will have a lien filed against the patient\u2019s estate",
-    "page": 4,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=71c2e8cb-40bc-49d6-a35e-9aa7f02f928a",
-    "effectiveDate": "2026-09-11",
-    "explanation": "For deceased patients the hospital files a lien on the estate, which could include a home. Families should ask whether this ever reaches real property."
    }
   ],
   "heritage-oaks-hospital": [
@@ -1763,52 +1285,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8c086c7e-b453-4fbf-9e81-dcd61cd61e54",
     "effectiveDate": "2026-06-19",
     "explanation": "The charity care section of the form asks for your total savings, which suggests they count it. California law says savings cannot be considered."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in dealing with Patients eligible for Financial Assistance, use wage garnishments or liens on any real property",
-    "page": 7,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a4f21a76-c6d0-4658-8343-0c813287e84e",
-    "effectiveDate": "2026-06-19",
-    "explanation": "The ban on liens on real property is written only for patients who qualify for help. Ask the hospital whether it ever places liens on homes of other patients."
-   }
-  ],
-  "hoag-hospital-irvine": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in working with patients eligible under the Financial Assistance Policy, use wage garnishments or a lien on any real property",
-    "page": 1,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8ac52032-cdc9-4f5b-81ef-185633c62d33",
-    "effectiveDate": "2026-05-26",
-    "explanation": "The ban on liens on real property is written only for patients who qualify for help. Ask the hospital whether it ever places liens on homes of other patients."
-   }
-  ],
-  "hoag-memorial-hospital-presbyterian": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in working with patients eligible under the Financial Assistance Policy, use wage garnishments or a lien on any real property",
-    "page": 1,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5b7aef92-0cb1-4910-a774-43e893a4f73e",
-    "effectiveDate": "2026-05-28",
-    "explanation": "The ban on liens on real property is written only for patients who qualify for help. Ask the hospital whether it ever places liens on homes of other patients."
-   }
-  ],
-  "hoag-orthopedic-institute": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in working with patients eligible under the Financial Assistance Policy, use wage garnishments or a lien on any real property",
-    "page": 1,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6586bb5e-c5df-4dfe-8624-53c5a8ea030e",
-    "effectiveDate": "2026-07-21",
-    "explanation": "The ban on liens on real property is written only for patients who qualify for help. Ask the hospital whether it ever places liens on homes of other patients."
    }
   ],
   "hollywood-presbyterian-medical-center": [
@@ -1836,25 +1312,13 @@
   "huntington-beach-hospital": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=98002f15-606e-4e2b-97fd-d0474ea85841",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
-   }
-  ],
-  "el-centro-regional-medical-center": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "For patients eligible for Financial Assistance, ECRMC shall also require external collection agencies to agree in writing",
-    "page": 6,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c892de8b-1df3-4ada-ae64-43dc70d8ab07",
-    "effectiveDate": "2026-08-01",
-    "explanation": "The ban on liens and property sales is written only for patients who qualify for help. Ask whether the collection agency can place a lien on the home of other patients."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "jerold-phelps-community-hospital": [
@@ -1879,6 +1343,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ee4a513f-cdca-4286-ad3f-c4ed1f03d2dc",
     "effectiveDate": "2022-08-10",
     "explanation": "The eligibility worksheet asks for statements of assets, suggesting savings are counted. California law says savings cannot be considered."
+   },
+   {
+    "rule": "INCOME_PROOF",
+    "verdict": "likely",
+    "quote": "Copy of latest bank statement",
+    "page": 1,
+    "docType": "application",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ee4a513f-cdca-4286-ad3f-c4ed1f03d2dc",
+    "effectiveDate": "2022-08-10",
+    "explanation": "The application lists a copy of your latest bank statement among the required documents. California limits income proof to recent pay stubs or tax returns, though the form does not say an application is denied without it."
    }
   ],
   "kaiser-foundation-hospital-antioch": [
@@ -2727,16 +2201,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=bec1cdde-6adf-4ce8-9e9f-09858d663ceb",
     "effectiveDate": "2026-10-12",
     "explanation": "The policy points to timelines for credit reporting in another document, which suggests it may report. Ask the hospital to confirm it never reports your debt."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in dealing with patients eligible under Kaweah Health\u2019s Financial Assistance or Credit and Collection Policies, use wage garnishments or liens on any real property",
-    "page": 11,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=54729b59-22c0-4278-b5af-23ca47ee7d2b",
-    "effectiveDate": "2026-10-12",
-    "explanation": "The ban on liens on real property is written for eligible patients only. Ask the hospital whether it ever places liens on homes of other patients."
    }
   ],
   "kaweah-health-mental-health-hospital": [
@@ -2749,29 +2213,9 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a180fa2d-2dcf-4975-97a4-8485ae759fe9",
     "effectiveDate": "2026-10-12",
     "explanation": "The policy points to timelines for credit reporting in another document, which suggests it may report. Ask the hospital to confirm it never reports your debt."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in dealing with patients eligible under Kaweah Health\u2019s Financial Assistance or Credit and Collection Policies, use wage garnishments or liens on any real property",
-    "page": 11,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6bc4e128-97d0-4ec0-a951-4506dd8f36dd",
-    "effectiveDate": "2026-10-12",
-    "explanation": "The ban on liens on real property is written for eligible patients only. Ask the hospital whether it ever places liens on homes of other patients."
    }
   ],
   "keck-hospital-of-usc": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "obtain judgment liens and execute upon such judgment liens using lawful means of collection",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=047d2b9d-b2ed-484d-abf8-2995072f5985",
-    "effectiveDate": "2026-06-30",
-    "explanation": "Collectors may get judgment liens and enforce them, which can reach your home, and nothing here excludes real property. California law bans liens on a patient's real property."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -2781,6 +2225,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=dc41db5e-c6b7-4ec9-b351-d2a1e40b99c8",
     "effectiveDate": "2026-07-29",
     "explanation": "Credit reporting is listed as a collection action the policy defines, without saying whether it is used. Ask the hospital to confirm it never reports your debt."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "external collection agencies shall be authorized to file litigation, obtain judgment liens and execute upon such judgment liens",
+    "page": 3,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=047d2b9d-b2ed-484d-abf8-2995072f5985",
+    "effectiveDate": "2026-06-30",
+    "explanation": "Collection agencies may get judgment liens, which can attach to a home. These start only after a patient is found ineligible or does not finish an application, but the policy never excludes eligible patients, so ask."
    }
   ],
   "kern-medical-center": [
@@ -2805,16 +2259,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1d943f35-f5f7-485a-99bb-beb2ce8801bf",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1d943f35-f5f7-485a-99bb-beb2ce8801bf",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-los-angeles": [
@@ -2827,16 +2271,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=18e0267e-21cd-4879-b697-54896a79b188",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=18e0267e-21cd-4879-b697-54896a79b188",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-ontario": [
@@ -2849,16 +2283,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f1136cd1-c9a7-4103-9b90-2e49cacf1037",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f1136cd1-c9a7-4103-9b90-2e49cacf1037",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-riverside": [
@@ -2871,16 +2295,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=23a53710-4eca-4942-952c-73aeb77e4a5d",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=23a53710-4eca-4942-952c-73aeb77e4a5d",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-san-diego": [
@@ -2893,16 +2307,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=89891dfc-059b-459c-aa7f-5e0c3f5f40d4",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=89891dfc-059b-459c-aa7f-5e0c3f5f40d4",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-san-francisco-bay-area": [
@@ -2915,16 +2319,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d81dd9d-ea80-41f7-a55f-ff969d1a102f",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d81dd9d-ea80-41f7-a55f-ff969d1a102f",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-san-gabriel-valley": [
@@ -2937,16 +2331,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=bf2ae75f-c578-4a08-9146-7c1827202824",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=bf2ae75f-c578-4a08-9146-7c1827202824",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-santa-ana": [
@@ -2959,16 +2343,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3def100a-73fb-49e9-88d6-817c24497197",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3def100a-73fb-49e9-88d6-817c24497197",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-south-bay": [
@@ -2981,16 +2355,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9d84ba9f-16bd-4220-a69c-10386bc0efe2",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9d84ba9f-16bd-4220-a69c-10386bc0efe2",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-brea": [
@@ -3003,16 +2367,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=91bc3107-3dd5-4070-ae66-e02c524e760f",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=91bc3107-3dd5-4070-ae66-e02c524e760f",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-paramount": [
@@ -3025,16 +2379,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=0d23195a-ead5-4f83-8b95-ffbae2b47c23",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=0d23195a-ead5-4f83-8b95-ffbae2b47c23",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-rancho": [
@@ -3047,16 +2391,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8f563ef2-ea9c-46bf-89c0-ea39c3dcacb1",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8f563ef2-ea9c-46bf-89c0-ea39c3dcacb1",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "kindred-hospital-westminster": [
@@ -3069,28 +2403,18 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=86f1ae22-8c83-428b-8fc5-cea4e48f8b4a",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=86f1ae22-8c83-428b-8fc5-cea4e48f8b4a",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "la-palma-intercommunity-hospital": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7c60b24a-9f9b-4c52-abf9-53172146ae1a",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "laguna-honda-hospital-and-rehabilitation-center": [
@@ -3165,16 +2489,6 @@
   ],
   "marian-regional-medical-center": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=13733fd8-f31e-4e47-b5ad-90a8ca27ee51",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -3186,16 +2500,6 @@
    }
   ],
   "marian-regional-medical-center-arroyo-grande": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=53ec78fe-757e-4de9-9373-666c5176b4f8",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3210,26 +2514,16 @@
   "marinhealth-medical-center": [
    {
     "rule": "CREDIT_REPORTING",
-    "verdict": "conflict",
+    "verdict": "likely",
     "quote": "Credit reporting shall not occur until after 180 days of the payment plan being inoperable.",
     "page": 6,
     "docType": "charity_care",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=74d624d0-a4a8-4439-b095-35dbdd41782b",
     "effectiveDate": "2025-12-31",
-    "explanation": "The policy only delays credit reporting until a payment plan fails, so it still allows reporting your hospital debt. California law no longer allows this."
+    "explanation": "This section on page 6 lets the hospital report you to credit bureaus 180 days after a payment plan fails. The same policy says on page 4 that the Medical Center will not furnish information about a medical debt to a credit reporting agency, so the policy contradicts itself. Ask which rule they follow."
    }
   ],
   "mark-twain-medical-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=64fd82fa-6621-439b-b965-9729a8c229d5",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3273,16 +2567,6 @@
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
    },
    {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b81427e3-5ead-4db8-8195-72af3ed4c5af",
-    "effectiveDate": "2026-08-03",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
-   },
-   {
     "rule": "MEDICAL_FIRST",
     "verdict": "ask",
     "quote": "Denial from Medicaid/Medi-Cal for date of Required Documentation One or more of the following:",
@@ -3303,16 +2587,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=08321350-75ad-47cb-9431-f85874815b3f",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=08321350-75ad-47cb-9431-f85874815b3f",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "memorial-hospital-of-gardena": [
@@ -3347,29 +2621,9 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3275ecd3-2d2a-465b-ac99-b1ef821cdef8",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3275ecd3-2d2a-465b-ac99-b1ef821cdef8",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "mercy-general-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e5cf7b6e-e2d7-41d2-bfa3-6cde55c7de82",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3383,16 +2637,6 @@
   ],
   "mercy-hospital-bakersfield": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=be8c14a1-2cdc-4213-bc64-353de059359b",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -3404,16 +2648,6 @@
    }
   ],
   "mercy-hospital-of-folsom": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e1cfd106-efda-419d-ba6c-6a0255d82764",
-    "effectiveDate": "2026-08-21",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3427,16 +2661,6 @@
   ],
   "mercy-medical-center-merced": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=44fa8a7d-f412-4334-8ec1-4be79df34ece",
-    "effectiveDate": "2026-09-01",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -3448,16 +2672,6 @@
    }
   ],
   "mercy-medical-center-redding": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=78553c56-9be1-430c-a1ea-4af8ebf62119",
-    "effectiveDate": "2026-08-21",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3471,16 +2685,6 @@
   ],
   "mercy-medical-center-mt-shasta": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d315a152-1a33-49f6-b525-faf8fdd73e77",
-    "effectiveDate": "2026-08-21",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -3492,16 +2696,6 @@
    }
   ],
   "mercy-san-juan-medical-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f7399860-bd18-4130-9844-4a0ce9059a44",
-    "effectiveDate": "2026-08-21",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3515,16 +2709,6 @@
   ],
   "mercy-southwest-hospital": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=073c71ff-c3cb-4e1e-b91c-a75ae3a6d7a9",
-    "effectiveDate": "2026-08-21",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -3536,16 +2720,6 @@
    }
   ],
   "methodist-hospital-of-sacramento": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7c6efcee-c5a9-4419-843b-173c6f90c905",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3567,16 +2741,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=532972b5-bed1-4158-bc45-db16ec482d10",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=532972b5-bed1-4158-bc45-db16ec482d10",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "mills-peninsula-medical-center": [
@@ -3589,16 +2753,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ffd02ebb-6b12-41d9-bcc7-4ec9d21aaa2a",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ffd02ebb-6b12-41d9-bcc7-4ec9d21aaa2a",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "mission-oaks-hospital": [
@@ -3638,26 +2792,16 @@
   "montclair-hospital-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=06ee9f55-71f3-4e68-a4fb-c1a5fd011bc0",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "northridge-hospital-medical-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=adfd9a3e-ce41-430c-8a5c-0175fc058f3a",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -3679,28 +2823,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5ebcb1ad-e224-4c23-b8a3-13ea6c66fad3",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5ebcb1ad-e224-4c23-b8a3-13ea6c66fad3",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
-   }
-  ],
-  "oak-valley-hospital-district": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "including some liens, foreclosures on real estate",
-    "page": 4,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=85883e09-9b1e-48e2-887c-c669c45a1ecc",
-    "effectiveDate": "2025-04-18",
-    "explanation": "The policy lets collection agencies use actions like liens and foreclosure on real estate after 180 days, and only shields patients found eligible for help. California law bans liens on any patient's real property."
    }
   ],
   "oroville-hospital": [
@@ -3747,6 +2869,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=83c86d8a-9230-4a3c-9839-40dc0caf8125",
     "effectiveDate": "2025-11-06",
     "explanation": "The sentence only defines what monetary assets exclude. The given text does not show assets being used as an eligibility test."
+   },
+   {
+    "rule": "INCOME_PROOF",
+    "verdict": "ask",
+    "quote": "Proof of unemployment, disability, general assistance, child support, bank statements and yearly tax form.",
+    "page": 2,
+    "docType": "application",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=83c86d8a-9230-4a3c-9839-40dc0caf8125",
+    "effectiveDate": "2025-11-06",
+    "explanation": "This list sits next to the payment plan terms and may be for setting up a payment plan, not for deciding eligibility. Ask whether bank statements are needed to qualify, since California limits income proof to pay stubs or tax returns."
    }
   ],
   "palomar-medical-center": [
@@ -3805,16 +2937,6 @@
     "explanation": "The policy lets collectors report debts to credit bureaus and does not exclude California residents. California law now forbids credit reporting of hospital debt."
    },
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
-    "page": 13,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=be0149a8-ed57-47e5-84d6-b89641dd707c",
-    "effectiveDate": "2024-04-01",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
-   },
-   {
     "rule": "DEADLINE",
     "verdict": "likely",
     "quote": "no later than 180 days following the date of the first post-discharge statement",
@@ -3823,18 +2945,28 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b6c0dca7-2869-4d1d-9f5e-e14bc9ad45ae",
     "effectiveDate": "2024-04-01",
     "explanation": "The policy sets a 180 day outer limit for applying. It is phrased as an expectation without a stated denial, but it reads as a time limit the law forbids."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
+    "page": 13,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=be0149a8-ed57-47e5-84d6-b89641dd707c",
+    "effectiveDate": "2024-04-01",
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "paradise-valley-hsp-d-p-aph-bayview-beh-hlth": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eba142be-a903-464b-837d-c7307de85b33",
     "effectiveDate": "2025-06-16",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "patients-hospital-of-redding": [
@@ -3850,26 +2982,6 @@
    }
   ],
   "petaluma-valley-hospital": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9e8fff5a-9fb5-4321-9b0e-c403dad51594",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1c0c022b-ede4-4670-a467-5678453e04d8",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -3905,12 +3017,12 @@
    {
     "rule": "LIENS",
     "verdict": "conflict",
-    "quote": "the account may be approved for legal action to include placing a lien on a home or other real estate",
+    "quote": "Under certain circumstances when income does not exceed 400% FPL, PIH\u2019s collection agency may file a lien on a primary residence",
     "page": 3,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c0642f75-62c7-4a5a-a186-1dfbd581e7bb",
     "effectiveDate": "2026-07-10",
-    "explanation": "The policy allows liens on a home or other real estate. California law prohibits liens on real property owned by the patient."
+    "explanation": "The policy lets the collection agency put a lien on the home of a patient with income at or below 400% of the poverty level. Those patients qualify for discounts, and California law forbids liens on their real property."
    },
    {
     "rule": "DEADLINE",
@@ -3947,12 +3059,12 @@
    {
     "rule": "LIENS",
     "verdict": "conflict",
-    "quote": "the account may be approved for legal action to include placing a lien on a home or other real estate",
+    "quote": "Under certain circumstances when income does not exceed 400% FPL, PIH\u2019s collection agency may file a lien on a primary residence",
     "page": 3,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=db4a5ba9-193a-4022-a829-0f1adc96c856",
     "effectiveDate": "2026-07-10",
-    "explanation": "The policy allows liens on a home or other real estate. California law prohibits liens on real property owned by the patient."
+    "explanation": "The policy lets the collection agency put a lien on the home of a patient with income at or below 400% of the poverty level. Those patients qualify for discounts, and California law forbids liens on their real property."
    },
    {
     "rule": "DEADLINE",
@@ -3989,12 +3101,12 @@
    {
     "rule": "LIENS",
     "verdict": "conflict",
-    "quote": "the account may be approved for legal action to include placing a lien on a home or other real estate",
+    "quote": "Under certain circumstances when income does not exceed 400% FPL, PIH\u2019s collection agency may file a lien on a primary residence",
     "page": 3,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ca1f34d3-5950-41ce-aa97-40feca5f95ec",
     "effectiveDate": "2026-07-10",
-    "explanation": "The policy allows liens on a home or other real estate. California law prohibits liens on real property owned by the patient."
+    "explanation": "The policy lets the collection agency put a lien on the home of a patient with income at or below 400% of the poverty level. Those patients qualify for discounts, and California law forbids liens on their real property."
    },
    {
     "rule": "DEADLINE",
@@ -4045,26 +3157,6 @@
   ],
   "providence-cedars-sinai-tarzana-medical-center": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ac2fed34-8dda-47b9-948e-76fefd877259",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b52111d8-83ac-4b7b-bc12-dcb5513975d9",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4076,26 +3168,6 @@
    }
   ],
   "providence-holy-cross-medical-center": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=29e29fbd-5522-40f1-a358-713d3c984a49",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a158ce17-ad00-44a8-ac51-2fd04f7f3b75",
-    "effectiveDate": "2025-05-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4109,26 +3181,6 @@
   ],
   "providence-little-company-of-mary-mc-san-pedro": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=70d81222-b3cd-4f7d-9dc5-aba24e775777",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=dd30a46f-a6a4-4e1e-99ad-932414e06bc5",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4140,26 +3192,6 @@
    }
   ],
   "providence-little-company-of-mary-medical-center-torrance": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9446f78f-5e1a-43ca-8652-33d2c06ea13f",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5a457c02-9ea3-44a3-919a-6c45c24e69ae",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4173,26 +3205,6 @@
   ],
   "providence-mission-hospital": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a6051814-8679-41ec-858c-e59177007343",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7dfab997-9327-40b2-96ce-9fda1db18943",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4204,26 +3216,6 @@
    }
   ],
   "providence-mission-hospital-laguna-beach": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a7faca54-d20c-459b-aad3-c97a9c32a7dc",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=08cccc95-da31-465c-be69-f3179600fe08",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4237,26 +3229,6 @@
   ],
   "providence-queen-of-the-valley-medical-center": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=25cffefb-4c29-4cc9-af8f-4d81aa97dbf6",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9e7022f8-d225-4bed-81db-921d16aa5921",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4268,26 +3240,6 @@
    }
   ],
   "providence-redwood-memorial-hospital": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=90c93e3d-d652-43c8-9db0-55f40101ea3e",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=0a05d1ad-089e-4275-bb51-2829ea3992d9",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4301,26 +3253,6 @@
   ],
   "providence-saint-joseph-medical-center": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=fd944944-2669-4852-8b75-2d4a66768788",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=82b487de-3f54-437f-b2a9-3273961d5c62",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4332,26 +3264,6 @@
    }
   ],
   "providence-santa-rosa-memorial-hospital-montgomery": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=88954265-f094-465d-8ec8-43a6079930d1",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1d16e449-71de-4022-9620-7ecfbe9f2fa7",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4365,26 +3277,6 @@
   ],
   "providence-santa-rosa-memorial-hospital-sotoyome": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=0f637c30-2d31-47ab-a4ca-08cd2cf0a962",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=460d7541-52f6-4c99-b14e-c48f415783b3",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4396,26 +3288,6 @@
    }
   ],
   "providence-st-joseph-hospital": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2dfbcb52-0a55-4740-a7b7-b9ecce18c7f6",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=66ddb99c-0832-4b33-8989-32dfef585998",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4429,26 +3301,6 @@
   ],
   "providence-st-joseph-hospital-eureka": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8221390d-8f1b-4dca-a3ba-0acdf3ba61ec",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b91c0113-82e4-444f-a140-6a0e5449da58",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4461,26 +3313,6 @@
   ],
   "providence-st-jude-medical-center": [
    {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c075acfb-321e-4e8d-964d-60da5d118077",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=bb81be03-f414-4010-911b-68d7624fae45",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
-   {
     "rule": "ASSETS",
     "verdict": "ask",
     "quote": "Current checking account balance",
@@ -4492,26 +3324,6 @@
    }
   ],
   "providence-st-mary-medical-center": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8eaa785c-7044-4ca5-b135-4ef4ca6d5656",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=24a78d50-7e5b-4b69-b634-c8b8a0a79506",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4533,16 +3345,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ed6c8cdc-7fcd-43db-910c-88776f13e968",
     "effectiveDate": "2025-01-06",
     "explanation": "The policy allows reporting unpaid balances to credit bureaus. California law no longer allows this."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "with respect to a FAP eligible patient",
-    "page": 12,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ed6c8cdc-7fcd-43db-910c-88776f13e968",
-    "effectiveDate": "2025-01-06",
-    "explanation": "The policy bars liens on real property only for patients eligible for assistance. Ask the hospital whether liens are used on others, since the law prohibits them."
    }
   ],
   "redlands-community-hospital": [
@@ -4577,16 +3379,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b9b96f37-5cba-4531-989a-bc3c604d7528",
     "effectiveDate": "2026-09-30",
     "explanation": "The eligibility worksheet has a line for your total monetary assets. California law says hospitals cannot consider monetary assets."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in dealing with patients eligible for Financial Assistance",
-    "page": 4,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5b0e5c3b-dbf7-4c96-b1b3-0079762f1aa0",
-    "effectiveDate": "2026-09-30",
-    "explanation": "The policy bars liens on real property only for patients eligible for assistance. Ask whether liens are used on others, since the law prohibits them."
    }
   ],
   "riverside-community-hospital": [
@@ -4611,16 +3403,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2cce4708-a1b9-424d-bbdd-cea470b6afb4",
     "effectiveDate": "2026-08-31",
     "explanation": "This implies credit reporting can happen after a payment plan fails. California law forbids reporting hospital debt to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Collection Agency should not",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5895bc66-22fc-4ced-9728-dbba768d7a8f",
-    "effectiveDate": "2026-08-31",
-    "explanation": "This uses soft wording and covers only assistance patients. Ask the hospital whether its collectors ever place liens on property, which the law prohibits."
    }
   ],
   "riverside-university-health-system-medical-center": [
@@ -4633,51 +3415,9 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=325c9bec-4c81-4129-8d5b-0f818f967cc0",
     "effectiveDate": "2026-08-31",
     "explanation": "This implies credit reporting can happen after a payment plan fails. California law forbids reporting hospital debt to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Collection Agency should not",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9bf76a64-43b7-4091-906b-c6185765f21a",
-    "effectiveDate": "2026-08-31",
-    "explanation": "This uses soft wording and covers only assistance patients. Ask the hospital whether its collectors ever place liens on property, which the law prohibits."
-   }
-  ],
-  "sacramento-behavioral-healthcare-hospital-llc": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Foreclosure on real or personal property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=12d4d87e-33fa-46e4-b406-8281429ccc22",
-    "effectiveDate": "2025-08-28",
-    "explanation": "This lists foreclosure as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never forecloses on property."
    }
   ],
   "saint-johns-health-center": [
-   {
-    "rule": "DEADLINE",
-    "verdict": "likely",
-    "quote": "the 240-day period of time; and (ii) clinic services is the 90-day period, in each case that a patient has to submit a Financial Assistance Application",
-    "page": 8,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a65948b0-82f2-4644-8cf8-1762962569a5",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy sets a 240 day window for hospital bills and 90 days for clinic bills to apply. It says late applications may be accepted at its discretion, but California law forbids any time limit."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "include a lien; foreclosure on real property",
-    "page": 8,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8787ca13-085f-429c-8b51-6ad82e9a1cc1",
-    "effectiveDate": "2025-03-26",
-    "explanation": "The policy lists liens and foreclosure on real property as collection actions but does not say whether it uses them. Ask the hospital to confirm it never places a lien on your home."
-   },
    {
     "rule": "ASSETS",
     "verdict": "ask",
@@ -4704,13 +3444,13 @@
   "san-dimas-community-hospital": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8bf72724-948d-40e3-b7c4-ae802223de24",
     "effectiveDate": "2025-06-17",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "san-gorgonio-memorial-hospital": [
@@ -4751,16 +3491,6 @@
   ],
   "sequoia-hospital": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1d570f77-67b7-4c6f-855e-540ba267903e",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -4774,38 +3504,28 @@
   "shasta-regional-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6d4fab67-5917-48a7-8aa7-44ae3ed5b1fb",
     "effectiveDate": "2025-06-17",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "sherman-oaks-hospital": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=35f5915d-b0b3-4807-8c34-647b5581b4b8",
     "effectiveDate": "2025-06-17",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "sierra-nevada-memorial-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9ed8b8a5-f119-4fe3-8214-5f897a0981b6",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -4829,18 +3549,6 @@
     "explanation": "The staff eligibility worksheet has a line for your total savings, which suggests they are counted. California law says savings cannot be considered."
    }
   ],
-  "southern-inyo-hospital": [
-   {
-    "rule": "CREDIT_REPORTING",
-    "verdict": "likely",
-    "quote": "including reporting to credit bureaus, filing lawsuits, and placing liens",
-    "page": 2,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=23c3d8b9-9fdb-41ff-9433-e0a57f368855",
-    "effectiveDate": "2026-06-30",
-    "explanation": "The policy lists credit bureau reporting as one of its collection steps. California law no longer allows hospital debt to be reported to credit bureaus."
-   }
-  ],
   "st-agnes-medical-center": [
    {
     "rule": "CREDIT_REPORTING",
@@ -4855,16 +3563,6 @@
   ],
   "st-bernardine-medical-center": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8827dcd2-77d0-457e-b0f2-81a17b073ed1",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -4876,16 +3574,6 @@
    }
   ],
   "st-elizabeth-community-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9636691f-39a4-40cc-b53b-aa5b95e42e23",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -4900,26 +3588,16 @@
   "st-francis-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e2e0fad8-e2e4-4afc-a49c-e86340d6d208",
     "effectiveDate": "2025-06-17",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "st-johns-hospital-camarillo": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ff9f406b-3f8f-49cf-9b3e-a49d8cea0cf6",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -4933,16 +3611,6 @@
   ],
   "st-johns-regional-medical-center": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=744bfe2e-956f-4433-b1b9-b495ad2655b0",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -4954,16 +3622,6 @@
    }
   ],
   "st-josephs-behavioral-health-center": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4a75caa7-5d6e-4b55-8444-eb59a97e043f",
-    "effectiveDate": "2026-09-01",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -4977,16 +3635,6 @@
   ],
   "st-josephs-medical-center-of-stockton": [
    {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b84a09ce-22e3-4cef-b2d4-3a216592b0b7",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "The Hospital Facility will not engage in ECAs against an individual prior to making a reasonable effort to determine eligibility under this Policy.",
@@ -4998,16 +3646,6 @@
    }
   ],
   "st-mary-medical-center-long-beach": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=67610333-7ded-4c6a-b4bc-0a44115f666f",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -5041,16 +3679,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3569f40d-0537-481b-a14c-a16548418ada",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3569f40d-0537-481b-a14c-a16548418ada",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-auburn-faith-hospital": [
@@ -5063,16 +3691,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=456439cf-35dd-4046-8d2b-86e3a0c853a6",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=456439cf-35dd-4046-8d2b-86e3a0c853a6",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-center-for-psychiatry": [
@@ -5085,16 +3703,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3fe34f29-e001-4fe6-89ee-935eae609cbd",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3fe34f29-e001-4fe6-89ee-935eae609cbd",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-coast-hospital": [
@@ -5107,16 +3715,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b89a9d35-aaa4-4626-a49c-4fa262a6432d",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b89a9d35-aaa4-4626-a49c-4fa262a6432d",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-davis-hospital": [
@@ -5129,16 +3727,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=396c1ca0-7688-4a4b-9ec1-43be478faea9",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=396c1ca0-7688-4a4b-9ec1-43be478faea9",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-delta-medical-center": [
@@ -5151,16 +3739,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=02edfa63-0d64-422e-9ebd-658a127badae",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=02edfa63-0d64-422e-9ebd-658a127badae",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-lakeside-hospital": [
@@ -5173,16 +3751,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d3320dbb-2aa1-41b3-b7a6-0bbc4c456858",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d3320dbb-2aa1-41b3-b7a6-0bbc4c456858",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-maternity-and-surgery-center-of-santa-cruz": [
@@ -5195,16 +3763,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4c4d5416-e6f2-4aa7-9def-ceb303dfc8a6",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4c4d5416-e6f2-4aa7-9def-ceb303dfc8a6",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-medical-center-sacramento": [
@@ -5217,16 +3775,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7ae9008b-baa0-405d-9405-8589f99073b0",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7ae9008b-baa0-405d-9405-8589f99073b0",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-roseville-medical-center": [
@@ -5239,16 +3787,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d2f050d1-2365-4e0c-8043-6f7050e07918",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d2f050d1-2365-4e0c-8043-6f7050e07918",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-santa-rosa-regional-hospital": [
@@ -5261,16 +3799,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f3021bbe-76db-415f-9366-ca48884a4234",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f3021bbe-76db-415f-9366-ca48884a4234",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-solano-medical-center": [
@@ -5283,16 +3811,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7cf73c64-69fd-46b3-8392-460b79970649",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7cf73c64-69fd-46b3-8392-460b79970649",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-surgical-hospital-north-valley": [
@@ -5305,16 +3823,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f7a84f31-75a0-409b-af2e-f166c203e46c",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f7a84f31-75a0-409b-af2e-f166c203e46c",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
    }
   ],
   "sutter-tracy-community-hospital": [
@@ -5327,28 +3835,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d56b579e-6cea-4a87-8ece-2e34c1b7a52e",
     "effectiveDate": "2026-01-26",
     "explanation": "This lists credit reporting as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never reports to credit bureaus."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "Lien on a residence or any other personal or real property;",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d56b579e-6cea-4a87-8ece-2e34c1b7a52e",
-    "effectiveDate": "2026-01-26",
-    "explanation": "This lists property liens as a type of collection action. It does not say the hospital does it, so ask the hospital to confirm it never places liens on property."
-   }
-  ],
-  "temecula-valley-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "in dealing with Patients eligible for Financial Assistance",
-    "page": 4,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=12bede6a-e92f-4927-be71-3d5ea6ff3843",
-    "effectiveDate": "2026-03-28",
-    "explanation": "The hospital promises no liens on real property only for patients who qualify for financial assistance. Ask whether it could place a lien on your property if you do not qualify, since California now bans these liens for everyone."
    }
   ],
   "thousand-oaks-surgical-hospital-a-campus-of-los-robles-hosp-med-ctr": [
@@ -5375,28 +3861,16 @@
     "explanation": "The final notice is said to state a deadline to submit an application, but California bans application deadlines. Ask the hospital whether any real deadline applies to you."
    }
   ],
-  "trinity-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "liens on a primary residence",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c20ba3c9-d4db-4812-b605-86a14c653e20",
-    "effectiveDate": "2026-08-11",
-    "explanation": "The hospital promises no liens on a primary residence, but California bans liens on any real property you own. Ask whether it could place a lien on other property you own."
-   }
-  ],
   "uc-davis-rehabilitation-hospital": [
    {
     "rule": "LIENS",
     "verdict": "ask",
-    "quote": "Neither UCDRH nor its contracted collection agencies will impose wage garnishments or liens on primary residences except as provided below.",
+    "quote": "liens on primary residences except as provided below",
     "page": 10,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f8e04047-3f05-4444-89c4-6cae3d3146ea",
     "effectiveDate": "2025-09-15",
-    "explanation": "The sentence is a prohibition with exceptions that are not shown. Whether it permits liens on any real property depends on text we cannot see."
+    "explanation": "The policy bars liens on primary homes except in cases it does not show here, and it says nothing about other real property. Ask the hospital whether it could place a lien on property of a patient who qualifies for help."
    }
   ],
   "uci-health-fountain-valley": [
@@ -5463,6 +3937,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3fe3706d-96ad-432e-9bf6-d09c61400727",
     "effectiveDate": "2021-05-01",
     "explanation": "The form asks for bank account balances, real estate and vehicle values, which suggests your assets are counted. California law forbids counting monetary assets."
+   },
+   {
+    "rule": "INCOME_PROOF",
+    "verdict": "likely",
+    "quote": "return it with copies of your pay stubs, bank statements and additional documents",
+    "page": 2,
+    "docType": "charity_care",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3fe3706d-96ad-432e-9bf6-d09c61400727",
+    "effectiveDate": "2021-05-01",
+    "explanation": "The form asks you to send bank statements with your application. State law limits income proof to recent pay stubs or tax returns."
    }
   ],
   "ucsf-benioff-childrens-hospital-oakland": [
@@ -5539,16 +4023,6 @@
   ],
   "usc-arcadia-hospital": [
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "obtain judgment liens and execute upon such judgment liens using lawful means of collection",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5be7ea8a-1276-41b8-a507-7202f259849a",
-    "effectiveDate": "2026-06-30",
-    "explanation": "Collectors may get judgment liens and enforce them, which can reach your home, and nothing here excludes real property. California law bans liens on a patient's real property."
-   },
-   {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
     "quote": "the reporting of adverse information to credit agencies/bureaus",
@@ -5557,19 +4031,19 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7b714d73-5589-49d8-ad92-ff14d05dcc46",
     "effectiveDate": "2026-07-29",
     "explanation": "Credit reporting is listed as a collection action the policy defines, without saying whether it is used. Ask the hospital to confirm it never reports your debt."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "external collection agencies shall be authorized to file litigation, obtain judgment liens and execute upon such judgment liens",
+    "page": 3,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5be7ea8a-1276-41b8-a507-7202f259849a",
+    "effectiveDate": "2026-06-30",
+    "explanation": "Collection agencies may get judgment liens, which can attach to a home. These start only after a patient is found ineligible or does not finish an application, but the policy never excludes eligible patients, so ask."
    }
   ],
   "usc-kenneth-norris-jr-cancer-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "obtain judgment liens and execute upon such judgment liens using lawful means of collection",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7a02ac91-f72b-4323-88f0-2ed255b01227",
-    "effectiveDate": "2026-06-30",
-    "explanation": "Collectors may get judgment liens and enforce them, which can reach your home, and nothing here excludes real property. California law bans liens on a patient's real property."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -5579,19 +4053,19 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7d3ebac8-c9f3-4600-9722-52a84bb4dcb9",
     "effectiveDate": "2026-07-29",
     "explanation": "Credit reporting is listed as a collection action the policy defines, without saying whether it is used. Ask the hospital to confirm it never reports your debt."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "external collection agencies shall be authorized to file litigation, obtain judgment liens and execute upon such judgment liens",
+    "page": 3,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7a02ac91-f72b-4323-88f0-2ed255b01227",
+    "effectiveDate": "2026-06-30",
+    "explanation": "Collection agencies may get judgment liens, which can attach to a home. These start only after a patient is found ineligible or does not finish an application, but the policy never excludes eligible patients, so ask."
    }
   ],
   "usc-verdugo-hills-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "obtain judgment liens and execute upon such judgment liens using lawful means of collection",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6ecdba3b-bf67-4e25-bec6-b4a86f39b50e",
-    "effectiveDate": "2026-06-30",
-    "explanation": "Collectors may get judgment liens and enforce them, which can reach your home, and nothing here excludes real property. California law bans liens on a patient's real property."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
@@ -5601,6 +4075,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e897260a-bbe8-4e52-ac8f-4dc99109902f",
     "effectiveDate": "2026-07-29",
     "explanation": "Credit reporting is listed as a collection action the policy defines, without saying whether it is used. Ask the hospital to confirm it never reports your debt."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "external collection agencies shall be authorized to file litigation, obtain judgment liens and execute upon such judgment liens",
+    "page": 3,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6ecdba3b-bf67-4e25-bec6-b4a86f39b50e",
+    "effectiveDate": "2026-06-30",
+    "explanation": "Collection agencies may get judgment liens, which can attach to a home. These start only after a patient is found ineligible or does not finish an application, but the policy never excludes eligible patients, so ask."
    }
   ],
   "valley-childrens-hospital": [
@@ -5615,18 +4099,6 @@
     "explanation": "If you do not apply within 70 days, your account goes to an outside vendor billing full charges. Ask whether you can still apply after that, since California bans application deadlines."
    }
   ],
-  "valley-presbyterian-hospital": [
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "cannot use wage garnishments or liens on primary residences as a means of collections",
-    "page": 3,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=8fd4ad3f-72a4-422d-aeac-8cdce9f70adb",
-    "effectiveDate": "2026-01-16",
-    "explanation": "The hospital bans liens only on a primary residence, but California bans liens on any real property you own. Ask whether it could place a lien on other property you own."
-   }
-  ],
   "kindred-hospital-la-mirada": [
    {
     "rule": "CREDIT_REPORTING",
@@ -5637,16 +4109,6 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=70951bd7-9cac-4c64-bfcc-c78b3d2df4c4",
     "effectiveDate": "2025-11-06",
     "explanation": "This only delays credit reporting for 180 days, which implies your debt may be reported afterward. California law no longer allows that."
-   },
-   {
-    "rule": "LIENS",
-    "verdict": "ask",
-    "quote": "use wage garnishment or a sale of a patient\u2019s primary residence as a means of collecting bad debt, except as expressly permitted",
-    "page": 2,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=70951bd7-9cac-4c64-bfcc-c78b3d2df4c4",
-    "effectiveDate": "2025-11-06",
-    "explanation": "The ban covers only sale of a primary residence and has an exception. Ask whether a debt buyer can place a lien on or sell any real property you own."
    }
   ],
   "watsonville-community-hospital": [
@@ -5664,26 +4126,16 @@
   "west-anaheim-medical-center": [
    {
     "rule": "LIENS",
-    "verdict": "likely",
+    "verdict": "ask",
     "quote": "Legal efforts (e.g., wage garnishment, liens, and judgements) are allowable if:",
     "page": 15,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=f29718bc-58b2-4135-b353-9aa1e8cd213c",
     "effectiveDate": "2025-06-17",
-    "explanation": "The policy allows liens without excluding a patient's home or excluding California patients. California law forbids liens on a patient's real property."
+    "explanation": "This rule allows liens in a policy written for many states and only for people who seem able to pay. It does not say if the liens can be on a home or if patients who qualify for help are left out, so a person should check."
    }
   ],
   "woodland-memorial-hospital": [
-   {
-    "rule": "ASSETS",
-    "verdict": "likely",
-    "quote": "In determining eligibility, CommonSpirit Hospital Organization may consider the \u2018monetary assets\u2019 of the patient\u2019s Family.",
-    "page": 5,
-    "docType": "charity_care",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4290fc25-06e3-4243-8172-16f2e8d4b743",
-    "effectiveDate": "2026-08-20",
-    "explanation": "The policy permits considering family monetary assets. It may be a multistate policy with California carve-outs elsewhere, but as written it applies the forbidden test."
-   },
    {
     "rule": "CREDIT_REPORTING",
     "verdict": "ask",
