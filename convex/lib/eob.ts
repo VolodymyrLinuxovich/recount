@@ -44,6 +44,68 @@ export const ParsedEob = z.object({
 });
 export type ParsedEob = z.infer<typeof ParsedEob>;
 
+// The form the model fills in. Claude's structured output allows only a few fields that may be
+// null, so text fields use "" for "not printed" and `emergency` is yes/no/unknown. Money fields
+// stay nullable, because "not printed" and $0 mean different things. fromEobRead turns it into
+// a ParsedEob, which is what the app stores and the checks use.
+const text = (what: string) => z.string().describe(`${what}. Empty string "" if not printed`);
+const EobReadLine = z.object({
+  date: text("Service date YYYY-MM-DD"),
+  code: text("CPT/HCPCS or revenue code exactly as printed"),
+  description: z.string().describe("Service description as printed"),
+  billed: EobLine.shape.billed,
+  allowed: EobLine.shape.allowed,
+  planPaid: EobLine.shape.planPaid,
+  patientOwes: EobLine.shape.patientOwes,
+  notCovered: EobLine.shape.notCovered,
+  remark: text("Denial or remark code and its text as printed (e.g. 'CO-50 not medically necessary')"),
+});
+export const EobRead = z.object({
+  isEob: ParsedEob.shape.isEob,
+  payer: text("Insurance company or plan name"),
+  planType: text("HMO, PPO, EPO, Medi-Cal, Medicare, etc."),
+  memberName: text("Member name"),
+  memberId: text("Member ID"),
+  claimNumber: text("Claim number"),
+  providerName: text("The hospital or provider the claim is for, as printed"),
+  serviceDateFrom: text("First service date, YYYY-MM-DD"),
+  serviceDateTo: text("Last service date, YYYY-MM-DD"),
+  network: ParsedEob.shape.network,
+  emergency: z.enum(["yes", "no", "unknown"]).describe("yes if the claim is marked as emergency/ER care, no if marked as not emergency, else unknown"),
+  claimStatus: ParsedEob.shape.claimStatus,
+  totalBilled: ParsedEob.shape.totalBilled,
+  totalAllowed: ParsedEob.shape.totalAllowed,
+  totalPlanPaid: ParsedEob.shape.totalPlanPaid,
+  totalPatientOwes: ParsedEob.shape.totalPatientOwes,
+  appealDeadline: text("Appeal deadline or time limit exactly as printed"),
+  appealAddress: text("Where to send an appeal or grievance, as printed"),
+  insurerPhone: text("Insurer phone number"),
+  lines: z.array(EobReadLine),
+  unreadable: ParsedEob.shape.unreadable,
+});
+export type EobRead = z.infer<typeof EobRead>;
+
+const orNull = (s: string) => (s.trim() ? s.trim() : null);
+
+export function fromEobRead(r: EobRead): ParsedEob {
+  return {
+    ...r,
+    payer: orNull(r.payer),
+    planType: orNull(r.planType),
+    memberName: orNull(r.memberName),
+    memberId: orNull(r.memberId),
+    claimNumber: orNull(r.claimNumber),
+    providerName: orNull(r.providerName),
+    serviceDateFrom: orNull(r.serviceDateFrom),
+    serviceDateTo: orNull(r.serviceDateTo),
+    emergency: r.emergency === "yes" ? true : r.emergency === "no" ? false : null,
+    appealDeadline: orNull(r.appealDeadline),
+    appealAddress: orNull(r.appealAddress),
+    insurerPhone: orNull(r.insurerPhone),
+    lines: r.lines.map((l) => ({ ...l, date: orNull(l.date), code: orNull(l.code), remark: orNull(l.remark) })),
+  };
+}
+
 /** Finding kinds that come from comparing the bill with the EOB. They join FindingKind in checks.ts. */
 export type EobFindingKind =
   | "EOB_MISMATCH" // the EOB looks like it is for a different visit

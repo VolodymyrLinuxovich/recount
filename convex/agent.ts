@@ -10,7 +10,7 @@ import type { Id } from "./_generated/dataModel";
 import { internalAction, type ActionCtx } from "./_generated/server";
 import { ParsedBill } from "./lib/bill";
 import { potentialSavings, type Finding } from "./lib/checks";
-import { normalizeEobDates, ParsedEob } from "./lib/eob";
+import { EobRead, fromEobRead, normalizeEobDates, ParsedEob } from "./lib/eob";
 import { allFindings } from "./lib/eobChecks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
@@ -558,7 +558,7 @@ export const draftLetters = internalAction({
 const EOB_PROMPT = `This is an insurance Explanation of Benefits (EOB) a patient photographed or uploaded: the insurer's statement for a hospital claim. It is not a bill. Transcribe it into the schema.
 Rules:
 - If this is not an EOB (for example a hospital bill, a receipt or a letter), set isEob to false and leave the rest empty or null.
-- Copy names, codes, dates and amounts exactly as printed. Never guess a code, a date or an amount that isn't printed; use null.
+- Copy names, codes, dates and amounts exactly as printed. Never guess a code, a date or an amount that isn't printed: use null for a missing amount and "" for missing text. A blank cell in the table is missing, not $0, and never work it out from other cells.
 - "patientOwes" and "totalPatientOwes" are what the EOB says the patient may owe the provider (often called "your responsibility", "you may owe" or "patient responsibility"). Copy them as printed; never compute them.
 - "notCovered" is the amount the plan denied or did not cover on that line, 0 if none. Copy each remark or denial code with its text as printed.
 - network: "in" only if the provider is marked in-network or participating, "out" only if marked out-of-network or non-participating, else "unknown".
@@ -571,14 +571,14 @@ async function readEobFile(blob: Blob, mediaType: string, lang: Lang, record: (r
     {
       task: "read",
       parts: [await filePart(blob, mediaType), { type: "text", text: EOB_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }],
-      schema: ParsedEob,
+      schema: EobRead,
       maxTokens: 12000,
     },
     record,
   );
   if (res.refused) throw new Error("The model declined to read this file.");
   if (!res.data) throw new Error("Couldn't read the insurance statement into a structured form.");
-  return normalizeEobDates(res.data);
+  return normalizeEobDates(fromEobRead(res.data));
 }
 
 /** Read the patient's insurance statement (EOB), then compare it with the bill by rules. */
