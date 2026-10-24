@@ -13,6 +13,7 @@ import { useT } from "./i18n/I18nProvider";
 import type { T } from "./i18n/strings";
 import { Letters } from "./Letters";
 import { PolicyAside } from "./PolicyAside";
+import { Progress } from "./Progress";
 import { Sources } from "./Sources";
 import { StepLog } from "./StepLog";
 import type { CaseView } from "./types";
@@ -54,6 +55,7 @@ export function CaseScreen() {
   if (c.status === "reading" || !c.bill) {
     return (
       <section className="stack">
+        <Progress status="reading" />
         <p className="eyebrow">{t("case.eyebrow")}</p>
         <h1 className="h-answer">{t("case.reading")}</h1>
         {c.fileUrl && c.fileType?.startsWith("image/") && (
@@ -70,6 +72,7 @@ export function CaseScreen() {
 
   return (
     <div className="stack-lg">
+      <Progress status={c.status} />
       {c.eligibility && !askHousehold && <Answer c={c} />}
 
       <BillMarkup c={c} findings={findings} />

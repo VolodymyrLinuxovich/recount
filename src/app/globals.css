@@ -1528,3 +1528,72 @@ body {
   display: flex;
   align-items: center;
 }
+
+/* ---------- progress through a bill ---------- */
+
+.progress {
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+
+.progress-of {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.progress-steps {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.progress-steps li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  font-size: 14.5px;
+  line-height: 1.25;
+  color: var(--ink-2);
+}
+
+.progress-dot {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--rule);
+  font-weight: 700;
+  font-size: 16px;
+  background: var(--paper);
+}
+
+.progress-steps li.done .progress-dot {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.progress-steps li.now {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.progress-steps li.now .progress-dot {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.progress-now {
+  margin: 12px 0 0;
+  font-size: 18px;
+}
