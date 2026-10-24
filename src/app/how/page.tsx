@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
-import { HowScreen } from "@/components/how/HowScreen";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "How Recount decides · Recount",
-  description: "Which steps are fixed rules, which use AI, and which are yours.",
-};
-
+// The /how page was removed. Old links go to the home page.
 export default function HowPage() {
-  return <HowScreen />;
+  redirect("/");
 }

@@ -48,9 +48,6 @@ export function WhoDidWhat({ c }: { c: CaseView }) {
           ))}
         </ol>
       )}
-      <p className="more-body">
-        <a href="/how">{t("who.howLink")}</a>
-      </p>
     </section>
   );
 }
