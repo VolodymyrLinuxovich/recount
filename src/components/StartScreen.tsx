@@ -10,6 +10,8 @@ import { RecentBills } from "./bills/RecentBills";
 import { rememberCase } from "./bills/myBills";
 import { useT } from "./i18n/I18nProvider";
 import { InstallHint } from "./install/InstallHint";
+import { Onboarding, type OnboardPath } from "./onboarding/Onboarding";
+import { hasOnboarded } from "./onboarding/seen";
 import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
 import "./start.css";
@@ -22,6 +24,7 @@ export function StartScreen() {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<null | "photo" | "sample">(null);
   const [error, setError] = useState<PlainKey | null>(null);
+  const [onboard, setOnboard] = useState<OnboardPath | null>(null);
 
   async function upload(file: Blob): Promise<Id<"_storage">> {
     const url = await generateUploadUrl();
@@ -80,36 +83,71 @@ export function StartScreen() {
     ["start.check3Title", "start.check3"],
   ] as const;
 
+  const fileInput = (
+    <input
+      ref={input}
+      type="file"
+      accept="image/*,application/pdf"
+      capture="environment"
+      className="visually-hidden"
+      id="bill-file"
+      onChange={(e) => onFile(e.target.files?.[0])}
+    />
+  );
+  const errorNote = error && (
+    <p className="error-note start-error" role="alert">
+      {t(error)}
+    </p>
+  );
+
+  // First visit: a short "before you start" before the camera opens or the sample starts.
+  function photoTap() {
+    if (hasOnboarded("photo")) input.current?.click();
+    else setOnboard("photo");
+  }
+  function sampleTap() {
+    if (hasOnboarded("sample")) onSample();
+    else setOnboard("sample");
+  }
+
+  if (onboard) {
+    return (
+      <>
+        {fileInput}
+        <Onboarding
+          path={onboard}
+          busy={busy !== null}
+          error={errorNote}
+          onPhoto={() => {
+            // Still inside the tap, so the browser lets the file picker open.
+            input.current?.click();
+            setOnboard(null);
+          }}
+          onSample={onSample}
+          onClose={() => setOnboard(null)}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="start">
+      {fileInput}
       <section className="start-hero" aria-labelledby="start-title">
         <h1 id="start-title" className="start-title">
           {t("start.promise")}
         </h1>
         <p className="start-pitch">{t("start.promise2")}</p>
 
-        <input
-          ref={input}
-          type="file"
-          accept="image/*,application/pdf"
-          capture="environment"
-          className="visually-hidden"
-          id="bill-file"
-          onChange={(e) => onFile(e.target.files?.[0])}
-        />
         <div className="start-actions">
-          <button className="btn btn-primary start-btn" onClick={() => input.current?.click()} disabled={busy !== null}>
+          <button className="btn btn-primary start-btn" onClick={photoTap} disabled={busy !== null}>
             {busy === "photo" ? t("start.uploading") : t("start.photo")}
           </button>
-          <button className="btn start-btn start-btn-2" onClick={onSample} disabled={busy !== null}>
+          <button className="btn start-btn start-btn-2" onClick={sampleTap} disabled={busy !== null}>
             {busy === "sample" ? t("start.sampleBusy") : t("start.sample")}
           </button>
         </div>
-        {error && (
-          <p className="error-note start-error" role="alert">
-            {t(error)}
-          </p>
-        )}
+        {errorNote}
         <p className="start-trust">{t("start.trust")}</p>
       </section>
 

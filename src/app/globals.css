@@ -786,12 +786,42 @@ no tilted or
 :root {
   --ink-2: #3d4250;
   --rule: #cfc4ae;
+  /* One container for every band: masthead, step content, step bar, footer (DESIGN-RESEARCH B3). */
+  --page-max: 40rem;
+  --gutter: 20px;
+  /* Main button fill (B2). */
+  --primary: #155e63;
+  --on-primary: #ffffff;
+  /* Motion (B5). */
+  --ease-in: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --motion-out: 160ms;
+  --motion-in: 260ms;
+  --motion-in-delay: 120ms;
+  --motion-out-shift: 24px;
+  --motion-in-shift: 32px;
+  --motion-fill: 200ms;
+  --motion-press: 80ms;
+}
+
+@media (max-width: 359px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 24px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --ink-2: #cdc6b8;
     --rule: #4a463e;
+    --primary: #7cc7ce;
+    --on-primary: #0b1f21;
   }
 }
 
@@ -801,7 +831,8 @@ body {
 }
 
 .page {
-  max-width: 680px;
+  max-width: var(--page-max);
+  padding: 0 var(--gutter);
 }
 
 .masthead {

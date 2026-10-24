@@ -12,8 +12,9 @@ import "./flow.css";
 
 /** A bill, one screen at a time. The screen is kept in the link so refresh and the Back button work. */
 export function CaseFlow({ c }: { c: CaseView }) {
-  const [wanted, go] = useStep();
   const steps = stepsFor(c);
+  // A screen's place in the flow decides which way the slide goes.
+  const [wanted, go, goBack] = useStep((s) => steps.indexOf(s && steps.includes(s) ? s : homeStep(c)));
   const step = wanted && steps.includes(wanted) ? wanted : homeStep(c);
 
   // When the backend moves the bill to a new phase (reading done, letters written…), move with it.
@@ -25,10 +26,12 @@ export function CaseFlow({ c }: { c: CaseView }) {
       // never while they are reading something.
       // No step in the link yet means the patient hasn't moved anywhere: follow the bill.
       const waiting = !wanted || ["reading", "hospital", "letters-wait", "q3"].includes(wanted);
-      if (waiting) go(wanted === "letters-wait" && c.status === "ready" ? "details" : homeStep(c), true);
-      else if (c.status === "error") go("reading", true);
+      if (waiting) return go(wanted === "letters-wait" && c.status === "ready" ? "details" : homeStep(c), true);
+      if (c.status === "error") return go("reading", true);
     }
-  }, [c, go, wanted]);
+    // A step the bill doesn't have (yet), like &s=letter-3: the fallback screen shows, so put it in the link too.
+    if (wanted && !steps.includes(wanted)) go(step, true, true);
+  }, [c, go, wanted, steps, step]);
 
   const i = steps.indexOf(step);
   const props: ScreenProps = {
@@ -36,9 +39,18 @@ export function CaseFlow({ c }: { c: CaseView }) {
     step,
     go,
     next: () => i + 1 < steps.length && go(steps[i + 1]),
-    back: i > 0 ? () => go(steps[i - 1]) : undefined,
+    back: i > 0 ? () => goBack(steps[i - 1]) : undefined,
   };
 
+  // Keyed by step so each screen arrives fresh and can slide in (see useStep and flow.css).
+  return (
+    <div className="step-anim" key={step}>
+      <Screen step={step} props={props} />
+    </div>
+  );
+}
+
+function Screen({ step, props }: { step: string; props: ScreenProps }) {
   if (step === "reading") return <ReadingStep {...props} />;
   if (step === "hospital") return <HospitalStep {...props} />;
   if (step === "found") return <FoundStep {...props} />;

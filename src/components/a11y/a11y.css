@@ -1,0 +1,344 @@
+/* Display settings: the "Aa Display" control in the masthead, and what it changes.
+   On <html>: data-text="large", data-contrast="hv-light" | "hv-dark"
+   (set before paint by the layout script; see vision.ts). Spec: docs/DESIGN-RESEARCH.md B2. */
+
+/* ---------- the control and its sheet ---------- */
+
+/* The sheet hangs from the masthead's right edge (the column edge), never off screen. */
+.masthead {
+  position: relative;
+}
+
+.vision {
+  display: inline-flex;
+}
+
+.vision-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vision-aa {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 20px;
+}
+
+.vision-btn.on,
+.vision-btn[aria-expanded="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.vision-btn:focus-visible,
+.vision-done:focus-visible,
+.vision-option:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.vision-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: min(360px, 100%);
+  padding: 16px;
+  background: var(--sheet);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  animation: vision-in 280ms cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+@keyframes vision-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.vision-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.vision-group {
+  margin: 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.vision-group + .vision-group {
+  margin-top: 12px;
+}
+
+.vision-group legend {
+  padding: 0;
+  float: left;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.vision-options {
+  clear: both;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.vision-options-3 {
+  grid-template-columns: 1fr;
+}
+
+.vision-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 8px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--sheet);
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.vision-option input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+.vision-option:has(input:checked) {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+/* The two high-visibility choices preview themselves. */
+.vision-swatch-hv-light {
+  background: #ffffff;
+  color: #000000;
+  border-color: #000000;
+}
+
+.vision-swatch-hv-dark {
+  background: #000000;
+  color: #ffe600;
+  border-color: #ffe600;
+}
+
+.vision-swatch-hv-light input {
+  accent-color: #00315c;
+}
+
+.vision-swatch-hv-dark input {
+  accent-color: #ffe600;
+}
+
+.vision-swatch-hv-light:has(input:checked) {
+  box-shadow: inset 0 0 0 2px #000000;
+}
+
+.vision-swatch-hv-dark:has(input:checked) {
+  box-shadow: inset 0 0 0 2px #ffe600;
+}
+
+.vision-done {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 16px;
+}
+
+/* Phone masthead: keep the word, just tighter. */
+@media (max-width: 480px) {
+  .masthead .vision-btn {
+    min-height: 44px;
+    padding: 0 10px;
+    gap: 4px;
+    font-size: 16px;
+  }
+}
+
+/* Phones: "Aa" alone so the masthead stays one row; the word stays as the button's name. */
+@media (max-width: 440px) {
+  .masthead .vision-word {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vision-panel {
+    animation: none;
+  }
+}
+
+/* ---------- Large text ----------
+   Everything scales by 1.1: the 20px body reads at 22px, headings and buttons scale with it,
+   and layouts reflow as on a slightly narrower screen. (Until the rem type scale lands,
+   zoom is the one switch that reaches every hard-coded px size.) */
+
+html[data-text="large"] body {
+  zoom: 1.1;
+}
+
+/* zoom also scales viewport units, so keep full-height boxes at one screen. */
+html[data-text="large"] .page {
+  min-height: calc(100dvh / 1.1);
+}
+
+html[data-text="large"] .step-screen {
+  min-height: calc((100dvh - 160px) / 1.1);
+}
+
+/* Same for the audit page's full-bleed band, which is sized in vw. */
+html[data-text="large"] .wide {
+  width: min(1040px, calc(100vw / 1.1 - 32px));
+}
+
+/* ---------- High visibility (B2) ---------- */
+
+html[data-contrast="hv-light"] {
+  --paper: #ffffff;
+  --sheet: #ffffff;
+  --ink: #000000;
+  --ink-2: #1f1f1f;
+  --rule: #000000;
+  --rule-soft: #ffffff;
+  --pen: #8e0000;
+  --pen-soft: transparent;
+  --warn: #5c3a00;
+  --ok: #0b4f1c;
+  --focus: #0000ee;
+  --accent: #00315c;
+  --accent-soft: transparent;
+  --primary: #00315c;
+  --on-primary: #ffffff;
+  --shadow: none;
+  color-scheme: light;
+}
+
+html[data-contrast="hv-dark"] {
+  --paper: #000000;
+  --sheet: #000000;
+  --ink: #ffffff;
+  --ink-2: #ffffff;
+  --rule: #ffffff;
+  --rule-soft: #000000;
+  --pen: #ff9c8f;
+  --pen-soft: transparent;
+  --warn: #ffe600;
+  --ok: #7cff9b;
+  --focus: #00e5ff;
+  --accent: #ffe600;
+  --accent-soft: transparent;
+  --primary: #ffe600;
+  --on-primary: #000000;
+  --shadow: none;
+  color-scheme: dark;
+}
+
+html[data-contrast] body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* No shadows, no tints, no translucency. */
+html[data-contrast] *,
+html[data-contrast] *::before,
+html[data-contrast] *::after {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* No faded text (an element that greys itself out with opacity is drawn at full strength). */
+html[data-contrast] :is(p, span, li, small, label, dt, dd, td, th, figcaption, summary, .quiet) {
+  opacity: 1;
+}
+
+html[data-contrast] a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 3px;
+}
+
+html[data-contrast] :focus-visible {
+  outline: 4px solid var(--focus) !important;
+  outline-offset: 3px !important;
+}
+
+/* 2px borders on controls and on the frame lines. Only on boxes that already draw a full
+   border: Tailwind's preflight gives every element "border: 0 solid", so a blanket
+   border-width would draw boxes around everything. */
+html[data-contrast] :is(.btn, .lang-toggle, .vision-btn, .vision-panel, .vision-option) {
+  border-width: 2px;
+}
+
+html[data-contrast] .masthead {
+  border-bottom: 2px solid var(--ink);
+}
+
+html[data-contrast] :is(.footnote, .step-bar) {
+  border-top: 2px solid var(--ink);
+}
+
+html[data-contrast] .btn:disabled {
+  opacity: 1;
+  border-style: dashed;
+}
+
+/* Every target at least 56px tall. */
+html[data-contrast] :is(.btn, .lang-option, .vision-btn):not(.bar-btn) {
+  min-height: 56px;
+}
+
+/* ---------- Windows high contrast and other forced colors ---------- */
+
+@media (forced-colors: active) {
+  :is(.btn, button, .bar-btn, .vision-btn, .vision-option, .lang-toggle) {
+    border: 2px solid ButtonText !important;
+  }
+  .bar-primary {
+    background: Highlight !important;
+    color: HighlightText !important;
+  }
+  .step-progress .seg {
+    border: 1px solid CanvasText;
+  }
+  .step-progress .seg::after {
+    background: CanvasText !important;
+  }
+  .step-bar {
+    border-top: 2px solid CanvasText;
+  }
+}

@@ -4,12 +4,15 @@
   min-height: calc(100dvh - 160px);
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(190px + env(safe-area-inset-bottom)); /* room for the pinned bar */
+  /* Room for the pinned bar; StepFrame measures the bar into --bar-h. */
+  padding-bottom: calc(var(--bar-h, 190px) + 24px);
 }
 
 .step-top {
   margin: 0 0 22px;
 }
+
+/* ---------- progress: four segments that fill in ---------- */
 
 .step-progress {
   display: grid;
@@ -18,17 +21,33 @@
 }
 
 .step-progress .seg {
+  position: relative;
   height: 6px;
   border-radius: 3px;
   background: var(--rule);
+  overflow: hidden;
 }
 
-.step-progress .seg.done {
-  background: var(--ok);
-}
-
-.step-progress .seg.now {
+.step-progress .seg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition:
+    transform var(--motion-fill, 200ms) var(--ease-out),
+    background-color var(--motion-fill, 200ms) var(--ease-out);
+}
+
+.step-progress .seg.done::after {
+  background: var(--ok);
+  transform: scaleX(1);
+}
+
+.step-progress .seg.now::after {
+  transform: scaleX(1);
 }
 
 .step-progress-text {
@@ -47,9 +66,17 @@
   margin: 0 0 16px;
 }
 
+/* Focus lands on the title after a step change so screen readers announce it; it isn't a control, so no ring. */
+.step-title:focus,
+.step-title:focus-visible {
+  outline: none !important;
+}
+
 .step-body > p {
   font-size: 19px;
 }
+
+/* ---------- the pinned bar: Back left (1 part), main button right (2 parts) ---------- */
 
 .step-bar {
   position: fixed;
@@ -58,22 +85,181 @@
   bottom: 0;
   z-index: 20;
   background: var(--paper);
-  box-shadow: 0 -6px 16px -10px rgba(40, 30, 10, 0.25);
   border-top: 1px solid var(--rule);
-  padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+  padding: 12px max(var(--gutter), env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
 }
 
+/* Exactly the content column: same container and gutter as the page, masthead and footer. */
 .step-bar-inner {
-  max-width: 640px;
+  max-width: calc(var(--page-max) - 2 * var(--gutter));
   margin: 0 auto;
-}
-
-.step-bar .btn-big {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .step-bar-row {
   display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.step-bar-above {
+  display: flex;
+}
+
+.step-bar .bar-btn {
+  min-height: var(--bar-btn-h, 56px);
+  width: auto;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    transform var(--motion-press) var(--ease-out),
+    filter var(--motion-press) var(--ease-out),
+    background-color 150ms var(--ease-out);
+}
+
+.step-bar-above .bar-btn {
+  flex: 1 1 auto;
+}
+
+/* Two non-Back buttons share the row evenly; with Back it's 1 : 2. */
+.step-bar-row > .bar-btn {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.step-bar-row > .bar-back ~ .bar-btn {
+  flex: 2 1 0;
+}
+
+.step-bar-row.solo > .bar-back {
+  flex: 0 0 calc((100% - 12px) / 3);
+}
+
+.bar-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.bar-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: 2px solid var(--primary);
+}
+
+.bar-arrow {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* Pressed: a quick darken and a slight shrink, so a tap is felt. */
+.step-bar .bar-btn:active:not(:disabled) {
+  transform: scale(0.98);
+  filter: brightness(0.92);
+}
+
+.step-bar .bar-secondary:active:not(:disabled) {
+  background: var(--rule-soft);
+}
+
+/* Disabled stays readable: dashed outline instead of a washed-out fill. */
+.step-bar .bar-btn:disabled {
+  opacity: 1;
+  background: transparent;
+  color: var(--ink-2);
+  border-style: dashed;
+  border-color: var(--ink-2);
+  cursor: default;
+}
+
+.step-bar .bar-btn[aria-busy="true"] {
+  border-style: solid;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.step-bar .bar-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.step-hint {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--ink);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* High visibility: 64px buttons (B4). */
+html[data-contrast] .step-bar {
+  --bar-btn-h: 64px;
+}
+
+/* Stacked: under 360px, with large text, or in high visibility. Primary on top, full width;
+   then the second action; Back last. */
+@media (max-width: 359px) {
+  .step-bar-row,
+  .step-bar-above {
+    display: contents;
+  }
+  .step-bar-row > .bar-btn,
+  .step-bar-above > .bar-btn {
+    width: 100%;
+  }
+  .step-bar .bar-primary {
+    order: 1;
+  }
+  .step-bar-above > .bar-btn,
+  .step-bar-row > .bar-secondary:not(.bar-back) {
+    order: 2;
+  }
+  .step-bar .bar-back {
+    order: 3;
+  }
+}
+
+html:is([data-text="large"], [data-contrast]) .step-bar-row,
+html:is([data-text="large"], [data-contrast]) .step-bar-above {
+  display: contents;
+}
+
+html:is([data-text="large"], [data-contrast]) .step-bar-row > .bar-btn,
+html:is([data-text="large"], [data-contrast]) .step-bar-above > .bar-btn {
+  width: 100%;
+}
+
+html:is([data-text="large"], [data-contrast]) .step-bar .bar-primary {
+  order: 1;
+}
+
+html:is([data-text="large"], [data-contrast]) :is(.step-bar-above > .bar-btn, .step-bar-row > .bar-secondary:not(.bar-back)) {
+  order: 2;
+}
+
+html:is([data-text="large"], [data-contrast]) .step-bar .bar-back {
+  order: 3;
+}
+
+/* Older bar markup (a full-width .btn-big plus a .step-back link row), still used by onboarding. */
+.step-bar .btn-big:not(.bar-btn) {
+  width: 100%;
+}
+
+.step-bar-row:not(:has(.bar-btn)) {
   justify-content: space-between;
   align-items: center;
   margin-top: 6px;
@@ -95,12 +281,6 @@
   outline: 3px solid var(--focus);
 }
 
-.step-hint {
-  margin: 6px 0 0;
-  font-size: 16px;
-  color: var(--ink-2);
-  text-align: center;
-}
 
 /* When a flow screen is showing, hide the page footer: the pinned bar is the footer. */
 body:has(.step-screen) .footnote {
@@ -181,4 +361,149 @@ body:has(.step-screen) .footnote {
 
 .step-body .answer-amt {
   color: var(--pen);
+}
+
+/* ---------- moving between screens (DESIGN-RESEARCH B5) ----------
+   Forward: the old screen leaves 24px to the left and fades (160ms ease-in), then the new one
+   comes in from 32px right (260ms ease-out, starting at 120ms). Back mirrors it.
+   useStep puts the direction on <html data-step-dir> and runs the swap in a View Transition;
+   only the step body moves. The masthead, progress and button bar stay still. */
+
+.step-anim .step-body {
+  view-transition-name: step;
+}
+
+/* Never block a tap while a slide is running. */
+:root::view-transition {
+  pointer-events: none;
+}
+
+/* Everything else swaps in place. */
+:root[data-step-via="vt"]::view-transition-old(root),
+:root[data-step-via="vt"]::view-transition-new(root) {
+  animation: none;
+}
+
+:root[data-step-via="vt"]::view-transition-group(step) {
+  animation: none;
+}
+
+:root[data-step-via="vt"]::view-transition-old(step) {
+  animation: step-out-left var(--motion-out) var(--ease-in) both;
+}
+
+:root[data-step-via="vt"]::view-transition-new(step) {
+  animation: step-in-right var(--motion-in) var(--ease-out) var(--motion-in-delay) both;
+}
+
+:root[data-step-via="vt"][data-step-dir="back"]::view-transition-old(step) {
+  animation-name: step-out-right;
+}
+
+:root[data-step-via="vt"][data-step-dir="back"]::view-transition-new(step) {
+  animation-name: step-in-left;
+}
+
+/* No View Transitions in this browser: the new screen's body plays the same entrance on mount. */
+:root[data-step-via="css"][data-step-dir="forward"] .step-anim .step-body {
+  animation: step-in-right var(--motion-in) var(--ease-out) both;
+}
+
+:root[data-step-via="css"][data-step-dir="back"] .step-anim .step-body {
+  animation: step-in-left var(--motion-in) var(--ease-out) both;
+}
+
+@keyframes step-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(var(--motion-in-shift));
+  }
+}
+
+@keyframes step-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--motion-in-shift)));
+  }
+}
+
+@keyframes step-out-left {
+  to {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--motion-out-shift)));
+  }
+}
+
+@keyframes step-out-right {
+  to {
+    opacity: 0;
+    transform: translateX(var(--motion-out-shift));
+  }
+}
+
+@keyframes step-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes step-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: a 120ms crossfade, no sliding, no press scale, no progress fill.
+   (globals.css shortens every animation to ~0ms, so the fade needs !important.) */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-step-via="vt"]::view-transition-old(step),
+  :root[data-step-via="vt"][data-step-dir="back"]::view-transition-old(step) {
+    animation: step-fade-out 120ms linear both !important;
+  }
+  :root[data-step-via="vt"]::view-transition-new(step),
+  :root[data-step-via="vt"][data-step-dir="back"]::view-transition-new(step) {
+    animation: step-fade-in 120ms linear both !important;
+  }
+  :root[data-step-via="css"][data-step-dir] .step-anim .step-body {
+    animation: step-fade-in 120ms linear both !important;
+  }
+  .step-progress .seg::after,
+  .step-bar .bar-btn {
+    transition: none;
+  }
+  .step-bar .bar-btn:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* ---------- reading your bill: a soft light line passes down the photo ---------- */
+
+.step-body .bill-thumb {
+  background: var(--sheet);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, rgba(0, 0, 0, 0.45) 50%, #000 58%, #000 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, rgba(0, 0, 0, 0.45) 50%, #000 58%, #000 100%);
+  -webkit-mask-size: 100% 300%;
+  mask-size: 100% 300%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: bill-scan 1.6s ease-in-out infinite;
+}
+
+@keyframes bill-scan {
+  from {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-body .bill-thumb {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }

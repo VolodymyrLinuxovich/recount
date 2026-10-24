@@ -1,0 +1,580 @@
+/* =====================================================================
+   Lupa, the helper: mascot, launcher and chat panel.
+   ===================================================================== */
+
+/* ---------- mascot ---------- */
+
+.lupa {
+  display: block;
+  flex: none;
+  overflow: visible;
+  --lupa-cheek: #e7a184;
+}
+
+.lupa-lens {
+  fill: var(--sheet);
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.lupa-tint {
+  fill: var(--accent);
+  opacity: 0.07;
+}
+
+.lupa-glint {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
+.lupa-handle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.lupa-collar {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.lupa-eye {
+  fill: var(--ink);
+}
+
+.lupa-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lupa--small .lupa-line {
+  stroke-width: 3.2;
+}
+
+.lupa-hand {
+  fill: var(--sheet);
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.lupa-cheek {
+  fill: var(--lupa-cheek);
+  opacity: 0.5;
+}
+
+.lupa--small .lupa-cheek {
+  opacity: 0.35;
+}
+
+.lupa-dots circle {
+  fill: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .lupa {
+    --lupa-cheek: #d98f73;
+  }
+  .lupa-tint {
+    opacity: 0.12;
+  }
+  .lupa-cheek {
+    opacity: 0.22;
+  }
+}
+
+/* Motion: kept quiet on purpose. A slow blink when idle, an opacity pulse while thinking.
+   No bounce, no sway. Everything stops under reduced motion. */
+.lupa-eyes {
+  transform-box: view-box;
+  transform-origin: 27px 26px;
+}
+
+.lupa-eyes--up {
+  transform: translate(1.4px, -1.2px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lupa--idle .lupa-eyes,
+  .lupa--wave .lupa-eyes {
+    animation: lupa-blink 4.2s infinite;
+  }
+  .lupa-dots circle {
+    animation: lupa-dot 1.6s ease-in-out infinite;
+  }
+  .lupa-dots circle:nth-child(2) {
+    animation-delay: 0.25s;
+  }
+  .lupa-dots circle:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+}
+
+@keyframes lupa-blink {
+  0%,
+  93%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes lupa-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- launcher ---------- */
+
+/* A labelled button, bottom right. On a case screen it sits just above the pinned
+   step bar (HelperChat measures the bar), so it never covers the main buttons. */
+.helper-launcher {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 4px 16px 4px 6px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: var(--sheet);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: border-color 0.15s ease;
+}
+
+.helper-launcher[hidden] {
+  display: none;
+}
+
+.helper-launcher:hover {
+  background: color-mix(in srgb, var(--accent) 8%, var(--sheet));
+}
+
+/* Before the bar is measured, keep clear of it anyway. */
+body:has(.step-bar) .helper-launcher {
+  bottom: 150px;
+}
+
+@media (min-width: 1024px) {
+  .helper-launcher {
+    right: 24px;
+    bottom: 24px;
+    min-height: 56px;
+    padding-right: 20px;
+    font-size: 18px;
+  }
+}
+
+/* ---------- panel ---------- */
+
+/* Phone and tablet: the page behind can't scroll while the sheet is open. */
+@media (max-width: 1023.98px) {
+  html.helper-open,
+  html.helper-open body {
+    overflow: hidden;
+  }
+}
+
+.helper-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(29, 34, 48, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in, visibility 0s linear 0.2s;
+}
+
+.helper-scrim[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.28s ease-out;
+}
+
+/* Phone: a bottom sheet, 92% of the screen, radius 16 on top. */
+.helper-panel {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: var(--helper-kb, 0px);
+  height: calc(92dvh - var(--helper-kb, 0px));
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -10px 40px -12px rgba(20, 15, 5, 0.45);
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.2s ease-in, visibility 0s linear 0.2s;
+  outline: none;
+}
+
+.helper-panel[data-open="true"] {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.28s cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+
+.helper-panel[data-dragging="true"] {
+  transition: none;
+}
+
+/* Desktop: a 360px column on the right. It floats beside the 640px content column,
+   so opening it never moves or resizes the page. */
+@media (min-width: 1024px) {
+  .helper-panel {
+    top: 24px;
+    bottom: 24px;
+    right: 24px;
+    left: auto;
+    width: 360px;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+    transform: translateX(calc(100% + 32px));
+  }
+  .helper-panel[data-open="true"] {
+    transform: translateX(0);
+  }
+}
+
+/* Wide enough that the 360px chat clears the 640px column by 32px: the page stays usable, no scrim. */
+@media (min-width: 1432px) {
+  .helper-scrim {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .helper-panel,
+  .helper-panel[data-open="true"] {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.12s linear, visibility 0s linear 0.12s;
+  }
+  .helper-panel[data-open="true"] {
+    opacity: 1;
+    transition: opacity 0.12s linear;
+  }
+  .helper-scrim,
+  .helper-scrim[data-open="true"] {
+    transition: opacity 0.12s linear;
+  }
+}
+
+.helper-grab {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 2px;
+  touch-action: none;
+  cursor: grab;
+}
+
+@media (min-width: 1024px) {
+  .helper-grab {
+    display: none;
+  }
+}
+
+.helper-grab-bar {
+  width: 44px;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--rule);
+}
+
+.helper-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px 12px 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 1024px) {
+  .helper-head {
+    padding-top: 12px;
+  }
+}
+
+.helper-head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.helper-name {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.helper-role {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+
+.helper-close {
+  appearance: none;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--ink-2);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.helper-close:hover {
+  border-color: var(--ink);
+}
+
+.helper-list {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.helper-hello {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.helper-bubble {
+  margin: 0;
+  max-width: 92%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.helper-bubble--lupa {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-top-left-radius: 4px;
+}
+
+.helper-bubble--you {
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-top-right-radius: 4px;
+  white-space: pre-wrap;
+}
+
+.helper-msg {
+  display: flex;
+}
+
+.helper-msg--you {
+  justify-content: flex-end;
+}
+
+.helper-rich p {
+  margin: 0;
+}
+
+.helper-rich p + p,
+.helper-rich p + ol,
+.helper-rich p + ul,
+.helper-rich ol + p,
+.helper-rich ul + p {
+  margin-top: 8px;
+}
+
+.helper-rich ol,
+.helper-rich ul {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.helper-rich li + li {
+  margin-top: 4px;
+}
+
+.helper-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.helper-suggest-title {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.helper-chip {
+  appearance: none;
+  text-align: left;
+  font: inherit;
+  font-size: 18px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.helper-chip:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.helper-chip:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.helper-typing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  color: var(--ink-2);
+}
+
+.helper-note {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.helper-form {
+  border-top: 1px solid var(--rule);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--paper);
+  border-radius: 0 0 16px 16px;
+}
+
+.helper-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.helper-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  max-height: 140px;
+  resize: none;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--ink-2);
+  background: var(--sheet);
+  color: var(--ink);
+  field-sizing: content;
+}
+
+.helper-input::placeholder {
+  color: var(--ink-2);
+  opacity: 0.8;
+}
+
+.helper-send {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.helper-send:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.helper-error {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: var(--warn);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .helper-error {
+    animation: helper-fade 0.15s ease-out;
+  }
+}
+
+@keyframes helper-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.helper-safety {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.helper-safety a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+@media print {
+  .helper-launcher,
+  .helper-scrim,
+  .helper-panel {
+    display: none !important;
+  }
+}

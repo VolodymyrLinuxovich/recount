@@ -2,8 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { Footer } from "@/components/Footer";
+import { HelperChat } from "@/components/helper/HelperChat";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Masthead } from "@/components/Masthead";
+import { VISION_SCRIPT } from "@/components/a11y/vision";
 import "./globals.css";
 
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"], axes: ["SOFT", "opsz"] });
@@ -27,7 +29,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Display settings (text size, contrast) before first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: VISION_SCRIPT }} />
+      </head>
       <body>
         <ConvexClientProvider>
           <I18nProvider>
@@ -36,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <main className="column">{children}</main>
             <Footer />
           </div>
+          <HelperChat />
           </I18nProvider>
         </ConvexClientProvider>
       </body>
