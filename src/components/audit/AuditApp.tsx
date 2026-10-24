@@ -55,16 +55,18 @@ export function AuditApp() {
   if (!data) return <p className="quiet">Loading the statewide audit…</p>;
 
   const { audit, sample } = data;
-  const flagged = audit.hospitals.filter(isFlagged).length;
+  const confirmed = audit.hospitals.filter((h) => h.findings.some((f) => f.verdict === "conflict")).length;
+  const likelyOnly = audit.hospitals.filter(isFlagged).length - confirmed;
   const selectedKey = resolveKey(audit.hospitals, selected);
   const hospital = audit.hospitals.find((h) => h.key === selectedKey) ?? null;
 
   const severity = (h: (typeof audit.hospitals)[number]) =>
     h.findings.reduce((a, f) => a + (f.verdict === "conflict" ? 3 : f.verdict === "likely" ? 2 : 1), 0);
-  const mostFlagged = audit.hospitals
-    .filter(isFlagged)
-    .sort((a, b) => severity(b) - severity(a))
-    .slice(0, 5);
+  // The map only helps when we know where the hospitals are.
+  const showMap = audit.hospitals.filter((h) => h.lat != null && h.lon != null).length >= 3;
+  const mostFlagged = showMap
+    ? audit.hospitals.filter(isFlagged).sort((a, b) => severity(b) - severity(a)).slice(0, 5)
+    : [...audit.hospitals].sort((a, b) => severity(b) - severity(a));
 
   const ruleRows = audit.rules
     .map((r) => {
@@ -89,14 +91,24 @@ export function AuditApp() {
       )}
 
       <header>
-        <p className="eyebrow">Statewide audit · {longDate(audit.generatedAt)}</p>
+        <p className="eyebrow">Hospital policy audit · {longDate(audit.generatedAt)}</p>
         <h1 className="h-answer audit-headline">
-          We read every California hospital&rsquo;s financial assistance policy.{" "}
-          <span className="audit-n">{flagged}</span> of them conflict with state law.
+          We read the financial assistance policies of San Francisco&rsquo;s hospitals.{" "}
+          {confirmed > 0 ? (
+            <>
+              <span className="audit-n">{confirmed}</span> of them {confirmed === 1 ? "conflicts" : "conflict"} with state law.
+              {likelyOnly > 0 && <> {likelyOnly} more likely {likelyOnly === 1 ? "does" : "do"}.</>}
+            </>
+          ) : (
+            <>
+              <span className="audit-n">{likelyOnly}</span> of them likely {likelyOnly === 1 ? "conflicts" : "conflict"} with state law.
+            </>
+          )}
         </h1>
         <p className="lede">
-          We checked the current charity care, discount, and debt collection policies of {audit.hospitalsChecked} of{" "}
-          {audit.hospitalsTotal} hospitals in the state&rsquo;s database against the rules in force since 2025: no deadlines to
+          We checked the current charity care, discount, and debt collection policies of {audit.hospitalsChecked} San Francisco hospitals
+          {audit.hospitalsTotal > audit.hospitalsChecked && <> (of {audit.hospitalsTotal} listed)</>}, from the state&rsquo;s
+          hospital database, against the rules in force since 2025: no deadlines to
           apply, no asset tests, simple proof of income, no credit reporting, no liens on homes, no Medi-Cal-first
           requirement. Every flag quotes the policy next to the law.
         </p>
@@ -106,8 +118,8 @@ export function AuditApp() {
         <h2 id="map-h" className="visually-hidden">
           Map
         </h2>
-        <div className="map-and-search">
-          <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={select} />
+        <div className={showMap ? "map-and-search" : "search-only"}>
+          {showMap && <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={select} />}
           <div className="finder">
             <label className="h-section" htmlFor="find">
               Find your hospital
@@ -137,10 +149,10 @@ export function AuditApp() {
                 ))}
               </ul>
             )}
-            <p className="quiet find-hint">Or tap a dot on the map.</p>
+            {showMap && <p className="quiet find-hint">Or tap a dot on the map.</p>}
             {q.trim().length < 2 && mostFlagged.length > 0 && (
               <div className="most">
-                <div className="versus-label">Most flags</div>
+                <div className="versus-label">{showMap ? "Most flags" : "Hospitals we checked"}</div>
                 <ul className="find-results">
                   {mostFlagged.map((h) => (
                     <li key={h.key}>
@@ -149,7 +161,9 @@ export function AuditApp() {
                         <span>
                           <span className="find-name">{h.name}</span>
                           <span className="find-place">
-                            {place(h)} · {h.findings.length} {h.findings.length === 1 ? "flag" : "flags"}
+                            {[place(h), h.findings.length ? `${h.findings.length} ${h.findings.length === 1 ? "flag" : "flags"}` : "no conflicts found"]
+                            .filter(Boolean)
+                            .join(" · ")}
                           </span>
                         </span>
                       </button>
@@ -216,7 +230,9 @@ export function AuditApp() {
           conclusions. Policies change; we show each document&rsquo;s effective date.
         </p>
         <p className="quiet">
-          Checked {audit.hospitalsChecked} of {audit.hospitalsTotal} hospitals. Data from {longDate(audit.generatedAt)}.
+          {audit.hospitalsChecked >= audit.hospitalsTotal
+            ? `Checked all ${audit.hospitalsChecked} hospitals in our list.`
+            : `Checked ${audit.hospitalsChecked} of ${audit.hospitalsTotal} hospitals.`} Data from {longDate(audit.generatedAt)}.
         </p>
       </section>
     </div>

@@ -117,7 +117,7 @@ export function PolicyAside({
       <p className="policy-aside-foot">
         {firm.length > 0 && (inLetter ? "We've added this to your letter. " : "We'll add this to your letter. ")}
         <Link href={hospitalKey ? `/audit#h=${encodeURIComponent(hospitalKey)}` : "/audit"}>
-          See what we found in every California hospital&rsquo;s policy
+          See what we found in San Francisco hospitals&rsquo; policies
         </Link>
       </p>
     </aside>

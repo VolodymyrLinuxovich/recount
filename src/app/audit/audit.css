@@ -489,3 +489,8 @@
   text-decoration: underline wavy var(--pen);
   text-underline-offset: 4px;
 }
+
+.search-only {
+  max-width: 640px;
+  margin: 0 auto;
+}
