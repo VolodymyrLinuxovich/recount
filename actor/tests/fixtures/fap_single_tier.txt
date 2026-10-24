@@ -1,0 +1,3 @@
+TABLE 1: Category of Financial Assistance Eligibility Discount
+Full Charity Care Discount 1. Self-Pay Patient; and 2. Family Income at or below 400% of the Federal Poverty Level (FPL) 100% write off of amount due from patient
+High Medical Cost Charity Care Discount 1. Not a Self-Pay Patient; and 2. Family Income at or below 400% of the Federal Poverty Level (FPL); or 3. Out-of-pocket medical expenses in prior twelve months exceed 10% of Family Income.

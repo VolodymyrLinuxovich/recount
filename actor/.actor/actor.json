@@ -1,0 +1,93 @@
+{
+  "actorSpecification": 1,
+  "name": "hospital-price-and-charity-finder",
+  "title": "Hospital Price & Charity Care Finder",
+  "description": "Give it a hospital website and billing codes. It finds the hospital's CMS price transparency file, streams it for your codes (gross charge, cash price, min/max negotiated), finds the charity care / financial assistance policy, and extracts the income thresholds for free and discounted care with quoted evidence.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "meta": {
+    "templateId": "python-start"
+  },
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "Hospital price and charity care results",
+      "views": {
+        "overview": {
+          "title": "Overview",
+          "transformation": {
+            "fields": [
+              "hospitalName",
+              "mrf.url",
+              "mrf.lastUpdated",
+              "mrf.format",
+              "fap.url",
+              "fap.freeCareMaxFplPct",
+              "fap.discountMaxFplPct",
+              "fap.discountHasNoFplCap",
+              "fap.phone",
+              "fap.applicationUrl",
+              "warnings"
+            ],
+            "flatten": [
+              "mrf",
+              "fap"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "hospitalName": {
+                "label": "Hospital",
+                "format": "text"
+              },
+              "mrf.url": {
+                "label": "Price file",
+                "format": "link"
+              },
+              "mrf.lastUpdated": {
+                "label": "Prices updated",
+                "format": "text"
+              },
+              "mrf.format": {
+                "label": "Format",
+                "format": "text"
+              },
+              "fap.url": {
+                "label": "Charity care policy",
+                "format": "link"
+              },
+              "fap.freeCareMaxFplPct": {
+                "label": "Free care up to (% FPL)",
+                "format": "number"
+              },
+              "fap.discountMaxFplPct": {
+                "label": "Discount up to (% FPL)",
+                "format": "number"
+              },
+              "fap.discountHasNoFplCap": {
+                "label": "Discount has no FPL cap",
+                "format": "boolean"
+              },
+              "fap.phone": {
+                "label": "Financial assistance phone",
+                "format": "text"
+              },
+              "fap.applicationUrl": {
+                "label": "Application",
+                "format": "link"
+              },
+              "warnings": {
+                "label": "Warnings",
+                "format": "array"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

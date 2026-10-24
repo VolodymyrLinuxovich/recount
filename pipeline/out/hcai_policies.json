@@ -1,0 +1,707 @@
+{
+ "source": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/hospital-fair-pricing-policy-lookup/",
+ "login_required": false,
+ "hospitals": {
+  "zsfg": {
+   "license": "220000063",
+   "address": "1001 POTRERO AVENUE, SAN FRANCISCO, CA 94110",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-11-14",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-05-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=71094dd9-e505-451d-b7f1-755333379534"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=db560d60-f5da-4578-b09e-3c338f8a2505"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2025-11-14",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2267a223-573d-4668-b7a6-7a74fef82104"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-11-14",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-05-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=71094dd9-e505-451d-b7f1-755333379534"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=db560d60-f5da-4578-b09e-3c338f8a2505"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2025-11-14",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2267a223-573d-4668-b7a6-7a74fef82104"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-05-12",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=df640bd1-b552-485c-911c-64a5f2e41ed9"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-11-14",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c7a78f0b-55df-4480-b351-e6e7098e5995"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2022-12-21",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5a5ec12c-16ed-43ff-91d4-f4fc8cdfafeb"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2025-11-14",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2025-11-14",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-05-12",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=df640bd1-b552-485c-911c-64a5f2e41ed9"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2025-11-14",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2267a223-573d-4668-b7a6-7a74fef82104"
+   }
+  },
+  "ucsf": {
+   "license": "220000091",
+   "address": "505 PARNASSUS AVENUE, SAN FRANCISCO, CA 94143",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d882f44-e71b-40d7-969d-f7f9e939cdc8"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cb81d95e-f521-4d6a-8e7f-3cff3586d8e9"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=290ff7a7-da31-4229-8a75-22ee15e8dbc9"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cb81d95e-f521-4d6a-8e7f-3cff3586d8e9"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-20",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a25b3298-afc8-46b8-a482-260b85531d1d"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-08",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c7e55bb8-dfdc-41ae-9b8f-56217602d459"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ac951f68-93d9-45c5-a042-e4152fdd77ee"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a29200ce-28f1-43a9-b3ce-232851c30ef1"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-07-20",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a25b3298-afc8-46b8-a482-260b85531d1d"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cb81d95e-f521-4d6a-8e7f-3cff3586d8e9"
+   }
+  },
+  "ucsf_missionbay": {
+   "license": "220000091",
+   "address": "1975 4TH STREET, SAN FRANCISCO, CA 94158",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e1fbaab2-451e-4405-ac07-00b1cec5c1c1"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e0dd90d6-607f-45f4-8c34-ddba8155d72a"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=a5b49680-30b6-4c53-a4f1-e555fd4010d5"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e0dd90d6-607f-45f4-8c34-ddba8155d72a"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-20",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b592f6d7-2f52-47b3-bdc4-673a9f04318d"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-08",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=397d8134-3e06-41b7-a577-0e482e2d96f3"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d9a487f-2751-4654-9ac9-dfc3bfaffc6d"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=87d0d679-11c7-4ace-b949-36be803d6f7e"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center-at-mission-bay/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-07-20",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=b592f6d7-2f52-47b3-bdc4-673a9f04318d"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e0dd90d6-607f-45f4-8c34-ddba8155d72a"
+   }
+  },
+  "cpmc_vanness": {
+   "license": "220000197",
+   "address": "1101 VAN NESS AVENUE, SAN FRANCISCO, CA 94109",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2026-01-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-08-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5faeac78-16cc-41de-ab3e-6ef9bc074c79"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-04-04",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=887d07ca-3544-49c1-b978-2470c34d73b5"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-01-07",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6b69e96b-b66c-486e-b493-a2f18bc89c98"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ca86f5c1-90bc-46ce-823f-fbb6ef3ed59c"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2026-01-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=fb5e6255-9bc5-4ef8-96a5-500d25d9d1c2"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2026-01-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-08-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5faeac78-16cc-41de-ab3e-6ef9bc074c79"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-04-04",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=887d07ca-3544-49c1-b978-2470c34d73b5"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-01-07",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=35c5fa71-88c9-40ff-9cff-da089623cb2e"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4fcbf399-2941-4a22-8971-ded738f52b20"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2026-01-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=fb5e6255-9bc5-4ef8-96a5-500d25d9d1c2"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-01-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=84dee8e4-309f-4be0-b998-a9ae401e42ed"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-08-26",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6acfebca-3a5f-45b4-9bf8-35101e0aba92"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-04-04",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c824f35a-f4c4-4bda-a59e-9ff3cfe4adf4"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-01-07",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e2fec6f3-d971-4c10-85a7-15c06fe58880"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2350e022-f16f-4834-b121-740086025582"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-van-ness-campus/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2026-01-26",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2026-01-26",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-01-26",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=84dee8e4-309f-4be0-b998-a9ae401e42ed"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2026-01-26",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=fb5e6255-9bc5-4ef8-96a5-500d25d9d1c2"
+   }
+  },
+  "stfrancis_hyde": {
+   "license": "220000069",
+   "address": "900 HYDE STREET, SAN FRANCISCO, CA 94109",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9a891715-9a99-471c-a997-5500fe81d5d1"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=06776ada-bea7-4c9c-9345-a28473ee252d"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7c26ef9f-937c-4a83-912b-19bb52c1e51d"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=9a891715-9a99-471c-a997-5500fe81d5d1"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=06776ada-bea7-4c9c-9345-a28473ee252d"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7c26ef9f-937c-4a83-912b-19bb52c1e51d"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-20",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d05e3d87-d719-43ff-86c8-e589c4cd7be0"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-08",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=67c2642b-fa3b-49d4-bbf3-8263d3e3c76a"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c08d2e22-a7b4-4f06-af24-291a80599d53"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=008d56f5-4cb5-47e1-807c-77890af41c7f"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=68a49e9d-ed71-4ceb-a336-3f80401bcc71"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-francis-memorial-hospital/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-07-20",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=d05e3d87-d719-43ff-86c8-e589c4cd7be0"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=7c26ef9f-937c-4a83-912b-19bb52c1e51d"
+   }
+  },
+  "stmarys": {
+   "license": "220000071",
+   "address": "450 STANYAN STREET, SAN FRANCISCO, CA 94117",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=469284fe-105e-416a-a874-8bf86dfab45c"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4acb17d5-a005-4050-9946-408c8d1aa8e7"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6687de2b-3b69-4478-9ab6-4abbed215c61"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=469284fe-105e-416a-a874-8bf86dfab45c"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4acb17d5-a005-4050-9946-408c8d1aa8e7"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6687de2b-3b69-4478-9ab6-4abbed215c61"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-20",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=736c5de4-4a0c-4ff8-b1e4-1d8fd801c714"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-07-07",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=dc99fc7d-8fc6-4edd-8a28-4ec2a8ddf469"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2026-01-16",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=31b1a113-e7d6-4162-b9b4-4805659f4714"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-09-22",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=cb17f1fe-fed3-4fcd-a5f5-c3968a2eec0b"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2022-07-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=ce65fb5d-5b6a-4249-8bd0-ef6ac0501153"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-marys-medical-center/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2026-07-20",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=736c5de4-4a0c-4ff8-b1e4-1d8fd801c714"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2026-01-16",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=6687de2b-3b69-4478-9ab6-4abbed215c61"
+   }
+  },
+  "kaiser_sf": {
+   "license": "220000188",
+   "address": "2425 GEARY BOULEVARD, SAN FRANCISCO, CA 94115",
+   "documents": [
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2025-02-27",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-07-10",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=30d204e4-57a5-49a6-8c02-ba3d552e7273"
+    },
+    {
+     "label": "Charity Care Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=957cfa93-7210-46ec-98c4-b38cdf408972"
+    },
+    {
+     "label": "Application for Charity Care",
+     "effective_date": "2025-02-27",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5b42ff05-4536-4c1f-bd13-9c206a3f8f40"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2025-02-27",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-07-10",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=30d204e4-57a5-49a6-8c02-ba3d552e7273"
+    },
+    {
+     "label": "Discount Payment Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=957cfa93-7210-46ec-98c4-b38cdf408972"
+    },
+    {
+     "label": "Application for Discount Payment",
+     "effective_date": "2025-02-27",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5b42ff05-4536-4c1f-bd13-9c206a3f8f40"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2025-02-27",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1b5300bc-4eec-4921-9c90-6ae218e09945"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2024-07-10",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=93a1f8b2-d58e-458f-84d8-2b26a78d4d6b"
+    },
+    {
+     "label": "Debt Collection Policy",
+     "effective_date": "2024-01-01",
+     "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c65c4789-fe8c-49e1-ac5c-ad783517ccdd"
+    }
+   ],
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kaiser-foundation-hospital-san-francisco/",
+   "latest_charity_care_policy": {
+    "label": "Charity Care Policy",
+    "effective_date": "2025-02-27",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa"
+   },
+   "latest_discount_payment_policy": {
+    "label": "Discount Payment Policy",
+    "effective_date": "2025-02-27",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa"
+   },
+   "latest_debt_collection_policy": {
+    "label": "Debt Collection Policy",
+    "effective_date": "2025-02-27",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=1b5300bc-4eec-4921-9c90-6ae218e09945"
+   },
+   "latest_application": {
+    "label": "Application for Charity Care",
+    "effective_date": "2025-02-27",
+    "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=5b42ff05-4536-4c1f-bd13-9c206a3f8f40"
+   }
+  }
+ },
+ "sf_search_results": [
+  {
+   "name": "KENTFIELD HOSPITAL SAN FRANCISCO",
+   "slug": "kentfield-hospital-san-francisco",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kentfield-hospital-san-francisco/"
+  },
+  {
+   "name": "KAISER FOUNDATION HOSPITAL \u2013 SAN FRANCISCO",
+   "slug": "kaiser-foundation-hospital-san-francisco",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kaiser-foundation-hospital-san-francisco/"
+  },
+  {
+   "name": "KAISER FOUNDATION HOSPITAL \u2013 SOUTH SAN FRANCISCO",
+   "slug": "kaiser-foundation-hospital-south-san-francisco",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kaiser-foundation-hospital-south-san-francisco/"
+  },
+  {
+   "name": "KINDRED HOSPITAL \u2013 SAN FRANCISCO BAY AREA",
+   "slug": "kindred-hospital-san-francisco-bay-area",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kindred-hospital-san-francisco-bay-area/"
+  },
+  {
+   "name": "PRISCILLA CHAN & MARK ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL & TRAUMA CENTER",
+   "slug": "priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center/"
+  },
+  {
+   "name": "UCSF MEDICAL CENTER AT MISSION BAY",
+   "slug": "ucsf-medical-center-at-mission-bay",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center-at-mission-bay/"
+  },
+  {
+   "name": "LAGUNA HONDA HOSPITAL AND REHABILITATION CENTER",
+   "slug": "laguna-honda-hospital-and-rehabilitation-center",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/laguna-honda-hospital-and-rehabilitation-center/"
+  },
+  {
+   "name": "CALIFORNIA PACIFIC MEDICAL CENTER \u2013 MISSION BERNAL CAMPUS",
+   "slug": "california-pacific-medical-center-mission-bernal-campus",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-mission-bernal-campus/"
+  },
+  {
+   "name": "UCSF HEALTH HYDE HOSPITAL",
+   "slug": "st-francis-memorial-hospital",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-francis-memorial-hospital/"
+  },
+  {
+   "name": "UCSF HEALTH \u2013 ST. MARY\u2019S HOSPITAL",
+   "slug": "st-marys-medical-center",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-marys-medical-center/"
+  },
+  {
+   "name": "LANGLEY PORTER PSYCHIATRIC INSTITUTE",
+   "slug": "langley-porter-psychiatric-institute",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/langley-porter-psychiatric-institute/"
+  },
+  {
+   "name": "CALIFORNIA PACIFIC MEDICAL CENTER \u2013 DAVIES CAMPUS HOSPITAL",
+   "slug": "california-pacific-medical-center-davies-campus-hospital",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-davies-campus-hospital/"
+  },
+  {
+   "name": "CALIFORNIA PACIFIC MEDICAL CENTER \u2013 VAN NESS CAMPUS",
+   "slug": "california-pacific-medical-center-van-ness-campus",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-van-ness-campus/"
+  },
+  {
+   "name": "UCSF MEDICAL CENTER",
+   "slug": "ucsf-medical-center",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center/"
+  },
+  {
+   "name": "JEWISH HOME & REHAB CENTER",
+   "slug": "jewish-home-rehab-center",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/jewish-home-rehab-center/"
+  },
+  {
+   "name": "CHINESE HOSPITAL",
+   "slug": "chinese-hospital",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/chinese-hospital/"
+  },
+  {
+   "name": "UCSF MEDICAL CENTER AT MOUNT ZION",
+   "slug": "ucsf-medical-center-at-mount-zion",
+   "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center-at-mount-zion/"
+  }
+ ]
+}

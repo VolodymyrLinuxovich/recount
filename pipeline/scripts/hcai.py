@@ -1,0 +1,88 @@
+"""Scrape HCAI's public Hospital Fair Pricing Policy Lookup (no login needed).
+
+- Search page: GET .../hospital-fair-pricing-policy-lookup/?hcai_search=<q>&hcai_page=<n>
+- Detail page: GET https://hcai.ca.gov/affordability/hospital-billing-policies/<slug>/
+- Each policy PDF: GET https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=<uuid>
+
+Writes out/hcai_policies.json and downloads each hospital's latest charity-care
+policy PDF to raw/fap/<key>.pdf (+ .txt).
+"""
+import html
+import json
+import os
+import re
+
+from scripts.common import OUT, fetch, pdf_text, raw_path
+
+LOOKUP = "https://hcai.ca.gov/affordability/hospital-fair-billing-program/hospital-fair-pricing-policy-lookup/"
+DETAIL = "https://hcai.ca.gov/affordability/hospital-billing-policies/{slug}/"
+
+HOSPITALS = {
+    "zsfg": "priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center",
+    "ucsf": "ucsf-medical-center",
+    "ucsf_missionbay": "ucsf-medical-center-at-mission-bay",
+    "cpmc_vanness": "california-pacific-medical-center-van-ness-campus",
+    "stfrancis_hyde": "st-francis-memorial-hospital",
+    "stmarys": "st-marys-medical-center",
+    "kaiser_sf": "kaiser-foundation-hospital-san-francisco",
+}
+
+
+def search(query):
+    """Return [(name, slug)] for a lookup search, following pagination."""
+    res, page = [], 1
+    while True:
+        url = f"{LOOKUP}?hcai_search={query.replace(' ', '+')}&hcai_page={page}"
+        t = fetch(url).decode("utf-8", "replace")
+        hits = re.findall(r'hospital-billing-policies/([a-z0-9-]+)/">([^<]+)</a>', t)
+        new = [(html.unescape(n).strip(), s) for s, n in hits if (html.unescape(n).strip(), s) not in res]
+        if not new:
+            return res
+        res += new
+        page += 1
+
+
+def parse_detail(t):
+    """Extract policy documents from a detail page, grouped by section."""
+    t = re.sub(r"<script.*?</script>|<style.*?</style>", "", t, flags=re.S)
+    docs = []
+    for m in re.finditer(r'<a[^>]*href="(https://api\.hdc\.hcai\.ca\.gov/Public/Extract/Attachment\?id=[0-9a-f-]+)"[^>]*>(.*?)</a>', t, re.S):
+        label = html.unescape(re.sub(r"<[^>]+>|\s+", " ", m.group(2))).strip()
+        before = re.sub(r"<[^>]+>|\s+", " ", t[max(0, m.start() - 400):m.start()])
+        dates = re.findall(r"(\d\d/\d\d/\d{4})", before)
+        d = dates[-1] if dates else None
+        iso = f"{d[6:]}-{d[:2]}-{d[3:5]}" if d else None
+        docs.append({"label": label, "effective_date": iso, "url": m.group(1)})
+    head = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t)))
+    lic = re.search(r"License #:\s*(\d+)", head)
+    addr = re.search(r"Address:\s*(.+?)\s+(?:Hospital Aliases|License #)", head)
+    return {"license": lic.group(1) if lic else None, "address": addr.group(1) if addr else None, "documents": docs}
+
+
+def latest(docs, label):
+    c = [d for d in docs if d["label"] == label and d["effective_date"]]
+    return max(c, key=lambda d: d["effective_date"]) if c else None
+
+
+def build(download_pdfs=True):
+    out = {"source": LOOKUP, "login_required": False, "hospitals": {}}
+    out["sf_search_results"] = [{"name": n, "slug": s, "detail_url": DETAIL.format(slug=s)} for n, s in search("san francisco")]
+    for key, slug in HOSPITALS.items():
+        url = DETAIL.format(slug=slug)
+        info = parse_detail(fetch(url).decode("utf-8", "replace"))
+        info["detail_url"] = url
+        info["latest_charity_care_policy"] = latest(info["documents"], "Charity Care Policy")
+        info["latest_discount_payment_policy"] = latest(info["documents"], "Discount Payment Policy")
+        info["latest_debt_collection_policy"] = latest(info["documents"], "Debt Collection Policy")
+        info["latest_application"] = latest(info["documents"], "Application for Charity Care")
+        out["hospitals"][key] = info
+        pol = info["latest_charity_care_policy"]
+        if download_pdfs and pol:
+            pdf = raw_path("fap", f"{key}.pdf")
+            if not os.path.exists(pdf):
+                fetch(pol["url"], pdf)
+            with open(raw_path("fap", f"{key}.txt"), "w") as f:
+                f.write(pdf_text(pdf))
+    with open(os.path.join(OUT, "hcai_policies.json"), "w") as f:
+        json.dump(out, f, indent=1)
+    return out

@@ -1,0 +1,8 @@
+hospital_name,last_updated_on,version,location_name,hospital_address,license_number|CA,"To the best of its knowledge and belief, this hospital has included all applicable standard charge information"
+EXAMPLE COUNTY HOSPITAL,3/19/2026,3.0.0,EXAMPLE COUNTY HOSPITAL,1 MAIN ST,220000063,TRUE
+description,code|1,code|1|type,code|2,code|2|type,modifiers,setting,billing_class,standard_charge| gross,standard_charge| discounted_cash,payer_name,plan_name,standard_charge|negotiated_dollar,standard_charge|negotiated_percentage,standard_charge|negotiated_algorithm,standard_charge|methodology,standard_charge| min,standard_charge| max,additional_generic_notes
+HC ER Ex/Tx Rm Level IV,260407561077,CDM,99284,CPT,,outpatient,facility,"6,084.00",6084.00,ANTHEM,Medi-Cal,49.60,,,fee schedule,49.60,6084.00,
+HC ER Ex/Tx Rm Level IV,260407561077,CDM,99284,CPT,,outpatient,facility,"6,084.00",6084.00,BLUE SHIELD,Commercial,,55,,percent of total billed charges,49.60,6084.00,
+HC ER Ex/Tx Rm Level IV,260407561077,CDM,99284,CPT,,inpatient,facility,6084.00,6084.00,ANTHEM,Medi-Cal,52.10,,,fee schedule,52.10,6084.00,
+HC Comprehensive Metabolic Panel,260407560001,CDM,80053,CPT,,outpatient,facility,528.00,528.00,ANTHEM,Medi-Cal,13.18,,,fee schedule,10.56,528.00,
+HC Comprehensive Metabolic Panel,260407560001,CDM,80053,CPT,,outpatient,facility,528.00,528.00,HEALTH NET,Medi-Cal,10.56,,,fee schedule,10.56,528.00,

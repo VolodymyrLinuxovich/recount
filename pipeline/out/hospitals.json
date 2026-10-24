@@ -1,0 +1,204 @@
+{
+  "as_of": "2026-10-24",
+  "verification_legend": {
+    "opened": "we downloaded/opened the document and read the value in it",
+    "cited": "URL seen cited in another document or page, not opened"
+  },
+  "fap_source_note": "FAP PDFs were downloaded from HCAI's public Hospital Fair Pricing Policy Lookup (the copy the hospital filed with the state). The api.hdc.hcai.ca.gov attachment URLs are stable public GETs; see hcai_policies.json for all filed versions.",
+  "hospitals": [
+    {
+      "key": "zsfg",
+      "name": "Priscilla Chan & Mark Zuckerberg San Francisco General Hospital & Trauma Center",
+      "address": "1001 Potrero Ave, San Francisco, CA 94110",
+      "operator": "City & County of San Francisco, Dept of Public Health (San Francisco Health Network)",
+      "hcai_license": "220000063",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center/",
+      "fap": {
+        "title": "San Francisco Health Network Charity Care and Discount Payment Program Policy and Procedure (v.05112026)",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143",
+        "hcai_effective_date": "2025-11-14",
+        "application_url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2267a223-573d-4668-b7a6-7a74fef82104",
+        "hospital_page": "https://www.zuckerbergsanfranciscogeneral.org/services/help-paying-your-bill/",
+        "verified": "opened",
+        "free_care": {"rule": "household income <= 138% FPL", "max_pct_fpl": 138, "quote": "A patient's household income may not exceed 138% of the Federal poverty level.", "extra_conditions": "must cooperate with insurance/third-party recovery and with Medicare/Medi-Cal/other coverage screening and application"},
+        "discount": {"rule": "household income >= 139% FPL, no upper limit; FPL determines the size of the discount (the discount schedule itself is NOT published in the policy)", "min_pct_fpl": 139, "max_pct_fpl": null, "quote": "There is no FPL limit for a patient to qualify. The patient's FPL determines the amount of the discount."},
+        "payment_cap": {"rule": "patients <= 400% FPL: expected payment limited to what Medicare would pay", "quote": "limits the expected payment for services it provides to patients at or below 400% of the FPL, to the amount of payment the hospital would expect to receive from Medicare."},
+        "high_medical_cost": "Policy history says the high-medical-cost criterion was eliminated in 2019 (discount program open to all FPL levels instead).",
+        "other": [
+          "Patient Cap: SFDPH applies an automatic predetermined maximum patient balance for qualifying patients/accounts without an application (amount not published in the policy).",
+          "Appeals within 15 business days of a decision.",
+          "Payment plans: <= 10% of family income after essential expenses; if no agreement, deduct 60% of gross household income for essential living expenses then take 10% of the remainder. Plans under $20/month or over 12 months are sent to the Bureau of Delinquent Revenue.",
+          "ER physician fees are billed separately by UCSF Clinical Practice Group dba SFGH Medical Group (its Guarantor/AB1020 policy is attached to the same PDF: limits payment to the greater of Medicare or Medi-Cal for patients <= 400% FPL).",
+          "Policy says patients without an accepted verifiable source of income will be found ineligible; and earlier history notes charity threshold was 500% FPL from 2019, now 138%."
+        ]
+      },
+      "billing_phones": [
+        {"purpose": "Patient Financial Assistance (apply for charity/discount)", "phone": "(628) 206-3275", "source": "FAP PDF", "verified": "opened"},
+        {"purpose": "Patient Accounting customer service / payment plans", "phone": "(628) 206-8448", "source": "FAP PDF and ZSFG billing page", "verified": "opened"}
+      ],
+      "mrf": {
+        "url": "https://sanfranciscogeneralhospitalfou.box.com/shared/static/bj0pj6iqcpc6bmb4yp7kobuz772j0jtl.csv",
+        "found_via": "https://www.zuckerbergsanfranciscogeneral.org/services/billing-financial-assistance/ ('CMS Regulations Machine Readable File' link). No cms-hhs-pricetransparency.txt at the domain root (HTTP 404).",
+        "format": "CMS template v3.0.0, CSV tall",
+        "size_bytes": 3934073,
+        "last_updated_on": "2026-03-19",
+        "verified": "opened",
+        "extract": "prices_zsfg.json"
+      }
+    },
+    {
+      "key": "ucsf",
+      "name": "UCSF Medical Center (Parnassus, Mission Bay, Mount Zion; one license 220000091)",
+      "address": "505 Parnassus Ave, San Francisco, CA 94143 (Mission Bay: 1975 4th St, 94158)",
+      "operator": "University of California, San Francisco (UCSF Health)",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center/",
+      "hcai_page_mission_bay": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center-at-mission-bay/",
+      "fap": {
+        "title": "UCSF Policy 3.04.07 Patient Financial Assistance, Prescription Assistance, and Charity Care",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=eff9713f-f9e4-4de7-ae1f-1704cbda2ead",
+        "url_mission_bay_filing": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4003bd8a-0d6b-4c83-827a-425a3e4beddb",
+        "hcai_effective_date": "2026-01-16",
+        "hospital_page": "https://www.ucsfhealth.org/billing-and-insurance/help-paying-your-bill",
+        "verified": "opened (hospital_page: cited in FAP, not opened)",
+        "free_care": {"rule": "Self-pay (no third-party coverage) and family income <= 400% FPL -> 100% write-off", "max_pct_fpl": 400, "quote": "Family Income at or below 400% of the Federal Poverty Level (FPL)"},
+        "high_medical_cost_free_care": {"rule": "Insured and (family income <= 400% FPL OR out-of-pocket medical expenses in prior 12 months > 10% of family income) -> 100% write-off of patient responsibility", "note": "As written the criteria list uses 'and ... ; or', so the >10% out-of-pocket test may apply at any income; confirm with UCSF."},
+        "discount": {"rule": "No separate partial-discount tier above 400% FPL found in the policy.", "max_pct_fpl": null},
+        "other": [
+          "Policy covers hospital inpatient/outpatient incl. hospital-based professional fees; excludes separately billed physician fees.",
+          "Policy asks for 'best efforts' to apply within 240 days of first bill; CA law (HSC 127405(e)(3)) bars application deadlines.",
+          "Extended payment plans interest-free; <= 10% of monthly family income after essential living expenses."
+        ]
+      },
+      "billing_phones": [
+        {"purpose": "Patient Financial Services (financial assistance application)", "phone": "1-866-433-4035", "source": "FAP PDF", "verified": "opened"},
+        {"purpose": "Patient Estimate Program", "phone": "844-678-6831", "source": "https://www.ucsfhealth.org/about/price-transparency", "verified": "opened"}
+      ],
+      "mrf": {
+        "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=ldckxfm5nm9wah74gqi7fdhe6mrtpg5e&file_id=f_1959275070690",
+        "found_via": "https://www.ucsfhealth.org/about/price-transparency ('UCSF Medical Center Standard Charges'). No cms-hhs-pricetransparency.txt at www.ucsfhealth.org (404).",
+        "format": "CMS template v3.0.0, JSON",
+        "size_bytes": 90990822,
+        "last_updated_on": "2026-04-01",
+        "locations_in_file": ["Ucsf Medical Center", "UCSF Mission Bay", "UCSF Mt Zion", "UCSF Parnassus"],
+        "verified": "opened",
+        "extract": "prices_ucsf.json"
+      }
+    },
+    {
+      "key": "cpmc_vanness",
+      "name": "California Pacific Medical Center - Van Ness Campus",
+      "address": "1101 Van Ness Ave, San Francisco, CA",
+      "operator": "Sutter Health",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-van-ness-campus/",
+      "fap": {
+        "title": "Policy On Financial Assistance for Sutter Hospitals (Charity Care), effective 2026-01-01",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e",
+        "hcai_effective_date": "2026-01-26",
+        "verified": "opened",
+        "free_care": {"rule": "Uninsured and family income <= 400% FPL -> full write-off of hospital charges", "max_pct_fpl": 400, "quote": "Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL."},
+        "high_medical_cost_free_care": {"rule": "Insured, family income <= 400% FPL, and out-of-pocket medical expenses (past 12 months) > 10% of family income -> write-off of patient responsibility"},
+        "discount": {"rule": "No partial-discount tier found in policy text. The internal worksheet (Attachment) mentions a 'Catastrophic' write-off where patient liability above 30% of annual income is written off, but the policy body does not define eligibility for it.", "max_pct_fpl": null},
+        "other": [
+          "Eligibility lasts 1 year after notification.",
+          "Refunds of credit balances include 10% per annum interest (HSC 127440); not if under $5.",
+          "Disputes: notify hospital CFO/designee within 30 days.",
+          "Excludes separately billed physicians incl. ER physicians."
+        ]
+      },
+      "billing_phones": [
+        {"purpose": "Sutter Patient Financial Services", "phone": "855-398-1633", "source": "FAP PDF", "verified": "opened"}
+      ],
+      "mrf": {
+        "url": "https://edge.sitecorecloud.io/sutterhealt962c-sutterhealt8fce-production57cc-4860/media/Project/SutterHealth/SutterHealth/Files/billing-insurance/costs-and-charges/940562680-1740348929_california-pacific-medical-center-van-ness-campus_standardcharges.csv",
+        "found_via": "https://www.sutterhealth.org/billing-insurance/costs-and-charges/cost-transparency (no cms-hhs-pricetransparency.txt at sutterhealth.org root: 404)",
+        "format": "CMS template v3.0.0, CSV tall",
+        "size_bytes": 16860354,
+        "last_updated_on": "2026-04-01",
+        "verified": "opened",
+        "extract": "prices_cpmc_vanness.json",
+        "caveat": "No payer-specific negotiated dollar amounts on the ED E/M rows; discounted cash = gross charge."
+      }
+    },
+    {
+      "key": "stfrancis_hyde",
+      "name": "UCSF Health Hyde Hospital (formerly Saint Francis Memorial Hospital)",
+      "address": "900 Hyde St, San Francisco, CA 94109",
+      "operator": "UCSF Health (formerly Dignity Health / CommonSpirit; HCAI now lists it as UCSF Health Hyde Hospital)",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-francis-memorial-hospital/",
+      "fap": {
+        "title": "Same PDF as UCSF Policy 3.04.07 (byte-identical file filed for UCSF Parnassus, Mission Bay, Hyde and St. Mary's)",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41d8671f-ce08-40bf-b2ff-700b01fb1f50",
+        "hcai_effective_date": "2026-01-16",
+        "verified": "opened",
+        "thresholds": "see ucsf: free care <= 400% FPL (self-pay); high-medical-cost free care for insured",
+        "caveat": "The policy text names 'UCSF Medical Center' throughout; it is what HCAI has on file for this hospital."
+      },
+      "billing_phones": [{"purpose": "UCSF Patient Financial Services (per filed FAP)", "phone": "1-866-433-4035", "source": "FAP PDF", "verified": "opened"}],
+      "mrf": {
+        "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=8wogrqzbbev45c7pup8v9298ul2ymlpr&file_id=f_1732346032300",
+        "found_via": "https://sfcommunityhospitals.ucsfhealth.org/st-marys/patients-and-visitors/for-patients/billing-and-payment/hospital-pricing-transparency ('MRF for Hyde')",
+        "format": "CMS template v3.0.0, JSON",
+        "size_bytes": 100499087,
+        "last_updated_on": "2026-02-28",
+        "hospital_name_in_file": "Saint Francis Memorial Hospital",
+        "verified": "opened",
+        "extract": "prices_stfrancis_hyde.json",
+        "caveat": "negotiated maxima for ED codes are very large (e.g. 24548 for 99283), which looks like case/bundled rates attached to the line; use min or median, not max."
+      }
+    },
+    {
+      "key": "stmarys",
+      "name": "UCSF Health St. Mary's Hospital (St. Mary's Medical Center - San Francisco)",
+      "address": "450 Stanyan St, San Francisco, CA 94117",
+      "operator": "UCSF Health (formerly Dignity Health / CommonSpirit)",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-marys-medical-center/",
+      "fap": {
+        "title": "Same PDF as UCSF Policy 3.04.07",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=3d3a1f38-1cbe-4953-a8a4-3444d208c585",
+        "hcai_effective_date": "2026-01-16",
+        "verified": "opened",
+        "thresholds": "see ucsf"
+      },
+      "billing_phones": [{"purpose": "UCSF Patient Financial Services (per filed FAP)", "phone": "1-866-433-4035", "source": "FAP PDF", "verified": "opened"}],
+      "mrf": {
+        "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=xsx8jxwcakpxzg78pfllolwmhrhcifxh&file_id=f_1732344688129",
+        "found_via": "https://sfcommunityhospitals.ucsfhealth.org/st-marys/patients-and-visitors/for-patients/billing-and-payment/hospital-pricing-transparency ('MRF for Stanyan')",
+        "format": "CMS template v3.0.0, JSON",
+        "size_bytes": 91287597,
+        "last_updated_on": "2026-02-28",
+        "verified": "opened",
+        "extract": "prices_stmarys.json"
+      }
+    },
+    {
+      "key": "kaiser_sf",
+      "name": "Kaiser Foundation Hospital - San Francisco",
+      "address": "2425 Geary Blvd, San Francisco, CA 94115",
+      "operator": "Kaiser Foundation Hospitals",
+      "hcai_page": "https://hcai.ca.gov/affordability/hospital-billing-policies/kaiser-foundation-hospital-san-francisco/",
+      "fap": {
+        "title": "Kaiser Permanente Medical Financial Assistance NATL.CB.307 with Northern California addendum (eff. 2025-01-01)",
+        "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=97c83cdd-ca29-4b62-8fe0-75229f1b04aa",
+        "hcai_effective_date": "2025-02-27",
+        "hospital_page": "https://kp.org/mfa/ncal",
+        "verified": "opened (hospital_page: cited in MRF metadata, not opened)",
+        "free_care": {"rule": "household income 0-200% FPL -> 100% discount", "max_pct_fpl": 200},
+        "discount": {"rule": "201-400% FPL -> 50% discount on patient cost", "min_pct_fpl": 201, "max_pct_fpl": 400, "discount_pct": 50},
+        "high_medical_cost": {"rule": "any income: paid+unpaid bills for eligible services in prior 12 months >= 10% of annual household income -> full financial assistance"},
+        "quote": "0% - 200% 100% Discount (Full) / 201% - 400% 50% Discount (Partial)",
+        "other": ["Remaining partial-MFA balance can go on an interest-free extended payment plan, <= 10% of monthly family income after essential living expenses."]
+      },
+      "billing_phones": [{"purpose": "Medical Financial Assistance counselors", "phone": "1-800-390-3507", "source": "FAP PDF", "verified": "opened"}],
+      "mrf": {
+        "url": "https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/coverage-information/machine-readable/941105628-san-francisco-medical-center-standard-charges-ncal-en.csv",
+        "found_via": "https://healthy.kaiserpermanente.org/northern-california/doctors-locations/price-transparency (page needs cookies; plain fetch loops on redirects)",
+        "format": "CMS template v3.0.1, CSV wide (one column set per payer/plan)",
+        "size_bytes": 215533161,
+        "last_updated_on": "2026-04-01",
+        "verified": "opened",
+        "extract": "prices_kaiser_sf.json",
+        "caveat": "Kaiser's own payer is Kaiser Foundation Health Plan; few outside payers."
+      }
+    }
+  ]
+}

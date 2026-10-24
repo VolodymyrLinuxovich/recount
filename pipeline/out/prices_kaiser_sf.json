@@ -1,0 +1,4108 @@
+{
+ "hospital_key": "kaiser_sf",
+ "source_url": "https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/coverage-information/machine-readable/941105628-san-francisco-medical-center-standard-charges-ncal-en.csv",
+ "mrf_format": "CMS template v3.0.1 CSV (wide)",
+ "mrf_hospital_name": "KAISER FOUNDATION HOSPITAL - SAN FRANCISCO",
+ "mrf_last_updated_on": "4/1/2026",
+ "mrf_last_updated_iso": "2026-04-01",
+ "records_scanned": 328536,
+ "codes_found": [
+  "99281",
+  "99282",
+  "99283",
+  "99284",
+  "99285",
+  "99291",
+  "96374",
+  "96375",
+  "96360",
+  "71046",
+  "70450",
+  "74177",
+  "80053",
+  "85025",
+  "81001",
+  "93005",
+  "36415",
+  "12002",
+  "J7030",
+  "J7050",
+  "J1885",
+  "J2405",
+  "0450"
+ ],
+ "codes_not_found": [
+  "0451"
+ ],
+ "notes": [
+  "All dollar values copied from the hospital's own CMS machine-readable file as published.",
+  "file_min/max_negotiated = the file's own de-identified min/max columns; computed_* and negotiated_dollar_min/max = min/max over payer negotiated_dollar values present.",
+  "outpatient_facility summary = rows with setting outpatient/both and facility billing class (typical ER facility charge).",
+  "Revenue-code entries (0450/0451) are rows whose only codes are revenue codes (no CPT/HCPCS)."
+ ],
+ "summary_by_code": {
+  "99281": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     843.0,
+     843.0
+    ],
+    "discounted_cash_range": [
+     472.08,
+     472.08
+    ],
+    "negotiated_dollar_min": 655.0,
+    "negotiated_dollar_max": 655.0,
+    "file_min_negotiated_range": [
+     655.0,
+     655.0
+    ],
+    "file_max_negotiated_range": [
+     655.0,
+     655.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT MAY NOT REQ PHYS/QHP"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     843.0,
+     843.0
+    ],
+    "discounted_cash_range": [
+     472.08,
+     472.08
+    ],
+    "negotiated_dollar_min": 655.0,
+    "negotiated_dollar_max": 655.0,
+    "file_min_negotiated_range": [
+     655.0,
+     655.0
+    ],
+    "file_max_negotiated_range": [
+     655.0,
+     655.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT MAY NOT REQ PHYS/QHP"
+    ]
+   }
+  },
+  "99282": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1558.0,
+     1558.0
+    ],
+    "discounted_cash_range": [
+     872.48,
+     872.48
+    ],
+    "negotiated_dollar_min": 1175.0,
+    "negotiated_dollar_max": 1175.0,
+    "file_min_negotiated_range": [
+     1175.0,
+     1175.0
+    ],
+    "file_max_negotiated_range": [
+     1175.0,
+     1175.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT STRAIGHTFORWARD MDM"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1558.0,
+     1558.0
+    ],
+    "discounted_cash_range": [
+     872.48,
+     872.48
+    ],
+    "negotiated_dollar_min": 1175.0,
+    "negotiated_dollar_max": 1175.0,
+    "file_min_negotiated_range": [
+     1175.0,
+     1175.0
+    ],
+    "file_max_negotiated_range": [
+     1175.0,
+     1175.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT STRAIGHTFORWARD MDM"
+    ]
+   }
+  },
+  "99283": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     2896.0,
+     2896.0
+    ],
+    "discounted_cash_range": [
+     1621.76,
+     1621.76
+    ],
+    "negotiated_dollar_min": 2055.0,
+    "negotiated_dollar_max": 2055.0,
+    "file_min_negotiated_range": [
+     2055.0,
+     2055.0
+    ],
+    "file_max_negotiated_range": [
+     2055.0,
+     2055.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT LOW MDM"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     2896.0,
+     2896.0
+    ],
+    "discounted_cash_range": [
+     1621.76,
+     1621.76
+    ],
+    "negotiated_dollar_min": 2055.0,
+    "negotiated_dollar_max": 2055.0,
+    "file_min_negotiated_range": [
+     2055.0,
+     2055.0
+    ],
+    "file_max_negotiated_range": [
+     2055.0,
+     2055.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT LOW MDM"
+    ]
+   }
+  },
+  "99284": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     4844.0,
+     4844.0
+    ],
+    "discounted_cash_range": [
+     2712.64,
+     2712.64
+    ],
+    "negotiated_dollar_min": 3165.0,
+    "negotiated_dollar_max": 3165.0,
+    "file_min_negotiated_range": [
+     3165.0,
+     3165.0
+    ],
+    "file_max_negotiated_range": [
+     3165.0,
+     3165.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT MODERATE MDM"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     4844.0,
+     4844.0
+    ],
+    "discounted_cash_range": [
+     2712.64,
+     2712.64
+    ],
+    "negotiated_dollar_min": 3165.0,
+    "negotiated_dollar_max": 3165.0,
+    "file_min_negotiated_range": [
+     3165.0,
+     3165.0
+    ],
+    "file_max_negotiated_range": [
+     3165.0,
+     3165.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT MODERATE MDM"
+    ]
+   }
+  },
+  "99285": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     7536.0,
+     7536.0
+    ],
+    "discounted_cash_range": [
+     4220.16,
+     4220.16
+    ],
+    "negotiated_dollar_min": 4555.0,
+    "negotiated_dollar_max": 4555.0,
+    "file_min_negotiated_range": [
+     4555.0,
+     4555.0
+    ],
+    "file_max_negotiated_range": [
+     4555.0,
+     4555.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT HIGH MDM"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     7536.0,
+     7536.0
+    ],
+    "discounted_cash_range": [
+     4220.16,
+     4220.16
+    ],
+    "negotiated_dollar_min": 4555.0,
+    "negotiated_dollar_max": 4555.0,
+    "file_min_negotiated_range": [
+     4555.0,
+     4555.0
+    ],
+    "file_max_negotiated_range": [
+     4555.0,
+     4555.0
+    ],
+    "descriptions": [
+     "EMERGENCY DEPARTMENT VISIT HIGH MDM"
+    ]
+   }
+  },
+  "99291": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     10553.0,
+     10553.0
+    ],
+    "discounted_cash_range": [
+     5909.68,
+     5909.68
+    ],
+    "negotiated_dollar_min": 6260.0,
+    "negotiated_dollar_max": 6260.0,
+    "file_min_negotiated_range": [
+     6260.0,
+     6260.0
+    ],
+    "file_max_negotiated_range": [
+     6260.0,
+     6260.0
+    ],
+    "descriptions": [
+     "CRITICAL CARE ILL/INJURED PATIENT INIT 30-74 MIN"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     10553.0,
+     10553.0
+    ],
+    "discounted_cash_range": [
+     5909.68,
+     5909.68
+    ],
+    "negotiated_dollar_min": 6260.0,
+    "negotiated_dollar_max": 6260.0,
+    "file_min_negotiated_range": [
+     6260.0,
+     6260.0
+    ],
+    "file_max_negotiated_range": [
+     6260.0,
+     6260.0
+    ],
+    "descriptions": [
+     "CRITICAL CARE ILL/INJURED PATIENT INIT 30-74 MIN"
+    ]
+   }
+  },
+  "96374": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     930.0,
+     930.0
+    ],
+    "discounted_cash_range": [
+     520.8,
+     520.8
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "THER PROPH/DX NJX IV PUSH SINGLE/1ST SBST/DRUG"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     930.0,
+     930.0
+    ],
+    "discounted_cash_range": [
+     520.8,
+     520.8
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "THER PROPH/DX NJX IV PUSH SINGLE/1ST SBST/DRUG"
+    ]
+   }
+  },
+  "96375": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     540.0,
+     540.0
+    ],
+    "discounted_cash_range": [
+     302.4,
+     302.4
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "THERAPEUTIC INJECTION IV PUSH EACH NEW DRUG"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     540.0,
+     540.0
+    ],
+    "discounted_cash_range": [
+     302.4,
+     302.4
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "THERAPEUTIC INJECTION IV PUSH EACH NEW DRUG"
+    ]
+   }
+  },
+  "96360": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1320.0,
+     1320.0
+    ],
+    "discounted_cash_range": [
+     739.2,
+     739.2
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "IV INFUSION HYDRATION INITIAL 31 MIN-1 HOUR"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1320.0,
+     1320.0
+    ],
+    "discounted_cash_range": [
+     739.2,
+     739.2
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "IV INFUSION HYDRATION INITIAL 31 MIN-1 HOUR"
+    ]
+   }
+  },
+  "71046": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     900.0,
+     900.0
+    ],
+    "discounted_cash_range": [
+     504.0,
+     504.0
+    ],
+    "negotiated_dollar_min": 118.0,
+    "negotiated_dollar_max": 370.0,
+    "file_min_negotiated_range": [
+     118.0,
+     118.0
+    ],
+    "file_max_negotiated_range": [
+     370.0,
+     370.0
+    ],
+    "descriptions": [
+     "RADIOLOGIC EXAM CHEST 2 VIEWS"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     900.0,
+     900.0
+    ],
+    "discounted_cash_range": [
+     504.0,
+     504.0
+    ],
+    "negotiated_dollar_min": 118.0,
+    "negotiated_dollar_max": 370.0,
+    "file_min_negotiated_range": [
+     118.0,
+     118.0
+    ],
+    "file_max_negotiated_range": [
+     370.0,
+     370.0
+    ],
+    "descriptions": [
+     "RADIOLOGIC EXAM CHEST 2 VIEWS"
+    ]
+   }
+  },
+  "70450": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     4790.0,
+     4790.0
+    ],
+    "discounted_cash_range": [
+     2682.4,
+     2682.4
+    ],
+    "negotiated_dollar_min": 145.0,
+    "negotiated_dollar_max": 455.0,
+    "file_min_negotiated_range": [
+     145.0,
+     145.0
+    ],
+    "file_max_negotiated_range": [
+     455.0,
+     455.0
+    ],
+    "descriptions": [
+     "CT HEAD/BRAIN W/O CONTRAST MATERIAL"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     4790.0,
+     4790.0
+    ],
+    "discounted_cash_range": [
+     2682.4,
+     2682.4
+    ],
+    "negotiated_dollar_min": 145.0,
+    "negotiated_dollar_max": 455.0,
+    "file_min_negotiated_range": [
+     145.0,
+     145.0
+    ],
+    "file_max_negotiated_range": [
+     455.0,
+     455.0
+    ],
+    "descriptions": [
+     "CT HEAD/BRAIN W/O CONTRAST MATERIAL"
+    ]
+   }
+  },
+  "74177": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     8490.0,
+     8490.0
+    ],
+    "discounted_cash_range": [
+     4754.4,
+     4754.4
+    ],
+    "negotiated_dollar_min": 476.0,
+    "negotiated_dollar_max": 1490.0,
+    "file_min_negotiated_range": [
+     476.0,
+     476.0
+    ],
+    "file_max_negotiated_range": [
+     1490.0,
+     1490.0
+    ],
+    "descriptions": [
+     "CT ABDOMEN & PELVIS W/CONTRAST MATERIAL"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     8490.0,
+     8490.0
+    ],
+    "discounted_cash_range": [
+     4754.4,
+     4754.4
+    ],
+    "negotiated_dollar_min": 476.0,
+    "negotiated_dollar_max": 1490.0,
+    "file_min_negotiated_range": [
+     476.0,
+     476.0
+    ],
+    "file_max_negotiated_range": [
+     1490.0,
+     1490.0
+    ],
+    "descriptions": [
+     "CT ABDOMEN & PELVIS W/CONTRAST MATERIAL"
+    ]
+   }
+  },
+  "80053": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     456.0,
+     456.0
+    ],
+    "discounted_cash_range": [
+     255.36,
+     255.36
+    ],
+    "negotiated_dollar_min": 10.0,
+    "negotiated_dollar_max": 30.0,
+    "file_min_negotiated_range": [
+     10.0,
+     10.0
+    ],
+    "file_max_negotiated_range": [
+     30.0,
+     30.0
+    ],
+    "descriptions": [
+     "COMPREHENSIVE METABOLIC PANEL"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     456.0,
+     456.0
+    ],
+    "discounted_cash_range": [
+     255.36,
+     255.36
+    ],
+    "negotiated_dollar_min": 10.0,
+    "negotiated_dollar_max": 30.0,
+    "file_min_negotiated_range": [
+     10.0,
+     10.0
+    ],
+    "file_max_negotiated_range": [
+     30.0,
+     30.0
+    ],
+    "descriptions": [
+     "COMPREHENSIVE METABOLIC PANEL"
+    ]
+   }
+  },
+  "85025": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     220.0,
+     220.0
+    ],
+    "discounted_cash_range": [
+     123.2,
+     123.2
+    ],
+    "negotiated_dollar_min": 8.0,
+    "negotiated_dollar_max": 25.0,
+    "file_min_negotiated_range": [
+     8.0,
+     8.0
+    ],
+    "file_max_negotiated_range": [
+     25.0,
+     25.0
+    ],
+    "descriptions": [
+     "BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     220.0,
+     220.0
+    ],
+    "discounted_cash_range": [
+     123.2,
+     123.2
+    ],
+    "negotiated_dollar_min": 8.0,
+    "negotiated_dollar_max": 25.0,
+    "file_min_negotiated_range": [
+     8.0,
+     8.0
+    ],
+    "file_max_negotiated_range": [
+     25.0,
+     25.0
+    ],
+    "descriptions": [
+     "BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC"
+    ]
+   }
+  },
+  "81001": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     148.0,
+     148.0
+    ],
+    "discounted_cash_range": [
+     82.88,
+     82.88
+    ],
+    "negotiated_dollar_min": 3.0,
+    "negotiated_dollar_max": 10.0,
+    "file_min_negotiated_range": [
+     3.0,
+     3.0
+    ],
+    "file_max_negotiated_range": [
+     10.0,
+     10.0
+    ],
+    "descriptions": [
+     "URNLS DIP STICK/TABLET REAGENT AUTO MICROSCOPY"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     148.0,
+     148.0
+    ],
+    "discounted_cash_range": [
+     82.88,
+     82.88
+    ],
+    "negotiated_dollar_min": 3.0,
+    "negotiated_dollar_max": 10.0,
+    "file_min_negotiated_range": [
+     3.0,
+     3.0
+    ],
+    "file_max_negotiated_range": [
+     10.0,
+     10.0
+    ],
+    "descriptions": [
+     "URNLS DIP STICK/TABLET REAGENT AUTO MICROSCOPY"
+    ]
+   }
+  },
+  "93005": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     680.0,
+     680.0
+    ],
+    "discounted_cash_range": [
+     380.8,
+     380.8
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "ECG ROUTINE ECG W/LEAST 12 LDS TRCG ONLY W/O I&R"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     680.0,
+     680.0
+    ],
+    "discounted_cash_range": [
+     380.8,
+     380.8
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "ECG ROUTINE ECG W/LEAST 12 LDS TRCG ONLY W/O I&R"
+    ]
+   }
+  },
+  "36415": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     71.0,
+     71.0
+    ],
+    "discounted_cash_range": [
+     39.76,
+     39.76
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "COLLECTION VENOUS BLOOD VENIPUNCTURE"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     71.0,
+     71.0
+    ],
+    "discounted_cash_range": [
+     39.76,
+     39.76
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "COLLECTION VENOUS BLOOD VENIPUNCTURE"
+    ]
+   }
+  },
+  "12002": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1430.0,
+     1430.0
+    ],
+    "discounted_cash_range": [
+     800.8,
+     800.8
+    ],
+    "negotiated_dollar_min": 240.0,
+    "negotiated_dollar_max": 752.0,
+    "file_min_negotiated_range": [
+     240.0,
+     240.0
+    ],
+    "file_max_negotiated_range": [
+     752.0,
+     752.0
+    ],
+    "descriptions": [
+     "SMPL REPAIR SCALP/NECK/AX/GENIT/TRUNK 2.6-7.5CM"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1430.0,
+     1430.0
+    ],
+    "discounted_cash_range": [
+     800.8,
+     800.8
+    ],
+    "negotiated_dollar_min": 240.0,
+    "negotiated_dollar_max": 752.0,
+    "file_min_negotiated_range": [
+     240.0,
+     240.0
+    ],
+    "file_max_negotiated_range": [
+     752.0,
+     752.0
+    ],
+    "descriptions": [
+     "SMPL REPAIR SCALP/NECK/AX/GENIT/TRUNK 2.6-7.5CM"
+    ]
+   }
+  },
+  "J7030": {
+   "all_settings": {
+    "n_rows": 15,
+    "gross_charge_range": [
+     7.55,
+     128.9
+    ],
+    "discounted_cash_range": [
+     4.23,
+     72.18
+    ],
+    "negotiated_dollar_min": 2.28,
+    "negotiated_dollar_max": 3.83,
+    "file_min_negotiated_range": [
+     2.28,
+     2.28
+    ],
+    "file_max_negotiated_range": [
+     3.83,
+     3.83
+    ],
+    "descriptions": [
+     "\"sodium chloride 0.9 % 0.9% Solp soln 1,000 mL FLEX CONT\"",
+     "\"sodium chloride 0.9% Solp soln 1,000 mL FLEX CONT\"",
+     "Normal saline solution infus",
+     "sodium chloride 0.9 % 0.9% Solp soln 100 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 150 mL FLEX CONT",
+     "sodium chloride 0.9 % 0.9% Solp soln 25 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 250 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 50 mL BAG"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 15,
+    "gross_charge_range": [
+     7.55,
+     128.9
+    ],
+    "discounted_cash_range": [
+     4.23,
+     72.18
+    ],
+    "negotiated_dollar_min": 2.28,
+    "negotiated_dollar_max": 3.83,
+    "file_min_negotiated_range": [
+     2.28,
+     2.28
+    ],
+    "file_max_negotiated_range": [
+     3.83,
+     3.83
+    ],
+    "descriptions": [
+     "\"sodium chloride 0.9 % 0.9% Solp soln 1,000 mL FLEX CONT\"",
+     "\"sodium chloride 0.9% Solp soln 1,000 mL FLEX CONT\"",
+     "Normal saline solution infus",
+     "sodium chloride 0.9 % 0.9% Solp soln 100 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 150 mL FLEX CONT",
+     "sodium chloride 0.9 % 0.9% Solp soln 25 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 250 mL BAG",
+     "sodium chloride 0.9 % 0.9% Solp soln 50 mL BAG"
+    ]
+   }
+  },
+  "J7050": {
+   "all_settings": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     23.36,
+     36.42
+    ],
+    "discounted_cash_range": [
+     13.08,
+     20.4
+    ],
+    "negotiated_dollar_min": 0.71,
+    "negotiated_dollar_max": 1.19,
+    "file_min_negotiated_range": [
+     0.71,
+     0.71
+    ],
+    "file_max_negotiated_range": [
+     1.19,
+     1.19
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "sodium chloride 0.9 % 0.9% Inj 100 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 150 mL FLEX CONT",
+     "sodium chloride 0.9 % 0.9% Inj 25 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 250 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 50 mL BAG",
+     "sodium chloride 0.9% Piggyback 100 mL BAG",
+     "sodium chloride 0.9% Piggyback 50 mL BAG"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     23.36,
+     36.42
+    ],
+    "discounted_cash_range": [
+     13.08,
+     20.4
+    ],
+    "negotiated_dollar_min": 0.71,
+    "negotiated_dollar_max": 1.19,
+    "file_min_negotiated_range": [
+     0.71,
+     0.71
+    ],
+    "file_max_negotiated_range": [
+     1.19,
+     1.19
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "sodium chloride 0.9 % 0.9% Inj 100 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 150 mL FLEX CONT",
+     "sodium chloride 0.9 % 0.9% Inj 25 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 250 mL BAG",
+     "sodium chloride 0.9 % 0.9% Inj 50 mL BAG",
+     "sodium chloride 0.9% Piggyback 100 mL BAG",
+     "sodium chloride 0.9% Piggyback 50 mL BAG"
+    ]
+   }
+  },
+  "J1885": {
+   "all_settings": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     8.57,
+     19.08
+    ],
+    "discounted_cash_range": [
+     4.8,
+     10.68
+    ],
+    "negotiated_dollar_min": 0.35,
+    "negotiated_dollar_max": 0.58,
+    "file_min_negotiated_range": [
+     0.35,
+     0.35
+    ],
+    "file_max_negotiated_range": [
+     0.58,
+     0.58
+    ],
+    "descriptions": [
+     "Ketorolac tromethamine inj",
+     "ketorolac 15 mg/mL Soln 1 mL VIAL",
+     "ketorolac 15 mg/mL Syringe 1 mL SYRINGE",
+     "ketorolac 30 mg/mL (1 mL) Soln 1 mL VIAL",
+     "ketorolac 30 mg/mL Soln 10 mL VIAL",
+     "ketorolac 30 mg/mL Syringe 1 mL SYRINGE",
+     "ketorolac 60 mg/2 mL Soln 2 mL VIAL",
+     "ketorolac 60 mg/2 mL Syringe 2 mL SYRINGE"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     8.57,
+     19.08
+    ],
+    "discounted_cash_range": [
+     4.8,
+     10.68
+    ],
+    "negotiated_dollar_min": 0.35,
+    "negotiated_dollar_max": 0.58,
+    "file_min_negotiated_range": [
+     0.35,
+     0.35
+    ],
+    "file_max_negotiated_range": [
+     0.58,
+     0.58
+    ],
+    "descriptions": [
+     "Ketorolac tromethamine inj",
+     "ketorolac 15 mg/mL Soln 1 mL VIAL",
+     "ketorolac 15 mg/mL Syringe 1 mL SYRINGE",
+     "ketorolac 30 mg/mL (1 mL) Soln 1 mL VIAL",
+     "ketorolac 30 mg/mL Soln 10 mL VIAL",
+     "ketorolac 30 mg/mL Syringe 1 mL SYRINGE",
+     "ketorolac 60 mg/2 mL Soln 2 mL VIAL",
+     "ketorolac 60 mg/2 mL Syringe 2 mL SYRINGE"
+    ]
+   }
+  },
+  "J2405": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     6.47,
+     12.55
+    ],
+    "discounted_cash_range": [
+     3.62,
+     7.03
+    ],
+    "negotiated_dollar_min": 0.09,
+    "negotiated_dollar_max": 0.15,
+    "file_min_negotiated_range": [
+     0.09,
+     0.09
+    ],
+    "file_max_negotiated_range": [
+     0.15,
+     0.15
+    ],
+    "descriptions": [
+     "Ondansetron hcl injection",
+     "ondansetron (PF) 4 mg/2 mL Soln 2 mL VIAL",
+     "ondansetron (PF) 4 mg/2 mL Syringe 2 mL SYRINGE",
+     "ondansetron 2 mg/mL Soln 20 mL VIAL"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     6.47,
+     12.55
+    ],
+    "discounted_cash_range": [
+     3.62,
+     7.03
+    ],
+    "negotiated_dollar_min": 0.09,
+    "negotiated_dollar_max": 0.15,
+    "file_min_negotiated_range": [
+     0.09,
+     0.09
+    ],
+    "file_max_negotiated_range": [
+     0.15,
+     0.15
+    ],
+    "descriptions": [
+     "Ondansetron hcl injection",
+     "ondansetron (PF) 4 mg/2 mL Soln 2 mL VIAL",
+     "ondansetron (PF) 4 mg/2 mL Syringe 2 mL SYRINGE",
+     "ondansetron 2 mg/mL Soln 20 mL VIAL"
+    ]
+   }
+  },
+  "0450": {
+   "all_settings": {
+    "n_rows": 9,
+    "gross_charge_range": [
+     730.0,
+     10553.0
+    ],
+    "discounted_cash_range": [
+     408.8,
+     5909.68
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 1\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 2\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 3\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 4\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 5\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 6\"",
+     "FACILITY USE-ED PROCEDURE COMPLEX",
+     "FACILITY USE-ED PROCEDURE MODERATE"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 9,
+    "gross_charge_range": [
+     730.0,
+     10553.0
+    ],
+    "discounted_cash_range": [
+     408.8,
+     5909.68
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 1\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 2\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 3\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 4\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 5\"",
+     "\"FACILITY USE-EMERGENCY ROOM, LEVEL 6\"",
+     "FACILITY USE-ED PROCEDURE COMPLEX",
+     "FACILITY USE-ED PROCEDURE MODERATE"
+    ]
+   }
+  }
+ },
+ "items": [
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "EMERGENCY DEPARTMENT VISIT MAY NOT REQ PHYS/QHP",
+   "all_codes": [
+    {
+     "code": "99281",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 843.0,
+   "discounted_cash_price": 472.08,
+   "file_min_negotiated": 655.0,
+   "file_max_negotiated": 655.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 655.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 655.0,
+   "computed_max_negotiated_dollar": 655.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "EMERGENCY DEPARTMENT VISIT STRAIGHTFORWARD MDM",
+   "all_codes": [
+    {
+     "code": "99282",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 1558.0,
+   "discounted_cash_price": 872.48,
+   "file_min_negotiated": 1175.0,
+   "file_max_negotiated": 1175.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1175.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 1175.0,
+   "computed_max_negotiated_dollar": 1175.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "EMERGENCY DEPARTMENT VISIT LOW MDM",
+   "all_codes": [
+    {
+     "code": "99283",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 2896.0,
+   "discounted_cash_price": 1621.76,
+   "file_min_negotiated": 2055.0,
+   "file_max_negotiated": 2055.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 2055.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2055.0,
+   "computed_max_negotiated_dollar": 2055.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "EMERGENCY DEPARTMENT VISIT MODERATE MDM",
+   "all_codes": [
+    {
+     "code": "99284",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 4844.0,
+   "discounted_cash_price": 2712.64,
+   "file_min_negotiated": 3165.0,
+   "file_max_negotiated": 3165.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3165.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3165.0,
+   "computed_max_negotiated_dollar": 3165.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "EMERGENCY DEPARTMENT VISIT HIGH MDM",
+   "all_codes": [
+    {
+     "code": "99285",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 7536.0,
+   "discounted_cash_price": 4220.16,
+   "file_min_negotiated": 4555.0,
+   "file_max_negotiated": 4555.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 4555.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 4555.0,
+   "computed_max_negotiated_dollar": 4555.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "CRITICAL CARE ILL/INJURED PATIENT INIT 30-74 MIN",
+   "all_codes": [
+    {
+     "code": "99291",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 10553.0,
+   "discounted_cash_price": 5909.68,
+   "file_min_negotiated": 6260.0,
+   "file_max_negotiated": 6260.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 6260.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": 6260.0,
+   "computed_max_negotiated_dollar": 6260.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "THER PROPH/DX NJX IV PUSH SINGLE/1ST SBST/DRUG",
+   "all_codes": [
+    {
+     "code": "96374",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 930.0,
+   "discounted_cash_price": 520.8,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 50.0,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "THERAPEUTIC INJECTION IV PUSH EACH NEW DRUG",
+   "all_codes": [
+    {
+     "code": "96375",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 540.0,
+   "discounted_cash_price": 302.4,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 50.0,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "IV INFUSION HYDRATION INITIAL 31 MIN-1 HOUR",
+   "all_codes": [
+    {
+     "code": "96360",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 1320.0,
+   "discounted_cash_price": 739.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 50.0,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "RADIOLOGIC EXAM CHEST 2 VIEWS",
+   "all_codes": [
+    {
+     "code": "71046",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 900.0,
+   "discounted_cash_price": 504.0,
+   "file_min_negotiated": 118.0,
+   "file_max_negotiated": 370.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 370.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 124.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 118.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 118.0,
+   "computed_max_negotiated_dollar": 370.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "CT HEAD/BRAIN W/O CONTRAST MATERIAL",
+   "all_codes": [
+    {
+     "code": "70450",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 4790.0,
+   "discounted_cash_price": 2682.4,
+   "file_min_negotiated": 145.0,
+   "file_max_negotiated": 455.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 455.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 153.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 145.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 145.0,
+   "computed_max_negotiated_dollar": 455.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "CT ABDOMEN & PELVIS W/CONTRAST MATERIAL",
+   "all_codes": [
+    {
+     "code": "74177",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 8490.0,
+   "discounted_cash_price": 4754.4,
+   "file_min_negotiated": 476.0,
+   "file_max_negotiated": 1490.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1490.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 500.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 476.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 476.0,
+   "computed_max_negotiated_dollar": 1490.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "COMPREHENSIVE METABOLIC PANEL",
+   "all_codes": [
+    {
+     "code": "80053",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 456.0,
+   "discounted_cash_price": 255.36,
+   "file_min_negotiated": 10.0,
+   "file_max_negotiated": 30.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 30.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 10.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 10.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.0,
+   "computed_max_negotiated_dollar": 30.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC",
+   "all_codes": [
+    {
+     "code": "85025",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 220.0,
+   "discounted_cash_price": 123.2,
+   "file_min_negotiated": 8.0,
+   "file_max_negotiated": 25.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 25.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 8.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 8.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 8.0,
+   "computed_max_negotiated_dollar": 25.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "URNLS DIP STICK/TABLET REAGENT AUTO MICROSCOPY",
+   "all_codes": [
+    {
+     "code": "81001",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 148.0,
+   "discounted_cash_price": 82.88,
+   "file_min_negotiated": 3.0,
+   "file_max_negotiated": 10.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 10.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 3.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 3.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3.0,
+   "computed_max_negotiated_dollar": 10.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "ECG ROUTINE ECG W/LEAST 12 LDS TRCG ONLY W/O I&R",
+   "all_codes": [
+    {
+     "code": "93005",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 680.0,
+   "discounted_cash_price": 380.8,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 50.0,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 17.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 16.7,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "COLLECTION VENOUS BLOOD VENIPUNCTURE",
+   "all_codes": [
+    {
+     "code": "36415",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 71.0,
+   "discounted_cash_price": 39.76,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 90.0,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 31.6,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": null,
+     "negotiated_percentage": 30.1,
+     "negotiated_algorithm": "percent of total billed charges",
+     "methodology": "percent of total billed charges"
+    }
+   ],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "SMPL REPAIR SCALP/NECK/AX/GENIT/TRUNK 2.6-7.5CM",
+   "all_codes": [
+    {
+     "code": "12002",
+     "type": "CPT"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 1430.0,
+   "discounted_cash_price": 800.8,
+   "file_min_negotiated": 240.0,
+   "file_max_negotiated": 752.0,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 752.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 252.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 240.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Case Rate"
+    }
+   ],
+   "computed_min_negotiated_dollar": 240.0,
+   "computed_max_negotiated_dollar": 752.0,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "\"sodium chloride 0.9 % 0.9% Solp soln 1,000 mL FLEX CONT\"",
+   "all_codes": [
+    {
+     "code": "264780000",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 7.55,
+   "discounted_cash_price": 4.23,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 6
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "\"sodium chloride 0.9% Solp soln 1,000 mL FLEX CONT\"",
+   "all_codes": [
+    {
+     "code": "264780000",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 25.2,
+   "discounted_cash_price": 14.11,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "Normal saline solution infus",
+   "all_codes": [
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 100 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180032",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 43.05,
+   "discounted_cash_price": 24.11,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 150 mL FLEX CONT",
+   "all_codes": [
+    {
+     "code": "990798361",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 50.7,
+   "discounted_cash_price": 28.39,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 25 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004910",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 128.9,
+   "discounted_cash_price": 72.18,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 250 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004902",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 22.85,
+   "discounted_cash_price": 12.8,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 50 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180031",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 70.25,
+   "discounted_cash_price": 39.34,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Solp soln 500 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004903",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 13.5,
+   "discounted_cash_price": 7.56,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 9
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 100 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180032",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.22,
+   "discounted_cash_price": 14.68,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 150 mL FLEX CONT",
+   "all_codes": [
+    {
+     "code": "990798361",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 36.42,
+   "discounted_cash_price": 20.4,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 25 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004910",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.39,
+   "discounted_cash_price": 14.78,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 250 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004902",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 32.85,
+   "discounted_cash_price": 18.4,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 50 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180031",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.05,
+   "discounted_cash_price": 14.59,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Solp soln 500 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004903",
+     "type": "NDC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 32.0,
+   "discounted_cash_price": 17.92,
+   "file_min_negotiated": 2.28,
+   "file_max_negotiated": 3.83,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 3.83,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 2.28,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.28,
+   "computed_max_negotiated_dollar": 3.83,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "Normal saline solution infus",
+   "all_codes": [
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Inj 100 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180032",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.22,
+   "discounted_cash_price": 14.68,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Inj 150 mL FLEX CONT",
+   "all_codes": [
+    {
+     "code": "990798361",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 36.42,
+   "discounted_cash_price": 20.4,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Inj 25 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004910",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.39,
+   "discounted_cash_price": 14.78,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Inj 250 mL BAG",
+   "all_codes": [
+    {
+     "code": "338004902",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 32.85,
+   "discounted_cash_price": 18.4,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9 % 0.9% Inj 50 mL BAG",
+   "all_codes": [
+    {
+     "code": "264180031",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 26.05,
+   "discounted_cash_price": 14.59,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Piggyback 100 mL BAG",
+   "all_codes": [
+    {
+     "code": "338055318",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 34.58,
+   "discounted_cash_price": 19.36,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "sodium chloride 0.9% Piggyback 50 mL BAG",
+   "all_codes": [
+    {
+     "code": "409710166",
+     "type": "NDC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 23.36,
+   "discounted_cash_price": 13.08,
+   "file_min_negotiated": 0.71,
+   "file_max_negotiated": 1.19,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 1.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.71,
+   "computed_max_negotiated_dollar": 1.19,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ketorolac tromethamine inj",
+   "all_codes": [
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 15 mg/mL Soln 1 mL VIAL",
+   "all_codes": [
+    {
+     "code": "409379301",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 17.28,
+   "discounted_cash_price": 9.68,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 15 mg/mL Syringe 1 mL SYRINGE",
+   "all_codes": [
+    {
+     "code": "76045010710",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 18.71,
+   "discounted_cash_price": 10.48,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 30 mg/mL (1 mL) Soln 1 mL VIAL",
+   "all_codes": [
+    {
+     "code": "338007225",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 8.57,
+   "discounted_cash_price": 4.8,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 30 mg/mL Soln 10 mL VIAL",
+   "all_codes": [
+    {
+     "code": "69852012310",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 13.83,
+   "discounted_cash_price": 7.74,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 30 mg/mL Syringe 1 mL SYRINGE",
+   "all_codes": [
+    {
+     "code": "76045010410",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 18.87,
+   "discounted_cash_price": 10.57,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 60 mg/2 mL Soln 2 mL VIAL",
+   "all_codes": [
+    {
+     "code": "72266011925",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 13.16,
+   "discounted_cash_price": 7.37,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "ketorolac 60 mg/2 mL Syringe 2 mL SYRINGE",
+   "all_codes": [
+    {
+     "code": "76045010520",
+     "type": "NDC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 19.08,
+   "discounted_cash_price": 10.68,
+   "file_min_negotiated": 0.35,
+   "file_max_negotiated": 0.58,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.58,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.35,
+   "computed_max_negotiated_dollar": 0.58,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ondansetron hcl injection",
+   "all_codes": [
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 0.09,
+   "file_max_negotiated": 0.15,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Fee Schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.09,
+   "computed_max_negotiated_dollar": 0.15,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ondansetron (PF) 4 mg/2 mL Soln 2 mL VIAL",
+   "all_codes": [
+    {
+     "code": "60505613005",
+     "type": "NDC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 7.45,
+   "discounted_cash_price": 4.17,
+   "file_min_negotiated": 0.09,
+   "file_max_negotiated": 0.15,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.09,
+   "computed_max_negotiated_dollar": 0.15,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ondansetron (PF) 4 mg/2 mL Syringe 2 mL SYRINGE",
+   "all_codes": [
+    {
+     "code": "76045010320",
+     "type": "NDC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 12.55,
+   "discounted_cash_price": 7.03,
+   "file_min_negotiated": 0.09,
+   "file_max_negotiated": 0.15,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.09,
+   "computed_max_negotiated_dollar": 0.15,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ondansetron 2 mg/mL Soln 20 mL VIAL",
+   "all_codes": [
+    {
+     "code": "409475901",
+     "type": "NDC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 6.47,
+   "discounted_cash_price": 3.62,
+   "file_min_negotiated": 0.09,
+   "file_max_negotiated": 0.15,
+   "payer_rates": [
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "COMMERCIAL",
+     "negotiated_dollar": 0.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICARE",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    },
+    {
+     "payer": "KAISER FOUNDATION HEALTH PLAN, INC.",
+     "plan": "MEDICAID",
+     "negotiated_dollar": 0.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "Other"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.09,
+   "computed_max_negotiated_dollar": 0.15,
+   "n_payer_rows": 3
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 1\"",
+   "all_codes": [
+    {
+     "code": "6536",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 843.0,
+   "discounted_cash_price": 472.08,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 2\"",
+   "all_codes": [
+    {
+     "code": "6537",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 1558.0,
+   "discounted_cash_price": 872.48,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 3\"",
+   "all_codes": [
+    {
+     "code": "6538",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 2896.0,
+   "discounted_cash_price": 1621.76,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 4\"",
+   "all_codes": [
+    {
+     "code": "6539",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 4844.0,
+   "discounted_cash_price": 2712.64,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 5\"",
+   "all_codes": [
+    {
+     "code": "6540",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 7536.0,
+   "discounted_cash_price": 4220.16,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "\"FACILITY USE-EMERGENCY ROOM, LEVEL 6\"",
+   "all_codes": [
+    {
+     "code": "6541",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 10553.0,
+   "discounted_cash_price": 5909.68,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "FACILITY USE-ED PROCEDURE COMPLEX",
+   "all_codes": [
+    {
+     "code": "6618",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 5900.0,
+   "discounted_cash_price": 3304.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "FACILITY USE-ED PROCEDURE MODERATE",
+   "all_codes": [
+    {
+     "code": "6619",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 1690.0,
+   "discounted_cash_price": 946.4,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "FACILITY USE-ED PROCEDURE SIMPLE",
+   "all_codes": [
+    {
+     "code": "6620",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "",
+   "modifiers": "",
+   "gross_charge": 730.0,
+   "discounted_cash_price": 408.8,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  }
+ ]
+}

@@ -1,0 +1,178 @@
+{
+  "title": "California Hospital Fair Pricing Act (Health & Safety Code 127400-127446) - rules used by Recount",
+  "as_of": "2026-10-24",
+  "text_sources": {
+    "official_code": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=HSC&division=107.&title=&part=2.&chapter=2.5.&article=1",
+    "official_code_note": "leginfo.legislature.ca.gov returned a Cloudflare challenge / HTTP 403 to automated fetches, so statute wording was read from FindLaw's mirror (states 'Current as of January 01, 2026') and cross-checked against HCAI's own summaries (PIL 24-03 and the Laws & Regulations page). Re-verify wording on leginfo before filing anything.",
+    "findlaw_mirror_pattern": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-<section>/",
+    "hcai_laws_page": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/laws-and-regulations",
+    "hcai_pil_24_03": "https://hcai.ca.gov/document/pil-24-03"
+  },
+  "definitions": {
+    "federal_poverty_level": {
+      "cite": "HSC 127400(b)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "summary": "The HHS poverty guidelines as updated in the Federal Register (see fpl.json)."
+    },
+    "financially_qualified_patient": {
+      "cite": "HSC 127400(c)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "rule": "self-pay patient OR patient with high medical costs, AND family income <= 400% FPL",
+      "quote": "A patient who has a family income that does not exceed 400 percent of the federal poverty level."
+    },
+    "self_pay_patient": {
+      "cite": "HSC 127400(f)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "quote": "does not have third-party coverage from a health insurer, health care service plan, Medicare, or Medicaid",
+      "note": "Also excludes injuries compensable by workers' comp, auto or other insurance. Self-pay patients may include charity care patients."
+    },
+    "patient_with_high_medical_costs": {
+      "cite": "HSC 127400(g)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "income_cap_pct_fpl": 400,
+      "quote_income": "a person whose family income does not exceed 400 percent of the federal poverty level",
+      "tests_any_of": [
+        {"id": "g1", "rule": "annual out-of-pocket costs incurred at the hospital > 10% of the lesser of current family income or family income in the prior 12 months", "quote": "exceed the lesser of 10 percent of the patient's current family income"},
+        {"id": "g2", "rule": "annual out-of-pocket medical expenses (documented, prior 12 months) > 10% of family income", "quote": "Annual out-of-pocket expenses that exceed 10 percent of the patient's family income"},
+        {"id": "g3", "rule": "a lower level set by the hospital's charity care policy", "quote": "A lower level determined by the hospital in accordance with the hospital's charity care policy."}
+      ],
+      "out_of_pocket_definition_added_by_AB2297": {
+        "source": "https://hcai.ca.gov/document/pil-24-03",
+        "quote": "mean any expenses for medical care that are not reimbursed by insurance or a health coverage program, such as Medicare copays or Medi-Cal cost sharing."
+      }
+    },
+    "charity_care": {
+      "cite": "HSC 127400.5(a) (added by AB 2297, eff. 2025-01-01)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400-5/",
+      "quote": "\"Charity care\" means free care."
+    },
+    "discount_payment": {
+      "cite": "HSC 127400.5(b)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400-5/",
+      "quote": "\"Discounted payment\" or \"discount payment\" means any charge for care that is reduced but not free."
+    },
+    "patients_family": {
+      "cite": "HSC 127400(h)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "summary": "Patient 18+: spouse, domestic partner, dependent children under 21 (or any age if disabled). Patient under 18 or dependent child 18-20: parent, caretaker relatives, and their other dependent children under 21 (or any age if disabled). AB 2297 expanded this (PIL 24-03: 'dependent children of any age')."
+    },
+    "reasonable_payment_plan": {
+      "cite": "HSC 127400(i)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127400/",
+      "quote": "monthly payments that are not more than 10 percent of a patient's family income for a month",
+      "rule": "max_monthly_payment = 0.10 * (monthly family income - essential living expenses)",
+      "essential_living_expenses": "rent or house payment and maintenance, food and household supplies, utilities and telephone, clothing, medical and dental payments, insurance, school or child care, child or spousal support, transportation and auto expenses (including insurance, gas, and repairs), installment payments, laundry and cleaning, and other extraordinary expenses"
+    }
+  },
+  "eligibility": {
+    "statutory_floor": {
+      "cite": "HSC 127405(a)(1)(A)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127405/",
+      "quote": "Uninsured patients or patients with high medical costs who are at or below 400 percent of the federal poverty level,",
+      "rule": "uninsured OR high-medical-cost patients with family income <= 400% FPL must be eligible to apply under the hospital's charity care policy or discount payment policy. Hospitals may extend eligibility above 400%.",
+      "charity_vs_discount_split": "The statute does NOT set a free-care (charity) income threshold. Each hospital's own policy decides who gets free care vs a discount; see hospitals.json. Statute guarantees that discount-payment patients <= 400% FPL pay no more than the Medicare/Medi-Cal cap below."
+    },
+    "rural_hospital_exception": {"cite": "HSC 127405(a)(2)", "summary": "Rural hospitals may set thresholds below 400% FPL. Not relevant for SF hospitals."},
+    "no_asset_test": {
+      "cite": "HSC 127405(b)(1) as amended by AB 2297 (eff. 2025-01-01)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127405/",
+      "quote": "In determining eligibility under its discount payment policy or charity care policy, a hospital shall not consider the monetary assets of the patient.",
+      "exceptions": "Health savings accounts may be considered when negotiating payment plans (127405(c)); monetary assets may be considered only for waiving Medicare cost-sharing to the extent needed for Medicare bad-debt rules (127405(f)(2))."
+    },
+    "income_documentation": {
+      "cite": "HSC 127405(e)(1)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127405/",
+      "summary": "Documentation the hospital may require is limited to recent pay stubs or income tax returns; other documents may be accepted but not required. Hospital may presume eligibility without an application based on other information or a prior determination.",
+      "hcai_quote": "documentation of income is limited to recent paystubs or income tax returns for both programs",
+      "hcai_source": "https://hcai.ca.gov/document/pil-24-03"
+    },
+    "no_prerequisite_coverage_application": {
+      "cite": "HSC 127405(b)(2)",
+      "summary": "Hospital cannot require the patient to apply for Medicare, Medi-Cal, or other coverage before screening for or providing a discount; it may require participation in Medi-Cal eligibility screening."
+    },
+    "no_application_deadline": {
+      "cite": "HSC 127405(e)(3) (renumbered/clarified by AB 2297)",
+      "url": "https://hcai.ca.gov/document/pil-24-03",
+      "quote": "shall not impose time limits for applying for charity care or discounted payments, nor deny eligibility based on the timing of a patient's application.",
+      "note": "Eligibility must be determined at any time the hospital receives information. Some hospital policies still say things like 'best efforts to submit within 240 days' (UCSF); state law controls."
+    },
+    "info_not_for_collections": {"cite": "HSC 127405(e)(2)", "summary": "Information gathered for eligibility may not be used for collection activities."}
+  },
+  "payment_cap": {
+    "cite": "HSC 127405(d)(1)",
+    "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127405/",
+    "quote": "A hospital shall limit expected payment for services it provides to a patient at or below 400 percent of the federal poverty level, as defined in subdivision (b) of Section 127400, eligible under its discount payment policy to the amount of payment the hospital would expect, in good faith, to receive for providing services from Medicare or Medi-Cal, whichever is greater.",
+    "rule": "if income <= 400% FPL and eligible for discount payment: patient_owes <= max(Medicare rate, Medi-Cal rate) for the services",
+    "fallback": "If there is no established Medicare or Medi-Cal payment for a service, the hospital sets an appropriate discounted payment (127405(d)(1), per FindLaw text summary).",
+    "note": "Current text says 'Medicare or Medi-Cal, whichever is greater' (not a broader 'any government program' list). The MRF does not publish Medicare FFS rates; Recount needs the CMS OPPS/physician fee schedule to compute this cap."
+  },
+  "extended_payment_plans": {
+    "requirement": {
+      "cite": "HSC 127405(c)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127405/",
+      "quote": "A discount payment policy shall include an extended payment plan to allow payment of the discounted price over time.",
+      "summary": "Terms negotiated considering family income and essential living expenses; if no agreement, hospital must use the 127400(i) reasonable-payment formula (<= 10% of monthly family income after essential living expenses)."
+    },
+    "interest_free_and_default": {
+      "cite": "HSC 127425(i)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127425/",
+      "rules": [
+        "Extended payment plans offered to eligible patients must be interest free.",
+        "Plan can be declared no longer operative only after the patient fails to make all consecutive payments due during a 90-day period, and only after a reasonable attempt to call plus written notice; hospital must renegotiate on request.",
+        "No civil action before the plan is declared no longer operative."
+      ],
+      "quote": "all consecutive payments due during a 90-day period"
+    }
+  },
+  "collections": {
+    "credit_reporting_ban": {
+      "cite": "HSC 127425(f) as amended by AB 2297 / SB 1061 (eff. 2025-01-01)",
+      "hcai_quote": "Reporting adverse information about a patient's hospital debt to a consumer credit reporting agency is no longer allowed.",
+      "source": "https://hcai.ca.gov/document/pil-24-03",
+      "history": "AB 1020 (2021) had extended the no-credit-reporting / no-lawsuit window from 150 to 180 days after initial billing; AB 2297/SB 1061 then banned adverse credit reporting of hospital debt outright."
+    },
+    "no_lawsuit_before_180_days": {
+      "cite": "HSC 127425(f)",
+      "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127425/",
+      "quote": "before 180 days after initial billing"
+    },
+    "debt_sale_conditions": {
+      "cite": "HSC 127425(a) (AB 1020)",
+      "summary": "Hospital may not sell debt to a debt buyer unless the patient was found ineligible for assistance or did not respond to billing/assistance offers for 180 days, buyer cannot charge interest/fees, must return charity-eligible accounts, cannot resell, and must be licensed by DFPI.",
+      "quote": "has not responded to any attempts to bill or offer financial assistance for 180 days"
+    },
+    "pre_collection_notice": {"cite": "HSC 127425(e)", "summary": "Before assigning to collections or selling, hospital must send notice with dates of service, the assignee's name, how to get an itemized bill, coverage on file, a financial assistance application, and history of notices."},
+    "good_faith_payments": {"cite": "HSC 127425(g)", "quote": "shall not send the unpaid bill to any collection agency, debt buyer, or other assignee", "summary": "...while the patient is attempting to qualify or is negotiating/paying in good faith, unless the assignee agrees to comply with the article."},
+    "liens_garnishment": {"cite": "HSC 127425(h) as amended by AB 2297", "summary": "For charity/discount-eligible patients: hospital and affiliates may not use wage garnishment or liens on any real property; outside collectors need a court order for garnishment and may not lien or sell any real property of the patient.", "hcai_quote": "liens on any real property owned by the patient are prohibited."}
+  },
+  "notices": {
+    "cite": "HSC 127410",
+    "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127410/",
+    "summary": "Written notice of charity care / discount policies (with Health Consumer Alliance web address, Covered California and Medi-Cal presumptive eligibility info, shoppable-services URL) must be given at time of service; ER patients get it in hard copy; mailed within 72 hours if patient left. Policies must be posted in the ED, billing, admissions and on the website.",
+    "quote": "the hospital shall mail the notice to the patient within 72 hours of providing services."
+  },
+  "refunds": {
+    "cite": "HSC 127440",
+    "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127440/",
+    "summary": "If a patient later found eligible already overpaid, hospital must refund the excess with interest at the Code of Civil Procedure 685.010 rate (Sutter's policy states 10% per annum) within 30 days; not required if under $5.",
+    "quote": "The hospital shall reimburse the patient or patients any amount actually paid in excess of the amount due."
+  },
+  "emergency_physicians": {
+    "cite": "HSC 127450-127462 (esp. 127452)",
+    "url": "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-127452/",
+    "summary": "ER physicians bill separately from the hospital and must offer discounts to uninsured / high-medical-cost patients at or below 400% FPL. Payment cap is NOT Medicare: it is tied to 50% of median billed charges in a national database, or once FAIR Health publishes commercial data, 'no greater than the median or average of rates paid by commercial insurers'. No application time limits.",
+    "quote": "at or below 400 percent of the federal poverty level"
+  },
+  "bills_changelog": [
+    {"bill": "AB 774 (Ch. 755, Stats. 2006)", "effective": "2007-01-01", "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=200520060AB774", "summary": "Created the Hospital Fair Pricing Policies law."},
+    {"bill": "AB 1020 (Ch. 473, Stats. 2021)", "effective": "2022-01-01 (HCAI enforcement from 2024-01-01)", "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB1020",
+     "changes": ["Raised income eligibility from 350% to 400% FPL", "Redefined high medical costs (10% of lesser of current or prior-12-month income)", "Debt sales barred unless conditions met, incl. ineligibility finding or 180 days without response", "Credit reporting / civil action window extended from 150 to 180 days", "Collectors must certify screening before suing", "HCAI Hospital Fair Billing Program enforcement, patient complaint process, administrative penalties"],
+     "source": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/laws-and-regulations"},
+    {"bill": "AB 2297 (Ch. 511, Stats. 2024) + SB 1061 (Ch. 520, Stats. 2024)", "effective": "2025-01-01", "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2297", "sb1061_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB1061",
+     "changes": ["Defined charity care (free) and discount payment (reduced but not free) in new 127400.5", "Eliminated consideration of monetary assets for any eligibility determination", "No required application for other coverage before discount", "HSAs may be considered for payment plans", "Other income documentation allowed when tax returns/paystubs unavailable", "No application deadlines; eligibility determined at any time", "No liens on or sale of any real property", "No adverse credit reporting of hospital debt", "Program authority covers violations on/after 2022-01-01"],
+     "source": "https://hcai.ca.gov/document/pil-24-03 (PIL dated 2024-10-16) and https://hcai.ca.gov/affordability/hospital-fair-billing-program/laws-and-regulations"},
+    {"bill": "AB 1312 (Ch. 450, Stats. 2025)", "effective": "2026-01-01; screening duty starts 2027-07-01", "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB1312", "summary": "Requires hospitals to perform financial assistance screening and presumptive eligibility determinations starting July 1, 2027 (per HCAI laws page; bill text not read).", "source": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/laws-and-regulations"}
+  ],
+  "regulations": {"cite": "22 CCR 96051-96051.37", "summary": "HCAI Hospital Fair Billing Program regulations, effective 2024-01-01 (amended 2025-01-02). Not read in detail.", "source": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/laws-and-regulations"},
+  "complaints": {"url": "https://hcai.ca.gov/affordability/hospital-fair-billing-program/hospital-bill-complaint-program/", "summary": "HCAI Hospital Bill Complaint Program: patients can file online or by mail if a hospital fails to follow charity care, discount payment, or debt collection rules."}
+}

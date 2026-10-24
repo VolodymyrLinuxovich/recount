@@ -1,0 +1,31 @@
+{
+  "year": 2026,
+  "region": "48 contiguous states and the District of Columbia",
+  "unit": "USD annual income",
+  "by_household_size": {
+    "1": 15960,
+    "2": 21640,
+    "3": 27320,
+    "4": 33000,
+    "5": 38680,
+    "6": 44360,
+    "7": 50040,
+    "8": 55720
+  },
+  "per_additional_person_over_8": 5680,
+  "formula": "guideline(n) = 15960 + 5680*(n-1)",
+  "effective": "Federal Register notice published 2026-01-15 (doc 2026-00755)",
+  "sources": [
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-01-15/pdf/2026-00755.pdf",
+      "what": "Federal Register notice, Annual Update of the HHS Poverty Guidelines (2026)",
+      "verified": "downloaded and parsed by scripts/fpl.py"
+    },
+    {
+      "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+      "what": "ASPE poverty guidelines page (same table)",
+      "verified": "opened 2026-10-24"
+    }
+  ],
+  "ca_note": "CA HSC 127400(b) defines 'federal poverty level' as the HHS poverty guidelines updated in the Federal Register."
+}

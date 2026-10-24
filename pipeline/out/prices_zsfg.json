@@ -1,0 +1,6197 @@
+{
+ "hospital_key": "zsfg",
+ "source_url": "https://sanfranciscogeneralhospitalfou.box.com/shared/static/bj0pj6iqcpc6bmb4yp7kobuz772j0jtl.csv",
+ "mrf_format": "CMS template v3.0.0 CSV (tall)",
+ "mrf_hospital_name": "PRISCILLA CHAN & MARK ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL & TRAUMA CENTER",
+ "mrf_last_updated_on": "3/19/2026",
+ "mrf_last_updated_iso": "2026-03-19",
+ "records_scanned": 14320,
+ "codes_found": [
+  "99281",
+  "99282",
+  "99283",
+  "99284",
+  "99285",
+  "99291",
+  "96374",
+  "96375",
+  "96360",
+  "71046",
+  "70450",
+  "74177",
+  "80053",
+  "85025",
+  "81001",
+  "93005",
+  "12002"
+ ],
+ "codes_not_found": [
+  "36415",
+  "J7030",
+  "J7050",
+  "J1885",
+  "J2405",
+  "0450",
+  "0451"
+ ],
+ "notes": [
+  "All dollar values copied from the hospital's own CMS machine-readable file as published.",
+  "file_min/max_negotiated = the file's own de-identified min/max columns; computed_* and negotiated_dollar_min/max = min/max over payer negotiated_dollar values present.",
+  "outpatient_facility summary = rows with setting outpatient/both and facility billing class (typical ER facility charge).",
+  "Revenue-code entries (0450/0451) are rows whose only codes are revenue codes (no CPT/HCPCS)."
+ ],
+ "summary_by_code": {
+  "99281": {
+   "all_settings": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     576.0,
+     1177.0
+    ],
+    "discounted_cash_range": [
+     576.0,
+     1177.0
+    ],
+    "negotiated_dollar_min": 18.09,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     18.09,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     576.0,
+     1177.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level I",
+     "HC Psych Crisis-Level I"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     576.0,
+     1177.0
+    ],
+    "discounted_cash_range": [
+     576.0,
+     1177.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     576.0,
+     1177.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level I",
+     "HC Psych Crisis-Level I"
+    ]
+   }
+  },
+  "99282": {
+   "all_settings": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     1726.0,
+     2734.0
+    ],
+    "discounted_cash_range": [
+     1726.0,
+     2734.0
+    ],
+    "negotiated_dollar_min": 33.59,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     33.59,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     1726.0,
+     2734.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level II",
+     "HC Psych Crisis-Level II"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     1726.0,
+     2734.0
+    ],
+    "discounted_cash_range": [
+     1726.0,
+     2734.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     1726.0,
+     2734.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level II",
+     "HC Psych Crisis-Level II"
+    ]
+   }
+  },
+  "99283": {
+   "all_settings": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     3694.0,
+     4295.0
+    ],
+    "discounted_cash_range": [
+     3694.0,
+     4295.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 61.44,
+    "file_min_negotiated_range": [
+     49.6,
+     61.44
+    ],
+    "file_max_negotiated_range": [
+     3694.0,
+     4295.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level III",
+     "HC Psych Crisis-Level III"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     3694.0,
+     4295.0
+    ],
+    "discounted_cash_range": [
+     3694.0,
+     4295.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     3694.0,
+     4295.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level III",
+     "HC Psych Crisis-Level III"
+    ]
+   }
+  },
+  "99284": {
+   "all_settings": {
+    "n_rows": 9,
+    "gross_charge_range": [
+     5855.0,
+     7419.0
+    ],
+    "discounted_cash_range": [
+     5855.0,
+     7419.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 94.17,
+    "file_min_negotiated_range": [
+     49.6,
+     94.17
+    ],
+    "file_max_negotiated_range": [
+     5855.0,
+     7419.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level IV",
+     "HC Psych Crisis-Level IV",
+     "HC Psych Crisis-Level V"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     5855.0,
+     7419.0
+    ],
+    "discounted_cash_range": [
+     5855.0,
+     7419.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     5855.0,
+     7419.0
+    ],
+    "descriptions": [
+     "HC ER Ex/Tx Rm Level IV",
+     "HC Psych Crisis-Level IV",
+     "HC Psych Crisis-Level V"
+    ]
+   }
+  },
+  "99285": {
+   "all_settings": {
+    "n_rows": 12,
+    "gross_charge_range": [
+     8980.0,
+     18248.0
+    ],
+    "discounted_cash_range": [
+     8980.0,
+     18248.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 149.06,
+    "file_min_negotiated_range": [
+     49.6,
+     149.06
+    ],
+    "file_max_negotiated_range": [
+     8980.0,
+     18248.0
+    ],
+    "descriptions": [
+     "HC ED Level 5 Team Trauma",
+     "HC ER Ex/Tx Rm Level V",
+     "HC Psych Crisis-Level VI"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     8980.0,
+     18248.0
+    ],
+    "discounted_cash_range": [
+     8980.0,
+     18248.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     8980.0,
+     18248.0
+    ],
+    "descriptions": [
+     "HC ED Level 5 Team Trauma",
+     "HC ER Ex/Tx Rm Level V",
+     "HC Psych Crisis-Level VI"
+    ]
+   }
+  },
+  "99291": {
+   "all_settings": {
+    "n_rows": 9,
+    "gross_charge_range": [
+     6771.0,
+     6771.0
+    ],
+    "discounted_cash_range": [
+     6771.0,
+     6771.0
+    ],
+    "negotiated_dollar_min": 17.44,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     17.44,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     6771.0,
+     6771.0
+    ],
+    "descriptions": [
+     "HC ED Critical Care 30-74 Mins.",
+     "HC Trauma Critical Care 30-74mins"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     6771.0,
+     6771.0
+    ],
+    "discounted_cash_range": [
+     6771.0,
+     6771.0
+    ],
+    "negotiated_dollar_min": 49.6,
+    "negotiated_dollar_max": 49.6,
+    "file_min_negotiated_range": [
+     49.6,
+     49.6
+    ],
+    "file_max_negotiated_range": [
+     6771.0,
+     6771.0
+    ],
+    "descriptions": [
+     "HC ED Critical Care 30-74 Mins.",
+     "HC Trauma Critical Care 30-74mins"
+    ]
+   }
+  },
+  "96374": {
+   "all_settings": {
+    "n_rows": 14,
+    "gross_charge_range": [
+     419.0,
+     419.0
+    ],
+    "discounted_cash_range": [
+     419.0,
+     419.0
+    ],
+    "negotiated_dollar_min": 49.82,
+    "negotiated_dollar_max": 71.46,
+    "file_min_negotiated_range": [
+     49.82,
+     71.46
+    ],
+    "file_max_negotiated_range": [
+     419.0,
+     419.0
+    ],
+    "descriptions": [
+     "HC IV Push (Infusion <= 15 Min)",
+     "HC IV Push Single or Initial Drug",
+     "HC Ivpush Single or Initial Drug"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     419.0,
+     419.0
+    ],
+    "discounted_cash_range": [
+     419.0,
+     419.0
+    ],
+    "negotiated_dollar_min": 49.82,
+    "negotiated_dollar_max": 71.46,
+    "file_min_negotiated_range": [
+     49.82,
+     71.46
+    ],
+    "file_max_negotiated_range": [
+     419.0,
+     419.0
+    ],
+    "descriptions": [
+     "HC IV Push (Infusion <= 15 Min)",
+     "HC IV Push Single or Initial Drug",
+     "HC Ivpush Single or Initial Drug"
+    ]
+   }
+  },
+  "96375": {
+   "all_settings": {
+    "n_rows": 14,
+    "gross_charge_range": [
+     218.0,
+     218.0
+    ],
+    "discounted_cash_range": [
+     218.0,
+     218.0
+    ],
+    "negotiated_dollar_min": 21.29,
+    "negotiated_dollar_max": 30.54,
+    "file_min_negotiated_range": [
+     21.29,
+     30.54
+    ],
+    "file_max_negotiated_range": [
+     218.0,
+     218.0
+    ],
+    "descriptions": [
+     "HC IV Push Ea Addl New Drug",
+     "HC IV Push and Drug Infusion Additoinal",
+     "HC Ivpush Ea Add Seqtl New Drug"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 8,
+    "gross_charge_range": [
+     218.0,
+     218.0
+    ],
+    "discounted_cash_range": [
+     218.0,
+     218.0
+    ],
+    "negotiated_dollar_min": 21.29,
+    "negotiated_dollar_max": 30.54,
+    "file_min_negotiated_range": [
+     21.29,
+     30.54
+    ],
+    "file_max_negotiated_range": [
+     218.0,
+     218.0
+    ],
+    "descriptions": [
+     "HC IV Push Ea Addl New Drug",
+     "HC IV Push and Drug Infusion Additoinal",
+     "HC Ivpush Ea Add Seqtl New Drug"
+    ]
+   }
+  },
+  "96360": {
+   "all_settings": {
+    "n_rows": 10,
+    "gross_charge_range": [
+     449.0,
+     449.0
+    ],
+    "discounted_cash_range": [
+     449.0,
+     449.0
+    ],
+    "negotiated_dollar_min": 7.36,
+    "negotiated_dollar_max": 55.97,
+    "file_min_negotiated_range": [
+     7.36,
+     55.97
+    ],
+    "file_max_negotiated_range": [
+     449.0,
+     449.0
+    ],
+    "descriptions": [
+     "HC IV Hydration Admin 1st Hour",
+     "HC IV Hydration Init to 1hr"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     449.0,
+     449.0
+    ],
+    "discounted_cash_range": [
+     449.0,
+     449.0
+    ],
+    "negotiated_dollar_min": 7.36,
+    "negotiated_dollar_max": 55.97,
+    "file_min_negotiated_range": [
+     7.36,
+     55.97
+    ],
+    "file_max_negotiated_range": [
+     449.0,
+     449.0
+    ],
+    "descriptions": [
+     "HC IV Hydration Admin 1st Hour",
+     "HC IV Hydration Init to 1hr"
+    ]
+   }
+  },
+  "71046": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     402.0,
+     402.0
+    ],
+    "discounted_cash_range": [
+     402.0,
+     402.0
+    ],
+    "negotiated_dollar_min": 10.31,
+    "negotiated_dollar_max": 27.48,
+    "file_min_negotiated_range": [
+     10.31,
+     27.48
+    ],
+    "file_max_negotiated_range": [
+     402.0,
+     402.0
+    ],
+    "descriptions": [
+     "HC Chest Any 2 Views"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     402.0,
+     402.0
+    ],
+    "discounted_cash_range": [
+     402.0,
+     402.0
+    ],
+    "negotiated_dollar_min": 10.31,
+    "negotiated_dollar_max": 27.48,
+    "file_min_negotiated_range": [
+     10.31,
+     27.48
+    ],
+    "file_max_negotiated_range": [
+     402.0,
+     402.0
+    ],
+    "descriptions": [
+     "HC Chest Any 2 Views"
+    ]
+   }
+  },
+  "70450": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     4403.0,
+     4403.0
+    ],
+    "discounted_cash_range": [
+     4403.0,
+     4403.0
+    ],
+    "negotiated_dollar_min": 38.03,
+    "negotiated_dollar_max": 282.35,
+    "file_min_negotiated_range": [
+     38.03,
+     282.35
+    ],
+    "file_max_negotiated_range": [
+     4403.0,
+     4403.0
+    ],
+    "descriptions": [
+     "HC CT Brain WO Contr"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     4403.0,
+     4403.0
+    ],
+    "discounted_cash_range": [
+     4403.0,
+     4403.0
+    ],
+    "negotiated_dollar_min": 38.03,
+    "negotiated_dollar_max": 282.35,
+    "file_min_negotiated_range": [
+     38.03,
+     282.35
+    ],
+    "file_max_negotiated_range": [
+     4403.0,
+     4403.0
+    ],
+    "descriptions": [
+     "HC CT Brain WO Contr"
+    ]
+   }
+  },
+  "74177": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     3596.0,
+     3596.0
+    ],
+    "discounted_cash_range": [
+     3596.0,
+     3596.0
+    ],
+    "negotiated_dollar_min": 105.82,
+    "negotiated_dollar_max": 281.8,
+    "file_min_negotiated_range": [
+     105.82,
+     281.8
+    ],
+    "file_max_negotiated_range": [
+     3596.0,
+     3596.0
+    ],
+    "descriptions": [
+     "HC CT Abdomen/Pelvis W/Cont."
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     3596.0,
+     3596.0
+    ],
+    "discounted_cash_range": [
+     3596.0,
+     3596.0
+    ],
+    "negotiated_dollar_min": 105.82,
+    "negotiated_dollar_max": 281.8,
+    "file_min_negotiated_range": [
+     105.82,
+     281.8
+    ],
+    "file_max_negotiated_range": [
+     3596.0,
+     3596.0
+    ],
+    "descriptions": [
+     "HC CT Abdomen/Pelvis W/Cont."
+    ]
+   }
+  },
+  "80053": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     528.0,
+     528.0
+    ],
+    "discounted_cash_range": [
+     528.0,
+     528.0
+    ],
+    "negotiated_dollar_min": 10.56,
+    "negotiated_dollar_max": 13.98,
+    "file_min_negotiated_range": [
+     13.18,
+     13.98
+    ],
+    "file_max_negotiated_range": [
+     528.0,
+     528.0
+    ],
+    "descriptions": [
+     "HC Comprehensive Metabolic Panel"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     528.0,
+     528.0
+    ],
+    "discounted_cash_range": [
+     528.0,
+     528.0
+    ],
+    "negotiated_dollar_min": 10.56,
+    "negotiated_dollar_max": 13.98,
+    "file_min_negotiated_range": [
+     13.18,
+     13.98
+    ],
+    "file_max_negotiated_range": [
+     528.0,
+     528.0
+    ],
+    "descriptions": [
+     "HC Comprehensive Metabolic Panel"
+    ]
+   }
+  },
+  "85025": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     269.0,
+     269.0
+    ],
+    "discounted_cash_range": [
+     269.0,
+     269.0
+    ],
+    "negotiated_dollar_min": 7.77,
+    "negotiated_dollar_max": 10.11,
+    "file_min_negotiated_range": [
+     9.68,
+     10.11
+    ],
+    "file_max_negotiated_range": [
+     269.0,
+     269.0
+    ],
+    "descriptions": [
+     "HC Cbc Platelets & Diff"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     269.0,
+     269.0
+    ],
+    "discounted_cash_range": [
+     269.0,
+     269.0
+    ],
+    "negotiated_dollar_min": 7.77,
+    "negotiated_dollar_max": 10.11,
+    "file_min_negotiated_range": [
+     9.68,
+     10.11
+    ],
+    "file_max_negotiated_range": [
+     269.0,
+     269.0
+    ],
+    "descriptions": [
+     "HC Cbc Platelets & Diff"
+    ]
+   }
+  },
+  "81001": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     149.0,
+     149.0
+    ],
+    "discounted_cash_range": [
+     149.0,
+     149.0
+    ],
+    "negotiated_dollar_min": 3.17,
+    "negotiated_dollar_max": 4.37,
+    "file_min_negotiated_range": [
+     3.97,
+     4.37
+    ],
+    "file_max_negotiated_range": [
+     149.0,
+     149.0
+    ],
+    "descriptions": [
+     "HC Urinalysis Micro. (Automated)"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     149.0,
+     149.0
+    ],
+    "discounted_cash_range": [
+     149.0,
+     149.0
+    ],
+    "negotiated_dollar_min": 3.17,
+    "negotiated_dollar_max": 4.37,
+    "file_min_negotiated_range": [
+     3.97,
+     4.37
+    ],
+    "file_max_negotiated_range": [
+     149.0,
+     149.0
+    ],
+    "descriptions": [
+     "HC Urinalysis Micro. (Automated)"
+    ]
+   }
+  },
+  "93005": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     287.0,
+     287.0
+    ],
+    "discounted_cash_range": [
+     287.0,
+     287.0
+    ],
+    "negotiated_dollar_min": 10.66,
+    "negotiated_dollar_max": 23.52,
+    "file_min_negotiated_range": [
+     10.66,
+     23.52
+    ],
+    "file_max_negotiated_range": [
+     287.0,
+     287.0
+    ],
+    "descriptions": [
+     "HC Ekg Tracing Only"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     287.0,
+     287.0
+    ],
+    "discounted_cash_range": [
+     287.0,
+     287.0
+    ],
+    "negotiated_dollar_min": 10.66,
+    "negotiated_dollar_max": 23.52,
+    "file_min_negotiated_range": [
+     10.66,
+     23.52
+    ],
+    "file_max_negotiated_range": [
+     287.0,
+     287.0
+    ],
+    "descriptions": [
+     "HC Ekg Tracing Only"
+    ]
+   }
+  },
+  "12002": {
+   "all_settings": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     185.0,
+     892.0
+    ],
+    "discounted_cash_range": [
+     185.0,
+     892.0
+    ],
+    "negotiated_dollar_min": 2.87,
+    "negotiated_dollar_max": 106.81,
+    "file_min_negotiated_range": [
+     2.87,
+     106.81
+    ],
+    "file_max_negotiated_range": [
+     185.0,
+     892.0
+    ],
+    "descriptions": [
+     "HC Laceration Repair",
+     "Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5cm"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     185.0,
+     892.0
+    ],
+    "discounted_cash_range": [
+     185.0,
+     892.0
+    ],
+    "negotiated_dollar_min": 2.87,
+    "negotiated_dollar_max": 106.81,
+    "file_min_negotiated_range": [
+     2.87,
+     106.81
+    ],
+    "file_max_negotiated_range": [
+     185.0,
+     892.0
+    ],
+    "descriptions": [
+     "HC Laceration Repair",
+     "Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5cm"
+    ]
+   }
+  }
+ },
+ "items": [
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level I",
+   "all_codes": [
+    {
+     "code": "450401011024",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 576.0,
+   "discounted_cash_price": 576.0,
+   "file_min_negotiated": 18.09,
+   "file_max_negotiated": 576.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 18.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 18.09,
+   "computed_max_negotiated_dollar": 18.09,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level I",
+   "all_codes": [
+    {
+     "code": "450406061043",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1177.0,
+   "discounted_cash_price": 1177.0,
+   "file_min_negotiated": 18.09,
+   "file_max_negotiated": 1177.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 18.09,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 18.09,
+   "computed_max_negotiated_dollar": 18.09,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level I",
+   "all_codes": [
+    {
+     "code": "450401011024",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 576.0,
+   "discounted_cash_price": 576.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 576.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level I",
+   "all_codes": [
+    {
+     "code": "450401011024",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 576.0,
+   "discounted_cash_price": 576.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 576.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level I",
+   "all_codes": [
+    {
+     "code": "450406061043",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1177.0,
+   "discounted_cash_price": 1177.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 1177.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level I",
+   "all_codes": [
+    {
+     "code": "450406061043",
+     "type": "CDM"
+    },
+    {
+     "code": "99281",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1177.0,
+   "discounted_cash_price": 1177.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 1177.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level II",
+   "all_codes": [
+    {
+     "code": "450401011026",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1726.0,
+   "discounted_cash_price": 1726.0,
+   "file_min_negotiated": 33.59,
+   "file_max_negotiated": 1726.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 33.59,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 33.59,
+   "computed_max_negotiated_dollar": 33.59,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level II",
+   "all_codes": [
+    {
+     "code": "450406061044",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2734.0,
+   "discounted_cash_price": 2734.0,
+   "file_min_negotiated": 33.59,
+   "file_max_negotiated": 2734.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 33.59,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 33.59,
+   "computed_max_negotiated_dollar": 33.59,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level II",
+   "all_codes": [
+    {
+     "code": "450401011026",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1726.0,
+   "discounted_cash_price": 1726.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 1726.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level II",
+   "all_codes": [
+    {
+     "code": "450401011026",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1726.0,
+   "discounted_cash_price": 1726.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 1726.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level II",
+   "all_codes": [
+    {
+     "code": "450406061044",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2734.0,
+   "discounted_cash_price": 2734.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 2734.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level II",
+   "all_codes": [
+    {
+     "code": "450406061044",
+     "type": "CDM"
+    },
+    {
+     "code": "99282",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2734.0,
+   "discounted_cash_price": 2734.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 2734.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level III",
+   "all_codes": [
+    {
+     "code": "450401011028",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3694.0,
+   "discounted_cash_price": 3694.0,
+   "file_min_negotiated": 61.44,
+   "file_max_negotiated": 3694.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 61.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 61.44,
+   "computed_max_negotiated_dollar": 61.44,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level III",
+   "all_codes": [
+    {
+     "code": "450406061045",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4295.0,
+   "discounted_cash_price": 4295.0,
+   "file_min_negotiated": 61.44,
+   "file_max_negotiated": 4295.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 61.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 61.44,
+   "computed_max_negotiated_dollar": 61.44,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level III",
+   "all_codes": [
+    {
+     "code": "450401011028",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3694.0,
+   "discounted_cash_price": 3694.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 3694.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level III",
+   "all_codes": [
+    {
+     "code": "450401011028",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3694.0,
+   "discounted_cash_price": 3694.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 3694.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level III",
+   "all_codes": [
+    {
+     "code": "450406061045",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4295.0,
+   "discounted_cash_price": 4295.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 4295.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level III",
+   "all_codes": [
+    {
+     "code": "450406061045",
+     "type": "CDM"
+    },
+    {
+     "code": "99283",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4295.0,
+   "discounted_cash_price": 4295.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 4295.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level IV",
+   "all_codes": [
+    {
+     "code": "450401011030",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6084.0,
+   "discounted_cash_price": 6084.0,
+   "file_min_negotiated": 94.17,
+   "file_max_negotiated": 6084.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 94.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 94.17,
+   "computed_max_negotiated_dollar": 94.17,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level IV",
+   "all_codes": [
+    {
+     "code": "450406061046",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5855.0,
+   "discounted_cash_price": 5855.0,
+   "file_min_negotiated": 94.17,
+   "file_max_negotiated": 5855.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 94.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 94.17,
+   "computed_max_negotiated_dollar": 94.17,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level V",
+   "all_codes": [
+    {
+     "code": "450406061048",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7419.0,
+   "discounted_cash_price": 7419.0,
+   "file_min_negotiated": 94.17,
+   "file_max_negotiated": 7419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 94.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 94.17,
+   "computed_max_negotiated_dollar": 94.17,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level IV",
+   "all_codes": [
+    {
+     "code": "450401011030",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6084.0,
+   "discounted_cash_price": 6084.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6084.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level IV",
+   "all_codes": [
+    {
+     "code": "450401011030",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6084.0,
+   "discounted_cash_price": 6084.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6084.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level IV",
+   "all_codes": [
+    {
+     "code": "450406061046",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5855.0,
+   "discounted_cash_price": 5855.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 5855.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level IV",
+   "all_codes": [
+    {
+     "code": "450406061046",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5855.0,
+   "discounted_cash_price": 5855.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 5855.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level V",
+   "all_codes": [
+    {
+     "code": "450406061048",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7419.0,
+   "discounted_cash_price": 7419.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 7419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level V",
+   "all_codes": [
+    {
+     "code": "450406061048",
+     "type": "CDM"
+    },
+    {
+     "code": "99284",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7419.0,
+   "discounted_cash_price": 7419.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 7419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Level 5 Team Trauma",
+   "all_codes": [
+    {
+     "code": "450401011018",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 18248.0,
+   "discounted_cash_price": 18248.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 18248.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Level 5 Team Trauma",
+   "all_codes": [
+    {
+     "code": "450401011018",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 18248.0,
+   "discounted_cash_price": 18248.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 18248.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level V",
+   "all_codes": [
+    {
+     "code": "450401011032",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 12281.0,
+   "discounted_cash_price": 12281.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 12281.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level V",
+   "all_codes": [
+    {
+     "code": "450401011032",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 12281.0,
+   "discounted_cash_price": 12281.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 12281.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level VI",
+   "all_codes": [
+    {
+     "code": "450406061049",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8980.0,
+   "discounted_cash_price": 8980.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 8980.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level VI",
+   "all_codes": [
+    {
+     "code": "450406061049",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8980.0,
+   "discounted_cash_price": 8980.0,
+   "file_min_negotiated": 149.06,
+   "file_max_negotiated": 8980.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 149.06,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 149.06,
+   "computed_max_negotiated_dollar": 149.06,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Level 5 Team Trauma",
+   "all_codes": [
+    {
+     "code": "450401011018",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 18248.0,
+   "discounted_cash_price": 18248.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 18248.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Level 5 Team Trauma",
+   "all_codes": [
+    {
+     "code": "450401011018",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 18248.0,
+   "discounted_cash_price": 18248.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 18248.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level V",
+   "all_codes": [
+    {
+     "code": "450401011032",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 12281.0,
+   "discounted_cash_price": 12281.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 12281.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ER Ex/Tx Rm Level V",
+   "all_codes": [
+    {
+     "code": "450401011032",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 12281.0,
+   "discounted_cash_price": 12281.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 12281.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level VI",
+   "all_codes": [
+    {
+     "code": "450406061049",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8980.0,
+   "discounted_cash_price": 8980.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 8980.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Psych Crisis-Level VI",
+   "all_codes": [
+    {
+     "code": "450406061049",
+     "type": "CDM"
+    },
+    {
+     "code": "99285",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8980.0,
+   "discounted_cash_price": 8980.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 8980.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Critical Care 30-74 Mins.",
+   "all_codes": [
+    {
+     "code": "450401111014",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 17.44,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 17.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 17.44,
+   "computed_max_negotiated_dollar": 17.44,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111095",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 17.44,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 17.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 17.44,
+   "computed_max_negotiated_dollar": 17.44,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111096",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 17.44,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 17.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 17.44,
+   "computed_max_negotiated_dollar": 17.44,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Critical Care 30-74 Mins.",
+   "all_codes": [
+    {
+     "code": "450401111014",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC ED Critical Care 30-74 Mins.",
+   "all_codes": [
+    {
+     "code": "450401111014",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111095",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111096",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111095",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Trauma Critical Care 30-74mins",
+   "all_codes": [
+    {
+     "code": "450401111096",
+     "type": "CDM"
+    },
+    {
+     "code": "99291",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 6771.0,
+   "discounted_cash_price": 6771.0,
+   "file_min_negotiated": 49.6,
+   "file_max_negotiated": 6771.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.6,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.6,
+   "computed_max_negotiated_dollar": 49.6,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push (Infusion <= 15 Min)",
+   "all_codes": [
+    {
+     "code": "481457061206",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0481",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push (Infusion <= 15 Min)",
+   "all_codes": [
+    {
+     "code": "481457061206",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "481",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "260407561077",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "260407561077",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "450401061065",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "450401061065",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push (Infusion <= 15 Min)",
+   "all_codes": [
+    {
+     "code": "481457061206",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0481",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 49.82,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.82,
+   "computed_max_negotiated_dollar": 49.82,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push (Infusion <= 15 Min)",
+   "all_codes": [
+    {
+     "code": "481457061206",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "481",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "260407561077",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 49.82,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.82,
+   "computed_max_negotiated_dollar": 49.82,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "260407561077",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "450401061065",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 49.82,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.82,
+   "computed_max_negotiated_dollar": 49.82,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "96374",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 49.82,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 49.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 49.82,
+   "computed_max_negotiated_dollar": 49.82,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "450401061065",
+     "type": "CDM"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Single or Initial Drug",
+   "all_codes": [
+    {
+     "code": "96374",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96374",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 419.0,
+   "discounted_cash_price": 419.0,
+   "file_min_negotiated": 71.46,
+   "file_max_negotiated": 419.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 71.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 71.46,
+   "computed_max_negotiated_dollar": 71.46,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Ea Addl New Drug",
+   "all_codes": [
+    {
+     "code": "260407561078",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Ea Addl New Drug",
+   "all_codes": [
+    {
+     "code": "260407561078",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push and Drug Infusion Additoinal",
+   "all_codes": [
+    {
+     "code": "481457061207",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0481",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push and Drug Infusion Additoinal",
+   "all_codes": [
+    {
+     "code": "481457061207",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "481",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "450401061061",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "450401061061",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Ea Addl New Drug",
+   "all_codes": [
+    {
+     "code": "260407561078",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 21.29,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 21.29,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 21.29,
+   "computed_max_negotiated_dollar": 21.29,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push Ea Addl New Drug",
+   "all_codes": [
+    {
+     "code": "260407561078",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push and Drug Infusion Additoinal",
+   "all_codes": [
+    {
+     "code": "481457061207",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0481",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 21.29,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 21.29,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 21.29,
+   "computed_max_negotiated_dollar": 21.29,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Push and Drug Infusion Additoinal",
+   "all_codes": [
+    {
+     "code": "481457061207",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "481",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "450401061061",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 21.29,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 21.29,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 21.29,
+   "computed_max_negotiated_dollar": 21.29,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "96375",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 21.29,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 21.29,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 21.29,
+   "computed_max_negotiated_dollar": 21.29,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "450401061061",
+     "type": "CDM"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ivpush Ea Add Seqtl New Drug",
+   "all_codes": [
+    {
+     "code": "96375",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96375",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 218.0,
+   "discounted_cash_price": 218.0,
+   "file_min_negotiated": 30.54,
+   "file_max_negotiated": 218.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 30.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 30.54,
+   "computed_max_negotiated_dollar": 30.54,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Admin 1st Hour",
+   "all_codes": [
+    {
+     "code": "260407061001",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Admin 1st Hour",
+   "all_codes": [
+    {
+     "code": "260407061001",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "450401061055",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "450401061055",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Admin 1st Hour",
+   "all_codes": [
+    {
+     "code": "260407061001",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "0260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 55.97,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 55.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 55.97,
+   "computed_max_negotiated_dollar": 55.97,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Admin 1st Hour",
+   "all_codes": [
+    {
+     "code": "260407061001",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "450401061055",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 55.97,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 55.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 55.97,
+   "computed_max_negotiated_dollar": 55.97,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "96360",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 51.3,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 51.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 51.3,
+   "computed_max_negotiated_dollar": 51.3,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "450401061055",
+     "type": "CDM"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC IV Hydration Init to 1hr",
+   "all_codes": [
+    {
+     "code": "96360",
+     "type": "LOCAL"
+    },
+    {
+     "code": "96360",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 449.0,
+   "discounted_cash_price": 449.0,
+   "file_min_negotiated": 7.36,
+   "file_max_negotiated": 449.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 7.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.36,
+   "computed_max_negotiated_dollar": 7.36,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Chest Any 2 Views",
+   "all_codes": [
+    {
+     "code": "320463041648",
+     "type": "CDM"
+    },
+    {
+     "code": "71046",
+     "type": "CPT"
+    },
+    {
+     "code": "0320",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 402.0,
+   "discounted_cash_price": 402.0,
+   "file_min_negotiated": 10.31,
+   "file_max_negotiated": 402.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.31,
+   "computed_max_negotiated_dollar": 10.31,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Chest Any 2 Views",
+   "all_codes": [
+    {
+     "code": "320463041648",
+     "type": "CDM"
+    },
+    {
+     "code": "71046",
+     "type": "CPT"
+    },
+    {
+     "code": "320",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 402.0,
+   "discounted_cash_price": 402.0,
+   "file_min_negotiated": 10.31,
+   "file_max_negotiated": 402.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.31,
+   "computed_max_negotiated_dollar": 10.31,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Chest Any 2 Views",
+   "all_codes": [
+    {
+     "code": "320463041648",
+     "type": "CDM"
+    },
+    {
+     "code": "71046",
+     "type": "CPT"
+    },
+    {
+     "code": "0320",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 402.0,
+   "discounted_cash_price": 402.0,
+   "file_min_negotiated": 27.48,
+   "file_max_negotiated": 402.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 27.48,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 27.48,
+   "computed_max_negotiated_dollar": 27.48,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Chest Any 2 Views",
+   "all_codes": [
+    {
+     "code": "320463041648",
+     "type": "CDM"
+    },
+    {
+     "code": "71046",
+     "type": "CPT"
+    },
+    {
+     "code": "320",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 402.0,
+   "discounted_cash_price": 402.0,
+   "file_min_negotiated": 10.31,
+   "file_max_negotiated": 402.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 10.31,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.31,
+   "computed_max_negotiated_dollar": 10.31,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Brain WO Contr",
+   "all_codes": [
+    {
+     "code": "351468041339",
+     "type": "CDM"
+    },
+    {
+     "code": "70450",
+     "type": "CPT"
+    },
+    {
+     "code": "0351",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4403.0,
+   "discounted_cash_price": 4403.0,
+   "file_min_negotiated": 38.03,
+   "file_max_negotiated": 4403.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 38.03,
+   "computed_max_negotiated_dollar": 38.03,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Brain WO Contr",
+   "all_codes": [
+    {
+     "code": "351468041339",
+     "type": "CDM"
+    },
+    {
+     "code": "70450",
+     "type": "CPT"
+    },
+    {
+     "code": "351",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4403.0,
+   "discounted_cash_price": 4403.0,
+   "file_min_negotiated": 38.03,
+   "file_max_negotiated": 4403.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 38.03,
+   "computed_max_negotiated_dollar": 38.03,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Brain WO Contr",
+   "all_codes": [
+    {
+     "code": "351468041339",
+     "type": "CDM"
+    },
+    {
+     "code": "70450",
+     "type": "CPT"
+    },
+    {
+     "code": "0351",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4403.0,
+   "discounted_cash_price": 4403.0,
+   "file_min_negotiated": 282.35,
+   "file_max_negotiated": 4403.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 282.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 282.35,
+   "computed_max_negotiated_dollar": 282.35,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Brain WO Contr",
+   "all_codes": [
+    {
+     "code": "351468041339",
+     "type": "CDM"
+    },
+    {
+     "code": "70450",
+     "type": "CPT"
+    },
+    {
+     "code": "351",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4403.0,
+   "discounted_cash_price": 4403.0,
+   "file_min_negotiated": 38.03,
+   "file_max_negotiated": 4403.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 38.03,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 38.03,
+   "computed_max_negotiated_dollar": 38.03,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Abdomen/Pelvis W/Cont.",
+   "all_codes": [
+    {
+     "code": "352468041396",
+     "type": "CDM"
+    },
+    {
+     "code": "74177",
+     "type": "CPT"
+    },
+    {
+     "code": "0352",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3596.0,
+   "discounted_cash_price": 3596.0,
+   "file_min_negotiated": 105.82,
+   "file_max_negotiated": 3596.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 105.82,
+   "computed_max_negotiated_dollar": 105.82,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Abdomen/Pelvis W/Cont.",
+   "all_codes": [
+    {
+     "code": "352468041396",
+     "type": "CDM"
+    },
+    {
+     "code": "74177",
+     "type": "CPT"
+    },
+    {
+     "code": "352",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3596.0,
+   "discounted_cash_price": 3596.0,
+   "file_min_negotiated": 105.82,
+   "file_max_negotiated": 3596.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 105.82,
+   "computed_max_negotiated_dollar": 105.82,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Abdomen/Pelvis W/Cont.",
+   "all_codes": [
+    {
+     "code": "352468041396",
+     "type": "CDM"
+    },
+    {
+     "code": "74177",
+     "type": "CPT"
+    },
+    {
+     "code": "0352",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3596.0,
+   "discounted_cash_price": 3596.0,
+   "file_min_negotiated": 281.8,
+   "file_max_negotiated": 3596.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 281.8,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 281.8,
+   "computed_max_negotiated_dollar": 281.8,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC CT Abdomen/Pelvis W/Cont.",
+   "all_codes": [
+    {
+     "code": "352468041396",
+     "type": "CDM"
+    },
+    {
+     "code": "74177",
+     "type": "CPT"
+    },
+    {
+     "code": "352",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3596.0,
+   "discounted_cash_price": 3596.0,
+   "file_min_negotiated": 105.82,
+   "file_max_negotiated": 3596.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 105.82,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 105.82,
+   "computed_max_negotiated_dollar": 105.82,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Comprehensive Metabolic Panel",
+   "all_codes": [
+    {
+     "code": "301450051018",
+     "type": "CDM"
+    },
+    {
+     "code": "80053",
+     "type": "CPT"
+    },
+    {
+     "code": "0301",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 528.0,
+   "discounted_cash_price": 528.0,
+   "file_min_negotiated": 13.18,
+   "file_max_negotiated": 528.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 13.18,
+   "computed_max_negotiated_dollar": 13.18,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Comprehensive Metabolic Panel",
+   "all_codes": [
+    {
+     "code": "301450051018",
+     "type": "CDM"
+    },
+    {
+     "code": "80053",
+     "type": "CPT"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 528.0,
+   "discounted_cash_price": 528.0,
+   "file_min_negotiated": 13.18,
+   "file_max_negotiated": 528.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 13.18,
+   "computed_max_negotiated_dollar": 13.18,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Comprehensive Metabolic Panel",
+   "all_codes": [
+    {
+     "code": "301450051018",
+     "type": "CDM"
+    },
+    {
+     "code": "80053",
+     "type": "CPT"
+    },
+    {
+     "code": "0301",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 528.0,
+   "discounted_cash_price": 528.0,
+   "file_min_negotiated": 13.98,
+   "file_max_negotiated": 528.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 13.98,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 13.98,
+   "computed_max_negotiated_dollar": 13.98,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Comprehensive Metabolic Panel",
+   "all_codes": [
+    {
+     "code": "301450051018",
+     "type": "CDM"
+    },
+    {
+     "code": "80053",
+     "type": "CPT"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 528.0,
+   "discounted_cash_price": 528.0,
+   "file_min_negotiated": 13.18,
+   "file_max_negotiated": 528.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "CANOPY HEALTH COMMERCIAL HMO [1012]",
+     "plan": "SFDPH CANOPY CONTRACT",
+     "negotiated_dollar": 10.56,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 13.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.56,
+   "computed_max_negotiated_dollar": 13.18,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Cbc Platelets & Diff",
+   "all_codes": [
+    {
+     "code": "305450051228",
+     "type": "CDM"
+    },
+    {
+     "code": "85025",
+     "type": "CPT"
+    },
+    {
+     "code": "0305",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 269.0,
+   "discounted_cash_price": 269.0,
+   "file_min_negotiated": 9.68,
+   "file_max_negotiated": 269.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 9.68,
+   "computed_max_negotiated_dollar": 9.68,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Cbc Platelets & Diff",
+   "all_codes": [
+    {
+     "code": "305450051228",
+     "type": "CDM"
+    },
+    {
+     "code": "85025",
+     "type": "CPT"
+    },
+    {
+     "code": "305",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 269.0,
+   "discounted_cash_price": 269.0,
+   "file_min_negotiated": 9.68,
+   "file_max_negotiated": 269.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 9.68,
+   "computed_max_negotiated_dollar": 9.68,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Cbc Platelets & Diff",
+   "all_codes": [
+    {
+     "code": "305450051228",
+     "type": "CDM"
+    },
+    {
+     "code": "85025",
+     "type": "CPT"
+    },
+    {
+     "code": "0305",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 269.0,
+   "discounted_cash_price": 269.0,
+   "file_min_negotiated": 10.11,
+   "file_max_negotiated": 269.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.11,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.11,
+   "computed_max_negotiated_dollar": 10.11,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Cbc Platelets & Diff",
+   "all_codes": [
+    {
+     "code": "305450051228",
+     "type": "CDM"
+    },
+    {
+     "code": "85025",
+     "type": "CPT"
+    },
+    {
+     "code": "305",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 269.0,
+   "discounted_cash_price": 269.0,
+   "file_min_negotiated": 9.68,
+   "file_max_negotiated": 269.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "CANOPY HEALTH COMMERCIAL HMO [1012]",
+     "plan": "SFDPH CANOPY CONTRACT",
+     "negotiated_dollar": 7.77,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 9.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.77,
+   "computed_max_negotiated_dollar": 9.68,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Urinalysis Micro. (Automated)",
+   "all_codes": [
+    {
+     "code": "307450051064",
+     "type": "CDM"
+    },
+    {
+     "code": "81001",
+     "type": "CPT"
+    },
+    {
+     "code": "0307",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 149.0,
+   "discounted_cash_price": 149.0,
+   "file_min_negotiated": 3.97,
+   "file_max_negotiated": 149.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3.97,
+   "computed_max_negotiated_dollar": 3.97,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Urinalysis Micro. (Automated)",
+   "all_codes": [
+    {
+     "code": "307450051064",
+     "type": "CDM"
+    },
+    {
+     "code": "81001",
+     "type": "CPT"
+    },
+    {
+     "code": "307",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 149.0,
+   "discounted_cash_price": 149.0,
+   "file_min_negotiated": 3.97,
+   "file_max_negotiated": 149.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3.97,
+   "computed_max_negotiated_dollar": 3.97,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Urinalysis Micro. (Automated)",
+   "all_codes": [
+    {
+     "code": "307450051064",
+     "type": "CDM"
+    },
+    {
+     "code": "81001",
+     "type": "CPT"
+    },
+    {
+     "code": "0307",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 149.0,
+   "discounted_cash_price": 149.0,
+   "file_min_negotiated": 4.37,
+   "file_max_negotiated": 149.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 4.37,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 4.37,
+   "computed_max_negotiated_dollar": 4.37,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Urinalysis Micro. (Automated)",
+   "all_codes": [
+    {
+     "code": "307450051064",
+     "type": "CDM"
+    },
+    {
+     "code": "81001",
+     "type": "CPT"
+    },
+    {
+     "code": "307",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 149.0,
+   "discounted_cash_price": 149.0,
+   "file_min_negotiated": 3.97,
+   "file_max_negotiated": 149.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "CANOPY HEALTH COMMERCIAL HMO [1012]",
+     "plan": "SFDPH CANOPY CONTRACT",
+     "negotiated_dollar": 3.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 3.97,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3.17,
+   "computed_max_negotiated_dollar": 3.97,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ekg Tracing Only",
+   "all_codes": [
+    {
+     "code": "730407011043",
+     "type": "CDM"
+    },
+    {
+     "code": "93005",
+     "type": "CPT"
+    },
+    {
+     "code": "0730",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 287.0,
+   "discounted_cash_price": 287.0,
+   "file_min_negotiated": 10.66,
+   "file_max_negotiated": 287.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.66,
+   "computed_max_negotiated_dollar": 10.66,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ekg Tracing Only",
+   "all_codes": [
+    {
+     "code": "730407011043",
+     "type": "CDM"
+    },
+    {
+     "code": "93005",
+     "type": "CPT"
+    },
+    {
+     "code": "730",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 287.0,
+   "discounted_cash_price": 287.0,
+   "file_min_negotiated": 10.66,
+   "file_max_negotiated": 287.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.66,
+   "computed_max_negotiated_dollar": 10.66,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ekg Tracing Only",
+   "all_codes": [
+    {
+     "code": "730407011043",
+     "type": "CDM"
+    },
+    {
+     "code": "93005",
+     "type": "CPT"
+    },
+    {
+     "code": "0730",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 287.0,
+   "discounted_cash_price": 287.0,
+   "file_min_negotiated": 23.52,
+   "file_max_negotiated": 287.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 23.52,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 23.52,
+   "computed_max_negotiated_dollar": 23.52,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Ekg Tracing Only",
+   "all_codes": [
+    {
+     "code": "730407011043",
+     "type": "CDM"
+    },
+    {
+     "code": "93005",
+     "type": "CPT"
+    },
+    {
+     "code": "730",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 287.0,
+   "discounted_cash_price": 287.0,
+   "file_min_negotiated": 10.66,
+   "file_max_negotiated": 287.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN - NON-CHN [5031]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "PARTNERSHIP HEALTH PLAN [5016]",
+     "plan": "SFDPH PARTNERSHIP HEALTH PLAN MANAGED CARE CONTRACT",
+     "negotiated_dollar": 10.66,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.66,
+   "computed_max_negotiated_dollar": 10.66,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Laceration Repair",
+   "all_codes": [
+    {
+     "code": "510407015259",
+     "type": "CDM"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "0510",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 892.0,
+   "discounted_cash_price": 892.0,
+   "file_min_negotiated": 2.87,
+   "file_max_negotiated": 892.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.87,
+   "computed_max_negotiated_dollar": 2.87,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Laceration Repair",
+   "all_codes": [
+    {
+     "code": "510407015259",
+     "type": "CDM"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "510",
+     "type": "RC"
+    }
+   ],
+   "setting": "inpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 892.0,
+   "discounted_cash_price": 892.0,
+   "file_min_negotiated": 2.87,
+   "file_max_negotiated": 892.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.87,
+   "computed_max_negotiated_dollar": 2.87,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Laceration Repair",
+   "all_codes": [
+    {
+     "code": "510407015259",
+     "type": "CDM"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "0510",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 892.0,
+   "discounted_cash_price": 892.0,
+   "file_min_negotiated": 106.81,
+   "file_max_negotiated": 892.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 106.81,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 106.81,
+   "computed_max_negotiated_dollar": 106.81,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "HC Laceration Repair",
+   "all_codes": [
+    {
+     "code": "510407015259",
+     "type": "CDM"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "510",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 892.0,
+   "discounted_cash_price": 892.0,
+   "file_min_negotiated": 2.87,
+   "file_max_negotiated": 892.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.87,
+   "computed_max_negotiated_dollar": 2.87,
+   "n_payer_rows": 2
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5cm",
+   "all_codes": [
+    {
+     "code": "12002",
+     "type": "LOCAL"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "0450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 185.0,
+   "discounted_cash_price": 185.0,
+   "file_min_negotiated": 106.81,
+   "file_max_negotiated": 185.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 106.81,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 106.81,
+   "computed_max_negotiated_dollar": 106.81,
+   "n_payer_rows": 1
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5cm",
+   "all_codes": [
+    {
+     "code": "12002",
+     "type": "LOCAL"
+    },
+    {
+     "code": "12002",
+     "type": "CPT"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 185.0,
+   "discounted_cash_price": 185.0,
+   "file_min_negotiated": 2.87,
+   "file_max_negotiated": 185.0,
+   "payer_rates": [
+    {
+     "payer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]",
+     "plan": "Blue Cross Medi-Cal",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "SAN FRANCISCO HEALTH PLAN [4000]",
+     "plan": "SFDPH SF HEALTH PLAN NON-CHN /CLN/SFN MEDI-CAL - SFGH",
+     "negotiated_dollar": 2.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 2.87,
+   "computed_max_negotiated_dollar": 2.87,
+   "n_payer_rows": 2
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+hospital_name,last_updated_on,version,location_name
+Wide Template Hospital,2026-01-15,2.2.0,Wide Template Hospital
+description,code|1,code|1|type,setting,standard_charge|gross,standard_charge|discounted_cash,standard_charge|Aetna|PPO|negotiated_dollar,standard_charge|Aetna|PPO|methodology,standard_charge|Cigna|HMO|negotiated_dollar,standard_charge|Cigna|HMO|methodology,standard_charge|min,standard_charge|max
+CBC with differential,85025,CPT,outpatient,232.00,69.60,15.54,fee schedule,7.77,fee schedule,7.77,15.54
+Office visit,99213,CPT,outpatient,410.00,,120.00,fee schedule,,case rate,120.00,120.00

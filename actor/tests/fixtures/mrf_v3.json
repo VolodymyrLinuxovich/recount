@@ -1,0 +1,15 @@
+{"hospital_name":"Example General Hospital","last_updated_on":"2026-04-01","version":"3.0.0","location_name":["Example General Hospital"],
+ "standard_charge_information":[
+  {"description":"ER visit level 4","code_information":[{"code":"45000005","type":"CDM"},{"code":"450","type":"RC"},{"code":"99284","type":"HCPCS"}],
+   "standard_charges":[{"gross_charge":8501.0,"discounted_cash":2550.3,"setting":"both","billing_class":"facility"}]},
+  {"description":"Line whose chargemaster number equals a requested code","code_information":[{"code":"80053","type":"CDM"}],
+   "standard_charges":[{"gross_charge":1.0,"discounted_cash":1.0,"setting":"both"}]},
+  {"description":"Comprehensive metabolic panel","code_information":[{"code":"80053","type":"CPT"}],
+   "standard_charges":[{"gross_charge":667,"discounted_cash":200.1,"setting":"outpatient","minimum":10.56,"maximum":21.12,
+     "payers_information":[{"payer_name":"Aetna","plan_name":"PPO","standard_charge_dollar":21.12,"methodology":"fee schedule"},
+                           {"payer_name":"Medi-Cal","plan_name":"Managed","standard_charge_dollar":10.56,"methodology":"fee schedule"},
+                           {"payer_name":"Blue Shield","plan_name":"HMO","standard_charge_percentage":60,"methodology":"percent of total billed charges"}]}]},
+  {"description":"ER visit level 4 (professional rates)","code_information":[{"code":"99284","type":"CPT"}],
+   "standard_charges":[{"setting":"outpatient","minimum":610.38,"maximum":1220.77,
+     "payers_information":[{"payer_name":"Aetna","plan_name":"PPO","standard_charge_dollar":1220.77},{"payer_name":"Cigna","plan_name":"PPO","standard_charge_dollar":610.38}]}]}
+ ]}

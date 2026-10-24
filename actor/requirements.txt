@@ -1,0 +1,6 @@
+# Versions tested locally with Python 3.12
+apify==3.4.1
+httpx==0.28.1
+ijson==3.6.0
+pypdf==6.21.2
+beautifulsoup4==4.15.0

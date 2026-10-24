@@ -1,0 +1,51 @@
+{
+  "title": "Hospital Price & Charity Care Finder input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "hospitalUrl": {
+      "title": "Hospital website",
+      "type": "string",
+      "description": "The hospital's homepage (or any page on its site). The Actor looks for /cms-hhs-pricetransparency.txt on the root domain, then crawls the site for price transparency and financial assistance pages.",
+      "editor": "textfield",
+      "prefill": "https://zuckerbergsanfranciscogeneral.org"
+    },
+    "hospitalName": {
+      "title": "Hospital name",
+      "type": "string",
+      "description": "Optional. Helps pick the right file when a health system publishes several hospitals, and is used to look the hospital up in California's HCAI Hospital Fair Billing policy registry. If empty, the name is taken from the price file or page title.",
+      "editor": "textfield"
+    },
+    "codes": {
+      "title": "Billing codes",
+      "type": "array",
+      "description": "CPT / HCPCS codes (or MS-DRG, NDC, etc.) to look up in the price file, e.g. 99284 (ER visit, level 4) and 80053 (comprehensive metabolic panel).",
+      "editor": "stringList",
+      "prefill": ["99284", "80053", "85025"]
+    },
+    "maxMrfMB": {
+      "title": "Max price file download (MB)",
+      "type": "integer",
+      "description": "Stop streaming the price file after this many megabytes (uncompressed bytes received). Large systems publish files of several hundred MB; the Actor stops early anyway once all codes are found.",
+      "default": 300,
+      "minimum": 1,
+      "maximum": 5000,
+      "unit": "MB"
+    },
+    "maxCrawlPages": {
+      "title": "Max pages to crawl",
+      "type": "integer",
+      "description": "Limit for the hospital-site crawl that looks for price transparency and financial assistance pages.",
+      "default": 30,
+      "minimum": 1,
+      "maximum": 200
+    },
+    "useHcaiRegistry": {
+      "title": "Use California HCAI policy registry",
+      "type": "boolean",
+      "description": "Also look the hospital up in the State of California's Hospital Fair Pricing Policy Lookup (HCAI), where every CA hospital must file its charity care and discount payment policies. Recommended for California hospitals.",
+      "default": true
+    }
+  },
+  "required": ["hospitalUrl"]
+}

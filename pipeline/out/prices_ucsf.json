@@ -1,0 +1,7323 @@
+{
+ "hospital_key": "ucsf",
+ "source_url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=ldckxfm5nm9wah74gqi7fdhe6mrtpg5e&file_id=f_1959275070690",
+ "mrf_format": "CMS template v3.0.0 JSON",
+ "mrf_hospital_name": "Ucsf Medical Center",
+ "mrf_last_updated_on": "2026-04-01",
+ "mrf_last_updated_iso": "2026-04-01",
+ "records_scanned": 82283,
+ "codes_found": [
+  "99281",
+  "99282",
+  "99283",
+  "99284",
+  "99285",
+  "99291",
+  "96374",
+  "96375",
+  "96360",
+  "71046",
+  "70450",
+  "74177",
+  "80053",
+  "85025",
+  "81001",
+  "93005",
+  "36415",
+  "12002",
+  "J7030",
+  "J7050",
+  "J1885",
+  "J2405",
+  "0450"
+ ],
+ "codes_not_found": [
+  "0451"
+ ],
+ "notes": [
+  "All dollar values copied from the hospital's own CMS machine-readable file as published.",
+  "file_min/max_negotiated = the file's own de-identified min/max columns; computed_* and negotiated_dollar_min/max = min/max over payer negotiated_dollar values present.",
+  "outpatient_facility summary = rows with setting outpatient/both and facility billing class (typical ER facility charge).",
+  "Revenue-code entries (0450/0451) are rows whose only codes are revenue codes (no CPT/HCPCS)."
+ ],
+ "summary_by_code": {
+  "99281": {
+   "all_settings": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     314.0,
+     844.0
+    ],
+    "discounted_cash_range": [
+     94.2,
+     253.2
+    ],
+    "negotiated_dollar_min": 123.35,
+    "negotiated_dollar_max": 246.7,
+    "file_min_negotiated_range": [
+     123.35,
+     123.35
+    ],
+    "file_max_negotiated_range": [
+     246.7,
+     246.7
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level I",
+     "Hc Er Fac Lev 1 Triage Only/Lwbs"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 4,
+    "gross_charge_range": [
+     314.0,
+     844.0
+    ],
+    "discounted_cash_range": [
+     94.2,
+     253.2
+    ],
+    "negotiated_dollar_min": 123.35,
+    "negotiated_dollar_max": 246.7,
+    "file_min_negotiated_range": [
+     123.35,
+     123.35
+    ],
+    "file_max_negotiated_range": [
+     246.7,
+     246.7
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level I",
+     "Hc Er Fac Lev 1 Triage Only/Lwbs"
+    ]
+   }
+  },
+  "99282": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     1784.0,
+     1784.0
+    ],
+    "discounted_cash_range": [
+     535.2,
+     535.2
+    ],
+    "negotiated_dollar_min": 224.61,
+    "negotiated_dollar_max": 449.22,
+    "file_min_negotiated_range": [
+     224.61,
+     224.61
+    ],
+    "file_max_negotiated_range": [
+     449.22,
+     449.22
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Ii"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     1784.0,
+     1784.0
+    ],
+    "discounted_cash_range": [
+     535.2,
+     535.2
+    ],
+    "negotiated_dollar_min": 224.61,
+    "negotiated_dollar_max": 449.22,
+    "file_min_negotiated_range": [
+     224.61,
+     224.61
+    ],
+    "file_max_negotiated_range": [
+     449.22,
+     449.22
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Ii"
+    ]
+   }
+  },
+  "99283": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     3297.0,
+     3297.0
+    ],
+    "discounted_cash_range": [
+     989.1,
+     989.1
+    ],
+    "negotiated_dollar_min": 399.32,
+    "negotiated_dollar_max": 798.64,
+    "file_min_negotiated_range": [
+     399.32,
+     399.32
+    ],
+    "file_max_negotiated_range": [
+     798.64,
+     798.64
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Iii"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     3297.0,
+     3297.0
+    ],
+    "discounted_cash_range": [
+     989.1,
+     989.1
+    ],
+    "negotiated_dollar_min": 399.32,
+    "negotiated_dollar_max": 798.64,
+    "file_min_negotiated_range": [
+     399.32,
+     399.32
+    ],
+    "file_max_negotiated_range": [
+     798.64,
+     798.64
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Iii"
+    ]
+   }
+  },
+  "99284": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     8501.0,
+     8501.0
+    ],
+    "discounted_cash_range": [
+     2550.3,
+     2550.3
+    ],
+    "negotiated_dollar_min": 610.38,
+    "negotiated_dollar_max": 1220.77,
+    "file_min_negotiated_range": [
+     610.38,
+     610.38
+    ],
+    "file_max_negotiated_range": [
+     1220.77,
+     1220.77
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Iv"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     8501.0,
+     8501.0
+    ],
+    "discounted_cash_range": [
+     2550.3,
+     2550.3
+    ],
+    "negotiated_dollar_min": 610.38,
+    "negotiated_dollar_max": 1220.77,
+    "file_min_negotiated_range": [
+     610.38,
+     610.38
+    ],
+    "file_max_negotiated_range": [
+     1220.77,
+     1220.77
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level Iv"
+    ]
+   }
+  },
+  "99285": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     11901.0,
+     11901.0
+    ],
+    "discounted_cash_range": [
+     3570.3,
+     3570.3
+    ],
+    "negotiated_dollar_min": 871.16,
+    "negotiated_dollar_max": 1742.32,
+    "file_min_negotiated_range": [
+     871.16,
+     871.16
+    ],
+    "file_max_negotiated_range": [
+     1742.32,
+     1742.32
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level V"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     11901.0,
+     11901.0
+    ],
+    "discounted_cash_range": [
+     3570.3,
+     3570.3
+    ],
+    "negotiated_dollar_min": 871.16,
+    "negotiated_dollar_max": 1742.32,
+    "file_min_negotiated_range": [
+     871.16,
+     871.16
+    ],
+    "file_max_negotiated_range": [
+     1742.32,
+     1742.32
+    ],
+    "descriptions": [
+     "Emergency dept visit",
+     "Hc Emerg Level V"
+    ]
+   }
+  },
+  "99291": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     14433.0,
+     14433.0
+    ],
+    "discounted_cash_range": [
+     4329.9,
+     4329.9
+    ],
+    "negotiated_dollar_min": 1208.34,
+    "negotiated_dollar_max": 2416.68,
+    "file_min_negotiated_range": [
+     1208.34,
+     1208.34
+    ],
+    "file_max_negotiated_range": [
+     2416.68,
+     2416.68
+    ],
+    "descriptions": [
+     "Critical care first hour",
+     "Hc Emerg Level Vi (C.C.)"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     14433.0,
+     14433.0
+    ],
+    "discounted_cash_range": [
+     4329.9,
+     4329.9
+    ],
+    "negotiated_dollar_min": 1208.34,
+    "negotiated_dollar_max": 2416.68,
+    "file_min_negotiated_range": [
+     1208.34,
+     1208.34
+    ],
+    "file_max_negotiated_range": [
+     2416.68,
+     2416.68
+    ],
+    "descriptions": [
+     "Critical care first hour",
+     "Hc Emerg Level Vi (C.C.)"
+    ]
+   }
+  },
+  "96374": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     671.0,
+     671.0
+    ],
+    "discounted_cash_range": [
+     201.3,
+     201.3
+    ],
+    "negotiated_dollar_min": 311.15,
+    "negotiated_dollar_max": 622.3,
+    "file_min_negotiated_range": [
+     311.15,
+     311.15
+    ],
+    "file_max_negotiated_range": [
+     622.3,
+     622.3
+    ],
+    "descriptions": [
+     "Hc Ther/Proph/Diag Inj, Iv Push",
+     "Ther/proph/diag inj iv push"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     671.0,
+     671.0
+    ],
+    "discounted_cash_range": [
+     201.3,
+     201.3
+    ],
+    "negotiated_dollar_min": 311.15,
+    "negotiated_dollar_max": 622.3,
+    "file_min_negotiated_range": [
+     311.15,
+     311.15
+    ],
+    "file_max_negotiated_range": [
+     622.3,
+     622.3
+    ],
+    "descriptions": [
+     "Hc Ther/Proph/Diag Inj, Iv Push",
+     "Ther/proph/diag inj iv push"
+    ]
+   }
+  },
+  "96375": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     438.0,
+     504.0
+    ],
+    "discounted_cash_range": [
+     131.4,
+     151.2
+    ],
+    "negotiated_dollar_min": 68.5,
+    "negotiated_dollar_max": 137.0,
+    "file_min_negotiated_range": [
+     68.5,
+     68.5
+    ],
+    "file_max_negotiated_range": [
+     137.0,
+     137.0
+    ],
+    "descriptions": [
+     "Hc Tx/Pro/Dx Inj New Drug Addon",
+     "Tx/pro/dx inj new drug addon"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     438.0,
+     504.0
+    ],
+    "discounted_cash_range": [
+     131.4,
+     151.2
+    ],
+    "negotiated_dollar_min": 68.5,
+    "negotiated_dollar_max": 137.0,
+    "file_min_negotiated_range": [
+     68.5,
+     68.5
+    ],
+    "file_max_negotiated_range": [
+     137.0,
+     137.0
+    ],
+    "descriptions": [
+     "Hc Tx/Pro/Dx Inj New Drug Addon",
+     "Tx/pro/dx inj new drug addon"
+    ]
+   }
+  },
+  "96360": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     934.0,
+     934.0
+    ],
+    "discounted_cash_range": [
+     280.2,
+     280.2
+    ],
+    "negotiated_dollar_min": 311.15,
+    "negotiated_dollar_max": 622.3,
+    "file_min_negotiated_range": [
+     311.15,
+     311.15
+    ],
+    "file_max_negotiated_range": [
+     622.3,
+     622.3
+    ],
+    "descriptions": [
+     "Hc Hydration Iv Infusion, Init",
+     "Hydration iv infusion init"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     934.0,
+     934.0
+    ],
+    "discounted_cash_range": [
+     280.2,
+     280.2
+    ],
+    "negotiated_dollar_min": 311.15,
+    "negotiated_dollar_max": 622.3,
+    "file_min_negotiated_range": [
+     311.15,
+     311.15
+    ],
+    "file_max_negotiated_range": [
+     622.3,
+     622.3
+    ],
+    "descriptions": [
+     "Hc Hydration Iv Infusion, Init",
+     "Hydration iv infusion init"
+    ]
+   }
+  },
+  "71046": {
+   "all_settings": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     531.0,
+     531.0
+    ],
+    "discounted_cash_range": [
+     159.3,
+     159.3
+    ],
+    "negotiated_dollar_min": 127.3,
+    "negotiated_dollar_max": 254.61,
+    "file_min_negotiated_range": [
+     127.3,
+     127.3
+    ],
+    "file_max_negotiated_range": [
+     254.61,
+     254.61
+    ],
+    "descriptions": [
+     "Hc X-Ray Exam Chest 2 Views",
+     "X-ray exam chest 2 views"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     531.0,
+     531.0
+    ],
+    "discounted_cash_range": [
+     159.3,
+     159.3
+    ],
+    "negotiated_dollar_min": 127.3,
+    "negotiated_dollar_max": 254.61,
+    "file_min_negotiated_range": [
+     127.3,
+     127.3
+    ],
+    "file_max_negotiated_range": [
+     254.61,
+     254.61
+    ],
+    "descriptions": [
+     "Hc X-Ray Exam Chest 2 Views",
+     "X-ray exam chest 2 views"
+    ]
+   }
+  },
+  "70450": {
+   "all_settings": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     3288.0,
+     3288.0
+    ],
+    "discounted_cash_range": [
+     986.4,
+     986.4
+    ],
+    "negotiated_dollar_min": 152.93,
+    "negotiated_dollar_max": 305.87,
+    "file_min_negotiated_range": [
+     152.93,
+     152.93
+    ],
+    "file_max_negotiated_range": [
+     305.87,
+     305.87
+    ],
+    "descriptions": [
+     "Ct head/brain w/o dye",
+     "Hc Ct - Head/Brain Wo Contrast"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     3288.0,
+     3288.0
+    ],
+    "discounted_cash_range": [
+     986.4,
+     986.4
+    ],
+    "negotiated_dollar_min": 152.93,
+    "negotiated_dollar_max": 305.87,
+    "file_min_negotiated_range": [
+     152.93,
+     152.93
+    ],
+    "file_max_negotiated_range": [
+     305.87,
+     305.87
+    ],
+    "descriptions": [
+     "Ct head/brain w/o dye",
+     "Hc Ct - Head/Brain Wo Contrast"
+    ]
+   }
+  },
+  "74177": {
+   "all_settings": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     8272.0,
+     8272.0
+    ],
+    "discounted_cash_range": [
+     2481.6,
+     2481.6
+    ],
+    "negotiated_dollar_min": 510.34,
+    "negotiated_dollar_max": 1020.69,
+    "file_min_negotiated_range": [
+     510.34,
+     510.34
+    ],
+    "file_max_negotiated_range": [
+     1020.69,
+     1020.69
+    ],
+    "descriptions": [
+     "Ct abd & pelv w/contrast",
+     "Hc Ct Abdomen & Pelvis W/Contrast"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 2,
+    "gross_charge_range": [
+     8272.0,
+     8272.0
+    ],
+    "discounted_cash_range": [
+     2481.6,
+     2481.6
+    ],
+    "negotiated_dollar_min": 510.34,
+    "negotiated_dollar_max": 1020.69,
+    "file_min_negotiated_range": [
+     510.34,
+     510.34
+    ],
+    "file_max_negotiated_range": [
+     1020.69,
+     1020.69
+    ],
+    "descriptions": [
+     "Ct abd & pelv w/contrast",
+     "Hc Ct Abdomen & Pelvis W/Contrast"
+    ]
+   }
+  },
+  "80053": {
+   "all_settings": {
+    "n_rows": 5,
+    "gross_charge_range": [
+     410.0,
+     667.0
+    ],
+    "discounted_cash_range": [
+     123.0,
+     200.1
+    ],
+    "negotiated_dollar_min": 10.56,
+    "negotiated_dollar_max": 21.12,
+    "file_min_negotiated_range": [
+     10.56,
+     10.56
+    ],
+    "file_max_negotiated_range": [
+     21.12,
+     21.12
+    ],
+    "descriptions": [
+     "Comprehen metabolic panel",
+     "Hc Comprehensive Metabolic Panel",
+     "Hc Comprehensive Metabolic Panel (Cmp)",
+     "Hc Comprehensive Metabolic Panel, Fasting",
+     "Hc Comprehensive Metabolic Panel, Random"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 5,
+    "gross_charge_range": [
+     410.0,
+     667.0
+    ],
+    "discounted_cash_range": [
+     123.0,
+     200.1
+    ],
+    "negotiated_dollar_min": 10.56,
+    "negotiated_dollar_max": 21.12,
+    "file_min_negotiated_range": [
+     10.56,
+     10.56
+    ],
+    "file_max_negotiated_range": [
+     21.12,
+     21.12
+    ],
+    "descriptions": [
+     "Comprehen metabolic panel",
+     "Hc Comprehensive Metabolic Panel",
+     "Hc Comprehensive Metabolic Panel (Cmp)",
+     "Hc Comprehensive Metabolic Panel, Fasting",
+     "Hc Comprehensive Metabolic Panel, Random"
+    ]
+   }
+  },
+  "85025": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     232.0,
+     232.0
+    ],
+    "discounted_cash_range": [
+     69.6,
+     69.6
+    ],
+    "negotiated_dollar_min": 7.77,
+    "negotiated_dollar_max": 15.54,
+    "file_min_negotiated_range": [
+     7.77,
+     7.77
+    ],
+    "file_max_negotiated_range": [
+     15.54,
+     15.54
+    ],
+    "descriptions": [
+     "Complete cbc w/auto diff wbc",
+     "Hc Blood Count Complete Auto&Auto Difrntl Wbc",
+     "Hc Cbc W/Auto Diff & Plt Co"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     232.0,
+     232.0
+    ],
+    "discounted_cash_range": [
+     69.6,
+     69.6
+    ],
+    "negotiated_dollar_min": 7.77,
+    "negotiated_dollar_max": 15.54,
+    "file_min_negotiated_range": [
+     7.77,
+     7.77
+    ],
+    "file_max_negotiated_range": [
+     15.54,
+     15.54
+    ],
+    "descriptions": [
+     "Complete cbc w/auto diff wbc",
+     "Hc Blood Count Complete Auto&Auto Difrntl Wbc",
+     "Hc Cbc W/Auto Diff & Plt Co"
+    ]
+   }
+  },
+  "81001": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     133.0,
+     133.0
+    ],
+    "discounted_cash_range": [
+     39.9,
+     39.9
+    ],
+    "negotiated_dollar_min": 3.17,
+    "negotiated_dollar_max": 6.34,
+    "file_min_negotiated_range": [
+     3.17,
+     3.17
+    ],
+    "file_max_negotiated_range": [
+     6.34,
+     6.34
+    ],
+    "descriptions": [
+     "Hc Urinalysis Auto W/Micro",
+     "Hc Urnls Dip Stick/Tablet Reagent Auto Microscopy",
+     "Urinalysis auto w/scope"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     133.0,
+     133.0
+    ],
+    "discounted_cash_range": [
+     39.9,
+     39.9
+    ],
+    "negotiated_dollar_min": 3.17,
+    "negotiated_dollar_max": 6.34,
+    "file_min_negotiated_range": [
+     3.17,
+     3.17
+    ],
+    "file_max_negotiated_range": [
+     6.34,
+     6.34
+    ],
+    "descriptions": [
+     "Hc Urinalysis Auto W/Micro",
+     "Hc Urnls Dip Stick/Tablet Reagent Auto Microscopy",
+     "Urinalysis auto w/scope"
+    ]
+   }
+  },
+  "93005": {
+   "all_settings": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     443.0,
+     443.0
+    ],
+    "discounted_cash_range": [
+     132.9,
+     132.9
+    ],
+    "negotiated_dollar_min": 86.3,
+    "negotiated_dollar_max": 172.59,
+    "file_min_negotiated_range": [
+     86.3,
+     86.3
+    ],
+    "file_max_negotiated_range": [
+     172.59,
+     172.59
+    ],
+    "descriptions": [
+     "Electrocardiogram tracing",
+     "Hc 12 Lead Ekg; Tracing Only"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 3,
+    "gross_charge_range": [
+     443.0,
+     443.0
+    ],
+    "discounted_cash_range": [
+     132.9,
+     132.9
+    ],
+    "negotiated_dollar_min": 86.3,
+    "negotiated_dollar_max": 172.59,
+    "file_min_negotiated_range": [
+     86.3,
+     86.3
+    ],
+    "file_max_negotiated_range": [
+     172.59,
+     172.59
+    ],
+    "descriptions": [
+     "Electrocardiogram tracing",
+     "Hc 12 Lead Ekg; Tracing Only"
+    ]
+   }
+  },
+  "36415": {
+   "all_settings": {
+    "n_rows": 5,
+    "gross_charge_range": [
+     69.0,
+     69.0
+    ],
+    "discounted_cash_range": [
+     20.7,
+     20.7
+    ],
+    "negotiated_dollar_min": 9.34,
+    "negotiated_dollar_max": 18.68,
+    "file_min_negotiated_range": [
+     9.34,
+     9.34
+    ],
+    "file_max_negotiated_range": [
+     18.68,
+     18.68
+    ],
+    "descriptions": [
+     "Hc Collection Venous Blood Venipuncture",
+     "Hc Venipnct For Lab Spec",
+     "Routine venipuncture"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 5,
+    "gross_charge_range": [
+     69.0,
+     69.0
+    ],
+    "discounted_cash_range": [
+     20.7,
+     20.7
+    ],
+    "negotiated_dollar_min": 9.34,
+    "negotiated_dollar_max": 18.68,
+    "file_min_negotiated_range": [
+     9.34,
+     9.34
+    ],
+    "file_max_negotiated_range": [
+     18.68,
+     18.68
+    ],
+    "descriptions": [
+     "Hc Collection Venous Blood Venipuncture",
+     "Hc Venipnct For Lab Spec",
+     "Routine venipuncture"
+    ]
+   }
+  },
+  "12002": {
+   "all_settings": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     891.0,
+     1654.0
+    ],
+    "discounted_cash_range": [
+     267.3,
+     496.2
+    ],
+    "negotiated_dollar_min": 293.49,
+    "negotiated_dollar_max": 2596.0,
+    "file_min_negotiated_range": [
+     293.49,
+     293.49
+    ],
+    "file_max_negotiated_range": [
+     2596.0,
+     2596.0
+    ],
+    "descriptions": [
+     "Hc Lac Smpl 2.6-7.5Cm",
+     "Hc Repair Wound Simple 2.6-7.5Cm",
+     "Hc Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5Cm",
+     "Rpr s/n/ax/gen/trnk2.6-7.5cm"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 6,
+    "gross_charge_range": [
+     891.0,
+     1654.0
+    ],
+    "discounted_cash_range": [
+     267.3,
+     496.2
+    ],
+    "negotiated_dollar_min": 293.49,
+    "negotiated_dollar_max": 2596.0,
+    "file_min_negotiated_range": [
+     293.49,
+     293.49
+    ],
+    "file_max_negotiated_range": [
+     2596.0,
+     2596.0
+    ],
+    "descriptions": [
+     "Hc Lac Smpl 2.6-7.5Cm",
+     "Hc Repair Wound Simple 2.6-7.5Cm",
+     "Hc Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5Cm",
+     "Rpr s/n/ax/gen/trnk2.6-7.5cm"
+    ]
+   }
+  },
+  "J7030": {
+   "all_settings": {
+    "n_rows": 17,
+    "gross_charge_range": [
+     49.83,
+     611.68
+    ],
+    "discounted_cash_range": [
+     14.95,
+     183.5
+    ],
+    "negotiated_dollar_min": 7.33,
+    "negotiated_dollar_max": 7.33,
+    "file_min_negotiated_range": [
+     7.33,
+     7.33
+    ],
+    "file_max_negotiated_range": [
+     7.33,
+     7.33
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+     "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 17,
+    "gross_charge_range": [
+     49.83,
+     611.68
+    ],
+    "discounted_cash_range": [
+     14.95,
+     183.5
+    ],
+    "negotiated_dollar_min": 7.33,
+    "negotiated_dollar_max": 7.33,
+    "file_min_negotiated_range": [
+     7.33,
+     7.33
+    ],
+    "file_max_negotiated_range": [
+     7.33,
+     7.33
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+     "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION"
+    ]
+   }
+  },
+  "J7050": {
+   "all_settings": {
+    "n_rows": 24,
+    "gross_charge_range": [
+     48.75,
+     66.21
+    ],
+    "discounted_cash_range": [
+     14.62,
+     19.86
+    ],
+    "negotiated_dollar_min": 5.72,
+    "negotiated_dollar_max": 5.72,
+    "file_min_negotiated_range": [
+     5.72,
+     5.72
+    ],
+    "file_max_negotiated_range": [
+     5.72,
+     5.72
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS PIGGYBACK",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 24,
+    "gross_charge_range": [
+     48.75,
+     66.21
+    ],
+    "discounted_cash_range": [
+     14.62,
+     19.86
+    ],
+    "negotiated_dollar_min": 5.72,
+    "negotiated_dollar_max": 5.72,
+    "file_min_negotiated_range": [
+     5.72,
+     5.72
+    ],
+    "file_max_negotiated_range": [
+     5.72,
+     5.72
+    ],
+    "descriptions": [
+     "Normal saline solution infus",
+     "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS PIGGYBACK",
+     "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION"
+    ]
+   }
+  },
+  "J1885": {
+   "all_settings": {
+    "n_rows": 44,
+    "gross_charge_range": [
+     5.0,
+     34.88
+    ],
+    "discounted_cash_range": [
+     1.5,
+     10.46
+    ],
+    "negotiated_dollar_min": 0.3,
+    "negotiated_dollar_max": 1.72,
+    "file_min_negotiated_range": [
+     0.3,
+     0.3
+    ],
+    "file_max_negotiated_range": [
+     1.72,
+     1.72
+    ],
+    "descriptions": [
+     "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+     "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+     "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+     "Ketorolac Tromethamine: 10 VIAL in 1 BOX (55390-481-02)  / 2 mL in 1 VIAL",
+     "Ketorolac Tromethamine: 25 Vial, Single-Use In 1 Tray (63323-161-01)  / 1 Ml In 1 Vial, Single-Use (63323-161-00)",
+     "Ketorolac tromethamine inj",
+     "NDC Description Not Available"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 44,
+    "gross_charge_range": [
+     5.0,
+     34.88
+    ],
+    "discounted_cash_range": [
+     1.5,
+     10.46
+    ],
+    "negotiated_dollar_min": 0.3,
+    "negotiated_dollar_max": 1.72,
+    "file_min_negotiated_range": [
+     0.3,
+     0.3
+    ],
+    "file_max_negotiated_range": [
+     1.72,
+     1.72
+    ],
+    "descriptions": [
+     "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+     "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+     "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+     "Ketorolac Tromethamine: 10 VIAL in 1 BOX (55390-481-02)  / 2 mL in 1 VIAL",
+     "Ketorolac Tromethamine: 25 Vial, Single-Use In 1 Tray (63323-161-01)  / 1 Ml In 1 Vial, Single-Use (63323-161-00)",
+     "Ketorolac tromethamine inj",
+     "NDC Description Not Available"
+    ]
+   }
+  },
+  "J2405": {
+   "all_settings": {
+    "n_rows": 18,
+    "gross_charge_range": [
+     2.5,
+     5.23
+    ],
+    "discounted_cash_range": [
+     0.75,
+     1.57
+    ],
+    "negotiated_dollar_min": 0.24,
+    "negotiated_dollar_max": 0.24,
+    "file_min_negotiated_range": [
+     0.24,
+     0.24
+    ],
+    "file_max_negotiated_range": [
+     0.24,
+     0.24
+    ],
+    "descriptions": [
+     "NDC Description Not Available",
+     "ONDANSETRON (1:1) 2 MG/ML (SKIN TEST)",
+     "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+     "Ondansetron hcl injection",
+     "Ondansetron: 10 Vial In 1 Carton (23155-547-41)  / 2 Ml In 1 Vial (23155-547-31)",
+     "Ondansetron: 25 Vial In 1 Carton (0641-6078-25)  / 2 Ml In 1 Vial (0641-6078-01)",
+     "Ondansetron: 25 Vial In 1 Carton (23155-548-42)  / 2 Ml In 1 Vial (23155-548-31)"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 18,
+    "gross_charge_range": [
+     2.5,
+     5.23
+    ],
+    "discounted_cash_range": [
+     0.75,
+     1.57
+    ],
+    "negotiated_dollar_min": 0.24,
+    "negotiated_dollar_max": 0.24,
+    "file_min_negotiated_range": [
+     0.24,
+     0.24
+    ],
+    "file_max_negotiated_range": [
+     0.24,
+     0.24
+    ],
+    "descriptions": [
+     "NDC Description Not Available",
+     "ONDANSETRON (1:1) 2 MG/ML (SKIN TEST)",
+     "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+     "Ondansetron hcl injection",
+     "Ondansetron: 10 Vial In 1 Carton (23155-547-41)  / 2 Ml In 1 Vial (23155-547-31)",
+     "Ondansetron: 25 Vial In 1 Carton (0641-6078-25)  / 2 Ml In 1 Vial (0641-6078-01)",
+     "Ondansetron: 25 Vial In 1 Carton (23155-548-42)  / 2 Ml In 1 Vial (23155-548-31)"
+    ]
+   }
+  },
+  "0450": {
+   "all_settings": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1554.0,
+     1554.0
+    ],
+    "discounted_cash_range": [
+     466.2,
+     466.2
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "Closed Tx Ulnar Fracture Prox End W/O Manipulate"
+    ]
+   },
+   "outpatient_facility": {
+    "n_rows": 1,
+    "gross_charge_range": [
+     1554.0,
+     1554.0
+    ],
+    "discounted_cash_range": [
+     466.2,
+     466.2
+    ],
+    "negotiated_dollar_min": null,
+    "negotiated_dollar_max": null,
+    "file_min_negotiated_range": null,
+    "file_max_negotiated_range": null,
+    "descriptions": [
+     "Closed Tx Ulnar Fracture Prox End W/O Manipulate"
+    ]
+   }
+  }
+ },
+ "items": [
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level I",
+   "all_codes": [
+    {
+     "code": "45000001",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99281",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 844.0,
+   "discounted_cash_price": 253.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level I",
+   "all_codes": [
+    {
+     "code": "45000001",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99281",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 844.0,
+   "discounted_cash_price": 253.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Er Fac Lev 1 Triage Only/Lwbs",
+   "all_codes": [
+    {
+     "code": "45000002",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99281",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "52",
+   "gross_charge": 314.0,
+   "discounted_cash_price": 94.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99281",
+   "code_kind": "CPT/HCPCS",
+   "description": "Emergency dept visit",
+   "all_codes": [
+    {
+     "code": "99281",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 123.35,
+   "file_max_negotiated": 246.7,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 123.35,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 154.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 172.69,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 246.7,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 148.02,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 123.35,
+   "computed_max_negotiated_dollar": 246.7,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Ii",
+   "all_codes": [
+    {
+     "code": "45000003",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99282",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1784.0,
+   "discounted_cash_price": 535.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Ii",
+   "all_codes": [
+    {
+     "code": "45000003",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99282",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1784.0,
+   "discounted_cash_price": 535.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99282",
+   "code_kind": "CPT/HCPCS",
+   "description": "Emergency dept visit",
+   "all_codes": [
+    {
+     "code": "99282",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 224.61,
+   "file_max_negotiated": 449.22,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 224.61,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 280.76,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 314.45,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 449.22,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 269.53,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 224.61,
+   "computed_max_negotiated_dollar": 449.22,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Iii",
+   "all_codes": [
+    {
+     "code": "45000004",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99283",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3297.0,
+   "discounted_cash_price": 989.1,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Iii",
+   "all_codes": [
+    {
+     "code": "45000004",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99283",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3297.0,
+   "discounted_cash_price": 989.1,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99283",
+   "code_kind": "CPT/HCPCS",
+   "description": "Emergency dept visit",
+   "all_codes": [
+    {
+     "code": "99283",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 399.32,
+   "file_max_negotiated": 798.64,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 399.32,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 499.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 559.05,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 798.64,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 479.18,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 399.32,
+   "computed_max_negotiated_dollar": 798.64,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Iv",
+   "all_codes": [
+    {
+     "code": "45000005",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99284",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8501.0,
+   "discounted_cash_price": 2550.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Iv",
+   "all_codes": [
+    {
+     "code": "45000005",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99284",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 8501.0,
+   "discounted_cash_price": 2550.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99284",
+   "code_kind": "CPT/HCPCS",
+   "description": "Emergency dept visit",
+   "all_codes": [
+    {
+     "code": "99284",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 610.38,
+   "file_max_negotiated": 1220.77,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 610.38,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 762.98,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 854.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1220.77,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 732.46,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 610.38,
+   "computed_max_negotiated_dollar": 1220.77,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level V",
+   "all_codes": [
+    {
+     "code": "45000006",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99285",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 11901.0,
+   "discounted_cash_price": 3570.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level V",
+   "all_codes": [
+    {
+     "code": "45000006",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99285",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 11901.0,
+   "discounted_cash_price": 3570.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99285",
+   "code_kind": "CPT/HCPCS",
+   "description": "Emergency dept visit",
+   "all_codes": [
+    {
+     "code": "99285",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 871.16,
+   "file_max_negotiated": 1742.32,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 871.16,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1088.95,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1219.63,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1742.32,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1045.39,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 871.16,
+   "computed_max_negotiated_dollar": 1742.32,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Vi (C.C.)",
+   "all_codes": [
+    {
+     "code": "45000007",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99291",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 14433.0,
+   "discounted_cash_price": 4329.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Emerg Level Vi (C.C.)",
+   "all_codes": [
+    {
+     "code": "45000007",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    },
+    {
+     "code": "99291",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 14433.0,
+   "discounted_cash_price": 4329.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "99291",
+   "code_kind": "CPT/HCPCS",
+   "description": "Critical care first hour",
+   "all_codes": [
+    {
+     "code": "99291",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 1208.34,
+   "file_max_negotiated": 2416.68,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1208.34,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1510.43,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1691.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 2416.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1450.01,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 1208.34,
+   "computed_max_negotiated_dollar": 2416.68,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Ther/Proph/Diag Inj, Iv Push",
+   "all_codes": [
+    {
+     "code": "26000008",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96374",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 671.0,
+   "discounted_cash_price": 201.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Ther/Proph/Diag Inj, Iv Push",
+   "all_codes": [
+    {
+     "code": "26000008",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96374",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 671.0,
+   "discounted_cash_price": 201.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96374",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ther/proph/diag inj iv push",
+   "all_codes": [
+    {
+     "code": "96374",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 311.15,
+   "file_max_negotiated": 622.3,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 311.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 388.94,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 435.61,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 622.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 373.38,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 311.15,
+   "computed_max_negotiated_dollar": 622.3,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Tx/Pro/Dx Inj New Drug Addon",
+   "all_codes": [
+    {
+     "code": "26000009",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96375",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 438.0,
+   "discounted_cash_price": 131.4,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Tx/Pro/Dx Inj New Drug Addon",
+   "all_codes": [
+    {
+     "code": "26000009",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96375",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 504.0,
+   "discounted_cash_price": 151.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96375",
+   "code_kind": "CPT/HCPCS",
+   "description": "Tx/pro/dx inj new drug addon",
+   "all_codes": [
+    {
+     "code": "96375",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 68.5,
+   "file_max_negotiated": 137.0,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 68.5,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 85.62,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 95.9,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 137.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 82.2,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 68.5,
+   "computed_max_negotiated_dollar": 137.0,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Hydration Iv Infusion, Init",
+   "all_codes": [
+    {
+     "code": "26000001",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96360",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 934.0,
+   "discounted_cash_price": 280.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Hydration Iv Infusion, Init",
+   "all_codes": [
+    {
+     "code": "26000001",
+     "type": "CDM"
+    },
+    {
+     "code": "260",
+     "type": "RC"
+    },
+    {
+     "code": "96360",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 934.0,
+   "discounted_cash_price": 280.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "96360",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hydration iv infusion init",
+   "all_codes": [
+    {
+     "code": "96360",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 311.15,
+   "file_max_negotiated": 622.3,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 311.15,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 388.94,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 435.61,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 622.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 373.38,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 311.15,
+   "computed_max_negotiated_dollar": 622.3,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc X-Ray Exam Chest 2 Views",
+   "all_codes": [
+    {
+     "code": "32471046",
+     "type": "CDM"
+    },
+    {
+     "code": "324",
+     "type": "RC"
+    },
+    {
+     "code": "71046",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "TC",
+   "gross_charge": 531.0,
+   "discounted_cash_price": 159.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "71046",
+   "code_kind": "CPT/HCPCS",
+   "description": "X-ray exam chest 2 views",
+   "all_codes": [
+    {
+     "code": "71046",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 127.3,
+   "file_max_negotiated": 254.61,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 127.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 159.13,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 178.22,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 254.61,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 152.76,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 127.3,
+   "computed_max_negotiated_dollar": 254.61,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Ct - Head/Brain Wo Contrast",
+   "all_codes": [
+    {
+     "code": "35170450",
+     "type": "CDM"
+    },
+    {
+     "code": "351",
+     "type": "RC"
+    },
+    {
+     "code": "70450",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "TC",
+   "gross_charge": 3288.0,
+   "discounted_cash_price": 986.4,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "70450",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ct head/brain w/o dye",
+   "all_codes": [
+    {
+     "code": "70450",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 152.93,
+   "file_max_negotiated": 305.87,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 152.93,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 191.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 214.11,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 305.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 183.52,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 152.93,
+   "computed_max_negotiated_dollar": 305.87,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Ct Abdomen & Pelvis W/Contrast",
+   "all_codes": [
+    {
+     "code": "35274177",
+     "type": "CDM"
+    },
+    {
+     "code": "352",
+     "type": "RC"
+    },
+    {
+     "code": "74177",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "TC",
+   "gross_charge": 8272.0,
+   "discounted_cash_price": 2481.6,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "74177",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ct abd & pelv w/contrast",
+   "all_codes": [
+    {
+     "code": "74177",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 510.34,
+   "file_max_negotiated": 1020.69,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 510.34,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 637.93,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 714.48,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 1020.69,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 612.41,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 510.34,
+   "computed_max_negotiated_dollar": 1020.69,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Comprehensive Metabolic Panel",
+   "all_codes": [
+    {
+     "code": "30110002",
+     "type": "CDM"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    },
+    {
+     "code": "80053",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 667.0,
+   "discounted_cash_price": 200.1,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Comprehensive Metabolic Panel (Cmp)",
+   "all_codes": [
+    {
+     "code": "30128525",
+     "type": "CDM"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    },
+    {
+     "code": "80053",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 667.0,
+   "discounted_cash_price": 200.1,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Comprehensive Metabolic Panel, Fasting",
+   "all_codes": [
+    {
+     "code": "30128644",
+     "type": "CDM"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    },
+    {
+     "code": "80053",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 410.0,
+   "discounted_cash_price": 123.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Comprehensive Metabolic Panel, Random",
+   "all_codes": [
+    {
+     "code": "30128645",
+     "type": "CDM"
+    },
+    {
+     "code": "301",
+     "type": "RC"
+    },
+    {
+     "code": "80053",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 410.0,
+   "discounted_cash_price": 123.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "80053",
+   "code_kind": "CPT/HCPCS",
+   "description": "Comprehen metabolic panel",
+   "all_codes": [
+    {
+     "code": "80053",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 10.56,
+   "file_max_negotiated": 21.12,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 10.56,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 13.2,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 14.78,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 21.12,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 12.67,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 10.56,
+   "computed_max_negotiated_dollar": 21.12,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Blood Count Complete Auto&Auto Difrntl Wbc",
+   "all_codes": [
+    {
+     "code": "30510017",
+     "type": "CDM"
+    },
+    {
+     "code": "305",
+     "type": "RC"
+    },
+    {
+     "code": "85025",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 232.0,
+   "discounted_cash_price": 69.6,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Cbc W/Auto Diff & Plt Co",
+   "all_codes": [
+    {
+     "code": "30500021",
+     "type": "CDM"
+    },
+    {
+     "code": "305",
+     "type": "RC"
+    },
+    {
+     "code": "85025",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 232.0,
+   "discounted_cash_price": 69.6,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "85025",
+   "code_kind": "CPT/HCPCS",
+   "description": "Complete cbc w/auto diff wbc",
+   "all_codes": [
+    {
+     "code": "85025",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 7.77,
+   "file_max_negotiated": 15.54,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 7.77,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 9.71,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 10.88,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 15.54,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 9.32,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.77,
+   "computed_max_negotiated_dollar": 15.54,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Urinalysis Auto W/Micro",
+   "all_codes": [
+    {
+     "code": "30500002",
+     "type": "CDM"
+    },
+    {
+     "code": "307",
+     "type": "RC"
+    },
+    {
+     "code": "81001",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 133.0,
+   "discounted_cash_price": 39.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Urnls Dip Stick/Tablet Reagent Auto Microscopy",
+   "all_codes": [
+    {
+     "code": "30710000",
+     "type": "CDM"
+    },
+    {
+     "code": "307",
+     "type": "RC"
+    },
+    {
+     "code": "81001",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 133.0,
+   "discounted_cash_price": 39.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "81001",
+   "code_kind": "CPT/HCPCS",
+   "description": "Urinalysis auto w/scope",
+   "all_codes": [
+    {
+     "code": "81001",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 3.17,
+   "file_max_negotiated": 6.34,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 3.17,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 3.96,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 4.44,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 6.34,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 3.8,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 3.17,
+   "computed_max_negotiated_dollar": 6.34,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc 12 Lead Ekg; Tracing Only",
+   "all_codes": [
+    {
+     "code": "73000001",
+     "type": "CDM"
+    },
+    {
+     "code": "730",
+     "type": "RC"
+    },
+    {
+     "code": "93005",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 443.0,
+   "discounted_cash_price": 132.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc 12 Lead Ekg; Tracing Only",
+   "all_codes": [
+    {
+     "code": "73000001",
+     "type": "CDM"
+    },
+    {
+     "code": "730",
+     "type": "RC"
+    },
+    {
+     "code": "93005",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 443.0,
+   "discounted_cash_price": 132.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "93005",
+   "code_kind": "CPT/HCPCS",
+   "description": "Electrocardiogram tracing",
+   "all_codes": [
+    {
+     "code": "93005",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 86.3,
+   "file_max_negotiated": 172.59,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 86.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 107.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 120.81,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 172.59,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 103.55,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 86.3,
+   "computed_max_negotiated_dollar": 172.59,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Collection Venous Blood Venipuncture",
+   "all_codes": [
+    {
+     "code": "30010034",
+     "type": "CDM"
+    },
+    {
+     "code": "300",
+     "type": "RC"
+    },
+    {
+     "code": "36415",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 69.0,
+   "discounted_cash_price": 20.7,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Collection Venous Blood Venipuncture",
+   "all_codes": [
+    {
+     "code": "30010034",
+     "type": "CDM"
+    },
+    {
+     "code": "300",
+     "type": "RC"
+    },
+    {
+     "code": "36415",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 69.0,
+   "discounted_cash_price": 20.7,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Venipnct For Lab Spec",
+   "all_codes": [
+    {
+     "code": "30000028",
+     "type": "CDM"
+    },
+    {
+     "code": "300",
+     "type": "RC"
+    },
+    {
+     "code": "36415",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 69.0,
+   "discounted_cash_price": 20.7,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Venipnct For Lab Spec",
+   "all_codes": [
+    {
+     "code": "30000028",
+     "type": "CDM"
+    },
+    {
+     "code": "300",
+     "type": "RC"
+    },
+    {
+     "code": "36415",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 69.0,
+   "discounted_cash_price": 20.7,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "36415",
+   "code_kind": "CPT/HCPCS",
+   "description": "Routine venipuncture",
+   "all_codes": [
+    {
+     "code": "36415",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 9.34,
+   "file_max_negotiated": 18.68,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 9.34,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 11.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 13.08,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 18.68,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 11.21,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 9.34,
+   "computed_max_negotiated_dollar": 18.68,
+   "n_payer_rows": 5
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Lac Smpl 2.6-7.5Cm",
+   "all_codes": [
+    {
+     "code": "36100012",
+     "type": "CDM"
+    },
+    {
+     "code": "510",
+     "type": "RC"
+    },
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1025.0,
+   "discounted_cash_price": 307.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Lac Smpl 2.6-7.5Cm",
+   "all_codes": [
+    {
+     "code": "36100012",
+     "type": "CDM"
+    },
+    {
+     "code": "510",
+     "type": "RC"
+    },
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1654.0,
+   "discounted_cash_price": 496.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Repair Wound Simple 2.6-7.5Cm",
+   "all_codes": [
+    {
+     "code": "76100783",
+     "type": "CDM"
+    },
+    {
+     "code": "761",
+     "type": "RC"
+    },
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 891.0,
+   "discounted_cash_price": 267.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5Cm",
+   "all_codes": [
+    {
+     "code": "76100959",
+     "type": "CDM"
+    },
+    {
+     "code": "761",
+     "type": "RC"
+    },
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1025.0,
+   "discounted_cash_price": 307.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Hc Smpl Repair Scalp/Neck/Ax/Genit/Trunk 2.6-7.5Cm",
+   "all_codes": [
+    {
+     "code": "76100959",
+     "type": "CDM"
+    },
+    {
+     "code": "761",
+     "type": "RC"
+    },
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1654.0,
+   "discounted_cash_price": 496.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "12002",
+   "code_kind": "CPT/HCPCS",
+   "description": "Rpr s/n/ax/gen/trnk2.6-7.5cm",
+   "all_codes": [
+    {
+     "code": "12002",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 293.49,
+   "file_max_negotiated": 2596.0,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 293.49,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Covered California Other Commercial Plan",
+     "negotiated_dollar": 2207.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Epn/Ifp Other Commercial Plan",
+     "negotiated_dollar": 2207.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Hmo/Pos",
+     "negotiated_dollar": 2596.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 366.87,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Ppo/Epo",
+     "negotiated_dollar": 2596.0,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 410.89,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 586.99,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 352.19,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 293.49,
+   "computed_max_negotiated_dollar": 2596.0,
+   "n_payer_rows": 9
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+   "all_codes": [
+    {
+     "code": "63600001_08290306499",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "08290306499",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 119.84,
+   "discounted_cash_price": 35.95,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+   "all_codes": [
+    {
+     "code": "63600001_08290306553",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "08290306553",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.0,
+   "discounted_cash_price": 18.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+   "all_codes": [
+    {
+     "code": "63600001_63807010011",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63807010011",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 277.98,
+   "discounted_cash_price": 83.39,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+   "all_codes": [
+    {
+     "code": "63600001_63807010035",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63807010035",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 611.68,
+   "discounted_cash_price": 183.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00264180032",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264180032",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.63,
+   "discounted_cash_price": 17.59,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600365_00338004902",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004902",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.0,
+   "discounted_cash_price": 18.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00264180031",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264180031",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 50.62,
+   "discounted_cash_price": 15.19,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00264780000",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264780000",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.73,
+   "discounted_cash_price": 17.62,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00264780010",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264780010",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.26,
+   "discounted_cash_price": 17.48,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00264780020",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264780020",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 49.83,
+   "discounted_cash_price": 14.95,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004931",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004931",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 56.29,
+   "discounted_cash_price": 16.89,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338954304",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338954304",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.0,
+   "discounted_cash_price": 18.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338954306",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338954306",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 63.3,
+   "discounted_cash_price": 18.99,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409710104",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409710104",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.0,
+   "discounted_cash_price": 18.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798355",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798355",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 66.97,
+   "discounted_cash_price": 20.09,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_17271070106",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    },
+    {
+     "code": "17271070106",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 73.43,
+   "discounted_cash_price": 22.03,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7030",
+   "code_kind": "CPT/HCPCS",
+   "description": "Normal saline solution infus",
+   "all_codes": [
+    {
+     "code": "J7030",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 7.33,
+   "file_max_negotiated": 7.33,
+   "payer_rates": [
+    {
+     "payer": "Blue Shield",
+     "plan": "Covered California Other Commercial Plan",
+     "negotiated_dollar": 7.33,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Epn/Ifp Other Commercial Plan",
+     "negotiated_dollar": 7.33,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Hmo/Pos",
+     "negotiated_dollar": 7.33,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Ppo/Epo",
+     "negotiated_dollar": 7.33,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 7.33,
+   "computed_max_negotiated_dollar": 7.33,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00338004902",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004902",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.12,
+   "discounted_cash_price": 18.04,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00338004903",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004903",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 59.61,
+   "discounted_cash_price": 17.88,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00338004904",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004904",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 57.46,
+   "discounted_cash_price": 17.24,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00338004948",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004948",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 62.19,
+   "discounted_cash_price": 18.66,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00990798302",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798302",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 60.1,
+   "discounted_cash_price": 18.03,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00990798303",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798303",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 59.88,
+   "discounted_cash_price": 17.96,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % DIALYSIS CIRCUIT",
+   "all_codes": [
+    {
+     "code": "63600001_00990798309",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798309",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.29,
+   "discounted_cash_price": 17.49,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS PIGGYBACK",
+   "all_codes": [
+    {
+     "code": "63600001_00264780009",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00264780009",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 48.75,
+   "discounted_cash_price": 14.62,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS PIGGYBACK",
+   "all_codes": [
+    {
+     "code": "63600001_00409710102",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409710102",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 54.32,
+   "discounted_cash_price": 16.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004910",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004910",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.6,
+   "discounted_cash_price": 17.58,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004911",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004911",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 57.91,
+   "discounted_cash_price": 17.37,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004918",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004918",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 57.11,
+   "discounted_cash_price": 17.13,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004938",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004938",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 57.57,
+   "discounted_cash_price": 17.27,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338004941",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338004941",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 58.76,
+   "discounted_cash_price": 17.63,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338055311",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338055311",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 61.11,
+   "discounted_cash_price": 18.33,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338055318",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338055318",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 61.32,
+   "discounted_cash_price": 18.4,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338915130",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338915130",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 66.21,
+   "discounted_cash_price": 19.86,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338915930",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338915930",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 66.19,
+   "discounted_cash_price": 19.86,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798413",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798413",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 59.68,
+   "discounted_cash_price": 17.9,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798420",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798420",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 54.73,
+   "discounted_cash_price": 16.42,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798423",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798423",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 59.86,
+   "discounted_cash_price": 17.96,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798436",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798436",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 57.19,
+   "discounted_cash_price": 17.16,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00990798437",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00990798437",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 56.97,
+   "discounted_cash_price": 17.09,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J7050",
+   "code_kind": "CPT/HCPCS",
+   "description": "Normal saline solution infus",
+   "all_codes": [
+    {
+     "code": "J7050",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 5.72,
+   "file_max_negotiated": 5.72,
+   "payer_rates": [
+    {
+     "payer": "Blue Shield",
+     "plan": "Covered California Other Commercial Plan",
+     "negotiated_dollar": 5.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Epn/Ifp Other Commercial Plan",
+     "negotiated_dollar": 5.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Hmo/Pos",
+     "negotiated_dollar": 5.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Ppo/Epo",
+     "negotiated_dollar": 5.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 5.72,
+   "computed_max_negotiated_dollar": 5.72,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338006910",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338006910",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 19.44,
+   "discounted_cash_price": 5.83,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338006910_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338006910",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409379319",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379319",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 27.48,
+   "discounted_cash_price": 8.24,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409379319_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379319",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 27.95,
+   "discounted_cash_price": 8.38,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_25021070001",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070001",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 33.06,
+   "discounted_cash_price": 9.92,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_25021070001_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070001",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 34.35,
+   "discounted_cash_price": 10.3,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_55390048001",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "55390048001",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_63323016100",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016100",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 32.23,
+   "discounted_cash_price": 9.67,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_63323016100_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016100",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 34.88,
+   "discounted_cash_price": 10.46,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_68462075501",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "68462075501",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_68462075501_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "68462075501",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_70860070041",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "70860070041",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266023401",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266023401",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 19.88,
+   "discounted_cash_price": 5.96,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266023401_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266023401",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_00409379319_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379319",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 27.69,
+   "discounted_cash_price": 8.31,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_25021070001_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070001",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 34.41,
+   "discounted_cash_price": 10.32,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_68462075501",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "68462075501",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 15.75,
+   "discounted_cash_price": 4.72,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_68462075501_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "68462075501",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00338007225",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00338007225",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 14.07,
+   "discounted_cash_price": 4.22,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409379519",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379519",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 30.29,
+   "discounted_cash_price": 9.09,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_25021070101",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070101",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 22.69,
+   "discounted_cash_price": 6.81,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_25021070101_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070101",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 22.97,
+   "discounted_cash_price": 6.89,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_55390048101",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "55390048101",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 11.43,
+   "discounted_cash_price": 3.43,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266011801",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 13.46,
+   "discounted_cash_price": 4.04,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266011801_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 15.59,
+   "discounted_cash_price": 4.68,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_00409379519",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379519",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 30.04,
+   "discounted_cash_price": 9.01,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_00409379519_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379519",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 30.04,
+   "discounted_cash_price": 9.01,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_25021070101",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070101",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 22.96,
+   "discounted_cash_price": 6.89,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_63323016201_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016201",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 26.22,
+   "discounted_cash_price": 7.87,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_72266011801",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 10.23,
+   "discounted_cash_price": 3.07,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_72266011801_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 10.2,
+   "discounted_cash_price": 3.06,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 30 MG/ML (1 ML) INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_72266011825",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011825",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 10.0,
+   "discounted_cash_price": 3.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409379619",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379619",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7.52,
+   "discounted_cash_price": 2.26,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_25021070102",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "25021070102",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7.29,
+   "discounted_cash_price": 2.19,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266011901",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011901",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_72266011925",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "72266011925",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 10.0,
+   "discounted_cash_price": 3.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_00409379619",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379619",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7.52,
+   "discounted_cash_price": 2.26,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_00409379619_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409379619",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 7.6,
+   "discounted_cash_price": 2.28,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_63323016203",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016203",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 19.03,
+   "discounted_cash_price": 5.71,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "KETOROLAC 60 MG/2 ML INTRAMUSCULAR SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600365_63323016203_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016203",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 18.86,
+   "discounted_cash_price": 5.66,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ketorolac Tromethamine: 10 VIAL in 1 BOX (55390-481-02)  / 2 mL in 1 VIAL",
+   "all_codes": [
+    {
+     "code": "63600001_55390048102",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "55390048102",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ketorolac Tromethamine: 25 Vial, Single-Use In 1 Tray (63323-161-01)  / 1 Ml In 1 Vial, Single-Use (63323-161-00)",
+   "all_codes": [
+    {
+     "code": "63600365_63323016101",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323016101",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 34.88,
+   "discounted_cash_price": 10.46,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "NDC Description Not Available",
+   "all_codes": [
+    {
+     "code": "63600001_00641604201_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00641604201",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 20.0,
+   "discounted_cash_price": 6.0,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J1885",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ketorolac tromethamine inj",
+   "all_codes": [
+    {
+     "code": "J1885",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 0.3,
+   "file_max_negotiated": 1.72,
+   "payer_rates": [
+    {
+     "payer": "Aspire",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 0.3,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Covered California Other Commercial Plan",
+     "negotiated_dollar": 1.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Epn/Ifp Other Commercial Plan",
+     "negotiated_dollar": 1.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Hmo/Pos",
+     "negotiated_dollar": 1.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 0.38,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Ppo/Epo",
+     "negotiated_dollar": 1.72,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Brown & Toland Health Services",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 0.42,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Chinese Community Health Plan",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 0.61,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Unitedhealthcare",
+     "plan": "Medicare Managed Care Plan",
+     "negotiated_dollar": 0.36,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.3,
+   "computed_max_negotiated_dollar": 1.72,
+   "n_payer_rows": 9
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "NDC Description Not Available",
+   "all_codes": [
+    {
+     "code": "63600001_00409475518",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409475518",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3.69,
+   "discounted_cash_price": 1.11,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "NDC Description Not Available",
+   "all_codes": [
+    {
+     "code": "63600001_23155019631",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "23155019631",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON (1:1) 2 MG/ML (SKIN TEST)",
+   "all_codes": [
+    {
+     "code": "63600001_60505613000",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "60505613000",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4.46,
+   "discounted_cash_price": 1.34,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON (1:1) 2 MG/ML (SKIN TEST)",
+   "all_codes": [
+    {
+     "code": "63600001_60505613000_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "60505613000",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4.56,
+   "discounted_cash_price": 1.37,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON (1:1) 2 MG/ML (SKIN TEST)",
+   "all_codes": [
+    {
+     "code": "63600365_60505613000",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "60505613000",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00409475503",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00409475503",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2.95,
+   "discounted_cash_price": 0.88,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00641607801",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00641607801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 4.41,
+   "discounted_cash_price": 1.32,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00641607801_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00641607801",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 3.64,
+   "discounted_cash_price": 1.09,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_00641608001",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00641608001",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_23155019642",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "23155019642",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_36000001225",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "36000001225",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2.5,
+   "discounted_cash_price": 0.75,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_63323037302",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323037302",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.18,
+   "discounted_cash_price": 1.55,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_63323037302_UD",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "63323037302",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.23,
+   "discounted_cash_price": 1.57,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+   "all_codes": [
+    {
+     "code": "63600001_67457044022",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "67457044022",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ondansetron: 10 Vial In 1 Carton (23155-547-41)  / 2 Ml In 1 Vial (23155-547-31)",
+   "all_codes": [
+    {
+     "code": "63600001_23155054741",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "23155054741",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ondansetron: 25 Vial In 1 Carton (0641-6078-25)  / 2 Ml In 1 Vial (0641-6078-01)",
+   "all_codes": [
+    {
+     "code": "63600001_00641607825",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "00641607825",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 5.0,
+   "discounted_cash_price": 1.5,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ondansetron: 25 Vial In 1 Carton (23155-548-42)  / 2 Ml In 1 Vial (23155-548-31)",
+   "all_codes": [
+    {
+     "code": "63600001_23155054842",
+     "type": "CDM"
+    },
+    {
+     "code": "636",
+     "type": "RC"
+    },
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    },
+    {
+     "code": "23155054842",
+     "type": "NDC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 2.5,
+   "discounted_cash_price": 0.75,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  },
+  {
+   "code": "J2405",
+   "code_kind": "CPT/HCPCS",
+   "description": "Ondansetron hcl injection",
+   "all_codes": [
+    {
+     "code": "J2405",
+     "type": "HCPCS"
+    }
+   ],
+   "setting": "outpatient",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": null,
+   "discounted_cash_price": null,
+   "file_min_negotiated": 0.24,
+   "file_max_negotiated": 0.24,
+   "payer_rates": [
+    {
+     "payer": "Blue Shield",
+     "plan": "Covered California Other Commercial Plan",
+     "negotiated_dollar": 0.24,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Epn/Ifp Other Commercial Plan",
+     "negotiated_dollar": 0.24,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Hmo/Pos",
+     "negotiated_dollar": 0.24,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    },
+    {
+     "payer": "Blue Shield",
+     "plan": "Ppo/Epo",
+     "negotiated_dollar": 0.24,
+     "negotiated_percentage": null,
+     "negotiated_algorithm": null,
+     "methodology": "fee schedule"
+    }
+   ],
+   "computed_min_negotiated_dollar": 0.24,
+   "computed_max_negotiated_dollar": 0.24,
+   "n_payer_rows": 4
+  },
+  {
+   "code": "0450",
+   "code_kind": "RC",
+   "description": "Closed Tx Ulnar Fracture Prox End W/O Manipulate",
+   "all_codes": [
+    {
+     "code": "24670",
+     "type": "CDM"
+    },
+    {
+     "code": "450",
+     "type": "RC"
+    }
+   ],
+   "setting": "both",
+   "billing_class": "facility",
+   "modifiers": "",
+   "gross_charge": 1554.0,
+   "discounted_cash_price": 466.2,
+   "file_min_negotiated": null,
+   "file_max_negotiated": null,
+   "payer_rates": [],
+   "computed_min_negotiated_dollar": null,
+   "computed_max_negotiated_dollar": null,
+   "n_payer_rows": 0
+  }
+ ]
+}
