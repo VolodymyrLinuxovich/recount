@@ -1,7 +1,21 @@
 // The signed-in user's details, used to fill in letters. Optional; never required to use Recount.
 import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query, type QueryCtx } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
+
+/** How this account signs in, and whether a separate account uses the same email (see auth.ts on linking). */
+async function signInInfo(ctx: QueryCtx, userId: Id<"users">, email: string | undefined) {
+  const mine = await ctx.db.query("authAccounts").withIndex("userIdAndProvider", (q) => q.eq("userId", userId)).collect();
+  const method = mine.some((a) => a.provider === "google") ? "google" : "password";
+  let otherAccount = false;
+  if (email) {
+    for (const u of await ctx.db.query("users").withIndex("email", (q) => q.eq("email", email)).collect()) {
+      if (u._id !== userId) otherAccount = true;
+    }
+  }
+  return { signInMethod: method as "google" | "password", otherAccount };
+}
 
 const clean = (s: string | undefined, max: number) => (s == null ? undefined : s.trim().slice(0, max) || undefined);
 
@@ -14,6 +28,7 @@ export const get = query({
     const p = await ctx.db.query("profiles").withIndex("by_user", (q) => q.eq("userId", userId)).first();
     return {
       accountEmail: user?.email ?? null,
+      ...(await signInInfo(ctx, userId, user?.email)),
       name: p?.name ?? null,
       street: p?.street ?? null,
       city: p?.city ?? null,
