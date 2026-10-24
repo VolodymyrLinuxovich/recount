@@ -456,17 +456,14 @@ html:has(.landing) body {
     grid-auto-rows: auto;
   }
 }
-@media (min-width: 640px) {
+@media (min-width: 900px) {
   .landing .ld-stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media (min-width: 1000px) {
   .landing .ld-problem {
     padding: 88px 0;
-  }
-  .landing .ld-stats {
-    grid-template-columns: repeat(4, 1fr);
   }
   .landing .ld-stat-big {
     font-size: 2.125rem;
