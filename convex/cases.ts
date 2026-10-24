@@ -2,6 +2,7 @@ import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
+import { resolveFilledBrackets } from "./lib/letters";
 import { checkBill } from "./lib/checks";
 import { isLang } from "./lib/lang";
 import type { Doc, Id } from "./_generated/dataModel";
@@ -124,7 +125,14 @@ export const approve = mutation({
   // requireFilled: the client asks us to refuse letters with [placeholders] left. Opt-in so older
   // clients that let people skip fields keep working.
   args: { id: v.id("cases"), token: Token, letters: v.array(LetterV), requireFilled: v.optional(v.boolean()) },
-  handler: async (ctx, { id, token, letters, requireFilled }) => {
+  handler: async (ctx, { id, token, letters: raw, requireFilled }) => {
+    // "[Label: value]" already holds its value: keep the value, it isn't a blank.
+    const letters = raw.map((l) => ({
+      ...l,
+      subject: resolveFilledBrackets(l.subject),
+      body: resolveFilledBrackets(l.body),
+      ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
+    }));
     const c = await mustOwn(ctx, id, token);
     if (c.status !== "ready" && c.status !== "approved") throw new ConvexError("Letters aren't ready yet");
     if (letters.length > 4 || letters.some((l) => l.body.length > 20000 || l.subject.length > 300)) throw new ConvexError("Letter too long");

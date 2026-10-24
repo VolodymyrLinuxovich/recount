@@ -177,3 +177,8 @@ export function templateLetters(f: LetterFacts, lang: Lang = "en"): Letter[] {
   if (d) out.push(lang === "es" ? { ...d, ...disputeEs(f) } : d);
   return out;
 }
+
+/** "[Your name: Alex Rivera]" -> "Alex Rivera". Brackets that already hold a value aren't blanks. */
+export function resolveFilledBrackets(text: string): string {
+  return text.replace(/\[[^\]\n:]{1,40}:\s*([^\]\n]*\S[^\]\n]*)\]/g, (_m, value: string) => value.trim());
+}

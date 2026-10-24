@@ -6,7 +6,8 @@ import { useState } from "react";
 import * as FileSystem from "expo-file-system/legacy";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
-import { C, Card, H1, H2, LinkText, P, Screen, s } from "./ui";
+import { RecountLogo } from "./Logo";
+import { C, Card, F, H1, H2, LinkText, P, Screen, s } from "./ui";
 
 const api = anyApi;
 export const SAMPLE_URL = "https://recount-nu.vercel.app/sample-bill.png";
@@ -128,10 +129,25 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
       secondary={{ label: busy === "sample" ? t.startingSample : t.trySample, onPress: () => begin("sample", sample), busy: busy === "sample", disabled: !!busy }}
     >
       <View style={st.top}>
-        <Text style={st.brand}>{t.appName}</Text>
-        <Pressable onPress={() => setLang(lang === "en" ? "es" : "en")} style={st.lang} accessibilityRole="button" hitSlop={10}>
-          <Text style={st.langText}>{t.language}</Text>
-        </Pressable>
+        <RecountLogo size={40} label={t.appName} />
+        <View style={st.lang} accessibilityRole="radiogroup" accessibilityLabel={t.language}>
+          {["en", "es"].map((code) => {
+            const on = lang === code;
+            return (
+              <Pressable
+                key={code}
+                onPress={() => !on && setLang(code)}
+                accessibilityRole="radio"
+                accessibilityState={{ selected: on }}
+                accessibilityLabel={code === "en" ? "English" : "Español"}
+                hitSlop={6}
+                style={({ pressed }) => [st.langBtn, on && st.langBtnOn, pressed && !on && st.langBtnPressed]}
+              >
+                <Text style={[st.langText, on && st.langTextOn]}>{code.toUpperCase()}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
       </View>
       <H1>{t.startTitle}</H1>
       <P>{t.startBody}</P>
@@ -142,14 +158,17 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
       {error ? <Text style={s.error}>{error}</Text> : null}
 
       {bills.length > 0 && (
-        <View style={{ marginTop: 26 }}>
+        <View style={{ marginTop: 28 }}>
           <H2>{t.myBills}</H2>
           {bills.map((b) => (
             <Pressable key={b.id} onPress={() => onOpen(b)} accessibilityRole="button">
               {({ pressed }) => (
-                <Card style={[st.bill, pressed && { opacity: 0.7 }]}>
-                  <Text style={st.billName}>{b.hospitalName || t.noName}</Text>
-                  <Text style={st.billDate}>{new Date(b.createdAt).toLocaleDateString(lang === "es" ? "es-US" : "en-US")}</Text>
+                <Card style={[st.bill, pressed && st.billPressed]}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={st.billName}>{b.hospitalName || t.noName}</Text>
+                    <Text style={st.billDate}>{new Date(b.createdAt).toLocaleDateString(lang === "es" ? "es-US" : "en-US")}</Text>
+                  </View>
+                  <Text style={st.chev}>›</Text>
                 </Card>
               )}
             </Pressable>
@@ -161,12 +180,17 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
 }
 
 const st = StyleSheet.create({
-  top: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 10, marginBottom: 18 },
-  brand: { fontSize: 20, fontWeight: "800", color: C.ink, letterSpacing: 0.4 },
-  lang: { borderWidth: 1.5, borderColor: C.ink, borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8 },
-  langText: { fontSize: 17, fontWeight: "600", color: C.ink },
-  links: { marginTop: 4 },
-  bill: { paddingVertical: 14, marginBottom: 10 },
-  billName: { fontSize: 19, fontWeight: "600", color: C.ink },
-  billDate: { fontSize: 16, color: C.muted, marginTop: 2 },
+  top: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 12, marginBottom: 28 },
+  lang: { flexDirection: "row", padding: 3, borderWidth: 1, borderColor: C.line, borderRadius: 12, backgroundColor: C.surface },
+  langBtn: { minWidth: 48, minHeight: 42, borderRadius: 9, alignItems: "center", justifyContent: "center", paddingHorizontal: 8 },
+  langBtnOn: { backgroundColor: C.brand },
+  langBtnPressed: { backgroundColor: C.bg2 },
+  langText: { fontFamily: F.body600, fontSize: 16, color: C.ink2 },
+  langTextOn: { color: C.onBrand },
+  links: { marginTop: 6 },
+  bill: { flexDirection: "row", alignItems: "center", paddingVertical: 16, marginBottom: 10 },
+  billPressed: { backgroundColor: C.bg2, borderColor: C.brand, transform: [{ translateY: 1 }] },
+  billName: { fontFamily: F.display700, fontSize: 19, lineHeight: 25, color: C.ink },
+  billDate: { fontFamily: F.body, fontSize: 16, color: C.ink2, marginTop: 2 },
+  chev: { fontFamily: F.body600, fontSize: 30, color: C.brand, marginLeft: 12 },
 });

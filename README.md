@@ -37,7 +37,7 @@ for you.**
 | [My bills](https://recount-nu.vercel.app/bills) | Every bill you checked, saved on this phone. No account |
 | [Hospital policy audit](https://recount-nu.vercel.app/audit) | All 470 California hospitals on a map: whose own policy conflicts with state law, with the quote |
 | [Apify Actor](https://apify.com/enterprising_arboretum_iq2/hospital-price-and-charity-finder) | Hospital Price & Charity Care Finder, public on the Apify Store |
-| [Android app](https://expo.dev/artifacts/eas/kWzukDLoJ2isUTrFZPJM-YsWqtkdqJ6Sxoj7EHbQdYQ.apk) | The same flow as a native app (Expo), on the same backend |
+| [Android app](https://expo.dev/artifacts/eas/Wcsx-6EwcgMjTyNtfPZ0E4dWNB_XredZx_Wvxz_WQvE.apk) | The same flow as a native app (Expo), on the same backend |
 
 ---
 

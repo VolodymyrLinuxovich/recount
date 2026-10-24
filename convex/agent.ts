@@ -11,7 +11,7 @@ import { ParsedBill } from "./lib/bill";
 import { checkBill, potentialSavings, type Finding } from "./lib/checks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
-import { lawLine, templateLetters, type Letter } from "./lib/letters";
+import { lawLine, resolveFilledBrackets, templateLetters, type Letter } from "./lib/letters";
 import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL } from "./lib/sample";
@@ -354,7 +354,7 @@ const LETTER_PROMPT = `Write the letters a patient will send to a hospital billi
 - If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
 - "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
 - If "patientLanguage" is "es", also give a faithful Spanish translation of each letter: subjectPatient translates ONLY the subject line, bodyPatient translates the body. Otherwise set them to null.
-Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] for anything the patient must fill in (signature, address). Sign as the patient.`;
+Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Use [brackets] ONLY for values you don't know, as short placeholders with no colon and no value inside, like "[Your street address]" or "[Signature]". When a value is known (for example the patient's name from the bill), write it plainly, never inside brackets. Sign as the patient.`;
 
 export const draftLetters = internalAction({
   args: { caseId: v.id("cases") },
@@ -419,6 +419,12 @@ export const draftLetters = internalAction({
       }
     }
     if (!letters) letters = templateLetters(facts, lang);
+    letters = letters.map((l) => ({
+      ...l,
+      subject: resolveFilledBrackets(l.subject),
+      body: resolveFilledBrackets(l.body),
+      ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
+    }));
     await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready" } });
     await step(ctx, caseId, "letters",
       lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
