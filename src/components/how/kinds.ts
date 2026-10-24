@@ -35,7 +35,7 @@ export type AgentRun = {
 /** "Anthropic", "Azure AI Foundry", or any OpenAI-compatible host. */
 export function providerName(p: string): string {
   if (p === "anthropic") return "Anthropic";
-  if (p === "azure") return "Azure AI Foundry";
+  if (p === "azure") return "Azure OpenAI";
   if (p === "openai") return "OpenAI-compatible";
   return p;
 }
