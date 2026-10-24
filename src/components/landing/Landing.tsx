@@ -56,7 +56,7 @@ function Reveal({
   className = "",
   id,
   labelledBy,
-  threshold = 0.2,
+  threshold = 0.01,
   children,
 }: {
   as?: "section" | "div";

@@ -1604,14 +1604,15 @@ delete ---------- */
     border-color 0.15s ease,
     background-color 0.15s ease;
 }
-:root :is(.hosp-choice, .choice button):hover:not(:disabled) {
+:root :is(.hosp-choice, .choice button):hover:not(:disabled):not([aria-pressed="true"]) {
   border-color: var(--primary);
   background: var(--rc-bg-2);
 }
 :root :is(.hosp-choice, .choice button):active:not(:disabled) {
   transform: translateY(1px) scale(0.985);
 }
-:root .choice button[aria-pressed="true"] {
+:root .choice button[aria-pressed="true"],
+:root .choice button[aria-pressed="true"]:hover {
   border-color: var(--primary);
   background: var(--primary);
   color: var(--on-primary);

@@ -30,7 +30,8 @@ export function useInView<T extends Element>(threshold = 0.25) {
           io.disconnect();
         }
       },
-      { threshold },
+      // Count it as seen once ~48px of it is on screen, so nothing sits blank at the bottom of the first view.
+      { threshold: Math.min(threshold, 0.01), rootMargin: threshold > 0.3 ? "0px 0px -20% 0px" : "0px 0px -48px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
