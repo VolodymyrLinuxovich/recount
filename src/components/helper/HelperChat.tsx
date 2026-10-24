@@ -1,12 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Component, type FormEvent, type ReactNode, type RefObject, Suspense, type KeyboardEvent, type PointerEvent, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Component, type FormEvent, type ReactNode, type RefObject, Suspense, type KeyboardEvent, type PointerEvent, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { tokenFor, tokenFromLink } from "../bills/myBills";
 import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
 import { type SendError, useChat, useSessionId } from "./chatApi";
-import { LightText } from "./LightText";
+import { TypedText } from "./TypedText";
 import { Mascot } from "./Mascot";
 import { lastTrigger, setHelperOpen, useHelperOpen } from "./openStore";
 import "./helper.css";
@@ -166,6 +166,15 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
   const launcherRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  // Replies already in the conversation when it loaded show at once; new ones type out.
+  const [history, setHistory] = useState<{ session: string | null; ids: Set<string> } | null>(null);
+  if (messages && history?.session !== (sessionId ?? null)) {
+    setHistory({ session: sessionId ?? null, ids: new Set(messages.map((m) => m.id)) });
+  }
+  const scrollDown = useCallback(() => {
+    const el = listRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, []);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const dragStart = useRef<number | null>(null);
   const wasOpen = useRef(false);
@@ -378,7 +387,7 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
               <div key={m.id} className="helper-msg helper-msg--lupa">
                 <span className="visually-hidden">{t("helper.name")}: </span>
                 <div className="helper-bubble helper-bubble--lupa helper-rich">
-                  <LightText text={m.content} />
+                  <TypedText text={m.content} animate={history ? !history.ids.has(m.id) : false} onGrow={scrollDown} />
                 </div>
               </div>
             ),
