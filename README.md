@@ -220,11 +220,21 @@ errors in most of them, and renders them as clean scans, phone photos and PDFs.
 
 - **Rules on a correct reading:** **24 of 24** planted errors caught, **0** false alarms on clean bills. The generator
   only plants errors the rules are meant to catch, so this tests the rules, not reading accuracy.
+- **Live reading on all 30 eval bills (10/24):** the app's own reads (`eval/read.py`, same model, prompts, settings and
+  two-read amount check as `convex/agent.ts`) got **30 of 30** bills exactly right: **181 of 181** lines with the right
+  code, amount, quantity and date, and every total and amount due to the cent. That held for each kind: **10 of 10**
+  clean scans, **16 of 16** phone photos, **4 of 4** PDFs.
+- **End to end, read then checked:** **24 of 24** planted errors caught, **0** false alarms on the **8** clean bills.
+- **The second read never disagreed** with the first, so no bill asked the patient to confirm an amount. Two photos
+  added a "please double-check" note anyway, saying the charges column looked out of line with the rows. Both were read
+  correctly.
 - **Claude on the sample photo:** **8 of 8** lines and the **$12,741** total read correctly.
 - **Live QA uploads:** a rotated, blurred photo read all 7 lines and its total; a ZSFG PDF and a CPMC photo flag exactly
   their planted errors (a total mismatch, a $647 duplicate) and nothing else.
 
-**Caveat.** Live reading accuracy hasn't been scored on the full eval set yet.
+**Caveat.** These are generated bills: printed type, one layout, and photos with tilt, shadow and light blur. Real
+bills that are crumpled, cut off, dim or handwritten are harder, and 30 bills read once can't show how often a rare
+misread happens. So 30 of 30 means the reader handles clean, typical bills. It doesn't mean it never misreads.
 
 ### The sample bill
 
