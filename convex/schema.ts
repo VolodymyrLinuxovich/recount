@@ -53,6 +53,22 @@ export default defineSchema({
     label: v.string(),
     detail: v.optional(v.string()),
     state: v.union(v.literal("running"), v.literal("done"), v.literal("warn"), v.literal("error")),
+    kind: v.optional(v.union(v.literal("rule"), v.literal("ai"), v.literal("person"))),
+  }).index("by_case", ["caseId", "at"]),
+  // One row per model call: which provider and model did what, how long, how many tokens.
+  // Never the prompt, the bill or the reply.
+  agentRuns: defineTable({
+    caseId: v.id("cases"),
+    at: v.number(),
+    task: v.string(),
+    provider: v.string(),
+    model: v.string(),
+    ms: v.number(),
+    inputTokens: v.union(v.number(), v.null()),
+    outputTokens: v.union(v.number(), v.null()),
+    ok: v.boolean(),
+    fallbackUsed: v.boolean(),
+    error: v.optional(v.string()),
   }).index("by_case", ["caseId", "at"]),
   chatMessages: defineTable({
     sessionId: v.string(),

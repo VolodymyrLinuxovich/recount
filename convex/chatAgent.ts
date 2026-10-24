@@ -1,12 +1,11 @@
 "use node";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { chat, modelReady, type ChatMessage, type Run } from "./lib/model";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { internalAction } from "./_generated/server";
 import { PRIVACY_FACTS } from "./lib/privacy";
 
-const MODEL = "claude-opus-5-5";
 
 const SYSTEM = `You are the helper inside Recount, an app for people in California who got a hospital bill they can't pay, many of them older or Spanish-speaking.
 
@@ -78,13 +77,13 @@ export const reply = internalAction({
   },
   handler: async (ctx, { replyId, sessionId, caseId, lang }): Promise<void> => {
     const sorry = lang === "es" ? "Lo siento, no pude responder ahora. Intente de nuevo en un momento." : "Sorry, I couldn't answer just now. Please try again in a moment.";
-    if (!process.env.ANTHROPIC_API_KEY) {
+    if (!modelReady("chat")) {
       await ctx.runMutation(internal.chat.write, { id: replyId, content: sorry, pending: false });
       return;
     }
     const c = caseId ? await ctx.runQuery(internal.chat.caseForChat, { caseId }) : null;
     const past = await ctx.runQuery(internal.chat.history, { sessionId });
-    const messages: Anthropic.MessageParam[] = past
+    const messages: ChatMessage[] = past
       .filter((m) => m._id !== replyId && m.content)
       .map((m) => ({ role: m.role, content: m.content }));
     if (!messages.length || messages[messages.length - 1].role !== "user") return;
@@ -100,17 +99,7 @@ export const reply = internalAction({
     };
     let timer: ReturnType<typeof setInterval> | undefined;
     try {
-      const client = new Anthropic();
-      const stream = client.messages.stream({
-        model: MODEL,
-        max_tokens: 2000,
-        output_config: { effort: "low" },
-        system,
-        messages,
-      });
-      stream.on("text", (delta) => {
-        text += delta;
-      });
+      const record = caseId ? (r: Run) => ctx.runMutation(internal.cases.recordRun, { caseId, ...r }).then(() => {}) : undefined;
       // Push partial text a few times a second so the phone shows typing.
       timer = setInterval(() => {
         if (text.length > lastWrite) {
@@ -118,8 +107,8 @@ export const reply = internalAction({
           void push(text, true);
         }
       }, 400);
-      const final = await stream.finalMessage();
-      if (final.stop_reason === "refusal") text = sorry;
+      const res = await chat({ task: "chat", system, messages, maxTokens: 2000, onText: (t) => (text = t) }, record);
+      text = res.refused ? sorry : res.text;
     } catch {
       // fall through to the final write
     } finally {
