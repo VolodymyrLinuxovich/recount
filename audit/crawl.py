@@ -311,6 +311,22 @@ def main():
             status[doc_id] = m
             if i % 100 == 0:
                 log(f"pdf {i}/{len(ids)}")
+    # If the newest version's attachment is gone (404), fall back to the next-newest of that type.
+    for h in hospitals:
+        for t, d in list(h["latest"].items()):
+            if not d or not status[d["id"]].get("error"):
+                continue
+            cands = sorted([x for x in h["documents"] if x["type"] == t],
+                           key=lambda x: x["effective_date"] or "", reverse=True)
+            for alt in cands[1:4]:
+                aid, m = get_pdf(alt["id"])
+                status[aid] = m
+                if not m.get("error"):
+                    alt = dict(alt, fallback_from={"id": d["id"], "effective_date": d["effective_date"],
+                                                   "error": status[d["id"]]["error"]})
+                    h["latest"][t] = alt
+                    log(f"fallback {h['slug']} {t}: {d['effective_date']} -> {alt['effective_date']}")
+                    break
     users = {}
     for h in hospitals:
         for t, d in h["latest"].items():

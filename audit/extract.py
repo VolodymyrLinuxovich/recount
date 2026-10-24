@@ -132,7 +132,7 @@ def main():
                    "shared_by_hospitals": len(sha_users.get(dl.get("sha256"), ())) or None,
                    "pdf_path": os.path.relpath(pdf, HERE) if os.path.exists(pdf) else None,
                    "text_path": None, "pages": None, "chars": None, "needs_ocr": None,
-                   "error": dl.get("error")}
+                   "error": dl.get("error"), "fallback_from": d.get("fallback_from")}
             if not dl.get("error") and os.path.exists(pdf):
                 counts["docs_downloaded"] += 1
                 if not dl.get("is_pdf"):
@@ -180,7 +180,19 @@ def main():
         f"- needs_ocr (no usable text layer, < {MIN_CHARS_PER_PAGE} non-space chars/page): {counts['needs_ocr']}",
         f"- failures: {len(failures)} (download/extract/detail; see summary.json)",
         f"- hospitals with no documents at all: {len(no_docs)}",
-        f"- geocoded (Census): {geocoded}", "",
+        f"- geocoded: {geocoded} (US Census geocoder; misses fall back to OSM Nominatim, "
+        "`matched` starting `nominatim: APPROX` = city/zip centroid only, see raw/geocode.json)",
+        f"- county: derived from HCAI ID digits 4-5 (alphabetical CA county code)",
+        "- full cold run: ~4 min crawl (470 detail pages + 1451 attachments at 4 concurrent) + ~2 min geocode "
+        "+ ~20 s extraction; ~1 GB of PDFs in raw/pdf", "",
+        "## Data quirks", "",
+        "- Most hospitals file one combined Charity Care + Discount Payment policy: the same PDF is listed under both "
+        "types (same sha256 for ~93% of hospitals). Likewise the two application slots are usually one form.",
+        "- Health systems upload one system-wide PDF for all their hospitals (up to ~28 hospitals share a file), "
+        "so 2340 doc slots map to ~708 distinct files.",
+        "- If the newest attachment 404s, the next-newest version of that type is used (`fallback_from` records it).",
+        "- Some effective dates are in the future (e.g. 2027-06-25) or very old (2005); taken as listed by HCAI.",
+        "- `needs_ocr` docs are image-only scans; their text files exist but are near-empty.", "",
         "| doc type | found | text | needs_ocr | hospitals missing |", "|---|---|---|---|---|",
     ]
     for t in OUT_TYPES:

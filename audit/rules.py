@@ -56,7 +56,7 @@ RULES: list[Rule] = [
         cite="HSC 127405(e)(3), as amended by AB 2297",
         url=PIL_24_03,
         law_quote="shall not impose time limits for applying for charity care or discounted payments, nor deny eligibility based on the timing of a patient's application.",
-        doc_types=("charity_care", "discount_payment", "application"),
+        doc_types=("charity_care", "discount_payment", "application", "application_discount"),
         patterns=[
             r"\b2[0-9]0[- ]day",
             r"\bwithin\s+(\d+|thirty|sixty|ninety|one hundred \w+)\s+(calendar\s+)?(days|months)\b",
@@ -79,7 +79,7 @@ RULES: list[Rule] = [
         cite="HSC 127405(b)(1), as amended by AB 2297",
         url=HSC.format("127405"),
         law_quote="In determining eligibility under its discount payment policy or charity care policy, a hospital shall not consider the monetary assets of the patient.",
-        doc_types=("charity_care", "discount_payment", "application"),
+        doc_types=("charity_care", "discount_payment", "application", "application_discount"),
         patterns=[
             r"\bmonetary assets?\b",
             r"\b(liquid|available|total|personal)\s+assets?\b",
@@ -138,7 +138,7 @@ RULES: list[Rule] = [
         cite="HSC 127405(e)(1)",
         url=PIL_24_03,
         law_quote="documentation of income is limited to recent paystubs or income tax returns for both programs",
-        doc_types=("charity_care", "discount_payment", "application"),
+        doc_types=("charity_care", "discount_payment", "application", "application_discount"),
         patterns=[
             r"\b(must|shall|required to|are required|is required)\b.{0,120}\b(bank statements?|social security (award|statement)|unemployment|letter from (your )?employer|proof of (assets|residency|address)|photo id|identification|w-?2)",
             r"\b(no|without)\b.{0,40}\bincome\b.{0,80}\b(ineligible|not eligible|denied|will not qualify)",
@@ -153,7 +153,7 @@ RULES: list[Rule] = [
         cite="HSC 127405(b)(2)",
         url=HSC.format("127405"),
         law_quote="A hospital may not require a patient to apply for Medicare, Medi-Cal, or other coverage before the patient is screened for, or provided, discounted payment. (A hospital may require participation in Medi-Cal eligibility screening.)",
-        doc_types=("charity_care", "discount_payment", "application"),
+        doc_types=("charity_care", "discount_payment", "application", "application_discount"),
         patterns=[
             r"\b(must|shall|required to|are required)\b.{0,60}\bapply\b.{0,40}\b(\bmedi-?cal\b|\bmedicaid\b|\bmedicare\b|covered california|other (coverage|programs?))",
             r"\b(denial|denied)\b.{0,40}\b(medi-?cal|medicaid)\b.{0,60}\b(before|prior to|required)",
