@@ -119,11 +119,28 @@ export function CaseFlow({ t, id, token, onHome }) {
     view = pageView();
   }
 
+  // Deleting is offered on the findings screen too, so a bill can be removed before any letters.
+  const deleteButton = {
+    label: t.deleteBill,
+    onPress: () => {
+      const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
+      // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
+      if (Platform.OS === "web") {
+        if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
+        return;
+      }
+      Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
+        { text: t.cancel, style: "cancel" },
+        { text: t.del, style: "destructive", onPress: del },
+      ]);
+    },
+  };
+
   function pageView() {
     const h = household;
     switch (page) {
       case "found":
-        return { step: 2, back: onHome, body: <Found t={t} c={c} />, primary: { label: t.continueQ, onPress: () => go("size") } };
+        return { step: 2, back: onHome, body: <Found t={t} c={c} />, primary: { label: t.continueQ, onPress: () => go("size") }, secondary: deleteButton };
       case "size":
         return {
           step: 3,
@@ -236,21 +253,7 @@ export function CaseFlow({ t, id, token, onHome }) {
           back: onHome,
           body: <Done t={t} c={c} letters={drafts || c.letters || []} />,
           primary: { label: t.changeLetters, busy, onPress: () => run(() => unapprove({ id, token })) },
-          secondary: {
-            label: t.deleteBill,
-            onPress: () => {
-              const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
-              // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
-              if (Platform.OS === "web") {
-                if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
-                return;
-              }
-              Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
-                { text: t.cancel, style: "cancel" },
-                { text: t.del, style: "destructive", onPress: del },
-              ]);
-            },
-          },
+          secondary: deleteButton,
         };
       default:
         return { step: 1, back: onHome, body: <Reading t={t} steps={c.steps} /> };
