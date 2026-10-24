@@ -98,3 +98,43 @@ The page isn't deployed yet (404), so this matters only once it ships.
 - **Now stale:**
   - README lines 37 ("No account"), 248 ("Privacy without accounts") and 320 ("No accounts") contradict the live optional accounts.
   - DEVPOST's "CHECK BEFORE SUBMITTING" note is resolved. Keep the account sentences and delete the note.
+
+## /how page and "who did what" (claims check round 2)
+
+Checked 2026-10-24 against `main` at 67b1377 (`convex/agent.ts`, `convex/lib/model.ts`, `convex/lib/pipeline.ts`, `convex/lib/checks.ts`, `convex/lib/eligibility.ts`, `convex/lib/letterCheck.ts`, `convex/cases.ts`, `convex/chatAgent.ts`, `audit/review.py`, `audit/report.py`, `src/components/flow/*`). Prod model map came from the public `pipeline:map` query on zealous-grouse-384. Live `/how` returns 200 and its text matches `en.json`. No files other than this one were changed.
+
+### WRONG
+
+| Claim | Key | Truth | Source | Fix |
+|---|---|---|---|---|
+| "If the main model fails, a backup takes over." | `how.modelsLede` | Prod has **no backup** for any task. `pipeline:map` returns `fallback: null` for read, column, letters and chat. The code supports one (`MODEL_FALLBACK_*`, and per task since 67b1377), but none is set. The "Backup:" line on the page already hides itself, so only this sentence is wrong. | `model.ts choose()`; live `pipeline:map` | Drop the sentence, or show it only when `map.models[*].fallback` is set. Or: "If no model answers, letters use a fixed template." |
+| "Every flag points to a line and a published number." | `how.s5.p` | True only for price flags (`ABOVE_LIST_PRICE` and `CASH_PRICE_GAP` cite the published charge). `DUPLICATE_LINE` points to two lines but no published number. `TOTAL_MISMATCH` and `NOT_ITEMIZED` have `lines: []` and cite only the bill. | `checks.ts:41,67,98,121,163` | "Every flag shows the lines and numbers it's based on. Price flags cite the hospital's published price." |
+| "Household size, yearly income, and insurance. Nothing else." | `how.s7.p` | Insured patients must also enter medical costs paid in the last 12 months (`outOfPocket12mo`). The form won't submit without it. | `MainScreens.tsx:134,155,227`; `cases.ts:118` | "...and insurance. If you have insurance, also what you paid for medical care this past year." |
+
+### Loose (true in spirit, worth tightening)
+
+| Claim | Key | Note |
+|---|---|---|
+| "AI only reads your bill and drafts the letters." | `how.lede` | Lupa chat is also AI (`how.may4` says so on the same page). Suggest: "AI reads your bill, drafts the letters and answers questions in chat." |
+| "An AI model. Its work is checked before you see it." | `how.legend.ai` | Chat replies stream straight to the patient with no check after them. The bill read and letters are checked. |
+| "Every AI step has a check after it..." | `how.why3` | Same as above: chat has none. The second read compares only the charges column, not names or dates. |
+| "used AI to review sentences once, offline" | `how.s6.p` | Offline is true, but it wasn't once. There was a first review, then verify and re-review passes (`verify_*`, `rereview_*`), and manual overrides (`override_spotcheck.jsonl`). Suggest "reviewed offline, not on your bill". The second sentence is **true**: `review.py:181 valid()` keeps a decision only if its quote is in the policy text (case- and spacing-insensitive), and `report.py:38` applies it to every file, overrides included. |
+| "Each answer shows the rule and source it used." | `how.s8.p` | Every basis row has a rule. `source` is optional: hospital free care and discount rows use `fap?.url ?? undefined`, so a hospital with no policy URL shows no source. |
+| "AI may never compute or change any amount" | `how.mayNot3` | Code computes every amount. But the letter model types amounts into the text. `inventedAmounts` **flags** an unmatched amount (`letters.flagged`); it doesn't block or remove it. It also checks only amounts written with "$". The claim describes the rule, and the flag enforces it. OK as written. |
+
+### Checked OK
+
+| Claim | Key | Code |
+|---|---|---|
+| A second, narrow read copies only the charges column | `how.s2.p` | `agent.ts readChargesColumn`, run in parallel with the full read |
+| If the reads disagree, both numbers are shown and you tap one; you can fix any line | `how.s3.p` | `agent.ts:320-335` builds `amountChecks`; `FoundScreens.tsx AmountCheck` has two buttons that call `correctLine`. Fixes are allowed only before the household questions (`cases.ts correctLine`). |
+| Code matches the hospital and fetches its price list; no AI | `how.s4.p` | `KNOWN_HOSPITALS` regex, `matchHospital`, the Apify Actor (no model calls in `actor/src`). Price lists exist for the 4 SF hospitals only. |
+| A model never tells you that you qualify | `how.s8.p` | Eligibility is `eligibility.ts`. The letter prompt says "Never say the patient qualifies". The chat prompt says "Never say the patient qualifies beyond the app's computed result". Both are prompt rules. |
+| Letters drafted from computed facts only; told not to add laws, amounts or names | `how.s9.p` | `LETTER_PROMPT`: "using ONLY the facts", "no invented law, amounts, dates or names" |
+| If the model is unavailable, a fixed template is used | `how.s9.p` | `agent.ts draftLetters`: no model configured, an error, a refusal, or a missing letter all lead to `templateLetters()`. The step is then marked "rule". Note: this covers letters only. A real photo can't be read without a model (`agent.ts:356`). |
+| Code fills in your name and address and checks nothing required is missing before you can approve | `how.s10.p` | `letterFill.ts fillLetter` puts the patient's details into the [brackets]. `cases.approve` with `requireFilled: true` (sent by `LetterScreens.tsx:201`) refuses any [placeholder] left, except signature lines. The name and address come from the patient (prefilled from the bill or their profile), and code only places them. |
+| Recount never sends anything for you | `how.s11.p`, `how.mayNot1` | No email or mail send path in `convex/`. The patient copies, prints or emails the letter themselves. |
+| AI may not decide eligibility, change findings or approve | `how.mayNot2,4,5` | Findings come from `checks.ts`. Approval is the `cases.approve` mutation, called only from a user tap. |
+| The rules are open to read in our code | `how.why4` | GitHub repo VolodymyrLinuxovich/recount is **public**. The page has no link to it, so consider adding one. |
+| Models in use: names and providers | `how.models*`, `who.*` | `pipeline:map` → Anthropic `claude-opus-5-5` for all 4 tasks. `who.backup` fires only on `fallbackUsed`, which can't happen on prod today. |
+| "We couldn't match it to your bill or our checks" | `letters.flagged` | `letterCheck.ts inventedAmounts` compares each $ amount with every number in the facts (bill, findings, eligibility, household), to within a cent or the same whole dollars. |

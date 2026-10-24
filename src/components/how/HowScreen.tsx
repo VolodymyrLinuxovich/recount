@@ -86,7 +86,10 @@ export function HowScreen() {
       {map && (
         <section className="how-models" aria-labelledby="how-models-h">
           <h2 id="how-models-h">{t("how.modelsH")}</h2>
-          <p>{t("how.modelsLede")}</p>
+          <p>
+            {t("how.modelsLede")}
+            {Object.values(map.models as Record<string, { fallback: unknown }>).some((m) => m?.fallback) && <> {t("how.modelsBackup")}</>}
+          </p>
           <ul className="how-model-list">
             {TASKS.map((task) => {
               const m = (map.models as Record<string, { primary: { provider: string; model: string }; fallback: { provider: string; model: string } | null }>)[task];
