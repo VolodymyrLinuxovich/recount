@@ -14,7 +14,7 @@
     "android": {
       "package": "app.recount.mobile",
       "adaptiveIcon": {
-        "backgroundColor": "#F6F2E8",
+        "backgroundColor": "#1d2230",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
