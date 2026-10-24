@@ -1,4 +1,4 @@
-import { getAuthUserId } from "@convex-dev/auth/server";
+import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
@@ -20,7 +20,7 @@ export async function owned(ctx: QueryCtx | MutationCtx, id: Id<"cases">, token:
   if (!c) return null;
   // The signed-in owner can always open their own bill.
   if (c.ownerId) {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (userId && userId === c.ownerId) return c;
   }
   // Otherwise the bill's secret token is required (cases made before tokens existed have none).
@@ -70,7 +70,7 @@ export const start = mutation({
   handler: async (ctx, args) => {
     await limit(ctx, "create", 60, 60_000);
     const token = crypto.randomUUID();
-    const ownerId = (await getAuthUserId(ctx)) ?? undefined;
+    const ownerId = (await currentUser(ctx)) ?? undefined;
     const id = await ctx.db.insert("cases", {
       ownerId,
       createdAt: Date.now(),
@@ -97,9 +97,10 @@ export const get = query({
       .withIndex("by_case", (q) => q.eq("caseId", id))
       .collect();
     const fileUrl = c.fileId ? await ctx.storage.getUrl(c.fileId) : null;
-    const { token: _secret, ...rest } = c;
+    const { token: _secret, ownerId, ...rest } = c;
     void _secret;
-    return { ...rest, steps, fileUrl };
+    const userId = ownerId ? await currentUser(ctx) : null;
+    return { ...rest, steps, fileUrl, mine: !!ownerId && userId === ownerId };
   },
 });
 
@@ -299,7 +300,7 @@ export const adminRemove = internalMutation({
 export const claim = mutation({
   args: { items: v.array(v.object({ id: v.id("cases"), token: v.string() })) },
   handler: async (ctx, { items }) => {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (!userId) throw new ConvexError("Please sign in first.");
     if (items.length > 200) throw new ConvexError("Too many bills at once.");
     let n = 0;
@@ -320,7 +321,7 @@ export const claim = mutation({
 export const mine = query({
   args: {},
   handler: async (ctx) => {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (!userId) return [];
     const rows = await ctx.db
       .query("cases")

@@ -1,5 +1,5 @@
 // The signed-in user's details, used to fill in letters. Optional; never required to use Recount.
-import { getAuthUserId } from "@convex-dev/auth/server";
+import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
@@ -8,7 +8,7 @@ const clean = (s: string | undefined, max: number) => (s == null ? undefined : s
 export const get = query({
   args: {},
   handler: async (ctx) => {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (!userId) return null;
     const user = await ctx.db.get(userId);
     const p = await ctx.db.query("profiles").withIndex("by_user", (q) => q.eq("userId", userId)).first();
@@ -36,7 +36,7 @@ export const set = mutation({
     dob: v.optional(v.string()),
   },
   handler: async (ctx, a) => {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (!userId) throw new ConvexError("Please sign in first.");
     const zip = clean(a.zip, 10);
     if (zip && !/^\d{5}(-\d{4})?$/.test(zip)) throw new ConvexError("ZIP code should look like 94110.");
