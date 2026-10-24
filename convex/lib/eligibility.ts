@@ -57,7 +57,7 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       rule: t("Poverty line", "Nivel federal de pobreza"),
       text: t(
         `${fpl.year} federal poverty guideline for a household of ${people}: ${usd(line)}. Your income is ${fplPct}% of it.`,
-        `Nivel federal de pobreza de ${fpl.year} para un hogar de ${people}: ${usd(line)}. Su ingreso es el ${fplPct}% de esa cantidad.`,
+        `Nivel federal de pobreza de ${fpl.year} para un hogar de ${people}: ${usd(line)}. Lo que ganan entre todos en su hogar es el ${fplPct}% de esa cantidad.`,
       ),
       source: fpl.source,
     },
@@ -84,23 +84,24 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       text: highCosts
         ? t(
             `Your family's medical costs in the last 12 months (${oop}, not paid by insurance) are more than 10% of your income. California treats that as high medical costs.`,
-            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) son más del 10% de su ingreso. California lo considera gastos médicos altos.`,
+            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) son más del 10% de lo que ganan entre todos en su hogar. California lo considera gastos médicos altos.`,
           )
         : t(
             `Your family's medical costs in the last 12 months (${oop}, not paid by insurance) are not more than 10% of your income, so the high-cost rule doesn't apply.`,
-            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) no son más del 10% de su ingreso, así que la regla de gastos altos no aplica.`,
+            `Los gastos médicos de su familia en los últimos 12 meses (${oop}, no pagados por el seguro) no son más del 10% de lo que ganan entre todos en su hogar, así que la regla de gastos altos no aplica.`,
           ),
       source: HSC_127400,
     });
     if (!highCosts) {
-      return result("NOT_ELIGIBLE", t("With insurance and medical costs under 10% of income, the state program doesn't cover this bill. You can still ask the hospital.", "Con seguro y gastos médicos de menos del 10% de su ingreso, el programa estatal no cubre esta factura. Aún puede preguntarle al hospital."), null, false);
+      return result("NOT_ELIGIBLE", t("With insurance and medical costs under 10% of income, the state program doesn't cover this bill. You can still ask the hospital.", "Con seguro y gastos médicos de menos del 10% de lo que ganan entre todos en su hogar, el programa estatal no cubre esta factura. Aún puede preguntarle al hospital."), null, false);
     }
   }
 
   const fap = ref?.fap ?? null;
   const freeMax = fap?.freeCareMaxFplPct ?? null;
   // State law sets the floor for discounted care at 400% of the poverty line; a hospital can go higher.
-  const discountMax = Math.max(400, fap?.discountMaxFplPct ?? 400);
+  const noCap = Boolean(fap?.discountNoCap);
+  const discountMax = noCap ? Infinity : Math.max(400, fap?.discountMaxFplPct ?? 400);
   const medicalLikely = !h.insured && fplPct <= 138;
 
   if (freeMax != null && fplPct <= freeMax) {
@@ -116,6 +117,17 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
   }
 
   if (fplPct <= discountMax) {
+    if (noCap && fplPct > 400) {
+      basis.push({
+        rule: t(`${ref!.name} discount`, `Descuento de ${ref!.name}`),
+        text: t(
+          "The hospital's own policy offers discounts with no upper income limit.",
+          "La propia política del hospital ofrece descuentos sin límite máximo de ingresos.",
+        ),
+        source: fap?.url ?? undefined,
+      });
+      return result("DISCOUNT", t("You likely qualify for a discount", "Probablemente califica para un descuento"), null, medicalLikely);
+    }
     basis.push({
       rule: t("California discount payment", "Pago con descuento de California"),
       text: h.insured
@@ -145,7 +157,7 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
     rule: t("California discount payment", "Pago con descuento de California"),
     text: t(
       `Your income is above ${discountMax}% of the poverty line, the cutoff we found. Hospitals may still offer help, so it's worth asking.`,
-      `Su ingreso está por encima del ${discountMax}% del nivel federal de pobreza, el límite que encontramos. Los hospitales aún pueden ofrecer ayuda, así que vale la pena preguntar.`,
+      `Lo que ganan entre todos en su hogar está por encima del ${discountMax}% del nivel federal de pobreza, el límite que encontramos. Los hospitales aún pueden ofrecer ayuda, así que vale la pena preguntar.`,
     ),
     source: HSC_127405,
   });

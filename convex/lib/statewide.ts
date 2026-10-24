@@ -21,6 +21,7 @@ export interface IndexedHospital {
     freeCareMaxFplPct: number | null;
     discountMaxFplPct: number | null;
     discountNoCap: boolean;
+    method?: "rules" | "claude" | "manual";
     freeQuote: string | null;
     discountQuote: string | null;
     phone: string | null;
@@ -86,15 +87,20 @@ export function refFromIndex(h: IndexedHospital): HospitalRef {
     key: h.key,
     name: h.name,
     source: "snapshot",
-    fetchedAt: h.fap.effectiveDate ?? "",
+    // Not a lookup date: these hospitals come from the state's policy filings. See fap.effectiveDate.
+    fetchedAt: "",
+    policyOnly: true,
     mrf: null,
     fap: {
       url: h.fap.url,
       freeCareMaxFplPct: h.fap.freeCareMaxFplPct,
-      discountMaxFplPct: h.fap.discountNoCap ? 1000 : h.fap.discountMaxFplPct,
+      discountMaxFplPct: h.fap.discountNoCap ? null : h.fap.discountMaxFplPct,
+      discountNoCap: h.fap.discountNoCap,
       quotes: [h.fap.freeQuote, h.fap.discountQuote].filter((q): q is string => Boolean(q)),
       phone: h.fap.phone,
       applicationUrl: h.fap.applicationUrl,
+      effectiveDate: h.fap.effectiveDate,
+      method: h.fap.method ?? "rules",
     },
     warnings: [],
   };

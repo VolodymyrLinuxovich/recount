@@ -46,8 +46,8 @@ const LAW_LINE: Record<string, [string, string]> = {
     "La ley de California ya no permite reportar deudas médicas a las agencias de crédito (SB 1061, 2024).",
   ],
   LIENS: [
-    "California law does not allow liens on a patient's real property (Health and Safety Code 127425).",
-    "La ley de California no permite gravámenes sobre la propiedad inmueble del paciente (Código de Salud y Seguridad 127425).",
+    "California law does not allow liens on the home or other real property of patients who qualify for help (Health and Safety Code 127425).",
+    "La ley de California no permite que el hospital ponga un gravamen (es decir, un derecho a cobrar sobre su casa o propiedad) a pacientes que califican para ayuda (Código de Salud y Seguridad 127425).",
   ],
   MEDICAL_FIRST: [
     "California law does not allow requiring an application for other coverage first (Health and Safety Code 127405(b)).",

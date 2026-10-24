@@ -47,7 +47,9 @@ export default defineSchema({
     content: v.string(),
     at: v.number(),
     pending: v.boolean(),
-  }).index("by_session", ["sessionId", "at"]),
+  })
+    .index("by_session", ["sessionId", "at"])
+    .index("by_case", ["caseId"]),
   limits: defineTable({
     key: v.string(),
     windowStart: v.number(),

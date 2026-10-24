@@ -75,24 +75,6 @@ export const start = mutation({
   },
 });
 
-/** Older form of start without a token. Kept so existing clients work; new code should use start. */
-export const create = mutation({
-  args: CreateArgs,
-  handler: async (ctx, args) => {
-    await limit(ctx, "create", 60, 60_000);
-    const id = await ctx.db.insert("cases", {
-      createdAt: Date.now(),
-      status: "reading",
-      sample: args.sample,
-      fileId: args.fileId,
-      fileType: args.fileType,
-      lang: args.lang,
-    });
-    await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });
-    return id;
-  },
-});
-
 export const get = query({
   args: { id: v.id("cases"), token: Token },
   handler: async (ctx, { id, token }) => {
@@ -210,6 +192,7 @@ export const remove = mutation({
     const c = await owned(ctx, id, token);
     if (!c) return;
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
+    for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     await ctx.db.delete(id);
   },
@@ -284,7 +267,7 @@ export const adminRemove = internalMutation({
     const c = await ctx.db.get(id);
     if (!c) return "not found";
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
-    for (const m of await ctx.db.query("chatMessages").collect()) if (m.caseId === id) await ctx.db.delete(m._id);
+    for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     await ctx.db.delete(id);
     return "deleted";
