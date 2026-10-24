@@ -1,14 +1,18 @@
-// Reference data. Values here come from sourced files in data/ (see data/README.md).
-// PROVISIONAL until the sourced files land: FPL below is the 2025 HHS guideline.
+// Reference data. Every number here comes from a sourced file (see pipeline/README.md).
 
 import type { FplTable } from "./eligibility";
 import type { HospitalRef } from "./hospital";
+import zsfg from "./snapshots/zsfg.json";
+import ucsf from "./snapshots/ucsf.json";
+import cpmc from "./snapshots/cpmc.json";
+import saintfrancis from "./snapshots/saintfrancis.json";
 
+// 2026 HHS poverty guidelines, 48 contiguous states + DC (Federal Register, 2026-01-15).
 export const FPL: FplTable = {
-  year: 2025,
-  source: "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
-  base: 15650,
-  perAdditional: 5500,
+  year: 2026,
+  source: "https://www.govinfo.gov/content/pkg/FR-2026-01-15/pdf/2026-00755.pdf",
+  base: 15960,
+  perAdditional: 5680,
 };
 
 /** Hospitals we know how to look up, matched by name on the bill. */
@@ -19,5 +23,10 @@ export const KNOWN_HOSPITALS: { key: string; name: string; url: string; match: R
   { key: "saintfrancis", name: "Saint Francis Memorial Hospital", url: "https://www.dignityhealth.org", match: /saint francis|st\.? francis/i },
 ];
 
-/** Saved Actor runs, used when a live run isn't possible. Filled from data/hospitals/*.json. */
-export const SNAPSHOTS: Record<string, HospitalRef> = {};
+/** Saved runs of the price lookup, used when a live Actor run isn't possible. */
+export const SNAPSHOTS: Record<string, HospitalRef> = {
+  zsfg: zsfg as unknown as HospitalRef,
+  ucsf: ucsf as unknown as HospitalRef,
+  cpmc: cpmc as unknown as HospitalRef,
+  saintfrancis: saintfrancis as unknown as HospitalRef,
+};

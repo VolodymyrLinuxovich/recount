@@ -1,0 +1,253 @@
+{
+ "key": "ucsf",
+ "name": "UCSF Medical Center",
+ "source": "snapshot",
+ "fetchedAt": "2026-10-24",
+ "mrf": {
+  "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=ldckxfm5nm9wah74gqi7fdhe6mrtpg5e&file_id=f_1959275070690",
+  "lastUpdated": "2026-04-01",
+  "prices": {
+   "99281": {
+    "description": "Hc Emerg Level I",
+    "grossCharge": 844.0,
+    "discountedCash": 253.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99282": {
+    "description": "Hc Emerg Level Ii",
+    "grossCharge": 1784.0,
+    "discountedCash": 535.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99283": {
+    "description": "Hc Emerg Level Iii",
+    "grossCharge": 3297.0,
+    "discountedCash": 989.1,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99284": {
+    "description": "Hc Emerg Level Iv",
+    "grossCharge": 8501.0,
+    "discountedCash": 2550.3,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99285": {
+    "description": "Hc Emerg Level V",
+    "grossCharge": 11901.0,
+    "discountedCash": 3570.3,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99291": {
+    "description": "Hc Emerg Level Vi (C.C.)",
+    "grossCharge": 14433.0,
+    "discountedCash": 4329.9,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96374": {
+    "description": "Hc Ther/Proph/Diag Inj, Iv Push",
+    "grossCharge": 671.0,
+    "discountedCash": 201.3,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96375": {
+    "description": "Hc Tx/Pro/Dx Inj New Drug Addon",
+    "grossCharge": 504.0,
+    "discountedCash": 151.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96360": {
+    "description": "Hc Hydration Iv Infusion, Init",
+    "grossCharge": 934.0,
+    "discountedCash": 280.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "71046": {
+    "description": "Hc X-Ray Exam Chest 2 Views",
+    "grossCharge": 531.0,
+    "discountedCash": 159.3,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "70450": {
+    "description": "Hc Ct - Head/Brain Wo Contrast",
+    "grossCharge": 3288.0,
+    "discountedCash": 986.4,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "74177": {
+    "description": "Hc Ct Abdomen & Pelvis W/Contrast",
+    "grossCharge": 8272.0,
+    "discountedCash": 2481.6,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "80053": {
+    "description": "Hc Comprehensive Metabolic Panel",
+    "grossCharge": 667.0,
+    "discountedCash": 200.1,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "85025": {
+    "description": "Hc Blood Count Complete Auto&Auto Difrntl Wbc",
+    "grossCharge": 232.0,
+    "discountedCash": 69.6,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "81001": {
+    "description": "Hc Urinalysis Auto W/Micro",
+    "grossCharge": 133.0,
+    "discountedCash": 39.9,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "93005": {
+    "description": "Hc 12 Lead Ekg; Tracing Only",
+    "grossCharge": 443.0,
+    "discountedCash": 132.9,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "36415": {
+    "description": "Hc Collection Venous Blood Venipuncture",
+    "grossCharge": 69.0,
+    "discountedCash": 20.7,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "12002": {
+    "description": "Hc Lac Smpl 2.6-7.5Cm",
+    "grossCharge": 1654.0,
+    "discountedCash": 496.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J7030": {
+    "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+    "grossCharge": 611.68,
+    "discountedCash": 183.5,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J7050": {
+    "description": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+    "grossCharge": 66.21,
+    "discountedCash": 19.86,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J1885": {
+    "description": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+    "grossCharge": 34.88,
+    "discountedCash": 10.46,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J2405": {
+    "description": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+    "grossCharge": 5.23,
+    "discountedCash": 1.57,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   },
+   "0450": {
+    "description": "Closed Tx Ulnar Fracture Prox End W/O Manipulate",
+    "grossCharge": 1554.0,
+    "discountedCash": 466.2,
+    "min": null,
+    "max": null,
+    "setting": "both",
+    "govRate": null,
+    "govPayer": null
+   }
+  }
+ },
+ "fap": {
+  "url": null,
+  "freeCareMaxFplPct": null,
+  "discountMaxFplPct": null,
+  "quotes": [],
+  "phone": null,
+  "applicationUrl": null
+ },
+ "warnings": [
+  "Codes not in the price file: 0451"
+ ]
+}

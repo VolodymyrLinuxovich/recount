@@ -1,0 +1,246 @@
+{
+ "key": "saintfrancis",
+ "name": "Saint Francis Memorial Hospital",
+ "source": "snapshot",
+ "fetchedAt": "2026-10-24",
+ "mrf": {
+  "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=8wogrqzbbev45c7pup8v9298ul2ymlpr&file_id=f_1732346032300",
+  "lastUpdated": "2026-02-28",
+  "prices": {
+   "99281": {
+    "description": "ER LEVEL 1",
+    "grossCharge": 1438.0,
+    "discountedCash": 1438.0,
+    "min": 21.25,
+    "max": 10131.0,
+    "setting": "outpatient",
+    "govRate": 21.25,
+    "govPayer": "SFHP"
+   },
+   "99282": {
+    "description": "ER LEVEL 2",
+    "grossCharge": 2301.0,
+    "discountedCash": 2301.0,
+    "min": 34.13,
+    "max": 16087.0,
+    "setting": "outpatient",
+    "govRate": 34.13,
+    "govPayer": "SFHP"
+   },
+   "99283": {
+    "description": "ER LEVEL 3",
+    "grossCharge": 3854.0,
+    "discountedCash": 3854.0,
+    "min": 62.44,
+    "max": 24548.0,
+    "setting": "outpatient",
+    "govRate": 62.44,
+    "govPayer": "SFHP"
+   },
+   "99284": {
+    "description": "ER LEVEL 4",
+    "grossCharge": 5752.0,
+    "discountedCash": 5752.0,
+    "min": 95.69,
+    "max": 24548.0,
+    "setting": "outpatient",
+    "govRate": 95.69,
+    "govPayer": "SFHP"
+   },
+   "99285": {
+    "description": "ER LEVEL 5",
+    "grossCharge": 11963.0,
+    "discountedCash": 11963.0,
+    "min": 151.31,
+    "max": 24548.0,
+    "setting": "outpatient",
+    "govRate": 151.31,
+    "govPayer": "SFHP"
+   },
+   "99291": {
+    "description": "ER CRITICAL CARE 30-74MIN",
+    "grossCharge": 15375.0,
+    "discountedCash": 15375.0,
+    "min": 170.24,
+    "max": 24548.0,
+    "setting": "outpatient",
+    "govRate": 170.24,
+    "govPayer": "SFHP"
+   },
+   "96374": {
+    "description": "INJ FOR MICROBUBBLE STUDY",
+    "grossCharge": 564.0,
+    "discountedCash": 564.0,
+    "min": 53.46,
+    "max": 36780.0,
+    "setting": "outpatient",
+    "govRate": 53.46,
+    "govPayer": "Brown Toland"
+   },
+   "96375": {
+    "description": "INJ TX/DX/PRO IV PUSH SEQ",
+    "grossCharge": 532.0,
+    "discountedCash": 532.0,
+    "min": 21.54,
+    "max": 21649.0,
+    "setting": "outpatient",
+    "govRate": 21.54,
+    "govPayer": "Brown Toland"
+   },
+   "96360": {
+    "description": "INF IV HYDRA INIT 31-60MN",
+    "grossCharge": 1048.0,
+    "discountedCash": 1048.0,
+    "min": 46.13,
+    "max": 21649.0,
+    "setting": "outpatient",
+    "govRate": 46.13,
+    "govPayer": "Brown Toland"
+   },
+   "71046": {
+    "description": "XR CHEST 2 VIEWS",
+    "grossCharge": 1074.0,
+    "discountedCash": 1074.0,
+    "min": 27.47,
+    "max": 1074.0,
+    "setting": "outpatient",
+    "govRate": 27.47,
+    "govPayer": "California Health & Wellness"
+   },
+   "70450": {
+    "description": "CT HEAD WO CON CT",
+    "grossCharge": 5710.0,
+    "discountedCash": 5710.0,
+    "min": 141.78,
+    "max": 5710.0,
+    "setting": "outpatient",
+    "govRate": 141.78,
+    "govPayer": "SFHP"
+   },
+   "74177": {
+    "description": "CT ABDOMEN PELV W CON CT",
+    "grossCharge": 11940.0,
+    "discountedCash": 11940.0,
+    "min": 281.8,
+    "max": 11940.0,
+    "setting": "outpatient",
+    "govRate": 281.8,
+    "govPayer": "California Health & Wellness"
+   },
+   "80053": {
+    "description": "COMP METABOLIC PANEL",
+    "grossCharge": 237.0,
+    "discountedCash": 237.0,
+    "min": 10.56,
+    "max": 237.0,
+    "setting": "outpatient",
+    "govRate": 10.56,
+    "govPayer": "Jade Medical Group"
+   },
+   "85025": {
+    "description": "CBC W/AUTO DIFF",
+    "grossCharge": 102.0,
+    "discountedCash": 102.0,
+    "min": 7.77,
+    "max": 102.0,
+    "setting": "outpatient",
+    "govRate": 7.77,
+    "govPayer": "Jade Medical Group"
+   },
+   "81001": {
+    "description": "UA AUTO W MICRO",
+    "grossCharge": 167.0,
+    "discountedCash": 167.0,
+    "min": 3.17,
+    "max": 167.0,
+    "setting": "outpatient",
+    "govRate": 3.17,
+    "govPayer": "Jade Medical Group"
+   },
+   "93005": {
+    "description": "ECG 12 LEAD TRACING ONLY",
+    "grossCharge": 882.0,
+    "discountedCash": 882.0,
+    "min": 8.51,
+    "max": 35410.0,
+    "setting": "outpatient",
+    "govRate": 8.51,
+    "govPayer": "Brown Toland"
+   },
+   "36415": {
+    "description": "VENIPUNCTURE",
+    "grossCharge": 135.0,
+    "discountedCash": 135.0,
+    "min": 3.6,
+    "max": 15255.0,
+    "setting": "outpatient",
+    "govRate": 9.09,
+    "govPayer": "Jade Medical Group"
+   },
+   "12002": {
+    "description": "RPR S/N/AX/GEN/TRNK2.6-7.5CM",
+    "grossCharge": null,
+    "discountedCash": null,
+    "min": 85.44,
+    "max": 11233.0,
+    "setting": "outpatient",
+    "govRate": 85.44,
+    "govPayer": "California Health & Wellness"
+   },
+   "J7030": {
+    "description": "NACL 0.9% 1000ML INJ",
+    "grossCharge": 80.0,
+    "discountedCash": 80.0,
+    "min": 2.47,
+    "max": 80.0,
+    "setting": "outpatient",
+    "govRate": 2.47,
+    "govPayer": "Partnership Health Plan"
+   },
+   "J7050": {
+    "description": "NACL 0.9% 150ML INJ",
+    "grossCharge": 80.0,
+    "discountedCash": 80.0,
+    "min": 0.62,
+    "max": 80.0,
+    "setting": "outpatient",
+    "govRate": 0.62,
+    "govPayer": "Partnership Health Plan"
+   },
+   "J1885": {
+    "description": "KETOROL 15MG/1ML ADMJZTB",
+    "grossCharge": 42.0,
+    "discountedCash": 42.0,
+    "min": 0.39,
+    "max": 42.0,
+    "setting": "outpatient",
+    "govRate": 0.39,
+    "govPayer": "Brown Toland"
+   },
+   "J2405": {
+    "description": "ONDANSETRON 4MG/2ML SDV",
+    "grossCharge": 42.0,
+    "discountedCash": 42.0,
+    "min": 0.1,
+    "max": 42.0,
+    "setting": "outpatient",
+    "govRate": 0.1,
+    "govPayer": "Brown Toland"
+   },
+   "0450": {
+    "description": "EXPLORE WOUND",
+    "grossCharge": 9671.0,
+    "discountedCash": 9671.0,
+    "min": 5802.6,
+    "max": 10131.0,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   }
+  }
+ },
+ "fap": null,
+ "warnings": [
+  "Codes not in the price file: 0451"
+ ]
+}

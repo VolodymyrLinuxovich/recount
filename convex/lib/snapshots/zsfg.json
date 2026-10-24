@@ -1,0 +1,193 @@
+{
+ "key": "zsfg",
+ "name": "Zuckerberg San Francisco General",
+ "source": "snapshot",
+ "fetchedAt": "2026-10-24",
+ "mrf": {
+  "url": "https://sanfranciscogeneralhospitalfou.box.com/shared/static/bj0pj6iqcpc6bmb4yp7kobuz772j0jtl.csv",
+  "lastUpdated": "3/19/2026",
+  "prices": {
+   "99281": {
+    "description": "HC ER Ex/Tx Rm Level I",
+    "grossCharge": 576.0,
+    "discountedCash": 576.0,
+    "min": 49.6,
+    "max": 576.0,
+    "setting": "outpatient",
+    "govRate": 18.09,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]"
+   },
+   "99282": {
+    "description": "HC ER Ex/Tx Rm Level II",
+    "grossCharge": 1726.0,
+    "discountedCash": 1726.0,
+    "min": 49.6,
+    "max": 1726.0,
+    "setting": "outpatient",
+    "govRate": 33.59,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]"
+   },
+   "99283": {
+    "description": "HC ER Ex/Tx Rm Level III",
+    "grossCharge": 3694.0,
+    "discountedCash": 3694.0,
+    "min": 49.6,
+    "max": 3694.0,
+    "setting": "outpatient",
+    "govRate": 49.6,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "99284": {
+    "description": "HC ER Ex/Tx Rm Level IV",
+    "grossCharge": 6084.0,
+    "discountedCash": 6084.0,
+    "min": 49.6,
+    "max": 6084.0,
+    "setting": "outpatient",
+    "govRate": 49.6,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "99285": {
+    "description": "HC ER Ex/Tx Rm Level V",
+    "grossCharge": 12281.0,
+    "discountedCash": 12281.0,
+    "min": 49.6,
+    "max": 12281.0,
+    "setting": "outpatient",
+    "govRate": 49.6,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "99291": {
+    "description": "HC ED Critical Care 30-74 Mins.",
+    "grossCharge": 6771.0,
+    "discountedCash": 6771.0,
+    "min": 49.6,
+    "max": 6771.0,
+    "setting": "outpatient",
+    "govRate": 17.44,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL FFS [5001]"
+   },
+   "96374": {
+    "description": "HC IV Push (Infusion <= 15 Min)",
+    "grossCharge": 419.0,
+    "discountedCash": 419.0,
+    "min": 49.82,
+    "max": 419.0,
+    "setting": "outpatient",
+    "govRate": 49.82,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "96375": {
+    "description": "HC IV Push Ea Addl New Drug",
+    "grossCharge": 218.0,
+    "discountedCash": 218.0,
+    "min": 21.29,
+    "max": 218.0,
+    "setting": "outpatient",
+    "govRate": 21.29,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "96360": {
+    "description": "HC IV Hydration Admin 1st Hour",
+    "grossCharge": 449.0,
+    "discountedCash": 449.0,
+    "min": 55.97,
+    "max": 449.0,
+    "setting": "outpatient",
+    "govRate": 7.36,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "71046": {
+    "description": "HC Chest Any 2 Views",
+    "grossCharge": 402.0,
+    "discountedCash": 402.0,
+    "min": 27.48,
+    "max": 402.0,
+    "setting": "outpatient",
+    "govRate": 10.31,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "70450": {
+    "description": "HC CT Brain WO Contr",
+    "grossCharge": 4403.0,
+    "discountedCash": 4403.0,
+    "min": 282.35,
+    "max": 4403.0,
+    "setting": "outpatient",
+    "govRate": 38.03,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "74177": {
+    "description": "HC CT Abdomen/Pelvis W/Cont.",
+    "grossCharge": 3596.0,
+    "discountedCash": 3596.0,
+    "min": 281.8,
+    "max": 3596.0,
+    "setting": "outpatient",
+    "govRate": 105.82,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "80053": {
+    "description": "HC Comprehensive Metabolic Panel",
+    "grossCharge": 528.0,
+    "discountedCash": 528.0,
+    "min": 13.98,
+    "max": 528.0,
+    "setting": "outpatient",
+    "govRate": 13.18,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "85025": {
+    "description": "HC Cbc Platelets & Diff",
+    "grossCharge": 269.0,
+    "discountedCash": 269.0,
+    "min": 10.11,
+    "max": 269.0,
+    "setting": "outpatient",
+    "govRate": 9.68,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "81001": {
+    "description": "HC Urinalysis Micro. (Automated)",
+    "grossCharge": 149.0,
+    "discountedCash": 149.0,
+    "min": 4.37,
+    "max": 149.0,
+    "setting": "outpatient",
+    "govRate": 3.97,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "93005": {
+    "description": "HC Ekg Tracing Only",
+    "grossCharge": 287.0,
+    "discountedCash": 287.0,
+    "min": 23.52,
+    "max": 287.0,
+    "setting": "outpatient",
+    "govRate": 10.66,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   },
+   "12002": {
+    "description": "HC Laceration Repair",
+    "grossCharge": 892.0,
+    "discountedCash": 892.0,
+    "min": 106.81,
+    "max": 892.0,
+    "setting": "outpatient",
+    "govRate": 2.87,
+    "govPayer": "ANTHEM BLUE CROSS MEDI-CAL DELEGATED [5002]"
+   }
+  }
+ },
+ "fap": {
+  "url": null,
+  "freeCareMaxFplPct": null,
+  "discountMaxFplPct": null,
+  "quotes": [],
+  "phone": null,
+  "applicationUrl": null
+ },
+ "warnings": [
+  "Codes not in the price file: 36415, J7030, J7050, J1885, J2405, 0450, 0451"
+ ]
+}

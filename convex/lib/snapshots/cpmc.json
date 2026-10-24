@@ -1,0 +1,236 @@
+{
+ "key": "cpmc",
+ "name": "CPMC Van Ness Campus (Sutter)",
+ "source": "snapshot",
+ "fetchedAt": "2026-10-24",
+ "mrf": {
+  "url": "https://edge.sitecorecloud.io/sutterhealt962c-sutterhealt8fce-production57cc-4860/media/Project/SutterHealth/SutterHealth/Files/billing-insurance/costs-and-charges/940562680-1740348929_california-pacific-medical-center-van-ness-campus_standardcharges.csv",
+  "lastUpdated": "2026-04-01",
+  "prices": {
+   "99281": {
+    "description": "HCHG ED LEVEL 1",
+    "grossCharge": 603.0,
+    "discountedCash": 603.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99282": {
+    "description": "HCHG ED LEVEL 2",
+    "grossCharge": 1527.0,
+    "discountedCash": 1527.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99283": {
+    "description": "HCHG ED LEVEL 3",
+    "grossCharge": 3093.0,
+    "discountedCash": 3093.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99284": {
+    "description": "HCHG ED LEVEL 4",
+    "grossCharge": 5214.0,
+    "discountedCash": 5214.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99285": {
+    "description": "HCHG ED LEVEL 5",
+    "grossCharge": 8003.0,
+    "discountedCash": 8003.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "99291": {
+    "description": "HCHG ED CC 1ST 30-74 MN W/PROC",
+    "grossCharge": 9840.0,
+    "discountedCash": 9840.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96374": {
+    "description": "HCHG IV PUSH INITIAL DRUG",
+    "grossCharge": 647.0,
+    "discountedCash": 647.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96375": {
+    "description": "HCHG INJECTION IVP ADDL SEQ NEW DRG",
+    "grossCharge": 484.0,
+    "discountedCash": 484.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "96360": {
+    "description": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR",
+    "grossCharge": 1160.0,
+    "discountedCash": 1160.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "71046": {
+    "description": "HCHG XR CHEST FRONTAL AND LATERAL 2 VIEW",
+    "grossCharge": 804.0,
+    "discountedCash": 804.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "70450": {
+    "description": "HCHG CT BRAIN WO CONTR",
+    "grossCharge": 4312.0,
+    "discountedCash": 4312.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "74177": {
+    "description": "HCHG CT ABD & PELVIS W/CON",
+    "grossCharge": 8287.0,
+    "discountedCash": 8287.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "80053": {
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "grossCharge": 386.0,
+    "discountedCash": 386.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "85025": {
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "grossCharge": 217.0,
+    "discountedCash": 217.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "81001": {
+    "description": "HCHG CORE URNALYSIS AUTO W/ MICRO",
+    "grossCharge": 125.0,
+    "discountedCash": 125.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "93005": {
+    "description": "HCHG EKG 12 LEAD TRACING ONLY",
+    "grossCharge": 614.0,
+    "discountedCash": 614.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "36415": {
+    "description": "HCHG OBS VENIPUNCTURE",
+    "grossCharge": 50.0,
+    "discountedCash": 50.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J7030": {
+    "description": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+    "grossCharge": 75.0,
+    "discountedCash": 75.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J7050": {
+    "description": "NACL 0.9% IV SOLN",
+    "grossCharge": 75.0,
+    "discountedCash": 75.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J1885": {
+    "description": "KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN",
+    "grossCharge": 72.23,
+    "discountedCash": 72.23,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "J2405": {
+    "description": "ONDANSETRON HCL 4 MG/2ML IJ SOLN",
+    "grossCharge": 18.75,
+    "discountedCash": 18.75,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   },
+   "0450": {
+    "description": "HCHG ED PROCEDURE MAJOR",
+    "grossCharge": 1604.0,
+    "discountedCash": 1604.0,
+    "min": null,
+    "max": null,
+    "setting": "outpatient",
+    "govRate": null,
+    "govPayer": null
+   }
+  }
+ },
+ "fap": null,
+ "warnings": [
+  "Codes not in the price file: 12002, 0451"
+ ]
+}

@@ -8,6 +8,9 @@ export interface PriceRow {
   min: number | null;
   max: number | null;
   setting?: string | null;
+  /** Lowest rate the hospital accepts from a government program (Medi-Cal/Medicare) for this service. */
+  govRate?: number | null;
+  govPayer?: string | null;
 }
 
 export interface HospitalRef {
