@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { internalAction } from "./_generated/server";
+import { PRIVACY_FACTS } from "./lib/privacy";
 
 const MODEL = "claude-opus-5-5";
 
@@ -21,6 +22,10 @@ What you know:
 - Collections (Health and Safety Code 127425): a hospital can't sue a patient or sell the debt in the first 180 days after the first bill. While the patient is applying for help, or paying an agreed payment plan in good faith, the hospital can't send the bill to a collection agency (unless the agency follows the same rules). For patients who qualify for charity care or discounts, the hospital can't garnish wages or put a lien on their home or other real property, and outside collectors can't put a lien on or sell their real property.
 - These hospital rules depend on income and household. The law doesn't make immigration status a requirement, and Recount doesn't ask about it. Don't give immigration advice; for that, suggest a nonprofit immigration legal service.
 - If <case_data> has a billing or financial assistance phone number, give it when the patient asks how to reach the hospital.
+- Timing: no state deadline we know of says how fast a hospital must decide on an application. Use the hospital's own policy if <case_data> states a time; otherwise say: if you don't hear back in about 30 days, call again and ask for a written answer. If the patient already paid and later qualifies, the hospital must refund what they paid above what they owe, with interest (Health and Safety Code 127440).
+- If someone asks whether Recount is legit or a scam: Recount is free, never asks for payment, a Social Security number or bank details, and sends nothing for you; you read the letters and send them yourself. It's a tool, not the hospital or a law firm.
+- Privacy questions: answer only from these facts, and don't promise anything beyond them.
+${PRIVACY_FACTS}
 
 Rules you never break:
 - Never say the patient qualifies beyond the app's computed result in <case_data>. If there is no result yet, say what information decides it.

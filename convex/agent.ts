@@ -45,6 +45,16 @@ function hasClaude() {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
+/** "MARIA HERNANDEZ" -> "Maria Hernandez"; names already in mixed case are left alone. */
+function niceName(name: string): string {
+  if (name !== name.toUpperCase()) return name.trim();
+  return name
+    .toLowerCase()
+    .replace(/(^|[\s'-])([a-zà-ÿ])/g, (_m, sep: string, ch: string) => sep + ch.toUpperCase())
+    .replace(/\bMc([a-z])/g, (_m, ch: string) => "Mc" + ch.toUpperCase())
+    .trim();
+}
+
 async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promise<ParsedBill> {
   const client = new Anthropic();
   const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
@@ -62,7 +72,9 @@ async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promis
   });
   if (res.stop_reason === "refusal") throw new Error("The model declined to read this file.");
   if (!res.parsed_output) throw new Error("Couldn't read the bill into a structured form.");
-  return res.parsed_output;
+  const bill = res.parsed_output;
+  // Bills print names in capitals; letters read better as "Maria Hernandez".
+  return { ...bill, patientName: bill.patientName ? niceName(bill.patientName) : null };
 }
 
 /** The Actor's dataset item uses its own field names; turn it into our HospitalRef. */
