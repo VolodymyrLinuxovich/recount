@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Recount",
+    "slug": "recount",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F6F2E8",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.recount.mobile"
+    },
+    "android": {
+      "package": "app.recount.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#F6F2E8",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Recount uses your photos so you can pick a picture of your hospital bill.",
+          "cameraPermission": "Recount uses the camera so you can take a picture of your hospital bill."
+        }
+      ]
+    ],
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
