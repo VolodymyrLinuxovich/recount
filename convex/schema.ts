@@ -44,6 +44,10 @@ export default defineSchema({
     letters: v.optional(v.any()),
     lettersSource: v.optional(v.union(v.literal("claude"), v.literal("template"))),
     approvedAt: v.optional(v.number()),
+    /** The day the patient wants to check in on their request, YYYY-MM-DD. */
+    checkInOn: v.optional(v.string()),
+    /** After sending: what the hospital did and the complaint to HCAI (see convex/followUp.ts). */
+    followUp: v.optional(v.any()),
     error: v.optional(v.string()),
   }).index("by_owner", ["ownerId", "createdAt"]),
   steps: defineTable({
