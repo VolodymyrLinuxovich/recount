@@ -503,6 +503,14 @@ function ChatPreview({ inView }: { inView: boolean }) {
           ))}
         </div>
         <div aria-hidden="true" className="ld-chat-demo">
+          <div className="ld-chat-ghost">
+            <div className="ld-msg ld-msg--me">{t("landing.q1")}</div>
+            <div className="ld-msg ld-msg--lupa">
+              {answer}
+              <span className="ld-caret" />
+            </div>
+          </div>
+          <div>
           {phase !== "idle" && <div className="ld-msg ld-msg--me">{t("landing.q1")}</div>}
           {phase === "thinking" && (
             <div className="ld-msg ld-msg--lupa ld-typing">
@@ -517,6 +525,7 @@ function ChatPreview({ inView }: { inView: boolean }) {
               {phase === "streaming" && <span className="ld-caret" />}
             </div>
           )}
+          </div>
         </div>
       </div>
     </div>

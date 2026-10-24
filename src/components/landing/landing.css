@@ -16,7 +16,7 @@ html:has(.landing) body {
   margin-inline: calc(50% - 50vw);
   color: var(--rc-ink, #2a004d);
   font-family: var(--rc-font-body, system-ui), system-ui, sans-serif;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.55;
 }
 .landing *,
@@ -73,7 +73,7 @@ html:has(.landing) body {
 .landing .ld-h2 {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: clamp(30px, 4vw, 44px);
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
   line-height: 1.12;
   letter-spacing: -0.02em;
   text-wrap: balance;
@@ -81,13 +81,13 @@ html:has(.landing) body {
 .landing .ld-h3 {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: clamp(24px, 2.6vw, 32px);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
   line-height: 1.15;
   letter-spacing: -0.015em;
 }
 .landing .ld-sub {
   margin-top: 12px;
-  font-size: 19px;
+  font-size: 1.1875rem;
   color: var(--rc-ink-2, #4f4566);
   max-width: 36em;
 }
@@ -129,7 +129,7 @@ html:has(.landing) body {
 .landing .ld-h1 {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: clamp(40px, 6.4vw, 76px);
+  font-size: clamp(2.5rem, 6.4vw, 4.75rem);
   line-height: 1.05;
   letter-spacing: -0.022em;
   text-wrap: balance;
@@ -140,7 +140,7 @@ html:has(.landing) body {
 }
 .landing .ld-lead {
   margin-top: 20px;
-  font-size: clamp(19px, 2vw, 22px);
+  font-size: clamp(1.1875rem, 2vw, 1.375rem);
   line-height: 1.5;
   color: var(--rc-ink-2, #4f4566);
   max-width: 30em;
@@ -164,7 +164,7 @@ html:has(.landing) body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 4px 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-trust li {
@@ -193,7 +193,7 @@ html:has(.landing) body {
     width: auto;
   }
   .landing .ld-trust {
-    font-size: 16px;
+    font-size: 1rem;
   }
 }
 @media (min-width: 960px) {
@@ -217,11 +217,11 @@ html:has(.landing) body {
 }
 .landing .ld-ledger-hosp {
   font-weight: 600;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.3;
 }
 .landing .ld-ledger-sub {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-ledger-badge {
@@ -232,7 +232,7 @@ html:has(.landing) body {
   padding: 4px 10px 4px 6px;
   border-radius: 999px;
   background: var(--rc-brand-tint, #eee9ff);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .landing .ld-ledger-lines {
@@ -246,12 +246,12 @@ html:has(.landing) body {
   gap: 10px;
   min-height: 44px;
   padding: 6px 8px;
-  border-bottom: 1px dashed var(--rc-line, #e6e0f5);
-  font-size: 16px;
+  border-bottom: 1px solid var(--rc-line, #e6e0f5);
+  font-size: 1rem;
   transition: background-color 0.4s ease;
 }
 .landing .ld-ln {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-lw {
@@ -265,7 +265,7 @@ html:has(.landing) body {
 }
 .landing .ld-flag {
   font-style: normal;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   padding: 1px 8px;
   border-radius: 999px;
@@ -289,7 +289,7 @@ html:has(.landing) body {
 }
 .landing .ld-total-was {
   position: relative;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 .landing .ld-total-was::after {
   content: "";
@@ -311,7 +311,7 @@ html:has(.landing) body {
 .landing .ld-owe-num {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 1;
   letter-spacing: -0.02em;
 }
@@ -382,7 +382,7 @@ html:has(.landing) body {
 .landing .ld-ledger-lines--sm li {
   min-height: 40px;
   padding: 4px 6px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   gap: 8px;
 }
 .landing .ld-ledger-lines--sm {
@@ -396,7 +396,7 @@ html:has(.landing) body {
   border-block: 1px solid var(--rc-line, #e6e0f5);
 }
 .landing .ld-problem .ld-h2 {
-  font-size: clamp(26px, 3vw, 34px);
+  font-size: clamp(1.625rem, 3vw, 2.125rem);
   max-width: 22em;
   margin: 0 auto;
   text-align: center;
@@ -422,14 +422,14 @@ html:has(.landing) body {
 .landing .ld-stat-big {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 1.05;
   letter-spacing: -0.025em;
   color: var(--rc-brand, #5b21b6);
   font-variant-numeric: tabular-nums;
 }
 .landing .ld-stat-text {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
 }
 .landing .ld-stat .ld-src {
@@ -439,7 +439,7 @@ html:has(.landing) body {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -469,7 +469,7 @@ html:has(.landing) body {
     grid-template-columns: repeat(4, 1fr);
   }
   .landing .ld-stat-big {
-    font-size: 34px;
+    font-size: 2.125rem;
   }
 }
 
@@ -486,7 +486,7 @@ html:has(.landing) body {
 }
 .landing .ld-step-copy p {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: var(--rc-ink-2, #4f4566);
   max-width: 26em;
 }
@@ -505,7 +505,7 @@ html:has(.landing) body {
 }
 .landing .ld-phone {
   width: 100%;
-  max-width: 370px;
+  max-width: 23.125rem;
   justify-self: center;
   border-radius: 34px;
   border: 1px solid var(--rc-line, #e6e0f5);
@@ -527,7 +527,7 @@ html:has(.landing) body {
 .landing .ld-scr-title {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 22px;
+  font-size: 1.375rem;
   margin-bottom: 14px;
 }
 @media (min-width: 960px) {
@@ -567,8 +567,8 @@ html:has(.landing) body {
   min-height: 40px;
   align-items: center;
   padding: 0 12px;
-  font-size: 15px;
-  border-bottom: 1px dashed var(--rc-line, #e6e0f5);
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--rc-line, #e6e0f5);
 }
 .landing .ld-mini-line:last-of-type {
   border-bottom: 0;
@@ -613,7 +613,7 @@ html:has(.landing) body {
   align-items: center;
   gap: 12px;
   min-height: 44px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .landing .ld-tick {
   display: grid;
@@ -671,7 +671,7 @@ html:has(.landing) body {
   border-radius: 999px;
   background: var(--rc-flag-tint, #ffe6e6);
   color: var(--rc-flag-ink, #b3001b);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .landing .ld-find-row {
@@ -680,7 +680,7 @@ html:has(.landing) body {
   gap: 10px;
   min-height: 36px;
   align-items: center;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .landing .ld-find-row.is-x s {
   color: var(--rc-flag-ink, #b3001b);
@@ -699,7 +699,7 @@ html:has(.landing) body {
 .landing .ld-saved strong {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 34px;
+  font-size: 2.125rem;
   line-height: 1;
   color: var(--rc-green-ink, #2b7000);
 }
@@ -714,7 +714,7 @@ html:has(.landing) body {
   flex: 1;
 }
 .landing .ld-q-count {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--rc-ink-2, #4f4566);
 }
@@ -722,12 +722,12 @@ html:has(.landing) body {
   margin-top: 22px;
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 .landing .ld-q-help {
   margin-top: 6px;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-stepper {
@@ -743,7 +743,7 @@ html:has(.landing) body {
   border-radius: 50%;
   border: 1px solid var(--rc-line, #e6e0f5);
   background: var(--rc-bg-2, #f6f3ff);
-  font-size: 26px;
+  font-size: 1.625rem;
   cursor: pointer;
   transition: transform 0.08s ease;
 }
@@ -755,7 +755,7 @@ html:has(.landing) body {
   text-align: center;
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1;
 }
 .landing .ld-bar {
@@ -800,13 +800,13 @@ html:has(.landing) body {
   stroke-dashoffset: 0;
 }
 .landing .ld-answer-k {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-answer-h {
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 28px;
+  font-size: 1.75rem;
   line-height: 1.15;
   margin-top: 2px;
 }
@@ -820,7 +820,7 @@ html:has(.landing) body {
 }
 .landing .ld-answer-was {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-answer-was s {
@@ -858,13 +858,13 @@ html:has(.landing) body {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-answer-why {
   margin-bottom: 18px;
   text-align: left;
-  font-size: 15.5px;
+  font-size: 0.96875rem;
 }
 .landing .ld-replay {
   display: block;
@@ -873,7 +873,7 @@ html:has(.landing) body {
   padding: 0 14px;
   border: 0;
   background: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
   text-decoration: underline;
   cursor: pointer;
@@ -909,11 +909,11 @@ html:has(.landing) body {
   padding: 14px;
   border: 1px solid var(--rc-line, #e6e0f5);
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
 .landing .ld-letter-meta {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-letter-skel {
@@ -930,7 +930,7 @@ html:has(.landing) body {
   gap: 12px;
   min-height: 56px;
   margin: 8px 0;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
 }
 .landing .ld-approve input {
@@ -947,7 +947,7 @@ html:has(.landing) body {
 .landing .ld-letter-note {
   margin-top: 10px;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
 }
 
@@ -995,11 +995,11 @@ html:has(.landing) body {
 }
 .landing .ld-chat-name {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.2;
 }
 .landing .ld-chat-status {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--rc-ink-2, #4f4566);
 }
 .landing .ld-chat-log {
@@ -1014,7 +1014,7 @@ html:has(.landing) body {
   max-width: 88%;
   padding: 12px 16px;
   border-radius: 16px;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -1045,7 +1045,7 @@ html:has(.landing) body {
   border-radius: 14px;
   border: 1.5px solid var(--rc-line, #e6e0f5);
   background: var(--rc-surface, #ffffff);
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -1129,7 +1129,7 @@ html:has(.landing) body {
   border-radius: 12px;
   border: 1px solid var(--rc-line, #e6e0f5);
   background: var(--rc-bg, #ffffff);
-  font-size: 17px;
+  font-size: 1.0625rem;
 }
 .landing .ld-chat-input input::placeholder {
   color: var(--rc-ink-2, #4f4566);
@@ -1158,7 +1158,7 @@ html:has(.landing) body {
 }
 .landing .ld-final-in p {
   margin-top: 12px;
-  font-size: 19px;
+  font-size: 1.1875rem;
   color: #ddd4f7;
 }
 .landing .ld-ctas--center {
@@ -1204,9 +1204,9 @@ html:has(.landing) body {
   width: 100%;
 }
 .landing .ld-cta {
-  min-height: 60px;
-  padding: 0 24px;
-  font-size: 18px;
+  min-height: 3.75rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
   border-radius: var(--rc-r-btn, 14px);
 }
@@ -1254,7 +1254,7 @@ html:has(.landing) body {
   gap: 8px;
   font-family: var(--rc-font-display, system-ui);
   font-weight: 800;
-  font-size: 15px;
+  font-size: 0.9375rem;
   letter-spacing: -0.02em;
 }
 .landing .ld-phone-mark {
@@ -1279,7 +1279,7 @@ html:has(.landing) body {
   border-radius: 50%;
   border: 1px solid var(--rc-line, #e6e0f5);
   background: var(--rc-bg-2, #f6f3ff);
-  font-size: 26px;
+  font-size: 1.625rem;
 }
 .landing .ld-approve {
   display: flex;
@@ -1287,7 +1287,7 @@ html:has(.landing) body {
   gap: 12px;
   min-height: 56px;
   margin: 8px 0;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .landing .ld-box {
   display: grid;
@@ -1309,9 +1309,6 @@ html:has(.landing) body {
 }
 .landing .ld-open-chat {
   margin-top: 24px;
-}
-.landing .ld-chat-demo {
-  display: contents;
 }
 
 /* Lupa avatar: a lens, no face. "think" sweeps a glint and pulses the ring. */
@@ -1369,4 +1366,242 @@ html:has(.landing) body {
 }
 .landing .ld-ctas {
   margin-inline: auto;
+}
+
+/* snap screen */
+.landing .ld-viewfinder {
+  position: relative;
+  height: 360px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #3a2a52, #1d1230);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.landing .ld-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 3px solid rgb(255 255 255 / 0.85);
+}
+.landing .ld-corner--tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; border-top-left-radius: 8px; }
+.landing .ld-corner--tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; border-top-right-radius: 8px; }
+.landing .ld-corner--bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; border-bottom-left-radius: 8px; }
+.landing .ld-corner--br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; border-bottom-right-radius: 8px; }
+.landing .ld-paper {
+  width: 72%;
+  padding: 14px 14px 12px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #2a004d;
+  box-shadow: 0 16px 30px rgb(0 0 0 / 0.35);
+  transform: rotate(-3deg);
+  display: grid;
+  gap: 6px;
+}
+.landing .ld-paper-h {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.landing .ld-paper-s {
+  font-size: 0.6875rem;
+  color: #4f4566;
+  margin-bottom: 4px;
+}
+.landing .ld-paper-line,
+.landing .ld-paper-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.6875rem;
+}
+.landing .ld-paper-line i,
+.landing .ld-paper-total i {
+  height: 6px;
+  flex: 1;
+  max-width: 60%;
+  border-radius: 3px;
+  background: #e6e0f5;
+}
+.landing .ld-paper-total {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid #e6e0f5;
+  font-size: 0.8125rem;
+}
+.landing .ld-flash {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+.landing .ld-snap-ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  min-height: 32px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.landing .ld-shutter {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 10px auto 0;
+  border-radius: 50%;
+  border: 3px solid var(--rc-brand, #5b21b6);
+}
+.landing .ld-shutter span {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rc-brand, #5b21b6);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .landing [data-in="false"] .ld-paper,
+  .landing [data-in="false"] .ld-snap-ok {
+    opacity: 0;
+  }
+  .landing [data-in="true"] .ld-paper {
+    animation: ld-paperin 0.9s var(--rc-ease-out, ease-out) 0.3s both;
+  }
+  .landing [data-in="true"] .ld-flash {
+    animation: ld-flash 0.5s ease-out 1.4s both;
+  }
+  .landing [data-in="true"] .ld-shutter span {
+    animation: ld-press 0.3s ease 1.3s;
+  }
+  .landing [data-in="true"] .ld-snap-ok {
+    animation: ld-rise 0.5s var(--rc-ease-out, ease-out) 1.8s both;
+  }
+}
+@keyframes ld-paperin {
+  from {
+    opacity: 0;
+    transform: translateY(60px) rotate(-10deg) scale(0.92);
+  }
+}
+@keyframes ld-flash {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ld-press {
+  50% {
+    transform: scale(0.86);
+  }
+}
+
+/* The Lupa preview never changes size: the finished conversation is laid out (invisibly)
+   underneath, and the live messages are drawn on top of it in the same grid cell. */
+.landing .ld-chat-demo {
+  display: grid;
+}
+.landing .ld-chat-demo > * {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.landing .ld-chat-ghost {
+  visibility: hidden;
+}
+/* The count-down to $0 sits on its own line, so its changing width never re-wraps the heading. */
+.landing .ld-answer-num {
+  display: block;
+}
+
+/* Steps at desktop: text and phone sized to their content and centered as a pair,
+   so there is no empty column between them. */
+@media (min-width: 960px) {
+  .landing .ld-step {
+    grid-template-columns: minmax(0, 27.5rem) minmax(0, 23.125rem);
+    justify-content: center;
+    gap: 72px;
+  }
+  .landing .ld-step:nth-of-type(even) {
+    grid-template-columns: minmax(0, 23.125rem) minmax(0, 27.5rem);
+  }
+  .landing .ld-step .ld-step-copy,
+  .landing .ld-step:nth-of-type(even) .ld-step-copy {
+    justify-self: stretch;
+    max-width: none;
+  }
+}
+
+/* ───────── high-contrast modes (html[data-contrast], set by Display settings) ─────────
+   The --rc-* tokens already switch to the pure palette; these are the few fixed colors. */
+html[data-contrast] .landing .ld-final {
+  background: var(--rc-bg);
+  color: var(--rc-ink);
+  border-block: 2px solid var(--rc-line);
+}
+html[data-contrast] .landing .ld-final-in p {
+  color: var(--rc-ink);
+}
+html[data-contrast] .landing .ld-final :focus-visible {
+  outline-color: var(--focus, currentColor);
+}
+html[data-contrast] .landing .ld-ctas--dark .btn-primary,
+html[data-contrast] .landing .ld-ctas--dark .btn-primary:hover:not(:disabled) {
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  color: var(--on-primary);
+}
+html[data-contrast] .landing .ld-ctas--dark .ld-cta-2,
+html[data-contrast] .landing .ld-ctas--dark .ld-cta-2:hover:not(:disabled) {
+  background: var(--rc-bg);
+  border: 2px solid var(--rc-line);
+  color: var(--rc-ink);
+}
+html[data-contrast] .landing .ld-hero {
+  background: var(--rc-bg);
+}
+html[data-contrast] .landing :is(.ld-phone, .rc-card, .ld-stat, .ld-chat) {
+  box-shadow: none;
+  border: 2px solid var(--rc-line);
+}
+html[data-contrast] .landing .ld-viewfinder {
+  background: var(--rc-bg);
+  border: 2px solid var(--rc-line);
+}
+html[data-contrast] .landing .ld-corner {
+  border-color: var(--rc-ink);
+}
+html[data-contrast] .landing .ld-paper {
+  background: var(--rc-bg);
+  color: var(--rc-ink);
+  border: 2px solid var(--rc-line);
+  box-shadow: none;
+}
+html[data-contrast] .landing .ld-paper-s {
+  color: var(--rc-ink);
+}
+html[data-contrast] .landing :is(.ld-paper-line, .ld-paper-total) i {
+  background: var(--rc-ink);
+  height: 2px;
+}
+html[data-contrast] .landing .ld-paper-total {
+  border-top-color: var(--rc-line);
+}
+html[data-contrast] .landing :is(.ld-flash, .ld-lupa-glint) {
+  display: none;
+}
+html[data-contrast] .landing :is(.ld-flag, .ld-find-tag, .ld-saved, .ld-ledger-lines li.is-flag) {
+  border: 2px solid currentColor;
+}
+html[data-contrast] .landing .ld-ledger-lines li.is-flag {
+  border-color: var(--rc-flag);
 }
