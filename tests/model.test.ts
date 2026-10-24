@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { choose, modelReady } from "../convex/lib/model";
 import { PIPELINE, kindOf } from "../convex/lib/pipeline";
 
-const KEYS = ["MODEL_PROVIDER", "MODEL_NAME", "MODEL_READ_PROVIDER", "MODEL_READ_NAME", "MODEL_FALLBACK_PROVIDER", "MODEL_FALLBACK_NAME", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY"];
+const KEYS = ["MODEL_CHAT_FALLBACK_PROVIDER", "AZURE_OPENAI_DEPLOYMENT", "MODEL_PROVIDER", "MODEL_NAME", "MODEL_READ_PROVIDER", "MODEL_READ_NAME", "MODEL_FALLBACK_PROVIDER", "MODEL_FALLBACK_NAME", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY"];
 const saved = Object.fromEntries(KEYS.map((k) => [k, process.env[k]]));
 afterEach(() => {
   for (const k of KEYS) if (saved[k] === undefined) delete process.env[k]; else process.env[k] = saved[k];
@@ -31,6 +31,11 @@ describe("model choice", () => {
     expect(choose("chat").fallback).toEqual({ provider: "anthropic", model: "claude-opus-5-5" });
     set({ MODEL_FALLBACK_PROVIDER: "anthropic" });
     expect(choose("chat").fallback).toBeNull();
+  });
+  it("gives one task its own fallback, using the Azure deployment name", () => {
+    set({ MODEL_CHAT_FALLBACK_PROVIDER: "azure", AZURE_OPENAI_DEPLOYMENT: "gpt-4.1-mini" });
+    expect(choose("chat").fallback).toEqual({ provider: "azure", model: "gpt-4.1-mini" });
+    expect(choose("read").fallback).toBeNull();
   });
   it("ignores unknown provider names", () => {
     set({ MODEL_PROVIDER: "something" });

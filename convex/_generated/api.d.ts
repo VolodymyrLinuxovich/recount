@@ -29,6 +29,7 @@ import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
 import type * as lib_safety from "../lib/safety.js";
 import type * as lib_sample from "../lib/sample.js";
+import type * as lib_search from "../lib/search.js";
 import type * as lib_statewide from "../lib/statewide.js";
 import type * as lib_user from "../lib/user.js";
 import type * as pipeline from "../pipeline.js";
@@ -62,6 +63,7 @@ declare const fullApi: ApiFromModules<{
   "lib/reference": typeof lib_reference;
   "lib/safety": typeof lib_safety;
   "lib/sample": typeof lib_sample;
+  "lib/search": typeof lib_search;
   "lib/statewide": typeof lib_statewide;
   "lib/user": typeof lib_user;
   pipeline: typeof pipeline;
