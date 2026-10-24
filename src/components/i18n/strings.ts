@@ -495,6 +495,7 @@ const en = {
   "src.noMatch": "We couldn’t match this hospital, so charges weren’t compared with its price list.",
   "src.policyUsed": "We used the hospital’s own financial assistance policy",
   "src.readPolicy": "read from the hospital’s policy",
+  "src.policyDate": (v: { date: string }) => `Policy effective ${v.date}.`,
   "src.noPrices": "Prices weren’t checked, because we don’t have this hospital’s price list.",
   "src.rulesOnly": "We don’t have this hospital’s price list or policy, so we used California’s rules only.",
 
@@ -1176,6 +1177,7 @@ const es: Dict = {
   "src.noMatch": "No pudimos identificar este hospital, así que no comparamos los cargos con su lista de precios.",
   "src.policyUsed": "Usamos la política de asistencia financiera del propio hospital",
   "src.readPolicy": "leída de la política del hospital",
+  "src.policyDate": (v) => `Política vigente desde el ${v.date}.`,
   "src.noPrices": "No revisamos los precios, porque no tenemos la lista de precios de este hospital.",
   "src.rulesOnly": "No tenemos la lista de precios ni la política de este hospital, así que solo usamos las reglas de California.",
 

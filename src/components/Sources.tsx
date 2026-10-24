@@ -40,6 +40,7 @@ export function Sources({ c }: { c: CaseView }) {
                       </>
                     )}
                     {". "}
+                    {h.fap.effectiveDate && <>{t("src.policyDate", { date: shortDate(h.fap.effectiveDate, lang) })} </>}
                     {t("src.noPrices")}
                   </>
                 ) : (
