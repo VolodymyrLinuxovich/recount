@@ -21,6 +21,7 @@ async function embed(text: string): Promise<number[] | null> {
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": env("AZURE_OPENAI_API_KEY")! },
     body: JSON.stringify({ input: text.slice(0, 4000) }),
+    signal: AbortSignal.timeout(5000),
   });
   if (!res.ok) return null;
   const j = (await res.json()) as { data?: { embedding: number[] }[] };
@@ -31,7 +32,7 @@ async function embed(text: string): Promise<number[] | null> {
 export async function policyPassages(question: string, hospitalKeys: string[], k = 4): Promise<Passage[]> {
   if (!searchOn() || !question.trim()) return [];
   try {
-    const vector = await embed(question);
+    const vector = await embed(question).catch(() => null);
     const base = env("AZURE_SEARCH_ENDPOINT")!.replace(/\/+$/, "");
     const index = env("AZURE_SEARCH_INDEX") ?? "recount-policies";
     const keys = hospitalKeys.filter((h) => /^[a-z0-9-]+$/.test(h));
@@ -46,6 +47,7 @@ export async function policyPassages(question: string, hospitalKeys: string[], k
         ...(filter ? { filter } : {}),
         ...(vector ? { vectorQueries: [{ kind: "vector", vector, fields: "vector", k }] } : {}),
       }),
+      signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) return [];
     const j = (await res.json()) as { value?: { hospitalName: string; rule: string; verdict: string; text: string; url: string }[] };

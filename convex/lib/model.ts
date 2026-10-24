@@ -48,6 +48,12 @@ const DEFAULT_MODEL: Record<Provider, string> = {
 
 const defaultModel = (p: Provider) => (p === "azure" ? env("AZURE_OPENAI_DEPLOYMENT") : undefined) ?? DEFAULT_MODEL[p];
 
+// A call that hangs longer than this fails, so the fallback (or the app's non-AI path) can run.
+const TIMEOUT_MS = 120_000;
+
+/** Provider error text without anything that looks like a key or token. */
+const scrub = (e: unknown) => String(e).replace(/\b(sk-|key[-_]?|Bearer\s+)[A-Za-z0-9*_\-.]{4,}/gi, "[redacted]").replace(/[A-Za-z0-9]{32,}/g, "[redacted]").slice(0, 160);
+
 const isProvider = (p: string | undefined): p is Provider => p === "anthropic" || p === "openai" || p === "azure";
 
 function env(name: string): string | undefined {
@@ -97,7 +103,7 @@ function anthropicContent(parts: Part[]): Anthropic.Beta.BetaContentBlockParam[]
 type Out<T> = { data: T | null; refused: boolean; inputTokens: number | null; outputTokens: number | null; model: string };
 
 async function anthropicStructured<T>(model: string, system: string | undefined, parts: Part[], schema: z.ZodType<T>, maxTokens: number): Promise<Out<T>> {
-  const client = new Anthropic();
+  const client = new Anthropic({ timeout: TIMEOUT_MS, maxRetries: 1 });
   const res = await client.beta.messages.parse({
     model,
     max_tokens: maxTokens,
@@ -117,7 +123,7 @@ async function anthropicStructured<T>(model: string, system: string | undefined,
 }
 
 async function anthropicChat(model: string, system: string, messages: ChatMessage[], maxTokens: number, onText: (t: string) => void) {
-  const client = new Anthropic();
+  const client = new Anthropic({ timeout: TIMEOUT_MS, maxRetries: 1 });
   const stream = client.messages.stream({ model, max_tokens: maxTokens, output_config: { effort: "low" }, system, messages });
   let text = "";
   stream.on("text", (d) => {
@@ -159,7 +165,7 @@ function openaiContent(parts: Part[]) {
 }
 
 async function postJson(url: string, headers: Record<string, string>, body: unknown, stream = false): Promise<Response> {
-  const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body) });
+  const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body), signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!res.ok) throw new Error(`Model API ${res.status}: ${(await res.text()).slice(0, 200)}`);
   void stream;
   return res;
@@ -257,12 +263,12 @@ async function attempt<R extends { inputTokens: number | null; outputTokens: num
         return {
           out: null,
           error: e,
-          run: { task, provider: c.provider, model: c.model, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: i > 0, error: String(e).slice(0, 160) },
+          run: { task, provider: c.provider, model: c.model, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: i > 0, error: scrub(e) },
         };
       }
     }
   }
-  return { out: null, error: lastErr, run: { task, provider: primary.provider, model: primary.model, ms: 0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: false, error: String(lastErr).slice(0, 160) } };
+  return { out: null, error: lastErr, run: { task, provider: primary.provider, model: primary.model, ms: 0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: false, error: scrub(lastErr) } };
 }
 
 /**
