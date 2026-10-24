@@ -1,20 +1,16 @@
-/* The hospital's own policy against state law: a plain bordered note.
-   Red edge only when it's a confirmed or likely conflict; amber when it's only worth asking. */
+/* The hospital's own policy against state law: a clean card. Color lives only in the small
+   verdict pill per quote (red for a confirmed conflict, amber for likely, gray for "ask");
+   the quote itself is a neutral highlight. */
 
 .policy-aside {
-  --edge: var(--pen);
   margin: 0;
   padding: var(--sp-5) var(--sp-5) var(--sp-4);
   background: var(--sheet);
   border: 1px solid var(--rule);
-  border-left: 4px solid var(--edge);
-  border-radius: 10px;
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
   font-size: var(--fs-base);
   line-height: var(--lh-body);
-}
-
-.policy-aside-ask {
-  --edge: var(--warn);
 }
 
 .policy-aside-h {
@@ -43,11 +39,57 @@
   padding-bottom: var(--sp-2);
 }
 
-.policy-aside-label {
+.policy-aside-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
   margin: 0 0 var(--sp-2);
+}
+
+.policy-aside-label {
+  margin: 0;
   font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--ink-2);
+}
+
+.policy-verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 2px var(--sp-3);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.policy-verdict::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.policy-verdict--conflict {
+  background: var(--rc-flag-tint);
+  color: var(--rc-flag-ink);
+}
+
+.policy-verdict--likely {
+  background: color-mix(in srgb, var(--warn) 14%, var(--sheet));
+  color: var(--warn);
+}
+
+.policy-verdict--ask {
+  background: var(--rc-bg-2);
+  color: var(--ink-2);
+  border-color: var(--rule);
 }
 
 .policy-aside-quote {
@@ -55,9 +97,9 @@
   padding: var(--sp-3) var(--sp-4);
   font-size: var(--fs-base);
   line-height: var(--lh-body);
-  background: color-mix(in srgb, var(--edge) 7%, transparent);
-  border-left: 3px solid var(--edge);
-  border-radius: 0 6px 6px 0;
+  color: var(--ink);
+  background: var(--rc-bg-2);
+  border-radius: var(--r-control);
 }
 
 .policy-aside-cite {
@@ -113,8 +155,8 @@
   font-size: var(--fs-base);
   font-weight: 600;
   color: var(--ink);
-  background: transparent;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
+  background: var(--sheet);
+  border: 1.5px solid var(--control-edge);
+  border-radius: var(--r-btn);
   cursor: pointer;
 }

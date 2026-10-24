@@ -32,6 +32,13 @@ const LAW: Record<string, { line: PlainKey; cite: string; url: string }> = {
   MEDICAL_FIRST: { line: "law.MEDICAL_FIRST", cite: "Health & Safety Code 127405", url: HSC("127405") },
 };
 
+// A small pill per quote: red only for a confirmed conflict, amber for likely, gray for "ask".
+const VERDICT: Record<PolicyFinding["verdict"], PlainKey> = {
+  conflict: "policy.vConflict",
+  likely: "policy.vLikely",
+  ask: "policy.vAsk",
+};
+
 export function PolicyAside({
   findings,
   hospitalName,
@@ -68,11 +75,10 @@ export function PolicyAside({
           const law = LAW[f.rule];
           return (
             <li key={f.rule + i}>
-              <p className="policy-aside-label">
-                {t("policy.theirSays", { doc: f.docType })}
-                {f.verdict === "likely" && t("policy.likely")}
-                {f.verdict === "ask" && t("policy.ask")}
-              </p>
+              <div className="policy-aside-top">
+                <p className="policy-aside-label">{t("policy.theirSays", { doc: f.docType })}</p>
+                <span className={`policy-verdict policy-verdict--${f.verdict}`}>{t(VERDICT[f.verdict])}</span>
+              </div>
               <blockquote className="policy-aside-quote">&ldquo;{f.quote}&rdquo;</blockquote>
               <div className="policy-aside-cite">
                 {f.docUrl ? (

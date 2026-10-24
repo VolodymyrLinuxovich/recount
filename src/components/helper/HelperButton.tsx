@@ -24,6 +24,10 @@ export function HelperButton() {
     >
       <Mascot size={30} />
       <span className="helper-mast-text">{t("helper.name")}</span>
+      {/* Phones: a short verb beside the lens, so it reads as "ask", not "search". */}
+      <span className="helper-mast-short" aria-hidden="true">
+        {t("helper.short")}
+      </span>
     </button>
   );
 }

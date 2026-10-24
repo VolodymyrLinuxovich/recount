@@ -11,6 +11,7 @@ import { StepFrame } from "./StepFrame";
 import { findingScreens } from "./steps";
 import type { ScreenProps } from "./types";
 import "./found.css";
+import "./found-extra.css";
 
 /* ---------- helpers ---------- */
 
@@ -270,7 +271,13 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
         </div>
       )}
 
-      {!c.hospital?.mrf && <p className="found-box">{t("bill.noPriceList")}</p>}
+      {/* No price list: the good news first, the missing list as one small muted line. */}
+      {!c.hospital?.mrf && (
+        <div className="found-noprice">
+          <p className="found-noprice-lead">{t("bill.noPriceLead")}</p>
+          <p className="found-quiet">{t("bill.noPriceList")}</p>
+        </div>
+      )}
 
       {bill.lines.length > 0 && (
         <section className="found-lines" aria-labelledby="found-lines-h">
@@ -351,6 +358,17 @@ function Save({ c, amount }: { c: CaseView; amount: number }) {
   );
 }
 
+/**
+ * An insured patient's duplicate: "You could save" is vague for them (insurance already adjusted the bill),
+ * but taking a repeated charge off the amount due is plain subtraction. Only for duplicates.
+ */
+function DupOwe({ c, amount }: { c: CaseView; amount: number }) {
+  const { t, lang } = useT();
+  const due = c.bill?.amountDue;
+  if (!isInsured(c) || typeof due !== "number" || amount <= 0 || amount > due) return null;
+  return <p className="found-owe">{t("found.dupInsuredOwe", { amount: money(due - amount, true, lang) })}</p>;
+}
+
 function Confidence({ c, f, amount }: { c: CaseView; f: Finding; amount: number }) {
   const { t } = useT();
   return (
@@ -416,6 +434,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
           right={{ label: t("found.lineN", { n: b + 1 }), value: money(lines[b]?.charge ?? f.amount, true, lang) }}
         />
         <Confidence c={c} f={f} amount={f.amount} />
+        <DupOwe c={c} amount={f.amount} />
         <p className="found-why">{t("found.whyDup", { a: a + 1, b: b + 1 })}</p>
       </div>
     );
@@ -470,7 +489,7 @@ function CashGroup({ c, items }: { c: CaseView; items: Finding[] }) {
   return (
     <div className="found-card">
       <p className="found-why">{t("bill.cashGroupBody")}</p>
-      <table className="found-table">
+      <table className="found-table cash-table">
         <thead>
           <tr>
             <th scope="col">{t("bill.colService")}</th>
@@ -485,8 +504,8 @@ function CashGroup({ c, items }: { c: CaseView; items: Finding[] }) {
             return (
               <tr key={f.id}>
                 <td lang={billLang(lang)}>{line?.description ?? ""}</td>
-                <td>{money(billed, true, lang)}</td>
-                <td>{money(Math.max(0, billed - f.amount), true, lang)}</td>
+                <td data-label={t("bill.colBilled")}>{money(billed, true, lang)}</td>
+                <td data-label={t("bill.colCash")}>{money(Math.max(0, billed - f.amount), true, lang)}</td>
               </tr>
             );
           })}

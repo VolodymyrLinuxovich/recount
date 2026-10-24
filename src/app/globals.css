@@ -295,6 +295,11 @@ body:has(.step-screen) .masthead-links .nav-count {
   background: var(--rc-bg-2);
   border-color: var(--control-edge);
 }
+/* The rightmost control: its focus ring sits inside so the header edge never clips it. */
+.menu-btn:focus-visible {
+  outline-offset: -5px;
+}
+
 .menu-btn svg {
   width: 22px;
   height: 22px;
@@ -513,8 +518,10 @@ body:has(.step-screen) .masthead-links .nav-count {
     border-color 0.15s ease;
 }
 
-.btn:hover:not(:disabled) {
-  background: var(--rc-bg-2);
+@media (hover: hover) {
+  .btn:hover:not(:disabled) {
+    background: var(--rc-bg-2);
+  }
 }
 
 .btn:active:not(:disabled) {
@@ -813,8 +820,12 @@ body:has(.step-screen) .masthead-links .nav-count {
   font-weight: 600;
 }
 
+/* The example amount: a lighter, smaller hint so "e.g. 32,000" fits a phone row. */
 .money-input input::placeholder {
-  color: var(--rule);
+  color: var(--ink-3);
+  opacity: 1;
+  font-size: 0.72em;
+  font-weight: 600;
 }
 
 .money-input:focus-within {
@@ -863,6 +874,16 @@ body:has(.step-screen) .masthead-links .nav-count {
 .answer-sub {
   font-size: var(--fs-base);
   margin: var(--sp-4) 0 0;
+}
+
+/* The second half of a "not eligible" answer, said plainly right under the headline. */
+.answer-sub-lead {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.answer-sub-lead + .answer-sub {
+  margin-top: var(--sp-2);
 }
 
 .receipts {

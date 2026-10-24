@@ -31,6 +31,7 @@ export function Answer({ c }: { c: CaseView }) {
       <h1 id="answer-h" className="h-answer">
         {big}
       </h1>
+      {e.tier === "NOT_ELIGIBLE" && <p className="answer-sub answer-sub-lead">{t("answer.notEligibleSub")}</p>}
       {e.tier === "NOT_ELIGIBLE" ? (
         <p className="answer-sub">
           {notEligibleWhy && <>{notEligibleWhy} </>}

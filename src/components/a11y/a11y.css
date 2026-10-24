@@ -1,5 +1,5 @@
 /* Display settings: the "Aa Display" control in the masthead, and what it changes.
-   On <html>: data-text="large", data-contrast="hv-light" | "hv-dark"
+   On <html>: data-text="large" | "largest", data-contrast="hv-light" | "hv-dark"
    (set before paint by the layout script; see vision.ts). Spec: docs/DESIGN-RESEARCH.md B2. */
 
 /* ---------- the control and its sheet ---------- */
@@ -199,6 +199,12 @@
 /* ---------- Large text ----------
    html[data-text="large"] raises the root font size (globals.css), so every rem-based
    type and space token grows by 1.2. No zoom: layouts reflow at the real viewport width. */
+
+/* Largest: 125% root (19px body reads at about 24px). Every rule keyed on html[data-text]
+   (flow.css's stacked step bar, for one) applies to both sizes. */
+html[data-text="largest"] {
+  font-size: 125%;
+}
 
 /* ---------- High visibility (B2) ---------- */
 
@@ -413,4 +419,47 @@ html[data-contrast] :is(.btn, .lang-option, .vision-btn):not(.bar-btn) {
   .step-bar {
     border-top: 2px solid CanvasText;
   }
+}
+
+/* ---------- High visibility: no purple or tinted chips ----------
+   Screens that keep their own color tokens (the audit) take the pure palette here, and every
+   small chip becomes text in the accent / problem / ok color with a solid edge, on the page color. */
+
+html[data-contrast] .audit {
+  --a-conflict: var(--pen);
+  --a-likely: var(--accent);
+  --a-likely-bar: var(--accent);
+  --a-ask: var(--ink);
+  --a-none: var(--ink-2);
+  --a-text-likely: var(--accent);
+}
+
+html[data-contrast] :is(.find-count, .verdict, .policy-verdict, .bill-pill, .found-pill, .found-badge, .nav-count) {
+  background: var(--paper) !important;
+  border: 2px solid currentColor;
+}
+
+html[data-contrast] :is(.find-count, .verdict, .policy-verdict--likely, .found-badge) {
+  color: var(--accent);
+}
+
+html[data-contrast] :is(.find-count--conflict, .verdict-conflict, .policy-verdict--conflict) {
+  color: var(--pen);
+}
+
+html[data-contrast] :is(.find-count:not(.find-count--conflict):not(.find-count--likely), .verdict-ask, .policy-verdict--ask, .nav-count) {
+  color: var(--ink);
+}
+
+html[data-contrast] :is(.policy-aside-quote, .policy-mark) {
+  background: transparent;
+  border-left: 3px solid var(--ink);
+  border-radius: 0;
+}
+
+html[data-contrast] .masthead-links a[aria-current="page"] {
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }

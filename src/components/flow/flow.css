@@ -114,12 +114,14 @@
   min-height: var(--bar-btn-h, 56px);
   width: auto;
   margin: 0;
-  padding: var(--sp-2) var(--sp-4);
+  padding: var(--sp-2) 10px;
   border-radius: var(--r-btn);
   font-size: var(--fs-base);
   font-weight: 600;
   line-height: var(--lh-tight);
   text-align: center;
+  /* A label that still needs two lines breaks evenly and stays centered. */
+  text-wrap: balance;
   gap: var(--sp-2);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -133,18 +135,27 @@
   flex: 1 1 auto;
 }
 
-/* Two non-Back buttons share the row evenly; with Back it's 1 : 2. */
+/* Two non-Back buttons share the row evenly (their labels are similar lengths);
+   with Back it's 1 : 2.2, so the main button's label fits on one line. */
 .step-bar-row > .bar-btn {
   flex: 1 1 0;
   min-width: 0;
 }
 
 .step-bar-row > .bar-back ~ .bar-btn {
-  flex: 2 1 0;
+  flex: 2.2 1 0;
 }
 
 .step-bar-row.solo > .bar-back {
-  flex: 0 0 calc((100% - 12px) / 3);
+  flex: 0 0 calc((100% - 12px) / 3.2);
+}
+
+/* Narrow phones: slightly smaller bar text so common labels stay on one line. */
+@media (max-width: 379px) {
+  .step-bar .bar-btn {
+    font-size: var(--fs-sm);
+    padding-inline: var(--sp-2);
+  }
 }
 
 .bar-secondary {
@@ -161,12 +172,16 @@
   box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.18), 0 1px 2px rgb(42 0 77 / 0.12);
 }
 
-.step-bar .bar-primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--primary) 88%, var(--ink));
-}
-
-.step-bar .bar-secondary:hover:not(:disabled) {
-  background: var(--rc-bg-2);
+/* Hover only where there is a pointer that hovers, and never a fill change on the secondary:
+   a tapped button on a phone must not stay tinted (it read as a different button). */
+@media (hover: hover) {
+  .step-bar .bar-primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--primary) 88%, var(--ink));
+  }
+  .step-bar .bar-secondary:hover:not(:disabled) {
+    background: var(--sheet);
+    border-color: var(--primary);
+  }
 }
 
 .bar-arrow {
@@ -244,25 +259,25 @@ html[data-contrast] .step-bar {
   }
 }
 
-html:is([data-text="large"], [data-contrast]) .step-bar-row,
-html:is([data-text="large"], [data-contrast]) .step-bar-above {
+html:is([data-text], [data-contrast]) .step-bar-row,
+html:is([data-text], [data-contrast]) .step-bar-above {
   display: contents;
 }
 
-html:is([data-text="large"], [data-contrast]) .step-bar-row > .bar-btn,
-html:is([data-text="large"], [data-contrast]) .step-bar-above > .bar-btn {
+html:is([data-text], [data-contrast]) .step-bar-row > .bar-btn,
+html:is([data-text], [data-contrast]) .step-bar-above > .bar-btn {
   width: 100%;
 }
 
-html:is([data-text="large"], [data-contrast]) .step-bar .bar-primary {
+html:is([data-text], [data-contrast]) .step-bar .bar-primary {
   order: 1;
 }
 
-html:is([data-text="large"], [data-contrast]) :is(.step-bar-above > .bar-btn, .step-bar-row > .bar-secondary:not(.bar-back)) {
+html:is([data-text], [data-contrast]) :is(.step-bar-above > .bar-btn, .step-bar-row > .bar-secondary:not(.bar-back)) {
   order: 2;
 }
 
-html:is([data-text="large"], [data-contrast]) .step-bar .bar-back {
+html:is([data-text], [data-contrast]) .step-bar .bar-back {
   order: 3;
 }
 

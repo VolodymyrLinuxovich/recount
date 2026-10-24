@@ -103,16 +103,49 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Phones: just the lens, like the menu button beside it, so the masthead stays one row.
-   Its accessible name is still "Ask Lupa". */
+.helper-mast-short {
+  display: none;
+}
+
+/* Phones: the lens plus a short verb ("Ask" / "Preguntar"), so the masthead stays one row
+   and the button doesn't read as search. Its accessible name is still "Ask Lupa". */
 @container masthead (max-width: 32.5rem) {
   .helper-mast-btn {
-    padding: 0;
-    width: 50px;
-    justify-content: center;
+    gap: 6px;
+    padding: 0 var(--sp-3) 0 var(--sp-2);
   }
   .helper-mast-text {
     display: none;
+  }
+  .helper-mast-short {
+    display: inline;
+  }
+  /* A speech-bubble corner: it reads as "talk to", not "search", even as a lens alone. */
+  .masthead .helper-mast-btn {
+    border-radius: 14px 14px 14px 4px;
+  }
+}
+
+/* Too tight for the word (narrow phones, Spanish, Large text): the lens alone, in its bubble. */
+@container masthead (max-width: 17.5rem) {
+  .helper-mast-short {
+    display: none;
+  }
+  .helper-mast-btn {
+    width: 50px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@container masthead (max-width: 21.5rem) {
+  .masthead:lang(es) .helper-mast-short {
+    display: none;
+  }
+  .masthead:lang(es) .helper-mast-btn {
+    width: 50px;
+    padding: 0;
+    justify-content: center;
   }
 }
 

@@ -234,21 +234,31 @@
   outline-offset: 2px;
 }
 
-/* A flagged line: a small round badge with the problem number. Tap goes to that problem. */
+/* A flagged line: a small purple outline chip with the problem number (red is for the
+   problem itself, not for every link to it). Tap goes to that problem. */
 .found-badge {
   all: unset;
+  box-sizing: border-box;
   cursor: pointer;
   display: inline-grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--pen);
-  color: var(--sheet);
+  min-width: 30px;
+  height: 28px;
+  padding: 0 var(--sp-2);
+  border: 1.5px solid var(--primary);
+  border-radius: 999px;
+  background: var(--sheet);
+  color: var(--primary);
   font-size: var(--fs-sm);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s ease;
   /* bigger invisible tap area */
   position: relative;
+}
+
+.found-badge:hover {
+  background: var(--rc-brand-tint);
 }
 
 .found-badge::after {
@@ -402,27 +412,109 @@
 
 .found-table th {
   text-align: left;
+  vertical-align: bottom;
   font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
   color: var(--ink-2);
   font-weight: 600;
-  border-bottom: 2px solid var(--ink);
-  padding: var(--sp-2) var(--sp-1);
+  border-bottom: 1.5px solid var(--rule);
+  padding: var(--sp-2);
 }
 
 .found-table td {
   border-bottom: 1px solid var(--rule-soft);
-  padding: var(--sp-3) var(--sp-1);
+  padding: var(--sp-3) var(--sp-2);
   vertical-align: top;
+}
+
+.found-table :is(th, td):first-child {
+  padding-left: 0;
+}
+
+.found-table :is(th, td):last-child {
+  padding-right: 0;
 }
 
 .found-table td:not(:first-child),
 .found-table th:not(:first-child) {
   text-align: right;
-  white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+
+.found-table td:not(:first-child) {
+  white-space: nowrap;
+}
+
+/* Phones (and Large text): the cash table stacks. The service on line 1, then
+   "Billed" and the cash price side by side on line 2, each with its own label. */
+@media (max-width: 420px) {
+  .cash-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .cash-table,
+  .cash-table tbody {
+    display: block;
+  }
+  .cash-table tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-1) var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cash-table tr:last-child {
+    border-bottom: 0;
+  }
+  .cash-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .cash-table td:first-child {
+    grid-column: 1 / -1;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .cash-table td:not(:first-child) {
+    text-align: left;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: var(--fs-base);
+    font-weight: 700;
+  }
+  .cash-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-ui);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--ink-2);
+    white-space: normal;
+  }
 }
 
 .found-versus-src {
   grid-column: 1 / -1;
   margin: calc(-1 * var(--sp-1)) 0 0;
+}
+
+/* No price list for this hospital: a positive lead line, then a small muted note. */
+.found-noprice {
+  margin: 0 0 var(--sp-4);
+}
+
+.found-noprice-lead {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ok);
+}
+
+.found-noprice .found-quiet {
+  margin: var(--sp-1) 0 0;
+  font-size: var(--fs-sm);
 }
