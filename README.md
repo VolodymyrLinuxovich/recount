@@ -147,7 +147,7 @@ sequenceDiagram
 flowchart LR
     H[HCAI Fair Pricing<br/>Policy Lookup] --> CR[crawl.py<br/>470 hospitals]
     CR --> EX[extract.py<br/>2,333 documents]
-    EX --> RX[rules.py<br/>980 candidate sentences]
+    EX --> RX[rules.py<br/>997 candidate sentences]
     RX --> R1[review.py<br/>Claude, exact quote required]
     R1 --> R2[verify.py<br/>second review argues<br/>the hospital's side]
     R2 --> RP[report.py<br/>milder verdict wins]
@@ -167,6 +167,9 @@ flowchart LR
 
 </div>
 
+**Also in the app:** a one-screen intro on first visit · **Lupa**, a helper chat that answers questions about your bill
+· a **Display** mode with larger type for low vision · "Change my answers" · a send checklist after you approve.
+
 **Where Claude is used, and where it is not**
 
 | Step | Who does it | Why |
@@ -176,6 +179,7 @@ flowchart LR
 | Flag bad charges | **Rules only** | Every flag points at a bill line and a published number |
 | Decide eligibility | **Rules only** | A wrong "you qualify" costs a family real money |
 | Draft letters | **Claude**, template fallback | Claude gets only the computed facts as JSON |
+| Lupa helper chat | **Claude** | Answers questions about this bill from its facts. It doesn't change answers or send anything |
 | Review audit sentences | **Claude**, twice, with a quote check | A verdict is dropped if its quote isn't in the policy text |
 | Send anything | Nobody | The patient sends the letters |
 
@@ -192,16 +196,17 @@ Medi-Cal-first requirement.
 
 | Result | Hospitals |
 |--------|-----------|
-| **Plain conflict with state law** | **15** |
-| Likely conflict | 135 |
-| Wording worth asking about | 117 |
+| **Plain conflict with state law** | **14** |
+| Likely conflict | 47 |
+| Wording worth asking about | 192 |
 
 Each hospital is counted once, under its strongest result. The three numbers are never added up.
 
 - **Example: PIH Health Whittier Hospital.** Its charity care policy says it will "consider individual or family net
-  worth including all liquid and non-liquid assets owned". Its debt collection policy lets collectors "notify the credit
-  reporting agencies of the outstanding balance … after 180 days" and allows "placing a lien on a home or other real
-  estate". California bans all three. Both documents are dated 2026-07-10.
+  worth including all liquid and non-liquid assets owned". Its debt collection policy says "Collection agencies may
+  notify the credit reporting agencies of the outstanding balance … after 180 days" and "Under certain circumstances when
+  income does not exceed 400% FPL, PIH’s collection agency may file a lien on a primary residence". California bans all
+  three. Both documents are dated 2026-07-10.
 - **The second review clears flags too.** An earlier pass flagged San Francisco General's income proof wording. The
   second review found a fair compliant reading and cleared it. We'd rather miss a problem than accuse a hospital wrongly.
 
@@ -232,6 +237,8 @@ is **"You likely owe $0"**, with both rules shown.
 ## Path to Production
 
 - **Any California hospital.** Hospital matching, eligibility, letters and the policy warning work for all 470.
+  Free-care cutoffs come from each hospital's own policy for **159 of 470**, kept only where the quoted sentence ties the
+  number to free care. Every other hospital gets the state's 400% discount rule, never a guessed "free".
   Line-by-line price checks are live for four San Francisco hospitals (ZSFG, UCSF, CPMC Van Ness, Saint Francis), and
   the app says so for every other hospital. The Actor reads any US hospital's price file, so adding a hospital means
   verifying its file, not writing code.
