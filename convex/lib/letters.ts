@@ -42,8 +42,8 @@ const LAW_LINE: Record<string, [string, string]> = {
     "La ley de California limita los comprobantes de ingreso exigidos a talones de pago recientes o declaraciones de impuestos (Código de Salud y Seguridad 127405(e)).",
   ],
   CREDIT_REPORTING: [
-    "California law no longer allows reporting hospital debt to credit agencies (Health and Safety Code 127425).",
-    "La ley de California ya no permite reportar deudas de hospital a las agencias de crédito (Código de Salud y Seguridad 127425).",
+    "California law no longer allows reporting medical debt to credit agencies (SB 1061, 2024).",
+    "La ley de California ya no permite reportar deudas médicas a las agencias de crédito (SB 1061, 2024).",
   ],
   LIENS: [
     "California law does not allow liens on a patient's real property (Health and Safety Code 127425).",

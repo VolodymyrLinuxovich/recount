@@ -229,7 +229,16 @@
    }
   }
  },
- "fap": null,
+ "fap": {
+  "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=e69c252a-04e7-4ce3-b713-105d50c0867e",
+  "freeCareMaxFplPct": 400,
+  "discountMaxFplPct": null,
+  "quotes": [
+   "Patient is an Uninsured Patient with a family income (as defined below) at or below 400% of the most recent FPL."
+  ],
+  "phone": null,
+  "applicationUrl": null
+ },
  "warnings": [
   "Codes not in the price file: 12002, 0451"
  ]

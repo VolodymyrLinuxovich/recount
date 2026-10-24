@@ -2,7 +2,6 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
-import { ApifyClient } from "apify-client";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -54,7 +53,34 @@ async function readWithClaude(blob: Blob, mediaType: string): Promise<ParsedBill
   return res.parsed_output;
 }
 
-async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string | null, lang: Lang): Promise<HospitalRef | null> {
+/** The Actor's dataset item uses its own field names; turn it into our HospitalRef. */
+function fromActor(item: Record<string, unknown>, key: string, fallbackName: string): HospitalRef {
+  const mrf = item.mrf as HospitalRef["mrf"] | null;
+  const fap = (item.fap ?? null) as (Omit<NonNullable<HospitalRef["fap"]>, "quotes"> & { quotes?: unknown[] }) | null;
+  const quotes = (fap?.quotes ?? []).map((q) =>
+    typeof q === "string" ? q : Array.isArray(q) ? String(q[q.length - 1]) : String((q as { text?: string }).text ?? ""),
+  );
+  return {
+    key,
+    name: (item.name as string) ?? (item.hospitalName as string) ?? fallbackName,
+    source: "apify-live",
+    fetchedAt: new Date().toISOString(),
+    mrf: mrf ? { url: mrf.url, lastUpdated: mrf.lastUpdated ?? null, prices: mrf.prices ?? {} } : null,
+    fap: fap
+      ? {
+          url: fap.url ?? null,
+          freeCareMaxFplPct: fap.freeCareMaxFplPct ?? null,
+          discountMaxFplPct: fap.discountMaxFplPct ?? null,
+          quotes: quotes.filter(Boolean),
+          phone: fap.phone ?? null,
+          applicationUrl: fap.applicationUrl ?? null,
+        }
+      : null,
+    warnings: (item.warnings as string[]) ?? [],
+  };
+}
+
+async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string | null, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
   const t = pick(lang);
   const known = KNOWN_HOSPITALS.find((h) => name && h.match.test(name));
   if (!known) {
@@ -65,19 +91,28 @@ async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string 
   await step(ctx, caseId, "hospital", t(`Pulling ${known.name}'s published prices and assistance policy`, `Buscando los precios publicados y la política de ayuda de ${known.name}`), "running");
   const token = process.env.APIFY_TOKEN;
   const actor = process.env.APIFY_ACTOR_ID;
-  if (token && actor) {
+  // Live lookups only for hospitals whose site the Actor has been verified on.
+  if (token && actor && known.live) {
     try {
-      const client = new ApifyClient({ token });
-      const run = await client.actor(actor).call({ hospitalUrl: known.url, hospitalName: known.name }, { waitSecs: 180 });
-      const { items } = await client.dataset(run.defaultDatasetId).listItems();
+      // Apify REST API: run the Actor and get its dataset items in one call.
+      const res = await fetch(`https://api.apify.com/v2/acts/${actor}/run-sync-get-dataset-items?timeout=150`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ hospitalUrl: known.url, hospitalName: known.name, codes }),
+      });
+      if (!res.ok) throw new Error(`Apify ${res.status}: ${(await res.text()).slice(0, 150)}`);
+      const items = (await res.json()) as unknown[];
       if (items[0]) {
-        const ref = { ...(items[0] as unknown as HospitalRef), key: known.key, source: "apify-live" as const, fetchedAt: new Date().toISOString() };
+        const live = fromActor(items[0] as Record<string, unknown>, known.key, known.name);
+        // The Actor may miss the policy cutoff; keep the reviewed snapshot's policy facts in that case.
+        const snapFap = SNAPSHOTS[known.key]?.fap ?? null;
+        const ref = live.fap?.freeCareMaxFplPct != null || !snapFap ? live : { ...live, fap: snapFap };
         await ctx.runMutation(internal.cases.saveHospital, { key: known.key, data: ref });
         await step(ctx, caseId, "hospital", t(`Read ${known.name}'s price file and policy live`, `Leímos en vivo el archivo de precios y la política de ${known.name}`), "done", ref.mrf?.url ?? undefined);
         return ref;
       }
     } catch (e) {
-      await step(ctx, caseId, "hospital", t("Live lookup failed, using our last saved run", "La búsqueda en vivo falló; usamos la última búsqueda guardada"), "warn", String(e).slice(0, 200));
+      await step(ctx, caseId, "hospital-live", t("Live lookup failed, using saved data", "La búsqueda en vivo falló; usamos datos guardados"), "warn", String(e).slice(0, 200));
     }
   }
   const cached = await ctx.runQuery(internal.cases.cachedHospital, { key: known.key });
@@ -87,8 +122,10 @@ async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string 
     return null;
   }
   await step(ctx, caseId, "hospital",
-    t(`Using a saved lookup of ${known.name} (${snap.fetchedAt.slice(0, 10)})`, `Usamos una búsqueda guardada de ${known.name} (${snap.fetchedAt.slice(0, 10)})`), "done",
-    t("Saved run of the same Apify Actor, not fetched just now.", "Resultado guardado del mismo Actor de Apify, no buscado ahora mismo."));
+    t(`Using saved price data for ${known.name} (${snap.fetchedAt.slice(0, 10)})`, `Usamos datos de precios guardados de ${known.name} (${snap.fetchedAt.slice(0, 10)})`), "done",
+    cached
+      ? t("From an earlier live lookup of the hospital's price file, not fetched just now.", "De una búsqueda en vivo anterior del archivo de precios del hospital, no buscado ahora mismo.")
+      : t("Extracted earlier from the hospital's published price file and assistance policy by our data pipeline, not fetched just now.", "Extraído antes del archivo de precios y la política de ayuda publicados por el hospital, no buscado ahora mismo."));
   return snap;
 }
 
@@ -145,7 +182,8 @@ export const readAndCheck = internalAction({
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { bill, billSource } });
 
       // 2. Look up the hospital's own published numbers.
-      const found = await lookupHospital(ctx, caseId, bill.hospitalName, lang);
+      const codes = [...new Set(bill.lines.map((l) => (l.code ?? "").toUpperCase()).filter(Boolean))];
+      const found = await lookupHospital(ctx, caseId, bill.hospitalName, lang, codes);
       const hospital = found ? warningsForBill(found, bill) : null;
 
       // 3. Check every line (rules, no model).

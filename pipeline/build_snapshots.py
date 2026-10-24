@@ -112,26 +112,44 @@ def build(key: str, data_dir: Path, fap_by_key: dict) -> dict | None:
     }
 
 
+# Snapshot keys used by the app -> keys used in hospitals.json.
+FAP_KEYS = {"zsfg": "zsfg", "ucsf": "ucsf", "cpmc": "cpmc_vanness", "saintfrancis": "stfrancis_hyde"}
+# Saint Francis is now a UCSF Health hospital; HCAI has the same UCSF policy PDF on file for it.
+FAP_FALLBACK = {"saintfrancis": "ucsf"}
+
+
 def load_faps(data_dir: Path) -> dict:
-    """Read financial assistance policy facts if the research file exists."""
+    """Read financial assistance policy facts (cutoffs with their quotes) from hospitals.json."""
     path = data_dir / "hospitals.json"
     if not path.exists():
         return {}
-    raw = json.loads(path.read_text())
-    items = raw.get("hospitals", raw) if isinstance(raw, dict) else raw
-    out = {}
-    for h in items if isinstance(items, list) else []:
-        key = h.get("key") or h.get("hospital_key")
-        if not key:
-            continue
-        out[key] = {
-            "url": h.get("fap_url"),
-            "freeCareMaxFplPct": h.get("free_care_max_fpl_pct"),
-            "discountMaxFplPct": h.get("discount_max_fpl_pct"),
-            "quotes": h.get("fap_quotes", []),
-            "phone": h.get("billing_phone"),
-            "applicationUrl": h.get("application_url"),
+    by_key = {h["key"]: h for h in json.loads(path.read_text()).get("hospitals", [])}
+
+    def fap_of(h: dict) -> dict | None:
+        f = h.get("fap") or {}
+        free, disc = f.get("free_care") or {}, f.get("discount") or {}
+        if not f.get("url") and free.get("max_pct_fpl") is None:
+            return None
+        phones = h.get("billing_phones") or {}
+        phone = next(iter(phones.values()), None) if isinstance(phones, dict) else (phones[0] if phones else None)
+        return {
+            "url": f.get("url"),
+            "freeCareMaxFplPct": free.get("max_pct_fpl"),
+            "discountMaxFplPct": disc.get("max_pct_fpl"),
+            "quotes": [q for q in (free.get("quote"), disc.get("quote")) if q],
+            "phone": phone if isinstance(phone, str) else None,
+            "applicationUrl": f.get("application_url"),
         }
+
+    out = {}
+    for app_key, data_key in FAP_KEYS.items():
+        h = by_key.get(data_key)
+        fap = fap_of(h) if h else None
+        if (fap is None or fap["freeCareMaxFplPct"] is None) and app_key in FAP_FALLBACK:
+            fb = by_key.get(FAP_KEYS[FAP_FALLBACK[app_key]])
+            fap = fap_of(fb) if fb else fap
+        if fap:
+            out[app_key] = fap
     return out
 
 

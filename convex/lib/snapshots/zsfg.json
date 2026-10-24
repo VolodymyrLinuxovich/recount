@@ -180,12 +180,15 @@
   }
  },
  "fap": {
-  "url": null,
-  "freeCareMaxFplPct": null,
+  "url": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=41121f62-1c1d-4c2f-a324-a8cbfe537143",
+  "freeCareMaxFplPct": 138,
   "discountMaxFplPct": null,
-  "quotes": [],
+  "quotes": [
+   "A patient's household income may not exceed 138% of the Federal poverty level.",
+   "There is no FPL limit for a patient to qualify. The patient's FPL determines the amount of the discount."
+  ],
   "phone": null,
-  "applicationUrl": null
+  "applicationUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=2267a223-573d-4668-b7a6-7a74fef82104"
  },
  "warnings": [
   "Codes not in the price file: 36415, J7030, J7050, J1885, J2405, 0450, 0451"
