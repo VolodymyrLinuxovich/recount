@@ -3,6 +3,8 @@
  "login_required": false,
  "hospitals": {
   "zsfg": {
+   "hcai_name": "PRISCILLA CHAN & MARK ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL & TRAUMA CENTER",
+   "hcai_id": "106380939",
    "license": "220000063",
    "address": "1001 POTRERO AVENUE, SAN FRANCISCO, CA 94110",
    "documents": [
@@ -63,6 +65,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center/",
+   "name": "Zuckerberg San Francisco General Hospital and Trauma Center",
+   "lat": 37.756114285811,
+   "lon": -122.406558173941,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "1001 POTRERO AVE, SAN FRANCISCO, CA, 94110",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2025-11-14",
@@ -85,6 +93,8 @@
    }
   },
   "ucsf": {
+   "hcai_name": "UCSF MEDICAL CENTER",
+   "hcai_id": "106381154",
    "license": "220000091",
    "address": "505 PARNASSUS AVENUE, SAN FRANCISCO, CA 94143",
    "documents": [
@@ -140,6 +150,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center/",
+   "name": "UCSF Medical Center (Parnassus)",
+   "lat": 37.762924129968,
+   "lon": -122.459581776079,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "505 PARNASSUS AVE, SAN FRANCISCO, CA, 94143",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2026-01-16",
@@ -162,6 +178,8 @@
    }
   },
   "ucsf_missionbay": {
+   "hcai_name": "UCSF MEDICAL CENTER AT MISSION BAY",
+   "hcai_id": "106384200",
    "license": "220000091",
    "address": "1975 4TH STREET, SAN FRANCISCO, CA 94158",
    "documents": [
@@ -217,6 +235,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/ucsf-medical-center-at-mission-bay/",
+   "name": "UCSF Medical Center at Mission Bay",
+   "lat": 37.7647716,
+   "lon": -122.3896641,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "nominatim: UCSF Medical Center at Mission Bay, 1975 4th Street",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2026-01-16",
@@ -239,6 +263,8 @@
    }
   },
   "cpmc_vanness": {
+   "hcai_name": "CALIFORNIA PACIFIC MEDICAL CENTER - VAN NESS CAMPUS",
+   "hcai_id": "106384176",
    "license": "220000197",
    "address": "1101 VAN NESS AVENUE, SAN FRANCISCO, CA 94109",
    "documents": [
@@ -329,6 +355,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/california-pacific-medical-center-van-ness-campus/",
+   "name": "California Pacific Medical Center, Van Ness Campus",
+   "lat": 37.785722723158,
+   "lon": -122.421555809264,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "1101 VAN NESS AVE, SAN FRANCISCO, CA, 94109",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2026-01-26",
@@ -351,6 +383,8 @@
    }
   },
   "stfrancis_hyde": {
+   "hcai_name": "UCSF HEALTH HYDE HOSPITAL",
+   "hcai_id": "106380960",
    "license": "220000069",
    "address": "900 HYDE STREET, SAN FRANCISCO, CA 94109",
    "documents": [
@@ -421,6 +455,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-francis-memorial-hospital/",
+   "name": "UCSF Health Hyde Hospital (formerly Saint Francis Memorial)",
+   "lat": 37.789175568076,
+   "lon": -122.416956745197,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "900 HYDE ST, SAN FRANCISCO, CA, 94109",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2026-01-16",
@@ -443,6 +483,8 @@
    }
   },
   "stmarys": {
+   "hcai_name": "UCSF HEALTH - ST. MARY'S HOSPITAL",
+   "hcai_id": "106380965",
    "license": "220000071",
    "address": "450 STANYAN STREET, SAN FRANCISCO, CA 94117",
    "documents": [
@@ -513,6 +555,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/st-marys-medical-center/",
+   "name": "UCSF Health St. Mary's Hospital",
+   "lat": 37.773798233343,
+   "lon": -122.454395026793,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "450 STANYAN ST, SAN FRANCISCO, CA, 94117",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2026-01-16",
@@ -535,6 +583,8 @@
    }
   },
   "kaiser_sf": {
+   "hcai_name": "KAISER FOUNDATION HOSPITAL - SAN FRANCISCO",
+   "hcai_id": "106380857",
    "license": "220000188",
    "address": "2425 GEARY BOULEVARD, SAN FRANCISCO, CA 94115",
    "documents": [
@@ -595,6 +645,12 @@
     }
    ],
    "detail_url": "https://hcai.ca.gov/affordability/hospital-billing-policies/kaiser-foundation-hospital-san-francisco/",
+   "name": "Kaiser Permanente San Francisco Medical Center",
+   "lat": 37.782698528994,
+   "lon": -122.44319644806,
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "geocode_match": "2425 GEARY BLVD, SAN FRANCISCO, CA, 94115",
    "latest_charity_care_policy": {
     "label": "Charity Care Policy",
     "effective_date": "2025-02-27",

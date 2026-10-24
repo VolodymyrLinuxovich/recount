@@ -11,6 +11,7 @@ import html
 import json
 import os
 import re
+import urllib.parse
 
 from scripts.common import OUT, fetch, pdf_text, raw_path
 
@@ -26,6 +27,43 @@ HOSPITALS = {
     "stmarys": "st-marys-medical-center",
     "kaiser_sf": "kaiser-foundation-hospital-san-francisco",
 }
+
+# Display names for the app. The HCAI name (all caps) is kept as hcai_name.
+NAMES = {
+    "zsfg": "Zuckerberg San Francisco General Hospital and Trauma Center",
+    "ucsf": "UCSF Medical Center (Parnassus)",
+    "ucsf_missionbay": "UCSF Medical Center at Mission Bay",
+    "cpmc_vanness": "California Pacific Medical Center, Van Ness Campus",
+    "stfrancis_hyde": "UCSF Health Hyde Hospital (formerly Saint Francis Memorial)",
+    "stmarys": "UCSF Health St. Mary's Hospital",
+    "kaiser_sf": "Kaiser Permanente San Francisco Medical Center",
+}
+
+GEOCODER = ("https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress"
+            "?benchmark=Public_AR_Current&vintage=Current_Current&layers=Counties&format=json&address={q}")
+
+# Addresses the Census geocoder can't match. Coordinates from OpenStreetMap (Nominatim),
+# the same fallback audit/crawl.py uses for the statewide corpus.
+GEOCODE_FALLBACK = {
+    "1975 4TH STREET, SAN FRANCISCO, CA 94158": {
+        "lat": 37.7647716, "lon": -122.3896641, "city": "San Francisco", "county": "San Francisco",
+        "geocode_match": "nominatim: UCSF Medical Center at Mission Bay, 1975 4th Street"},
+}
+
+
+def geocode(address):
+    """Lat/lon, city and county for an HCAI address, from the US Census geocoder."""
+    r = json.loads(fetch(GEOCODER.format(q=urllib.parse.quote(address)), timeout=60))
+    m = r["result"]["addressMatches"]
+    if not m and address in GEOCODE_FALLBACK:
+        return dict(GEOCODE_FALLBACK[address])
+    if not m:
+        raise ValueError(f"no geocoder match for {address!r}")
+    m = m[0]
+    county = m["geographies"]["Counties"][0]["BASENAME"]
+    return {"lat": m["coordinates"]["y"], "lon": m["coordinates"]["x"],
+            "city": m["addressComponents"]["city"].title(), "county": county,
+            "geocode_match": m["matchedAddress"]}
 
 
 def search(query):
@@ -54,9 +92,13 @@ def parse_detail(t):
         iso = f"{d[6:]}-{d[:2]}-{d[3:5]}" if d else None
         docs.append({"label": label, "effective_date": iso, "url": m.group(1)})
     head = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t)))
+    name = re.search(r"<title>(.*?)(?:\s+-\s+HCAI)?</title>", t, re.S)
+    hcai_id = re.search(r"HCAI ID:\s*(\d+)", head)
     lic = re.search(r"License #:\s*(\d+)", head)
     addr = re.search(r"Address:\s*(.+?)\s+(?:Hospital Aliases|License #)", head)
-    return {"license": lic.group(1) if lic else None, "address": addr.group(1) if addr else None, "documents": docs}
+    return {"hcai_name": html.unescape(re.sub(r"<[^>]+>|\s+", " ", name.group(1))).strip() if name else None,
+            "hcai_id": hcai_id.group(1) if hcai_id else None,
+            "license": lic.group(1) if lic else None, "address": addr.group(1) if addr else None, "documents": docs}
 
 
 def latest(docs, label):
@@ -71,6 +113,9 @@ def build(download_pdfs=True):
         url = DETAIL.format(slug=slug)
         info = parse_detail(fetch(url).decode("utf-8", "replace"))
         info["detail_url"] = url
+        info["name"] = NAMES[key]
+        if info["address"]:
+            info.update(geocode(info["address"]))
         info["latest_charity_care_policy"] = latest(info["documents"], "Charity Care Policy")
         info["latest_discount_payment_policy"] = latest(info["documents"], "Discount Payment Policy")
         info["latest_debt_collection_policy"] = latest(info["documents"], "Debt Collection Policy")
