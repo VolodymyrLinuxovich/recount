@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "convex/react";
 import { anyApi } from "convex/server";
 import * as Clipboard from "expo-clipboard";
 import { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Alert, BackHandler, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Alert, BackHandler, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
 import Svg, { Circle, Path } from "react-native-svg";
@@ -223,6 +223,7 @@ export function CaseFlow({ t, id, token, onHome }) {
                     approve({
                       id,
                       token,
+                      requireFilled: true,
                       letters: list.map((l) => clean({ kind: l.kind, title: l.title, subject: l.subject, body: l.body, subjectPatient: l.subjectPatient, bodyPatient: l.bodyPatient })),
                     }),
                   ),
@@ -237,15 +238,18 @@ export function CaseFlow({ t, id, token, onHome }) {
           primary: { label: t.changeLetters, busy, onPress: () => run(() => unapprove({ id, token })) },
           secondary: {
             label: t.deleteBill,
-            onPress: () =>
+            onPress: () => {
+              const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
+              // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
+              if (Platform.OS === "web") {
+                if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
+                return;
+              }
               Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
                 { text: t.cancel, style: "cancel" },
-                {
-                  text: t.del,
-                  style: "destructive",
-                  onPress: () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); }),
-                },
-              ]),
+                { text: t.del, style: "destructive", onPress: del },
+              ]);
+            },
           },
         };
       default:

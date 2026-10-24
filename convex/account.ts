@@ -1,12 +1,12 @@
 // Delete an account: the user, their sign-in records, their profile and, if asked, all their bills.
-import { getAuthUserId } from "@convex-dev/auth/server";
+import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { mutation } from "./_generated/server";
 
 export const remove = mutation({
   args: { deleteBills: v.boolean() },
   handler: async (ctx, { deleteBills }) => {
-    const userId = await getAuthUserId(ctx);
+    const userId = await currentUser(ctx);
     if (!userId) throw new ConvexError("Please sign in first.");
 
     for (const c of await ctx.db.query("cases").withIndex("by_owner", (q) => q.eq("ownerId", userId)).collect()) {

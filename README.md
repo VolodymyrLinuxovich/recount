@@ -4,7 +4,7 @@
 
 **Got an ER bill you can't pay?** Recount reads a photo of a California hospital bill, checks every line against the
 hospital's **own published prices**, applies **California's charity care law** to your household, flags where the
-hospital's **own policy breaks state law**, and drafts the letters to ask for a discount. **You approve. Nothing is sent
+hospital's **own policy conflicts with state law**, and drafts the letters to ask for a discount. **You approve. Nothing is sent
 for you.**
 
 <br/>
@@ -49,12 +49,12 @@ patients owe much less:
 - Hospitals must offer discounted care to uninsured patients up to **400% of the federal poverty line**. For one person
   in 2026 that is **$63,840 a year**.
 - Since **January 2025**, hospitals **can't count your assets**, **can't set a deadline** to apply, **can't report the
-  debt to credit bureaus**, and **can't put a lien on your home**.
+  debt to credit bureaus**, and **can't put a lien on the home** of a patient who qualifies for help.
 - Many hospitals give **free** care below their own cutoff. Zuckerberg San Francisco General's is **138%** of the poverty
   line, about $22,000 a year for one person.
 
 Most patients never find out. The numbers needed to check a bill are public, but they sit in **hospital price files of
-90 MB or more** and in **40-page policy PDFs**. So people pay, or the bill goes to collections.
+up to 90 MB** and in **40-page policy PDFs**. So people pay, or the bill goes to collections.
 
 **Recount does the checking from a phone in a few minutes**, and every number it shows links to the document it came
 from.
@@ -218,7 +218,8 @@ shows the policy's own words, the page, and the document's effective date.
 `eval/` generates synthetic San Francisco ER bills priced from each hospital's **real published charges**, plants known
 errors in most of them, and renders them as clean scans, phone photos and PDFs.
 
-- **Rules on a correct reading:** **24 of 24** planted errors caught, **0** false alarms on clean bills.
+- **Rules on a correct reading:** **24 of 24** planted errors caught, **0** false alarms on clean bills. The generator
+  only plants errors the rules are meant to catch, so this tests the rules, not reading accuracy.
 - **Claude on the sample photo:** **8 of 8** lines and the **$12,741** total read correctly.
 - **Live QA uploads:** a rotated, blurred photo read all 7 lines and its total; a ZSFG PDF and a CPMC photo flag exactly
   their planted errors (a total mismatch, a $647 duplicate) and nothing else.
