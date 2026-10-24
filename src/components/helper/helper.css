@@ -126,8 +126,8 @@
   }
 }
 
-/* Too tight for the word (narrow phones, Spanish, Large text): the lens alone, in its bubble. */
-@container masthead (max-width: 17.5rem) {
+/* Too tight for the word next to the account button (narrow phones, Spanish, Large text): the lens alone, in its bubble. */
+@container masthead (max-width: 21rem) {
   .helper-mast-short {
     display: none;
   }
@@ -138,7 +138,7 @@
   }
 }
 
-@container masthead (max-width: 21.5rem) {
+@container masthead (max-width: 23.5rem) {
   .masthead:lang(es) .helper-mast-short {
     display: none;
   }

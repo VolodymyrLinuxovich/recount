@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
-import { RecentBills } from "./bills/RecentBills";
 import { rememberCase } from "./bills/myBills";
 import { useT } from "./i18n/I18nProvider";
 import { InstallHint } from "./install/InstallHint";
@@ -171,7 +170,6 @@ export function StartScreen() {
               sampleLabel: busy === "sample" ? t("start.sampleBusy") : t("start.sample"),
             }}
             error={errorNote}
-            recent={<RecentBills />}
             install={<InstallHint />}
           />
         </div>

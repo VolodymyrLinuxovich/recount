@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { VisionToggle } from "./a11y/VisionToggle";
-import { AccountLink } from "./account/AccountLink";
+import { AccountButton, AccountLink } from "./account/AccountLink";
 import { BrandMark } from "./BrandMark";
 import { useMyBills } from "./bills/myBills";
 import { HelperButton } from "./helper/HelperButton";
@@ -43,7 +43,7 @@ function Links({ where, onPick }: { where: Where; onPick?: () => void }) {
           </span>
         )}
       </Link>
-      <AccountLink menu={!!onPick} onPick={onPick} />
+      {onPick && <AccountLink menu onPick={onPick} />}
     </>
   );
 }
@@ -116,6 +116,7 @@ export function Masthead() {
         <div className="masthead-nav">
           <LanguageToggle />
           <HelperButton />
+          <AccountButton />
           <button
             ref={menuBtn}
             type="button"

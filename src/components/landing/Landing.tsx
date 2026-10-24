@@ -37,11 +37,10 @@ type Actions = {
   sampleLabel: string;
 };
 
-export function Landing({ actions, error, recent, install }: { actions: Actions; error: ReactNode; recent: ReactNode; install: ReactNode }) {
+export function Landing({ actions, error, install }: { actions: Actions; error: ReactNode; install: ReactNode }) {
   return (
     <div className="landing">
       <Hero actions={actions} error={error} />
-      {recent && <div className="ld-wrap ld-recent">{recent}</div>}
       <Problem />
       <How />
       <AskLupa />
