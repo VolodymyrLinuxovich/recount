@@ -41,7 +41,8 @@ describe("checkBill", () => {
   });
 
   it("flags a charge above the published gross charge, per unit", () => {
-    const f = checkBill(bill([L("99284", 2400)]), ref).find((x) => x.kind === "ABOVE_LIST_PRICE");
+    // Insured bill: only the list-price check applies.
+    const f = checkBill(bill([L("99284", 2400)], { insurancePayer: "Blue Shield" }), ref).find((x) => x.kind === "ABOVE_LIST_PRICE");
     expect(f?.amount).toBe(400);
     // Two units at the list price is fine.
     expect(checkBill(bill([L("85025", 200, 2)]), ref).find((x) => x.kind === "ABOVE_LIST_PRICE")).toBeUndefined();
@@ -108,8 +109,11 @@ import { templateLetters } from "../convex/lib/letters";
 describe("potentialSavings", () => {
   it("counts a line once even when it has two findings", () => {
     const f = checkBill(bill([L("99284", 2400)]), ref);
-    expect(f.map((x) => x.kind).sort()).toEqual(["ABOVE_LIST_PRICE", "CASH_PRICE_GAP"]);
-    expect(potentialSavings(f)).toBe(1600); // the larger of 400 and 1600, not 2000
+    // Above both list and cash price: one finding, the larger saving, both numbers as evidence.
+    expect(f.map((x) => x.kind)).toEqual(["ABOVE_LIST_PRICE"]);
+    expect(f[0].amount).toBe(1600);
+    expect(f[0].evidence.map((e) => e.label)).toContain("Published cash price");
+    expect(potentialSavings(f)).toBe(1600);
   });
 });
 

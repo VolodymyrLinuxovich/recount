@@ -97,6 +97,8 @@ const en = {
   del: "Delete",
   home: "Back to start",
 
+  retakeTitle: "Let's try another photo",
+  outOfStateTitle: "This bill is from outside California",
   notABill: "This doesn't look like a hospital bill.",
   notABillBody: "Try another photo. Make sure the whole page is in the picture.",
   errorTitle: "Something went wrong",
@@ -201,6 +203,8 @@ const es = {
   del: "Borrar",
   home: "Volver al inicio",
 
+  retakeTitle: "Probemos con otra foto",
+  outOfStateTitle: "Esta factura es de fuera de California",
   notABill: "Esto no parece una factura de hospital.",
   notABillBody: "Pruebe con otra foto. Asegúrese de que se vea toda la página.",
   errorTitle: "Algo salió mal",

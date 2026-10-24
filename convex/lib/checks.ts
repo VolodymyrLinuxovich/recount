@@ -139,6 +139,19 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null, lang: Lang 
     });
   }
 
+  // A line above both the list price and the cash price is one problem, not two:
+  // keep the larger saving and show both published numbers as evidence.
+  for (const cash of out.filter((f) => f.kind === "CASH_PRICE_GAP")) {
+    const list = out.find((f) => f.kind === "ABOVE_LIST_PRICE" && f.lines[0] === cash.lines[0]);
+    if (!list) continue;
+    if (cash.amount > list.amount) {
+      list.amount = cash.amount;
+      list.detail += " " + cash.detail;
+    }
+    list.evidence.push(...cash.evidence.filter((e) => !list.evidence.some((x) => x.label === e.label)));
+    out.splice(out.indexOf(cash), 1);
+  }
+
   // Do the lines add up to the printed total?
   if (bill.totalCharges != null && bill.lines.length > 0) {
     const sum = r2(bill.lines.reduce((a, l) => a + l.charge, 0));
