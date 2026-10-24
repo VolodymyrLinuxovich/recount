@@ -1,0 +1,2266 @@
+{
+ "generatedAt": "2026-10-24T12:00:00Z",
+ "hospitalsTotal": 470,
+ "hospitalsChecked": 71,
+ "rules": [
+  {
+   "id": "no-time-limit",
+   "title": "No deadline to apply",
+   "cite": "Cal. Health & Safety Code \u00a7 127405",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
+   "lawQuote": "[Sample text] A hospital shall not impose time limits for applying for charity care or discount payment."
+  },
+  {
+   "id": "no-asset-test",
+   "title": "No asset test",
+   "cite": "Cal. Health & Safety Code \u00a7 127405",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
+   "lawQuote": "[Sample text] A hospital shall not use the patient's monetary assets in determining eligibility."
+  },
+  {
+   "id": "income-docs",
+   "title": "Income proof: pay stubs or tax returns only",
+   "cite": "Cal. Health & Safety Code \u00a7 127405",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
+   "lawQuote": "[Sample text] Documentation of income shall be limited to recent pay stubs or income tax returns."
+  },
+  {
+   "id": "no-credit-reporting",
+   "title": "No reporting to credit agencies",
+   "cite": "Cal. Civil Code \u00a7 1785.27",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1785.27.",
+   "lawQuote": "[Sample text] A person shall not furnish information regarding medical debt to a consumer credit reporting agency."
+  },
+  {
+   "id": "no-liens",
+   "title": "No liens on a home",
+   "cite": "Cal. Health & Safety Code \u00a7 127425",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127425.",
+   "lawQuote": "[Sample text] A hospital shall not use a lien on a patient's primary residence as a means of collecting unpaid bills."
+  },
+  {
+   "id": "no-medi-cal-first",
+   "title": "Can't require a Medi-Cal application first",
+   "cite": "Cal. Health & Safety Code \u00a7 127405",
+   "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405.",
+   "lawQuote": "[Sample text] A hospital shall not deny charity care because the patient has not applied for Medi-Cal or another public program."
+  }
+ ],
+ "hospitals": [
+  {
+   "key": "sample-1",
+   "name": "Mission Memorial Hospital (sample 1)",
+   "city": "Eureka",
+   "county": "Humboldt",
+   "lat": 40.8771,
+   "lon": -124.2574,
+   "detailUrl": "https://example.org/hcai/sample-1",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-1-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-1-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-2",
+   "name": "Bayview Community Hospital (sample 2)",
+   "city": "Eureka",
+   "county": "Humboldt",
+   "lat": 40.7006,
+   "lon": -124.1796,
+   "detailUrl": "https://example.org/hcai/sample-2",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-2-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-2-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-3",
+   "name": "Summit Community Hospital (sample 3)",
+   "city": "Eureka",
+   "county": "Humboldt",
+   "lat": 40.8784,
+   "lon": -124.2503,
+   "detailUrl": "https://example.org/hcai/sample-3",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-3-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-3-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-4",
+   "name": "Canyon General Hospital (sample 4)",
+   "city": "Redding",
+   "county": "Shasta",
+   "lat": 40.4812,
+   "lon": -122.304,
+   "detailUrl": "https://example.org/hcai/sample-4",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-4-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-4-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "conflict",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 5,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-4-collections.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-5",
+   "name": "Harbor Memorial Hospital (sample 5)",
+   "city": "Redding",
+   "county": "Shasta",
+   "lat": 40.4947,
+   "lon": -122.3729,
+   "detailUrl": "https://example.org/hcai/sample-5",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-5-charity.pdf",
+     "effectiveDate": "2025-03-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-5-collections.pdf",
+     "effectiveDate": "2025-03-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "likely",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 4,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-5-collections.pdf",
+     "effectiveDate": "2025-03-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-6",
+   "name": "Oak Community Hospital (sample 6)",
+   "city": "Chico",
+   "county": "Butte",
+   "lat": 39.7291,
+   "lon": -121.8324,
+   "detailUrl": "https://example.org/hcai/sample-6",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-6-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-6-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "conflict",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 5,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-6-collections.pdf",
+     "effectiveDate": "2025-09-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-7",
+   "name": "Oak Memorial Hospital (sample 7)",
+   "city": "Chico",
+   "county": "Butte",
+   "lat": 39.6791,
+   "lon": -121.7248,
+   "detailUrl": "https://example.org/hcai/sample-7",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-7-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-7-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 3,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-7-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-7-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-liens",
+     "verdict": "likely",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 9,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-7-collections.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-8",
+   "name": "Sierra Memorial Hospital (sample 8)",
+   "city": "Sacramento",
+   "county": "Sacramento",
+   "lat": 38.6269,
+   "lon": -121.4674,
+   "detailUrl": "https://example.org/hcai/sample-8",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-8-charity.pdf",
+     "effectiveDate": "2025-03-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-8-collections.pdf",
+     "effectiveDate": "2025-03-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "conflict",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 3,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-8-collections.pdf",
+     "effectiveDate": "2025-03-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 7,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-8-charity.pdf",
+     "effectiveDate": "2025-03-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-9",
+   "name": "Coast Community Hospital (sample 9)",
+   "city": "Santa Rosa",
+   "county": "Sonoma",
+   "lat": 38.4955,
+   "lon": -122.7557,
+   "detailUrl": "https://example.org/hcai/sample-9",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-9-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-9-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-9-charity.pdf",
+     "effectiveDate": "2025-05-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-10",
+   "name": "Bayview Memorial Hospital (sample 10)",
+   "city": "Santa Rosa",
+   "county": "Sonoma",
+   "lat": 38.5458,
+   "lon": -122.7447,
+   "detailUrl": "https://example.org/hcai/sample-10",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-10-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-10-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-10-charity.pdf",
+     "effectiveDate": "2025-05-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-11",
+   "name": "Bayview Community Hospital (sample 11)",
+   "city": "Santa Rosa",
+   "county": "Sonoma",
+   "lat": 38.5044,
+   "lon": -122.799,
+   "detailUrl": "https://example.org/hcai/sample-11",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-11-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-11-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-12",
+   "name": "Summit Memorial Hospital (sample 12)",
+   "city": "Santa Rosa",
+   "county": "Sonoma",
+   "lat": 38.5568,
+   "lon": -122.6661,
+   "detailUrl": "https://example.org/hcai/sample-12",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-12-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-12-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-time-limit",
+     "verdict": "ask",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-12-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "conflict",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-12-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "likely",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 8,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-12-collections.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-13",
+   "name": "Summit Medical Center (sample 13)",
+   "city": "Oakland",
+   "county": "Alameda",
+   "lat": 37.7357,
+   "lon": -122.334,
+   "detailUrl": "https://example.org/hcai/sample-13",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-13-charity.pdf",
+     "effectiveDate": "2025-02-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-13-collections.pdf",
+     "effectiveDate": "2025-02-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-14",
+   "name": "Riverbend General Hospital (sample 14)",
+   "city": "Oakland",
+   "county": "Alameda",
+   "lat": 37.681,
+   "lon": -122.2895,
+   "detailUrl": "https://example.org/hcai/sample-14",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-14-charity.pdf",
+     "effectiveDate": "2025-03-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-14-collections.pdf",
+     "effectiveDate": "2025-03-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-15",
+   "name": "Oak General Hospital (sample 15)",
+   "city": "Oakland",
+   "county": "Alameda",
+   "lat": 37.7101,
+   "lon": -122.1838,
+   "detailUrl": "https://example.org/hcai/sample-15",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-15-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-15-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-16",
+   "name": "Bayview Community Hospital (sample 16)",
+   "city": "Oakland",
+   "county": "Alameda",
+   "lat": 37.9163,
+   "lon": -122.2842,
+   "detailUrl": "https://example.org/hcai/sample-16",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-16-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-16-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "conflict",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 9,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-16-collections.pdf",
+     "effectiveDate": "2025-08-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "ask",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-16-charity.pdf",
+     "effectiveDate": "2025-08-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    },
+    {
+     "rule": "no-liens",
+     "verdict": "conflict",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 3,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-16-collections.pdf",
+     "effectiveDate": "2025-08-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-17",
+   "name": "Oak General Hospital (sample 17)",
+   "city": "San Francisco",
+   "county": "San Francisco",
+   "lat": 37.786,
+   "lon": -122.4112,
+   "detailUrl": "https://example.org/hcai/sample-17",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-17-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-17-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-18",
+   "name": "Bayview Community Hospital (sample 18)",
+   "city": "San Jose",
+   "county": "Santa Clara",
+   "lat": 37.3353,
+   "lon": -121.9352,
+   "detailUrl": "https://example.org/hcai/sample-18",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-18-charity.pdf",
+     "effectiveDate": "2025-02-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-18-collections.pdf",
+     "effectiveDate": "2025-02-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-18-charity.pdf",
+     "effectiveDate": "2025-02-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 3,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-18-charity.pdf",
+     "effectiveDate": "2025-02-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-liens",
+     "verdict": "ask",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 9,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-18-collections.pdf",
+     "effectiveDate": "2025-02-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  },
+  {
+   "key": "sample-19",
+   "name": "Mission Community Hospital (sample 19)",
+   "city": "San Jose",
+   "county": "Santa Clara",
+   "lat": 37.2835,
+   "lon": -121.8111,
+   "detailUrl": "https://example.org/hcai/sample-19",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-19-charity.pdf",
+     "effectiveDate": "2025-12-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-19-collections.pdf",
+     "effectiveDate": "2025-12-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-20",
+   "name": "Mission General Hospital (sample 20)",
+   "city": "San Jose",
+   "county": "Santa Clara",
+   "lat": 37.4485,
+   "lon": -121.9232,
+   "detailUrl": "https://example.org/hcai/sample-20",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-20-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-20-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-21",
+   "name": "Sierra Regional Medical Center (sample 21)",
+   "city": "Stockton",
+   "county": "San Joaquin",
+   "lat": 38.0364,
+   "lon": -121.2324,
+   "detailUrl": "https://example.org/hcai/sample-21",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-21-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-21-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "likely",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 5,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-21-collections.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "likely",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-21-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "conflict",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-21-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-22",
+   "name": "Summit General Hospital (sample 22)",
+   "city": "Modesto",
+   "county": "Stanislaus",
+   "lat": 37.527,
+   "lon": -121.1033,
+   "detailUrl": "https://example.org/hcai/sample-22",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-22-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-22-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-23",
+   "name": "Harbor Memorial Hospital (sample 23)",
+   "city": "Modesto",
+   "county": "Stanislaus",
+   "lat": 37.6652,
+   "lon": -121.0274,
+   "detailUrl": "https://example.org/hcai/sample-23",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-23-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-23-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-24",
+   "name": "Oak Community Hospital (sample 24)",
+   "city": "Fresno",
+   "county": "Fresno",
+   "lat": 36.7328,
+   "lon": -119.8289,
+   "detailUrl": "https://example.org/hcai/sample-24",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-24-charity.pdf",
+     "effectiveDate": "2025-04-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-24-collections.pdf",
+     "effectiveDate": "2025-04-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-25",
+   "name": "Riverbend General Hospital (sample 25)",
+   "city": "Fresno",
+   "county": "Fresno",
+   "lat": 36.8094,
+   "lon": -119.8302,
+   "detailUrl": "https://example.org/hcai/sample-25",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-25-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-25-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-25-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-25-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-time-limit",
+     "verdict": "conflict",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-25-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-26",
+   "name": "Meadow Memorial Hospital (sample 26)",
+   "city": "Fresno",
+   "county": "Fresno",
+   "lat": 36.8472,
+   "lon": -119.736,
+   "detailUrl": "https://example.org/hcai/sample-26",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-26-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-26-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-27",
+   "name": "Mission Community Hospital (sample 27)",
+   "city": "Salinas",
+   "county": "Monterey",
+   "lat": 36.7177,
+   "lon": -121.6959,
+   "detailUrl": "https://example.org/hcai/sample-27",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-27-charity.pdf",
+     "effectiveDate": "2025-03-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-27-collections.pdf",
+     "effectiveDate": "2025-03-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "conflict",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 9,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-27-collections.pdf",
+     "effectiveDate": "2025-03-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-28",
+   "name": "Sierra General Hospital (sample 28)",
+   "city": "Salinas",
+   "county": "Monterey",
+   "lat": 36.7518,
+   "lon": -121.6057,
+   "detailUrl": "https://example.org/hcai/sample-28",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-28-charity.pdf",
+     "effectiveDate": "2025-03-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-28-collections.pdf",
+     "effectiveDate": "2025-03-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-29",
+   "name": "Sierra Medical Center (sample 29)",
+   "city": "Bakersfield",
+   "county": "Kern",
+   "lat": 35.4333,
+   "lon": -119.0618,
+   "detailUrl": "https://example.org/hcai/sample-29",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-29-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-29-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-29-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-time-limit",
+     "verdict": "likely",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-29-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-30",
+   "name": "Mission Community Hospital (sample 30)",
+   "city": "San Luis Obispo",
+   "county": "San Luis Obispo",
+   "lat": 35.27,
+   "lon": -120.64,
+   "detailUrl": "https://example.org/hcai/sample-30",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-30-charity.pdf",
+     "effectiveDate": "2025-12-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-30-collections.pdf",
+     "effectiveDate": "2025-12-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-31",
+   "name": "Sierra Memorial Hospital (sample 31)",
+   "city": "San Luis Obispo",
+   "county": "San Luis Obispo",
+   "lat": 35.1964,
+   "lon": -120.6575,
+   "detailUrl": "https://example.org/hcai/sample-31",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-31-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-31-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-32",
+   "name": "Riverbend Medical Center (sample 32)",
+   "city": "San Luis Obispo",
+   "county": "San Luis Obispo",
+   "lat": 35.3518,
+   "lon": -120.7386,
+   "detailUrl": "https://example.org/hcai/sample-32",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-32-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-32-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-33",
+   "name": "Riverbend General Hospital (sample 33)",
+   "city": "San Luis Obispo",
+   "county": "San Luis Obispo",
+   "lat": 35.1748,
+   "lon": -120.6162,
+   "detailUrl": "https://example.org/hcai/sample-33",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-33-charity.pdf",
+     "effectiveDate": "2025-12-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-33-collections.pdf",
+     "effectiveDate": "2025-12-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-34",
+   "name": "Coast General Hospital (sample 34)",
+   "city": "Santa Barbara",
+   "county": "Santa Barbara",
+   "lat": 34.3665,
+   "lon": -119.6347,
+   "detailUrl": "https://example.org/hcai/sample-34",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-34-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-34-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-35",
+   "name": "Sierra Memorial Hospital (sample 35)",
+   "city": "Santa Barbara",
+   "county": "Santa Barbara",
+   "lat": 34.5146,
+   "lon": -119.8048,
+   "detailUrl": "https://example.org/hcai/sample-35",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-35-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-35-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-36",
+   "name": "Oak General Hospital (sample 36)",
+   "city": "Santa Barbara",
+   "county": "Santa Barbara",
+   "lat": 34.422,
+   "lon": -119.6262,
+   "detailUrl": "https://example.org/hcai/sample-36",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-36-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-36-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-36-charity.pdf",
+     "effectiveDate": "2025-09-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-37",
+   "name": "Sierra Medical Center (sample 37)",
+   "city": "Santa Barbara",
+   "county": "Santa Barbara",
+   "lat": 34.3329,
+   "lon": -119.7908,
+   "detailUrl": "https://example.org/hcai/sample-37",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-37-charity.pdf",
+     "effectiveDate": "2025-12-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-37-collections.pdf",
+     "effectiveDate": "2025-12-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-37-charity.pdf",
+     "effectiveDate": "2025-12-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-38",
+   "name": "Oak Community Hospital (sample 38)",
+   "city": "Ventura",
+   "county": "Ventura",
+   "lat": 34.1675,
+   "lon": -119.1893,
+   "detailUrl": "https://example.org/hcai/sample-38",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-38-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-38-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-39",
+   "name": "Coast Medical Center (sample 39)",
+   "city": "Ventura",
+   "county": "Ventura",
+   "lat": 34.3619,
+   "lon": -119.1178,
+   "detailUrl": "https://example.org/hcai/sample-39",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-39-charity.pdf",
+     "effectiveDate": "2025-12-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-39-collections.pdf",
+     "effectiveDate": "2025-12-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-39-charity.pdf",
+     "effectiveDate": "2025-12-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-40",
+   "name": "Summit Community Hospital (sample 40)",
+   "city": "Ventura",
+   "county": "Ventura",
+   "lat": 34.2511,
+   "lon": -119.2644,
+   "detailUrl": "https://example.org/hcai/sample-40",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-40-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-40-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-40-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "ask",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 7,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-40-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  },
+  {
+   "key": "sample-41",
+   "name": "Coast Regional Medical Center (sample 41)",
+   "city": "Ventura",
+   "county": "Ventura",
+   "lat": 34.2601,
+   "lon": -119.1812,
+   "detailUrl": "https://example.org/hcai/sample-41",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-41-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-41-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-42",
+   "name": "Oak General Hospital (sample 42)",
+   "city": "Los Angeles",
+   "county": "Los Angeles",
+   "lat": 34.1606,
+   "lon": -118.3329,
+   "detailUrl": "https://example.org/hcai/sample-42",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-42-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-42-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-43",
+   "name": "Summit Community Hospital (sample 43)",
+   "city": "Los Angeles",
+   "county": "Los Angeles",
+   "lat": 33.9395,
+   "lon": -118.173,
+   "detailUrl": "https://example.org/hcai/sample-43",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-43-charity.pdf",
+     "effectiveDate": "2025-02-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-43-collections.pdf",
+     "effectiveDate": "2025-02-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-44",
+   "name": "Harbor Medical Center (sample 44)",
+   "city": "Los Angeles",
+   "county": "Los Angeles",
+   "lat": 34.1449,
+   "lon": -118.2955,
+   "detailUrl": "https://example.org/hcai/sample-44",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-44-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-44-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "likely",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 3,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-44-collections.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-44-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-44-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-45",
+   "name": "Valley Community Hospital (sample 45)",
+   "city": "Los Angeles",
+   "county": "Los Angeles",
+   "lat": 34.1355,
+   "lon": -118.344,
+   "detailUrl": "https://example.org/hcai/sample-45",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-45-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-45-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-46",
+   "name": "Riverbend Community Hospital (sample 46)",
+   "city": "Long Beach",
+   "county": "Los Angeles",
+   "lat": 33.6935,
+   "lon": -118.0863,
+   "detailUrl": "https://example.org/hcai/sample-46",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-46-charity.pdf",
+     "effectiveDate": "2025-06-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-46-collections.pdf",
+     "effectiveDate": "2025-06-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-46-charity.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-liens",
+     "verdict": "conflict",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 4,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-46-collections.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "likely",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-46-charity.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-47",
+   "name": "Sierra Medical Center (sample 47)",
+   "city": "Pasadena",
+   "county": "Los Angeles",
+   "lat": 34.1913,
+   "lon": -118.1951,
+   "detailUrl": "https://example.org/hcai/sample-47",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-47-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-47-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-48",
+   "name": "Valley Regional Medical Center (sample 48)",
+   "city": "Pasadena",
+   "county": "Los Angeles",
+   "lat": 34.2059,
+   "lon": -118.1277,
+   "detailUrl": "https://example.org/hcai/sample-48",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-48-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-48-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-49",
+   "name": "Summit General Hospital (sample 49)",
+   "city": "Pasadena",
+   "county": "Los Angeles",
+   "lat": 34.1373,
+   "lon": -118.102,
+   "detailUrl": "https://example.org/hcai/sample-49",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-49-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-49-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-50",
+   "name": "Canyon Memorial Hospital (sample 50)",
+   "city": "Anaheim",
+   "county": "Orange",
+   "lat": 33.9557,
+   "lon": -117.8291,
+   "detailUrl": "https://example.org/hcai/sample-50",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-50-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-50-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "conflict",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 7,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-50-collections.pdf",
+     "effectiveDate": "2025-09-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 4,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-50-charity.pdf",
+     "effectiveDate": "2025-09-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "ask",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 7,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-50-charity.pdf",
+     "effectiveDate": "2025-09-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  },
+  {
+   "key": "sample-51",
+   "name": "Valley Community Hospital (sample 51)",
+   "city": "Anaheim",
+   "county": "Orange",
+   "lat": 33.7333,
+   "lon": -117.8703,
+   "detailUrl": "https://example.org/hcai/sample-51",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-51-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-51-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "ask",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 4,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-51-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  },
+  {
+   "key": "sample-52",
+   "name": "Cedar General Hospital (sample 52)",
+   "city": "Anaheim",
+   "county": "Orange",
+   "lat": 33.7846,
+   "lon": -118.0291,
+   "detailUrl": "https://example.org/hcai/sample-52",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-52-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-52-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-52-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 4,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-52-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-53",
+   "name": "Oak Regional Medical Center (sample 53)",
+   "city": "Anaheim",
+   "county": "Orange",
+   "lat": 33.7283,
+   "lon": -117.8182,
+   "detailUrl": "https://example.org/hcai/sample-53",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-53-charity.pdf",
+     "effectiveDate": "2025-09-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-53-collections.pdf",
+     "effectiveDate": "2025-09-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-54",
+   "name": "Oak Medical Center (sample 54)",
+   "city": "Riverside",
+   "county": "Riverside",
+   "lat": 33.8501,
+   "lon": -117.4531,
+   "detailUrl": "https://example.org/hcai/sample-54",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-54-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-54-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-55",
+   "name": "Canyon Medical Center (sample 55)",
+   "city": "Riverside",
+   "county": "Riverside",
+   "lat": 34.0261,
+   "lon": -117.4855,
+   "detailUrl": "https://example.org/hcai/sample-55",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-55-charity.pdf",
+     "effectiveDate": "2025-04-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-55-collections.pdf",
+     "effectiveDate": "2025-04-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-time-limit",
+     "verdict": "conflict",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-55-charity.pdf",
+     "effectiveDate": "2025-04-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-56",
+   "name": "Cedar Community Hospital (sample 56)",
+   "city": "San Bernardino",
+   "county": "San Bernardino",
+   "lat": 34.0459,
+   "lon": -117.2695,
+   "detailUrl": "https://example.org/hcai/sample-56",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-56-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-56-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-57",
+   "name": "Canyon General Hospital (sample 57)",
+   "city": "Palm Springs",
+   "county": "Riverside",
+   "lat": 33.7175,
+   "lon": -116.6381,
+   "detailUrl": "https://example.org/hcai/sample-57",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-57-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-57-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-asset-test",
+     "verdict": "conflict",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-57-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-57-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 3,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-57-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-58",
+   "name": "Oak Community Hospital (sample 58)",
+   "city": "Palm Springs",
+   "county": "Riverside",
+   "lat": 33.8197,
+   "lon": -116.6532,
+   "detailUrl": "https://example.org/hcai/sample-58",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-58-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-58-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "conflict",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-58-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-time-limit",
+     "verdict": "likely",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-58-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-59",
+   "name": "Canyon General Hospital (sample 59)",
+   "city": "San Diego",
+   "county": "San Diego",
+   "lat": 32.8031,
+   "lon": -117.2237,
+   "detailUrl": "https://example.org/hcai/sample-59",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-59-charity.pdf",
+     "effectiveDate": "2025-02-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-59-collections.pdf",
+     "effectiveDate": "2025-02-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "likely",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 3,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-59-collections.pdf",
+     "effectiveDate": "2025-02-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-60",
+   "name": "Summit Memorial Hospital (sample 60)",
+   "city": "El Centro",
+   "county": "Imperial",
+   "lat": 32.7496,
+   "lon": -115.5236,
+   "detailUrl": "https://example.org/hcai/sample-60",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-60-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-60-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "conflict",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 5,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-60-collections.pdf",
+     "effectiveDate": "2025-08-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 4,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-60-charity.pdf",
+     "effectiveDate": "2025-08-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-61",
+   "name": "Meadow Regional Medical Center (sample 61)",
+   "city": "El Centro",
+   "county": "Imperial",
+   "lat": 32.7866,
+   "lon": -115.4466,
+   "detailUrl": "https://example.org/hcai/sample-61",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-61-charity.pdf",
+     "effectiveDate": "2025-10-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-61-collections.pdf",
+     "effectiveDate": "2025-10-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-time-limit",
+     "verdict": "ask",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 2,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-61-charity.pdf",
+     "effectiveDate": "2025-10-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  },
+  {
+   "key": "sample-62",
+   "name": "Meadow Medical Center (sample 62)",
+   "city": "Bishop",
+   "county": "Inyo",
+   "lat": 37.3518,
+   "lon": -118.3359,
+   "detailUrl": "https://example.org/hcai/sample-62",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-62-charity.pdf",
+     "effectiveDate": "2025-11-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-62-collections.pdf",
+     "effectiveDate": "2025-11-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-62-charity.pdf",
+     "effectiveDate": "2025-11-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-63",
+   "name": "Harbor Community Hospital (sample 63)",
+   "city": "Truckee",
+   "county": "Nevada",
+   "lat": 39.3202,
+   "lon": -120.1032,
+   "detailUrl": "https://example.org/hcai/sample-63",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-63-charity.pdf",
+     "effectiveDate": "2025-08-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-63-collections.pdf",
+     "effectiveDate": "2025-08-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-64",
+   "name": "Riverbend Regional Medical Center (sample 64)",
+   "city": "Truckee",
+   "county": "Nevada",
+   "lat": 39.4369,
+   "lon": -120.2494,
+   "detailUrl": "https://example.org/hcai/sample-64",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-64-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-64-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-65",
+   "name": "Mission General Hospital (sample 65)",
+   "city": "Merced",
+   "county": "Merced",
+   "lat": 37.2995,
+   "lon": -120.3897,
+   "detailUrl": "https://example.org/hcai/sample-65",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-65-charity.pdf",
+     "effectiveDate": "2025-05-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-65-collections.pdf",
+     "effectiveDate": "2025-05-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "likely",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 3,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-65-collections.pdf",
+     "effectiveDate": "2025-05-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-65-charity.pdf",
+     "effectiveDate": "2025-05-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-66",
+   "name": "Valley Medical Center (sample 66)",
+   "city": "Visalia",
+   "county": "Tulare",
+   "lat": 36.2104,
+   "lon": -119.2298,
+   "detailUrl": "https://example.org/hcai/sample-66",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-66-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-66-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-credit-reporting",
+     "verdict": "ask",
+     "quote": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies.",
+     "context": "Accounts that remain unpaid may be reported to one or more consumer credit reporting agencies. Patients will receive written notice before any report is made.",
+     "page": 7,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-66-collections.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "ask",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 7,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-66-charity.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "conflict",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 7,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-66-charity.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-67",
+   "name": "Cedar Community Hospital (sample 67)",
+   "city": "Visalia",
+   "county": "Tulare",
+   "lat": 36.2993,
+   "lon": -119.3157,
+   "detailUrl": "https://example.org/hcai/sample-67",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-67-charity.pdf",
+     "effectiveDate": "2025-04-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-67-collections.pdf",
+     "effectiveDate": "2025-04-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-67-charity.pdf",
+     "effectiveDate": "2025-04-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-68",
+   "name": "Bayview Community Hospital (sample 68)",
+   "city": "Visalia",
+   "county": "Tulare",
+   "lat": 36.3326,
+   "lon": -119.3644,
+   "detailUrl": "https://example.org/hcai/sample-68",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-68-charity.pdf",
+     "effectiveDate": "2025-06-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-68-collections.pdf",
+     "effectiveDate": "2025-06-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-time-limit",
+     "verdict": "conflict",
+     "quote": "Applications must be received within 240 days of the first post-discharge billing statement.",
+     "context": "Applications must be received within 240 days of the first post-discharge billing statement. after which the account will be referred to the standard collection process.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-68-charity.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "income-docs",
+     "verdict": "conflict",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 5,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-68-charity.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "likely",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-68-charity.pdf",
+     "effectiveDate": "2025-06-01",
+     "explanation": "The wording reads like a condition the law bans, but it may be applied differently in practice."
+    }
+   ]
+  },
+  {
+   "key": "sample-69",
+   "name": "Oak Memorial Hospital (sample 69)",
+   "city": "Visalia",
+   "county": "Tulare",
+   "lat": 36.3265,
+   "lon": -119.1911,
+   "detailUrl": "https://example.org/hcai/sample-69",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-69-charity.pdf",
+     "effectiveDate": "2025-01-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-69-collections.pdf",
+     "effectiveDate": "2025-01-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "no-liens",
+     "verdict": "conflict",
+     "quote": "The Hospital may place a lien on real property owned by the guarantor to secure payment.",
+     "context": "The Hospital may place a lien on real property owned by the guarantor to secure payment. Liens will be released upon payment in full.",
+     "page": 2,
+     "docType": "debt_collection",
+     "docUrl": "https://example.org/sample-policies/sample-69-collections.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    },
+    {
+     "rule": "no-medi-cal-first",
+     "verdict": "ask",
+     "quote": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered.",
+     "context": "Patients who appear eligible for Medi-Cal must apply and receive a determination before charity care is considered. Financial counselors are available to help.",
+     "page": 9,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-69-charity.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    },
+    {
+     "rule": "no-asset-test",
+     "verdict": "conflict",
+     "quote": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability.",
+     "context": "Liquid assets in excess of $10,000 will be considered available to pay the patient's liability. Assets include checking and savings accounts, stocks, and bonds.",
+     "page": 6,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-69-charity.pdf",
+     "effectiveDate": "2025-01-01",
+     "explanation": "The policy sets a condition that the current law no longer allows."
+    }
+   ]
+  },
+  {
+   "key": "sample-70",
+   "name": "Mission Memorial Hospital (sample 70)",
+   "city": "Lancaster",
+   "county": "Los Angeles",
+   "lat": 34.6415,
+   "lon": -118.0926,
+   "detailUrl": "https://example.org/hcai/sample-70",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-70-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-70-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": []
+  },
+  {
+   "key": "sample-71",
+   "name": "Canyon Regional Medical Center (sample 71)",
+   "city": "Lancaster",
+   "county": "Los Angeles",
+   "lat": 34.5987,
+   "lon": -118.1156,
+   "detailUrl": "https://example.org/hcai/sample-71",
+   "docs": {
+    "charity_care": {
+     "url": "https://example.org/sample-policies/sample-71-charity.pdf",
+     "effectiveDate": "2025-07-01"
+    },
+    "debt_collection": {
+     "url": "https://example.org/sample-policies/sample-71-collections.pdf",
+     "effectiveDate": "2025-07-01"
+    }
+   },
+   "findings": [
+    {
+     "rule": "income-docs",
+     "verdict": "ask",
+     "quote": "Applicants must provide three months of bank statements and a letter of support from any person providing housing.",
+     "context": "Applicants must provide three months of bank statements and a letter of support from any person providing housing. Incomplete applications will not be reviewed.",
+     "page": 8,
+     "docType": "charity_care",
+     "docUrl": "https://example.org/sample-policies/sample-71-charity.pdf",
+     "effectiveDate": "2025-07-01",
+     "explanation": "The policy is unclear here. Ask the hospital how it applies this."
+    }
+   ]
+  }
+ ]
+}

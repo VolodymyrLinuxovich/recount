@@ -1,0 +1,110 @@
+import Link from "next/link";
+import { hostOf } from "../types";
+import { type AuditFinding, DOC_LABEL, type DocType, type Hospital, type Rule, VERDICT_LABEL, longDate, place, worst } from "./data";
+
+/** Show the surrounding text with the flagged sentence marked in red pen. */
+function InContext({ f }: { f: AuditFinding }) {
+  const at = f.context.indexOf(f.quote);
+  if (at < 0) return <mark className="policy-mark">{f.quote}</mark>;
+  return (
+    <>
+      {f.context.slice(0, at)}
+      <mark className="policy-mark">{f.quote}</mark>
+      {f.context.slice(at + f.quote.length)}
+    </>
+  );
+}
+
+function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
+  return (
+    <li className={`a-finding a-${f.verdict}`}>
+      <div className="a-finding-head">
+        <h4 className="a-rule">{rule?.title ?? f.rule}</h4>
+        <span className={`verdict verdict-${f.verdict}`}>{VERDICT_LABEL[f.verdict]}</span>
+      </div>
+      <div className="versus">
+        <div className="versus-col">
+          <div className="versus-label">Their policy says</div>
+          <blockquote className="policy-quote">
+            <InContext f={f} />
+          </blockquote>
+          <div className="versus-cite">
+            <a href={f.docUrl} target="_blank" rel="noreferrer">
+              {DOC_LABEL[f.docType] ?? "Policy"}
+              {f.page != null && <>, page {f.page}</>}
+            </a>
+            <span className="quiet"> · effective {longDate(f.effectiveDate)}</span>
+          </div>
+        </div>
+        <div className="versus-col versus-law">
+          <div className="versus-label">California law says</div>
+          <blockquote className="law-quote">{rule?.lawQuote ?? "See the rule text."}</blockquote>
+          {rule && (
+            <div className="versus-cite">
+              <a href={rule.url} target="_blank" rel="noreferrer">
+                {rule.cite}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+      <p className="a-explain">{f.explanation}</p>
+    </li>
+  );
+}
+
+function summary(h: Hospital) {
+  const bad = h.findings.filter((f) => f.verdict !== "ask").length;
+  const ask = h.findings.length - bad;
+  const parts = [];
+  if (bad) parts.push(`${bad} ${bad === 1 ? "part" : "parts"} of its policies ${bad === 1 ? "goes" : "go"} against California law`);
+  if (ask) parts.push(`${ask} ${ask === 1 ? "is" : "are"} worth asking about`);
+  if (!bad) return `${ask} ${ask === 1 ? "part" : "parts"} of its policies ${ask === 1 ? "is" : "are"} worth asking about.`;
+  return parts.join(", and ") + ".";
+}
+
+export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
+  const w = worst(h);
+  const byId = new Map(rules.map((r) => [r.id, r]));
+  const order = { conflict: 0, likely: 1, ask: 2 } as const;
+  const findings = [...h.findings].sort((a, b) => order[a.verdict] - order[b.verdict]);
+  const docs = Object.entries(h.docs) as [DocType, { url: string; effectiveDate: string | null }][];
+
+  return (
+    <article className="hospital" aria-labelledby="hospital-h">
+      <p className="eyebrow">{place(h) || "California"}</p>
+      <h2 id="hospital-h" className="h-hospital">
+        {h.name}
+      </h2>
+      <p className={`hospital-verdict verdict-text-${w}`}>
+        {w === "none" ? "No conflicts found in the documents we read." : summary(h)}
+      </p>
+
+      {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}
+
+      <div className="hospital-docs">
+        <div className="versus-label">Documents we read</div>
+        <ul>
+          {docs.map(([t, d]) => (
+            <li key={t}>
+              <a href={d.url} target="_blank" rel="noreferrer">
+                {DOC_LABEL[t] ?? t}
+              </a>{" "}
+              <span className="quiet">effective {longDate(d.effectiveDate)}</span>
+            </li>
+          ))}
+          <li>
+            <a href={h.detailUrl} target="_blank" rel="noreferrer">
+              State listing
+            </a>{" "}
+            <span className="quiet">{hostOf(h.detailUrl)}</span>
+          </li>
+        </ul>
+      </div>
+
+      <Link href="/" className="btn btn-primary btn-big">
+        Got a bill from this hospital? Check it
+      </Link>
+    </article>
+  );
+}
