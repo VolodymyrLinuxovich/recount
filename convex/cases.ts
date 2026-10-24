@@ -4,7 +4,9 @@ import { internalMutation, internalQuery, mutation, query } from "./_generated/s
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
 import { resolveFilledBrackets } from "./lib/letters";
-import { checkBill } from "./lib/checks";
+import { allFindings } from "./lib/eobChecks";
+import { potentialSavings, type Finding } from "./lib/checks";
+import type { ParsedEob } from "./lib/eob";
 import { isLang } from "./lib/lang";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
@@ -98,12 +100,14 @@ export const get = query({
       .withIndex("by_case", (q) => q.eq("caseId", id))
       .collect();
     const fileUrl = c.fileId ? await ctx.storage.getUrl(c.fileId) : null;
+    const eobFileUrl = c.eobFileId ? await ctx.storage.getUrl(c.eobFileId) : null;
     const { token: _secret, ownerId, ...rest } = c;
     void _secret;
     const userId = ownerId ? await currentUser(ctx) : null;
     const runs = await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect();
     const agentRuns = runs.map(({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }) => ({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }));
-    return { ...rest, steps, fileUrl, agentRuns, mine: !!ownerId && userId === ownerId };
+    // rest carries eobStatus, eob, eobError and eobSource; eobFileId stays internal like fileId's url.
+    return { ...rest, steps, fileUrl, eobFileUrl, agentRuns, mine: !!ownerId && userId === ownerId };
   },
 });
 
@@ -128,7 +132,7 @@ export const submitHousehold = mutation({
 });
 
 const LetterV = v.object({
-  kind: v.union(v.literal("assistance"), v.literal("dispute")),
+  kind: v.union(v.literal("assistance"), v.literal("dispute"), v.literal("appeal")),
   title: v.string(),
   subject: v.string(),
   body: v.string(),
@@ -183,7 +187,7 @@ export const correctLine = mutation({
     // The patient settled this line, so its "second look" question is answered.
     const amountChecks = (c.bill.amountChecks ?? []).filter((x: { index: number }) => x.index !== index);
     const bill = { ...c.bill, lines, unreadable, correctedLines, amountChecks };
-    const findings = checkBill(bill, c.hospital ?? null, isLang(c.lang) ? c.lang : "en");
+    const findings = allFindings(bill, c.hospital ?? null, usableEob(c), isLang(c.lang) ? c.lang : "en");
     await ctx.db.patch(id, { bill, findings });
   },
 });
@@ -220,7 +224,122 @@ export const remove = mutation({
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
+    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
     await ctx.db.delete(id);
+  },
+});
+
+// ---- the insurance statement (EOB), see docs/EOB.md ----
+
+/** The case's EOB when it was read and can be used for findings. */
+function usableEob(c: Doc<"cases">): ParsedEob | null {
+  return c.eobStatus === "done" && c.eob ? (c.eob as ParsedEob) : null;
+}
+
+/**
+ * Recompute the findings with (or without) an EOB. If letters exist or are being written,
+ * write them again from the new findings. Returns whether letters will be redrafted.
+ */
+async function refreshFindings(ctx: MutationCtx, c: Doc<"cases">, eob: ParsedEob | null, extra: Partial<Doc<"cases">> = {}, mayRedraft = true): Promise<{ findings: Finding[]; redraft: boolean }> {
+  const lang = isLang(c.lang) ? c.lang : "en";
+  // Before the hospital step finishes there are no findings yet; finishCheck picks up the EOB itself.
+  const ready = c.bill && c.status !== "reading" && c.status !== "confirm_hospital" && c.status !== "error";
+  const findings: Finding[] = ready ? allFindings(c.bill, c.hospital ?? null, eob, lang) : (c.findings ?? []);
+  const redraft = Boolean(mayRedraft && ready && (c.status === "ready" || c.status === "drafting") && c.eligibility);
+  await ctx.db.patch(c._id, { ...extra, ...(ready ? { findings } : {}), ...(redraft ? { status: "drafting" as const, letters: undefined } : {}) });
+  if (redraft) await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: c._id });
+  return { findings, redraft };
+}
+
+/** The patient adds a photo or PDF of their insurance statement. It's read in the background. */
+export const addEob = mutation({
+  args: { id: v.id("cases"), token: Token, fileId: v.id("_storage"), fileType: v.optional(v.string()) },
+  handler: async (ctx, { id, token, fileId, fileType }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to add an insurance statement.");
+    await limit(ctx, "eob", 60, 60_000);
+    if (c.eobFileId && c.eobFileId !== fileId) await ctx.storage.delete(c.eobFileId);
+    await ctx.db.patch(id, { eobFileId: fileId, eobFileType: fileType, eobStatus: "reading", eobError: undefined });
+    await ctx.scheduler.runAfter(0, internal.agent.readEob, { caseId: id });
+  },
+});
+
+/** Sample bills only: use the sample insurance statement. */
+export const addSampleEob = mutation({
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (!c.sample) throw new ConvexError("The sample insurance statement is only for the sample bill.");
+    if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to add an insurance statement.");
+    await limit(ctx, "eob", 60, 60_000);
+    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await ctx.db.patch(id, { eobFileId: undefined, eobFileType: undefined, eobStatus: "reading", eobError: undefined });
+    await ctx.scheduler.runAfter(0, internal.agent.readEob, { caseId: id });
+  },
+});
+
+/** Remove the insurance statement: the file, what we read, and its findings. */
+export const removeEob = mutation({
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to remove the insurance statement.");
+    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    const clear = { eobFileId: undefined, eobFileType: undefined, eobStatus: undefined, eob: undefined, eobSource: undefined, eobError: undefined };
+    if (usableEob(c)) await refreshFindings(ctx, c, null, clear);
+    else await ctx.db.patch(id, clear);
+  },
+});
+
+/** Called by agent.readEob with what it read. Returns null when the case moved on meanwhile. */
+export const applyEob = internalMutation({
+  args: { id: v.id("cases"), fileId: v.optional(v.id("_storage")), eob: v.any(), eobSource: v.union(v.literal("claude"), v.literal("sample-source")) },
+  handler: async (ctx, { id, fileId, eob, eobSource }) => {
+    const c = await ctx.db.get(id);
+    // Removed, replaced by another statement, or approved while we read: leave the case alone.
+    if (!c || c.eobStatus !== "reading" || (c.eobFileId ?? undefined) !== fileId) return null;
+    if (c.status === "approved") {
+      await ctx.db.patch(id, { eobStatus: "error", eobError: "APPROVED" });
+      return null;
+    }
+    const parsed = eob as ParsedEob;
+    const extra: Partial<Doc<"cases">> = { eob: parsed, eobSource, eobStatus: "done", eobError: undefined };
+    // An insurance statement means the patient has insurance: fix the answer and re-run the rules.
+    let mayRedraft = true;
+    if (c.household && c.household.insured === false && c.bill) {
+      const household = { ...c.household, insured: true };
+      extra.household = household;
+      extra.eligibility = assess(household, FPL, c.hospital ?? null, c.bill.amountDue ?? null, isLang(c.lang) ? c.lang : "en");
+      // Insured patients also need their medical costs (NEEDS_INFO): ask that first, then write letters.
+      if (extra.eligibility.tier === "NEEDS_INFO" && (c.status === "ready" || c.status === "drafting")) {
+        extra.status = "needs_household";
+        extra.letters = undefined;
+        mayRedraft = false;
+      }
+    }
+    const { findings, redraft } = await refreshFindings(ctx, c, parsed, extra, mayRedraft);
+    const fromEob = findings.filter((f) => EOB_KINDS.has(f.kind));
+    return {
+      eobFindings: fromEob.length,
+      mismatch: fromEob.some((f) => f.kind === "EOB_MISMATCH"),
+      total: potentialSavings(findings),
+      redraft,
+    };
+  },
+});
+
+const EOB_KINDS = new Set<string>(["EOB_MISMATCH", "OWES_MORE_THAN_EOB", "SURPRISE_BILL", "INSURANCE_NOT_APPLIED", "NOT_ON_EOB", "DENIED_BY_PLAN", "CLAIM_PENDING"]);
+
+/** The statement couldn't be used. Error codes: NOT_AN_EOB, RETAKE, TOO_LARGE, NO_MODEL. */
+export const eobFailed = internalMutation({
+  args: { id: v.id("cases"), fileId: v.optional(v.id("_storage")), error: v.string() },
+  handler: async (ctx, { id, fileId, error }) => {
+    const c = await ctx.db.get(id);
+    if (!c || c.eobStatus !== "reading" || (c.eobFileId ?? undefined) !== fileId) return;
+    // Findings from an earlier statement no longer apply.
+    const clear = { eobStatus: "error" as const, eobError: error, eob: undefined, eobSource: undefined };
+    if (c.status !== "approved" && (c.findings ?? []).some((f: Finding) => EOB_KINDS.has(f.kind))) await refreshFindings(ctx, c, null, clear);
+    else await ctx.db.patch(id, clear);
   },
 });
 
@@ -318,6 +437,7 @@ export const adminRemove = internalMutation({
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
+    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
     await ctx.db.delete(id);
     return "deleted";
   },

@@ -13,7 +13,7 @@ import { EMPTY_DETAILS, leftovers, saveDetails } from "../letterFill";
 import { LetterSheet, SLOT_KEY } from "../Letters";
 import { PrintLetters } from "../PrintLetters";
 import { SendGuide, useSendSteps } from "../SendGuide";
-import type { CaseView, Letter } from "../types";
+import { letterTitleKey, type CaseView, type Letter } from "../types";
 import { forApproval, useLetters } from "./letterEdits";
 import { StepFrame } from "./StepFrame";
 import type { ScreenProps } from "./types";
@@ -189,7 +189,7 @@ export function LetterStep({ c, index, next, back, go }: ScreenProps & { index: 
   if (!letter) return <StepFrame phase={3} onBack={back} />;
 
   const last = index === letters.length - 1;
-  const title = lang === "en" ? letter.title : t(letter.kind === "assistance" ? "letters.titleAssist" : "letters.titleDispute");
+  const title = lang === "en" ? letter.title : t(letterTitleKey(letter.kind));
 
   const onApprove = async () => {
     // Older hands double tap; one approve at a time.
@@ -271,7 +271,7 @@ export function SendStep({ c, go }: ScreenProps) {
   const { t } = useT();
   const [details] = useDetails(c);
   const { letters } = useLetters(c, details);
-  const steps = useSendSteps(c._id);
+  const steps = useSendSteps(c._id, letters.some((l) => l.kind === "appeal"));
   const unapprove = useMutation(api.cases.unapprove);
   const [busy, setBusy] = useState(false);
   const onChange = async () => {

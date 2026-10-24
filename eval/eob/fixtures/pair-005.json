@@ -1,0 +1,234 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-44376392",
+  "patientName": "Maria Santos",
+  "patientAddress": null,
+  "statementDate": "2026-09-08",
+  "serviceDate": "2026-08-25",
+  "insurancePayer": "Golden Bear Health Plan HMO",
+  "insurancePaid": 0.0,
+  "adjustments": 0.0,
+  "patientPaid": 50.0,
+  "totalCharges": 7764.0,
+  "amountDue": 7714.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-25",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 4",
+    "quantity": 1,
+    "charge": 5214.0,
+    "chargePrinted": "5,214.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR",
+    "quantity": 1,
+    "charge": 1160.0,
+    "chargePrinted": "1,160.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+    "quantity": 1,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 386.0,
+    "chargePrinted": "386.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HCHG CPMC VENIPUNCTURE BTMG",
+    "quantity": 1,
+    "charge": 28.0,
+    "chargePrinted": "28.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL 4 MG/2ML IJ SOLN",
+    "quantity": 4,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "96375",
+    "revCode": "0260",
+    "description": "HCHG INJECTION IVP ADDL SEQ NEW DRG",
+    "quantity": 1,
+    "charge": 484.0,
+    "chargePrinted": "484.00"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HCHG CORE URNALYSIS AUTO W/ MICRO",
+    "quantity": 1,
+    "charge": 125.0,
+    "chargePrinted": "125.00"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "quantity": 1,
+    "charge": 217.0,
+    "chargePrinted": "217.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "HMO",
+  "memberName": "Maria Santos",
+  "memberId": "GBH596787967",
+  "claimNumber": "2326657614926",
+  "providerName": "CALIFORNIA PACIFIC MED CTR CPMC",
+  "serviceDateFrom": "2026-08-25",
+  "serviceDateTo": "2026-08-26",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "denied",
+  "totalBilled": 7764.0,
+  "totalAllowed": null,
+  "totalPlanPaid": 0.0,
+  "totalPatientOwes": 7764.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-08-25",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5214.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 1160.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 75.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 386.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 28.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 75.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "96375",
+    "description": "IV push, added drug",
+    "billed": 484.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 125.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 217.0,
+    "allowed": null,
+    "planPaid": 0.0,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 7764.0
+  }
+ ]
+}

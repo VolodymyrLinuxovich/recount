@@ -22,6 +22,8 @@ import type * as lib_bill from "../lib/bill.js";
 import type * as lib_checks from "../lib/checks.js";
 import type * as lib_complaint from "../lib/complaint.js";
 import type * as lib_eligibility from "../lib/eligibility.js";
+import type * as lib_eob from "../lib/eob.js";
+import type * as lib_eobChecks from "../lib/eobChecks.js";
 import type * as lib_hospital from "../lib/hospital.js";
 import type * as lib_lang from "../lib/lang.js";
 import type * as lib_letterCheck from "../lib/letterCheck.js";
@@ -60,6 +62,8 @@ declare const fullApi: ApiFromModules<{
   "lib/checks": typeof lib_checks;
   "lib/complaint": typeof lib_complaint;
   "lib/eligibility": typeof lib_eligibility;
+  "lib/eob": typeof lib_eob;
+  "lib/eobChecks": typeof lib_eobChecks;
   "lib/hospital": typeof lib_hospital;
   "lib/lang": typeof lib_lang;
   "lib/letterCheck": typeof lib_letterCheck;

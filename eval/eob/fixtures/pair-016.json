@@ -1,0 +1,214 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-71205543",
+  "patientName": "Drew Martin",
+  "patientAddress": null,
+  "statementDate": "2026-09-22",
+  "serviceDate": "2026-08-20",
+  "insurancePayer": "Golden Bear Health Plan HMO",
+  "insurancePaid": 2468.81,
+  "adjustments": 0.0,
+  "patientPaid": 100.0,
+  "totalCharges": 8428.0,
+  "amountDue": 5859.19,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-20",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "ER LEVEL 4",
+    "quantity": 1,
+    "charge": 5752.0,
+    "chargePrinted": "5,752.00"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "ECG 12 LEAD TRACING ONLY",
+    "quantity": 1,
+    "charge": 882.0,
+    "chargePrinted": "882.00"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "COMP METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 237.0,
+    "chargePrinted": "237.00"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "CBC W/AUTO DIFF",
+    "quantity": 1,
+    "charge": 102.0,
+    "chargePrinted": "102.00"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "XR CHEST 2 VIEWS",
+    "quantity": 1,
+    "charge": 1074.0,
+    "chargePrinted": "1,074.00"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 135.0,
+    "chargePrinted": "135.00"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON 4MG/2ML SDV",
+    "quantity": 4,
+    "charge": 168.0,
+    "chargePrinted": "168.00"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% 1000ML INJ",
+    "quantity": 1,
+    "charge": 78.0,
+    "chargePrinted": "78.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "HMO",
+  "memberName": "Drew Martin",
+  "memberId": "GBH216820147",
+  "claimNumber": "2399331604802",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSP",
+  "serviceDateFrom": "2026-08-20",
+  "serviceDateTo": "2026-08-21",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 8428.0,
+  "totalAllowed": 2718.81,
+  "totalPlanPaid": 2468.81,
+  "totalPatientOwes": 250.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-08-20",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5752.0,
+    "allowed": 1879.33,
+    "planPaid": 1629.33,
+    "patientOwes": 250.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 882.0,
+    "allowed": 292.35,
+    "planPaid": 292.35,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 237.0,
+    "allowed": 77.37,
+    "planPaid": 77.37,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 102.0,
+    "allowed": 31.31,
+    "planPaid": 31.31,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-20",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 1074.0,
+    "allowed": 320.88,
+    "planPaid": 320.88,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 135.0,
+    "allowed": 40.14,
+    "planPaid": 40.14,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 168.0,
+    "allowed": 53.03,
+    "planPaid": 53.03,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-21",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 78.0,
+    "allowed": 24.4,
+    "planPaid": 24.4,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "OWES_MORE_THAN_EOB",
+   "amount": 5709.19
+  }
+ ]
+}

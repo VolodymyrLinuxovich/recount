@@ -191,7 +191,8 @@
 
   body[data-print="all"] .print-sheet,
   body[data-print="assistance"] .print-sheet[data-kind="assistance"],
-  body[data-print="dispute"] .print-sheet[data-kind="dispute"] {
+  body[data-print="dispute"] .print-sheet[data-kind="dispute"],
+  body[data-print="appeal"] .print-sheet[data-kind="appeal"] {
     display: block;
   }
 

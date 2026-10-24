@@ -1,0 +1,109 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-12720605",
+  "patientName": "Priya Raman",
+  "patientAddress": null,
+  "statementDate": "2026-08-31",
+  "serviceDate": "2026-08-07",
+  "insurancePayer": "Golden Bear Health Plan HMO",
+  "insurancePaid": 1278.32,
+  "adjustments": 3459.68,
+  "patientPaid": 0.0,
+  "totalCharges": 4988.0,
+  "amountDue": 250.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-07",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL III",
+    "quantity": 1,
+    "charge": 3694.0,
+    "chargePrinted": "3,694.00"
+   },
+   {
+    "date": "2026-08-07",
+    "code": "12002",
+    "revCode": "0450",
+    "description": "HC LACERATION REPAIR",
+    "quantity": 1,
+    "charge": 892.0,
+    "chargePrinted": "892.00"
+   },
+   {
+    "date": "2026-08-07",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HC CHEST ANY 2 VIEWS",
+    "quantity": 1,
+    "charge": 402.0,
+    "chargePrinted": "402.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "HMO",
+  "memberName": "Priya Raman",
+  "memberId": "GBH512430588",
+  "claimNumber": "2332012601016",
+  "providerName": "ZUCKERBERG SF GENERAL HOSP",
+  "serviceDateFrom": "2026-08-07",
+  "serviceDateTo": "2026-08-07",
+  "network": "out",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 4988.0,
+  "totalAllowed": 1528.32,
+  "totalPlanPaid": 1278.32,
+  "totalPatientOwes": 250.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-08-07",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3694.0,
+    "allowed": 1114.18,
+    "planPaid": 864.18,
+    "patientOwes": 250.0,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-07",
+    "code": "12002",
+    "description": "Wound repair",
+    "billed": 892.0,
+    "allowed": 287.84,
+    "planPaid": 287.84,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-07",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 402.0,
+    "allowed": 126.3,
+    "planPaid": 126.3,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

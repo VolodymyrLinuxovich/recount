@@ -5,21 +5,23 @@ import { useEffect, useRef, useState } from "react";
 import { useT } from "./i18n/I18nProvider";
 import { translate } from "./i18n/strings";
 import { printLetters } from "./PrintLetters";
-import type { CaseView, Letter } from "./types";
+import { letterTitleKey, type CaseView, type Letter } from "./types";
 import "./letters.css";
 
-type StepKey = "call" | "send" | "pause" | "apply";
-const ORDER: StepKey[] = ["call", "send", "pause", "apply"];
+type StepKey = "call" | "send" | "appeal" | "pause" | "apply";
+const ORDER: StepKey[] = ["call", "send", "appeal", "pause", "apply"];
+/** The steps a bill has: "appeal" only when there's an appeal letter for the insurer. */
+const orderFor = (appeal: boolean) => ORDER.filter((k) => appeal || k !== "appeal");
 
 const stepsKey = (id: string) => `recount.sendsteps.${id}`;
 const notesKey = (id: string) => `recount.notes.${id}`;
 
-function readDone(id: string): StepKey[] {
+function readDone(id: string, order: StepKey[]): StepKey[] {
   try {
     const data: unknown = JSON.parse(
       window.localStorage.getItem(stepsKey(id)) ?? "[]",
     );
-    return Array.isArray(data) ? ORDER.filter((k) => data.includes(k)) : [];
+    return Array.isArray(data) ? order.filter((k) => data.includes(k)) : [];
   } catch {
     return [];
   }
@@ -44,13 +46,15 @@ function readNotes(id: string) {
 }
 
 /** Which send steps are ticked for this bill, kept in this browser. */
-export function useSendSteps(id: string) {
+export function useSendSteps(id: string, appeal = false) {
+  const order = orderFor(appeal);
   // The guide renders only after the case loads in the browser, so storage is there to read.
-  const [done, setDone] = useState<StepKey[]>(() =>
-    typeof window === "undefined" ? [] : readDone(id),
+  const [saved, setDone] = useState<StepKey[]>(() =>
+    typeof window === "undefined" ? [] : readDone(id, ORDER),
   );
+  const done = order.filter((k) => saved.includes(k));
   const set = (k: StepKey, on: boolean) => {
-    const next = ORDER.filter((x) => (x === k ? on : done.includes(x)));
+    const next = order.filter((x) => (x === k ? on : done.includes(x)));
     setDone(next);
     writeDone(id, next);
     return next;
@@ -58,8 +62,9 @@ export function useSendSteps(id: string) {
   return {
     done,
     set,
-    total: ORDER.length,
-    allDone: done.length === ORDER.length,
+    order,
+    total: order.length,
+    allDone: done.length === order.length,
   };
 }
 
@@ -116,10 +121,13 @@ export function SendGuide({
   steps?: ReturnType<typeof useSendSteps>;
 }) {
   const { t, lang } = useT();
-  const own = useSendSteps(c._id);
-  const { done, set, total, allDone } = given ?? own;
+  const own = useSendSteps(
+    c._id,
+    letters.some((l) => l.kind === "appeal"),
+  );
+  const { done, set, total, allDone, order } = given ?? own;
   const [open, setOpen] = useState<StepKey | null>(
-    () => ORDER.find((k) => !done.includes(k)) ?? null,
+    () => order.find((k) => !done.includes(k)) ?? null,
   );
   const [ask, setAsk] = useState(false);
   const [later, setLater] = useState(false);
@@ -149,14 +157,11 @@ export function SendGuide({
   const applicationUrl = c.hospital?.fap?.applicationUrl ?? null;
   const mailto = (l: Letter) =>
     `mailto:?subject=${encodeURIComponent(l.subject)}&body=${encodeURIComponent(l.body)}`;
-  const nameOf = (l: Letter) =>
-    lang === "en"
-      ? l.title
-      : t(
-          l.kind === "assistance"
-            ? "letters.titleAssist"
-            : "letters.titleDispute",
-        );
+  const nameOf = (l: Letter) => (lang === "en" ? l.title : t(letterTitleKey(l.kind)));
+  // The appeal goes to the insurer, so it has its own step; the hospital letters go together.
+  const appeal = letters.find((l) => l.kind === "appeal") ?? null;
+  const hospitalLetters = letters.filter((l) => l.kind !== "appeal");
+  const eob = c.eob ?? null;
 
   // After tapping Call, the phone app takes over. When the patient comes back to this page, ask how it went.
   useEffect(() => {
@@ -176,7 +181,7 @@ export function SendGuide({
 
   const mark = (k: StepKey, on: boolean, advance = true) => {
     const next = set(k, on);
-    if (on && advance) openStep(ORDER.find((x) => !next.includes(x)) ?? null);
+    if (on && advance) openStep(order.find((x) => !next.includes(x)) ?? null);
   };
   const openStep = (k: StepKey | null) => {
     setOpen(k);
@@ -189,12 +194,14 @@ export function SendGuide({
   const titles: Record<StepKey, string> = {
     call: t("send.step1H"),
     send: t("send.step2H"),
+    appeal: t("send.appealH"),
     pause: t("send.step3H"),
     apply: t("send.step4H"),
   };
   const doneLines: Record<StepKey, string> = {
     call: t("send.step1Done"),
     send: t("send.step2Done"),
+    appeal: t("send.appealDone"),
     pause: t("send.step3Done"),
     apply: t("send.step4Done"),
   };
@@ -387,7 +394,7 @@ export function SendGuide({
                 type="button"
                 className="btn btn-big sg-done-btn"
                 onClick={() =>
-                  openStep(ORDER.find((x) => !done.includes(x)) ?? null)
+                  openStep(order.find((x) => !done.includes(x)) ?? null)
                 }
               >
                 {t("flow.next")}
@@ -403,7 +410,7 @@ export function SendGuide({
           2,
           <>
             <p className="sg-p">{t("send.step2")}</p>
-            {letters.length > 1 && (
+            {hospitalLetters.length > 1 && (
               <button
                 type="button"
                 className="btn btn-big sg-print-all"
@@ -413,7 +420,7 @@ export function SendGuide({
               </button>
             )}
             <ul className="sg-letters">
-              {letters.map((l) => (
+              {hospitalLetters.map((l) => (
                 <li key={l.kind} className="sg-letter">
                   <span className="sg-letter-name">{nameOf(l)}</span>
                   <span className="sg-letter-btns">
@@ -437,9 +444,71 @@ export function SendGuide({
           </>,
         )}
 
+        {appeal &&
+          card(
+            "appeal",
+            3,
+            <>
+              <p className="sg-p">{t("send.appeal")}</p>
+              {eob?.appealAddress ? (
+                <>
+                  <p className="sg-p">{t("send.appealAddress")}</p>
+                  <p className="sg-appeal-addr" lang="en">
+                    {eob.appealAddress}
+                  </p>
+                </>
+              ) : (
+                <p className="quiet sg-small">{t("send.appealNoAddress")}</p>
+              )}
+              {eob?.memberId && eob.claimNumber && (
+                <p className="sg-p">
+                  {t("send.appealIds", {
+                    member: eob.memberId,
+                    claim: eob.claimNumber,
+                  })}
+                </p>
+              )}
+              {eob?.appealDeadline && (
+                <p className="sg-p sg-insured">
+                  {t("send.appealDeadline", { deadline: eob.appealDeadline })}
+                </p>
+              )}
+              <ul className="sg-letters">
+                <li className="sg-letter">
+                  <span className="sg-letter-name">
+                    {nameOf(appeal)}
+                    <span className="quiet sg-small"> · {t("send.toInsurer")}</span>
+                  </span>
+                  <span className="sg-letter-btns">
+                    <button
+                      type="button"
+                      className="btn btn-quiet"
+                      onClick={() => printLetters("appeal", appeal.title)}
+                    >
+                      {t("send.print")}
+                    </button>
+                    <a href={mailto(appeal)} className="btn btn-quiet">
+                      {t("send.email")}
+                    </a>
+                  </span>
+                </li>
+              </ul>
+              {eob?.insurerPhone && (
+                <a
+                  href={`tel:${eob.insurerPhone.replace(/[^0-9+]/g, "")}`}
+                  className="btn btn-big sg-call"
+                >
+                  {t("send.appealCall")}&nbsp;
+                  <span className="send-phone">{eob.insurerPhone}</span>
+                </a>
+              )}
+              {doneButton("appeal", t("send.appealBtn"))}
+            </>,
+          )}
+
         {card(
           "pause",
-          3,
+          order.indexOf("pause") + 1,
           <>
             <p className="sg-p">{t("send.step3")}</p>
             <p className="sg-say">{t("send.say")}</p>
@@ -456,7 +525,7 @@ export function SendGuide({
 
         {card(
           "apply",
-          4,
+          order.indexOf("apply") + 1,
           <>
             <p className="sg-p">{t("send.step4")}</p>
             {(applicationUrl || policyUrl) && (

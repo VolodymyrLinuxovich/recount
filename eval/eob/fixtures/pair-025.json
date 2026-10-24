@@ -1,0 +1,198 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "UCSF Helen Diller Medical Center at Parnassus Heights",
+  "hospitalWebsite": "ucsfhealth.org",
+  "hospitalAddress": "505 Parnassus Avenue, San Francisco, CA 94143",
+  "billingPhone": "(415) 353-1888",
+  "accountNumber": "SAMPLE-86423399",
+  "patientName": "Drew Martin",
+  "patientAddress": null,
+  "statementDate": "2026-09-07",
+  "serviceDate": "2026-08-13",
+  "insurancePayer": "Sierra Larkspur Health Plan HMO",
+  "insurancePaid": 0.0,
+  "adjustments": 0.0,
+  "patientPaid": 0.0,
+  "totalCharges": 11080.68,
+  "amountDue": 11080.68,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-13",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HC EMERG LEVEL IV",
+    "quantity": 1,
+    "charge": 8501.0,
+    "chargePrinted": "8,501.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HC HYDRATION IV INFUSION, INIT",
+    "quantity": 1,
+    "charge": 934.0,
+    "chargePrinted": "934.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+    "quantity": 2,
+    "charge": 239.68,
+    "chargePrinted": "239.68"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 667.0,
+    "chargePrinted": "667.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HC COLLECTION VENOUS BLOOD VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 69.0,
+    "chargePrinted": "69.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "96375",
+    "revCode": "0260",
+    "description": "HC TX/PRO/DX INJ NEW DRUG ADDON",
+    "quantity": 1,
+    "charge": 438.0,
+    "chargePrinted": "438.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC",
+    "quantity": 1,
+    "charge": 232.0,
+    "chargePrinted": "232.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Sierra Larkspur Health Plan",
+  "planType": "HMO",
+  "memberName": "Drew Martin",
+  "memberId": "SLH422157251",
+  "claimNumber": "2611105371835",
+  "providerName": "UCSF MEDICAL CENTER",
+  "serviceDateFrom": "2026-08-13",
+  "serviceDateTo": "2026-08-13",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "partly_denied",
+  "totalBilled": 11080.68,
+  "totalAllowed": 3162.24,
+  "totalPlanPaid": 2813.88,
+  "totalPatientOwes": 348.36,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Sierra Larkspur Health Plan, Grievance and Appeals Department, 815 K Street, Sacramento, CA 95814",
+  "insurerPhone": "1-877-555-0163",
+  "lines": [
+   {
+    "date": "2026-08-13",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 8501.0,
+    "allowed": 2421.25,
+    "planPaid": 2271.25,
+    "patientOwes": 150.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-13",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 934.0,
+    "allowed": 274.23,
+    "planPaid": 274.23,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-13",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 239.68,
+    "allowed": 65.76,
+    "planPaid": 65.76,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-13",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 667.0,
+    "allowed": 198.36,
+    "planPaid": 0.0,
+    "patientOwes": 198.36,
+    "notCovered": 198.36,
+    "remark": "PR-204 This service is not covered under your benefit plan"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 69.0,
+    "allowed": 18.52,
+    "planPaid": 18.52,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-13",
+    "code": "96375",
+    "description": "IV push, added drug",
+    "billed": 438.0,
+    "allowed": 120.72,
+    "planPaid": 120.72,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-13",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 232.0,
+    "allowed": 63.4,
+    "planPaid": 63.4,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "OWES_MORE_THAN_EOB",
+   "amount": 10732.32
+  },
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 198.36
+  }
+ ]
+}

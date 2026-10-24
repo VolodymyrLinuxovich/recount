@@ -10,7 +10,7 @@ import { DetailsForm, useDetails } from "./DetailsForm";
 import { fillLetter, leftovers, type Slot } from "./letterFill";
 import { PrintLetters, printLetters } from "./PrintLetters";
 import { SendGuide } from "./SendGuide";
-import type { CaseView, ComplaintLetter, Letter } from "./types";
+import { letterTitleKey, type CaseView, type ComplaintLetter, type Letter } from "./types";
 
 // What gets copied, downloaded and emailed is the English letter for the hospital.
 function asText(l: Letter | ComplaintLetter) {
@@ -104,13 +104,15 @@ export function LetterSheet<L extends Letter | ComplaintLetter>({
   const title =
     lang === "en"
       ? letter.title
-      : t(letter.kind === "assistance" ? "letters.titleAssist" : letter.kind === "complaint" ? "after.complaintTitle" : "letters.titleDispute");
+      : t(letterTitleKey(letter.kind));
   const patientCopy = letter.bodyPatient ? [letter.subjectPatient, letter.bodyPatient].filter(Boolean).join("\n\n") : null;
-  const slug = letter.kind === "assistance" ? "financial-assistance-request" : letter.kind === "complaint" ? "hcai-complaint" : "billing-questions";
+  const slug =
+    letter.kind === "assistance" ? "financial-assistance-request" : letter.kind === "complaint" ? "hcai-complaint" : letter.kind === "appeal" ? "insurance-appeal" : "billing-questions";
   const spanishFirst = lang === "es" && !!patientCopy;
 
   const english = (
     <>
+      {letter.kind === "appeal" && <p className="flow-note letter-to-insurer">{t("letters.toInsurer")}</p>}
       {lang !== "en" && <p className="quiet letter-lang-note">{t("letters.sentInEnglish")}</p>}
       <label className="letter-field">
         <span>{t("letters.subject")}</span>

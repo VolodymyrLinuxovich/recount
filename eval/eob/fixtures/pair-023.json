@@ -1,0 +1,174 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-13910766",
+  "patientName": "Chris Nguyen",
+  "patientAddress": null,
+  "statementDate": "2026-07-23",
+  "serviceDate": "2026-07-02",
+  "insurancePayer": "Redwood Lantern Assurance PPO",
+  "insurancePaid": 0.0,
+  "adjustments": 8064.09,
+  "patientPaid": 0.0,
+  "totalCharges": 13102.0,
+  "amountDue": 5037.91,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-02",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "ER LEVEL 4",
+    "quantity": 1,
+    "charge": 5752.0,
+    "chargePrinted": "5,752.00"
+   },
+   {
+    "date": "2026-07-02",
+    "code": "70450",
+    "revCode": "0351",
+    "description": "CT HEAD WO CON CT",
+    "quantity": 1,
+    "charge": 5710.0,
+    "chargePrinted": "5,710.00"
+   },
+   {
+    "date": "2026-07-02",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "INJ FOR MICROBUBBLE STUDY",
+    "quantity": 1,
+    "charge": 564.0,
+    "chargePrinted": "564.00"
+   },
+   {
+    "date": "2026-07-02",
+    "code": "J1885",
+    "revCode": "0636",
+    "description": "KETOROL 15MG/1ML ADMJZTB",
+    "quantity": 2,
+    "charge": 84.0,
+    "chargePrinted": "84.00"
+   },
+   {
+    "date": "2026-07-02",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "CBC W/AUTO DIFF",
+    "quantity": 1,
+    "charge": 102.0,
+    "chargePrinted": "102.00"
+   },
+   {
+    "date": "2026-07-02",
+    "code": "12002",
+    "revCode": "0450",
+    "description": "SIMPLE REPAIR 2.6-7.5 CM",
+    "quantity": 1,
+    "charge": 890.0,
+    "chargePrinted": "890.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Redwood Lantern Assurance",
+  "planType": "PPO",
+  "memberName": "Chris Nguyen",
+  "memberId": "RLA472598845",
+  "claimNumber": "2599685258100",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSPITAL",
+  "serviceDateFrom": "2026-07-02",
+  "serviceDateTo": "2026-07-02",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 13102.0,
+  "totalAllowed": 5126.38,
+  "totalPlanPaid": 88.47,
+  "totalPatientOwes": 5037.91,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Redwood Lantern Assurance, Attn: Appeals Unit, P.O. Box 77120, Sacramento, CA 95887",
+  "insurerPhone": "1-866-555-0119",
+  "lines": [
+   {
+    "date": "2026-07-02",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5752.0,
+    "allowed": 2222.13,
+    "planPaid": 0.0,
+    "patientOwes": 2222.13,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-02",
+    "code": "70450",
+    "description": "CT scan",
+    "billed": 5710.0,
+    "allowed": 2251.96,
+    "planPaid": 0.0,
+    "patientOwes": 2251.96,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-02",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 564.0,
+    "allowed": 234.02,
+    "planPaid": 0.0,
+    "patientOwes": 234.02,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-02",
+    "code": "J1885",
+    "description": "Drugs",
+    "billed": 84.0,
+    "allowed": 31.43,
+    "planPaid": 0.0,
+    "patientOwes": 31.43,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-02",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 102.0,
+    "allowed": 39.52,
+    "planPaid": 0.0,
+    "patientOwes": 39.52,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-02",
+    "code": "12002",
+    "description": "Wound repair",
+    "billed": 890.0,
+    "allowed": 347.32,
+    "planPaid": 88.47,
+    "patientOwes": 258.85,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "INSURANCE_NOT_APPLIED",
+   "amount": 88.47
+  }
+ ]
+}

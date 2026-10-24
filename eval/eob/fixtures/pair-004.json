@@ -1,0 +1,109 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-79703978",
+  "patientName": "Elena Duarte",
+  "patientAddress": null,
+  "statementDate": "2026-09-26",
+  "serviceDate": "2026-08-29",
+  "insurancePayer": "Golden Bear Health Plan HMO",
+  "insurancePaid": 3007.75,
+  "adjustments": 6915.25,
+  "patientPaid": 100.0,
+  "totalCharges": 10173.0,
+  "amountDue": 150.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-29",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 4",
+    "quantity": 1,
+    "charge": 5214.0,
+    "chargePrinted": "5,214.00"
+   },
+   {
+    "date": "2026-08-29",
+    "code": "70450",
+    "revCode": "0351",
+    "description": "HCHG CT BRAIN WO CONTR",
+    "quantity": 1,
+    "charge": 4312.0,
+    "chargePrinted": "4,312.00"
+   },
+   {
+    "date": "2026-08-29",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HCHG IV PUSH INITIAL DRUG",
+    "quantity": 1,
+    "charge": 647.0,
+    "chargePrinted": "647.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "HMO",
+  "memberName": "Elena Duarte",
+  "memberId": "GBH703445637",
+  "claimNumber": "2538082122872",
+  "providerName": "CPMC VAN NESS CAMPUS",
+  "serviceDateFrom": "2026-08-29",
+  "serviceDateTo": "2026-08-29",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 10173.0,
+  "totalAllowed": 3257.75,
+  "totalPlanPaid": 3007.75,
+  "totalPatientOwes": 250.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-08-29",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5214.0,
+    "allowed": 1730.59,
+    "planPaid": 1480.59,
+    "patientOwes": 250.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-29",
+    "code": "70450",
+    "description": "CT scan",
+    "billed": 4312.0,
+    "allowed": 1332.06,
+    "planPaid": 1332.06,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-29",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 647.0,
+    "allowed": 195.1,
+    "planPaid": 195.1,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

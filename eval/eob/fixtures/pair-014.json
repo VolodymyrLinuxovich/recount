@@ -1,0 +1,89 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "UCSF Helen Diller Medical Center at Parnassus Heights",
+  "hospitalWebsite": "ucsfhealth.org",
+  "hospitalAddress": "505 Parnassus Avenue, San Francisco, CA 94143",
+  "billingPhone": "(415) 353-1888",
+  "accountNumber": "SAMPLE-93590697",
+  "patientName": "Elena Duarte",
+  "patientAddress": null,
+  "statementDate": "2026-10-28",
+  "serviceDate": "2026-09-27",
+  "insurancePayer": "Golden Bear Health Plan HMO",
+  "insurancePaid": 870.1,
+  "adjustments": 3201.9,
+  "patientPaid": 100.0,
+  "totalCharges": 4322.0,
+  "amountDue": 150.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-09-27",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HC EMERG LEVEL III",
+    "quantity": 1,
+    "charge": 3297.0,
+    "chargePrinted": "3,297.00"
+   },
+   {
+    "date": "2026-09-27",
+    "code": "12002",
+    "revCode": "0450",
+    "description": "HC LAC SMPL 2.6-7.5CM",
+    "quantity": 1,
+    "charge": 1025.0,
+    "chargePrinted": "1,025.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "HMO",
+  "memberName": "Elena Duarte",
+  "memberId": "GBH201636153",
+  "claimNumber": "2254054457532",
+  "providerName": "UCSF MEDICAL CENTER",
+  "serviceDateFrom": "2026-09-27",
+  "serviceDateTo": "2026-09-27",
+  "network": "unknown",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 4322.0,
+  "totalAllowed": 1120.1,
+  "totalPlanPaid": 870.1,
+  "totalPatientOwes": 250.0,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-09-27",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3297.0,
+    "allowed": 855.3,
+    "planPaid": 605.3,
+    "patientOwes": 250.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-27",
+    "code": "12002",
+    "description": "Wound repair",
+    "billed": 1025.0,
+    "allowed": 264.8,
+    "planPaid": 264.8,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

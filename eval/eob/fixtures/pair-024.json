@@ -1,0 +1,205 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-30051879",
+  "patientName": "Jesse Kim",
+  "patientAddress": null,
+  "statementDate": "2026-10-17",
+  "serviceDate": "2026-09-19",
+  "insurancePayer": "Sierra Larkspur Health Plan HMO",
+  "insurancePaid": 1755.02,
+  "adjustments": 5411.08,
+  "patientPaid": 0.0,
+  "totalCharges": 13924.0,
+  "amountDue": 6757.9,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-09-19",
+    "code": "99285",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL V",
+    "quantity": 1,
+    "charge": 12281.0,
+    "chargePrinted": "12,281.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "HC EKG TRACING ONLY",
+    "quantity": 1,
+    "charge": 287.0,
+    "chargePrinted": "287.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 528.0,
+    "chargePrinted": "528.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC CBC PLATELETS & DIFF",
+    "quantity": 1,
+    "charge": 269.0,
+    "chargePrinted": "269.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HC CHEST ANY 2 VIEWS",
+    "quantity": 1,
+    "charge": 402.0,
+    "chargePrinted": "402.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE ROUTINE",
+    "quantity": 1,
+    "charge": 45.0,
+    "chargePrinted": "45.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL INJ 1 MG",
+    "quantity": 4,
+    "charge": 112.0,
+    "chargePrinted": "112.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Sierra Larkspur Health Plan",
+  "planType": "HMO",
+  "memberName": "Jesse Kim",
+  "memberId": "SLH274999413",
+  "claimNumber": "2282218883554",
+  "providerName": "ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL",
+  "serviceDateFrom": "2026-11-05",
+  "serviceDateTo": "2026-11-05",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 8007.0,
+  "totalAllowed": 1905.02,
+  "totalPlanPaid": 1755.02,
+  "totalPatientOwes": 150.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Sierra Larkspur Health Plan, Grievance and Appeals Department, 815 K Street, Sacramento, CA 95814",
+  "insurerPhone": "1-877-555-0163",
+  "lines": [
+   {
+    "date": "2026-11-05",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 6084.0,
+    "allowed": 1436.76,
+    "planPaid": 1286.76,
+    "patientOwes": 150.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 287.0,
+    "allowed": 69.52,
+    "planPaid": 69.52,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 528.0,
+    "allowed": 127.18,
+    "planPaid": 127.18,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 269.0,
+    "allowed": 68.24,
+    "planPaid": 68.24,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 402.0,
+    "allowed": 95.04,
+    "planPaid": 95.04,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 45.0,
+    "allowed": 11.23,
+    "planPaid": 11.23,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 112.0,
+    "allowed": 28.16,
+    "planPaid": 28.16,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-11-05",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 280.0,
+    "allowed": 68.89,
+    "planPaid": 68.89,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "EOB_MISMATCH",
+   "amount": 0
+  }
+ ]
+}

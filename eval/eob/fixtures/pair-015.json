@@ -1,0 +1,94 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-81922129",
+  "patientName": "Robin Tran",
+  "patientAddress": null,
+  "statementDate": "2026-09-06",
+  "serviceDate": "2026-07-31",
+  "insurancePayer": "Sierra Larkspur Health Plan HMO",
+  "insurancePaid": 837.87,
+  "adjustments": 3544.59,
+  "patientPaid": 0.0,
+  "totalCharges": 4744.0,
+  "amountDue": 361.54,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-31",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "ER LEVEL 3",
+    "quantity": 1,
+    "charge": 3854.0,
+    "chargePrinted": "3,854.00"
+   },
+   {
+    "date": "2026-07-31",
+    "code": "12002",
+    "revCode": "0450",
+    "description": "SIMPLE REPAIR 2.6-7.5 CM",
+    "quantity": 1,
+    "charge": 890.0,
+    "chargePrinted": "890.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Sierra Larkspur Health Plan",
+  "planType": "HMO",
+  "memberName": "Robin Tran",
+  "memberId": "SLH480035249",
+  "claimNumber": "2594520756487",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSPITAL",
+  "serviceDateFrom": "2026-07-31",
+  "serviceDateTo": "2026-07-31",
+  "network": "in",
+  "emergency": null,
+  "claimStatus": "partly_denied",
+  "totalBilled": 4744.0,
+  "totalAllowed": 1199.41,
+  "totalPlanPaid": 837.87,
+  "totalPatientOwes": 361.54,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Sierra Larkspur Health Plan, Grievance and Appeals Department, 815 K Street, Sacramento, CA 95814",
+  "insurerPhone": "1-877-555-0163",
+  "lines": [
+   {
+    "date": "2026-07-31",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3854.0,
+    "allowed": 987.87,
+    "planPaid": 837.87,
+    "patientOwes": 150.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-31",
+    "code": "12002",
+    "description": "Wound repair",
+    "billed": 890.0,
+    "allowed": 211.54,
+    "planPaid": 0.0,
+    "patientOwes": 211.54,
+    "notCovered": 211.54,
+    "remark": "PR-204 This service is not covered under your benefit plan"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 211.54
+  }
+ ]
+}

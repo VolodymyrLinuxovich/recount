@@ -1,0 +1,218 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-92806254",
+  "patientName": "Casey Huang",
+  "patientAddress": null,
+  "statementDate": "2026-09-11",
+  "serviceDate": "2026-08-08",
+  "insurancePayer": "Sierra Larkspur Health Plan HMO",
+  "insurancePaid": 0.0,
+  "adjustments": 0.0,
+  "patientPaid": 150.0,
+  "totalCharges": 8146.0,
+  "amountDue": 7996.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-08",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL IV",
+    "quantity": 1,
+    "charge": 6084.0,
+    "chargePrinted": "6,084.00"
+   },
+   {
+    "date": "2026-08-08",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "HC EKG TRACING ONLY",
+    "quantity": 1,
+    "charge": 287.0,
+    "chargePrinted": "287.00"
+   },
+   {
+    "date": "2026-08-08",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 528.0,
+    "chargePrinted": "528.00"
+   },
+   {
+    "date": "2026-08-08",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC CBC PLATELETS & DIFF",
+    "quantity": 1,
+    "charge": 269.0,
+    "chargePrinted": "269.00"
+   },
+   {
+    "date": "2026-08-08",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HC CHEST ANY 2 VIEWS",
+    "quantity": 1,
+    "charge": 402.0,
+    "chargePrinted": "402.00"
+   },
+   {
+    "date": "2026-08-09",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE ROUTINE",
+    "quantity": 1,
+    "charge": 45.0,
+    "chargePrinted": "45.00"
+   },
+   {
+    "date": "2026-08-09",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HC IV PUSH (INFUSION <= 15 MIN)",
+    "quantity": 1,
+    "charge": 419.0,
+    "chargePrinted": "419.00"
+   },
+   {
+    "date": "2026-08-09",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL INJ 1 MG",
+    "quantity": 4,
+    "charge": 112.0,
+    "chargePrinted": "112.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Sierra Larkspur Health Plan",
+  "planType": "HMO",
+  "memberName": "Casey Huang",
+  "memberId": "SLH448968265",
+  "claimNumber": "2385188866136",
+  "providerName": "ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL",
+  "serviceDateFrom": "2026-08-08",
+  "serviceDateTo": "2026-08-09",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "partly_denied",
+  "totalBilled": 8146.0,
+  "totalAllowed": 2328.43,
+  "totalPlanPaid": 2146.93,
+  "totalPatientOwes": 181.5,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Sierra Larkspur Health Plan, Grievance and Appeals Department, 815 K Street, Sacramento, CA 95814",
+  "insurerPhone": "1-877-555-0163",
+  "lines": [
+   {
+    "date": "2026-08-08",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 6084.0,
+    "allowed": 1762.5,
+    "planPaid": 1612.5,
+    "patientOwes": 150.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-08",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 287.0,
+    "allowed": 77.7,
+    "planPaid": 77.7,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-08",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 528.0,
+    "allowed": 138.13,
+    "planPaid": 138.13,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-08",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 269.0,
+    "allowed": 78.44,
+    "planPaid": 78.44,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-08",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 402.0,
+    "allowed": 115.0,
+    "planPaid": 115.0,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-09",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 45.0,
+    "allowed": 12.83,
+    "planPaid": 12.83,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-09",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 419.0,
+    "allowed": 112.33,
+    "planPaid": 112.33,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-08-09",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 112.0,
+    "allowed": 31.5,
+    "planPaid": 0.0,
+    "patientOwes": 31.5,
+    "notCovered": 31.5,
+    "remark": "PR-204 This service is not covered under your benefit plan"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "OWES_MORE_THAN_EOB",
+   "amount": 7964.5
+  },
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 31.5
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-44911442",
+  "patientName": "Elena Duarte",
+  "patientAddress": null,
+  "statementDate": "2026-09-22",
+  "serviceDate": "2026-08-25",
+  "insurancePayer": "Fogline Health PPO",
+  "insurancePaid": 1847.09,
+  "adjustments": 4604.14,
+  "patientPaid": 50.0,
+  "totalCharges": 7063.0,
+  "amountDue": 561.77,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-25",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 4",
+    "quantity": 1,
+    "charge": 5214.0,
+    "chargePrinted": "5,214.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR",
+    "quantity": 1,
+    "charge": 1160.0,
+    "chargePrinted": "1,160.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+    "quantity": 1,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 386.0,
+    "chargePrinted": "386.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HCHG CPMC VENIPUNCTURE BTMG",
+    "quantity": 1,
+    "charge": 28.0,
+    "chargePrinted": "28.00"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HCHG CORE URNALYSIS AUTO W/ MICRO",
+    "quantity": 1,
+    "charge": 125.0,
+    "chargePrinted": "125.00"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL 4 MG/2ML IJ SOLN",
+    "quantity": 4,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "PPO",
+  "memberName": "Elena Duarte",
+  "memberId": "FGL635175209",
+  "claimNumber": "2236184966260",
+  "providerName": "BAY EMERGENCY PHYSICIANS MED GROUP",
+  "serviceDateFrom": "2026-08-25",
+  "serviceDateTo": "2026-08-26",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 7063.0,
+  "totalAllowed": 2458.86,
+  "totalPlanPaid": 1847.09,
+  "totalPatientOwes": 611.77,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-08-25",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5214.0,
+    "allowed": 1785.32,
+    "planPaid": 1308.26,
+    "patientOwes": 477.06,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 1160.0,
+    "allowed": 429.74,
+    "planPaid": 343.79,
+    "patientOwes": 85.95,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 75.0,
+    "allowed": 25.44,
+    "planPaid": 20.35,
+    "patientOwes": 5.09,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 386.0,
+    "allowed": 134.9,
+    "planPaid": 107.92,
+    "patientOwes": 26.98,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 28.0,
+    "allowed": 10.14,
+    "planPaid": 8.11,
+    "patientOwes": 2.03,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 125.0,
+    "allowed": 46.4,
+    "planPaid": 37.12,
+    "patientOwes": 9.28,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-26",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 75.0,
+    "allowed": 26.92,
+    "planPaid": 21.54,
+    "patientOwes": 5.38,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "EOB_MISMATCH",
+   "amount": 0
+  }
+ ]
+}
