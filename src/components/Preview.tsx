@@ -173,7 +173,7 @@ export function Preview() {
         <>
           {view !== "bill" && <Answer c={c} />}
           <BillMarkup c={c} findings={c.findings ?? []} />
-          {view === "bill" ? <HouseholdForm id="preview" /> : <Letters key={view} c={c} />}
+          {view === "bill" ? <HouseholdForm id="preview" token="preview" /> : <Letters key={view} c={c} />}
           <Sources c={c} />
         </>
       )}

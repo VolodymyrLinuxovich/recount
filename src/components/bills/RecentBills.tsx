@@ -18,7 +18,7 @@ export function RecentBills() {
       </h2>
       <ul className="bill-slips">
         {bills.slice(0, 3).map((b) => (
-          <BillRow key={b.id} id={b.id} addedAt={b.addedAt} />
+          <BillRow key={b.id} id={b.id} token={b.token} addedAt={b.addedAt} />
         ))}
       </ul>
       <Link href="/bills" className="btn btn-quiet bills-see-all">

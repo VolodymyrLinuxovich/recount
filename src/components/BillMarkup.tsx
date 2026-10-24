@@ -210,42 +210,132 @@ export function BillMarkup({ c, findings }: { c: CaseView; findings: Finding[] }
       {findings.length === 0 ? (
         <p className="quiet">{t("bill.noFindings")}</p>
       ) : (
-        <ol className="findings">
-          {numbered.map(({ f, n }) => (
-            <li key={f.id} id={`finding-${n}`} className="finding">
-              <span className="margin-n">{n}</span>
-              <div>
-                <h3 className="finding-title">{f.title}</h3>
-                <p className="finding-detail">{f.detail}</p>
-                {f.evidence.length > 0 && (
-                  <dl className="evidence">
-                    {f.evidence.map((e) => (
-                      <div key={e.label}>
-                        <dt>{e.label}</dt>
-                        <dd>
-                          {e.value}
-                          {e.source && (
-                            <>
-                              {" "}
-                              <a href={e.source} target="_blank" rel="noreferrer" className="src">
-                                {hostOf(e.source)}
-                              </a>
-                            </>
-                          )}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                )}
-                <p className="confidence">
-                  {f.confidence === "high" ? t("bill.confHigh") : t("bill.confCheck")}
-                  {f.amount > 0 && t("bill.couldTakeOff", { amount: money(f.amount, true, lang) })}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <FindingList numbered={numbered} lines={bill.lines} />
       )}
     </section>
+  );
+}
+
+const SHOW_FIRST = 3;
+
+/** One finding as a card. */
+function FindingCard({ f, n }: { f: Finding; n: number }) {
+  const { t, lang } = useT();
+  return (
+    <li id={`finding-${n}`} className="finding">
+      <span className="margin-n">{n}</span>
+      <div>
+        <h3 className="finding-title">{f.title}</h3>
+        <p className="finding-detail">{f.detail}</p>
+        {f.evidence.length > 0 && (
+          <dl className="evidence">
+            {f.evidence.map((e) => (
+              <div key={e.label}>
+                <dt>{e.label}</dt>
+                <dd>
+                  {e.value}
+                  {e.source && (
+                    <>
+                      {" "}
+                      <a href={e.source} target="_blank" rel="noreferrer" className="src">
+                        {hostOf(e.source)}
+                      </a>
+                    </>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <p className="confidence">
+          {f.confidence === "high" ? t("bill.confHigh") : t("bill.confCheck")}
+          {f.amount > 0 && t("bill.couldTakeOff", { amount: money(f.amount, true, lang) })}
+        </p>
+      </div>
+    </li>
+  );
+}
+
+/** Many "ask for the cash price" findings read better as one card with a small table. */
+function CashGroup({ items, lines }: { items: { f: Finding; n: number }[]; lines: { description: string; charge: number }[] }) {
+  const { t, lang } = useT();
+  const src = items.flatMap((x) => x.f.evidence.map((e) => e.source)).find(Boolean);
+  const total = items.reduce((a, x) => a + x.f.amount, 0);
+  return (
+    <li className="finding cash-group">
+      {items.map(({ n }) => (
+        <span key={n} id={`finding-${n}`} className="anchor" aria-hidden />
+      ))}
+      <span className="margin-n">{items[0].n}</span>
+      <div>
+        <h3 className="finding-title">{t("bill.cashGroupH", { n: items.length })}</h3>
+        <p className="finding-detail">{t("bill.cashGroupBody")}</p>
+        <table className="cash-table">
+          <thead>
+            <tr>
+              <th scope="col">{t("bill.colService")}</th>
+              <th scope="col">{t("bill.colBilled")}</th>
+              <th scope="col">{t("bill.colCash")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map(({ f, n }) => {
+              const i = f.lines[0];
+              const line = lines[i];
+              const cash = f.evidence.find((e) => /cash|efectivo/i.test(e.label))?.value ?? "";
+              return (
+                <tr key={n}>
+                  <td>
+                    <span className="margin-n margin-n-sm">{n}</span> {line?.description ?? ""}
+                  </td>
+                  <td>{line ? money(line.charge, true, lang) : ""}</td>
+                  <td>{cash}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <p className="confidence">
+          {t("bill.confHigh")}
+          {total > 0 && t("bill.couldTakeOff", { amount: money(total, true, lang) })}
+          {src && (
+            <>
+              {" "}
+              <a href={src} target="_blank" rel="noreferrer" className="src">
+                {hostOf(src)}
+              </a>
+            </>
+          )}
+        </p>
+      </div>
+    </li>
+  );
+}
+
+/** Biggest problems first; the rest behind one button. */
+function FindingList({ numbered, lines }: { numbered: { f: Finding; n: number }[]; lines: { description: string; charge: number }[] }) {
+  const { t } = useT();
+  const [all, setAll] = useState(false);
+  const cash = numbered.filter((x) => x.f.kind === "CASH_PRICE_GAP");
+  const grouped = cash.length >= 3;
+  const rest = (grouped ? numbered.filter((x) => x.f.kind !== "CASH_PRICE_GAP") : [...numbered]).sort((a, b) => b.f.amount - a.f.amount);
+  const items: ({ kind: "one"; f: Finding; n: number; amount: number } | { kind: "cash"; amount: number })[] = [
+    ...rest.map((x) => ({ kind: "one" as const, ...x, amount: x.f.amount })),
+    ...(grouped ? [{ kind: "cash" as const, amount: cash.reduce((a, x) => a + x.f.amount, 0) }] : []),
+  ].sort((a, b) => b.amount - a.amount);
+  const shown = all ? items : items.slice(0, SHOW_FIRST);
+  return (
+    <>
+      <ol className="findings">
+        {shown.map((it) =>
+          it.kind === "cash" ? <CashGroup key="cash" items={cash} lines={lines} /> : <FindingCard key={it.f.id} f={it.f} n={it.n} />,
+        )}
+      </ol>
+      {items.length > SHOW_FIRST && (
+        <button className="btn btn-quiet findings-more" onClick={() => setAll((x) => !x)} aria-expanded={all}>
+          {all ? t("bill.showFewer") : t("bill.showAll", { n: items.length })}
+        </button>
+      )}
+    </>
   );
 }

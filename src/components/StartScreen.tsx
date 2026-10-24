@@ -8,6 +8,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { RecentBills } from "./bills/RecentBills";
 import { rememberCase } from "./bills/myBills";
 import { useT } from "./i18n/I18nProvider";
+import { InstallHint } from "./install/InstallHint";
 import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
 
@@ -15,7 +16,7 @@ export function StartScreen() {
   const router = useRouter();
   const { t, lang } = useT();
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
-  const create = useMutation(api.cases.create);
+  const start = useMutation(api.cases.start);
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<null | "photo" | "sample">(null);
   const [error, setError] = useState<PlainKey | null>(null);
@@ -35,11 +36,11 @@ export function StartScreen() {
     try {
       const { blob, type } = await prepareFile(file);
       const fileId = await upload(blob);
-      const id = await create({ fileId, fileType: type, sample: false, lang });
-      rememberCase(id);
-      router.push(`/case/${id}`);
+      const { id, token } = await start({ fileId, fileType: type, sample: false, lang });
+      rememberCase(id, token);
+      router.push(`/case/${id}#t=${token}`);
     } catch (e) {
-      setError(e instanceof FileProblem ? e.key : "start.uploadFailed");
+      setError(e instanceof FileProblem ? e.key : /too many/i.test(String(e)) ? "start.busy" : "start.uploadFailed");
       setBusy(null);
       if (input.current) input.current.value = "";
     }
@@ -57,11 +58,11 @@ export function StartScreen() {
         fileId = await upload(blob);
         fileType = blob.type || "image/png";
       }
-      const id = await create({ fileId, fileType, sample: true, lang });
-      rememberCase(id);
-      router.push(`/case/${id}`);
-    } catch {
-      setError("start.sampleFailed");
+      const { id, token } = await start({ fileId, fileType, sample: true, lang });
+      rememberCase(id, token);
+      router.push(`/case/${id}#t=${token}`);
+    } catch (e) {
+      setError(/too many/i.test(String(e)) ? "start.busy" : "start.sampleFailed");
       setBusy(null);
     }
   }
@@ -93,6 +94,8 @@ export function StartScreen() {
           {t(error)}
         </p>
       )}
+
+      <InstallHint />
 
       <RecentBills />
 

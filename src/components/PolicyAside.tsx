@@ -47,7 +47,7 @@ export function PolicyAside({
     : t("policy.headUnclear", { name: hospitalName });
 
   return (
-    <aside className="policy-aside" aria-labelledby="policy-aside-h">
+    <aside className={`policy-aside ${firm.length ? "" : "policy-aside-ask"}`} aria-labelledby="policy-aside-h">
       <h2 id="policy-aside-h" className="hand policy-aside-h">
         {head}
       </h2>

@@ -19,10 +19,12 @@ const toNumber = (s: string) => {
 
 export function HouseholdForm({
   id,
+  token,
   prior,
   needsOutOfPocket,
 }: {
   id: string;
+  token?: string;
   prior?: CaseView["household"];
   needsOutOfPocket?: boolean;
 }) {
@@ -55,6 +57,7 @@ export function HouseholdForm({
     try {
       await submit({
         id: id as Id<"cases">,
+        token,
         size,
         annualIncome: incomeN!,
         insured: insured!,
