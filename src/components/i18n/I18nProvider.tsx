@@ -70,7 +70,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const t = useCallback<T>((key, ...args) => translate(lang, key, ...args), [lang]);
+  const t = useCallback<T>((key, vars) => translate(lang, key, vars), [lang]);
   const value = useMemo(() => ({ lang, setLang: storeLang, t }), [lang, t]);
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

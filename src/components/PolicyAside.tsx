@@ -22,7 +22,7 @@ export interface PolicyFinding {
 
 const HSC = (n: string) => `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=${n}.`;
 
-// One plain line per state rule (text in i18n/strings.ts), with the section it comes from.
+// One plain line per state rule (text in i18n/en.json), with the section it comes from.
 const LAW: Record<string, { line: PlainKey; cite: string; url: string }> = {
   DEADLINE: { line: "law.DEADLINE", cite: "Health & Safety Code 127405", url: HSC("127405") },
   ASSETS: { line: "law.ASSETS", cite: "Health & Safety Code 127405", url: HSC("127405") },

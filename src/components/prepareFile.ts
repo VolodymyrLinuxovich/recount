@@ -5,7 +5,7 @@ const SEND_AS_IS = new Set(["image/jpeg", "image/png", "image/webp"]);
 const MAX_BYTES = 3.5 * 1024 * 1024; // the model accepts images up to 5 MB
 const MAX_SIDE = 2400;
 
-/** A problem the patient can fix. `key` names the message in i18n/strings.ts. */
+/** A problem the patient can fix. `key` names the message in i18n/en.json. */
 export class FileProblem extends Error {
   constructor(public key: "file.pdfTooBig" | "file.notImage" | "file.cantOpen" | "file.tooLarge") {
     super(key);

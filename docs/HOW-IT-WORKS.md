@@ -112,7 +112,7 @@ Every result carries a `basis` list (rule, plain text, source link). The answer 
 
 ### 8. Access for older and Spanish-speaking patients (frontend)
 - Display mode for low vision: `src/components/a11y/vision.ts` and `VisionToggle.tsx`. Text size and contrast are saved per device and applied before the first paint. A system "more contrast" setting turns it on by default.
-- Spanish and English: `src/components/i18n/` with typed dictionaries in `strings.ts`. The backend writes step labels, findings and reasons in the case's language.
+- Spanish and English: `src/components/i18n/` with the dictionaries in `en.json` and `es.json` (template syntax in `format.ts`, key types and lookup in `strings.ts`). The backend writes step labels, findings and reasons in the case's language.
 - Lupa, the helper: `src/components/helper/` (`HelperButton`, `HelperChat`, `Mascot`, `chatApi.ts`). Backend `chat.send` and `chat.list` in [convex/chat.ts](../convex/chat.ts). It is limited to 20 questions per 10 minutes and one reply at a time. The reply streams from `reply` in [convex/chatAgent.ts](../convex/chatAgent.ts), with the case passed as marked data, never as instructions (`SYSTEM` [L10-26](../convex/chatAgent.ts#L10-L26)).
 - "My bills": `src/components/bills/`, case ids and tokens kept on this phone.
 - The research behind these choices is in [DESIGN-RESEARCH.md](DESIGN-RESEARCH.md).
@@ -145,7 +145,7 @@ Frontend: `src/components/audit/AuditApp.tsx` (search, sorting and list), `CaMap
 
 ## Real vs sample vs fallback
 
-| Thing | Real | Sample or fallback | How the UI labels it (English; Spanish in `src/components/i18n/strings.ts`) |
+| Thing | Real | Sample or fallback | How the UI labels it (English; Spanish in `src/components/i18n/es.json`) |
 |---|---|---|---|
 | Bill reading | Claude reads the uploaded file | The sample bill loads `convex/lib/sampleBill.json` when there's no key or the model fails. The sample PNG is rendered from the same file | "read by Claude from your photo" or "sample bill source data". Sources: "Read by Claude ... Check names and amounts" or "Sample bill, loaded from its source data" |
 | The sample patient | Fictional (Alex Rivera) | Charges are ZSFG's real published gross charges, with two planted problems (CBC twice, X-ray $482 vs $402) | "The sample bill" on the photo toggle |
