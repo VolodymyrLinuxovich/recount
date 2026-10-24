@@ -176,3 +176,13 @@ describe("demo path", () => {
     expect(e.fplPct).toBeCloseTo(125.3, 1);
   });
 });
+
+import { resolveFilledBrackets } from "../convex/lib/letters";
+
+describe("letter placeholders", () => {
+  it("turns [Label: value] into the value and leaves real blanks alone", () => {
+    expect(resolveFilledBrackets("Thank you,\n[Your name: Alex Rivera]\n[Your street address]\n[Signature]"))
+      .toBe("Thank you,\nAlex Rivera\n[Your street address]\n[Signature]");
+    expect(resolveFilledBrackets("[Phone: ]")).toBe("[Phone: ]");
+  });
+});
