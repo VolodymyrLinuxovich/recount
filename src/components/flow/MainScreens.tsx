@@ -17,6 +17,7 @@ import { money } from "../types";
 import { StepFrame } from "./StepFrame";
 import { phaseOf } from "./steps";
 import type { ScreenProps } from "./types";
+import "../more.css";
 
 /** Read "28k", "$28,000", "28000" or "1.2m" as whole dollars. */
 export function parseDollars(s: string): number | null {
@@ -265,16 +266,25 @@ export function MoreStep({ c, back }: ScreenProps) {
   const { t } = useT();
   return (
     <StepFrame phase={phaseOf("more")} title={t("flow.moreH")} onBack={back}>
-      <Sources c={c} />
-      {c.token && <BillTools id={c._id} token={c.token} />}
-      <details className="log-details">
-        <summary>{t("case.log")}</summary>
-        <StepLog steps={c.steps} />
-      </details>
-      <p className="quiet small-print">{t("footer")}</p>
-      <p>
-        <Link href="/bills">{t("bills.title")}</Link>
-      </p>
+      <div className="more">
+        <Sources c={c} />
+        {c.token && <BillTools id={c._id} token={c.token} />}
+        <section className="more-sec" aria-labelledby="log-h">
+          <h2 id="log-h" className="more-h">
+            {t("case.log")}
+          </h2>
+          <details className="more-log">
+            <summary>{t("more.showLog")}</summary>
+            <StepLog steps={c.steps} />
+          </details>
+        </section>
+        <section className="more-sec">
+          <p className="more-note">{t("footer")}</p>
+          <Link href="/bills" className="more-link">
+            {t("bills.title")}
+          </Link>
+        </section>
+      </div>
     </StepFrame>
   );
 }

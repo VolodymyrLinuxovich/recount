@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { Footer } from "@/components/Footer";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
@@ -9,7 +9,6 @@ import "./globals.css";
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"], axes: ["SOFT", "opsz"] });
 const body = Source_Serif_4({ variable: "--font-body", subsets: ["latin"] });
 const mono = IBM_Plex_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "500"] });
-const hand = Caveat({ variable: "--font-hand", subsets: ["latin"], weight: ["500", "700"] });
 
 export const metadata: Metadata = {
   title: "Recount",
@@ -28,7 +27,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable} ${hand.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
         <ConvexClientProvider>
           <I18nProvider>

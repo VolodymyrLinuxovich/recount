@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { useT } from "../i18n/I18nProvider";
 import { type Hospital, type Worst, displayName, verdictLabel, worst } from "./data";
 
-// A simplified outline of California as [lon, lat] points, drawn like a sketch on paper.
+// A simplified outline of California as [lon, lat] points.
 const OUTLINE: [number, number][] = [
   [-124.21, 42.0], [-120.0, 42.0], [-120.0, 39.0], [-114.63, 35.0], [-114.57, 34.3], [-114.43, 34.08],
   [-114.72, 33.4], [-114.52, 33.03], [-114.72, 32.72], [-117.12, 32.53], [-117.25, 32.7], [-117.3, 33.1],
@@ -88,11 +88,7 @@ export function CaMap({
           </g>
         ))}
         {sel && (
-          <path
-            className="dot-ring"
-            transform={`translate(${sel.xy[0]} ${sel.xy[1]})`}
-            d="M-11 3 C-13 -8, 2 -14, 10 -8 C16 -2, 10 11, -1 12 C-9 12, -14 4, -9 -5"
-          />
+          <circle className="dot-ring" cx={sel.xy[0]} cy={sel.xy[1]} r={11} />
         )}
       </svg>
       {near && (

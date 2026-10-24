@@ -1,0 +1,97 @@
+/* The hospital's own policy against state law: a plain bordered note.
+   Red edge only when it's a confirmed or likely conflict; amber when it's only worth asking. */
+
+.policy-aside {
+  --edge: var(--pen);
+  margin: 0;
+  padding: 20px 20px 16px;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--edge);
+  border-radius: 10px;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.policy-aside-ask {
+  --edge: var(--warn);
+}
+
+.policy-aside-h {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 4px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.policy-aside-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.policy-aside-list li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.policy-aside-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 8px;
+}
+
+.policy-aside-label {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.policy-aside-quote {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 18px;
+  line-height: 1.55;
+  background: color-mix(in srgb, var(--edge) 7%, transparent);
+  border-left: 3px solid var(--edge);
+  border-radius: 0 6px 6px 0;
+}
+
+.policy-aside-cite {
+  margin-top: 8px;
+  font-size: 16.5px;
+  color: var(--ink-2);
+}
+
+.policy-aside-law {
+  margin: 12px 0 0;
+  font-size: 18px;
+}
+
+.policy-aside a {
+  color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+.policy-aside-foot {
+  margin: 8px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 17px;
+}
+
+.policy-aside-foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-weight: 600;
+}
+
+.policy-aside a.src {
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 16.5px;
+}

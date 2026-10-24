@@ -1,12 +1,13 @@
 import { useT } from "./i18n/I18nProvider";
 import { type CaseView, hostOf, shortDate } from "./types";
+import "./more.css";
 
 export function Sources({ c }: { c: CaseView }) {
   const { t, lang } = useT();
   const h = c.hospital;
   return (
-    <section className="sources" aria-labelledby="src-h">
-      <h2 id="src-h" className="h-small">
+    <section className="sources more-sec" aria-labelledby="src-h">
+      <h2 id="src-h" className="more-h">
         {t("src.h")}
       </h2>
       <ul>

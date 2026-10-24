@@ -10,7 +10,6 @@ import { money, shortDate, type CaseView } from "../types";
 import { forgetCase, privateLink } from "./myBills";
 import "./bills.css";
 
-
 type Row = CaseView & { createdAt?: number };
 
 export function BillRow({ id, token, addedAt }: { id: string; token?: string; addedAt: number }) {
@@ -38,39 +37,40 @@ function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: 
   const name = c.bill?.hospitalName || c.hospital?.name || t("bills.untitled");
   const when = c.bill?.serviceDate
     ? t("bills.visit", { date: shortDate(c.bill.serviceDate, lang) })
-    : t("bills.added", { date: shortDate(new Date(c.createdAt ?? addedAt).toISOString(), lang) });
+    : t("bills.added", {
+        date: shortDate(new Date(c.createdAt ?? addedAt).toISOString(), lang),
+      });
   const amount = typeof c.bill?.amountDue === "number" ? c.bill.amountDue : null;
   const tier = c.eligibility?.tier && c.eligibility.tier !== "NEEDS_INFO" ? t(`bills.tier.${c.eligibility.tier}`) : "";
   const n = c.findings?.length;
   const flags = n === undefined ? "" : t("bills.flags", { n });
-  const tone = c.status === "error" ? "bad" : c.status === "needs_household" ? "todo" : "plain";
+  const tone = c.status === "approved" ? "ok" : c.status === "needs_household" ? "todo" : c.status === "error" ? "bad" : "plain";
 
   return (
     <li className="bill-slip">
-      <Link href={`/case/${id}`} className="bill-slip-open">
-        <span className="bill-slip-name">{name}</span>
-        <span className="bill-slip-meta">
-          {when}
-          {amount !== null && (
-            <>
-              <span aria-hidden="true"> · </span>
-              <span className="bill-slip-amount">
-                {t("bills.billSays")} <strong>{money(amount, true, lang)}</strong>
-              </span>
-            </>
-          )}
-        </span>
-        <span className={`bill-slip-status bill-tone-${tone}`}>{t(`bills.status.${c.status}`)}</span>
-        {(tier || flags) && (
-          <span className="bill-slip-facts">
-            {tier && <span className="bill-slip-tier">{tier}</span>}
-            {flags && <span>{flags}</span>}
-          </span>
-        )}
-        <span className="bill-slip-go">{t("bills.open")} &rarr;</span>
+      <p className="bill-slip-name">{name}</p>
+      <p className="bill-slip-meta">{when}</p>
+      {amount !== null && (
+        <p className="bill-slip-amount">
+          {t("bills.billSays")} <strong>{money(amount, true, lang)}</strong>
+        </p>
+      )}
+      <p className="bill-slip-status-row">
+        <span className={`bill-pill bill-tone-${tone}`}>{t(`bills.status.${c.status}`)}</span>
+      </p>
+      {(tier || flags) && (
+        <p className="bill-slip-facts">
+          {tier && <span className="bill-slip-tier">{tier}</span>}
+          {flags && <span>{flags}</span>}
+        </p>
+      )}
+      <Link href={`/case/${id}`} className="btn btn-primary bill-slip-open" aria-label={`${t("bills.open")}: ${name}`}>
+        {t("bills.open")}
       </Link>
-      {token && <CopyLink id={id} token={token} />}
-      <RemoveControl id={id} />
+      <div className="bill-slip-tools">
+        {token && <CopyLink id={id} token={token} />}
+        <RemoveControl id={id} />
+      </div>
     </li>
   );
 }
@@ -83,7 +83,7 @@ function CopyLink({ id, token }: { id: string; token: string }) {
     <>
       <button
         type="button"
-        className="btn btn-quiet bill-slip-copy"
+        className="bill-slip-text-btn"
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(link);
@@ -149,7 +149,7 @@ function RemoveControl({ id }: { id: string }) {
   const [asking, setAsking] = useState(false);
   if (!asking)
     return (
-      <button type="button" className="bill-slip-remove-link" onClick={() => setAsking(true)}>
+      <button type="button" className="bill-slip-text-btn" onClick={() => setAsking(true)}>
         {t("bills.removeFromPhone")}
       </button>
     );

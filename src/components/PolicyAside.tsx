@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useT } from "./i18n/I18nProvider";
 import type { PlainKey } from "./i18n/strings";
 import { shortDate } from "./types";
+import "./policy-aside.css";
 
 export interface PolicyFinding {
   rule: string;
@@ -47,8 +48,8 @@ export function PolicyAside({
     : t("policy.headUnclear", { name: hospitalName });
 
   return (
-    <aside className={`policy-aside ${firm.length ? "" : "policy-aside-ask"}`} aria-labelledby="policy-aside-h">
-      <h2 id="policy-aside-h" className="hand policy-aside-h">
+    <aside className={firm.length ? "policy-aside" : "policy-aside policy-aside-ask"} aria-labelledby="policy-aside-h">
+      <h2 id="policy-aside-h" className="policy-aside-h">
         {head}
       </h2>
       <ol className="policy-aside-list">
@@ -56,11 +57,11 @@ export function PolicyAside({
           const law = LAW[f.rule];
           return (
             <li key={f.rule + i}>
-              <div className="versus-label">
+              <p className="policy-aside-label">
                 {t("policy.theirSays", { doc: f.docType })}
                 {f.verdict === "likely" && t("policy.likely")}
                 {f.verdict === "ask" && t("policy.ask")}
-              </div>
+              </p>
               <blockquote className="policy-aside-quote">&ldquo;{f.quote}&rdquo;</blockquote>
               <div className="policy-aside-cite">
                 {f.docUrl ? (

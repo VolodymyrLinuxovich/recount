@@ -2,7 +2,7 @@ import Link from "next/link";
 import { hostOf } from "../types";
 import { useT } from "../i18n/I18nProvider";
 import type { T } from "../i18n/strings";
-import { type AuditFinding, type DocType, type Hospital, type Rule, displayName, docLabel, longDate, place, ruleTitle, verdictLabel, worst } from "./data";
+import { type AuditFinding, type DocType, type Hospital, type Rule, displayName, docLabel, longDate, place, ruleTitle, worst } from "./data";
 
 // A sentence ends at . ; or : followed by a space and a capital letter (or the end), so "$5.00" and "704.10" don't count.
 const SENTENCE_END = /[.;:](?=\s+[A-Z("“]|\s*$)/g;
@@ -30,7 +30,7 @@ function tail(after: string) {
   return text.slice(0, cut) + (cut < text.length ? " …" : "");
 }
 
-/** Show the flagged sentence in red pen, with a little of the text around it. */
+/** Show the flagged sentence highlighted, with a little of the text around it. */
 function InContext({ f }: { f: AuditFinding }) {
   const at = f.context.indexOf(f.quote);
   if (at < 0) return <mark className="policy-mark">{f.quote}</mark>;
@@ -48,12 +48,12 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
   return (
     <li className={`a-finding a-${f.verdict}`}>
       <div className="a-finding-head">
-        <h4 className="a-rule">{ruleTitle(rule, f.rule, lang)}</h4>
-        <span className={`verdict verdict-${f.verdict}`}>{verdictLabel(f.verdict, lang)}</span>
+        <h3 className="a-rule">{ruleTitle(rule, f.rule, lang)}</h3>
+        <span className={`verdict verdict-${f.verdict}`}>{t(`verdict.pill.${f.verdict}`)}</span>
       </div>
       <div className="versus">
         <div className="versus-col">
-          <div className="versus-label">{t("hosp.theirSays")}</div>
+          <p className="versus-label">{t("hosp.theirSays")}</p>
           <blockquote className="policy-quote">
             <InContext f={f} />
           </blockquote>
@@ -66,7 +66,7 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
           </div>
         </div>
         <div className="versus-col versus-law">
-          <div className="versus-label">{t("hosp.lawSays")}</div>
+          <p className="versus-label">{t("hosp.lawSays")}</p>
           <blockquote className="law-quote">{rule?.lawQuote ?? t("hosp.seeRule")}</blockquote>
           {rule && (
             <div className="versus-cite">
@@ -117,7 +117,7 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
       {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}
 
       <div className="hospital-docs">
-        <div className="versus-label">{t("hosp.docsRead")}</div>
+        <h3 className="hospital-docs-h">{t("hosp.docsRead")}</h3>
         <ul>
           {docs.map(([type, d]) => (
             <li key={type}>

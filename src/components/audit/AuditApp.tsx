@@ -192,7 +192,7 @@ export function AuditApp() {
             {showMap && <p className="quiet find-hint">{t("audit.tapDot")}</p>}
             {q.trim().length < 2 && mostFlagged.length > 0 && (
               <div className="most">
-                <div className="versus-label">{showMap ? t("audit.mostFlags") : t("audit.checkedList")}</div>
+                <h3 className="most-h">{showMap ? t("audit.mostFlags") : t("audit.checkedList")}</h3>
                 <ul className="find-results">
                   {mostFlagged.map((h) => (
                     <li key={h.key}>
@@ -257,7 +257,7 @@ export function AuditApp() {
       </section>
 
       <section aria-labelledby="method-h" className="method">
-        <h2 id="method-h" className="h-small">
+        <h2 id="method-h" className="h-section">
           {t("audit.methodH")}
         </h2>
         <p>{t("audit.method1")}</p>
