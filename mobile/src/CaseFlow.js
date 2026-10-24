@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, BackHandler, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { EMPTY_DETAILS, checkDetails, fillLetter } from "./letterFill";
+
+const DETAILS_KEY = "recount.details.v1"; // kept only on this phone
 import Svg, { Circle, Path } from "react-native-svg";
 import { Button, C, Card, F, H1, H2, LinkText, P, Screen, openUrl, s } from "./ui";
 
@@ -22,12 +26,22 @@ export function CaseFlow({ t, id, token, onHome }) {
   const [err, setErr] = useState(null);
   const [seenStatus, setSeenStatus] = useState(null);
   const [draftsKey, setDraftsKey] = useState("");
+  const [details, setDetails] = useState(EMPTY_DETAILS);
+  const [detailsTried, setDetailsTried] = useState(false);
+
+  // The patient's details are typed once and reused for their next bill.
+  useEffect(() => {
+    AsyncStorage.getItem(DETAILS_KEY)
+      .then((raw) => raw && setDetails((d) => ({ ...d, ...JSON.parse(raw) })))
+      .catch(() => {});
+  }, []);
 
   const confirmHospital = useMutation(api.cases.confirmHospital);
   const submitHousehold = useMutation(api.cases.submitHousehold);
   const approve = useMutation(api.cases.approve);
   const unapprove = useMutation(api.cases.unapprove);
   const remove = useMutation(api.cases.remove);
+  const correctLine = useMutation(api.cases.correctLine);
 
   // Move to the right screen when the backend status changes (not on every update).
   // Adjusting state during render is React's recommended pattern for this.
@@ -86,6 +100,23 @@ export function CaseFlow({ t, id, token, onHome }) {
     setPage(p);
   };
 
+  // Deleting is offered on the findings screen too, so a bill can be removed before any letters.
+  const deleteButton = {
+    label: t.deleteBill,
+    onPress: () => {
+      const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
+      // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
+      if (Platform.OS === "web") {
+        if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
+        return;
+      }
+      Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
+        { text: t.cancel, style: "cancel" },
+        { text: t.del, style: "destructive", onPress: del },
+      ]);
+    },
+  };
+
   // ---------- states driven by the backend ----------
   let view;
   if (c === undefined) {
@@ -119,28 +150,11 @@ export function CaseFlow({ t, id, token, onHome }) {
     view = pageView();
   }
 
-  // Deleting is offered on the findings screen too, so a bill can be removed before any letters.
-  const deleteButton = {
-    label: t.deleteBill,
-    onPress: () => {
-      const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
-      // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
-      if (Platform.OS === "web") {
-        if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
-        return;
-      }
-      Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
-        { text: t.cancel, style: "cancel" },
-        { text: t.del, style: "destructive", onPress: del },
-      ]);
-    },
-  };
-
   function pageView() {
     const h = household;
     switch (page) {
       case "found":
-        return { step: 2, back: onHome, body: <Found t={t} c={c} />, primary: { label: t.continueQ, onPress: () => go("size") }, secondary: deleteButton };
+        return { step: 2, back: onHome, body: <Found t={t} c={c} busy={busy} err={err} onFix={(index, charge) => run(() => correctLine({ id, token, index, charge }))} />, primary: { label: t.continueQ, onPress: () => go("size") }, secondary: deleteButton };
       case "size":
         return {
           step: 3,
@@ -206,16 +220,54 @@ export function CaseFlow({ t, id, token, onHome }) {
           body: <Answer t={t} e={c.eligibility} />,
           primary:
             status === "ready" || status === "approved"
-              ? { label: t.seeLetters, onPress: () => { setLetterIndex(0); go("letter"); } }
+              ? {
+                  label: t.seeLetters,
+                  onPress: () => {
+                    // Start with the name printed on the bill; the patient can change it.
+                    if (!details.name && c.bill?.patientName) setDetails({ ...details, name: c.bill.patientName });
+                    setLetterIndex(0);
+                    go("details");
+                  },
+                }
               : { label: t.draftingLetters, busy: true },
         };
+      case "details": {
+        const d = details;
+        const problems = checkDetails(d);
+        const ok = !Object.keys(problems).length;
+        return {
+          step: 4,
+          back: () => go("answer"),
+          body: <DetailsForm t={t} d={d} problems={detailsTried ? problems : {}} onChange={setDetails} />,
+          primary: {
+            label: t.detailsDone,
+            onPress: () => {
+              setDetailsTried(true);
+              if (!ok) return;
+              AsyncStorage.setItem(DETAILS_KEY, JSON.stringify(d)).catch(() => {});
+              // The letters already use the name printed on the bill; use the patient's name instead.
+              const billName = (c.bill?.patientName || "").trim();
+              const newName = d.name.trim();
+              const rename = (txt) => (txt && billName && newName && billName !== newName ? txt.split(billName).join(newName) : txt);
+              setDrafts(
+                // Start from the letters as written, so changing a detail twice still works.
+                (c.letters || drafts || []).map((l) =>
+                  fillLetter({ ...l, subject: rename(l.subject), body: rename(l.body), bodyPatient: rename(l.bodyPatient), subjectPatient: rename(l.subjectPatient) }, d),
+                ),
+              );
+              setLetterIndex(0);
+              go("letter");
+            },
+          },
+        };
+      }
       case "letter": {
         const list = drafts || [];
         const i = Math.min(letterIndex, Math.max(0, list.length - 1));
         const last = i >= list.length - 1;
         return {
           step: 4,
-          back: () => (i > 0 ? setLetterIndex(i - 1) : go("answer")),
+          back: () => (i > 0 ? setLetterIndex(i - 1) : go("details")),
           body: list.length ? (
             <LetterEditor
               key={i}
@@ -370,13 +422,26 @@ function HospitalPick({ t, c, busy, onPick }) {
 }
 
 // ---------- 2. What we found ----------
-function Found({ t, c }) {
+function Found({ t, c, busy, err, onFix }) {
   const findings = c.findings || [];
   const policy = c.policyFindings || [];
-  const unreadable = c.bill?.unreadable || [];
+  const lines = c.bill?.lines || [];
+  const checks = (c.bill?.amountChecks || []).filter((k) => lines[k.index]);
+  // Notes about amounts we're already asking about would say the same thing twice.
+  const unreadable = (c.bill?.unreadable || []).filter((u) => !checks.length || !/second look|segunda lectura/i.test(u));
   return (
     <>
       <H1>{t.foundTitle}</H1>
+      {err ? <Text style={s.error}>{err}</Text> : null}
+      {checks.map((k) => (
+        <Card key={"check" + k.index} style={{ borderColor: C.flag }}>
+          <H2>{t.whichAmount}</H2>
+          <P>{t.whichAmountBody(lines[k.index].description || lines[k.index].code || "", money(k.first), money(k.second))}</P>
+          <Button label={money(k.first)} busy={busy} onPress={() => onFix(k.index, k.first)} />
+          <View style={{ height: 10 }} />
+          <Button kind="secondary" label={money(k.second)} disabled={busy} onPress={() => onFix(k.index, k.second)} />
+        </Card>
+      ))}
       <Card style={{ backgroundColor: C.bg2 }}>
         <Text style={s.label}>{t.billFrom}</Text>
         <Text style={x.hName}>{c.hospital?.name || c.bill?.hospitalName || t.noName}</Text>
@@ -425,6 +490,8 @@ function Found({ t, c }) {
         </View>
       )}
 
+      <LineFixer t={t} lines={lines} busy={busy} onFix={onFix} />
+
       {unreadable.length > 0 && (
         <Card style={{ marginTop: 10 }}>
           <H2>{t.doubleCheck}</H2>
@@ -463,6 +530,84 @@ function Stepper({ t, value, onChange }) {
   );
 }
 
+/** "Is an amount wrong?": every line we read, each with a Fix button. */
+function LineFixer({ t, lines, busy, onFix }) {
+  const [open, setOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [value, setValue] = useState("");
+  if (!lines.length) return null;
+  if (!open) return <LinkText label={t.checkLines} onPress={() => setOpen(true)} />;
+  return (
+    <Card style={{ marginTop: 10 }}>
+      <H2>{t.linesTitle}</H2>
+      <P muted>{t.linesBody}</P>
+      {lines.map((l, i) => (
+        <View key={i} style={x.evRow}>
+          <Text style={[x.evLabel, { flex: 1 }]}>{l.description || l.code}</Text>
+          {editing === i ? (
+            <View style={{ alignItems: "flex-end" }}>
+              <TextInput
+                style={[s.input, { minWidth: 120, textAlign: "right" }]}
+                value={value}
+                onChangeText={(v) => setValue(v.replace(/[^0-9.]/g, "").slice(0, 10))}
+                keyboardType="decimal-pad"
+                autoFocus
+                accessibilityLabel={t.linesTitle}
+              />
+              <LinkText
+                label={t.save}
+                onPress={() => {
+                  const n = Number(value);
+                  if (value === "" || !Number.isFinite(n)) return;
+                  onFix(i, Math.round(n * 100) / 100);
+                  setEditing(null);
+                }}
+              />
+            </View>
+          ) : (
+            <Pressable
+              disabled={busy}
+              onPress={() => { setEditing(i); setValue(String(l.charge)); }}
+              accessibilityRole="button"
+              accessibilityLabel={t.fixAmount + " " + (l.description || "")}
+              style={{ minHeight: 44, justifyContent: "center" }}
+            >
+              <Text style={x.evValue}>{money(l.charge) + "  ✎"}</Text>
+            </Pressable>
+          )}
+        </View>
+      ))}
+    </Card>
+  );
+}
+
+function DetailsForm({ t, d, problems, onChange }) {
+  const field = (key, label, props = {}) => (
+    <View style={{ marginBottom: 12 }} key={key}>
+      <Text style={x.fieldLabel}>{label}</Text>
+      <TextInput
+        style={[s.input, problems[key] && { borderColor: C.flag }]}
+        value={d[key]}
+        onChangeText={(v) => onChange({ ...d, [key]: v })}
+        accessibilityLabel={label}
+        {...props}
+      />
+      {problems[key] ? <Text style={s.error}>{problems[key] === "bad" ? t.detailsBad[key] : t.detailsMissing}</Text> : null}
+    </View>
+  );
+  return (
+    <>
+      <H1>{t.detailsTitle}</H1>
+      <P muted>{t.detailsBody}</P>
+      {field("name", t.dName, { autoComplete: "name", textContentType: "name" })}
+      {field("street", t.dStreet, { autoComplete: "street-address", textContentType: "streetAddressLine1" })}
+      {field("city", t.dCity, { textContentType: "addressCity" })}
+      {field("zip", t.dZip, { keyboardType: "number-pad", autoComplete: "postal-code", textContentType: "postalCode", maxLength: 10 })}
+      {field("phone", t.dPhone, { keyboardType: "phone-pad", autoComplete: "tel", textContentType: "telephoneNumber" })}
+    </>
+  );
+}
+
 function MoneyInput({ value, onChange }) {
   const shown = value === "" ? "" : Number(value).toLocaleString("en-US");
   return (
@@ -475,7 +620,7 @@ function MoneyInput({ value, onChange }) {
         keyboardType="number-pad"
         autoFocus
         placeholder="0"
-        placeholderTextColor={C.lilac}
+        placeholderTextColor="#958cad"
       />
     </View>
   );
@@ -618,6 +763,7 @@ function Done({ t, c, letters }) {
 }
 
 const x = StyleSheet.create({
+  fieldLabel: { fontFamily: F.body500, fontSize: 17, color: C.ink, marginBottom: 6 },
   stepRow: { flexDirection: "row", alignItems: "flex-start", paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: C.line },
   stepMark: { width: 32, height: 32, borderRadius: 16, backgroundColor: C.bg2, alignItems: "center", justifyContent: "center", marginRight: 14 },
   stepDone: { backgroundColor: C.brandTint },
