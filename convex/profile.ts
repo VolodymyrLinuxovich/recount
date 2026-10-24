@@ -28,6 +28,7 @@ export const get = query({
     const p = await ctx.db.query("profiles").withIndex("by_user", (q) => q.eq("userId", userId)).first();
     return {
       accountEmail: user?.email ?? null,
+      accountName: user?.name ?? null,
       ...(await signInInfo(ctx, userId, user?.email)),
       name: p?.name ?? null,
       street: p?.street ?? null,
