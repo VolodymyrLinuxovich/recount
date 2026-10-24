@@ -55,7 +55,7 @@ const SLOT_KEY: Record<Exclude<Slot, "date">, PlainKey> = {
 };
 
 /** A gentle note listing the brackets still in the letter. */
-function StillMissing({ letter }: { letter: Letter }) {
+export function StillMissing({ letter }: { letter: Letter }) {
   const { t, lang } = useT();
   const left = leftovers(letter);
   if (!left.length) return null;
@@ -63,11 +63,14 @@ function StillMissing({ letter }: { letter: Letter }) {
   return <p className="letter-missing">{t("letters.stillMissing", { list: joinList(lang, names) })}</p>;
 }
 
-function LetterSheet({
+export function LetterSheet({
   letter,
   onChange,
   readOnly,
+  inFlow = false,
 }: {
+  /** One letter per screen: the screen shows the title, and the actions are small. */
+  inFlow?: boolean;
   /** The letter with the patient's details already put in. */
   letter: Letter;
   onChange: (l: Letter) => void;
@@ -130,7 +133,7 @@ function LetterSheet({
 
   return (
     <article className="letter">
-      <h3 className="letter-title">{title}</h3>
+      {!inFlow && <h3 className="letter-title">{title}</h3>}
       {spanishFirst ? (
         <>
           {spanish}
@@ -143,7 +146,11 @@ function LetterSheet({
         english
       )}
       <StillMissing letter={letter} />
-      <button className="btn btn-big letter-print" type="button" onClick={() => printLetters(letter.kind, letter.title)}>
+      <button
+        className={inFlow ? "btn btn-quiet letter-print" : "btn btn-big letter-print"}
+        type="button"
+        onClick={() => printLetters(letter.kind, letter.title)}
+      >
         {t("print.one")}
       </button>
       {!spanishFirst && spanish}

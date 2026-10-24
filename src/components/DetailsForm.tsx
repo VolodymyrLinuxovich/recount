@@ -8,7 +8,16 @@ import type { CaseView } from "./types";
 import "./letters.css";
 
 /** The patient's name, address and phone, typed once and put into the English letters. */
-export function DetailsForm({ details, onChange }: { details: Details; onChange: (d: Details) => void }) {
+export function DetailsForm({
+  details,
+  onChange,
+  bare = false,
+}: {
+  details: Details;
+  onChange: (d: Details) => void;
+  /** On its own screen: the screen has the heading, so no box and no heading here. */
+  bare?: boolean;
+}) {
   const { t } = useT();
   const field = (k: keyof Details, label: PlainKey, attrs: React.InputHTMLAttributes<HTMLInputElement>) => (
     <label className="details-field">
@@ -22,10 +31,8 @@ export function DetailsForm({ details, onChange }: { details: Details; onChange:
     </label>
   );
   return (
-    <section className="details" aria-labelledby="details-h">
-      <h3 id="details-h" className="details-h">
-        {t("letters.detailsH")}
-      </h3>
+    <section className={bare ? "details details-bare" : "details"} aria-label={t("letters.detailsH")}>
+      {!bare && <h3 className="details-h">{t("letters.detailsH")}</h3>}
       <p className="details-lede">{t("letters.detailsLede")}</p>
       {field("name", "letters.dName", { autoComplete: "name" })}
       {field("street", "letters.dStreet", { autoComplete: "street-address" })}

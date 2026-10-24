@@ -23,9 +23,9 @@ export function stepsFor(c: CaseView): StepId[] {
   const found = ["found", ...findingScreens(c).map((_, i) => `finding-${i}`)];
   if (s === "needs_household" || c.eligibility?.tier === "NEEDS_INFO") return [...found, "q1", "q2", "q3", "more"];
   const letters = (c.letters ?? []).map((_, i) => `letter-${i}`);
-  const answer = ["answer", ...found];
-  if (s === "drafting" || (s === "ready" && !letters.length)) return [...answer, "letters-wait", "more"];
-  if (s === "ready") return [...answer, "details", ...letters, "more"];
+  // After the answer comes the letters; the findings stay reachable from the answer screen.
+  if (s === "drafting" || (s === "ready" && !letters.length)) return ["answer", "letters-wait", ...found, "more"];
+  if (s === "ready") return ["answer", "details", ...letters, ...found, "more"];
   return ["send", "answer", "details", ...letters, ...found, "more"]; // approved
 }
 

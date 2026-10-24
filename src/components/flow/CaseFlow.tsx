@@ -20,12 +20,15 @@ export function CaseFlow({ c }: { c: CaseView }) {
   const lastStatus = useRef(c.status);
   useEffect(() => {
     if (lastStatus.current !== c.status) {
-      const was = lastStatus.current;
       lastStatus.current = c.status;
-      // Letters just finished while the patient waited: go straight to them.
-      go(was === "drafting" && c.status === "ready" ? "details" : homeStep(c), true);
+      // Only move the patient on by itself from a screen that is waiting for the backend,
+      // never while they are reading something.
+      // No step in the link yet means the patient hasn't moved anywhere: follow the bill.
+      const waiting = !wanted || ["reading", "hospital", "letters-wait", "q3"].includes(wanted);
+      if (waiting) go(wanted === "letters-wait" && c.status === "ready" ? "details" : homeStep(c), true);
+      else if (c.status === "error") go("reading", true);
     }
-  }, [c, go]);
+  }, [c, go, wanted]);
 
   const i = steps.indexOf(step);
   const props: ScreenProps = {

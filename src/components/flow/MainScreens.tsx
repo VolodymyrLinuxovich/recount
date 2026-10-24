@@ -233,7 +233,7 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
 
 // ---------- 3. The answer ----------
 
-export function AnswerStep({ c, next, back, go }: ScreenProps) {
+export function AnswerStep({ c, back, go }: ScreenProps) {
   const { t } = useT();
   const writing = c.status === "drafting" || !(c.letters ?? []).length;
   return (
@@ -242,7 +242,7 @@ export function AnswerStep({ c, next, back, go }: ScreenProps) {
       primary={
         c.status === "approved"
           ? { label: t("flow.toSend"), onClick: () => go("send") }
-          : { label: writing ? t("flow.seeLettersWait") : t("flow.seeLetters"), onClick: next }
+          : { label: writing ? t("flow.seeLettersWait") : t("flow.seeLetters"), onClick: () => go(writing ? "letters-wait" : "details") }
       }
       secondary={{ label: t("flow.whatWeFound"), onClick: () => go("found") }}
       onBack={c.status === "approved" ? () => go("send") : back}

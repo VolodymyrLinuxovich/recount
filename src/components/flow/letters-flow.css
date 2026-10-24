@@ -1,0 +1,89 @@
+/* Letters and sending, one screen at a time. Calm ink, no red pen. */
+
+.details-bare {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.details-bare .details-lede {
+  font-size: 19px;
+}
+
+.flow-note,
+.flow-wait {
+  font-size: 19px;
+  color: var(--ink-2);
+}
+
+.flow-letter .letter {
+  border: 0;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flow-letter .letter-body,
+.flow-letter .letter-subject {
+  font-size: 18px;
+}
+
+.flow-letter .row .btn,
+.flow-letter .letter-print {
+  min-height: 56px;
+  font-size: 18px;
+}
+
+.flow-letter .letter-print {
+  width: auto;
+  margin-top: 12px;
+}
+
+.flow-reassure {
+  margin: 20px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.flow-done {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ok);
+  margin: 4px 0 16px;
+}
+
+
+/* The send guide inside the flow: no box and ink numbers, not red. */
+.step-body .send {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.step-body .send-h {
+  display: none;
+}
+
+.step-body .send-n {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.step-body .send-ask {
+  border-left-color: var(--ink-2);
+}
+
+.step-body .send .btn-big {
+  min-height: 56px;
+}
+
+/* On the send screen the pinned bar already has the Call button. */
+.step-body .send-call {
+  display: none;
+}

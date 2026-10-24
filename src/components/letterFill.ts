@@ -62,7 +62,8 @@ export function slotOf(label: string): Slot | null {
   const addr = /\b(address|street|direccion|calle)\b/.test(x);
   const city = /\b(city|state|zip|zip code|postal|ciudad|estado|codigo postal)\b/.test(x);
   if (addr && city) return "address";
-  if (addr) return "street";
+  // "[Street]" is just the street; a plain "[Your address]" is the whole address.
+  if (addr) return /\b(street|calle)\b/.test(x) ? "street" : "address";
   if (city) return "city";
   if (/^(today )?date$|^today$|^fecha( de hoy)?$/.test(x)) return "date";
   if (/^(your |patient |the patient |printed |full |your full |your printed |patient full )*name$/.test(x)) return "name";
@@ -73,7 +74,7 @@ export function slotOf(label: string): Slot | null {
 function valueFor(slot: Slot, d: Details, today: string): string {
   switch (slot) {
     case "address":
-      return d.street.trim() && d.city.trim() ? `${d.street.trim()}, ${d.city.trim()}` : "";
+      return [d.street.trim(), d.city.trim()].filter(Boolean).join(", ");
     case "date":
       return today;
     default:
@@ -82,14 +83,31 @@ function valueFor(slot: Slot, d: Details, today: string): string {
 }
 
 const usToday = () => new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+const esToday = () => new Date().toLocaleDateString("es-US", { month: "long", day: "numeric", year: "numeric" });
 
-/** Put the patient's details into the matching [brackets]. Brackets with nothing to put in stay. */
+const OPTIONAL: Slot[] = ["email", "dob"];
+const DROP = "\u0000";
+
+/** Put the patient's details into the matching [brackets]. Brackets with nothing to put in stay,
+ * except optional ones (email, date of birth): their line is left out of the letter. */
 export function fillText(text: string, d: Details, today = usToday()): string {
-  return text.replace(BRACKET, (whole, label: string) => {
+  const filled = text.replace(BRACKET, (whole, label: string) => {
     const slot = slotOf(label);
     if (!slot) return whole;
-    return valueFor(slot, d, today) || whole;
+    const v = valueFor(slot, d, today);
+    if (v) return v;
+    return OPTIONAL.includes(slot) ? DROP : whole;
   });
+  if (!filled.includes(DROP)) return filled;
+  return filled
+    .split("\n")
+    .filter((line) => {
+      if (!line.includes(DROP)) return true;
+      const rest = line.replaceAll(DROP, "").trim();
+      return rest !== "" && !/^[^.!?]{0,40}:$/.test(rest);
+    })
+    .map((line) => line.replaceAll(DROP, "").replace(/\s+([,.])/g, "$1"))
+    .join("\n");
 }
 
 export function fillLetter(l: Letter, d: Details): Letter {
@@ -99,8 +117,8 @@ export function fillLetter(l: Letter, d: Details): Letter {
     subject: fillText(l.subject, d, today),
     body: fillText(l.body, d, today),
     // The Spanish copy shows the same details, so it reads like the letter that is sent.
-    ...(l.subjectPatient != null ? { subjectPatient: fillText(l.subjectPatient, d, today) } : {}),
-    ...(l.bodyPatient != null ? { bodyPatient: fillText(l.bodyPatient, d, today) } : {}),
+    ...(l.subjectPatient != null ? { subjectPatient: fillText(l.subjectPatient, d, esToday()) } : {}),
+    ...(l.bodyPatient != null ? { bodyPatient: fillText(l.bodyPatient, d, esToday()) } : {}),
   };
 }
 
@@ -112,6 +130,8 @@ export function leftovers(l: Letter): { slot: Slot | null; label: string }[] {
     // A signature is written by hand on the paper, so it isn't something to fill in here.
     if (/signature|firma/i.test(m[1])) continue;
     const slot = slotOf(m[1]);
+    // Optional details (email, date of birth) are never "missing".
+    if (slot && OPTIONAL.includes(slot)) continue;
     const id = slot ?? m[1].toLowerCase();
     if (seen.has(id)) continue;
     seen.add(id);
