@@ -348,3 +348,59 @@
 .acct-pic[data-loading] {
   visibility: hidden;
 }
+
+/* ---------- Continue with Google (Google's own button look) ---------- */
+
+.acct-google {
+  margin-bottom: var(--sp-4);
+}
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--sp-4);
+  border: 1px solid #747775;
+  border-radius: 999px;
+  background: #fff;
+  color: #1f1f1f;
+  font-family: "Roboto", var(--font-ui), system-ui, sans-serif;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.google-btn:hover:not(:disabled) {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.25);
+}
+.google-btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.google-btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.google-btn span {
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.acct-or {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0 0;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.acct-or::before,
+.acct-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}

@@ -10,6 +10,7 @@ import { useT } from "../i18n/I18nProvider";
 import { AuthCard } from "./AuthCard";
 import { ClaimNote } from "./ClaimNote";
 import { DeleteAccount } from "./DeleteAccount";
+import { clearGooglePending, googlePending } from "./GoogleButton";
 import { ProfileForm } from "./ProfileForm";
 import "./account.css";
 
@@ -25,14 +26,27 @@ export function AccountScreen() {
   const next = safeNext(useSearchParams().get("next"));
   const router = useRouter();
   const wasOut = useRef(false);
+  // Back from Google: the sign-in code is still being exchanged while the URL carries ?code=.
+  const [fromGoogle] = useState(() => typeof window !== "undefined" && googlePending());
+  const [googleFailed, setGoogleFailed] = useState(false);
 
   // Signed in from this page with somewhere to go back to (the bill they were on): go there.
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) wasOut.current = true;
-    else if (isAuthenticated && wasOut.current && next) router.replace(next);
-  }, [isAuthenticated, isLoading, next, router]);
+    if (isLoading) return;
+    if (isAuthenticated) {
+      if ((wasOut.current || fromGoogle) && next) router.replace(next);
+      if (fromGoogle) clearGooglePending();
+      return;
+    }
+    wasOut.current = true;
+    // Still signed out after coming back from Google, with no code left to exchange: it was cancelled or failed.
+    if (fromGoogle && !new URLSearchParams(window.location.search).has("code")) {
+      clearGooglePending();
+      setGoogleFailed(true);
+    }
+  }, [isAuthenticated, isLoading, next, router, fromGoogle]);
 
-  if (isLoading) return <p className="quiet">{t("acct.loading")}</p>;
+  if (isLoading) return <p className="quiet">{fromGoogle ? t("acct.googleChecking") : t("acct.loading")}</p>;
 
   if (!isAuthenticated)
     return (
@@ -40,7 +54,7 @@ export function AccountScreen() {
         <h1 className="acct-title">{t("acct.outTitle")}</h1>
         <p className="acct-lede">{t("acct.why")}</p>
         <p className="acct-optional">{t("acct.optional")}</p>
-        <AuthCard />
+        <AuthCard next={next} googleFailed={googleFailed} />
         <ul className="acct-limits">
           <li>{t("acct.limitVerify")}</li>
           <li>{t("acct.limitPrivacy")}</li>

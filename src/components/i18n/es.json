@@ -820,5 +820,10 @@
   "amt.line": "Línea {n}:",
   "amt.q": "Leímos {first}. Una segunda lectura dio {second}. ¿Cuál aparece en su factura?",
   "amt.neither": "¿Ninguno de los dos? Toque el monto en la lista de abajo para escribirlo.",
-  "acct.toSignIn": "Entrar con este correo"
+  "acct.toSignIn": "Entrar con este correo",
+  "acct.google": "Continuar con Google",
+  "acct.googleBusy": "Abriendo Google…",
+  "acct.googleFailed": "No se pudo entrar con Google. Inténtelo de nuevo o use su correo abajo.",
+  "acct.orEmail": "o use su correo",
+  "acct.googleChecking": "Terminando de entrar con Google…"
 }

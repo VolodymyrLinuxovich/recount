@@ -820,5 +820,10 @@
   "amt.line": "Line {n}:",
   "amt.q": "We read {first}. A second look read {second}. Which is on your bill?",
   "amt.neither": "Neither one? Tap the amount in the list below to type it.",
-  "acct.toSignIn": "Sign in with this email"
+  "acct.toSignIn": "Sign in with this email",
+  "acct.google": "Continue with Google",
+  "acct.googleBusy": "Opening Google…",
+  "acct.googleFailed": "Google sign-in didn’t finish. Please try again, or use your email below.",
+  "acct.orEmail": "or use email",
+  "acct.googleChecking": "Finishing Google sign-in…"
 }

@@ -4,12 +4,13 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { type FormEvent, useId, useState } from "react";
 import { useT } from "../i18n/I18nProvider";
 import { authError } from "./errors";
+import { GoogleButton } from "./GoogleButton";
 
 type Mode = "signUp" | "signIn";
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** Signed out: create an account or sign in. Optional, and says so. */
-export function AuthCard({ startIn = "signUp" }: { startIn?: Mode }) {
+export function AuthCard({ startIn = "signUp", next = null, googleFailed = false }: { startIn?: Mode; next?: string | null; googleFailed?: boolean }) {
   const { t } = useT();
   const { signIn } = useAuthActions();
   const [mode, setMode] = useState<Mode>(startIn);
@@ -48,6 +49,12 @@ export function AuthCard({ startIn = "signUp" }: { startIn?: Mode }) {
 
   return (
     <section className="acct-card rc-card" aria-labelledby={`${uid}-h`}>
+      {googleFailed && (
+        <p className="error-note acct-error" role="alert">
+          {t("acct.googleFailed")}
+        </p>
+      )}
+      <GoogleButton next={next} />
       <div className="acct-tabs" role="group" aria-label={t("acct.modeLabel")}>
         <button type="button" className="acct-tab" aria-pressed={mode === "signUp"} onClick={() => pick("signUp")}>
           {t("acct.tabCreate")}
