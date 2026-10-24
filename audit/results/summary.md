@@ -1,6 +1,6 @@
 # Audit summary
 
-Generated 2026-10-24T12:48+00:00. 463 of 470 hospitals had readable policy text.
+Generated 2026-10-24T12:51+00:00. 463 of 470 hospitals had readable policy text.
 Reviewed 997 of 997 unique candidate sentences.
 
 | Worst verdict | Hospitals |
@@ -22,9 +22,9 @@ Reviewed 997 of 997 unique candidate sentences.
 | DEADLINE | likely | 13 |
 | INCOME_PROOF | ask | 1 |
 | INCOME_PROOF | likely | 4 |
-| LIENS | ask | 26 |
+| LIENS | ask | 27 |
 | LIENS | conflict | 3 |
-| LIENS | likely | 2 |
+| LIENS | likely | 1 |
 | MEDICAL_FIRST | ask | 1 |
 | MEDICAL_FIRST | likely | 1 |
 

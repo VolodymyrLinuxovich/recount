@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T12:48+00:00",
+ "generatedAt": "2026-10-24T12:51+00:00",
  "hospitalsTotal": 470,
  "hospitalsChecked": 463,
  "packetsReviewed": 997,
@@ -2957,15 +2957,15 @@
     {
      "rule": "LIENS",
      "verdict": "likely",
-     "quote": "Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered.",
+     "quote": "Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered. d.",
      "sentence": "Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered. d.",
      "context": "A\u00a0telephone\u00a0call\u00a0will\u00a0be\u00a0placed\u00a0after\u00a030\u00a0days\u00a0from\u00a0the\u00a0bill date\u00a0 to\u00a0 collect\u00a0 payment\u00a0 in\u00a0 f ull\u00a0 or\u00a0 negotiate\u00a0 a\u00a0 payment a r r a n g e m e n t \u00a0i f \u00a0n o \u00a0r e s p o n s e \u00a0t o \u00a0p r e v i o u s \u00a0s t a t e m e n t ( s ) \u00a0h a s been\u00a0received. b. Any\u00a0debt\u00a0assigned\u00a0to\u00a0a\u00a0collection\u00a0agency\u00a0must\u00a0have\u00a0met\u00a0the\u00a0above criteria\u00a0 and\u00a0 the\u00a0 assignment\u00a0 date\u00a0 must\u00a0 be\u00a0 greater\u00a0 than\u00a0 180\u00a0 days from\u00a0 initial\u00a0 billing. The\u00a0 exception\u00a0 to\u00a0 the\u00a0 above\u00a0 would\u00a0 be\u00a0 any account\u00a0 that\u00a0 is\u00a0 deemed\u00a0 to\u00a0 be\u00a0 unc ollectible\u00a0 due\u00a0 to\u00a0 inaccurate address\u00a0 (returned\u00a0 mail\u00a0 with\u00a0 no\u00a0 forwarding\u00a0 address,\u00a0 phone,\u00a0 or bankruptcy). c. Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered. d. A\u00a0 patient\u00a0 may\u00a0 request\u00a0 an\u00a0 extended\u00a0 payment\u00a0 arrangement\u00a0 to satisfy\u00a0 the\u00a0 remaining\u00a0 debt\u00a0 once\u00a0 the\u00a0 discount\u00a0 has\u00a0 been\u00a0 applied. Such\u00a0 extension\u00a0 should\u00a0 be\u00a0 based\u00a0 on\u00a0 the\u00a0 circumstances\u00a0 of\u00a0 each patient\u00a0with\u00a0a\u00a0standard\u00a0installment\u00a0of\u00a0up\u00a0to\u00a06\u00a0months\u00a0and\u00a0must\u00a0be approved\u00a0 by\u00a0 the\u00a0 Director\u00a0 of\u00a0 Patient\u00a0 Financial\u00a0 Services. If\u00a0 Casa Colina\u00a0and\u00a0the\u00a0patient\u00a0cannot\u00a0agree\u00a0on\u00a0repayment\u00a0plan\u00a0terms, default\u00a0 monthly\u00a0 payments\u00a0 will\u00a0 consist\u00a0 of\u00a0 an\u00a0 amount\u00a0 not\u00a0 more than\u00a0 10\u00a0 percent\u00a0 of\u00a0 a\u00a0 patient\u2019s\u00a0 family\u00a0 income\u00a0 for\u00a0 a\u00a0 month,",
      "page": 8,
      "docType": "debt_collection",
      "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=adf2bb2b-5c54-461a-9217-0e2eea8cfaf3",
      "effectiveDate": "2026-05-23",
-     "explanation": "The policy allows liens on assets with a court order, which could include your home. California law forbids liens on a patient's real property.",
-     "reviewer": "review-agent-a"
+     "explanation": "The policy allows liens on assets with a court order, which could include a home. California law forbids liens on the real property of patients who qualify for charity or discount care, and the policy doesn't limit this to other patients.",
+     "reviewer": "spot-check-2"
     }
    ]
   },
@@ -4246,19 +4246,6 @@
      "reviewer": "spot-check"
     },
     {
-     "rule": "LIENS",
-     "verdict": "likely",
-     "quote": "If allowed by client \u2013 conduct a search for real property for consideration of lien filing",
-     "sentence": "Bad Debt Write-Offs Page 5 \u25aa Conduct a probate search in the appropriate county(ies) to locate the existence of the following \u2022 Attempt to determine if a Will exists o Codicils to the Will o Determine Executor or Probate Administrator o Probate of the Will o Estate inventory including real property \u2022 The probate search will continue for a number of months to allow time for filing \u25aa File a Creditor Claim in the superior court in the county in which the probate was filed and serve the claim to the estate Executor, Administrator or other personal representative of the estate of the decedent \u25aa If allowed by client \u2013 conduct a search for real property for consideration of lien filing if probate was not opened and there is no living spouse. \u25aa Determine if there is a living spouse \u2022 Contact the spouse regarding the account balance in a gentle, respectful fashion o If it is determined that there isn\u2019t a living spouse and probate was not opened we will update the account with the appropriate status of Deceased, no Estate",
-     "context": "\u2022 Supervisor reviews accounts and uses Activity Code 196 (Supervisor Approved for B/D), prompting for manual write-off to bad debt RCA Legal counsel provided a brief summary of the \u201cDeceased\u201d process: Deceased process overview: \u2022 Upon determination or notification that patient is deceased we will: o Determine where patient was living at the time of death as well as previous residences outside of county of death Bad Debt Write-Offs Page 5 \u25aa Conduct a probate search in the appropriate county(ies) to locate the existence of the following \u2022 Attempt to determine if a Will exists o Codicils to the Will o Determine Executor or Probate Administrator o Probate of the Will o Estate inventory including real property \u2022 The probate search will continue for a number of months to allow time for filing \u25aa File a Creditor Claim in the superior court in the county in which the probate was filed and serve the claim to the estate Executor, Administrator or other personal representative of the estate of the decedent \u25aa If allowed by client \u2013 conduct a search for real property for consideration of lien filing if probate was not opened and there is no living spouse. \u25aa Determine if there is a living spouse \u2022 Contact the spouse regarding the account balance in a gentle, respectful fashion o If it is determined that there isn\u2019t a living spouse and probate was not opened we will update the account with the appropriate status of Deceased, no Estate",
-     "page": 5,
-     "docType": "debt_collection",
-     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4b40b809-262d-46db-9c64-a6eefc3926a8",
-     "effectiveDate": "2026-08-21",
-     "explanation": "Collectors may look for a deceased patient's real property to place a lien. California law bans liens on real property.",
-     "reviewer": "review-agent-a"
-    },
-    {
      "rule": "INCOME_PROOF",
      "verdict": "likely",
      "quote": "and statements from financial institutions",
@@ -4270,6 +4257,19 @@
      "effectiveDate": "2022-04-01",
      "explanation": "The policy lists bank statements as income documents. State law limits income proof to recent pay stubs or tax returns.",
      "reviewer": "income-proof-agent"
+    },
+    {
+     "rule": "LIENS",
+     "verdict": "ask",
+     "quote": "The account is sent to bad debt so a lien can be placed.",
+     "sentence": "The account is sent to bad debt so a lien can be placed.",
+     "context": "See exclusions at end of this section. Bankruptcy Confirmed No goodbye letter When bankruptcy is confirmed, the user adds Account Activity 173-Bankruptcy to the account and the account is automatically sent to bad debt with an agency code \u2013 \u201cRash Curtis- Bankruptcy\u201d Patient/Guarantor Deceased No goodbye letter When a guarantor is confirmed as deceased, the user updates the Guarantor Status to Deceased and the account is automatically sent to bad debt with Agency - \u201cRash Curtis-Deceased\u201d. The same thing occurs for when a patient is flagged as deceased and the guarantor is set to SELF. The account is sent to bad debt so a lien can be placed. M/Cal Pending and BHC Pending patients that are deceased are sent as well. Payment Plan Requested No goodbye letter When the patient requests to be set-up on a payment plan, the user adds Account Activity 132- Payment Management Request is added to the account. If the full self-pay balance is < $5,000, the account is automatically sent to bad debt with Agency - \u201cRash Curtis-Time Payments.\u201d Otherwise, the account is set to a Supervisor WQ (201) for approval and sending to B/D.",
+     "page": 1,
+     "docType": "debt_collection",
+     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4b40b809-262d-46db-9c64-a6eefc3926a8",
+     "effectiveDate": "2026-08-21",
+     "explanation": "The account of a deceased patient goes to collections so a lien can be placed. Ask what kind of lien, since California law bans liens on real property.",
+     "reviewer": "review-agent-a"
     }
    ]
   },

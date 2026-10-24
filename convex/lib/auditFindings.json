@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T12:48+00:00",
+ "generatedAt": "2026-10-24T12:51+00:00",
  "hospitals": {
   "adventist-health-and-rideout": [
    {
@@ -769,12 +769,12 @@
    {
     "rule": "LIENS",
     "verdict": "likely",
-    "quote": "Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered.",
+    "quote": "Neither\u00a0 Casa\u00a0 Colina\u00a0 nor\u00a0 a\u00a0 collection\u00a0 agency\u00a0 may\u00a0 use\u00a0 wage garnishments\u00a0or\u00a0file\u00a0liens\u00a0on\u00a0assets\u00a0except\u00a0if\u00a0court\u00a0ordered. d.",
     "page": 8,
     "docType": "debt_collection",
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=adf2bb2b-5c54-461a-9217-0e2eea8cfaf3",
     "effectiveDate": "2026-05-23",
-    "explanation": "The policy allows liens on assets with a court order, which could include your home. California law forbids liens on a patient's real property."
+    "explanation": "The policy allows liens on assets with a court order, which could include a home. California law forbids liens on the real property of patients who qualify for charity or discount care, and the policy doesn't limit this to other patients."
    }
   ],
   "centinela-hospital-medical-center": [
@@ -931,16 +931,6 @@
     "explanation": "The policy only bars credit reporting in the first 180 days after billing, which implies the hospital or its collectors may report you after that. California law no longer allows reporting hospital debt to credit bureaus at all."
    },
    {
-    "rule": "LIENS",
-    "verdict": "likely",
-    "quote": "If allowed by client \u2013 conduct a search for real property for consideration of lien filing",
-    "page": 5,
-    "docType": "debt_collection",
-    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4b40b809-262d-46db-9c64-a6eefc3926a8",
-    "effectiveDate": "2026-08-21",
-    "explanation": "Collectors may look for a deceased patient's real property to place a lien. California law bans liens on real property."
-   },
-   {
     "rule": "INCOME_PROOF",
     "verdict": "likely",
     "quote": "and statements from financial institutions",
@@ -949,6 +939,16 @@
     "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=c906f4fa-9077-40cc-a0ca-c91274813c0e",
     "effectiveDate": "2022-04-01",
     "explanation": "The policy lists bank statements as income documents. State law limits income proof to recent pay stubs or tax returns."
+   },
+   {
+    "rule": "LIENS",
+    "verdict": "ask",
+    "quote": "The account is sent to bad debt so a lien can be placed.",
+    "page": 1,
+    "docType": "debt_collection",
+    "docUrl": "https://api.hdc.hcai.ca.gov/Public/Extract/Attachment?id=4b40b809-262d-46db-9c64-a6eefc3926a8",
+    "effectiveDate": "2026-08-21",
+    "explanation": "The account of a deceased patient goes to collections so a lien can be placed. Ask what kind of lien, since California law bans liens on real property."
    }
   ],
   "del-amo-behavioral-health-system": [
