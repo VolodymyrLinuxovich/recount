@@ -44,6 +44,9 @@ export function StartScreen() {
       const { id, token } = await start({ fileId, fileType: type, sample: false, lang });
       rememberCase(id, token);
       router.push(`/case/${id}#t=${token}`);
+      // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
+      setBusy(null);
+      setOnboard(null);
     } catch (e) {
       setError(e instanceof FileProblem ? e.key : /too many/i.test(String(e)) ? "start.busy" : "start.uploadFailed");
       setBusy(null);
@@ -66,6 +69,9 @@ export function StartScreen() {
       const { id, token } = await start({ fileId, fileType, sample: true, lang });
       rememberCase(id, token);
       router.push(`/case/${id}#t=${token}`);
+      // Next keeps this page alive in the background: reset it so coming back shows a fresh start.
+      setBusy(null);
+      setOnboard(null);
     } catch (e) {
       setError(/too many/i.test(String(e)) ? "start.busy" : "start.sampleFailed");
       setBusy(null);
