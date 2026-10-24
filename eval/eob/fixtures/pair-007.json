@@ -1,0 +1,223 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-39774682",
+  "patientName": "Marcus Bell",
+  "patientAddress": null,
+  "statementDate": "2026-10-07",
+  "serviceDate": "2026-09-19",
+  "insurancePayer": "Poppyfield Community Health Plan Medi-Cal",
+  "insurancePaid": 3032.86,
+  "adjustments": 14506.14,
+  "patientPaid": 0.0,
+  "totalCharges": 17539.0,
+  "amountDue": 0.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-09-19",
+    "code": "99285",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL V",
+    "quantity": 1,
+    "charge": 12281.0,
+    "chargePrinted": "12,281.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "74177",
+    "revCode": "0352",
+    "description": "HC CT ABDOMEN/PELVIS W/CONT.",
+    "quantity": 1,
+    "charge": 3596.0,
+    "chargePrinted": "3,596.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 528.0,
+    "chargePrinted": "528.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC CBC PLATELETS & DIFF",
+    "quantity": 1,
+    "charge": 269.0,
+    "chargePrinted": "269.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HC URINALYSIS MICRO. (AUTOMATED)",
+    "quantity": 1,
+    "charge": 149.0,
+    "chargePrinted": "149.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE ROUTINE",
+    "quantity": 1,
+    "charge": 45.0,
+    "chargePrinted": "45.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL INJ 1 MG",
+    "quantity": 4,
+    "charge": 112.0,
+    "chargePrinted": "112.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NORMAL SALINE SOLUTION 1000 CC",
+    "quantity": 1,
+    "charge": 140.0,
+    "chargePrinted": "140.00"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HC IV PUSH (INFUSION <= 15 MIN)",
+    "quantity": 1,
+    "charge": 419.0,
+    "chargePrinted": "419.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Poppyfield Community Health Plan",
+  "planType": "Medi-Cal",
+  "memberName": "Marcus Bell",
+  "memberId": "PCH480568766",
+  "claimNumber": "2696060434183",
+  "providerName": "ZUCKERBERG SF GENERAL HOSP",
+  "serviceDateFrom": "2026-09-19",
+  "serviceDateTo": "2026-09-19",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 17120.0,
+  "totalAllowed": 3032.86,
+  "totalPlanPaid": 3032.86,
+  "totalPatientOwes": 0.0,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Poppyfield Community Health Plan, Member Services Appeals, 1450 Mission Street, San Francisco, CA 94103",
+  "insurerPhone": "1-855-555-0176",
+  "lines": [
+   {
+    "date": "2026-09-19",
+    "code": "99285",
+    "description": "Emergency room visit",
+    "billed": 12281.0,
+    "allowed": 2178.04,
+    "planPaid": 2178.04,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "74177",
+    "description": "CT scan",
+    "billed": 3596.0,
+    "allowed": 644.06,
+    "planPaid": 644.06,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 528.0,
+    "allowed": 92.15,
+    "planPaid": 92.15,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 269.0,
+    "allowed": 44.95,
+    "planPaid": 44.95,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 149.0,
+    "allowed": 24.43,
+    "planPaid": 24.43,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 45.0,
+    "allowed": 7.61,
+    "planPaid": 7.61,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 112.0,
+    "allowed": 19.11,
+    "planPaid": 19.11,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-09-19",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 140.0,
+    "allowed": 22.51,
+    "planPaid": 22.51,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "NOT_ON_EOB",
+   "amount": 0
+  }
+ ]
+}

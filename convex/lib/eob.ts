@@ -67,3 +67,24 @@ export const EOB_FINDING_TARGET: Record<EobFindingKind, "hospital" | "insurer" |
 
 /** Where the case's EOB is in its life. Stored on the case as `eobStatus`. */
 export type EobStatus = "reading" | "done" | "error";
+
+/** A printed date as YYYY-MM-DD. Readers sometimes return 08/08/2026; the checks need ISO dates. */
+export function isoDate(s: string | null | undefined): string | null {
+  if (!s) return null;
+  const t = s.trim();
+  if (/^\d{4}-\d{2}-\d{2}/.test(t)) return t.slice(0, 10);
+  const m = t.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{2}|\d{4})$/);
+  if (!m) return t;
+  const y = m[3].length === 2 ? `20${m[3]}` : m[3];
+  return `${y}-${m[1].padStart(2, "0")}-${m[2].padStart(2, "0")}`;
+}
+
+/** The EOB with every date in YYYY-MM-DD (US month/day order, as US insurers print them). */
+export function normalizeEobDates(e: ParsedEob): ParsedEob {
+  return {
+    ...e,
+    serviceDateFrom: isoDate(e.serviceDateFrom),
+    serviceDateTo: isoDate(e.serviceDateTo),
+    lines: e.lines.map((l) => ({ ...l, date: isoDate(l.date) })),
+  };
+}

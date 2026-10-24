@@ -1,0 +1,154 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-18967535",
+  "patientName": "Chris Nguyen",
+  "patientAddress": null,
+  "statementDate": "2026-11-03",
+  "serviceDate": "2026-09-25",
+  "insurancePayer": "Golden Bear Health Plan PPO",
+  "insurancePaid": 0.0,
+  "adjustments": 5587.55,
+  "patientPaid": 100.0,
+  "totalCharges": 6863.0,
+  "amountDue": 1175.45,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-09-25",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 4",
+    "quantity": 1,
+    "charge": 5214.0,
+    "chargePrinted": "5,214.00"
+   },
+   {
+    "date": "2026-09-25",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR",
+    "quantity": 1,
+    "charge": 1160.0,
+    "chargePrinted": "1,160.00"
+   },
+   {
+    "date": "2026-09-25",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+    "quantity": 1,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   },
+   {
+    "date": "2026-09-25",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 386.0,
+    "chargePrinted": "386.00"
+   },
+   {
+    "date": "2026-09-25",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HCHG CPMC VENIPUNCTURE BTMG",
+    "quantity": 1,
+    "charge": 28.0,
+    "chargePrinted": "28.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "PPO",
+  "memberName": "Chris Nguyen",
+  "memberId": "GBP154829263",
+  "claimNumber": "2328518313516",
+  "providerName": "CALIFORNIA PACIFIC MED CTR CPMC",
+  "serviceDateFrom": "2026-09-25",
+  "serviceDateTo": "2026-09-25",
+  "network": "in",
+  "emergency": null,
+  "claimStatus": "processed",
+  "totalBilled": 6863.0,
+  "totalAllowed": 2777.3,
+  "totalPlanPaid": 1501.85,
+  "totalPatientOwes": 1275.45,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-09-25",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5214.0,
+    "allowed": 2105.57,
+    "planPaid": 964.46,
+    "patientOwes": 1141.11,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-25",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 1160.0,
+    "allowed": 466.29,
+    "planPaid": 373.03,
+    "patientOwes": 93.26,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-25",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 75.0,
+    "allowed": 31.27,
+    "planPaid": 25.02,
+    "patientOwes": 6.25,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-25",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 386.0,
+    "allowed": 163.16,
+    "planPaid": 130.53,
+    "patientOwes": 32.63,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-25",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 28.0,
+    "allowed": 11.01,
+    "planPaid": 8.81,
+    "patientOwes": 2.2,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "INSURANCE_NOT_APPLIED",
+   "amount": 1175.45
+  }
+ ]
+}

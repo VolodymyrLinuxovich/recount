@@ -1,0 +1,194 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-65823356",
+  "patientName": "Drew Martin",
+  "patientAddress": null,
+  "statementDate": "2026-07-30",
+  "serviceDate": "2026-07-16",
+  "insurancePayer": "Redwood Lantern Assurance PPO",
+  "insurancePaid": 0.0,
+  "adjustments": 3628.19,
+  "patientPaid": 150.0,
+  "totalCharges": 5622.0,
+  "amountDue": 1843.81,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-16",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "ER LEVEL 3",
+    "quantity": 1,
+    "charge": 3854.0,
+    "chargePrinted": "3,854.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "INF IV HYDRA INIT 31-60MN",
+    "quantity": 1,
+    "charge": 1048.0,
+    "chargePrinted": "1,048.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% 1000ML INJ",
+    "quantity": 1,
+    "charge": 78.0,
+    "chargePrinted": "78.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "COMP METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 237.0,
+    "chargePrinted": "237.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 135.0,
+    "chargePrinted": "135.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON 4MG/2ML SDV",
+    "quantity": 4,
+    "charge": 168.0,
+    "chargePrinted": "168.00"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "CBC W/AUTO DIFF",
+    "quantity": 1,
+    "charge": 102.0,
+    "chargePrinted": "102.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Redwood Lantern Assurance",
+  "planType": "PPO",
+  "memberName": "Drew Martin",
+  "memberId": "RLA845031138",
+  "claimNumber": "2398113353680",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSPITAL",
+  "serviceDateFrom": "2026-07-16",
+  "serviceDateTo": "2026-07-16",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "partly_denied",
+  "totalBilled": 5622.0,
+  "totalAllowed": 1993.81,
+  "totalPlanPaid": 0.0,
+  "totalPatientOwes": 1993.81,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Redwood Lantern Assurance, Attn: Appeals Unit, P.O. Box 77120, Sacramento, CA 95887",
+  "insurerPhone": "1-866-555-0119",
+  "lines": [
+   {
+    "date": "2026-07-16",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3854.0,
+    "allowed": 1341.01,
+    "planPaid": 0.0,
+    "patientOwes": 1341.01,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 1048.0,
+    "allowed": 392.9,
+    "planPaid": 0.0,
+    "patientOwes": 392.9,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 78.0,
+    "allowed": 29.11,
+    "planPaid": 0.0,
+    "patientOwes": 29.11,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 237.0,
+    "allowed": 85.99,
+    "planPaid": 0.0,
+    "patientOwes": 85.99,
+    "notCovered": 85.99,
+    "remark": "PR-96 Non-covered charge"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 135.0,
+    "allowed": 48.91,
+    "planPaid": 0.0,
+    "patientOwes": 48.91,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 168.0,
+    "allowed": 57.13,
+    "planPaid": 0.0,
+    "patientOwes": 57.13,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-16",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 102.0,
+    "allowed": 38.76,
+    "planPaid": 0.0,
+    "patientOwes": 38.76,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 85.99
+  }
+ ]
+}

@@ -1,0 +1,134 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-39510600",
+  "patientName": "Chris Nguyen",
+  "patientAddress": null,
+  "statementDate": "2026-09-16",
+  "serviceDate": "2026-08-12",
+  "insurancePayer": "Golden Bear Health Plan PPO",
+  "insurancePaid": 3222.87,
+  "adjustments": 0.0,
+  "patientPaid": 150.0,
+  "totalCharges": 11018.0,
+  "amountDue": 7645.13,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-12",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "ER LEVEL 3",
+    "quantity": 1,
+    "charge": 3854.0,
+    "chargePrinted": "3,854.00"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "70450",
+    "revCode": "0351",
+    "description": "CT HEAD WO CON CT",
+    "quantity": 1,
+    "charge": 5710.0,
+    "chargePrinted": "5,710.00"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "INJ FOR MICROBUBBLE STUDY",
+    "quantity": 1,
+    "charge": 564.0,
+    "chargePrinted": "564.00"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "12002",
+    "revCode": "0450",
+    "description": "SIMPLE REPAIR 2.6-7.5 CM",
+    "quantity": 1,
+    "charge": 890.0,
+    "chargePrinted": "890.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "PPO",
+  "memberName": "Chris Nguyen",
+  "memberId": "GBP454317051",
+  "claimNumber": "2174180079025",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSPITAL",
+  "serviceDateFrom": "2026-08-12",
+  "serviceDateTo": "2026-08-12",
+  "network": "out",
+  "emergency": null,
+  "claimStatus": "processed",
+  "totalBilled": 11018.0,
+  "totalAllowed": 4028.58,
+  "totalPlanPaid": 3222.87,
+  "totalPatientOwes": 805.71,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-08-12",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3854.0,
+    "allowed": 1436.56,
+    "planPaid": 1149.25,
+    "patientOwes": 287.31,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "70450",
+    "description": "CT scan",
+    "billed": 5710.0,
+    "allowed": 2090.06,
+    "planPaid": 1672.05,
+    "patientOwes": 418.01,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 564.0,
+    "allowed": 193.44,
+    "planPaid": 154.75,
+    "patientOwes": 38.69,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-12",
+    "code": "12002",
+    "description": "Wound repair",
+    "billed": 890.0,
+    "allowed": 308.52,
+    "planPaid": 246.82,
+    "patientOwes": 61.7,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "SURPRISE_BILL",
+   "amount": 6989.42
+  }
+ ]
+}

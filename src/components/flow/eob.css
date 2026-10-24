@@ -1,0 +1,293 @@
+/* The insurance statement screen and the insurance findings. Light: white cards, purple ink. */
+
+/* A small drawing of the paper to look for. */
+.eob-hint {
+  display: grid;
+  gap: var(--sp-2);
+  max-width: 17rem;
+  margin: 0 0 var(--sp-5);
+  padding: var(--sp-4);
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.eob-hint-kicker {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.eob-hint-stamp {
+  justify-self: start;
+  padding: 2px var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+.eob-hint-row {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--rule-soft);
+}
+
+.eob-hint-row.short {
+  width: 60%;
+}
+
+.eob-thumb-wait {
+  max-height: 14rem;
+  object-fit: contain;
+}
+
+.eob-head {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  margin: 0 0 var(--sp-5);
+}
+
+.eob-head-text {
+  min-width: 0;
+}
+
+.eob-head-text p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.eob-h2 {
+  margin: var(--sp-5) 0 var(--sp-3);
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+  font-weight: 700;
+}
+
+/* The four key numbers, two by two. */
+.eob-nums {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  margin: 0;
+}
+
+.eob-num {
+  min-width: 0;
+  padding: var(--sp-3);
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+.eob-num dt {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  color: var(--ink-2);
+}
+
+.eob-num dd {
+  margin: var(--sp-1) 0 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.eob-num dd.eob-num-word {
+  font-size: var(--fs-md);
+}
+
+/* The number to ask about: a purple edge, not a red pen. */
+.eob-num-flag {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  background: var(--accent-soft);
+}
+
+.eob-gap {
+  margin: var(--sp-3) 0 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.eob-found {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.eob-found-item {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--sp-3);
+  row-gap: var(--sp-1);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+button.eob-found-item {
+  cursor: pointer;
+}
+
+button.eob-found-item:hover {
+  border-color: var(--control-edge);
+}
+
+button.eob-found-item:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.eob-found-title {
+  grid-column: 1;
+  font-weight: 700;
+  line-height: var(--lh-snug);
+}
+
+.eob-found-meta {
+  grid-column: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-items: center;
+  font-size: var(--fs-sm);
+}
+
+.eob-chev {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: var(--fs-lg);
+  color: var(--ink-3);
+}
+
+.eob-found-amt {
+  font-weight: 700;
+  color: var(--ok);
+}
+
+.eob-tag {
+  padding: 1px var(--sp-2);
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.eob-tag-insurer {
+  color: var(--ink);
+  background: var(--rule-soft);
+}
+
+.eob-tag-none {
+  color: var(--warn);
+  background: #fff4e0;
+}
+
+.eob-remove {
+  margin: var(--sp-5) 0 0;
+  padding: var(--sp-4);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+.eob-remove-q {
+  margin: 0 0 var(--sp-3);
+  font-weight: 700;
+}
+
+.eob-remove-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* Finding screens: what was compared, and who to contact. */
+.eob-evidence {
+  margin: var(--sp-4) 0 0;
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.eob-evidence > div {
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.eob-evidence dt {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.eob-evidence dd {
+  margin: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.eob-evidence dd.found-quiet {
+  font-weight: 400;
+}
+
+.eob-evidence-h {
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.eob-contact {
+  margin: var(--sp-4) 0 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: 10px;
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+.eob-hold {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* The appeal letter on the send screen. */
+.sg-appeal-addr {
+  margin: var(--sp-2) 0 var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  white-space: pre-line;
+  font-weight: 600;
+}
+
+/* Short paragraphs on the statement screen need room between them. */
+[data-step="eob"] .step-body > p {
+  margin: 0 0 var(--sp-3);
+}
+
+/* Dollar amounts stay on one line in the two boxes. */
+.eob-card .found-versus-num {
+  font-size: clamp(1.25rem, 5.6vw, var(--fs-xl));
+  overflow-wrap: normal;
+  white-space: nowrap;
+}

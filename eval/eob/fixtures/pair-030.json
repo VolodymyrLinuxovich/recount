@@ -1,0 +1,209 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-62849478",
+  "patientName": "Taylor Brooks",
+  "patientAddress": null,
+  "statementDate": "2026-10-03",
+  "serviceDate": "2026-08-24",
+  "insurancePayer": "Fogline Health PPO",
+  "insurancePaid": 1926.45,
+  "adjustments": 7249.95,
+  "patientPaid": 150.0,
+  "totalCharges": 11308.0,
+  "amountDue": 1981.6,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-24",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL IV",
+    "quantity": 1,
+    "charge": 6084.0,
+    "chargePrinted": "6,084.00"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "74177",
+    "revCode": "0352",
+    "description": "HC CT ABDOMEN/PELVIS W/CONT.",
+    "quantity": 1,
+    "charge": 3596.0,
+    "chargePrinted": "3,596.00"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 528.0,
+    "chargePrinted": "528.00"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC CBC PLATELETS & DIFF",
+    "quantity": 1,
+    "charge": 269.0,
+    "chargePrinted": "269.00"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HC URINALYSIS MICRO. (AUTOMATED)",
+    "quantity": 1,
+    "charge": 149.0,
+    "chargePrinted": "149.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE ROUTINE",
+    "quantity": 1,
+    "charge": 45.0,
+    "chargePrinted": "45.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HC IV PUSH (INFUSION <= 15 MIN)",
+    "quantity": 1,
+    "charge": 419.0,
+    "chargePrinted": "419.00"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96375",
+    "revCode": "0260",
+    "description": "HC IV PUSH EA ADDL NEW DRUG",
+    "quantity": 1,
+    "charge": 218.0,
+    "chargePrinted": "218.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "PPO",
+  "memberName": "Taylor Brooks",
+  "memberId": "FGL356384986",
+  "claimNumber": "2556319724933",
+  "providerName": "ZUCKERBERG SF GENERAL HOSP",
+  "serviceDateFrom": "2026-08-24",
+  "serviceDateTo": "2026-08-25",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 11308.0,
+  "totalAllowed": 4058.05,
+  "totalPlanPaid": 1926.45,
+  "totalPatientOwes": 2131.6,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-08-24",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 6084.0,
+    "allowed": 2209.65,
+    "planPaid": 447.72,
+    "patientOwes": 1761.93,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "74177",
+    "description": "CT scan",
+    "billed": 3596.0,
+    "allowed": 1266.1,
+    "planPaid": 1012.88,
+    "patientOwes": 253.22,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 528.0,
+    "allowed": 188.78,
+    "planPaid": 151.02,
+    "patientOwes": 37.76,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 269.0,
+    "allowed": 94.32,
+    "planPaid": 75.46,
+    "patientOwes": 18.86,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-24",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 149.0,
+    "allowed": 53.06,
+    "planPaid": 42.45,
+    "patientOwes": 10.61,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 45.0,
+    "allowed": 15.62,
+    "planPaid": 12.5,
+    "patientOwes": 3.12,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 419.0,
+    "allowed": 150.4,
+    "planPaid": 120.32,
+    "patientOwes": 30.08,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-25",
+    "code": "96375",
+    "description": "IV push, added drug",
+    "billed": 218.0,
+    "allowed": 80.12,
+    "planPaid": 64.1,
+    "patientOwes": 16.02,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

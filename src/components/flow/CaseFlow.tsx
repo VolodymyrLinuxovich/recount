@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { CaseView } from "../types";
 import { FindingStep, FoundStep } from "./FoundScreens";
+import { EobStep } from "./EobScreens";
 import { AfterStep, ComplaintStep, OutcomeStep } from "./FollowUpScreens";
 import { DetailsStep, LetterStep, LettersWaitStep, SendStep } from "./LetterScreens";
 import { AnswerStep, HospitalStep, MoreStep, QuestionStep, ReadingStep } from "./MainScreens";
@@ -90,6 +91,7 @@ function Screen({ step, props }: { step: string; props: ScreenProps }) {
   if (step === "hospital") return <HospitalStep {...props} />;
   if (step === "found") return <FoundStep {...props} />;
   if (step.startsWith("finding-")) return <FindingStep {...props} index={Number(step.slice(8))} />;
+  if (step === "eob") return <EobStep {...props} />;
   if (step === "q1" || step === "q2" || step === "q3") return <QuestionStep {...props} n={Number(step[1]) as 1 | 2 | 3} />;
   if (step === "answer") return <AnswerStep {...props} />;
   if (step === "letters-wait") return <LettersWaitStep {...props} />;

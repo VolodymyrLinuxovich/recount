@@ -1,0 +1,187 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "UCSF Helen Diller Medical Center at Parnassus Heights",
+  "hospitalWebsite": "ucsfhealth.org",
+  "hospitalAddress": "505 Parnassus Avenue, San Francisco, CA 94143",
+  "billingPhone": "(415) 353-1888",
+  "accountNumber": "SAMPLE-54776368",
+  "patientName": "Priya Raman",
+  "patientAddress": null,
+  "statementDate": "2026-10-05",
+  "serviceDate": "2026-09-13",
+  "insurancePayer": "Fogline Health PPO",
+  "insurancePaid": 1350.23,
+  "adjustments": 5558.05,
+  "patientPaid": 0.0,
+  "totalCharges": 10562.84,
+  "amountDue": 3654.56,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-09-13",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HC EMERG LEVEL IV",
+    "quantity": 1,
+    "charge": 8501.0,
+    "chargePrinted": "8,501.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "HC 12 LEAD EKG; TRACING ONLY",
+    "quantity": 1,
+    "charge": 443.0,
+    "chargePrinted": "443.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 667.0,
+    "chargePrinted": "667.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC",
+    "quantity": 1,
+    "charge": 232.0,
+    "chargePrinted": "232.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HC X-RAY EXAM CHEST 2 VIEWS",
+    "quantity": 1,
+    "charge": 531.0,
+    "chargePrinted": "531.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HC COLLECTION VENOUS BLOOD VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 69.0,
+    "chargePrinted": "69.00"
+   },
+   {
+    "date": "2026-09-13",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+    "quantity": 1,
+    "charge": 119.84,
+    "chargePrinted": "119.84"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "PPO",
+  "memberName": "Priya Raman",
+  "memberId": "FGL929326140",
+  "claimNumber": "2687295711255",
+  "providerName": "UCSF MEDICAL CENTER",
+  "serviceDateFrom": "2026-09-13",
+  "serviceDateTo": "2026-09-13",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 9895.84,
+  "totalAllowed": 4337.79,
+  "totalPlanPaid": 1350.23,
+  "totalPatientOwes": 2987.56,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-09-13",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 8501.0,
+    "allowed": 3745.03,
+    "planPaid": 876.02,
+    "patientOwes": 2869.01,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-13",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 443.0,
+    "allowed": 187.49,
+    "planPaid": 149.99,
+    "patientOwes": 37.5,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-13",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 232.0,
+    "allowed": 100.71,
+    "planPaid": 80.57,
+    "patientOwes": 20.14,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-13",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 531.0,
+    "allowed": 225.21,
+    "planPaid": 180.17,
+    "patientOwes": 45.04,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-13",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 69.0,
+    "allowed": 30.27,
+    "planPaid": 24.22,
+    "patientOwes": 6.05,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-09-13",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 119.84,
+    "allowed": 49.08,
+    "planPaid": 39.26,
+    "patientOwes": 9.82,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "OWES_MORE_THAN_EOB",
+   "amount": 667.0
+  },
+  {
+   "kind": "NOT_ON_EOB",
+   "amount": 0
+  }
+ ]
+}

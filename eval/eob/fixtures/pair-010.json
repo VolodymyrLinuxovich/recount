@@ -1,0 +1,149 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-54154075",
+  "patientName": "Chris Nguyen",
+  "patientAddress": null,
+  "statementDate": "2026-09-07",
+  "serviceDate": "2026-08-14",
+  "insurancePayer": "Sierra Larkspur Health Plan HMO",
+  "insurancePaid": 2080.33,
+  "adjustments": 6183.13,
+  "patientPaid": 0.0,
+  "totalCharges": 8413.46,
+  "amountDue": 150.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-14",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 3",
+    "quantity": 1,
+    "charge": 3093.0,
+    "chargePrinted": "3,093.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "70450",
+    "revCode": "0351",
+    "description": "HCHG CT BRAIN WO CONTR",
+    "quantity": 1,
+    "charge": 4312.0,
+    "chargePrinted": "4,312.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J1885",
+    "revCode": "0636",
+    "description": "KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN",
+    "quantity": 2,
+    "charge": 144.46,
+    "chargePrinted": "144.46"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HCHG IV PUSH INITIAL DRUG",
+    "quantity": 1,
+    "charge": 647.0,
+    "chargePrinted": "647.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "quantity": 1,
+    "charge": 217.0,
+    "chargePrinted": "217.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Sierra Larkspur Health Plan",
+  "planType": "HMO",
+  "memberName": "Chris Nguyen",
+  "memberId": "SLH461676063",
+  "claimNumber": "2078388309355",
+  "providerName": "CPMC VAN NESS CAMPUS",
+  "serviceDateFrom": "2026-08-14",
+  "serviceDateTo": "2026-08-14",
+  "network": "unknown",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 8413.46,
+  "totalAllowed": 2230.33,
+  "totalPlanPaid": 2080.33,
+  "totalPatientOwes": 150.0,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Sierra Larkspur Health Plan, Grievance and Appeals Department, 815 K Street, Sacramento, CA 95814",
+  "insurerPhone": "1-877-555-0163",
+  "lines": [
+   {
+    "date": "2026-08-14",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3093.0,
+    "allowed": 821.03,
+    "planPaid": 671.03,
+    "patientOwes": 150.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "70450",
+    "description": "CT scan",
+    "billed": 4312.0,
+    "allowed": 1136.77,
+    "planPaid": 1136.77,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J1885",
+    "description": "Drugs",
+    "billed": 144.46,
+    "allowed": 36.33,
+    "planPaid": 36.33,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 647.0,
+    "allowed": 177.1,
+    "planPaid": 177.1,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 217.0,
+    "allowed": 59.1,
+    "planPaid": 59.1,
+    "patientOwes": 0.0,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

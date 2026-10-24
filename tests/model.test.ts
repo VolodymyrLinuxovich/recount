@@ -51,9 +51,9 @@ describe("model choice", () => {
 
 describe("pipeline map", () => {
   it("keeps money, rules and sending away from AI", () => {
-    for (const key of ["check", "eligibility", "compare-reads", "letters-check", "hospital"]) expect(kindOf(key)).toBe("rule");
+    for (const key of ["check", "eligibility", "compare-reads", "letters-check", "hospital", "eob-check"]) expect(kindOf(key)).toBe("rule");
     expect(kindOf("approve")).toBe("person");
-    expect(PIPELINE.filter((p) => p.kind === "ai").map((p) => p.key)).toEqual(["read", "read-column", "letters", "chat"]);
+    expect(PIPELINE.filter((p) => p.kind === "ai").map((p) => p.key)).toEqual(["read", "read-column", "eob-read", "letters", "chat"]);
   });
 });
 

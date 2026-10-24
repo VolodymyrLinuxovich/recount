@@ -1,0 +1,214 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "UCSF Helen Diller Medical Center at Parnassus Heights",
+  "hospitalWebsite": "ucsfhealth.org",
+  "hospitalAddress": "505 Parnassus Avenue, San Francisco, CA 94143",
+  "billingPhone": "(415) 353-1888",
+  "accountNumber": "SAMPLE-57776503",
+  "patientName": "Maria Santos",
+  "patientAddress": null,
+  "statementDate": "2026-08-29",
+  "serviceDate": "2026-07-23",
+  "insurancePayer": "Golden Bear Health Plan PPO",
+  "insurancePaid": 1920.72,
+  "adjustments": 0.0,
+  "patientPaid": 0.0,
+  "totalCharges": 5466.6,
+  "amountDue": 3545.88,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-23",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HC EMERG LEVEL III",
+    "quantity": 1,
+    "charge": 3297.0,
+    "chargePrinted": "3,297.00"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HC HYDRATION IV INFUSION, INIT",
+    "quantity": 1,
+    "charge": 934.0,
+    "chargePrinted": "934.00"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+    "quantity": 1,
+    "charge": 119.84,
+    "chargePrinted": "119.84"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 667.0,
+    "chargePrinted": "667.00"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HC COLLECTION VENOUS BLOOD VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 69.0,
+    "chargePrinted": "69.00"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "NDC DESCRIPTION NOT AVAILABLE",
+    "quantity": 4,
+    "charge": 14.76,
+    "chargePrinted": "14.76"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC",
+    "quantity": 1,
+    "charge": 232.0,
+    "chargePrinted": "232.00"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HC URINALYSIS AUTO W/MICRO",
+    "quantity": 1,
+    "charge": 133.0,
+    "chargePrinted": "133.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Golden Bear Health Plan",
+  "planType": "PPO",
+  "memberName": "Maria Santos",
+  "memberId": "GBP867122694",
+  "claimNumber": "2325418537546",
+  "providerName": "UCSF MEDICAL CENTER",
+  "serviceDateFrom": "2026-07-23",
+  "serviceDateTo": "2026-07-23",
+  "network": "out",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 5466.6,
+  "totalAllowed": 2400.9,
+  "totalPlanPaid": 1920.72,
+  "totalPatientOwes": 480.18,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94623",
+  "insurerPhone": "1-800-555-0142",
+  "lines": [
+   {
+    "date": "2026-07-23",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3297.0,
+    "allowed": 1458.35,
+    "planPaid": 1166.68,
+    "patientOwes": 291.67,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 934.0,
+    "allowed": 413.36,
+    "planPaid": 330.69,
+    "patientOwes": 82.67,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 119.84,
+    "allowed": 52.33,
+    "planPaid": 41.86,
+    "patientOwes": 10.47,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 667.0,
+    "allowed": 282.25,
+    "planPaid": 225.8,
+    "patientOwes": 56.45,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 69.0,
+    "allowed": 30.0,
+    "planPaid": 24.0,
+    "patientOwes": 6.0,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 14.76,
+    "allowed": 6.76,
+    "planPaid": 5.41,
+    "patientOwes": 1.35,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 232.0,
+    "allowed": 98.6,
+    "planPaid": 78.88,
+    "patientOwes": 19.72,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-07-23",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 133.0,
+    "allowed": 59.25,
+    "planPaid": 47.4,
+    "patientOwes": 11.85,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "SURPRISE_BILL",
+   "amount": 3065.7
+  }
+ ]
+}

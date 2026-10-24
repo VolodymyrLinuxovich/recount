@@ -17,7 +17,7 @@ import { StepLog } from "../StepLog";
 import { WhoDidWhat } from "../how/WhoDidWhat";
 import { money } from "../types";
 import { StepFrame } from "./StepFrame";
-import { phaseOf } from "./steps";
+import { canChangeEob, phaseOf, stepsFor } from "./steps";
 import type { ScreenProps } from "./types";
 import "./links.css";
 import "../more.css";
@@ -91,7 +91,7 @@ interface Draft {
   oop: string;
 }
 
-function useDraft(id: string, prior: ScreenProps["c"]["household"]): [Draft, (d: Partial<Draft>) => void] {
+function useDraft(id: string, prior: ScreenProps["c"]["household"], hasEob: boolean): [Draft, (d: Partial<Draft>) => void] {
   const key = `recount.draft.${id}`;
   const [d, setD] = useState<Draft>(() => {
     const base: Draft = prior
@@ -104,6 +104,13 @@ function useDraft(id: string, prior: ScreenProps["c"]["household"]): [Draft, (d:
       return base;
     }
   });
+  // An insurance statement answers the insurance question: yes. It can arrive while the patient
+  // is on these screens, so it fills in then too (the patient can still change it).
+  const [eobSeen, setEobSeen] = useState(false);
+  if (hasEob && !eobSeen) {
+    setEobSeen(true);
+    if (!d.insured) setD({ ...d, insured: true });
+  }
   const update = (p: Partial<Draft>) =>
     setD((old) => {
       const n = { ...old, ...p };
@@ -118,7 +125,8 @@ function useDraft(id: string, prior: ScreenProps["c"]["household"]): [Draft, (d:
 export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 }) {
   const { t, lang } = useT();
   const submit = useMutation(api.cases.submitHousehold);
-  const [d, set] = useDraft(c._id, c.household);
+  const hasEob = c.eobStatus === "done" && Boolean(c.eob);
+  const [d, set] = useDraft(c._id, c.household, hasEob);
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -214,6 +222,11 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
       )}
       {n === 3 && (
         <>
+          {hasEob && d.insured && (
+            <p className="flow-note" role="status">
+              {t("hh.eobYes", { payer: c.eob?.payer ?? null })}
+            </p>
+          )}
           <div className="choice choice-big">
             <button type="button" aria-pressed={d.insured === false} onClick={() => set({ insured: false })}>
               {t("hh.no")}
@@ -277,6 +290,11 @@ export function AnswerStep({ c, back, go }: ScreenProps) {
             {t("flow.changeAnswers")}
           </button>
         )}
+        {(c.eob || canChangeEob(c)) && (
+          <button className="link-btn" onClick={() => go("eob")}>
+            {c.eob ? t("eob.linkSeen") : t("eob.link")}
+          </button>
+        )}
         <button className="link-btn" onClick={() => go("more")}>
           {t("flow.moreLink")}
         </button>
@@ -288,12 +306,21 @@ export function AnswerStep({ c, back, go }: ScreenProps) {
 
 // ---------- More: sources, share, delete, log ----------
 
-export function MoreStep({ c, back }: ScreenProps) {
+export function MoreStep({ c, back, go }: ScreenProps) {
   const { t } = useT();
+  // The insurance statement, from here too, while the bill has that screen.
+  const eobHere = stepsFor(c).includes("eob") && (Boolean(c.eob) || canChangeEob(c));
   const phase = c.status === "approved" ? 4 : c.status === "error" || c.status === "reading" ? 1 : phaseOf("more");
   return (
     <StepFrame phase={phase} title={t("flow.moreH")} onBack={back}>
       <div className="more">
+        {eobHere && (
+          <div className="step-links">
+            <button className="link-btn" onClick={() => go("eob")}>
+              {c.eob ? t("eob.linkSeen") : t("eob.link")}
+            </button>
+          </div>
+        )}
         <Sources c={c} />
         <WhoDidWhat c={c} />
         {c.token && <BillTools id={c._id} token={c.token} />}
