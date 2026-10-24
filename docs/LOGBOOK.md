@@ -8,6 +8,19 @@ Tracks: Microsoft "Built for the Real World", Anthropic "Claude for Public Benef
 > If a decision changed, edit its line under Decisions rather than adding a second one. When an issue is closed, mark it done in Open issues with the closing commit.
 > `git log --format='%h %ad %s' --date=format:'%m-%d %H:%M'` gives the hashes and times.
 
+## Plan to the deadline (Sun Oct 25, 9:00 AM PDT)
+
+Goal: a product a real California patient can use on their own phone, not a demo. Quality bar: an older person or a Spanish speaker can go from photo to approved letter alone, without getting stuck.
+
+| Phase | When | What | Who |
+|---|---|---|---|
+| 1. Real | now → Sat 12:00 | Live public URL with real Claude + Apify. Any of the 470 CA hospitals (match bill → HCAI record, its own free-care cutoff, its audit findings; "Is this your hospital?" confirm). Delete a bill + per-case secret. Fix QA round 2 (real photos). | deploy chat; main (backend); UI session; QA chat |
+| 2. Complete | Sat 12:00 → 20:00 | Print/mail-ready letters + how-to-send guide + install to home screen. Edit after approve (#7). Cold tests with real people (older, Spanish) and fix what confuses them. Failure states when Claude/Apify are slow or down. | UI helpers; main; Vova |
+| 3. Freeze | Sat 20:00 → Sun 06:00 | Feature freeze at 20:00, bug fixes only. Final QA both languages on the live URL. README, logbook, code guide. Record a 2-min video of a real person using it. Devpost text. | everyone; Vova records |
+| 4. Submit | by Sun 07:00 | Submit with 2 h buffer. No code changes after. | Vova |
+
+Not before the deadline: accounts (My bills stays per phone), insurance appeals, price checks beyond hospitals where the lookup works (labeled honestly).
+
 ## Now
 
 As of Sat Oct 24, about 03:40. `main` is at `e999ff1` (pushed). `ui` is at `0df2f55`, which merges `main`.
