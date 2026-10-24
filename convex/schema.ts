@@ -1,7 +1,19 @@
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  ...authTables,
+  profiles: defineTable({
+    userId: v.id("users"),
+    name: v.optional(v.string()),
+    street: v.optional(v.string()),
+    city: v.optional(v.string()),
+    zip: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    email: v.optional(v.string()),
+    dob: v.optional(v.string()),
+  }).index("by_user", ["userId"]),
   cases: defineTable({
     createdAt: v.number(),
     status: v.union(
@@ -24,6 +36,7 @@ export default defineSchema({
     hospitalHint: v.optional(v.string()),
     hospitalCandidates: v.optional(v.any()),
     token: v.optional(v.string()),
+    ownerId: v.optional(v.id("users")),
     findings: v.optional(v.any()),
     policyFindings: v.optional(v.any()),
     household: v.optional(v.any()),
@@ -32,7 +45,7 @@ export default defineSchema({
     lettersSource: v.optional(v.union(v.literal("claude"), v.literal("template"))),
     approvedAt: v.optional(v.number()),
     error: v.optional(v.string()),
-  }),
+  }).index("by_owner", ["ownerId", "createdAt"]),
   steps: defineTable({
     caseId: v.id("cases"),
     at: v.number(),

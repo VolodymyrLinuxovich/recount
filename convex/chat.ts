@@ -6,6 +6,7 @@
 // Privacy: a conversation is bound to the case it started with, and every read or write
 // of a case's conversation needs that case's secret token.
 
+import { getAuthUserId } from "@convex-dev/auth/server";
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
@@ -18,7 +19,12 @@ const STALE_MS = 90_000; // a reply still "pending" after this long is treated a
 async function caseIfOwned(ctx: QueryCtx, caseId: Id<"cases"> | undefined, token: string | undefined) {
   if (!caseId) return null;
   const c = await ctx.db.get(caseId);
-  if (!c || (c.token && c.token !== token)) return null;
+  if (!c) return null;
+  if (c.ownerId) {
+    const userId = await getAuthUserId(ctx);
+    if (userId && userId === c.ownerId) return c;
+  }
+  if (c.token && c.token !== token) return null;
   return c;
 }
 

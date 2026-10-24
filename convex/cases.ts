@@ -1,3 +1,4 @@
+import { getAuthUserId } from "@convex-dev/auth/server";
 import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
@@ -14,10 +15,15 @@ import { HOSPITALS, tokens } from "./lib/statewide";
 
 const Token = v.optional(v.string());
 
-async function owned(ctx: QueryCtx | MutationCtx, id: Id<"cases">, token: string | undefined): Promise<Doc<"cases"> | null> {
+export async function owned(ctx: QueryCtx | MutationCtx, id: Id<"cases">, token: string | undefined): Promise<Doc<"cases"> | null> {
   const c = await ctx.db.get(id);
   if (!c) return null;
-  // Cases made before tokens existed have none; every new case requires its token.
+  // The signed-in owner can always open their own bill.
+  if (c.ownerId) {
+    const userId = await getAuthUserId(ctx);
+    if (userId && userId === c.ownerId) return c;
+  }
+  // Otherwise the bill's secret token is required (cases made before tokens existed have none).
   if (c.token && c.token !== token) return null;
   return c;
 }
@@ -64,7 +70,9 @@ export const start = mutation({
   handler: async (ctx, args) => {
     await limit(ctx, "create", 60, 60_000);
     const token = crypto.randomUUID();
+    const ownerId = (await getAuthUserId(ctx)) ?? undefined;
     const id = await ctx.db.insert("cases", {
+      ownerId,
       createdAt: Date.now(),
       status: "reading",
       sample: args.sample,
@@ -282,5 +290,51 @@ export const adminRemove = internalMutation({
     if (c.fileId) await ctx.storage.delete(c.fileId);
     await ctx.db.delete(id);
     return "deleted";
+  },
+});
+
+/** Attach bills from this phone (id + token) to the signed-in account. Returns how many were attached. */
+export const claim = mutation({
+  args: { items: v.array(v.object({ id: v.id("cases"), token: v.string() })) },
+  handler: async (ctx, { items }) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) throw new ConvexError("Please sign in first.");
+    if (items.length > 200) throw new ConvexError("Too many bills at once.");
+    let n = 0;
+    for (const { id, token } of items) {
+      const c = await ctx.db.get(id);
+      if (!c || !c.token || c.token !== token) continue;
+      if (c.ownerId && c.ownerId !== userId) continue; // already someone else's
+      if (c.ownerId !== userId) {
+        await ctx.db.patch(id, { ownerId: userId });
+        n++;
+      }
+    }
+    return n;
+  },
+});
+
+/** The signed-in user's bills, newest first (a summary for "My bills"). */
+export const mine = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) return [];
+    const rows = await ctx.db
+      .query("cases")
+      .withIndex("by_owner", (q) => q.eq("ownerId", userId))
+      .order("desc")
+      .take(200);
+    return rows.map((c) => ({
+      id: c._id,
+      token: c.token ?? null,
+      createdAt: c.createdAt,
+      status: c.status,
+      hospitalName: c.hospital?.name ?? c.bill?.hospitalName ?? null,
+      amountDue: c.bill?.amountDue ?? null,
+      tier: c.eligibility?.tier ?? null,
+      findingsCount: Array.isArray(c.findings) ? c.findings.length : 0,
+      sample: c.sample,
+    }));
   },
 });

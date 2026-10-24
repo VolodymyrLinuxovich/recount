@@ -8,10 +8,13 @@
  * @module
  */
 
+import type * as account from "../account.js";
 import type * as agent from "../agent.js";
+import type * as auth from "../auth.js";
 import type * as cases from "../cases.js";
 import type * as chat from "../chat.js";
 import type * as chatAgent from "../chatAgent.js";
+import type * as http from "../http.js";
 import type * as lib_bill from "../lib/bill.js";
 import type * as lib_checks from "../lib/checks.js";
 import type * as lib_eligibility from "../lib/eligibility.js";
@@ -22,6 +25,7 @@ import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
 import type * as lib_sample from "../lib/sample.js";
 import type * as lib_statewide from "../lib/statewide.js";
+import type * as profile from "../profile.js";
 
 import type {
   ApiFromModules,
@@ -30,10 +34,13 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  account: typeof account;
   agent: typeof agent;
+  auth: typeof auth;
   cases: typeof cases;
   chat: typeof chat;
   chatAgent: typeof chatAgent;
+  http: typeof http;
   "lib/bill": typeof lib_bill;
   "lib/checks": typeof lib_checks;
   "lib/eligibility": typeof lib_eligibility;
@@ -44,6 +51,7 @@ declare const fullApi: ApiFromModules<{
   "lib/reference": typeof lib_reference;
   "lib/sample": typeof lib_sample;
   "lib/statewide": typeof lib_statewide;
+  profile: typeof profile;
 }>;
 
 /**
