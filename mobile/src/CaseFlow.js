@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, BackHandler, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
-import { Button, C, Card, H1, H2, LinkText, P, Screen, openUrl, s } from "./ui";
+import Svg, { Circle, Path } from "react-native-svg";
+import { Button, C, Card, F, H1, H2, LinkText, P, Screen, openUrl, s } from "./ui";
 
 const api = anyApi;
 const QUESTION_PAGES = ["found", "size", "income", "insured", "oop"];
@@ -283,7 +284,7 @@ const clean = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !=
 function Center({ label }) {
   return (
     <View style={{ paddingVertical: 60, alignItems: "center" }}>
-      <ActivityIndicator size="large" color={C.ink} />
+      <ActivityIndicator size="large" color={C.brand} />
       <P muted style={{ marginTop: 16 }}>{label}</P>
     </View>
   );
@@ -311,13 +312,27 @@ function StepRow({ state, label, detail }) {
   return (
     <View style={x.stepRow}>
       <View style={[x.stepMark, state === "done" && x.stepDone, (state === "warn" || state === "error") && x.stepWarn]}>
-        {state === "running" ? <ActivityIndicator size="small" color={C.ink} /> : <Text style={x.stepMarkText}>{mark}</Text>}
+        {state === "running" ? (
+          <ActivityIndicator size="small" color={C.brand} />
+        ) : state === "done" ? (
+          <Tick />
+        ) : (
+          <Text style={[x.stepMarkText, (state === "warn" || state === "error") && { color: C.flagInk }]}>{mark}</Text>
+        )}
       </View>
       <View style={{ flex: 1 }}>
         <Text style={x.stepLabel}>{label}</Text>
         {detail ? <Text style={x.stepDetail} numberOfLines={3}>{detail}</Text> : null}
       </View>
     </View>
+  );
+}
+
+function Tick({ color = C.brand, size = 18 }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Path d="M5 12.5 L10 17.5 L19 7" stroke={color} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+    </Svg>
   );
 }
 
@@ -331,11 +346,11 @@ function HospitalPick({ t, c, busy, onPick }) {
       <H1>{t.hospitalTitle}</H1>
       <P muted>{t.hospitalBody}</P>
       {c.bill?.hospitalName ? <P>{t.onBill}: {c.bill.hospitalName}</P> : null}
-      <TextInput style={[s.input, { marginBottom: 14 }]} value={q} onChangeText={setQ} placeholder={t.searchPlaceholder} placeholderTextColor={C.muted} autoCorrect={false} />
+      <TextInput style={[s.input, { marginBottom: 14 }]} value={q} onChangeText={setQ} placeholder={t.searchPlaceholder} placeholderTextColor={C.ink2} autoCorrect={false} />
       {list.map((h) => (
         <Pressable key={h.key} disabled={busy} onPress={() => onPick(h.key)} accessibilityRole="button">
           {({ pressed }) => (
-            <Card style={[{ paddingVertical: 14, marginBottom: 10 }, pressed && { opacity: 0.7 }]}>
+            <Card style={[{ paddingVertical: 16, marginBottom: 10 }, pressed && x.cardPressed]}>
               <Text style={x.hName}>{h.name}</Text>
               {h.city ? <Text style={x.hCity}>{h.city}</Text> : null}
             </Card>
@@ -355,7 +370,7 @@ function Found({ t, c }) {
   return (
     <>
       <H1>{t.foundTitle}</H1>
-      <Card style={{ backgroundColor: "transparent" }}>
+      <Card style={{ backgroundColor: C.bg2 }}>
         <Text style={s.label}>{t.billFrom}</Text>
         <Text style={x.hName}>{c.hospital?.name || c.bill?.hospitalName || t.noName}</Text>
         <View style={x.totals}>
@@ -367,7 +382,10 @@ function Found({ t, c }) {
       {findings.length === 0 ? <P>{t.foundNone}</P> : null}
       {findings.map((f, i) => (
         <Card key={f.id || i}>
-          <Text style={x.count}>{t.findingOf(i + 1, findings.length)}</Text>
+          <View style={x.flagTag}>
+            <View style={x.flagDot} />
+            <Text style={x.flagTagText}>{t.findingOf(i + 1, findings.length)}</Text>
+          </View>
           <H2>{f.title}</H2>
           {(f.evidence || []).map((ev, j) => (
             <View key={j} style={x.evRow}>
@@ -375,7 +393,11 @@ function Found({ t, c }) {
               <Text style={x.evValue}>{ev.value}</Text>
             </View>
           ))}
-          {f.amount > 0 ? <Text style={x.save}>{t.couldSave(money(f.amount))}</Text> : null}
+          {f.amount > 0 ? (
+            <View style={x.saved}>
+              <Text style={x.saveText}>{t.couldSave(money(f.amount))}</Text>
+            </View>
+          ) : null}
           <P style={{ marginTop: 6, marginBottom: 0 }}>{f.detail}</P>
           {f.evidence?.find((ev) => /^https?:/.test(ev.source || "")) ? (
             <LinkText label={t.source} onPress={() => openUrl(f.evidence.find((ev) => /^https?:/.test(ev.source || "")).source)} />
@@ -387,8 +409,8 @@ function Found({ t, c }) {
         <View style={{ marginTop: 10 }}>
           <H2>{t.policyTitle}</H2>
           {policy.map((p, i) => (
-            <Card key={i} style={p.verdict === "ask" ? null : { borderColor: C.red }}>
-              <Text style={[x.badge, p.verdict !== "ask" && { color: C.red }]}>{p.verdict === "ask" ? t.worthAsking : t.headsUp}</Text>
+            <Card key={i} style={p.verdict === "ask" ? null : { borderColor: C.flag }}>
+              <Text style={[x.badge, p.verdict !== "ask" && x.badgeFlag]}>{p.verdict === "ask" ? t.worthAsking : t.headsUp}</Text>
               <P>{p.explanation}</P>
               {p.quote ? <Text style={x.quote}>{"“" + p.quote + "”"}</Text> : null}
             </Card>
@@ -420,14 +442,14 @@ const Kv = ({ k, v }) => (
 function Stepper({ t, value, onChange }) {
   return (
     <View style={x.stepper}>
-      <Pressable style={x.stepBtn} onPress={() => onChange(Math.max(1, value - 1))} accessibilityLabel={t.minus} accessibilityRole="button">
+      <Pressable style={({ pressed }) => [x.stepBtn, pressed && x.stepBtnPressed]} onPress={() => onChange(Math.max(1, value - 1))} accessibilityLabel={t.minus} accessibilityRole="button">
         <Text style={x.stepBtnText}>{"−"}</Text>
       </Pressable>
       <View style={{ alignItems: "center", flex: 1 }}>
         <Text style={x.stepValue}>{value}</Text>
         <Text style={x.hCity}>{t.people(value)}</Text>
       </View>
-      <Pressable style={x.stepBtn} onPress={() => onChange(Math.min(20, value + 1))} accessibilityLabel={t.plus} accessibilityRole="button">
+      <Pressable style={({ pressed }) => [x.stepBtn, pressed && x.stepBtnPressed]} onPress={() => onChange(Math.min(20, value + 1))} accessibilityLabel={t.plus} accessibilityRole="button">
         <Text style={x.stepBtnText}>+</Text>
       </Pressable>
     </View>
@@ -446,7 +468,7 @@ function MoneyInput({ value, onChange }) {
         keyboardType="number-pad"
         autoFocus
         placeholder="0"
-        placeholderTextColor={C.disabled}
+        placeholderTextColor={C.lilac}
       />
     </View>
   );
@@ -454,8 +476,13 @@ function MoneyInput({ value, onChange }) {
 
 function Choice({ label, on, onPress }) {
   return (
-    <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ selected: on }} style={[x.choice, on && x.choiceOn]}>
-      <View style={[x.radio, on && x.radioOn]} />
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="radio"
+      accessibilityState={{ selected: on }}
+      style={({ pressed }) => [x.choice, pressed && !on && x.choicePressed, on && x.choiceOn, pressed && { transform: [{ translateY: 1 }] }]}
+    >
+      <View style={[x.radio, on && x.radioOn]}>{on ? <View style={x.radioDot} /> : null}</View>
       <Text style={x.choiceText}>{label}</Text>
     </Pressable>
   );
@@ -466,11 +493,12 @@ function Answer({ t, e }) {
   if (!e) return <Center label={t.loading} />;
   return (
     <>
+      {e.tier === "FREE" || e.tier === "DISCOUNT" ? <OkBadge /> : null}
       <Text style={s.label}>{t.answerTitle}</Text>
-      <Text style={x.headline}>{e.headline}</Text>
+      <Text style={[x.headline, (e.tier === "FREE" || e.tier === "DISCOUNT") && { color: C.greenInk }]}>{e.headline}</Text>
       {typeof e.fplPct === "number" ? <P>{t.fpl(Math.round(e.fplPct))}</P> : null}
       {e.medicalLikely ? (
-        <Card style={{ borderColor: C.ink }}>
+        <Card style={{ backgroundColor: C.brandTint, borderColor: C.brandTint }}>
           <P style={{ marginBottom: 0 }}>{t.medical}</P>
         </Card>
       ) : null}
@@ -489,6 +517,17 @@ function Answer({ t, e }) {
   );
 }
 
+function OkBadge() {
+  return (
+    <View style={{ marginBottom: 10 }} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+      <Svg width={60} height={60} viewBox="0 0 64 64" fill="none">
+        <Circle cx={32} cy={32} r={29} fill={C.greenTint} stroke={C.greenDeep} strokeWidth={3} />
+        <Path d="M19 33 L28 42 L45 23" stroke={C.greenDeep} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
+      </Svg>
+    </View>
+  );
+}
+
 // ---------- 4b. Letters ----------
 function LetterEditor({ t, es, index, count, letter, onChange, err }) {
   const [copied, setCopied] = useState(false);
@@ -499,7 +538,7 @@ function LetterEditor({ t, es, index, count, letter, onChange, err }) {
       <H1>{letter.title}</H1>
       <P muted>{t.editHint}</P>
       <Text style={s.label}>{t.subject}</Text>
-      <TextInput style={[s.input, { marginBottom: 14 }]} value={letter.subject} onChangeText={(subject) => onChange({ ...letter, subject })} multiline />
+      <TextInput style={[s.input, { marginBottom: 14, minHeight: 88 }]} value={letter.subject} onChangeText={(subject) => onChange({ ...letter, subject })} multiline />
       <TextInput
         style={[s.input, x.letterBody]}
         value={letter.body}
@@ -527,7 +566,7 @@ function LetterEditor({ t, es, index, count, letter, onChange, err }) {
       {es && letter.bodyPatient ? (
         <Card style={{ marginTop: 18 }}>
           <H2>{t.patientCopy}</H2>
-          {letter.subjectPatient ? <P style={{ fontWeight: "700" }}>{letter.subjectPatient}</P> : null}
+          {letter.subjectPatient ? <P style={{ fontFamily: F.body600 }}>{letter.subjectPatient}</P> : null}
           <P style={{ marginBottom: 0 }}>{letter.bodyPatient}</P>
         </Card>
       ) : null}
@@ -543,8 +582,10 @@ function Done({ t, c, letters }) {
   const tel = (p) => openUrl("tel:" + p.replace(/[^0-9+]/g, ""));
   return (
     <>
+      <OkBadge />
       <H1>{t.doneTitle}</H1>
       <P>{t.doneBody}</P>
+      <View style={{ height: 8 }} />
       <H2>{t.howToSend}</H2>
       {billing ? <Button kind="secondary" label={t.callBilling(billing)} onPress={() => tel(billing)} /> : null}
       {assist && assist !== billing ? (
@@ -570,37 +611,46 @@ function Done({ t, c, letters }) {
 }
 
 const x = StyleSheet.create({
-  stepRow: { flexDirection: "row", alignItems: "flex-start", paddingVertical: 12, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: C.line },
-  stepMark: { width: 32, height: 32, borderRadius: 16, borderWidth: 1.5, borderColor: C.line, alignItems: "center", justifyContent: "center", marginRight: 14 },
-  stepDone: { borderColor: C.ink, backgroundColor: C.ink },
-  stepWarn: { borderColor: C.red, backgroundColor: C.red },
-  stepMarkText: { color: "#fff", fontSize: 17, fontWeight: "800" },
-  stepLabel: { fontSize: 19, color: C.ink, lineHeight: 25 },
-  stepDetail: { fontSize: 16, color: C.muted, marginTop: 3, lineHeight: 22 },
-  hName: { fontSize: 20, fontWeight: "700", color: C.ink },
-  hCity: { fontSize: 16, color: C.muted, marginTop: 2 },
-  totals: { flexDirection: "row", marginTop: 12 },
-  kvValue: { fontSize: 22, fontWeight: "700", color: C.ink },
-  count: { fontSize: 15, color: C.muted, marginBottom: 4 },
-  evRow: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 6, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: C.line },
-  evLabel: { fontSize: 16, color: C.muted, flex: 1, paddingRight: 10 },
-  evValue: { fontSize: 18, color: C.ink, fontWeight: "600" },
-  save: { fontSize: 21, color: C.red, fontWeight: "800", marginTop: 12 },
-  badge: { fontSize: 15, fontWeight: "800", textTransform: "uppercase", letterSpacing: 0.6, color: C.muted, marginBottom: 6 },
-  quote: { fontSize: 17, fontStyle: "italic", color: C.muted, lineHeight: 24 },
-  stepper: { flexDirection: "row", alignItems: "center", marginTop: 24 },
-  stepBtn: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: C.ink, alignItems: "center", justifyContent: "center", backgroundColor: C.card },
-  stepBtnText: { fontSize: 36, color: C.ink, fontWeight: "500", lineHeight: 40 },
-  stepValue: { fontSize: 56, fontWeight: "800", color: C.ink },
-  moneyRow: { flexDirection: "row", alignItems: "center", marginTop: 18 },
-  dollar: { fontSize: 32, fontWeight: "700", color: C.ink, marginRight: 10 },
-  moneyInput: { flex: 1, fontSize: 30, fontWeight: "700" },
-  choice: { flexDirection: "row", alignItems: "center", borderWidth: 1.5, borderColor: C.line, backgroundColor: C.card, borderRadius: 14, padding: 20, marginTop: 12 },
-  choiceOn: { borderColor: C.ink, borderWidth: 2.5 },
-  radio: { width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: C.muted, marginRight: 16 },
-  radioOn: { borderColor: C.red, borderWidth: 8 },
-  choiceText: { fontSize: 22, fontWeight: "600", color: C.ink },
-  headline: { fontFamily: undefined, fontSize: 30, lineHeight: 38, fontWeight: "800", color: C.ink, marginBottom: 12 },
-  letterBody: { minHeight: 320, fontSize: 17, lineHeight: 24 },
+  stepRow: { flexDirection: "row", alignItems: "flex-start", paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: C.line },
+  stepMark: { width: 32, height: 32, borderRadius: 16, backgroundColor: C.bg2, alignItems: "center", justifyContent: "center", marginRight: 14 },
+  stepDone: { backgroundColor: C.brandTint },
+  stepWarn: { backgroundColor: C.flagTint },
+  stepMarkText: { fontFamily: F.display800, color: C.ink, fontSize: 17 },
+  stepLabel: { fontFamily: F.body500, fontSize: 18, color: C.ink, lineHeight: 26 },
+  stepDetail: { fontFamily: F.body, fontSize: 16, color: C.ink2, marginTop: 3, lineHeight: 23 },
+  cardPressed: { backgroundColor: C.bg2, borderColor: C.brand, transform: [{ translateY: 1 }] },
+  hName: { fontFamily: F.display700, fontSize: 20, lineHeight: 26, color: C.ink },
+  hCity: { fontFamily: F.body, fontSize: 16, color: C.ink2, marginTop: 2 },
+  totals: { flexDirection: "row", marginTop: 14 },
+  kvValue: { fontFamily: F.display800, fontSize: 24, lineHeight: 30, color: C.ink, marginTop: 2 },
+  count: { fontFamily: F.body600, fontSize: 15, color: C.ink2, marginBottom: 6 },
+  flagTag: { flexDirection: "row", alignItems: "center", alignSelf: "flex-start", backgroundColor: C.flagTint, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 10 },
+  flagDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: C.flag, marginRight: 8 },
+  flagTagText: { fontFamily: F.body600, fontSize: 14, color: C.flagInk },
+  evRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", minHeight: 40, paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: C.line },
+  evLabel: { fontFamily: F.body, fontSize: 16, lineHeight: 22, color: C.ink2, flex: 1, paddingRight: 10 },
+  evValue: { fontFamily: F.body600, fontSize: 17, color: C.ink },
+  saved: { backgroundColor: C.greenTint, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 14, marginTop: 14, marginBottom: 6 },
+  saveText: { fontFamily: F.display800, fontSize: 24, lineHeight: 30, color: C.greenInk },
+  badge: { fontFamily: F.body600, fontSize: 14, textTransform: "uppercase", letterSpacing: 0.8, color: C.brand, backgroundColor: C.brandTint, alignSelf: "flex-start", borderRadius: 999, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 10, overflow: "hidden" },
+  badgeFlag: { color: C.flagInk, backgroundColor: C.flagTint },
+  quote: { fontFamily: F.body, fontSize: 17, fontStyle: "italic", color: C.ink2, lineHeight: 25, borderLeftWidth: 3, borderLeftColor: C.lilac, paddingLeft: 12 },
+  stepper: { flexDirection: "row", alignItems: "center", marginTop: 28 },
+  stepBtn: { width: 72, height: 72, borderRadius: 36, borderWidth: 1, borderColor: C.line, alignItems: "center", justifyContent: "center", backgroundColor: C.bg2 },
+  stepBtnPressed: { backgroundColor: C.brandTint, borderColor: C.brand, transform: [{ scale: 0.94 }] },
+  stepBtnText: { fontFamily: F.body500, fontSize: 34, color: C.brand, lineHeight: 40 },
+  stepValue: { fontFamily: F.display800, fontSize: 56, lineHeight: 64, color: C.ink },
+  moneyRow: { flexDirection: "row", alignItems: "center", marginTop: 20 },
+  dollar: { fontFamily: F.display800, fontSize: 32, color: C.ink2, marginRight: 10 },
+  moneyInput: { flex: 1, minWidth: 0, width: "100%", fontFamily: F.display800, fontSize: 30 },
+  choice: { flexDirection: "row", alignItems: "center", borderWidth: 1.5, borderColor: C.line, backgroundColor: C.surface, borderRadius: 16, padding: 20, minHeight: 68, marginTop: 12 },
+  choicePressed: { backgroundColor: C.bg2 },
+  choiceOn: { borderColor: C.brand, borderWidth: 2, backgroundColor: C.brandTint },
+  radio: { width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: C.ink2, marginRight: 16, alignItems: "center", justifyContent: "center" },
+  radioOn: { borderColor: C.brand, backgroundColor: C.brand },
+  radioDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: C.onBrand },
+  choiceText: { fontFamily: F.body600, fontSize: 21, color: C.ink },
+  headline: { fontFamily: F.display800, fontSize: 29, lineHeight: 36, letterSpacing: -0.4, color: C.ink, marginBottom: 12 },
+  letterBody: { minHeight: 320, fontSize: 17, lineHeight: 25 },
   row: { flexDirection: "row", marginTop: 14 },
 });

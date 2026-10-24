@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -8,7 +9,7 @@ import { loadBills, rememberBill } from "./src/myBills";
 import { StartScreen } from "./src/StartScreen";
 import { STRINGS } from "./src/strings";
 import { View } from "react-native";
-import { C } from "./src/ui";
+import { C, FONTS } from "./src/theme";
 
 export const CONVEX_URL = process.env.EXPO_PUBLIC_CONVEX_URL || "https://zealous-grouse-384.convex.cloud";
 const convex = new ConvexReactClient(CONVEX_URL, { unsavedChangesWarning: false });
@@ -18,6 +19,7 @@ export default function App() {
   const [lang, setLangState] = useState("en");
   const [current, setCurrent] = useState(null); // { id, token } of the open bill
   const [bills, setBills] = useState([]);
+  const [fontsLoaded, fontError] = useFonts(FONTS);
   const t = STRINGS[lang];
 
   const refresh = useCallback(() => loadBills().then(setBills), []);
@@ -43,11 +45,14 @@ export default function App() {
     refresh();
   }
 
+  // Show nothing (the native splash stays up) until the fonts are ready; on a font error, fall back to system fonts.
+  if (!fontsLoaded && !fontError) return null;
+
   return (
     <ConvexProvider client={convex}>
       <SafeAreaProvider>
         <StatusBar style="dark" />
-        <View style={{ flex: 1, backgroundColor: C.paper }}>
+        <View style={{ flex: 1, backgroundColor: C.bg }}>
           {current ? (
             <CaseFlow key={current.id} t={t} id={current.id} token={current.token} onHome={goHome} />
           ) : (
