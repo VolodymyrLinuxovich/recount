@@ -154,6 +154,12 @@ const en = {
   "flow.detailsH": "Your details for the letter",
   "flow.sendH": "Send your letters",
   "flow.seeLettersAgain": "See my letters",
+  "flow.moreLink": "More about this bill: sources, share, delete",
+  "flow.changeAnswers": "Change my answers",
+  "flow.retakeH": "We couldn’t read this photo",
+  "flow.retakeBody": "We couldn’t make out the charges. Take a new photo of the page that lists each charge, flat and in good light, with all four corners showing.",
+  "flow.retake": "Take a new photo",
+  "flow.continueAnyway": "Continue anyway",
   "flow.letterOf": (v: { n: number; total: number }) => `Letter ${v.n} of ${v.total}`,
   "flow.nextLetter": "Next letter",
   "flow.nothingSent": "Nothing is sent. You’ll send them yourself next.",
@@ -161,7 +167,8 @@ const en = {
   "flow.detailsNone": "Your letters have nothing left to fill in.",
   "flow.readyToSend": "You’re ready to send.",
   "flow.callBilling": "Call billing",
-  "flow.approveFailed": "That didn’t save. Check your connection and try again.",
+  "flow.approveFailed": "Something went wrong on our side. Please try again.",
+  "flow.tryAgain": "Try again",
   // Found screens
   "found.tapBill": "Tap to see your bill",
   "found.closeBill": "Close",
@@ -492,6 +499,8 @@ const en = {
   // The hospital's own policy, next to state law (bill page)
   "policy.headBreaks": (v: { name: string | null; n: number }) =>
     `Heads up: ${v.name ?? "the hospital"}’s own policy breaks ${v.n === 1 ? "a state rule" : `${v.n} state rules`}.`,
+  "policy.headLikely": (v: { name: string | null; n: number }) =>
+    `${v.name ?? "The hospital"}’s own policy likely goes against ${v.n === 1 ? "a state rule" : `${v.n} state rules`}. You can ask them about it.`,
   "policy.headUnclear": (v: { name: string | null }) =>
     `One part of ${v.name ?? "the hospital"}’s policy is unclear. You may want to ask them about it.`,
   "policy.theirSays": (v: { doc: string }) => {
@@ -684,8 +693,6 @@ const en = {
   "helper.thinking": "Lupa is looking…",
   "helper.you": "You",
   "helper.safety": "Recount’s helper explains your bill. It isn’t legal or medical advice, and it never sends anything for you.",
-  "helper.errTooMany": "Too many questions in a row. Please wait a few minutes.",
-  "helper.errWait": "Please wait for the answer to finish.",
   "helper.errFailed": "That didn’t send. Check your connection and try again.",
   "helper.loading": "Loading the chat…",
   "helper.sensitive": "Please don’t type a Social Security number or bank details here. Lupa doesn’t need them, so this wasn’t sent.",
@@ -832,6 +839,12 @@ const es: Dict = {
   "flow.detailsH": "Sus datos para la carta",
   "flow.sendH": "Envíe sus cartas",
   "flow.seeLettersAgain": "Ver mis cartas",
+  "flow.moreLink": "Más sobre esta factura: fuentes, compartir, borrar",
+  "flow.changeAnswers": "Cambiar mis respuestas",
+  "flow.retakeH": "No pudimos leer esta foto",
+  "flow.retakeBody": "No pudimos distinguir los cargos. Tome una foto nueva de la página que muestra cada cargo, plana y con buena luz, con las cuatro esquinas visibles.",
+  "flow.retake": "Tomar una foto nueva",
+  "flow.continueAnyway": "Seguir de todos modos",
   "flow.letterOf": (v) => `Carta ${v.n} de ${v.total}`,
   "flow.nextLetter": "Siguiente carta",
   "flow.nothingSent": "No se envía nada. Usted las enviará en el siguiente paso.",
@@ -839,7 +852,8 @@ const es: Dict = {
   "flow.detailsNone": "A sus cartas no les falta nada por llenar.",
   "flow.readyToSend": "Ya puede enviarlas.",
   "flow.callBilling": "Llamar a facturación",
-  "flow.approveFailed": "No se guardó. Revise su conexión e intente de nuevo.",
+  "flow.approveFailed": "Algo salió mal de nuestro lado. Por favor intente de nuevo.",
+  "flow.tryAgain": "Intentar de nuevo",
   // Found screens
   "found.tapBill": "Toque para ver su factura",
   "found.closeBill": "Cerrar",
@@ -1162,6 +1176,8 @@ const es: Dict = {
 
   "policy.headBreaks": (v) =>
     `Atención: la propia política ${v.name ? `de ${v.name}` : "del hospital"} no cumple con ${v.n === 1 ? "una regla estatal" : `${v.n} reglas estatales`}.`,
+  "policy.headLikely": (v) =>
+    `Probablemente la política ${v.name ? `de ${v.name}` : "del hospital"} no cumple con ${v.n === 1 ? "una regla estatal" : `${v.n} reglas estatales`}. Puede preguntarles al respecto.`,
   "policy.headUnclear": (v) =>
     `Una parte de la política ${v.name ? `de ${v.name}` : "del hospital"} no está clara. Quizás quiera preguntarles al respecto.`,
   "policy.theirSays": (v) => {
@@ -1357,8 +1373,6 @@ const es: Dict = {
   "helper.thinking": "Lupa está revisando…",
   "helper.you": "Usted",
   "helper.safety": "El ayudante de Recount le explica su factura. No es consejo legal ni médico, y nunca envía nada por usted.",
-  "helper.errTooMany": "Demasiadas preguntas seguidas. Espere unos minutos.",
-  "helper.errWait": "Espere a que termine la respuesta.",
   "helper.errFailed": "No se envió. Revise su conexión e intente otra vez.",
   "helper.loading": "Cargando el chat…",
   "helper.sensitive": "Por favor, no escriba aquí su número de Seguro Social ni datos de su banco. Lupa no los necesita, así que no se envió.",

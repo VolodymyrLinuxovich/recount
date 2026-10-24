@@ -17,6 +17,7 @@ import { money } from "../types";
 import { StepFrame } from "./StepFrame";
 import { phaseOf } from "./steps";
 import type { ScreenProps } from "./types";
+import "./links.css";
 import "../more.css";
 
 /** Read "28k", "$28,000", "28000" or "1.2m" as whole dollars. */
@@ -38,10 +39,12 @@ export function ReadingStep({ c, go }: ScreenProps) {
     return (
       <StepFrame phase={1} title={notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
         <p>{notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf)}</p>
-        <details className="log-details">
-          <summary>{t("case.details")}</summary>
-          <StepLog steps={c.steps.map((s) => (s.state === "running" ? { ...s, state: "error" as const } : s))} />
-        </details>
+        {!notBill && (
+          <details className="log-details">
+            <summary>{t("case.details")}</summary>
+            <StepLog steps={c.steps.map((s) => (s.state === "running" ? { ...s, state: "error" as const } : s))} />
+          </details>
+        )}
       </StepFrame>
     );
   }
@@ -255,6 +258,16 @@ export function AnswerStep({ c, back, go }: ScreenProps) {
         hospitalKey={c.hospitalKey ?? c.hospital?.key ?? null}
         inLetter={Boolean(c.letters?.length)}
       />
+      <div className="step-links">
+        {(c.status === "drafting" || c.status === "ready") && (
+          <button className="link-btn" onClick={() => go("q1")}>
+            {t("flow.changeAnswers")}
+          </button>
+        )}
+        <button className="link-btn" onClick={() => go("more")}>
+          {t("flow.moreLink")}
+        </button>
+      </div>
       <p className="quiet small-print">{t("footer")}</p>
     </StepFrame>
   );

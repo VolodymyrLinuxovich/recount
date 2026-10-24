@@ -26,8 +26,9 @@ export function stepsFor(c: CaseView): StepId[] {
   if (s === "needs_household" || c.eligibility?.tier === "NEEDS_INFO") return [...found, "q1", "q2", "q3", "more"];
   const letters = (c.letters ?? []).map((_, i) => `letter-${i}`);
   // After the answer comes the letters; the findings stay reachable from the answer screen.
-  if (s === "drafting" || (s === "ready" && !letters.length)) return ["answer", "letters-wait", ...found, "more"];
-  if (s === "ready") return ["answer", "details", ...letters, ...found, "more"];
+  const redo = ["q1", "q2", "q3"]; // "Change my answers" before approving
+  if (s === "drafting" || (s === "ready" && !letters.length)) return ["answer", "letters-wait", ...found, ...redo, "more"];
+  if (s === "ready") return ["answer", "details", ...letters, ...found, ...redo, "more"];
   return ["send", "answer", "details", ...letters, ...found, "more"]; // approved
 }
 

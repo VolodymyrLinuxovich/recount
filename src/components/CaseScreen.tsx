@@ -22,7 +22,8 @@ export function CaseScreen() {
     window.addEventListener("hashchange", read);
     return () => window.removeEventListener("hashchange", read);
   }, [id]);
-  const raw = useQuery(api.cases.get, token === undefined ? "skip" : { id: id as Id<"cases">, token: token ?? undefined }) as
+  const validId = /^[0-9a-z]{25,40}$/.test(id);
+  const raw = useQuery(api.cases.get, token === undefined || !validId ? "skip" : { id: id as Id<"cases">, token: token ?? undefined }) as
     | CaseView
     | null
     | undefined;
@@ -30,6 +31,20 @@ export function CaseScreen() {
   useRememberCase(id, token ?? undefined, c);
   const { t, lang } = useT();
 
+  if (!validId)
+    return (
+      <section className="stack">
+        <h1 className="h-answer">{t("case.notFound")}</h1>
+        <div className="row">
+          <Link href="/bills" className="btn btn-primary">
+            {t("bills.title")}
+          </Link>
+          <Link href="/" className="btn btn-quiet">
+            {t("case.startAgain")}
+          </Link>
+        </div>
+      </section>
+    );
   if (token === null && c === null)
     return (
       <section className="stack">

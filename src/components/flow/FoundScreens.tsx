@@ -208,7 +208,8 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
   const bill = c.bill!;
   const screens = findingScreens(c);
   const n = screens.length;
-  const unsure = bill.unreadable ?? [];
+  // Notes from the reader, without internal field names like "hospitalAddress: …".
+  const unsure = (bill.unreadable ?? []).map((u) => u.replace(/^[a-z]+[A-Z][A-Za-z]*(\[\d+\])?(\.[A-Za-z]+)?\s*:\s*/, "")).filter(Boolean);
   const unsureSet = unsureLines(unsure);
   const name = c.hospital?.name ?? bill.hospitalName;
 
@@ -222,6 +223,22 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
         if (!list.includes(i)) badgesFor.set(line, [...list, i]);
       }
   });
+
+  // Nothing readable: ask for a better photo instead of carrying on with an empty bill.
+  if (bill.lines.length === 0 && unsure.length > 0 && c.status === "needs_household")
+    return (
+      <StepFrame
+        phase={1}
+        title={t("flow.retakeH")}
+        primary={{ label: t("flow.retake"), href: "/" }}
+        secondary={{ label: t("flow.continueAnyway"), onClick: n > 0 ? next : () => go("q1") }}
+      >
+        <p>{t("flow.retakeBody")}</p>
+        <button className="link-btn" onClick={() => go("more")}>
+          {t("flow.moreLink")}
+        </button>
+      </StepFrame>
+    );
 
   return (
     <StepFrame
@@ -276,6 +293,11 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
           {!unsure.length && canFix(c) && <p className="found-quiet found-legend">{t("found.fixHint")}</p>}
         </section>
       )}
+      <div className="step-links">
+        <button className="link-btn" onClick={() => go("more")}>
+          {t("flow.moreLink")}
+        </button>
+      </div>
     </StepFrame>
   );
 }

@@ -43,9 +43,12 @@ export function PolicyAside({
   const { t, lang } = useT();
   if (!findings.length) return null;
   const firm = findings.filter((f) => f.verdict !== "ask");
-  const head = firm.length
-    ? t("policy.headBreaks", { name: hospitalName, n: firm.length })
-    : t("policy.headUnclear", { name: hospitalName });
+  const conflicts = findings.filter((f) => f.verdict === "conflict").length;
+  const head = conflicts
+    ? t("policy.headBreaks", { name: hospitalName, n: conflicts })
+    : firm.length
+      ? t("policy.headLikely", { name: hospitalName, n: firm.length })
+      : t("policy.headUnclear", { name: hospitalName });
 
   return (
     <aside className={firm.length ? "policy-aside" : "policy-aside policy-aside-ask"} aria-labelledby="policy-aside-h">

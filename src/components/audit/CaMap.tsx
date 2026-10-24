@@ -57,8 +57,8 @@ export function CaMap({
     const m = svg.getScreenCTM();
     if (!m) return;
     const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
-    // About 22 screen pixels, in map units.
-    const r = 22 / m.a;
+    // About 14 screen pixels, in map units.
+    const r = 14 / m.a;
     const hits = placed
       .map((p) => ({ p, d: Math.hypot(p.xy[0] - pt.x, p.xy[1] - pt.y) }))
       .filter((x) => x.d <= r)
