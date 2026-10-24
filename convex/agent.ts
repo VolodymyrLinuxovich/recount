@@ -47,7 +47,7 @@ async function readWithClaude(blob: Blob, mediaType: string, lang: Lang): Promis
     max_tokens: 16000,
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
-    output_config: { effort: "high", format: betaZodOutputFormat(ParsedBill) },
+    output_config: { effort: "medium", format: betaZodOutputFormat(ParsedBill) },
     messages: [{ role: "user", content: [media, { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }] }],
   });
   if (res.stop_reason === "refusal") throw new Error("The model declined to read this file.");
@@ -84,53 +84,81 @@ function fromActor(item: Record<string, unknown>, key: string, fallbackName: str
 
 type Known = (typeof KNOWN_HOSPITALS)[number];
 
-async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
-  const t = pick(lang);
-  await step(ctx, caseId, "hospital", t(`Pulling ${known.name}'s published prices and assistance policy`, `Buscando los precios publicados y la política de ayuda de ${known.name}`), "running");
+/** Run the Apify Actor live for a known hospital and merge with the hand-checked snapshot. */
+async function liveLookup(known: Known, codes: string[]): Promise<HospitalRef | null> {
   const token = process.env.APIFY_TOKEN;
   const actor = process.env.APIFY_ACTOR_ID;
-  // Live lookups only for hospitals whose site the Actor has been verified on.
-  if (token && actor && known.live) {
-    try {
-      // Apify REST API: run the Actor and get its dataset items in one call.
-      const res = await fetch(`https://api.apify.com/v2/acts/${actor}/run-sync-get-dataset-items?timeout=150`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ hospitalUrl: known.url, hospitalName: known.name, codes }),
-      });
-      if (!res.ok) throw new Error(`Apify ${res.status}: ${(await res.text()).slice(0, 150)}`);
-      const items = (await res.json()) as unknown[];
-      if (items[0]) {
-        const live = fromActor(items[0] as Record<string, unknown>, known.key, known.name);
-        // The Actor may miss the policy cutoff; keep the reviewed snapshot's policy facts in that case.
-        const snap = SNAPSHOTS[known.key] ?? null;
-        const snapFap = snap?.fap ?? null;
-        // Live rows can come from a different variant of a code (setting, modifier, per-unit vs per-line).
-        // Our snapshot rows were checked by hand, so for any code both have, the snapshot wins.
-        const prices = { ...(live.mrf?.prices ?? {}), ...(snap?.mrf?.prices ?? {}) };
-        const merged = { ...live, mrf: live.mrf ? { ...live.mrf, prices } : snap?.mrf ?? null };
-        const ref = merged.fap?.freeCareMaxFplPct != null || !snapFap ? merged : { ...merged, fap: snapFap };
-        await ctx.runMutation(internal.cases.saveHospital, { key: known.key, data: ref });
-        await step(ctx, caseId, "hospital", t(`Read ${known.name}'s price file and policy live`, `Leímos en vivo el archivo de precios y la política de ${known.name}`), "done", ref.mrf?.url ?? undefined);
-        return ref;
-      }
-    } catch (e) {
-      await step(ctx, caseId, "hospital-live", t("Live lookup failed, using saved data", "La búsqueda en vivo falló; usamos datos guardados"), "warn", String(e).slice(0, 200));
-    }
-  }
-  const cached = await ctx.runQuery(internal.cases.cachedHospital, { key: known.key });
-  const snap = (cached?.data as HospitalRef | undefined) ?? SNAPSHOTS[known.key] ?? null;
-  if (!snap) {
-    await step(ctx, caseId, "hospital", t(`No price data for ${known.name} yet`, `Todavía no hay datos de precios de ${known.name}`), "warn");
-    return null;
-  }
-  await step(ctx, caseId, "hospital",
-    t(`Using saved price data for ${known.name} (${snap.fetchedAt.slice(0, 10)})`, `Usamos datos de precios guardados de ${known.name} (${snap.fetchedAt.slice(0, 10)})`), "done",
-    cached
-      ? t("From an earlier live lookup of the hospital's price file, not fetched just now.", "De una búsqueda en vivo anterior del archivo de precios del hospital, no buscado ahora mismo.")
-      : t("Extracted earlier from the hospital's published price file and assistance policy by our data pipeline, not fetched just now.", "Extraído antes del archivo de precios y la política de ayuda publicados por el hospital, no buscado ahora mismo."));
-  return snap;
+  if (!token || !actor || !known.live) return null;
+  // Apify REST API: run the Actor and get its dataset items in one call.
+  const res = await fetch(`https://api.apify.com/v2/acts/${actor}/run-sync-get-dataset-items?timeout=150`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ hospitalUrl: known.url, hospitalName: known.name, codes }),
+  });
+  if (!res.ok) throw new Error(`Apify ${res.status}: ${(await res.text()).slice(0, 150)}`);
+  const items = (await res.json()) as unknown[];
+  if (!items[0]) return null;
+  const live = fromActor(items[0] as Record<string, unknown>, known.key, known.name);
+  const snap = SNAPSHOTS[known.key] ?? null;
+  const snapFap = snap?.fap ?? null;
+  // Live rows can come from a different variant of a code (setting, modifier, per-unit vs per-line).
+  // Our snapshot rows were checked by hand, so for any code both have, the snapshot wins.
+  const prices = { ...(live.mrf?.prices ?? {}), ...(snap?.mrf?.prices ?? {}) };
+  const merged = { ...live, mrf: live.mrf ? { ...live.mrf, prices } : snap?.mrf ?? null };
+  return merged.fap?.freeCareMaxFplPct != null || !snapFap ? merged : { ...merged, fap: snapFap };
 }
+
+/**
+ * Prices and policy for a known hospital. If we already hold checked data (a hand-checked
+ * snapshot or an earlier live lookup), use it right away and refresh live in the background,
+ * so the patient doesn't wait on a ~10 s crawl. Only with no saved data do we wait for the live run.
+ */
+async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
+  const t = pick(lang);
+  const cached = await ctx.runQuery(internal.cases.cachedHospital, { key: known.key });
+  const saved = (cached?.data as HospitalRef | undefined) ?? SNAPSHOTS[known.key] ?? null;
+  if (saved) {
+    if (known.live) await ctx.scheduler.runAfter(0, internal.agent.refreshHospital, { key: known.key, codes });
+    const live = saved.source === "apify-live";
+    await step(ctx, caseId, "hospital",
+      live
+        ? t(`Using ${known.name}'s price file and policy (live lookup ${saved.fetchedAt.slice(0, 10)})`, `Usamos el archivo de precios y la política de ${known.name} (búsqueda en vivo ${saved.fetchedAt.slice(0, 10)})`)
+        : t(`Using ${known.name}'s published prices and assistance policy`, `Usamos los precios publicados y la política de ayuda de ${known.name}`),
+      "done",
+      live
+        ? t("Read from the hospital's own files by our Apify Actor; a fresh check runs in the background.", "Leído de los archivos del propio hospital por nuestro Actor de Apify; se hace una nueva revisión en segundo plano.")
+        : t("Extracted from the hospital's published price file and assistance policy by our data pipeline; a live check runs in the background.", "Extraído del archivo de precios y la política publicados por el hospital; se hace una revisión en vivo en segundo plano."));
+    return saved;
+  }
+  await step(ctx, caseId, "hospital", t(`Pulling ${known.name}'s published prices and assistance policy`, `Buscando los precios publicados y la política de ayuda de ${known.name}`), "running");
+  try {
+    const ref = await liveLookup(known, codes);
+    if (ref) {
+      await ctx.runMutation(internal.cases.saveHospital, { key: known.key, data: ref });
+      await step(ctx, caseId, "hospital", t(`Read ${known.name}'s price file and policy live`, `Leímos en vivo el archivo de precios y la política de ${known.name}`), "done", ref.mrf?.url ?? undefined);
+      return ref;
+    }
+  } catch (e) {
+    await step(ctx, caseId, "hospital-live", t("Live lookup failed", "La búsqueda en vivo falló"), "warn", String(e).slice(0, 200));
+  }
+  await step(ctx, caseId, "hospital", t(`No price data for ${known.name} yet`, `Todavía no hay datos de precios de ${known.name}`), "warn");
+  return null;
+}
+
+/** Background refresh of a hospital's live data (never blocks a patient). */
+export const refreshHospital = internalAction({
+  args: { key: v.string(), codes: v.array(v.string()) },
+  handler: async (ctx, { key, codes }): Promise<void> => {
+    const known = KNOWN_HOSPITALS.find((k) => k.key === key);
+    if (!known) return;
+    try {
+      const ref = await liveLookup(known, codes);
+      if (ref) await ctx.runMutation(internal.cases.saveHospital, { key, data: ref });
+    } catch {
+      // Keep the saved data; the next bill tries again.
+    }
+  },
+});
 
 /** Patient-facing warnings: only codes on this bill that the price file lacks. Crawl notes stay internal. */
 function warningsForBill(ref: HospitalRef, bill: ParsedBill, lang: Lang): HospitalRef {
@@ -353,16 +381,25 @@ export const draftLetters = internalAction({
       try {
         const client = new Anthropic();
         const forModel = { ...facts, findings: facts.findingsEn ?? facts.findings, findingsEn: undefined, patientLanguage: lang };
-        const res = await client.beta.messages.parse({
-          model: MODEL,
-          max_tokens: 16000,
-          betas: ["server-side-fallback-2026-07-01"],
-          fallbacks: "default",
-          output_config: { effort: "medium", format: betaZodOutputFormat(Letters) },
-          messages: [{ role: "user", content: `${LETTER_PROMPT}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
-        });
-        if (res.stop_reason !== "refusal" && res.parsed_output) {
-          letters = res.parsed_output.letters.map((l) => ({
+        const kinds: ("assistance" | "dispute")[] = facts.findings.length ? ["assistance", "dispute"] : ["assistance"];
+        // One call per letter, in parallel: about half the wait of writing both in one reply.
+        const results = await Promise.all(
+          kinds.map((kind) =>
+            client.beta.messages.parse({
+              model: MODEL,
+              max_tokens: 8000,
+              betas: ["server-side-fallback-2026-07-01"],
+              fallbacks: "default",
+              output_config: { effort: "low", format: betaZodOutputFormat(Letters) },
+              messages: [{ role: "user", content: `${LETTER_PROMPT}\n\nWrite ONLY the "${kind}" letter (an array with exactly one letter).\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
+            }),
+          ),
+        );
+        const got = results.flatMap((res, i) =>
+          res.stop_reason !== "refusal" && res.parsed_output?.letters?.[0] ? [{ ...res.parsed_output.letters[0], kind: kinds[i] }] : [],
+        );
+        if (got.length === kinds.length) {
+          letters = got.map((l) => ({
             kind: l.kind,
             title: l.title,
             subject: l.subject,

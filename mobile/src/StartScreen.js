@@ -3,22 +3,44 @@ import { anyApi } from "convex/server";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import * as FileSystem from "expo-file-system/legacy";
+import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { C, Card, H1, H2, LinkText, P, Screen, s } from "./ui";
 
 const api = anyApi;
 export const SAMPLE_URL = "https://recount-nu.vercel.app/sample-bill.png";
 
-/** Upload a local or remote file to Convex storage; returns { storageId, type }. */
+/**
+ * Upload a local or remote file to Convex storage; returns { storageId, type }.
+ * On phones we use the native uploader: posting a fetch() Blob is unreliable in React Native
+ * (iOS often sends an empty or broken body). Photos are shrunk to ~1600 px wide first,
+ * which is plenty to read a bill and makes upload and reading much faster.
+ */
 async function uploadFile(generateUploadUrl, uri, type) {
-  const file = await fetch(uri);
-  const blob = await file.blob();
-  const contentType = type || blob.type || "image/jpeg";
-  const url = await generateUploadUrl();
-  const res = await fetch(url, { method: "POST", headers: { "Content-Type": contentType }, body: blob });
-  if (!res.ok) throw new Error("Upload failed");
-  const { storageId } = await res.json();
-  return { storageId, type: contentType };
+  let contentType = type || "image/jpeg";
+  if (Platform.OS === "web") {
+    const blob = await (await fetch(uri)).blob();
+    const res = await fetch(await generateUploadUrl(), { method: "POST", headers: { "Content-Type": contentType }, body: blob });
+    if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+    return { storageId: (await res.json()).storageId, type: contentType };
+  }
+  let local = uri;
+  if (/^https?:/i.test(uri)) {
+    const d = await FileSystem.downloadAsync(uri, `${FileSystem.cacheDirectory}upload-${Date.now()}`);
+    local = d.uri;
+  } else if (contentType.startsWith("image/")) {
+    const small = await manipulateAsync(uri, [{ resize: { width: 1600 } }], { compress: 0.75, format: SaveFormat.JPEG });
+    local = small.uri;
+    contentType = "image/jpeg";
+  }
+  const res = await FileSystem.uploadAsync(await generateUploadUrl(), local, {
+    httpMethod: "POST",
+    uploadType: FileSystem.FileSystemUploadType.BINARY_CONTENT,
+    headers: { "Content-Type": contentType },
+  });
+  if (res.status < 200 || res.status >= 300) throw new Error(`Upload failed (${res.status})`);
+  return { storageId: JSON.parse(res.body).storageId, type: contentType };
 }
 
 function imageType(asset) {
@@ -58,6 +80,7 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
       onStarted({ id, token });
     } catch (e) {
       setBusy(null);
+      console.warn("upload failed", e);
       setError(/too many/i.test(String(e)) ? t.busy : t.uploadFailed);
     }
   }
