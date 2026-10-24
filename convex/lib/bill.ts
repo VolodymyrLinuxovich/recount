@@ -20,6 +20,7 @@ export const ParsedBill = z.object({
   billingPhone: z.string().nullable(),
   accountNumber: z.string().nullable(),
   patientName: z.string().nullable(),
+  patientAddress: z.string().nullable().describe("Patient or guarantor mailing address as printed, else null"),
   statementDate: z.string().nullable().describe("YYYY-MM-DD"),
   serviceDate: z.string().nullable().describe("First date of service, YYYY-MM-DD"),
   insurancePayer: z.string().nullable().describe("Insurance named on the bill, or null if self-pay/none"),

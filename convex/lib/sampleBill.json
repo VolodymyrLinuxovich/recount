@@ -81,5 +81,6 @@
   }
  ],
  "unreadable": [],
- "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110"
+ "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+ "patientAddress": null
 }

@@ -40,6 +40,14 @@ export default defineSchema({
     detail: v.optional(v.string()),
     state: v.union(v.literal("running"), v.literal("done"), v.literal("warn"), v.literal("error")),
   }).index("by_case", ["caseId", "at"]),
+  chatMessages: defineTable({
+    sessionId: v.string(),
+    caseId: v.optional(v.id("cases")),
+    role: v.union(v.literal("user"), v.literal("assistant")),
+    content: v.string(),
+    at: v.number(),
+    pending: v.boolean(),
+  }).index("by_session", ["sessionId", "at"]),
   limits: defineTable({
     key: v.string(),
     windowStart: v.number(),

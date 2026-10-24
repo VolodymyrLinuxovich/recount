@@ -10,6 +10,8 @@
 
 import type * as agent from "../agent.js";
 import type * as cases from "../cases.js";
+import type * as chat from "../chat.js";
+import type * as chatAgent from "../chatAgent.js";
 import type * as lib_bill from "../lib/bill.js";
 import type * as lib_checks from "../lib/checks.js";
 import type * as lib_eligibility from "../lib/eligibility.js";
@@ -29,6 +31,8 @@ import type {
 declare const fullApi: ApiFromModules<{
   agent: typeof agent;
   cases: typeof cases;
+  chat: typeof chat;
+  chatAgent: typeof chatAgent;
   "lib/bill": typeof lib_bill;
   "lib/checks": typeof lib_checks;
   "lib/eligibility": typeof lib_eligibility;
