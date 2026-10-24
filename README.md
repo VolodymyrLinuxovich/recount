@@ -252,8 +252,8 @@ is **"You likely owe $0"**, with both rules shown.
 - **Any California hospital.** Hospital matching, eligibility, letters and the policy warning work for all 470.
   Free-care cutoffs come from each hospital's own policy for **159 of 470**, kept only where the quoted sentence ties the
   number to free care. Every other hospital gets the state's 400% discount rule, never a guessed "free".
-  Line-by-line price checks are live for four San Francisco hospitals (ZSFG, UCSF, CPMC Van Ness, Saint Francis), and
-  the app says so for every other hospital. The Actor reads any US hospital's price file, so adding a hospital means
+  Line-by-line price checks work for **240 of 470** hospitals: four SF hospitals from hand-checked snapshots, plus 236 whose
+  price files our Apify Actor read in one statewide run (about $5 of Apify usage). The app says so for every other hospital. The Actor reads any US hospital's price file, so adding a hospital means
   verifying its file, not writing code.
 - **Cost.** One bill read is about **$0.04** of Claude (2,449 input and 1,422 output tokens). With letters, a bill costs on
   the order of 10 cents.
@@ -323,8 +323,8 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 
 ## Limits
 
-- **Price checks for four San Francisco hospitals.** Other California hospitals get eligibility, the policy warning and
-  letters, but no line-by-line price check.
+- **Price checks for 240 of 470 hospitals.** The others get eligibility, the policy warning and letters, but no
+  line-by-line price check. Batch prices are as of the run date and are not refreshed live yet.
 - **ER codes only.** Saved price data covers 17 to 23 common ER codes per hospital.
 - **Hospital bills only.** ER physician bills are separate and follow different rules (HSC 127450 and after).
 - **No payment cap amount.** The law caps discounted bills at what Medicare or Medi-Cal would pay. Price files don't

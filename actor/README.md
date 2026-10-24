@@ -43,17 +43,36 @@ It was built for **Recount** at Cal Hacks 13.0. Recount is an app for uninsured 
 
 | Field | Type | Description |
 |---|---|---|
-| `hospitalUrl` | string, required | The hospital's homepage or any page on its site, e.g. `https://zuckerbergsanfranciscogeneral.org` |
+| `hospitalUrl` | string, required unless `hospitals` is set | The hospital's homepage or any page on its site, e.g. `https://zuckerbergsanfranciscogeneral.org` |
 | `hospitalName` | string | Optional. Helps when a health system publishes several hospitals (e.g. `"California Pacific Medical Center Van Ness Campus"`). |
 | `codes` | string[] | CPT / HCPCS codes to price (MS-DRG and NDC codes also work), e.g. `["99284","80053","85025"]` |
 | `maxMrfMB` | integer | Stop streaming the price file after this many MB (default 300). |
 | `maxCrawlPages` | integer | Page budget for the site crawl (default 30). |
 | `useHcaiRegistry` | boolean | Look the hospital up in California's HCAI policy registry (default `true`). |
+| `mrfUrl` | string | Optional. The price file's URL, if you already know it. The Actor streams it directly and skips the search. |
+| `hospitals` | object[] | Batch mode: many hospitals in one run (see below). |
+| `maxConcurrency` | integer | Batch mode: hospitals checked in parallel (default 4). |
 
 ```json
 {
   "hospitalUrl": "https://zuckerbergsanfranciscogeneral.org",
   "codes": ["99284", "80053"]
+}
+```
+
+### Batch mode
+
+Pass a list of hospitals to check many in one run. Top-level `codes` and limits apply to every entry unless the entry sets its own. `key` is your own ID and is copied to the output. You get one dataset item per hospital. A site that fails gets an item with an `error` field, and the run keeps going.
+
+```json
+{
+  "codes": ["99284", "80053", "85025"],
+  "maxConcurrency": 4,
+  "hospitals": [
+    { "hospitalUrl": "https://zuckerbergsanfranciscogeneral.org", "key": "zsfg" },
+    { "hospitalUrl": "https://healthy.kaiserpermanente.org", "hospitalName": "Kaiser Foundation Hospital - Walnut Creek",
+      "mrfUrl": "https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/coverage-information/machine-readable/941105628-walnut-creek-medical-center-standard-charges-ncal-en.csv" }
+  ]
 }
 ```
 
@@ -153,9 +172,20 @@ To combine the thresholds with household size, use the HHS poverty guidelines fo
 | CPMC Van Ness (Sutter) | 16.9 MB CSV (tall, v3) | 3/3 | 400% FPL | not stated | ~8 s |
 | Chinese Hospital SF | vendor page loads the file with JavaScript: not found | 0/3 | 200% FPL | 400% FPL | ~6 s |
 
+## Statewide run: every California hospital (October 2026)
+
+We ran the Actor on all 470 hospitals in California's HCAI registry, with 20 common ER codes, to give Recount price checks beyond San Francisco.
+
+- Hospital websites came from Apify's Google Search Scraper (one query per hospital, about $2).
+- Each hospital was one Actor run. Hospitals where the price page loads its links with JavaScript were run again in batch mode with a known `mrfUrl`: all 35 Kaiser hospitals in one run for $0.08.
+- **236 hospitals** ended with usable ER prices, a price file that names the hospital and at least one of the 20 codes. Most of the rest are psychiatric, rehab or long-term care hospitals with no ER codes, or sites whose file link is loaded with JavaScript.
+- Checked against 75 prices we had verified by hand, the batch matched 73 exactly; the other 2 used a higher row of the same code.
+- Total Apify usage for the whole state: about $5.
+
 ## Limitations
 
-- **Price files linked only through JavaScript** are not downloaded. Some vendors (e.g. apps.para-hcfs.com) load the file through a script on the page. The Actor reports the vendor page in `warnings` and `sourceUrls` instead.
+- **Price files linked only through JavaScript** are not downloaded. The Actor reports the page in `warnings` and `sourceUrls` instead. If you know the file's URL, pass it as `mrfUrl`. Vendor download links that name the format in the query (for example `apps.para-hcfs.com/...Reports.aspx?...&fileType=CSV`, used by Adventist Health) are found and streamed.
+- Pages are read at most 5 MB each during the crawl, and a link that turns out to be a large file is never loaded into memory.
 - ZIP-compressed price files and the pre-2024 v1 JSON layout are not supported. Gzip is supported.
 - The FPL extraction is rule-based and conservative. Unusual wording or scanned (image-only) PDFs can leave a threshold `null`, and that gap is always reported in `warnings`. Always show the user the quote, not just the number.
 - The HCAI registry only covers California. For other states, the policy must be linked from the hospital's own site.

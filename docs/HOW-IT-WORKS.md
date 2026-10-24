@@ -162,7 +162,7 @@ Frontend: `src/components/audit/AuditApp.tsx` (search, sorting and list), `CaMap
 
 ## Limits we know about
 Open issues are on GitHub (see [LOGBOOK.md](LOGBOOK.md#open-issues)).
-- Price checks cover four San Francisco hospitals. The other 466 get eligibility, letters and the audit, but no price check, and the app says so.
+- Price checks cover 240 of 470 California hospitals: 4 SF hospitals from hand-checked snapshots, and 236 from a statewide run of our Apify Actor (`convex/lib/statewidePrices.json`, built by `pipeline/build_statewide_prices.py`). A batch price is kept only when the price file names that hospital, and each code uses the highest outpatient list price in the file, so a charge is flagged only when it is above every matching row. Checked against our hand-checked snapshots, 73 of 75 prices matched exactly and the other 2 were higher (never lower). The rest get eligibility, letters and the audit, but no price check, and the app says so.
 - The discount answer gives no dollar estimate. The legal cap is tied to Medicare or Medi-Cal rates, and price files don't publish Medicare fee-for-service rates.
 - No accounts. "My bills" and the saved profile live on one phone (#9). Anyone holding a case link with its token can open that case. That is how a patient shares a bill on purpose.
 - The language is fixed when the case is created. Switching later changes the screens but not text the backend already wrote.
