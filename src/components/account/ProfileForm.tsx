@@ -30,7 +30,7 @@ const BAD: Partial<Record<Field, PlainKey>> = {
 };
 
 /** "Your details for letters": the same fields as the letter form, all optional here. */
-export function ProfileForm() {
+export function ProfileForm({ onDone, onCancel }: { onDone?: () => void; onCancel?: () => void } = {}) {
   const { t } = useT();
   const profile = useQuery(api.profile.get);
   const save = useMutation(api.profile.set);
@@ -64,6 +64,7 @@ export function ProfileForm() {
     try {
       await save(toServer(d));
       setState("saved");
+      onDone?.();
     } catch (err) {
       setError(saveError(t, err));
       setState("idle");
@@ -123,6 +124,11 @@ export function ProfileForm() {
       <button type="submit" className="rc-btn rc-btn--block acct-submit" disabled={state === "saving"}>
         {state === "saving" ? t("acct.saving") : t("acct.saveDetails")}
       </button>
+      {onCancel && (
+        <button type="button" className="rc-btn rc-btn--secondary rc-btn--block" onClick={onCancel} disabled={state === "saving"}>
+          {t("acct.cancelEdit")}
+        </button>
+      )}
       <p className="acct-quiet" role="status">
         {state === "saved" ? `✓ ${t("acct.saved")}` : t("acct.detailsNote")}
       </p>
