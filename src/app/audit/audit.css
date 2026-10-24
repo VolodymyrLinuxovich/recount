@@ -563,3 +563,8 @@
 .method {
   font-size: 18px;
 }
+
+.audit-headline {
+  font-size: clamp(30px, 7.4vw, 44px);
+  line-height: 1.15;
+}
