@@ -1,0 +1,534 @@
+{
+ "alameda-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full Charity Care Patient is an Uninsured Patient with a Family Income at or below 400% of the most recent FPL Full write-off of all charges for Medically Necessary Care",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "A patient who is a Self-Pay Patient or is a High Medical Cost Patient, and who has a Family Income that does not exceed 400 percent of the federal poverty level."
+ },
+ "clovis-community-medical-center": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Who are Uninsured, as defined above; and Who have a family income at or below 400% of the most recent Federal Poverty Level (FPL); or 2.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Patient has a family income between 401% and 450% of the most recent FPL."
+ },
+ "community-memorial-hospital-ojai": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "2026 SCHEDULE 1 200% of Poverty Guidelines Equals Charity Write Off No Patient Responsibility",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "2026 SCHEDULE 3 301%-700% and above Poverty Guidelines Equals a 40% of Charges or Medicare DRG whichever is less"
+ },
+ "community-memorial-hospital-san-buenaventura": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "2026 SCHEDULE 1 200% of Poverty Guidelines Equals Charity Write Off No Patient Responsibility",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "2026 SCHEDULE 3 301%-700% and above Poverty Guidelines Equals a 40% of Charges or Medicare DRG whichever is less"
+ },
+ "community-regional-medical-center-fresno": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Who are Uninsured, as defined above; and Who have a family income at or below 400% of the most recent Federal Poverty Level (FPL); or 2.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Patient has a family income between 401% and 450% of the most recent FPL."
+ },
+ "doctors-hospital-of-riverside": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "If the patient\u2019s household income is 250% or less of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance Program qualification requirements, the entire (100%) patient portion of the bill for services will be written off as charity care.",
+  "discountMaxFplPct": 350,
+  "discountNoCap": false,
+  "discountQuote": "If the patient\u2019s household income is between 251% and 350% of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance Program qualification requirements, the following will apply:"
+ },
+ "eisenhower-medical-center": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Any patient whose income is at or below 400% of the established poverty income level and experiences a catastrophic medical event may be deemed eligible for financial assistance."
+ },
+ "fairmont-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full Charity Care Patient is an Uninsured Patient with a Family Income at or below 400% of the most recent FPL Full write-off of all charges for Medically Necessary Care",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "High Medical Cost Charity Care (for Insured Patients) Patient is an Insured Patient with a Family Income at or below 400% of the most recent FPL and is a High Medical Cost Patient"
+ },
+ "foothill-regional-medical-center": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "fresno-heart-and-surgical-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Who are Uninsured, as defined above; and Who have a family income at or below 400% of the most recent Federal Poverty Level (FPL); or 2.",
+  "discountMaxFplPct": 450,
+  "discountNoCap": false,
+  "discountQuote": "Who have a family income between 401-450% of the FPL; and 2."
+ },
+ "george-l-mee-memorial-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "\u2022 Household income less than or equal to 200% of the FPL -- 100% assistance",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Household income greater than 300-400% of the FPL -- 35% assistance towards AGB (Discount)"
+ },
+ "henry-mayo-newhall-hospital": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "200% or less of the Federal Poverty Level Zero (Charity Care)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "301% - 400% of the Federal Poverty Level 50% of the AGB, less insurance/third party payment (if any) (Discount Payment)"
+ },
+ "henry-mayo-newhall-memorial-hospital-d-p-aph": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "200% or less of the Federal Poverty Level Zero (Charity Care)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "301% - 400% of the Federal Poverty Level 50% of the AGB, less insurance/third party payment (if any) (Discount Payment)"
+ },
+ "highland-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full Charity Care Patient is an Uninsured Patient with a Family Income at or below 400% of the most recent FPL Full write-off of all charges for Medically Necessary Care",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "john-george-psychiatric-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Patient is an Uninsured Patient with a Family Income at or below 400% of the most recent FPL Full write-off of all charges for Medically Necessary Care",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "kaiser-foundation-hospital-antioch": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-baldwin-park": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-downey": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-fontana": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-fremont": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-fresno": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-los-angeles": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-manteca": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-mental-health-center-d-p-aph": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-modesto": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-moreno-valley": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-oakland-richmond": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-ontario": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-orange-county-anaheim": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-orange-county-irvine": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-panorama-city": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-redwood-city": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-richmond-campus": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-riverside": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-roseville": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-sacramento": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-diego-clairemont-mesa": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-diego-zion": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-francisco": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-jose": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-leandro": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-marcos": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-san-rafael": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-santa-clara": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-santa-rosa": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-south-bay": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-south-sacramento": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-south-san-francisco": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-vacaville": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-walnut-creek": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-west-la": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-woodland-hills": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kaiser-foundation-hospital-rehab-center-vallejo": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Federal Poverty Level Guidelines Financial Assistance Discount From To 0% - 200% 100% Discount (Full) 201% - 400% 50% Discount (Partial)"
+ },
+ "kedren-community-mental-health-center": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "The KAPH&CMHC has established a sliding fee schedule for all eligible patients whose annual individual or family incomes do not exceed 400% of the most current Federal Poverty Guidelines."
+ },
+ "l-a-downtown-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care is available to patients who received Covered Services, are Uninsured Patients, and have Family Income at or below 200% of the most recent Federal Poverty Guidelines.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Hospital may also extend Discount Payment Assistance to otherwise eligible patients whose Family Income is above 400% and at or below 500% of the most recent Federal Poverty Guidelines, in accordance with Hospital's written discount schedule or calculation worksheet."
+ },
+ "l-a-downtown-medical-center-ingleside-campus-d-p-aph": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care is available to patients who received Covered Services, are Uninsured Patients, and have Family Income at or below 200% of the most recent Federal Poverty Guidelines.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Hospital may also extend Discount Payment Assistance to otherwise eligible patients whose Family Income is above 400% and at or below 500% of the most recent Federal Poverty Guidelines, in accordance with Hospital's written discount schedule or calculation worksheet."
+ },
+ "lac-harbor-ucla-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "\u2022 If the household income is at or below 200% FPL, then the liability amount is $0 for inpatient/outpatient services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "\u2022 Charity care is available for persons with income up to 200% of FPL; however, ATP has no upper income cap for eligibility for discounted care, but liability increases on a sliding scale above 200% FPL."
+ },
+ "lac-rancho-los-amigos-national-rehab-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "\u2022 If the household income is at or below 200% FPL, then the liability amount is $0 for inpatient/outpatient services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "\u2022 Charity care is available for persons with income up to 200% of FPL; however, ATP has no upper income cap for eligibility for discounted care, but liability increases on a sliding scale above 200% FPL."
+ },
+ "los-angeles-county-olive-view-ucla-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "\u2022 If the household income is at or below 200% FPL, then the liability amount is $0 for inpatient/outpatient services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "\u2022 Charity care is available for persons with income up to 200% of FPL; however, ATP has no upper income cap for eligibility for discounted care, but liability increases on a sliding scale above 200% FPL."
+ },
+ "los-angeles-general-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "\u2022 If the household income is at or below 200% FPL, then the liability amount is $0 for inpatient/outpatient services.",
+  "discountMaxFplPct": null,
+  "discountNoCap": true,
+  "discountQuote": "\u2022 Charity care is available for persons with income up to 200% of FPL; however, ATP has no upper income cap for eligibility for discounted care, but liability increases on a sliding scale above 200% FPL."
+ },
+ "modoc-medical-center": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "\u2022 Patients below 100% of the federal poverty level pay nothing.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "\u2022 Patients between 301% and 400% of the federal poverty level receive a 20% discount on their bill."
+ },
+ "motion-picture-and-television-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Uninsured patients \u2013 Patients with no third-party health coverage, whose family income within the prior 12 months is at or below 400% of the Federal Poverty Guidelines, are eligible for charity care (free care).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "northern-inyo-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "100 % Atenci\u00f3n ben\u00e9fica completa",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "55 De scuento Tama\u00f1o de la familia (h ogar) Anual 100 % del FPL 200 % del FPL an ual 250 % del FPL an ual 300 % del FPL an ual 350 % del FPL an ual 400 % del FPL an ual"
+ },
+ "pacific-grove-hospital": {
+  "freeCareMaxFplPct": 133,
+  "freeQuote": "Equal to or less than 133% of FPG 100%",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "201% - 400% of FPG 25% Greater than 400% of FPG 0%"
+ },
+ "salinas-valley-health-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "If the patient\u2019s adjusted gross family income is 200% or less of the established poverty income level, based upon current FPL Guidelines, and the patient meets all other Financial Assistance Program qualification requirements, the entire (100%) patient liability portion of the bill for services will be written off.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "If the patient\u2019s adjusted gross family income is between 201% and 400% of the established poverty income level, based upon current FPL Guidelines, the following will apply: a."
+ },
+ "san-leandro-hospital": {
+  "freeCareMaxFplPct": 400,
+  "freeQuote": "Full Charity Care Patient is an Uninsured Patient with a Family Income at or below 400% of the most recent FPL Full write-off of all charges for Medically Necessary Care",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "san-mateo-medical-center": {
+  "freeCareMaxFplPct": 138,
+  "freeQuote": "How to Qualify Patients are eligible for the Charity Care Program if their current household income is not more than 138% of the Federal Poverty Level.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Have a current household income at or below 400% of the Federal Poverty Level AND 2."
+ },
+ "scripps-green-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Uninsured and underinsured patients whose family income is 250 percent or less than the FPL are eligible for full or partial forgiveness of the patient's financial responsibility for covered services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Patients whose family income is between 251 percent and 400 percent of the FPL may be eligible for discounted care and may receive a reduction in their financial responsibility ."
+ },
+ "scripps-memorial-hospital-encinitas": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Uninsured and underinsured patients whose family income is 250 percent or less than the FPL are eligible for full or partial forgiveness of the patient's financial responsibility for covered services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Patients whose family income is between 251 percent and 400 percent of the FPL may be eligible for discounted care and may receive a reduction in their financial responsibility ."
+ },
+ "scripps-memorial-hospital-la-jolla": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Uninsured and underinsured patients whose family income is 250 percent or less than the FPL are eligible for full or partial forgiveness of the patient's financial responsibility for covered services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Patients whose family income is between 251 percent and 400 percent of the FPL may be eligible for discounted care and may receive a reduction in their financial responsibility ."
+ },
+ "scripps-mercy-hospital": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Uninsured and underinsured patients whose family income is 250 percent or less than the FPL are eligible for full or partial forgiveness of the patient's financial responsibility for covered services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Patients whose family income is between 251 percent and 400 percent of the FPL may be eligible for discounted care and may receive a reduction in their financial responsibility ."
+ },
+ "scripps-mercy-hospital-chula-vista": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Uninsured and underinsured patients whose family income is 250 percent or less than the FPL are eligible for full or partial forgiveness of the patient's financial responsibility for covered services.",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Discounted Care Patients whose family income is between 251 percent and 400 percent of the FPL may be eligible for discounted care and may receive a reduction in their financial responsibility ."
+ },
+ "sierra-vista-hospital-inc": {
+  "freeCareMaxFplPct": null,
+  "freeQuote": null,
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Greater than 400% 0% Less than 400% and line 8 is greater than or equal to 10% Total payment received from insurance plus patient will not exceed 100% of the higher of Medicare or Medi-Cal payment"
+ },
+ "southern-california-hospital-at-hollywood": {
+  "freeCareMaxFplPct": 250,
+  "freeQuote": "Charity Care Patient Patients may be eligible for Charity Care if their household income is no more than 250% of the Federal Poverty Level based on family size (FPL).",
+  "discountMaxFplPct": null,
+  "discountNoCap": false,
+  "discountQuote": null
+ },
+ "stanislaus-surgical-hospital": {
+  "freeCareMaxFplPct": 100,
+  "freeQuote": "0-100% 100% 0%",
+  "discountMaxFplPct": 400,
+  "discountNoCap": false,
+  "discountQuote": "Your family income is not more than 400 percent of the federal poverty level."
+ },
+ "west-covina-medical-center": {
+  "freeCareMaxFplPct": 200,
+  "freeQuote": "Charity Care, meaning free care, may be available to eligible Uninsured Patients who receive Covered Services and whose Family Income is at or below 200% of the most recent Federal Poverty Guidelines.",
+  "discountMaxFplPct": 500,
+  "discountNoCap": false,
+  "discountQuote": "Hospital may also extend Discount Payment Assistance to otherwise eligible patients whose Family Income is above 400% and at or below 500% of the most recent Federal Poverty Guidelines, in accordance with Hospital's written discount schedule or calculation worksheet."
+ }
+}
