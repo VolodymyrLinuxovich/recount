@@ -34,7 +34,9 @@ for you.**
 |------|------------------|
 | [Start](https://recount-nu.vercel.app) | Take a photo of your bill, or try the sample bill. English and Spanish |
 | [Your bill](https://recount-nu.vercel.app) | One step per screen: what we found, three questions, your answer, your letters, how to send them |
-| [My bills](https://recount-nu.vercel.app/bills) | Every bill you checked, saved on this phone. No account |
+| [My bills](https://recount-nu.vercel.app/bills) | Every bill you checked, saved on this phone. No account needed |
+| [Account](https://recount-nu.vercel.app/account) | Optional email and password, to open your bills on any device. You can delete it all |
+| [Privacy](https://recount-nu.vercel.app/privacy) | What Recount keeps, and how to delete it |
 | [Hospital policy audit](https://recount-nu.vercel.app/audit) | All 470 California hospitals on a map: whose own policy conflicts with state law, with the quote |
 | [Apify Actor](https://apify.com/enterprising_arboretum_iq2/hospital-price-and-charity-finder) | Hospital Price & Charity Care Finder, public on the Apify Store |
 | [Android app](https://expo.dev/artifacts/eas/Wcsx-6EwcgMjTyNtfPZ0E4dWNB_XredZx_Wvxz_WQvE.apk) | The same flow as a native app (Expo), on the same backend |
@@ -255,8 +257,10 @@ is **"You likely owe $0"**, with both rules shown.
   verifying its file, not writing code.
 - **Cost.** One bill read is about **$0.04** of Claude (2,449 input and 1,422 output tokens). With letters, a bill costs on
   the order of 10 cents.
-- **Privacy without accounts.** Each bill opens only with a random secret kept on the patient's phone, in the link
-  fragment, which never reaches a server. Patients can delete a bill and its photo. Uploads are rate-limited.
+- **Privacy, with optional accounts.** Without an account, each bill opens only with a random secret kept on the patient's phone, in the link
+  fragment, which never reaches a server. With an account, you can also open your own bills by signing in on any
+  device. Passwords are stored hashed, and the account can be deleted along with its bills. Patients can delete a bill
+  and its photo. Uploads are rate-limited.
 - **Honest fallbacks.** If the live lookup or the model fails, the app uses saved data or standard letters and labels
   which one you got.
 
@@ -327,6 +331,7 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
   publish those rates, so Recount explains the cap but doesn't compute it.
 - **Audit gaps.** 7 hospitals have only scanned PDFs. "Worth asking" flags got one review, not two. Some policies on file
   are from 2022, and the audit judges the latest one HCAI holds.
-- **No accounts.** My bills lives on one phone. Anyone with a bill's private link can open it.
+- **Accounts are optional and basic.** Without one, My bills lives on one phone and anyone with a bill's private link can
+  open it. Accounts use email and password only: no email check and no password reset.
 - **Not legal or medical advice.** Recount checks a bill against public rules and prices. The hospital makes the final
   decision.
