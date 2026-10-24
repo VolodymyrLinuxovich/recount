@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Fraunces } from "next/font/google";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { Footer } from "@/components/Footer";
 import { HelperChat } from "@/components/helper/HelperChat";
@@ -8,9 +8,10 @@ import { Masthead } from "@/components/Masthead";
 import { VISION_SCRIPT } from "@/components/a11y/vision";
 import "./globals.css";
 
+// Fraunces only for the h1 and the wordmark (32px and up); everything else, numbers included,
+// is Atkinson Hyperlegible Next (DESIGN-RESEARCH B1).
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"], axes: ["SOFT", "opsz"] });
-const body = Source_Serif_4({ variable: "--font-body", subsets: ["latin"] });
-const mono = IBM_Plex_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "500"] });
+const body = Atkinson_Hyperlegible_Next({ variable: "--font-body", subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
   title: "Recount",
@@ -29,7 +30,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
         {/* Display settings (text size, contrast) before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: VISION_SCRIPT }} />

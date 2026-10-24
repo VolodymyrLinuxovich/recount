@@ -9,7 +9,7 @@
 }
 
 .step-top {
-  margin: 0 0 22px;
+  margin: 0 0 var(--sp-5);
 }
 
 /* ---------- progress: four segments that fill in ---------- */
@@ -17,7 +17,7 @@
 .step-progress {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  gap: var(--sp-2);
 }
 
 .step-progress .seg {
@@ -51,8 +51,8 @@
 }
 
 .step-progress-text {
-  margin: 8px 0 0;
-  font-size: 16px;
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
   font-weight: 600;
 }
@@ -60,10 +60,10 @@
 .step-title {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 500;
-  font-size: clamp(30px, 8vw, 40px);
-  line-height: 1.15;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
   letter-spacing: -0.01em;
-  margin: 0 0 16px;
+  margin: 0 0 var(--sp-4);
 }
 
 /* Focus lands on the title after a step change so screen readers announce it; it isn't a control, so no ring. */
@@ -73,7 +73,7 @@
 }
 
 .step-body > p {
-  font-size: 19px;
+  font-size: var(--fs-base);
 }
 
 /* ---------- the pinned bar: Back left (1 part), main button right (2 parts) ---------- */
@@ -96,13 +96,13 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--sp-3);
 }
 
 .step-bar-row {
   display: flex;
   align-items: stretch;
-  gap: 12px;
+  gap: var(--sp-3);
 }
 
 .step-bar-above {
@@ -113,13 +113,13 @@
   min-height: var(--bar-btn-h, 56px);
   width: auto;
   margin: 0;
-  padding: 8px 14px;
+  padding: var(--sp-2) var(--sp-4);
   border-radius: 12px;
-  font-size: 19px;
+  font-size: var(--fs-base);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--lh-tight);
   text-align: center;
-  gap: 8px;
+  gap: var(--sp-2);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   transition:
@@ -197,8 +197,8 @@
 
 .step-hint {
   margin: 0;
-  font-size: 17px;
-  line-height: 1.35;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
   color: var(--ink);
   font-weight: 600;
   text-align: center;
@@ -262,7 +262,7 @@ html:is([data-text="large"], [data-contrast]) .step-bar .bar-back {
 .step-bar-row:not(:has(.bar-btn)) {
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
+  margin-top: var(--sp-2);
 }
 
 .step-back {
@@ -271,7 +271,7 @@ html:is([data-text="large"], [data-contrast]) .step-bar .bar-back {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  font-size: 18px;
+  font-size: var(--fs-base);
   color: var(--ink-2);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -289,45 +289,45 @@ body:has(.step-screen) .footnote {
 
 /* Questions, one per screen: big controls */
 .stepper-big {
-  margin-top: 18px;
+  margin-top: var(--sp-4);
 }
 
 .stepper-big button {
   width: 76px;
   height: 72px;
-  font-size: 34px;
+  font-size: var(--fs-2xl);
 }
 
 .stepper-big output {
   min-width: 150px;
-  font-size: 26px;
+  font-size: var(--fs-lg);
   line-height: 72px;
 }
 
 .money-input-big {
   max-width: none;
-  margin-top: 18px;
+  margin-top: var(--sp-4);
 }
 
 .money-input-big,
 .money-input-big input {
-  font-size: 34px;
+  font-size: var(--fs-2xl);
 }
 
 .choice-big {
-  margin-top: 18px;
+  margin-top: var(--sp-4);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: var(--sp-3);
 }
 
 .choice-big button {
   min-height: 72px;
-  font-size: 22px;
+  font-size: var(--fs-md);
 }
 
 .step-body .q-sub {
-  margin: 26px 0 0;
+  margin: var(--sp-5) 0 0;
 }
 
 .bill-thumb {
@@ -338,12 +338,12 @@ body:has(.step-screen) .footnote {
   object-position: top;
   border-radius: 10px;
   border: 1px solid var(--rule);
-  margin: 16px 0;
+  margin: var(--sp-4) 0;
 }
 
 .small-print {
-  margin-top: 28px;
-  font-size: 15px;
+  margin-top: var(--sp-6);
+  font-size: var(--fs-sm);
 }
 
 /* Clean look: no receipt zigzag, no indented hints */

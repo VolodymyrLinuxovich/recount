@@ -94,3 +94,40 @@ All 12 hospitals now at 400% were also checked. The 6 on the HCA template (Good 
 4. PIH Downey, Good Samaritan and Whittier LIENS: replace the quote with the sentence about income at or below 400% FPL.
 5. MarinHealth CREDIT_REPORTING: mention the contradicting p4 ban in the explanation.
 6. Optional: fill in null `discountMaxFplPct` for Mammoth (450) and College Medical Center South Campus (400). Consider adding INCOME_PROOF findings for Contra Costa and Hollywood Presbyterian.
+
+---
+
+## Round 2: after the fixes
+
+Checked 2026-10-24 against `findings.json` generated 12:48 UTC (main db1069b + 7a92cb0). The file now has 21 conflict, 57 likely and 286 ask findings, counted per finding.
+
+**All round 1 fixes are in the data.** I confirmed these: Palomar Escondido and Poway at 250/400, Mammoth discount 450, College South discount 400, PIH ×3 lien quote replaced with the ≤400% FPL sentence, LIENS rule text limited to eligible patients, Adventist and CommonSpirit false positives gone, MarinHealth and Contra Costa credit reporting set to likely, and Contra Costa INCOME_PROOF added.
+
+**New "likely" set: 20/20 fair, and all 20 quotes are on the cited page (100%).** The sample is every LIENS, INCOME_PROOF and MEDICAL_FIRST likely finding (7), plus 13 random from the rest (`random.seed(1024)`). Each document was also searched for an overriding clause, such as a flat ban elsewhere, a California addendum, or "apply any time". None was found.
+
+| Hospital | Rule | Quote found? | Fair? | Note |
+|---|---|---|---|---|
+| Alvarado Parkway Institute | INCOME_PROOF | yes, p2 | yes | "PLEASE INCLUDE BANK STATEMENT AND LAST YEAR'S TAX RETURN" |
+| Casa Colina | LIENS | yes, p8 | yes, reword | Liens are allowed "if court ordered". The (h)(2)(C) lien ban has no court-order exception. The explanation still says the law bans liens for everyone; add "for patients who qualify for charity or discount care". |
+| Contra Costa Regional | LIENS | yes, p5 | borderline, reword | Applies only to deceased patients with no probate and no spouse ("If allowed by client"). p1 says deceased accounts go to bad debt "so a lien can be placed". `ask` may fit better. The explanation also needs the eligible-patient limit. |
+| Contra Costa Regional | INCOME_PROOF | yes, p2 | yes | |
+| John C Fremont | INCOME_PROOF | yes, p1 | yes | "Copy of latest bank statement" is listed as required |
+| UCI Health Orange | MEDICAL_FIRST | yes, p1 | yes | "All patients must apply for Medi-Cal before charity care funds are considered." This could be `conflict`. |
+| UCI Health Orange | INCOME_PROOF | yes, p2 | yes | Also asks for "Last two months of complete bank statements" (p1) |
+| BHC Alhambra | ASSETS | yes, p4 | yes | Form lists checking, savings and stocks |
+| Mayers Memorial | DEADLINE | yes, p5 | borderline | A 30-day return instruction on the application letter, with no denial stated. The explanation already says so. |
+| Kindred Paramount | CREDIT_REPORTING | yes, p2 | yes | Also: "any information previously sent to a consumer reporting agency must be corrected", which confirms they report |
+| Kindred San Gabriel Valley | CREDIT_REPORTING | yes, p2 | yes | Same Kindred template |
+| Kindred Brea | CREDIT_REPORTING | yes, p2 | yes | Same Kindred template |
+| Palomar UCSD Escondido | CREDIT_REPORTING | yes, p12 | yes | Bars reporting only before 180 days |
+| Contra Costa Regional | CREDIT_REPORTING | yes, p4 | yes | |
+| Lompoc Valley | CREDIT_REPORTING | yes, p19 | yes | Bars reporting only before 150 days |
+| Palo Verde | CREDIT_REPORTING | yes, p8 | yes | Reporting allowed once a payment plan is declared inoperative |
+| St. Agnes (Trinity) | CREDIT_REPORTING | yes, p5 | yes | "unless the individual can Pay … will not … report the individual to a credit bureau" |
+| UCSF Mission Bay | DEADLINE | yes, p4 | yes | 240 days, extended only "for good cause" (p5). Note that p10 does bar its collection agencies from reporting "at any time". |
+| UCSF St. Mary's | DEADLINE | yes, p4 | yes | Same UCSF document |
+| East LA Doctors | DEADLINE | yes, p1 | yes | Documents "must be received within 60 days of the initial patient billing" |
+
+### Round 2 fix list (wording only)
+1. Casa Colina and Contra Costa LIENS explanations: add the eligible-patient limit. They still say "California law forbids/bans liens on (a patient's) real property" with no qualifier, which is the overstatement fixed in the rule text.
+2. Optional: move Contra Costa LIENS (deceased patients only) to `ask`. Consider moving UCI Health Orange MEDICAL_FIRST to `conflict`, since its wording is explicit.

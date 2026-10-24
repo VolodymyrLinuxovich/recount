@@ -140,20 +140,64 @@
   }
 }
 
-/* ---------- launcher ---------- */
+/* ---------- entry points ---------- */
 
-/* A labelled button, bottom right. On a case screen it sits just above the pinned
-   step bar (HelperChat measures the bar), so it never covers the main buttons. */
-.helper-launcher {
-  position: fixed;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  z-index: 40;
+/* Below 1200px: a labelled button in the masthead row, so nothing floats over the page
+   or the step bar. At 1200px and up the page has a wide empty margin on the right,
+   and a pill sits there instead (above the step bar when one is showing). */
+
+.helper-mast-btn {
+  appearance: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 4px 16px 4px 6px;
+  gap: var(--sp-2);
+  min-width: 48px;
+  min-height: 44px;
+  padding: 0 var(--sp-3) 0 var(--sp-2);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Phones: just the mascot, like the "Aa" button beside it, so the masthead stays one row.
+   Its accessible name is still "Ask Lupa". */
+@media (max-width: 519.98px) {
+  .helper-mast-btn {
+    padding: 0;
+    width: 48px;
+    justify-content: center;
+  }
+  .helper-mast-text {
+    display: none;
+  }
+}
+
+.helper-mast-btn[aria-expanded="true"] {
+  background: var(--accent-soft);
+}
+
+.helper-mast-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.helper-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 56px;
+  padding: var(--sp-1) var(--sp-5) var(--sp-1) var(--sp-2);
   border-radius: 999px;
   border: 1.5px solid var(--accent);
   background: var(--sheet);
@@ -161,32 +205,28 @@
   box-shadow: var(--shadow);
   cursor: pointer;
   font: inherit;
-  font-size: 17px;
+  font-size: var(--fs-base);
   font-weight: 600;
-  line-height: 1.2;
-  transition: border-color 0.15s ease;
-}
-
-.helper-launcher[hidden] {
-  display: none;
+  line-height: var(--lh-tight);
 }
 
 .helper-launcher:hover {
   background: color-mix(in srgb, var(--accent) 8%, var(--sheet));
 }
 
-/* Before the bar is measured, keep clear of it anyway. */
-body:has(.step-bar) .helper-launcher {
-  bottom: 150px;
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
+  .helper-mast-btn {
+    display: none;
+  }
   .helper-launcher {
-    right: 24px;
-    bottom: 24px;
-    min-height: 56px;
-    padding-right: 20px;
-    font-size: 18px;
+    display: inline-flex;
+  }
+  .helper-launcher[hidden] {
+    display: none;
+  }
+  /* Before the bar is measured, keep clear of it anyway. */
+  body:has(.step-bar) .helper-launcher {
+    bottom: 150px;
   }
 }
 
@@ -293,7 +333,7 @@ body:has(.step-bar) .helper-launcher {
 .helper-grab {
   display: flex;
   justify-content: center;
-  padding: 10px 0 2px;
+  padding: var(--sp-3) 0 var(--sp-1);
   touch-action: none;
   cursor: grab;
 }
@@ -314,14 +354,14 @@ body:has(.step-bar) .helper-launcher {
 .helper-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 12px 12px 16px;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) var(--sp-3) var(--sp-4);
   border-bottom: 1px solid var(--rule);
 }
 
 @media (min-width: 1024px) {
   .helper-head {
-    padding-top: 12px;
+    padding-top: var(--sp-3);
   }
 }
 
@@ -332,17 +372,17 @@ body:has(.step-bar) .helper-launcher {
 
 .helper-name {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 22px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-md);
   font-weight: 600;
-  line-height: 1.15;
+  line-height: var(--lh-tight);
 }
 
 .helper-role {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
-  line-height: 1.3;
+  line-height: var(--lh-snug);
 }
 
 .helper-close {
@@ -350,15 +390,15 @@ body:has(.step-bar) .helper-launcher {
   flex: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--sp-2);
   min-height: 48px;
-  padding: 0 14px;
+  padding: 0 var(--sp-4);
   border-radius: 12px;
   border: 1.5px solid var(--ink-2);
   background: transparent;
   color: var(--ink);
   font: inherit;
-  font-size: 17px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
 }
@@ -371,26 +411,26 @@ body:has(.step-bar) .helper-launcher {
   flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 16px;
+  padding: var(--sp-4);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--sp-3);
 }
 
 .helper-hello {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 .helper-bubble {
   margin: 0;
   max-width: 92%;
-  padding: 12px 14px;
+  padding: var(--sp-3) var(--sp-4);
   border-radius: 14px;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
   overflow-wrap: anywhere;
 }
 
@@ -424,7 +464,7 @@ body:has(.step-bar) .helper-launcher {
 .helper-rich p + ul,
 .helper-rich ol + p,
 .helper-rich ul + p {
-  margin-top: 8px;
+  margin-top: var(--sp-2);
 }
 
 .helper-rich ol,
@@ -434,19 +474,19 @@ body:has(.step-bar) .helper-launcher {
 }
 
 .helper-rich li + li {
-  margin-top: 4px;
+  margin-top: var(--sp-1);
 }
 
 .helper-suggest {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
+  gap: var(--sp-2);
+  margin-top: var(--sp-1);
 }
 
 .helper-suggest-title {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
@@ -454,9 +494,9 @@ body:has(.step-bar) .helper-launcher {
   appearance: none;
   text-align: left;
   font: inherit;
-  font-size: 18px;
+  font-size: var(--fs-base);
   min-height: 52px;
-  padding: 10px 14px;
+  padding: var(--sp-3) var(--sp-4);
   border-radius: 12px;
   border: 1.5px solid var(--accent);
   background: transparent;
@@ -476,14 +516,14 @@ body:has(.step-bar) .helper-launcher {
 .helper-typing {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 17px;
+  gap: var(--sp-3);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
 .helper-note {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
@@ -497,7 +537,7 @@ body:has(.step-bar) .helper-launcher {
 .helper-input-row {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: var(--sp-2);
 }
 
 .helper-input {
@@ -507,9 +547,9 @@ body:has(.step-bar) .helper-launcher {
   max-height: 140px;
   resize: none;
   font: inherit;
-  font-size: 18px;
-  line-height: 1.4;
-  padding: 13px 14px;
+  font-size: var(--fs-base);
+  line-height: var(--lh-snug);
+  padding: var(--sp-3) var(--sp-4);
   border-radius: 12px;
   border: 1.5px solid var(--ink-2);
   background: var(--sheet);
@@ -542,8 +582,8 @@ body:has(.step-bar) .helper-launcher {
 }
 
 .helper-error {
-  margin: 6px 0 0;
-  font-size: 16px;
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-sm);
   color: var(--warn);
 }
 
@@ -560,9 +600,9 @@ body:has(.step-bar) .helper-launcher {
 }
 
 .helper-safety {
-  margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.4;
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-xs);
+  line-height: var(--lh-snug);
   color: var(--ink-2);
 }
 
@@ -577,4 +617,16 @@ body:has(.step-bar) .helper-launcher {
   .helper-panel {
     display: none !important;
   }
+}
+
+.helper-count {
+  margin: 4px 0 0;
+  font-size: var(--fs-xs, 14px);
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.helper-count.full {
+  color: var(--pen);
+  font-weight: 700;
 }

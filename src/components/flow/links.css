@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  margin-top: 24px;
+  gap: var(--sp-1);
+  margin-top: var(--sp-5);
 }
 
 .link-btn {
@@ -13,7 +13,7 @@
   min-height: 48px;
   display: inline-flex;
   align-items: center;
-  font-size: 18px;
+  font-size: var(--fs-base);
   color: var(--accent, var(--ink));
   text-decoration: underline;
   text-underline-offset: 4px;

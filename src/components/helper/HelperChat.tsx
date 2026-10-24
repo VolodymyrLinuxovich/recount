@@ -8,6 +8,7 @@ import type { PlainKey } from "../i18n/strings";
 import { type SendError, useChat, useSessionId } from "./chatApi";
 import { LightText } from "./LightText";
 import { Mascot } from "./Mascot";
+import { lastTrigger, setHelperOpen, useHelperOpen } from "./openStore";
 import "./helper.css";
 
 /** An SSN (123-45-6789, 123 45 6789) or a long run of digits like a bank account or card number. */
@@ -152,7 +153,8 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
   /** Below the wide breakpoint the chat covers the page, so the page goes inert. */
   const modal = !wide;
 
-  const [open, setOpen] = useState(false);
+  const open = useHelperOpen();
+  const setOpen = (next: boolean) => setHelperOpen(next);
   const [draft, setDraft] = useState("");
   // An error belongs to one conversation and language; it hides when either changes.
   const ctxKey = `${caseId ?? ""}|${lang}`;
@@ -189,7 +191,7 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
         document.documentElement.classList.remove("helper-open");
       };
     }
-    if (wasOpen.current) launcherRef.current?.focus();
+    if (wasOpen.current) (lastTrigger() ?? launcherRef.current)?.focus();
   }, [open, modal]);
 
   // Keep the newest message in view as replies stream in.
@@ -276,7 +278,7 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
         aria-haspopup="dialog"
         aria-expanded={open}
         hidden={open}
-        onClick={() => setOpen(true)}
+        onClick={(e) => setHelperOpen(true, e.currentTarget)}
       >
         <span className="helper-launcher-face">
           <Mascot state={waiting ? "thinking" : "idle"} size={38} />
@@ -391,6 +393,11 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
               </svg>
             </button>
           </div>
+          {draft.length > 1200 && (
+            <p className={`helper-count ${draft.length >= 1500 ? "full" : ""}`} aria-live="polite">
+              {draft.length} / 1500
+            </p>
+          )}
           {error && (
             <p className="helper-error" role="alert">
               {errorText(error, t)}

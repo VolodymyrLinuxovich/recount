@@ -2,12 +2,12 @@
    Red only for confirmed conflicts with the law; amber for likely; ink outline for worth asking. */
 
 .audit {
-  font-size: 19px;
-  line-height: 1.6;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
 }
 
 .audit.stack-lg > * + * {
-  margin-top: 56px;
+  margin-top: var(--sp-8);
 }
 
 .wide {
@@ -19,8 +19,8 @@
 
 .sample-banner {
   margin: 0;
-  padding: 12px 16px;
-  font-size: 17px;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-sm);
   color: var(--ink);
   background: var(--sheet);
   border: 1px solid var(--rule);
@@ -29,12 +29,12 @@
 }
 
 .audit .eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 var(--sp-3);
 }
 
 .audit-headline {
-  font-size: clamp(30px, 7.4vw, 46px);
-  line-height: 1.15;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
   text-wrap: balance;
 }
 
@@ -47,8 +47,8 @@
 }
 
 .audit .lede {
-  margin-top: 18px;
-  font-size: 20px;
+  margin-top: var(--sp-4);
+  font-size: var(--fs-base);
   max-width: 38em;
 }
 
@@ -56,14 +56,14 @@
 
 .map-and-search {
   display: grid;
-  gap: 32px;
+  gap: var(--sp-6);
 }
 
 @media (min-width: 900px) {
   .map-and-search {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     align-items: start;
-    gap: 40px;
+    gap: var(--sp-7);
   }
 }
 
@@ -72,7 +72,7 @@
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-radius: 10px;
-  padding: 16px;
+  padding: var(--sp-4);
 }
 
 .ca-map svg {
@@ -146,16 +146,16 @@
 .map-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 20px;
-  margin-top: 14px;
-  font-size: 16px;
+  gap: var(--sp-2) var(--sp-5);
+  margin-top: var(--sp-4);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
 .map-legend span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-2);
 }
 
 .dot-key {
@@ -186,11 +186,11 @@
 
 /* Tap on a crowded spot: list the hospitals there */
 .map-near {
-  margin-top: 14px;
+  margin-top: var(--sp-4);
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 10px;
-  padding: 8px 14px;
+  padding: var(--sp-2) var(--sp-4);
 }
 
 .map-near-head {
@@ -198,7 +198,7 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .map-near-close {
@@ -207,7 +207,7 @@
   height: 56px;
   display: grid;
   place-items: center;
-  font-size: 28px;
+  font-size: var(--fs-xl);
   cursor: pointer;
 }
 
@@ -229,11 +229,11 @@
   all: unset;
   box-sizing: border-box;
   display: flex;
-  gap: 12px;
+  gap: var(--sp-3);
   align-items: center;
   width: 100%;
   min-height: 56px;
-  padding: 6px 2px;
+  padding: var(--sp-2) var(--sp-1);
   cursor: pointer;
 }
 
@@ -242,27 +242,27 @@
 }
 
 .map-near-more {
-  font-size: 16px;
-  margin: 8px 0 4px;
+  font-size: var(--fs-sm);
+  margin: var(--sp-2) 0 var(--sp-1);
 }
 
 /* ---------- search ---------- */
 
 .finder .h-section {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: var(--sp-3);
 }
 
 .find-input {
   width: 100%;
   min-height: 60px;
   font: inherit;
-  font-size: 20px;
+  font-size: var(--fs-base);
   color: var(--ink);
   background: var(--sheet);
   border: 1.5px solid var(--ink-2);
   border-radius: 10px;
-  padding: 13px 16px;
+  padding: var(--sp-3) var(--sp-4);
 }
 
 .find-input:focus {
@@ -273,7 +273,7 @@
 .find-results {
   list-style: none;
   padding: 0;
-  margin: 10px 0 0;
+  margin: var(--sp-3) 0 0;
   border-top: 1px solid var(--rule);
 }
 
@@ -282,18 +282,18 @@
 }
 
 .find-results li.quiet {
-  padding: 14px 4px;
+  padding: var(--sp-4) var(--sp-1);
 }
 
 .find-results button {
   all: unset;
   box-sizing: border-box;
   display: flex;
-  gap: 14px;
+  gap: var(--sp-4);
   align-items: center;
   width: 100%;
   min-height: 64px;
-  padding: 10px 8px;
+  padding: var(--sp-3) var(--sp-2);
   cursor: pointer;
 }
 
@@ -317,28 +317,28 @@
 
 .find-name {
   display: block;
-  font-size: 19px;
-  line-height: 1.3;
+  font-size: var(--fs-base);
+  line-height: var(--lh-snug);
 }
 
 .find-place {
   display: block;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
 .find-hint {
-  font-size: 17px;
-  margin: 12px 0 0;
+  font-size: var(--fs-sm);
+  margin: var(--sp-3) 0 0;
 }
 
 .most {
-  margin-top: 32px;
+  margin-top: var(--sp-6);
 }
 
 .most-h {
-  margin: 0 0 4px;
-  font-size: 17px;
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--ink-2);
 }
@@ -360,21 +360,21 @@
 
 .hospital {
   border-top: 1px solid var(--rule);
-  padding-top: 40px;
+  padding-top: var(--sp-7);
 }
 
 .h-hospital {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 500;
-  font-size: clamp(28px, 7vw, 40px);
-  line-height: 1.15;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
   margin: 0;
   text-wrap: balance;
 }
 
 .hospital-verdict {
-  font-size: 20px;
-  margin: 12px 0 0;
+  font-size: var(--fs-base);
+  margin: var(--sp-3) 0 0;
 }
 
 .hospital-verdict.verdict-text-conflict {
@@ -388,30 +388,30 @@
 }
 
 .hospital-check-top {
-  margin: 20px 0 0;
+  margin: var(--sp-5) 0 0;
   min-height: 56px;
   white-space: normal;
   text-align: center;
 }
 
 .hospital .quotes-note {
-  margin: 24px 0 0;
+  margin: var(--sp-5) 0 0;
 }
 
 .a-findings {
   list-style: none;
   padding: 0;
-  margin: 32px 0 0;
+  margin: var(--sp-6) 0 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--sp-5);
 }
 
 .a-finding {
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-radius: 10px;
-  padding: 20px;
+  padding: var(--sp-5);
 }
 
 .a-finding-head {
@@ -419,15 +419,15 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 10px 16px;
-  margin-bottom: 18px;
+  gap: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
 }
 
 .a-rule {
-  font-family: var(--font-display), serif;
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 1.3;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
   margin: 0;
 }
 
@@ -436,13 +436,13 @@
   display: inline-flex;
   align-items: center;
   min-height: 32px;
-  padding: 3px 12px;
+  padding: var(--sp-1) var(--sp-3);
   border: 1px solid transparent;
   border-radius: 999px;
-  font-family: var(--font-body), Georgia, serif;
-  font-size: 16px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: var(--lh-snug);
   white-space: nowrap;
 }
 
@@ -463,24 +463,24 @@
 
 .versus {
   display: grid;
-  gap: 20px;
+  gap: var(--sp-5);
 }
 
 @media (min-width: 700px) {
   .versus {
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: var(--sp-6);
   }
   .versus-law {
     border-left: 1px solid var(--rule-soft);
-    padding-left: 28px;
+    padding-left: var(--sp-6);
   }
 }
 
 .audit .versus-label {
-  margin: 0 0 8px;
-  font-family: var(--font-body), Georgia, serif;
-  font-size: 16px;
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
@@ -490,8 +490,8 @@
 .policy-quote,
 .law-quote {
   margin: 0;
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
 }
 
 .policy-quote {
@@ -502,7 +502,7 @@
 .policy-mark {
   color: var(--ink);
   background: color-mix(in srgb, var(--warn) 16%, transparent);
-  padding: 1px 3px;
+  padding: 1px var(--sp-1);
   border-radius: 3px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -513,15 +513,15 @@
 }
 
 .law-quote {
-  padding-left: 14px;
+  padding-left: var(--sp-4);
   border-left: 3px solid var(--accent);
-  font-family: var(--font-display), serif;
-  font-variation-settings: "opsz" 24;
+  font-family: var(--font-ui);
+  font-weight: 600;
 }
 
 .versus-cite {
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
 }
 
 .audit a {
@@ -535,32 +535,32 @@
 }
 
 .a-explain {
-  margin: 20px 0 0;
-  padding-top: 16px;
+  margin: var(--sp-5) 0 0;
+  padding-top: var(--sp-4);
   border-top: 1px solid var(--rule-soft);
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .hospital-docs {
-  margin: 40px 0 32px;
+  margin: var(--sp-7) 0 var(--sp-6);
 }
 
 .hospital-docs-h {
-  margin: 0 0 8px;
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: 22px;
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-md);
 }
 
 .hospital-docs ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .hospital-docs li {
-  padding: 8px 0;
+  padding: var(--sp-2) 0;
   border-bottom: 1px solid var(--rule-soft);
 }
 
@@ -585,18 +585,18 @@
 /* ---------- rule breakdown ---------- */
 
 .audit .h-section {
-  font-size: 28px;
+  font-size: var(--fs-xl);
 }
 
 .rule-rows {
   list-style: none;
   padding: 0;
-  margin: 24px 0 0;
+  margin: var(--sp-5) 0 0;
   border-top: 1px solid var(--rule);
 }
 
 .rule-rows li {
-  padding: 18px 0;
+  padding: var(--sp-4) 0;
   border-bottom: 1px solid var(--rule-soft);
 }
 
@@ -604,30 +604,30 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
+  gap: var(--sp-3);
 }
 
 .rule-title {
-  font-size: 19px;
+  font-size: var(--fs-base);
 }
 
 .rule-count {
-  font-family: var(--font-display), serif;
-  font-variation-settings: "opsz" 72;
-  font-size: 26px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-lg);
   color: var(--accent);
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .rule-count .quiet {
-  font-family: var(--font-body), serif;
-  font-size: 16px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
 }
 
 .rule-bar {
   display: flex;
   height: 8px;
-  margin: 10px 0 8px;
+  margin: var(--sp-3) 0 var(--sp-2);
   background: var(--rule-soft);
   border-radius: 4px;
   overflow: hidden;
@@ -652,20 +652,20 @@
 }
 
 .rule-cite {
-  font-size: 16px;
+  font-size: var(--fs-sm);
 }
 
 .method {
   border-top: 1px solid var(--rule);
-  padding-top: 40px;
-  font-size: 18px;
+  padding-top: var(--sp-7);
+  font-size: var(--fs-base);
   max-width: 40em;
 }
 
 .method .h-section {
-  margin-bottom: 16px;
+  margin-bottom: var(--sp-4);
 }
 
 .method p {
-  margin: 0 0 14px;
+  margin: 0 0 var(--sp-4);
 }

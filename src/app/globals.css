@@ -16,6 +16,31 @@
   --accent-soft: rgba(31, 95, 102, 0.1);
   --shadow: 0 1px 0 rgba(60, 40, 10, 0.06), 0 8px 24px -12px rgba(60, 40, 10, 0.25);
   color-scheme: light;
+
+  /* Type scale (DESIGN-RESEARCH B1). rem, so the browser's text size and Large text scale it.
+     Nothing smaller than --fs-xs. */
+  --fs-xs: 0.875rem; /* 14px: legal footnotes and small tags only */
+  --fs-sm: 1rem; /* 16px: hints, captions, "Step 2 of 4" */
+  --fs-base: 1.1875rem; /* 19px: body, inputs, buttons */
+  --fs-md: 1.375rem; /* 22px: h3, amounts in lists, question labels */
+  --fs-lg: 1.625rem; /* 26px: h2, wordmark */
+  --fs-xl: 1.75rem; /* 28px: key totals, section titles */
+  --fs-2xl: clamp(2rem, 1.5rem + 2.5vw, 2.5rem); /* 32 to 40px: the h1, one per screen */
+  --fs-hero: clamp(2.5rem, 1.75rem + 4vw, 3.5rem); /* 40 to 56px: the single big answer */
+  --lh-tight: 1.15; /* h1, hero */
+  --lh-snug: 1.3; /* h2, h3, buttons */
+  --lh-body: 1.55; /* paragraphs */
+  --font-ui: var(--font-body), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing scale (B3): 4 8 12 16 24 32 48 64. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,15 +69,24 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  font-size: 100%;
+}
+
+/* Large text: one switch scales every rem-based size and space by 1.2
+   (19px body reads at about 23px). Set by the Display sheet (a11y/vision.ts). */
+html[data-text="large"] {
+  font-size: 120%;
 }
 
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), Georgia, serif;
-  font-size: 18px;
-  line-height: 1.55;
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  /* Hyperlegible digits that line up in every amount, table and line item. */
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -83,55 +117,149 @@ a {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--sp-5);
 }
 
+/* ---------- masthead: one row at every width ----------
+   Mark + wordmark on the left; My bills, EN | ES, Aa and the helper on the right.
+   Every control is at least 44px. On phones the controls fold to icons, and below 400px
+   the word "Recount" folds into the mark when the row would overflow. */
+
 .masthead {
-  padding: 18px 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--sp-2);
+  min-height: 4.5rem;
+  padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--rule);
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  min-height: 44px;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 22px;
+  font-size: var(--fs-lg);
   font-weight: 600;
+  line-height: 1;
   letter-spacing: -0.01em;
+  white-space: nowrap;
   text-decoration: none;
   font-variation-settings: "SOFT" 100;
 }
 
+.wordmark-mark {
+  flex: none;
+  width: auto;
+  height: 2rem;
+}
+
+.masthead-nav {
+  display: flex;
+  flex: none;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--sp-2);
+}
+
+@media (max-width: 519.98px) {
+  .masthead {
+    gap: var(--sp-1);
+  }
+  .wordmark {
+    gap: var(--sp-2);
+    font-size: var(--fs-base);
+  }
+  .wordmark-mark {
+    height: 1.625rem;
+  }
+  .masthead-nav {
+    gap: var(--sp-1);
+  }
+  /* Icon + count; the link keeps its full name ("My bills, 2 saved in this browser"). */
+  .masthead .bills-link {
+    position: relative;
+    width: 44px;
+    padding: 0;
+  }
+  .masthead .bills-link-count {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    min-width: 1.375rem;
+    padding: 0.1em 0.3em;
+    font-size: var(--fs-xs);
+    line-height: 1.1;
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+  .masthead .bills-link-text {
+    display: none;
+  }
+  .masthead .lang-option {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 var(--sp-2);
+    font-size: var(--fs-sm);
+  }
+  .masthead .vision-btn,
+  .masthead .helper-mast-btn {
+    min-width: 44px;
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* Not enough room for the word: the mark alone stays as the home link ("Recount"). */
+@media (max-width: 374.98px) {
+  .masthead:has(.bills-link) .wordmark-text {
+    display: none;
+  }
+}
+
+@media (max-width: 519.98px) {
+  html[data-text="large"] .masthead:has(.bills-link) .wordmark-text {
+    display: none;
+  }
+}
+
 .column {
   flex: 1;
-  padding: 28px 0 48px;
+  padding: var(--sp-6) 0 var(--sp-7);
 }
 
 .footnote {
   border-top: 1px solid var(--rule);
-  padding: 16px 0 28px;
-  font-size: 14px;
+  padding: var(--sp-4) 0 var(--sp-6);
+  font-size: var(--fs-xs);
   color: var(--ink-2);
-  line-height: 1.5;
+  line-height: var(--lh-body);
 }
 
 .stack > * + * {
-  margin-top: 20px;
+  margin-top: var(--sp-5);
 }
 
 .stack-lg > * + * {
-  margin-top: 44px;
+  margin-top: var(--sp-7);
 }
 
 /* ---------- type ---------- */
 
 .eyebrow {
-  font-family: var(--font-mono), monospace;
-  font-size: 12.5px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
-  margin: 0 0 10px;
+  margin: 0 0 var(--sp-3);
 }
 
 .promise,
@@ -140,29 +268,29 @@ a {
   font-weight: 500;
   font-variation-settings: "SOFT" 50, "opsz" 72;
   letter-spacing: -0.015em;
-  line-height: 1.1;
+  line-height: var(--lh-tight);
   margin: 0;
 }
 
 .promise {
-  font-size: clamp(32px, 9vw, 46px);
+  font-size: var(--fs-2xl);
 }
 
 .h-answer {
-  font-size: clamp(34px, 10vw, 52px);
+  font-size: var(--fs-2xl);
 }
 
 .h-section {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 1.2;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-tight);
   margin: 0;
 }
 
 .lede {
   color: var(--ink-2);
-  margin: 14px 0 0;
+  margin: var(--sp-4) 0 0;
 }
 
 .quiet {
@@ -170,13 +298,13 @@ a {
 }
 
 .label {
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
   letter-spacing: 0.04em;
   color: var(--ink-2);
   border: 1px solid var(--rule);
   border-radius: 999px;
-  padding: 2px 9px;
+  padding: var(--sp-1) var(--sp-2);
   white-space: nowrap;
 }
 
@@ -185,13 +313,13 @@ a {
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px 12px;
-  margin-bottom: 16px;
+  gap: var(--sp-2) var(--sp-3);
+  margin-bottom: var(--sp-4);
 }
 
 .error-note {
   color: var(--pen);
-  margin: 12px 0 0;
+  margin: var(--sp-3) 0 0;
 }
 
 /* ---------- buttons ---------- */
@@ -202,9 +330,9 @@ a {
   align-items: center;
   justify-content: center;
   font: inherit;
-  font-size: 17px;
+  font-size: var(--fs-sm);
   min-height: 48px;
-  padding: 10px 18px;
+  padding: var(--sp-3) var(--sp-4);
   border-radius: 10px;
   border: 1.5px solid var(--ink);
   background: transparent;
@@ -239,7 +367,7 @@ a {
 .btn-big {
   width: 100%;
   min-height: 60px;
-  font-size: 19px;
+  font-size: var(--fs-base);
   font-weight: 600;
   border-radius: 12px;
 }
@@ -247,7 +375,7 @@ a {
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 /* ---------- live steps ---------- */
@@ -260,8 +388,8 @@ a {
 
 .step {
   display: flex;
-  gap: 12px;
-  padding: 10px 0;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--rule-soft);
   animation: rise 0.35s ease both;
 }
@@ -270,13 +398,13 @@ a {
   flex: none;
   width: 20px;
   height: 20px;
-  margin-top: 3px;
+  margin-top: var(--sp-1);
   display: inline-grid;
   place-items: center;
   color: var(--ok);
-  font-family: var(--font-display), serif;
+  font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--fs-sm);
 }
 
 .step-running {
@@ -286,7 +414,7 @@ a {
   animation: spin 0.9s linear infinite;
   width: 16px;
   height: 16px;
-  margin: 5px 2px 0;
+  margin: var(--sp-1) var(--sp-1) 0;
 }
 
 .step-warn {
@@ -298,24 +426,24 @@ a {
 }
 
 .step-label {
-  font-size: 17px;
+  font-size: var(--fs-sm);
 }
 
 .step-detail {
-  font-size: 14.5px;
+  font-size: var(--fs-xs);
   color: var(--ink-2);
   overflow-wrap: anywhere;
 }
 
 .log-details {
   border-top: 1px solid var(--rule);
-  padding-top: 12px;
+  padding-top: var(--sp-3);
 }
 
 .log-details summary {
   cursor: pointer;
   color: var(--ink-2);
-  font-size: 16px;
+  font-size: var(--fs-sm);
 }
 
 .photo {
@@ -333,43 +461,43 @@ a {
 
 .line {
   display: flex;
-  gap: 8px;
-  padding: 11px 0 11px 0;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0 var(--sp-3) 0;
   border-bottom: 1px solid var(--rule-soft);
 }
 
 .findings {
   list-style: none;
   padding: 0;
-  margin: 22px 0 0;
+  margin: var(--sp-5) 0 0;
 }
 
 .finding {
   display: flex;
-  gap: 12px;
-  padding: 16px 0;
+  gap: var(--sp-3);
+  padding: var(--sp-4) 0;
   border-bottom: 1px solid var(--rule);
   scroll-margin-top: 20px;
 }
 
 .finding:target {
   background: var(--pen-soft);
-  margin: 0 -10px;
-  padding: 16px 10px;
+  margin: 0 calc(-1 * var(--sp-3));
+  padding: var(--sp-4) var(--sp-3);
   border-radius: 6px;
 }
 
 .evidence {
-  margin: 10px 0 0;
-  padding: 8px 12px;
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-2) var(--sp-3);
   border-left: 2px solid var(--rule);
-  font-size: 15px;
+  font-size: var(--fs-sm);
 }
 
 .evidence > div {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 8px;
+  gap: 0 var(--sp-2);
 }
 
 .evidence dt {
@@ -382,20 +510,20 @@ a {
 
 .evidence dd {
   margin: 0;
-  font-family: var(--font-mono), monospace;
-  font-size: 14px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
 }
 
 .src {
-  font-family: var(--font-mono), monospace;
-  font-size: 12.5px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
   color: var(--ink-2);
   overflow-wrap: anywhere;
 }
 
 .confidence {
-  margin: 8px 0 0;
-  font-size: 14.5px;
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-xs);
   color: var(--ink-2);
 }
 
@@ -403,13 +531,13 @@ a {
 
 .questions {
   border-top: 1.5px solid var(--ink);
-  padding-top: 22px;
+  padding-top: var(--sp-5);
 }
 
 .q {
   border: 0;
   padding: 0;
-  margin: 28px 0 0;
+  margin: var(--sp-6) 0 0;
   min-width: 0;
 }
 
@@ -417,21 +545,21 @@ a {
 .q > .money-input,
 .q > .choice,
 .q-sub {
-  margin-left: 26px;
+  margin-left: var(--sp-5);
 }
 
 .q > .choice {
-  margin-top: 12px;
+  margin-top: var(--sp-3);
 }
 
 .q-sub {
-  margin-top: 18px;
+  margin-top: var(--sp-4);
 }
 
 .q-label-sm {
   display: block;
-  font-size: 16.5px;
-  margin-bottom: 8px;
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-2);
 }
 
 .stepper {
@@ -449,7 +577,7 @@ a {
   height: 54px;
   display: grid;
   place-items: center;
-  font-size: 26px;
+  font-size: var(--fs-lg);
   cursor: pointer;
 }
 
@@ -465,11 +593,12 @@ a {
 .stepper output {
   min-width: 110px;
   text-align: center;
-  font-family: var(--font-display), serif;
-  font-size: 20px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
   border-left: 1px solid var(--rule);
   border-right: 1px solid var(--rule);
   line-height: 54px;
+  font-weight: 600;
 }
 
 .money-input {
@@ -477,18 +606,20 @@ a {
   align-items: center;
   border-bottom: 2px solid var(--ink);
   max-width: 280px;
-  gap: 6px;
-  padding: 4px 2px;
-  font-family: var(--font-display), serif;
-  font-size: 28px;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-1);
+  font-family: var(--font-ui);
+  font-size: var(--fs-xl);
+  font-weight: 600;
 }
 
 .money-input input {
   all: unset;
   flex: 1;
   min-width: 0;
-  font-family: var(--font-display), serif;
-  font-size: 28px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xl);
+  font-weight: 600;
 }
 
 .money-input input::placeholder {
@@ -501,12 +632,12 @@ a {
 
 .choice {
   display: flex;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 .choice button {
   font: inherit;
-  font-size: 18px;
+  font-size: var(--fs-base);
   min-width: 96px;
   min-height: 52px;
   border-radius: 12px;
@@ -523,13 +654,13 @@ a {
 }
 
 .questions .btn-big {
-  margin-top: 36px;
+  margin-top: var(--sp-6);
 }
 
 /* ---------- answer ---------- */
 
 .answer .h-answer {
-  font-size: clamp(40px, 12vw, 60px);
+  font-size: var(--fs-hero);
 }
 
 .answer-amt {
@@ -539,16 +670,16 @@ a {
 }
 
 .answer-sub {
-  font-size: 19px;
-  margin: 18px 0 0;
+  font-size: var(--fs-base);
+  margin: var(--sp-4) 0 0;
 }
 
 .receipts {
-  margin-top: 28px;
+  margin-top: var(--sp-6);
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-radius: 4px;
-  padding: 14px 16px 6px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-2);
   box-shadow: var(--shadow);
   position: relative;
 }
@@ -565,13 +696,13 @@ a {
 }
 
 .receipts-h {
-  font-family: var(--font-mono), monospace;
-  font-size: 12.5px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
-  margin: 0 0 4px;
+  margin: 0 0 var(--sp-1);
 }
 
 .receipts ol {
@@ -581,7 +712,7 @@ a {
 }
 
 .receipt {
-  padding: 10px 0 12px;
+  padding: var(--sp-3) 0 var(--sp-3);
   border-top: 1px dashed var(--rule);
 }
 
@@ -591,26 +722,26 @@ a {
 
 .receipt-rule {
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--fs-sm);
 }
 
 .receipt p {
-  margin: 2px 0 4px;
-  font-size: 16.5px;
+  margin: var(--sp-1) 0 var(--sp-1);
+  font-size: var(--fs-sm);
 }
 
 .aside {
-  margin-top: 22px;
-  padding: 12px 14px;
+  margin-top: var(--sp-5);
+  padding: var(--sp-3) var(--sp-4);
   border-left: 3px solid var(--pen);
   background: var(--pen-soft);
-  font-size: 16.5px;
+  font-size: var(--fs-sm);
 }
 
 /* ---------- letters ---------- */
 
 .letters > * + * {
-  margin-top: 18px;
+  margin-top: var(--sp-4);
 }
 
 .letter {
@@ -618,25 +749,25 @@ a {
   border: 1px solid var(--rule);
   border-radius: 4px;
   box-shadow: var(--shadow);
-  padding: 16px;
+  padding: var(--sp-4);
 }
 
 .letter-title {
-  font-family: var(--font-display), serif;
-  font-weight: 500;
-  font-size: 20px;
-  margin: 0 0 12px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  margin: 0 0 var(--sp-3);
 }
 
 .letter-field {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: var(--sp-3);
 }
 
 .letter-field span {
   display: block;
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
   color: var(--ink-2);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -650,25 +781,25 @@ a {
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--rule);
-  padding: 6px 0;
+  padding: var(--sp-2) 0;
 }
 
 .letter-body {
-  font-size: 16.5px;
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
   resize: none;
   overflow: hidden;
   border: 0;
-  margin: 6px 0 14px;
-  background-image: linear-gradient(transparent calc(1.6em - 1px), var(--rule-soft) 1px);
-  background-size: 100% 1.6em;
+  margin: var(--sp-2) 0 var(--sp-4);
+  background-image: linear-gradient(transparent calc(var(--lh-body) * 1em - 1px), var(--rule-soft) 1px);
+  background-size: 100% calc(var(--lh-body) * 1em);
   background-attachment: local;
 }
 
 .letter-subject {
   resize: none;
   overflow: hidden;
-  line-height: 1.4;
+  line-height: var(--lh-snug);
 }
 
 .letter-subject:focus,
@@ -685,18 +816,18 @@ a {
 .send {
   border: 2px solid var(--ok);
   border-radius: 10px;
-  padding: 14px 16px;
+  padding: var(--sp-4) var(--sp-4);
 }
 
 .send p {
-  margin: 0 0 12px;
+  margin: 0 0 var(--sp-3);
 }
 
 .phone {
   display: inline-block;
-  margin-top: 4px;
-  font-family: var(--font-mono), monospace;
-  font-size: 20px;
+  margin-top: var(--sp-1);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -709,8 +840,8 @@ a {
 
 .sources {
   border-top: 1px solid var(--rule);
-  padding-top: 18px;
-  font-size: 15.5px;
+  padding-top: var(--sp-4);
+  font-size: var(--fs-sm);
 }
 
 .sources ul {
@@ -720,12 +851,12 @@ a {
 }
 
 .sources li {
-  padding: 6px 0;
+  padding: var(--sp-2) 0;
   overflow-wrap: anywhere;
 }
 
 .sources .label {
-  margin-right: 4px;
+  margin-right: var(--sp-1);
 }
 
 /* ---------- motion ---------- */
@@ -760,13 +891,13 @@ a {
 
 @media (min-width: 720px) {
   .column {
-    padding-top: 44px;
+    padding-top: var(--sp-7);
   }
 }
 
 .q-check {
-  margin: 6px 0 0 26px;
-  font-size: 15px;
+  margin: var(--sp-2) 0 0 var(--sp-5);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
@@ -825,38 +956,14 @@ no tilted or
   }
 }
 
-body {
-  font-size: 20px;
-  line-height: 1.6;
-}
 
 .page {
   max-width: var(--page-max);
   padding: 0 var(--gutter);
 }
 
-.masthead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 14px 0 12px;
-}
-
-.wordmark {
-  font-size: 26px;
-}
-
-.masthead-nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
 .footnote {
-  font-size: 16px;
+  font-size: var(--fs-sm);
 }
 
 /* Labels: readable sentence case,
@@ -865,40 +972,40 @@ not tiny capitals. */
 .versus-label,
 .receipts-h,
 .letter-field span {
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-ui);
   text-transform: none;
   letter-spacing: 0;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--ink-2);
 }
 
 .label {
-  font-family: var(--font-body), Georgia, serif;
-  font-size: 15px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
   letter-spacing: 0;
-  padding: 3px 11px;
+  padding: var(--sp-1) var(--sp-3);
 }
 
 .lede,
 .answer-sub {
-  font-size: 20px;
+  font-size: var(--fs-base);
 }
 
 .h-section {
-  font-size: 28px;
+  font-size: var(--fs-xl);
 }
 
 /* Buttons: big and plain. */
 .btn {
-  font-size: 19px;
+  font-size: var(--fs-base);
   min-height: 56px;
-  padding: 12px 20px;
+  padding: var(--sp-3) var(--sp-5);
 }
 
 .btn-big {
   min-height: 66px;
-  font-size: 21px;
+  font-size: var(--fs-md);
 }
 
 .btn-quiet {
@@ -911,11 +1018,11 @@ not tiny capitals. */
 
 /* Live steps */
 .step-label {
-  font-size: 19px;
+  font-size: var(--fs-base);
 }
 
 .step-detail {
-  font-size: 16.5px;
+  font-size: var(--fs-sm);
 }
 
 /* Red-pen notes stay red,
@@ -929,46 +1036,46 @@ but in a plain bold face and level {
 .receipt p,
 .aside,
 .a-explain {
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .evidence dd {
-  font-size: 16px;
+  font-size: var(--fs-sm);
 }
 
 .src {
-  font-size: 15px;
+  font-size: var(--fs-sm);
 }
 
 .confidence {
-  font-size: 16.5px;
+  font-size: var(--fs-sm);
 }
 
 .q-check {
-  font-size: 17px;
+  font-size: var(--fs-sm);
 }
 
 .stepper button {
   width: 64px;
   height: 60px;
-  font-size: 30px;
+  font-size: var(--fs-xl);
 }
 
 .stepper output {
   min-width: 130px;
-  font-size: 22px;
+  font-size: var(--fs-md);
   line-height: 60px;
 }
 
 .money-input,
 .money-input input {
-  font-size: 30px;
+  font-size: var(--fs-xl);
 }
 
 .choice button {
   min-width: 120px;
   min-height: 60px;
-  font-size: 20px;
+  font-size: var(--fs-base);
 }
 
 .choice button[aria-pressed="true"]::before {
@@ -977,28 +1084,28 @@ but in a plain bold face and level {
 
 /* Answer */
 .receipt-rule {
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 /* Letters */
 .letter-body {
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .letter-title {
-  font-size: 22px;
+  font-size: var(--fs-md);
 }
 
 .phone {
-  font-size: 24px;
+  font-size: var(--fs-lg);
 }
 
 .sources {
-  font-size: 17px;
+  font-size: var(--fs-sm);
 }
 
 .log-details summary {
-  font-size: 18px;
+  font-size: var(--fs-base);
   min-height: 44px;
   display: flex;
   align-items: center;
@@ -1007,8 +1114,8 @@ but in a plain bold face and level {
 /* ---------- progress through a bill ---------- */
 
 .progress {
-  margin: 0 0 28px;
-  padding: 14px 16px;
+  margin: 0 0 var(--sp-6);
+  padding: var(--sp-4) var(--sp-4);
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-radius: 10px;
@@ -1017,22 +1124,22 @@ but in a plain bold face and level {
 /* ---------- which hospital ---------- */
 
 .hosp-h {
-  font-size: clamp(28px, 7vw, 36px);
+  font-size: var(--fs-2xl);
 }
 
 .hosp-printed {
-  margin: 10px 0 0;
-  font-family: var(--font-mono), monospace;
-  font-size: 16px;
+  margin: var(--sp-3) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
 .hosp-list {
   list-style: none;
   padding: 0;
-  margin: 20px 0 0;
+  margin: var(--sp-5) 0 0;
   display: grid;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 .hosp-choice {
@@ -1040,10 +1147,10 @@ but in a plain bold face and level {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--sp-1);
   width: 100%;
   min-height: 64px;
-  padding: 12px 16px;
+  padding: var(--sp-3) var(--sp-4);
   background: var(--sheet);
   border: 1.5px solid var(--rule);
   border-radius: 10px;
@@ -1060,43 +1167,43 @@ but in a plain bold face and level {
 }
 
 .hosp-name {
-  font-size: 19px;
+  font-size: var(--fs-base);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: var(--lh-snug);
 }
 
 .hosp-city {
-  font-size: 16px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
 .hosp-search-label {
   display: block;
-  margin: 26px 0 8px;
+  margin: var(--sp-5) 0 var(--sp-2);
   font-weight: 600;
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .hosp-search {
   width: 100%;
   font: inherit;
-  font-size: 20px;
+  font-size: var(--fs-base);
   color: var(--ink);
   background: var(--sheet);
   border: 1.5px solid var(--ink);
   border-radius: 12px;
-  padding: 13px 14px;
+  padding: var(--sp-3) var(--sp-4);
   min-height: 60px;
 }
 
 .hosp-none {
   width: 100%;
-  margin-top: 24px;
+  margin-top: var(--sp-5);
 }
 
 .hosp-none-hint {
-  font-size: 16px;
-  margin: 8px 0 0;
+  font-size: var(--fs-sm);
+  margin: var(--sp-2) 0 0;
 }
 
 /* ---------- open elsewhere,
@@ -1104,16 +1211,16 @@ delete ---------- */
 
 .bill-tools {
   border-top: 1px solid var(--rule);
-  padding-top: 18px;
+  padding-top: var(--sp-4);
 }
 
 .bill-tools .quiet {
-  font-size: 16.5px;
-  margin: 0 0 12px;
+  font-size: var(--fs-sm);
+  margin: 0 0 var(--sp-3);
 }
 
 .bill-delete {
-  margin-top: 28px;
+  margin-top: var(--sp-6);
 }
 
 .btn-danger {
@@ -1128,20 +1235,20 @@ delete ---------- */
 }
 
 .bill-delete-ask p {
-  margin: 0 0 12px;
+  margin: 0 0 var(--sp-3);
   font-weight: 600;
 }
 
 .answer-note {
-  font-size: 18px;
-  margin: 14px 0 0;
-  padding: 10px 14px;
+  font-size: var(--fs-base);
+  margin: var(--sp-4) 0 0;
+  padding: var(--sp-3) var(--sp-4);
   border-left: 3px solid var(--ok);
   background: var(--sheet);
 }
 
 .lang-note {
-  padding: 12px 14px;
+  padding: var(--sp-3) var(--sp-4);
   border: 1px solid var(--rule);
   border-left: 4px solid var(--focus);
   border-radius: 8px;
@@ -1149,6 +1256,6 @@ delete ---------- */
 }
 
 .lang-note p {
-  margin: 0 0 10px;
-  font-size: 17px;
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-sm);
 }

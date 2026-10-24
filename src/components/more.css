@@ -3,17 +3,17 @@
 .more {
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  margin-top: 16px;
-  font-size: 19px;
-  line-height: 1.55;
+  gap: var(--sp-7);
+  margin-top: var(--sp-4);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
 }
 
 .more .more-sec {
   margin: 0;
-  padding: 32px 0 0;
+  padding: var(--sp-6) 0 0;
   border-top: 1px solid var(--rule);
-  font-size: 19px;
+  font-size: var(--fs-base);
 }
 
 .more > .more-sec:first-child {
@@ -22,24 +22,24 @@
 }
 
 .more-h {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 1.25;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
   letter-spacing: -0.005em;
-  margin: 0 0 16px;
+  margin: 0 0 var(--sp-4);
   text-wrap: balance;
 }
 
 .more-body {
-  margin: 0 0 20px;
+  margin: 0 0 var(--sp-5);
   color: var(--ink-2);
 }
 
 .more .more-btn {
   width: 100%;
   min-height: 56px;
-  font-size: 19px;
+  font-size: var(--fs-base);
   font-weight: 600;
 }
 
@@ -57,7 +57,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--sp-4);
 }
 
 .more .sources li {
@@ -67,13 +67,13 @@
 
 .more .sources .label {
   display: block;
-  margin: 0 0 2px;
+  margin: 0 0 var(--sp-1);
   padding: 0;
   border: 0;
   border-radius: 0;
   white-space: normal;
-  font-family: var(--font-body), Georgia, serif;
-  font-size: 16px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--ink-2);
@@ -97,21 +97,21 @@
 }
 
 .more .bill-delete-ask {
-  padding: 18px;
+  padding: var(--sp-4);
   border: 1px solid var(--pen);
   border-radius: 10px;
   background: var(--sheet);
 }
 
 .more .bill-delete-ask p {
-  margin: 0 0 16px;
+  margin: 0 0 var(--sp-4);
   font-weight: 600;
 }
 
 .more-btns {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 .more-btns .btn {
@@ -120,7 +120,7 @@
 }
 
 .more .error-note {
-  margin: 14px 0 0;
+  margin: var(--sp-4) 0 0;
 }
 
 /* Step log */
@@ -137,12 +137,12 @@
 }
 
 .more-log[open] summary {
-  margin-bottom: 12px;
+  margin-bottom: var(--sp-3);
 }
 
 .more-note {
-  margin: 0 0 12px;
-  font-size: 17px;
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
 }
 
@@ -155,5 +155,5 @@
 
 .more .more-link::after {
   content: "\2192";
-  margin-left: 8px;
+  margin-left: var(--sp-2);
 }

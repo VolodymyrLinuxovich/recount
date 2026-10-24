@@ -2,21 +2,21 @@
 
 .found-quiet {
   color: var(--ink-2);
-  font-size: 18px;
-  margin: 6px 0 0;
+  font-size: var(--fs-base);
+  margin: var(--sp-2) 0 0;
 }
 
 /* Summary: thumbnail of the bill + three facts */
 .found-summary {
   display: flex;
-  gap: 16px;
+  gap: var(--sp-4);
   align-items: flex-start;
-  margin: 0 0 18px;
+  margin: 0 0 var(--sp-4);
 }
 
 .found-summary-text p {
-  margin: 0 0 4px;
-  font-size: 19px;
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fs-base);
 }
 
 .found-hospital {
@@ -31,10 +31,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: var(--sp-2);
   text-align: center;
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: var(--fs-xs);
+  line-height: var(--lh-tight);
   color: var(--ink-2);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -57,7 +57,7 @@
 
 .found-file-link {
   flex: none;
-  font-size: 18px;
+  font-size: var(--fs-base);
   min-height: 56px;
   display: inline-flex;
   align-items: center;
@@ -86,7 +86,7 @@
 .found-viewer-scroll {
   flex: 1;
   overflow: auto;
-  margin-top: 12px;
+  margin-top: var(--sp-3);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -99,9 +99,9 @@
 
 /* Notes: check against paper, no price list */
 .found-box {
-  margin: 0 0 18px;
-  padding: 14px 16px;
-  font-size: 18px;
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-4) var(--sp-4);
+  font-size: var(--fs-base);
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-left: 4px solid var(--ink-2);
@@ -118,13 +118,13 @@
 }
 
 .found-box ul {
-  margin: 6px 0 0;
-  padding-left: 22px;
+  margin: var(--sp-2) 0 0;
+  padding-left: var(--sp-5);
 }
 
 /* All bill lines */
 .found-lines {
-  margin-top: 6px;
+  margin-top: var(--sp-2);
 }
 
 .found-lines-head {
@@ -132,18 +132,18 @@
   justify-content: space-between;
   align-items: baseline;
   border-bottom: 2px solid var(--ink);
-  padding-bottom: 6px;
+  padding-bottom: var(--sp-2);
 }
 
 .found-lines-head h2 {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: 22px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-md);
 }
 
 .found-lines-head span {
-  font-size: 16px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
   font-weight: 600;
 }
@@ -156,20 +156,20 @@
 
 .found-line {
   border-bottom: 1px solid var(--rule-soft);
-  padding: 10px 0;
+  padding: var(--sp-3) 0;
 }
 
 .found-line-row {
   display: flex;
-  gap: 10px;
+  gap: var(--sp-3);
   align-items: flex-start;
 }
 
 .found-line-no {
   flex: none;
   width: 24px;
-  padding-top: 2px;
-  font-size: 15px;
+  padding-top: var(--sp-1);
+  font-size: var(--fs-sm);
   color: var(--ink-2);
   font-variant-numeric: tabular-nums;
 }
@@ -181,8 +181,8 @@
 
 .found-line-desc {
   display: block;
-  font-size: 18px;
-  line-height: 1.3;
+  font-size: var(--fs-base);
+  line-height: var(--lh-snug);
   overflow-wrap: anywhere;
 }
 
@@ -190,13 +190,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
 }
 
 .found-line-amt {
   flex: none;
-  font-size: 18px;
+  font-size: var(--fs-base);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-align: right;
@@ -213,19 +213,19 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
-  font-size: 18px;
+  font-size: var(--fs-base);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .found-fix-word {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--focus);
   text-decoration: underline;
   text-underline-offset: 3px;
-  margin-top: 4px;
+  margin-top: var(--sp-1);
 }
 
 .found-line-fix:focus-visible,
@@ -245,7 +245,7 @@
   border-radius: 50%;
   background: var(--pen);
   color: var(--sheet);
-  font-size: 16px;
+  font-size: var(--fs-sm);
   font-weight: 700;
   /* bigger invisible tap area */
   position: relative;
@@ -259,9 +259,9 @@
 
 .found-pill {
   display: inline-block;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   font-weight: 700;
-  padding: 2px 10px;
+  padding: var(--sp-1) var(--sp-3);
   border-radius: 999px;
 }
 
@@ -276,30 +276,30 @@
 }
 
 .found-legend {
-  font-size: 16px;
-  margin-top: 10px;
+  font-size: var(--fs-sm);
+  margin-top: var(--sp-3);
 }
 
 /* Inline amount editor */
 .found-fix {
-  margin: 10px 0 4px 34px;
+  margin: var(--sp-3) 0 var(--sp-1) var(--sp-6);
 }
 
 .found-fix label {
   display: block;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--ink-2);
-  margin-bottom: 6px;
+  margin-bottom: var(--sp-2);
 }
 
 .found-fix input {
   width: 100%;
   max-width: 240px;
   min-height: 56px;
-  padding: 8px 12px;
+  padding: var(--sp-2) var(--sp-3);
   font: inherit;
-  font-size: 20px;
+  font-size: var(--fs-base);
   border: 2px solid var(--ink-2);
   border-radius: 8px;
   background: var(--paper);
@@ -310,8 +310,8 @@
 .found-fix-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
 }
 
 /* One problem */
@@ -319,71 +319,72 @@
   background: var(--sheet);
   border: 1px solid var(--rule);
   border-radius: 14px;
-  padding: 18px;
+  padding: var(--sp-4);
   box-shadow: var(--shadow);
 }
 
 .found-card-name {
   margin: 0;
-  font-size: 21px;
+  font-size: var(--fs-md);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: var(--lh-snug);
 }
 
 .found-card > .found-quiet:first-of-type {
-  margin-top: 2px;
+  margin-top: var(--sp-1);
 }
 
 .found-versus {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 16px 0 6px;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0 var(--sp-2);
 }
 
 .found-versus > div {
   border: 1px solid var(--rule);
   border-radius: 10px;
-  padding: 12px;
+  padding: var(--sp-3);
   background: var(--paper);
   min-width: 0;
 }
 
 .found-versus-label {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--ink-2);
 }
 
 .found-versus-num {
-  margin: 4px 0 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(24px, 7vw, 30px);
-  line-height: 1.1;
+  margin: var(--sp-1) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-tight);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
+  font-weight: 600;
 }
 
 .found-src {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: 16px;
+  font-size: var(--fs-sm);
   overflow-wrap: anywhere;
 }
 
 .found-save {
-  margin: 14px 0 0;
-  font-size: 22px;
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-md);
   font-weight: 700;
   color: var(--pen);
 }
 
 .found-why {
-  margin: 12px 0 0;
-  font-size: 19px;
-  line-height: 1.45;
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
 }
 
 .found-card > .found-why:first-child {
@@ -394,22 +395,22 @@
 .found-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 14px 0 4px;
-  font-size: 17px;
+  margin: var(--sp-4) 0 var(--sp-1);
+  font-size: var(--fs-sm);
 }
 
 .found-table th {
   text-align: left;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
   font-weight: 600;
   border-bottom: 2px solid var(--ink);
-  padding: 6px 4px;
+  padding: var(--sp-2) var(--sp-1);
 }
 
 .found-table td {
   border-bottom: 1px solid var(--rule-soft);
-  padding: 10px 4px;
+  padding: var(--sp-3) var(--sp-1);
   vertical-align: top;
 }
 
@@ -422,5 +423,5 @@
 
 .found-versus-src {
   grid-column: 1 / -1;
-  margin: -4px 0 0;
+  margin: calc(-1 * var(--sp-1)) 0 0;
 }

@@ -14,23 +14,23 @@
 }
 
 .onb .onb-top {
-  margin: -12px 0 4px;
+  margin: calc(-1 * var(--sp-3)) 0 var(--sp-1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--sp-3);
   min-height: 56px;
 }
 
 .onb .onb-skip {
   min-height: 56px;
-  padding: 0 4px 0 16px;
-  font-size: 19px;
+  padding: 0 var(--sp-1) 0 var(--sp-4);
+  font-size: var(--fs-base);
 }
 
 .onb-dots {
   display: flex;
-  gap: 8px;
+  gap: var(--sp-2);
 }
 
 .onb-dot {
@@ -50,7 +50,7 @@
 }
 
 .onb .eyebrow {
-  margin-bottom: 4px;
+  margin-bottom: var(--sp-1);
 }
 
 .onb .step-title:focus {
@@ -63,20 +63,20 @@
 
 .onb-list {
   list-style: none;
-  margin: 8px 0 0;
+  margin: var(--sp-2) 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--sp-4);
 }
 
 .onb-list li {
   display: grid;
   grid-template-columns: 48px 1fr;
-  gap: 16px;
+  gap: var(--sp-4);
   align-items: center;
-  font-size: 21px;
-  line-height: 1.45;
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
 }
 
 .onb-icon-wrap {
@@ -95,20 +95,20 @@
 }
 
 .onb-body > .onb-note {
-  margin: 22px 0 0;
-  font-size: 19px;
+  margin: var(--sp-5) 0 0;
+  font-size: var(--fs-base);
   color: var(--ink-2);
 }
 
 .onb-body > .onb-note + .onb-note {
-  margin-top: 10px;
+  margin-top: var(--sp-3);
 }
 
 .onb-private {
-  margin: 32px 0 0;
-  padding-top: 20px;
+  margin: var(--sp-6) 0 0;
+  padding-top: var(--sp-5);
   border-top: 1px solid var(--rule-soft);
-  font-size: 19px;
+  font-size: var(--fs-base);
   color: var(--ink-2);
 }
 
@@ -119,7 +119,7 @@
   max-width: 340px;
   height: auto;
   max-height: 170px;
-  margin: 0 0 18px;
+  margin: 0 0 var(--sp-4);
 }
 
 .onb-photo-table {
@@ -149,9 +149,9 @@
   padding-left: 1em;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  font-size: 21px;
-  line-height: 1.45;
+  gap: var(--sp-3);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
 }
 
 .onb-tips li::marker {
@@ -159,8 +159,8 @@
 }
 
 .onb .start-error {
-  margin-top: 20px;
-  padding-left: 14px;
+  margin-top: var(--sp-5);
+  padding-left: var(--sp-4);
   border-left: 3px solid var(--warn);
   color: var(--ink);
   font-weight: 600;

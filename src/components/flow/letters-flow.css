@@ -8,12 +8,12 @@
 }
 
 .details-bare .details-lede {
-  font-size: 19px;
+  font-size: var(--fs-base);
 }
 
 .flow-note,
 .flow-wait {
-  font-size: 19px;
+  font-size: var(--fs-base);
   color: var(--ink-2);
 }
 
@@ -27,41 +27,41 @@
 
 .flow-letter .letter-body,
 .flow-letter .letter-subject {
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .flow-letter .row .btn,
 .flow-letter .letter-print {
   min-height: 56px;
-  font-size: 18px;
+  font-size: var(--fs-base);
 }
 
 .flow-letter .letter-print {
   width: auto;
-  margin-top: 12px;
+  margin-top: var(--sp-3);
 }
 
 .flow-reassure {
-  margin: 20px 0 0;
-  font-size: 19px;
+  margin: var(--sp-5) 0 0;
+  font-size: var(--fs-base);
   font-weight: 600;
 }
 
 .flow-done {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 24px;
+  gap: var(--sp-3);
+  font-family: var(--font-ui);
+  font-size: var(--fs-lg);
   font-weight: 600;
   color: var(--ok);
-  margin: 4px 0 16px;
+  margin: var(--sp-1) 0 var(--sp-4);
 }
 
 
 .flow-fill-hint {
-  margin: 12px 0 0;
-  font-size: 17px;
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-sm);
   color: var(--ink-2);
   max-width: 30em;
 }
@@ -75,14 +75,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px 0;
+  padding: var(--sp-5) 0;
   animation: approved-in 260ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
 .approved-check {
   width: 120px;
   height: 120px;
-  margin-bottom: 24px;
+  margin-bottom: var(--sp-5);
 }
 
 .approved-ring,
@@ -110,13 +110,13 @@
 .approved-h {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 500;
-  font-size: clamp(32px, 8vw, 40px);
-  line-height: 1.15;
-  margin: 0 0 12px;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--sp-3);
 }
 
 .approved-p {
-  font-size: 19px;
+  font-size: var(--fs-base);
   color: var(--ink-2);
   max-width: 22em;
   margin: 0;
@@ -151,18 +151,18 @@
 }
 
 .sg-change {
-  margin: 24px 0 0;
+  margin: var(--sp-5) 0 0;
   text-align: center;
 }
 
 .flow-failed {
-  margin: 16px 0 0;
-  padding: 12px 0 0 12px;
+  margin: var(--sp-4) 0 0;
+  padding: var(--sp-3) 0 0 var(--sp-3);
   border-left: 4px solid var(--pen);
 }
 
 .flow-failed .error-note {
-  margin: 0 0 12px;
-  font-size: 18px;
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-base);
   font-weight: 600;
 }
