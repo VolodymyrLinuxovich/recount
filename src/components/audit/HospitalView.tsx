@@ -2,7 +2,7 @@ import Link from "next/link";
 import { hostOf } from "../types";
 import { useT } from "../i18n/I18nProvider";
 import type { T } from "../i18n/strings";
-import { type AuditFinding, type DocType, type Hospital, type Rule, displayName, docLabel, longDate, place, verdictLabel, worst } from "./data";
+import { type AuditFinding, type DocType, type Hospital, type Rule, displayName, docLabel, longDate, place, ruleTitle, verdictLabel, worst } from "./data";
 
 // A sentence ends at . ; or : followed by a space and a capital letter (or the end), so "$5.00" and "704.10" don't count.
 const SENTENCE_END = /[.;:](?=\s+[A-Z("“]|\s*$)/g;
@@ -48,7 +48,7 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
   return (
     <li className={`a-finding a-${f.verdict}`}>
       <div className="a-finding-head">
-        <h4 className="a-rule">{rule?.title ?? f.rule}</h4>
+        <h4 className="a-rule">{ruleTitle(rule, f.rule, lang)}</h4>
         <span className={`verdict verdict-${f.verdict}`}>{verdictLabel(f.verdict, lang)}</span>
       </div>
       <div className="versus">
@@ -109,6 +109,7 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
             : summary(t, h)}
       </p>
 
+      {lang === "es" && findings.length > 0 && <p className="quiet quotes-note">{t("audit.quotesNote")}</p>}
       {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}
 
       <div className="hospital-docs">

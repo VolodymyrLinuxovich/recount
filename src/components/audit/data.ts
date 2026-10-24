@@ -61,6 +61,15 @@ export const isFlagged = (h: Hospital) => h.findings.some((f) => f.verdict === "
 
 export const verdictLabel = (w: Worst, lang: Lang) => translate(lang, `verdict.${w}`);
 
+const RULE_IDS = ["DEADLINE", "ASSETS", "INCOME_PROOF", "CREDIT_REPORTING", "LIENS", "MEDICAL_FIRST"] as const;
+
+/** A rule's short title: findings.json's own wording in English, ours in Spanish for known rule ids. */
+export function ruleTitle(rule: Pick<Rule, "id" | "title"> | undefined, id: string, lang: Lang) {
+  const known = (RULE_IDS as readonly string[]).includes(id) ? (id as (typeof RULE_IDS)[number]) : null;
+  if (lang === "en" || !known) return rule?.title ?? (known ? translate("en", `rule.${known}`) : id);
+  return translate(lang, `rule.${known}`);
+}
+
 export const docLabel = (doc: string, lang: Lang) => translate(lang, "doc.label", { doc });
 
 export function longDate(iso: string | null | undefined, lang: Lang) {

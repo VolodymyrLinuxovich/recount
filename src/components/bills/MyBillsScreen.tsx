@@ -2,49 +2,42 @@
 
 import Link from "next/link";
 import { BillRow } from "./BillRow";
+import { useT } from "../i18n/I18nProvider";
 import { useHydrated, useMyBills } from "./myBills";
 import "./bills.css";
 
-const S = {
-  title: "Your bills",
-  checkAnother: "Check another bill",
-  checkFirst: "Check a bill",
-  empty: "You haven't checked a bill on this phone yet.",
-  emptyHint: "When you check a bill, it will show up here so you can come back to it.",
-  savedHere: "This list is saved only on this phone. On another phone or computer, open the bill's link instead.",
-  loading: "Loading your bills…",
-};
 
 export function MyBillsScreen() {
+  const { t } = useT();
   const bills = useMyBills();
   const hydrated = useHydrated();
 
-  if (!hydrated) return <p className="quiet">{S.loading}</p>;
+  if (!hydrated) return <p className="quiet">{t("bills.loading")}</p>;
 
   if (bills.length === 0)
     return (
       <section className="bills-page">
-        <h1 className="bills-title">{S.title}</h1>
-        <p className="bills-empty">{S.empty}</p>
-        <p className="bills-note">{S.emptyHint}</p>
+        <h1 className="bills-title">{t("bills.title")}</h1>
+        <p className="bills-empty">{t("bills.empty")}</p>
+        <p className="bills-note">{t("bills.emptyHint")}</p>
         <Link href="/" className="btn btn-primary btn-big">
-          {S.checkFirst}
+          {t("bills.checkFirst")}
         </Link>
       </section>
     );
 
   return (
     <section className="bills-page">
-      <h1 className="bills-title">{S.title}</h1>
+      <h1 className="bills-title">{t("bills.title")}</h1>
       <Link href="/" className="btn btn-primary btn-big">
-        {S.checkAnother}
+        {t("bills.checkAnother")}
       </Link>
       <ul className="bill-slips">
         {bills.map((b) => (
           <BillRow key={b.id} id={b.id} addedAt={b.addedAt} />
         ))}
       </ul>
-      <p className="bills-note">{S.savedHere}</p>
+      <p className="bills-note">{t("bills.savedHere")}</p>
     </section>
   );
 }

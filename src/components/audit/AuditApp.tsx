@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useT } from "../i18n/I18nProvider";
 import { CaMap } from "./CaMap";
-import { type Audit, displayName, isFlagged, longDate, place, resolveKey, worst } from "./data";
+import { type Audit, displayName, isFlagged, longDate, place, resolveKey, ruleTitle, worst } from "./data";
 import { HospitalView } from "./HospitalView";
 
 async function loadAudit(): Promise<{ audit: Audit; sample: boolean }> {
@@ -199,11 +199,12 @@ export function AuditApp() {
           {t("audit.rulesH")}
         </h2>
         <p className="quiet">{t("audit.rulesSub")}</p>
+        {lang === "es" && <p className="quiet quotes-note">{t("audit.quotesNote")}</p>}
         <ul className="rule-rows">
           {ruleRows.map(({ r, c, total }) => (
             <li key={r.id}>
               <div className="rule-row-head">
-                <span className="rule-title">{r.title}</span>
+                <span className="rule-title">{ruleTitle(r, r.id, lang)}</span>
                 <span className="rule-count">
                   {c.conflict + c.likely}
                   {c.ask > 0 && <span className="quiet">{t("audit.toAsk", { n: c.ask })}</span>}
