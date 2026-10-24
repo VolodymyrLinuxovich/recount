@@ -116,18 +116,25 @@ export function CaMap({
     if (!svg) return;
     const m = svg.getScreenCTM();
     if (!m) return;
-    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
-    // About 14 screen pixels, in map units.
-    const r = 14 / m.a;
+    // Measure in screen pixels, so a tap covers the same finger-sized spot on a phone and a laptop.
+    const TAP = 20;
     const hits = placed
-      .map((p) => ({ p, d: Math.hypot(p.xy[0] - pt.x, p.xy[1] - pt.y) }))
-      .filter((x) => x.d <= r)
-      .sort((a, b) => ORDER.indexOf(b.p.w) - ORDER.indexOf(a.p.w) || a.d - b.d)
-      .map((x) => x.p);
-    if (hits.length === 1) {
+      .map((p) => {
+        const s = new DOMPoint(p.xy[0], p.xy[1]).matrixTransform(m);
+        return { p, d: Math.hypot(s.x - e.clientX, s.y - e.clientY) };
+      })
+      .filter((x) => x.d <= TAP)
+      .sort((a, b) => a.d - b.d);
+    if (!hits.length) return;
+    // One dot right under the finger, with no close neighbour: open it.
+    if (hits.length === 1 || (hits[0].d <= 8 && hits[1].d > 2 * hits[0].d + 6)) {
       setNear(null);
-      onSelect(hits[0].h.key);
-    } else if (hits.length > 1) setNear({ list: hits.slice(0, 8), total: hits.length });
+      onSelect(hits[0].p.h.key);
+      return;
+    }
+    // Otherwise list the closest few (worst first among those) and point to the search box.
+    const closest = hits.slice(0, 8).sort((a, b) => ORDER.indexOf(b.p.w) - ORDER.indexOf(a.p.w) || a.d - b.d);
+    setNear({ list: closest.map((x) => x.p), total: hits.length });
   }
 
   return (

@@ -66,19 +66,52 @@ function ArrowRight() {
 }
 
 /** A big figure that counts up once it scrolls into view. Screen readers get the number at once. */
-function Figure({ n, label, sub, tone, run, k }: { n: number; label: string; sub?: string; tone: "brand" | "flag" | "lilac"; run: boolean; k: number }) {
-  const shown = useCountUp(n, run, 1200, 150 + k * 120);
+function Figure({ n, label, sub, tone, run, k }: { n: number | null; label: string; sub?: string; tone: "brand" | "flag" | "lilac"; run: boolean; k: number }) {
+  const shown = useCountUp(n ?? 0, run && n != null, 1200, 150 + k * 120);
   return (
     <div className={`a-fig a-fig--${tone} rv`} style={i(k + 1)}>
+      {/* Screen readers hear the final figure once; the counting digits are hidden from them.
+          Before the data arrives the figure keeps its height, so nothing below it moves. */}
+      {n != null && <p className="visually-hidden">{[n, label, sub].filter(Boolean).join(" ")}</p>}
       <p className="a-fig-n" aria-hidden="true">
-        {shown}
+        {n == null ? "\u00a0" : shown}
       </p>
-      <p className="a-fig-label">
-        <span className="visually-hidden">{n} </span>
+      <p className="a-fig-label" aria-hidden="true">
         {label}
       </p>
-      {sub && <p className="a-fig-sub">{sub}</p>}
+      {sub && (
+        <p className="a-fig-sub" aria-hidden="true">
+          {sub}
+        </p>
+      )}
     </div>
+  );
+}
+
+/** Matches the "Most flags" order: confirmed conflicts in red, likely conflicts after them. */
+function FlagChip({ conflict, likely }: { conflict: number; likely: number }) {
+  const { t } = useT();
+  const said = [conflict > 0 && t("audit.conflictsN", { n: conflict }), likely > 0 && t("audit.likelyN", { n: likely })].filter(Boolean).join(", ");
+  return (
+    <span className="find-flags">
+      <span className="visually-hidden">{said}</span>
+      {conflict > 0 ? (
+        <>
+          <span className="find-count find-count--conflict" aria-hidden="true">
+            {t("audit.conflictsN", { n: conflict })}
+          </span>
+          {likely > 0 && (
+            <span className="find-more" aria-hidden="true">
+              {t("audit.likelyPlus", { n: likely })}
+            </span>
+          )}
+        </>
+      ) : (
+        <span className="find-count find-count--likely" aria-hidden="true">
+          {t("audit.likelyN", { n: likely })}
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -90,9 +123,9 @@ function RuleCard({ s, max, run, k }: { s: RuleStat; max: number; run: boolean; 
   const why = WHY[s.r.id];
   return (
     <li className="a-rule-card rv" style={i(k + 1)}>
-      <p className="a-rule-n">
-        <span aria-hidden="true">{shown}</span>
-        <span className="visually-hidden">{s.total}</span> <span className="a-rule-unit">{t("audit.ruleHosp", { n: s.total })}</span>
+      <p className="visually-hidden">{`${s.total} ${t("audit.ruleHosp", { n: s.total })}`}</p>
+      <p className="a-rule-n" aria-hidden="true">
+        {shown} <span className="a-rule-unit">{t("audit.ruleHosp", { n: s.total })}</span>
       </p>
       <h3 className="a-rule-title">{ruleTitle(s.r, s.r.id, lang)}</h3>
       <div
@@ -113,10 +146,10 @@ function RuleCard({ s, max, run, k }: { s: RuleStat; max: number; run: boolean; 
   );
 }
 
-function Hero({ audit, confirmed, likelyOnly, statewide, sfOnly }: { audit: Audit; confirmed: number; likelyOnly: number; statewide: boolean; sfOnly: boolean }) {
+function Hero({ audit, confirmed, likelyOnly, statewide, sfOnly }: { audit: Audit | null; confirmed: number; likelyOnly: number; statewide: boolean; sfOnly: boolean }) {
   const { t, lang } = useT();
   const [ref, inView] = useInView<HTMLElement>(0.2);
-  const headline = statewide ? t("audit.heroAll") : sfOnly ? t("audit.heroSf") : t("audit.heroSome", { n: audit.hospitalsChecked });
+  const headline = statewide ? t("audit.heroAll") : sfOnly ? t("audit.heroSf") : t("audit.heroSome", { n: audit?.hospitalsChecked ?? 0 });
   return (
     <header ref={ref} className="a-hero" data-in={inView}>
       <div className="a-hero-copy">
@@ -124,7 +157,7 @@ function Hero({ audit, confirmed, likelyOnly, statewide, sfOnly }: { audit: Audi
           {headline}
         </h1>
         <p className="a-date rv" style={i(1)}>
-          {t("audit.updated", { date: longDate(audit.generatedAt, lang) })}
+          {audit ? t("audit.updated", { date: longDate(audit.generatedAt, lang) }) : "\u00a0"}
         </p>
       </div>
       <div className="a-hero-side">
@@ -132,13 +165,13 @@ function Hero({ audit, confirmed, likelyOnly, statewide, sfOnly }: { audit: Audi
           <Figure
             k={0}
             run={inView}
-            n={audit.hospitalsChecked}
+            n={audit ? audit.hospitalsChecked : null}
             tone="brand"
             label={t("audit.figChecked")}
-            sub={audit.hospitalsTotal > audit.hospitalsChecked ? t("audit.figOf", { total: audit.hospitalsTotal }) : undefined}
+            sub={!audit ? "\u00a0" : audit.hospitalsTotal > audit.hospitalsChecked ? t("audit.figOf", { total: audit.hospitalsTotal }) : undefined}
           />
-          <Figure k={1} run={inView} n={confirmed} tone="flag" label={t("audit.figConflict", { n: confirmed })} />
-          <Figure k={2} run={inView} n={likelyOnly} tone="lilac" label={t("audit.figLikely", { n: likelyOnly })} />
+          <Figure k={1} run={inView} n={audit ? confirmed : null} tone="flag" label={t("audit.figConflict", { n: audit ? confirmed : 2 })} />
+          <Figure k={2} run={inView} n={audit ? likelyOnly : null} tone="lilac" label={t("audit.figLikely", { n: audit ? likelyOnly : 2 })} />
         </div>
         <Link href="/" className="rc-btn a-hero-cta rv" style={i(4)}>
           {t("audit.checkCta")}
@@ -261,40 +294,41 @@ export function AuditApp() {
         <p className="error-note">{t("audit.loadFailed")}</p>
       </div>
     );
-  if (!data)
-    return (
-      <div className="audit">
-        {homeLink}
-        <p className="quiet">{t("audit.loading")}</p>
-      </div>
-    );
-
-  const { audit, sample } = data;
+  // Until the data arrives the page draws its full layout (hero figures, the map's box, the
+  // list's space) so nothing below jumps when it loads.
+  const audit = data?.audit ?? null;
+  const sample = data?.sample ?? false;
+  const hospitals = audit?.hospitals ?? [];
   // Describe exactly the set of hospitals in the file, never more.
-  const statewide = audit.hospitalsChecked >= 300;
-  const counties = new Set(audit.hospitals.map((h) => h.county).filter(Boolean));
+  const statewide = audit ? audit.hospitalsChecked >= 300 : true;
+  const counties = new Set(hospitals.map((h) => h.county).filter(Boolean));
   const sfOnly = !statewide && counties.size === 1 && counties.has("San Francisco");
 
   // Per hospital, by its worst verdict.
-  const confirmed = audit.hospitals.filter((h) => h.findings.some((f) => f.verdict === "conflict")).length;
-  const likelyOnly = audit.hospitals.filter(isFlagged).length - confirmed;
-  const selectedKey = resolveKey(audit.hospitals, selected);
-  const hospital = audit.hospitals.find((h) => h.key === selectedKey) ?? null;
+  const confirmed = hospitals.filter((h) => h.findings.some((f) => f.verdict === "conflict")).length;
+  const likelyOnly = hospitals.filter(isFlagged).length - confirmed;
+  const selectedKey = resolveKey(hospitals, selected);
+  const hospital = hospitals.find((h) => h.key === selectedKey) ?? null;
 
-  // Most conflict and likely flags first, then most flags of any kind, then by name.
-  const serious = (h: Hospital) => h.findings.filter((f) => f.verdict === "conflict" || f.verdict === "likely").length;
+  // Confirmed conflicts first, then likely conflicts, then flags of any kind, then by name,
+  // so a hospital with a confirmed conflict outranks ones with only likely flags.
+  const nOf = (h: Hospital, v: "conflict" | "likely") => h.findings.filter((f) => f.verdict === v).length;
+  const serious = (h: Hospital) => nOf(h, "conflict") + nOf(h, "likely");
   const byFlags = (a: Hospital, b: Hospital) =>
-    serious(b) - serious(a) || b.findings.length - a.findings.length || displayName(a.name).localeCompare(displayName(b.name));
+    nOf(b, "conflict") - nOf(a, "conflict") ||
+    nOf(b, "likely") - nOf(a, "likely") ||
+    b.findings.length - a.findings.length ||
+    displayName(a.name).localeCompare(displayName(b.name));
   // The map only helps when we know where the hospitals are.
-  const showMap = audit.hospitals.filter((h) => h.lat != null && h.lon != null).length >= 3;
-  const mostFlagged = showMap ? audit.hospitals.filter(isFlagged).sort(byFlags).slice(0, 6) : [...audit.hospitals].sort(byFlags);
+  const showMap = !audit || hospitals.filter((h) => h.lat != null && h.lon != null).length >= 3;
+  const mostFlagged = showMap ? hospitals.filter(isFlagged).sort(byFlags).slice(0, 6) : [...hospitals].sort(byFlags);
 
   // The three rules the most hospitals go against (conflict or likely), counted per hospital.
-  const topRules: RuleStat[] = audit.rules
+  const topRules: RuleStat[] = (audit?.rules ?? [])
     .map((r) => {
       let conflict = 0;
       let likely = 0;
-      for (const h of audit.hospitals) {
+      for (const h of hospitals) {
         const fs = h.findings.filter((f) => f.rule === r.id);
         if (fs.some((f) => f.verdict === "conflict")) conflict++;
         else if (fs.some((f) => f.verdict === "likely")) likely++;
@@ -313,7 +347,8 @@ export function AuditApp() {
           <span className="find-name">{displayName(h.name)}</span>
           {place(h, lang) && <span className="find-place">{place(h, lang)}</span>}
         </span>
-        {h.findings.length > 0 && <span className={`find-count find-count--${worst(h)}`}>{t("audit.flags", { n: h.findings.length })}</span>}
+        {/* The count the "Most flags" list is sorted by: conflicts plus likely conflicts. */}
+        {serious(h) > 0 && <FlagChip conflict={nOf(h, "conflict")} likely={nOf(h, "likely")} />}
       </button>
     </li>
   );
@@ -368,7 +403,7 @@ export function AuditApp() {
         {/* Search first in reading and Tab order; on a laptop the map sits to its left. */}
         {showMap && (
           <div className="a-map-col">
-            <CaMap hospitals={audit.hospitals} selected={selectedKey} onSelect={(key) => select(key, "map")} />
+            <CaMap hospitals={hospitals} selected={selectedKey} onSelect={(key) => select(key, "map")} />
           </div>
         )}
 
@@ -379,8 +414,15 @@ export function AuditApp() {
                 <ArrowLeft />
                 {t("audit.back")}
               </button>
-              <HospitalView h={hospital} rules={audit.rules} />
+              <HospitalView h={hospital} rules={audit?.rules ?? []} />
             </>
+          ) : !audit ? (
+            <div className="most rc-card">
+              <h3 className="most-h">{t("audit.mostFlags")}</h3>
+              <p className="most-loading" role="status">
+                {t("audit.loading")}
+              </p>
+            </div>
           ) : (
             mostFlagged.length > 0 && (
               <div className="most rc-card">
@@ -392,19 +434,21 @@ export function AuditApp() {
         </div>
       </section>
 
-      <Found stats={topRules} />
+      {audit && <Found stats={topRules} />}
 
-      <details className="a-disclosure a-method">
-        <summary>{t("audit.methodH")}</summary>
-        <p>{t("audit.method1")}</p>
-        <p>{t("audit.method2")}</p>
-        <p className="a-method-note">
-          {audit.hospitalsChecked >= audit.hospitalsTotal
-            ? t("audit.checkedAll", { n: audit.hospitalsChecked })
-            : t("audit.checkedSome", { checked: audit.hospitalsChecked, total: audit.hospitalsTotal })}
-          {t("audit.dataFrom", { date: longDate(audit.generatedAt, lang) })}
-        </p>
-      </details>
+      {audit && (
+        <details className="a-disclosure a-method">
+          <summary>{t("audit.methodH")}</summary>
+          <p>{t("audit.method1")}</p>
+          <p>{t("audit.method2")}</p>
+          <p className="a-method-note">
+            {audit.hospitalsChecked >= audit.hospitalsTotal
+              ? t("audit.checkedAll", { n: audit.hospitalsChecked })
+              : t("audit.checkedSome", { checked: audit.hospitalsChecked, total: audit.hospitalsTotal })}
+            {t("audit.dataFrom", { date: longDate(audit.generatedAt, lang) })}
+          </p>
+        </details>
+      )}
 
       <section className="a-end" aria-labelledby="end-h">
         <h2 id="end-h" className="a-end-h">

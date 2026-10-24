@@ -105,7 +105,7 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
         <p className={`hospital-verdict verdict-text-${w}`}>
           {h.checked === false ? t("hosp.unread") : w === "none" ? t("hosp.none") : summary(t, h)}
         </p>
-        <Link href="/" className="rc-btn rc-btn--block hospital-check">
+        <Link href={`/?hospital=${encodeURIComponent(h.key)}`} className="rc-btn rc-btn--block hospital-check">
           {t("hosp.checkBill")}
         </Link>
       </div>

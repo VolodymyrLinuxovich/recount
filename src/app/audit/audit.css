@@ -483,9 +483,25 @@
   color: var(--ink-2);
 }
 
+.find-flags {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.find-more {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* A confirmed conflict: a solid red chip, so it reads as worse than "likely" at a glance.
+   --pen on white text is 4.8:1; in dark mode the page color (deep purple) sits on light red. */
 .find-count--conflict {
-  background: var(--rc-flag-tint);
-  color: var(--rc-flag-ink);
+  background: var(--pen);
+  color: var(--paper);
 }
 
 .find-count--likely {
@@ -512,6 +528,16 @@
   .find-input::placeholder {
     font-size: var(--fs-sm);
   }
+}
+
+/* While the data loads, the list keeps about the room it will need. */
+.most-loading {
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
 }
 
 .most-h {
@@ -1206,4 +1232,54 @@
 
 .audit > .a-method + .a-end {
   margin-top: var(--sp-7);
+}
+
+/* ---------- high visibility ----------
+   The audit's own purple and grays are not in the pure palette, so map them onto it:
+   likely conflicts take the accent (yellow on black, navy on white), chips get an outline. */
+
+html[data-contrast] .audit {
+  --a-conflict: var(--pen);
+  --a-likely: var(--primary);
+  --a-likely-bar: var(--primary);
+  --a-text-likely: var(--ink);
+  --a-ask: var(--ink);
+  --a-none: var(--ink-2);
+}
+
+html[data-contrast] .audit :is(.find-count, .verdict) {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+html[data-contrast] .audit .find-count--conflict {
+  color: var(--pen);
+}
+
+html[data-contrast] .audit .find-count--likely,
+html[data-contrast] .audit .verdict-likely {
+  color: var(--ink);
+}
+
+/* ---------- the floating helper on this wide page ----------
+   On a laptop the "Ask Lupa" pill would sit on top of the "Most flags" list. Here it shrinks
+   to its round icon (the name stays for screen readers) and moves into the page margin as far
+   as the width allows, so it doesn't cover the list's counts. */
+
+@media (min-width: 1024px) {
+  body:has(.audit) .helper-launcher {
+    right: max(8px, calc((100vw - 1200px) / 2 - 76px));
+    width: 60px;
+    min-height: 60px;
+    padding: 0;
+    justify-content: center;
+  }
+  body:has(.audit) .helper-launcher-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 }
