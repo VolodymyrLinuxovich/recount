@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, BackHandler, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { EMPTY_DETAILS, checkDetails, fillLetter } from "./letterFill";
+
+const DETAILS_KEY = "recount.details.v1"; // kept only on this phone
 import Svg, { Circle, Path } from "react-native-svg";
 import { Button, C, Card, F, H1, H2, LinkText, P, Screen, openUrl, s } from "./ui";
 
@@ -22,6 +26,15 @@ export function CaseFlow({ t, id, token, onHome }) {
   const [err, setErr] = useState(null);
   const [seenStatus, setSeenStatus] = useState(null);
   const [draftsKey, setDraftsKey] = useState("");
+  const [details, setDetails] = useState(EMPTY_DETAILS);
+  const [detailsTried, setDetailsTried] = useState(false);
+
+  // The patient's details are typed once and reused for their next bill.
+  useEffect(() => {
+    AsyncStorage.getItem(DETAILS_KEY)
+      .then((raw) => raw && setDetails((d) => ({ ...d, ...JSON.parse(raw) })))
+      .catch(() => {});
+  }, []);
 
   const confirmHospital = useMutation(api.cases.confirmHospital);
   const submitHousehold = useMutation(api.cases.submitHousehold);
@@ -86,6 +99,23 @@ export function CaseFlow({ t, id, token, onHome }) {
     setPage(p);
   };
 
+  // Deleting is offered on the findings screen too, so a bill can be removed before any letters.
+  const deleteButton = {
+    label: t.deleteBill,
+    onPress: () => {
+      const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
+      // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
+      if (Platform.OS === "web") {
+        if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
+        return;
+      }
+      Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
+        { text: t.cancel, style: "cancel" },
+        { text: t.del, style: "destructive", onPress: del },
+      ]);
+    },
+  };
+
   // ---------- states driven by the backend ----------
   let view;
   if (c === undefined) {
@@ -118,23 +148,6 @@ export function CaseFlow({ t, id, token, onHome }) {
   } else {
     view = pageView();
   }
-
-  // Deleting is offered on the findings screen too, so a bill can be removed before any letters.
-  const deleteButton = {
-    label: t.deleteBill,
-    onPress: () => {
-      const del = () => run(async () => { await remove({ id, token }); await forgetBill(id); onHome(); });
-      // Alert.alert does nothing in a web browser, so use the browser's own confirm there.
-      if (Platform.OS === "web") {
-        if (window.confirm(`${t.deleteConfirmTitle}\n\n${t.deleteConfirmBody}`)) del();
-        return;
-      }
-      Alert.alert(t.deleteConfirmTitle, t.deleteConfirmBody, [
-        { text: t.cancel, style: "cancel" },
-        { text: t.del, style: "destructive", onPress: del },
-      ]);
-    },
-  };
 
   function pageView() {
     const h = household;
@@ -206,16 +219,38 @@ export function CaseFlow({ t, id, token, onHome }) {
           body: <Answer t={t} e={c.eligibility} />,
           primary:
             status === "ready" || status === "approved"
-              ? { label: t.seeLetters, onPress: () => { setLetterIndex(0); go("letter"); } }
+              ? { label: t.seeLetters, onPress: () => { setLetterIndex(0); go("details"); } }
               : { label: t.draftingLetters, busy: true },
         };
+      case "details": {
+        // Prefill the name printed on the bill.
+        const d = details.name || !c.bill?.patientName ? details : { ...details, name: c.bill.patientName };
+        const problems = checkDetails(d);
+        const ok = !Object.keys(problems).length;
+        return {
+          step: 4,
+          back: () => go("answer"),
+          body: <DetailsForm t={t} d={d} problems={detailsTried ? problems : {}} onChange={setDetails} />,
+          primary: {
+            label: t.detailsDone,
+            onPress: () => {
+              setDetailsTried(true);
+              if (!ok) return;
+              AsyncStorage.setItem(DETAILS_KEY, JSON.stringify(d)).catch(() => {});
+              setDrafts((drafts || []).map((l) => fillLetter(l, d)));
+              setLetterIndex(0);
+              go("letter");
+            },
+          },
+        };
+      }
       case "letter": {
         const list = drafts || [];
         const i = Math.min(letterIndex, Math.max(0, list.length - 1));
         const last = i >= list.length - 1;
         return {
           step: 4,
-          back: () => (i > 0 ? setLetterIndex(i - 1) : go("answer")),
+          back: () => (i > 0 ? setLetterIndex(i - 1) : go("details")),
           body: list.length ? (
             <LetterEditor
               key={i}
@@ -463,6 +498,33 @@ function Stepper({ t, value, onChange }) {
   );
 }
 
+function DetailsForm({ t, d, problems, onChange }) {
+  const field = (key, label, props = {}) => (
+    <View style={{ marginBottom: 12 }} key={key}>
+      <Text style={x.fieldLabel}>{label}</Text>
+      <TextInput
+        style={[s.input, problems[key] && { borderColor: C.flag }]}
+        value={d[key]}
+        onChangeText={(v) => onChange({ ...d, [key]: v })}
+        accessibilityLabel={label}
+        {...props}
+      />
+      {problems[key] ? <Text style={s.error}>{problems[key] === "bad" ? t.detailsBad[key] : t.detailsMissing}</Text> : null}
+    </View>
+  );
+  return (
+    <>
+      <H1>{t.detailsTitle}</H1>
+      <P muted>{t.detailsBody}</P>
+      {field("name", t.dName, { autoComplete: "name", textContentType: "name" })}
+      {field("street", t.dStreet, { autoComplete: "street-address", textContentType: "streetAddressLine1" })}
+      {field("city", t.dCity, { textContentType: "addressCity" })}
+      {field("zip", t.dZip, { keyboardType: "number-pad", autoComplete: "postal-code", textContentType: "postalCode", maxLength: 10 })}
+      {field("phone", t.dPhone, { keyboardType: "phone-pad", autoComplete: "tel", textContentType: "telephoneNumber" })}
+    </>
+  );
+}
+
 function MoneyInput({ value, onChange }) {
   const shown = value === "" ? "" : Number(value).toLocaleString("en-US");
   return (
@@ -475,7 +537,7 @@ function MoneyInput({ value, onChange }) {
         keyboardType="number-pad"
         autoFocus
         placeholder="0"
-        placeholderTextColor={C.lilac}
+        placeholderTextColor="#d9d2ea"
       />
     </View>
   );
@@ -618,6 +680,7 @@ function Done({ t, c, letters }) {
 }
 
 const x = StyleSheet.create({
+  fieldLabel: { fontFamily: F.body500, fontSize: 17, color: C.ink, marginBottom: 6 },
   stepRow: { flexDirection: "row", alignItems: "flex-start", paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: C.line },
   stepMark: { width: 32, height: 32, borderRadius: 16, backgroundColor: C.bg2, alignItems: "center", justifyContent: "center", marginRight: 14 },
   stepDone: { backgroundColor: C.brandTint },

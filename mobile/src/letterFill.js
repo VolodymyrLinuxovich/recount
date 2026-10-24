@@ -1,0 +1,131 @@
+// The patient's details go into the [brackets] of the letters. Same rules as the website
+// (src/components/letterFill.ts), so both apps fill letters the same way.
+
+export const REQUIRED = ["name", "street", "city", "zip", "phone"];
+export const EMPTY_DETAILS = { name: "", street: "", city: "", zip: "", phone: "", email: "", dob: "" };
+const phoneDigits = (v) => {
+  const d = v.replace(/\D/g, "");
+  return d.length === 11 && d.startsWith("1") ? d.slice(1) : d;
+};
+export const phoneOk = (v) => phoneDigits(v).length === 10;
+export const zipOk = (v) => /^\d{5}(-?\d{4})?$/.test(v.trim());
+
+/** Each field's problem: "missing", "bad", or nothing. */
+export function checkDetails(d) {
+  const out = {};
+  for (const k of REQUIRED) if (!(d[k] || "").trim()) out[k] = "missing";
+  if (d.phone.trim() && !phoneOk(d.phone)) out.phone = "bad";
+  if (d.zip.trim() && !zipOk(d.zip)) out.zip = "bad";
+  return out;
+}
+
+const BRACKET = /\[([^\]\n]{1,80})\]/g;
+
+/** Which of the patient's details a bracket asks for, or null when it's something else (an amount, the hospital's address…). */
+export function slotOf(label) {
+  const x = label
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']s\b/g, "")
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  // Someone else's details are not the patient's.
+  if (/\b(hospital|billing|office|facility|department|provider|insurer|insurance|agency|collector|clinic|doctor|physician)\b/.test(x)) return null;
+  if (/\b(e ?mail|correo electronico)\b/.test(x)) return "email";
+  if (/\b(date of birth|dob|birth ?date|birthday|fecha de nacimiento)\b/.test(x)) return "dob";
+  if (/\b(phone|telephone|cell|mobile|telefono|celular)\b/.test(x)) return "phone";
+  if (/^(your )?(zip|zip code|postal code|codigo postal)$/.test(x)) return "zip";
+  const addr = /\b(address|street|direccion|calle)\b/.test(x);
+  const city = /\b(city|state|zip|zip code|postal|ciudad|estado|codigo postal)\b/.test(x);
+  if (addr && city) return "address";
+  // "[Street]" is just the street; a plain "[Your address]" is the whole address.
+  if (addr) return /\b(street|calle)\b/.test(x) ? "street" : "address";
+  if (city) return "city";
+  if (/^(today )?date$|^today$|^fecha( de hoy)?$/.test(x)) return "date";
+  if (/^(your |patient |the patient |printed |full |your full |your printed |patient full )*name$/.test(x)) return "name";
+  if (/^(su )?nombre( completo| del paciente)?$/.test(x)) return "name";
+  return null;
+}
+
+const cityLine = (d) => [d.city.trim().replace(/,\s*$/, ""), d.zip.trim()].filter(Boolean).join(" ");
+
+function valueFor(slot, d, today) {
+  switch (slot) {
+    case "address":
+      return [d.street.trim(), cityLine(d)].filter(Boolean).join(", ");
+    case "city":
+      return cityLine(d);
+    case "date":
+      return today;
+    default:
+      return (d[slot] || "").trim();
+  }
+}
+
+const usToday = () => new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+const esToday = () => new Date().toLocaleDateString("es-US", { month: "long", day: "numeric", year: "numeric" });
+
+const OPTIONAL = ["email", "dob"];
+const DROP = "\u0000";
+
+/** Put the patient's details into the matching [brackets]. Brackets with nothing to put in stay,
+ * except optional ones (email, date of birth): their line is left out of the letter. */
+export function fillText(text, d, today = usToday()) {
+  // "[Address]" next to its own "[City, State ZIP]" line is only the street, or the city shows twice.
+  const slots = new Set([...text.matchAll(BRACKET)].map((m) => slotOf(m[1])));
+  const cityApart = slots.has("city");
+  const zipApart = slots.has("zip");
+  const filled = text.replace(BRACKET, (whole, label) => {
+    // The writer sometimes leaves "[Your name: Alex Rivera]": the value is already there, so use it.
+    const kv = label.match(/^([^:]{2,40}):\s*(\S.*)$/);
+    if (kv && !/\b(insert|enter|fill|type|your|add|escriba|ingrese|su)\b/i.test(kv[2])) return kv[2].trim();
+    let slot = slotOf(label);
+    if (!slot) return whole;
+    if (slot === "address" && cityApart) slot = "street";
+    const v = slot === "city" && zipApart ? d.city.trim() : valueFor(slot, d, today);
+    if (v) return v;
+    return OPTIONAL.includes(slot) ? DROP : whole;
+  });
+  if (!filled.includes(DROP)) return filled;
+  return filled
+    .split("\n")
+    .filter((line) => {
+      if (!line.includes(DROP)) return true;
+      const rest = line.split(DROP).join("").trim();
+      return rest !== "" && !/^[^.!?]{0,40}:$/.test(rest);
+    })
+    .map((line) => line.split(DROP).join("").replace(/\s+([,.])/g, "$1"))
+    .join("\n");
+}
+
+export function fillLetter(l, d) {
+  const today = usToday();
+  return {
+    ...l,
+    subject: fillText(l.subject, d, today),
+    body: fillText(l.body, d, today),
+    // The Spanish copy shows the same details, so it reads like the letter that is sent.
+    ...(l.subjectPatient != null ? { subjectPatient: fillText(l.subjectPatient, d, esToday()) } : {}),
+    ...(l.bodyPatient != null ? { bodyPatient: fillText(l.bodyPatient, d, esToday()) } : {}),
+  };
+}
+
+/** The brackets still in the letter: the detail it asks for (if one of ours) and its text. */
+export function leftovers(l) {
+  const seen = new Set();
+  const out = [];
+  for (const m of `${l.subject}\n${l.body}`.matchAll(BRACKET)) {
+    // A signature is written by hand on the paper, so it isn't something to fill in here.
+    if (/signature|firma|sign here/i.test(m[1])) continue;
+    const slot = slotOf(m[1]);
+    // Optional details (email, date of birth) are never "missing".
+    if (slot && OPTIONAL.includes(slot)) continue;
+    const id = slot ?? m[1].toLowerCase();
+    if (seen.has(id)) continue;
+    seen.add(id);
+    out.push({ slot, label: m[0] });
+  }
+  return out;
+}
