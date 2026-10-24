@@ -419,3 +419,8 @@
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+
+.found-versus-src {
+  grid-column: 1 / -1;
+  margin: -4px 0 0;
+}

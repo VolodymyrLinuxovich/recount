@@ -303,8 +303,12 @@ function Versus({ left, right }: { left: { label: string; value: string }; right
         <p className="found-versus-label">{right.label}</p>
         <p className="found-versus-num">{right.value}</p>
         {right.note && <p className="found-quiet">{right.note}</p>}
-        <SourceLink url={right.src} />
       </div>
+      {right.src && (
+        <p className="found-versus-src">
+          <SourceLink url={right.src} />
+        </p>
+      )}
     </div>
   );
 }
