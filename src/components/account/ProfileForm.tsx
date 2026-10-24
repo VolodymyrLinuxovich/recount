@@ -45,9 +45,8 @@ export function ProfileForm() {
   if (profile === undefined) return <p className="quiet">{t("acct.loading")}</p>;
 
   // Nothing saved yet: start from the account itself (the name and email Google gave us, or the sign-in email).
-  const acct = profile as { accountName?: string | null; accountEmail?: string | null } | null;
   const saved = fromServer(profile);
-  const d = edits ?? { ...saved, name: saved.name || (acct?.accountName ?? ""), email: saved.email || (acct?.accountEmail ?? "") };
+  const d = edits ?? { ...saved, name: saved.name || (profile?.accountName ?? ""), email: saved.email || (profile?.accountEmail ?? "") };
   // Only typos matter here: nothing is required on the account.
   const problems = checkDetails(d);
   const bad = (k: Field) => problems[k] === "bad" && (tried || left[k]) ? t(BAD[k]!) : null;
