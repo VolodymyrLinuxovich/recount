@@ -148,3 +148,126 @@
     gap: var(--sp-3);
   }
 }
+
+/* ---------- "Who did what" on a bill ---------- */
+.who-sum {
+  display: grid;
+  gap: var(--sp-2);
+  margin: var(--sp-2) 0 var(--sp-3);
+  padding: 0;
+  list-style: none;
+}
+.who-sum li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.who-runs {
+  margin: 0 0 var(--sp-3);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.who-run {
+  display: grid;
+  gap: 2px;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.who-task {
+  font-weight: 700;
+}
+.who-model {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.who-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.who-flag {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--rc-bg-2);
+  font-weight: 600;
+}
+.who-flag-bad {
+  color: var(--pen);
+}
+
+/* ---------- /how: models in use, and what the AI may and may not do ---------- */
+.how-models,
+.how-limits {
+  margin: 0 0 var(--sp-6);
+}
+.how-models h2,
+.how-limits h2 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-lg, 1.2rem);
+}
+.how-models > p {
+  margin: 0 0 var(--sp-3);
+  color: var(--ink-2);
+}
+.how-model-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.how-model-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.how-model-list b {
+  font-weight: 700;
+}
+.how-model-list code {
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.how-model-backup {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+@media (max-width: 520px) {
+  .how-model-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+.how-limit-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--sp-3);
+}
+.how-limit-col {
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--sheet);
+}
+.how-limit-col h3 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-base);
+}
+.how-limit-col ul {
+  margin: 0;
+  padding-left: var(--sp-5);
+  display: grid;
+  gap: 4px;
+}
+.how-limit-no h3 {
+  color: var(--pen);
+}

@@ -1,10 +1,12 @@
 "use client";
 
+import { useQuery } from "convex/react";
 import Link from "next/link";
+import { api } from "../../../convex/_generated/api";
 import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
 import { KindBadge } from "./KindBadge";
-import type { Kind } from "./kinds";
+import { type Kind, providerName } from "./kinds";
 import "./how.css";
 
 /** Every step from photo to letter, and who does it. */
@@ -25,6 +27,8 @@ const STEPS: { kind: Kind; n: number }[] = [
 export function HowScreen() {
   const { t } = useT();
   const k = (s: string) => s as PlainKey;
+  const map = useQuery(api.pipeline.map);
+  const TASKS = ["read", "column", "letters", "chat"] as const;
   return (
     <article className="how">
       <p className="eyebrow">{t("how.eyebrow")}</p>
@@ -56,6 +60,54 @@ export function HowScreen() {
           </li>
         ))}
       </ol>
+
+      <section className="how-limits" aria-labelledby="how-limits-h">
+        <h2 id="how-limits-h">{t("how.limitsH")}</h2>
+        <div className="how-limit-cols">
+          <div className="how-limit-col">
+            <h3>{t("how.mayH")}</h3>
+            <ul>
+              {[1, 2, 3, 4].map((i) => (
+                <li key={i}>{t(k(`how.may${i}`))}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="how-limit-col how-limit-no">
+            <h3>{t("how.mayNotH")}</h3>
+            <ul>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <li key={i}>{t(k(`how.mayNot${i}`))}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {map && (
+        <section className="how-models" aria-labelledby="how-models-h">
+          <h2 id="how-models-h">{t("how.modelsH")}</h2>
+          <p>{t("how.modelsLede")}</p>
+          <ul className="how-model-list">
+            {TASKS.map((task) => {
+              const m = (map.models as Record<string, { primary: { provider: string; model: string }; fallback: { provider: string; model: string } | null }>)[task];
+              if (!m) return null;
+              return (
+                <li key={task}>
+                  <b>{t(k(`who.task.${task}`))}</b>
+                  <span>
+                    <code>{m.primary.model}</code> · {providerName(m.primary.provider)}
+                    {m.fallback && (
+                      <span className="how-model-backup">
+                        {t("how.backup")} <code>{m.fallback.model}</code> · {providerName(m.fallback.provider)}
+                      </span>
+                    )}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
 
       <section className="how-why" aria-labelledby="how-why-h">
         <h2 id="how-why-h">{t("how.whyH")}</h2>

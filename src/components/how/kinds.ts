@@ -13,6 +13,29 @@ const BY_KEY: Record<string, Kind> = {
   letters: "ai",
 };
 
-export function kindOf(s: Step & { kind?: Kind }): Kind | null {
-  return s.kind ?? BY_KEY[s.key] ?? null;
+type ServerKind = "rule" | "ai" | "person";
+
+export function kindOf(s: Step & { kind?: ServerKind }): Kind | null {
+  if (s.kind) return s.kind === "person" ? "you" : s.kind;
+  return BY_KEY[s.key] ?? null;
+}
+
+export type AgentRun = {
+  task: "read" | "column" | "letters" | "chat";
+  provider: string;
+  model: string;
+  ms: number;
+  inputTokens: number | null;
+  outputTokens: number | null;
+  ok: boolean;
+  fallbackUsed: boolean;
+  at: number;
+};
+
+/** "Anthropic", "Azure AI Foundry", or any OpenAI-compatible host. */
+export function providerName(p: string): string {
+  if (p === "anthropic") return "Anthropic";
+  if (p === "azure") return "Azure AI Foundry";
+  if (p === "openai") return "OpenAI-compatible";
+  return p;
 }

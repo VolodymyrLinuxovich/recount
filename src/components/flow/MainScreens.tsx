@@ -14,6 +14,7 @@ import { useT } from "../i18n/I18nProvider";
 import { PolicyAside } from "../PolicyAside";
 import { Sources } from "../Sources";
 import { StepLog } from "../StepLog";
+import { WhoDidWhat } from "../how/WhoDidWhat";
 import { money } from "../types";
 import { StepFrame } from "./StepFrame";
 import { phaseOf } from "./steps";
@@ -294,6 +295,7 @@ export function MoreStep({ c, back }: ScreenProps) {
     <StepFrame phase={phase} title={t("flow.moreH")} onBack={back}>
       <div className="more">
         <Sources c={c} />
+        <WhoDidWhat c={c} />
         {c.token && <BillTools id={c._id} token={c.token} />}
         <section className="more-sec" aria-labelledby="log-h">
           <h2 id="log-h" className="more-h">
