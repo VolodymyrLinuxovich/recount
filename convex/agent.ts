@@ -273,7 +273,8 @@ export const readAndCheck = internalAction({
         throw new Error(t("RETAKE: We couldn't read the charges on this photo. Please take a new photo in good light, flat and close enough to read.", "RETAKE: No pudimos leer los cargos en esta foto. Tome otra foto con buena luz, plana y de cerca."));
       }
       const addr = `${bill.hospitalAddress ?? ""}`;
-      const stateMatch = addr.match(/,\s*([A-Z]{2})\s*\d{5}/) ?? addr.match(/\b(Nevada|Oregon|Arizona|Washington|Texas|New York)\b/i);
+      // Only a "…, ST 12345" or a trailing "…, ST" state code counts; street names like Washington Blvd don't.
+      const stateMatch = addr.match(/,\s*([A-Z]{2})\s+\d{5}(?:-\d{4})?\s*$/) ?? addr.match(/,\s*([A-Z]{2})\s*$/);
       if (stateMatch && !/^(CA|California)$/i.test(stateMatch[1])) {
         throw new Error(t("OUT_OF_STATE: Recount covers California hospitals. This bill looks like it's from another state, where different rules apply.", "OUT_OF_STATE: Recount cubre hospitales de California. Esta factura parece ser de otro estado, donde aplican otras reglas."));
       }

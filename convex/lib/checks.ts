@@ -100,15 +100,15 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null, lang: Lang 
           amount: over,
           title: t(
             `${l.description} is billed above the hospital's own list price`,
-            `${l.description} cuesta más que el precio publicado por el propio hospital`,
+            `${l.description} cuesta más que el precio de lista del hospital`,
           ),
           detail: t(
             `Billed ${money(perUnit)} per unit, but the hospital's published standard charge is ${money(row.grossCharge)}.`,
-            `Le cobraron ${money(perUnit)} por unidad, pero el precio estándar que publica el hospital es ${money(row.grossCharge)}.`,
+            `Le cobraron ${money(perUnit)} por unidad, pero el precio de lista del hospital es ${money(row.grossCharge)}.`,
           ),
           evidence: [
             { label: t("Billed per unit", "Cobrado por unidad"), value: money(perUnit) },
-            { label: t("Published gross charge", "Precio publicado"), value: money(row.grossCharge), source: src },
+            { label: t("Published gross charge", "Precio de lista del hospital"), value: money(row.grossCharge), source: src },
           ],
           confidence: "high",
         });
@@ -123,15 +123,15 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null, lang: Lang 
           amount: gap,
           title: t(
             `${l.description}: the cash price is ${money(row.discountedCash * qty)}`,
-            `${l.description}: el precio en efectivo es ${money(row.discountedCash * qty)}`,
+            `${l.description}: el precio para pacientes sin seguro es ${money(row.discountedCash * qty)}`,
           ),
           detail: t(
             `You were billed ${money(l.charge)}. The hospital publishes a discounted cash price of ${money(row.discountedCash)} per unit for this service. As a self-pay patient you can ask for it.`,
-            `Le cobraron ${money(l.charge)}. El hospital publica un precio en efectivo con descuento de ${money(row.discountedCash)} por unidad para este servicio. Como paciente sin seguro, puede pedirlo.`,
+            `Le cobraron ${money(l.charge)}. El hospital publica un precio para pacientes sin seguro de ${money(row.discountedCash)} por unidad para este servicio. Como paciente sin seguro, puede pedirlo.`,
           ),
           evidence: [
             { label: t("Billed", "Cobrado"), value: money(l.charge) },
-            { label: t("Published cash price", "Precio en efectivo publicado"), value: money(row.discountedCash), source: src },
+            { label: t("Published cash price", "Precio publicado sin seguro"), value: money(row.discountedCash), source: src },
           ],
           confidence: "high",
         });

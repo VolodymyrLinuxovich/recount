@@ -30,7 +30,15 @@ export interface HospitalRef {
     quotes: string[];
     phone: string | null;
     applicationUrl: string | null;
+    /** The hospital's policy sets no upper income limit for discounts. */
+    discountNoCap?: boolean;
+    /** Effective date of the policy document the limits came from. */
+    effectiveDate?: string | null;
+    /** How the limits were read: "rules" (pattern extractor) or "claude" (checked against a verbatim quote). */
+    method?: "rules" | "claude" | "manual";
   } | null;
+  /** True for hospitals we only know from the state's policy filings (no price file). */
+  policyOnly?: boolean;
   warnings: string[];
 }
 
