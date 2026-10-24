@@ -85,11 +85,11 @@
 }
 
 /* Three long answers: one per row, so they stay readable at large text sizes. */
-.fu-choices {
+.choice-big.fu-choices {
   grid-template-columns: 1fr;
 }
 
-.fu-choices button {
+.choice-big.fu-choices button {
   text-align: left;
   padding: var(--sp-3) var(--sp-4);
 }
