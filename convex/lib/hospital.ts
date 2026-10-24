@@ -1,0 +1,38 @@
+// Reference data about one hospital, as returned by our Apify Actor
+// (or a saved snapshot of an earlier Actor run when the live run isn't available).
+
+export interface PriceRow {
+  description: string | null;
+  grossCharge: number | null;
+  discountedCash: number | null;
+  min: number | null;
+  max: number | null;
+  setting?: string | null;
+}
+
+export interface HospitalRef {
+  key: string;
+  name: string;
+  source: "apify-live" | "snapshot";
+  fetchedAt: string;
+  mrf: {
+    url: string;
+    lastUpdated: string | null;
+    prices: Record<string, PriceRow>;
+  } | null;
+  fap: {
+    url: string | null;
+    freeCareMaxFplPct: number | null;
+    discountMaxFplPct: number | null;
+    quotes: string[];
+    phone: string | null;
+    applicationUrl: string | null;
+  } | null;
+  warnings: string[];
+}
+
+export function normalizeCode(code: string | null | undefined): string | null {
+  if (!code) return null;
+  const c = code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+  return c.length >= 4 ? c : null;
+}
