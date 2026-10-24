@@ -1,32 +1,17 @@
 "use client";
 
 // The home page below the masthead: a centered hero, the problem in sourced numbers,
-// a six-step "See how it works" scroll story, a way into Lupa, and a final call to action.
+// a way into Lupa, and a final call to action.
 // StartScreen owns the real behavior (file input, onboarding, uploads) and passes it in.
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { BrandMark } from "../BrandMark";
 import { setHelperOpen } from "../helper/openStore";
 import { useT } from "../i18n/I18nProvider";
-import type { Key, PlainKey } from "../i18n/strings";
-import { useCountUp, useInView, useReducedMotion } from "./hooks";
+import type { PlainKey } from "../i18n/strings";
+import { useInView, useReducedMotion } from "./hooks";
 import { Lupa } from "./Lupa";
 import "./landing.css";
 
-// The real sample bill (convex/lib/sampleBill.json).
-const BILL: { n: number; amt: number; flag?: "landing.overList" | "landing.twice" }[] = [
-  { n: 1, amt: 6084 },
-  { n: 2, amt: 4403 },
-  { n: 3, amt: 482, flag: "landing.overList" },
-  { n: 4, amt: 528 },
-  { n: 5, amt: 269 },
-  { n: 6, amt: 269, flag: "landing.twice" },
-  { n: 7, amt: 287 },
-  { n: 8, amt: 419 },
-];
-const lineKey = (n: number) => `landing.line${n}` as PlainKey;
-
-const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 const i = (n: number) => ({ "--i": n }) as CSSProperties;
 
 type Actions = {
@@ -42,7 +27,6 @@ export function Landing({ actions, error, install }: { actions: Actions; error: 
     <div className="landing">
       <Hero actions={actions} error={error} />
       <Problem />
-      <How />
       <AskLupa />
       <FinalCta actions={actions} />
       {install && <div className="ld-wrap ld-install">{install}</div>}
@@ -162,241 +146,6 @@ function Problem() {
         </div>
       )}
     </Reveal>
-  );
-}
-
-/* ─────────────── How it works: a scroll story ─────────────── */
-const STEPS: [Key, Key, (on: boolean) => ReactNode][] = [
-  ["landing.step1T", "landing.step1", (on) => <SnapScreen on={on} />],
-  ["landing.step2T", "landing.step2", (on) => <ReadingScreen on={on} />],
-  ["landing.step3T", "landing.step3", (on) => <FlagScreen on={on} />],
-  ["landing.step4T", "landing.step4", () => <QuestionScreen />],
-  ["landing.step5T", "landing.step5", (on) => <AnswerScreen on={on} />],
-  ["landing.step6T", "landing.step6", () => <LetterScreen />],
-];
-
-function How() {
-  const { t } = useT();
-  return (
-    <section className="ld-how" id="how" aria-labelledby="ld-how-h">
-      <div className="ld-wrap">
-        <h2 id="ld-how-h" className="ld-h2 ld-how-h">
-          {t("landing.howH")}
-        </h2>
-        {STEPS.map(([title, text, screen], k) => (
-          <Step key={title} n={k + 1} title={t(title as PlainKey)} text={t(text as PlainKey)}>
-            {screen}
-          </Step>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Step({ n, title, text, children }: { n: number; title: string; text: string; children: (on: boolean) => ReactNode }) {
-  return (
-    <Reveal as="div" className="ld-step" labelledBy={`ld-step-${n}`} threshold={0.35}>
-      {(on) => (
-        <>
-          <div className="ld-step-copy rv" style={i(0)}>
-            <span className="ld-step-n" aria-hidden="true">
-              {n}
-            </span>
-            <h3 id={`ld-step-${n}`} className="ld-h3">
-              {title}
-            </h3>
-            <p>{text}</p>
-          </div>
-          <div className="ld-phone rv" style={i(1)} aria-hidden="true" inert>
-            <div className="ld-phone-bar">
-              <BrandMark className="ld-phone-mark" />
-              <span>Recount</span>
-            </div>
-            {children(on)}
-          </div>
-        </>
-      )}
-    </Reveal>
-  );
-}
-
-function SnapScreen({ on }: { on: boolean }) {
-  const { t } = useT();
-  return (
-    <div className="ld-scr" data-on={on}>
-      <div className="ld-viewfinder">
-        <span className="ld-corner ld-corner--tl" />
-        <span className="ld-corner ld-corner--tr" />
-        <span className="ld-corner ld-corner--bl" />
-        <span className="ld-corner ld-corner--br" />
-        <div className="ld-paper">
-          <p className="ld-paper-h">ZSFG</p>
-          <p className="ld-paper-s">{t("landing.itemized")}</p>
-          {BILL.map((l) => (
-            <span key={l.n} className="ld-paper-line">
-              <i />
-              <b>{usd(l.amt)}</b>
-            </span>
-          ))}
-          <span className="ld-paper-total">
-            <i />
-            <b>$12,741</b>
-          </span>
-        </div>
-        <span className="ld-flash" />
-      </div>
-      <p className="ld-snap-ok">
-        <CheckIcon /> {t("landing.snapOk")}
-      </p>
-      <div className="ld-shutter">
-        <span />
-      </div>
-    </div>
-  );
-}
-
-function ReadingScreen({ on }: { on: boolean }) {
-  const { t } = useT();
-  const checks: PlainKey[] = ["landing.read1", "landing.read2"];
-  return (
-    <div className="ld-scr">
-      <p className="ld-scr-title">{t("landing.readTitle")}</p>
-      <div className="ld-mini-bill">
-        {BILL.map((l) => (
-          <div key={l.n} className="ld-mini-line">
-            <span>{t(lineKey(l.n))}</span>
-            <span>{usd(l.amt)}</span>
-          </div>
-        ))}
-        {on && <span className="ld-sweep" />}
-      </div>
-      <ul className="ld-checks">
-        {checks.map((k, j) => (
-          <li key={k} style={i(j)}>
-            <span className="ld-tick">
-              <svg viewBox="0 0 24 24">
-                <path d="M6 12.5l4 4L18 8" pathLength={1} />
-              </svg>
-            </span>
-            {t(k)}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function FlagScreen({ on }: { on: boolean }) {
-  const { t } = useT();
-  const saved = useCountUp(349, on, 1400, 2200);
-  return (
-    <div className="ld-scr">
-      <p className="ld-scr-title">{t("landing.flagTitle")}</p>
-      <ol className="ld-ledger-lines ld-ledger-lines--sm">
-        {BILL.map((l) => (
-          <li key={l.n} className={l.flag ? "is-flag" : undefined} style={i(l.n)}>
-            <span className="ld-ln">{l.n}</span>
-            <span className="ld-lw">
-              {t(lineKey(l.n))}
-              {l.flag && <em className="ld-flag">{t(l.flag)}</em>}
-            </span>
-            <span className="ld-la">{usd(l.amt)}</span>
-          </li>
-        ))}
-      </ol>
-      <div className="ld-saved">
-        <span>{t("landing.save")}</span>
-        <strong>{usd(saved)}</strong>
-      </div>
-    </div>
-  );
-}
-
-function QuestionScreen() {
-  const { t } = useT();
-  return (
-    <div className="ld-scr">
-      <div className="ld-q-top">
-        <div className="rc-progress" style={{ "--p": "34%" } as CSSProperties}>
-          <span />
-        </div>
-        <span className="ld-q-count">{t("landing.qCount")}</span>
-      </div>
-      <p className="ld-q">{t("landing.qAsk")}</p>
-      <p className="ld-q-help">{t("landing.qHelp")}</p>
-      <div className="ld-stepper">
-        <span>−</span>
-        <output>3</output>
-        <span>+</span>
-      </div>
-      <div className="ld-bar">
-        <span className="btn ld-bar-btn">{t("landing.qBack")}</span>
-        <span className="btn btn-primary ld-bar-btn">{t("landing.qNext")}</span>
-      </div>
-    </div>
-  );
-}
-
-function AnswerScreen({ on }: { on: boolean }) {
-  const { t } = useT();
-  const counted = useCountUp(12741, on, 1500, 500);
-  const left = 12741 - counted;
-  const done = on && left === 0;
-  return (
-    <div className="ld-scr ld-answer" data-done={done}>
-      <span className="ld-ok-badge">
-        <svg viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="21" pathLength={1} />
-          <path d="M15 24.5l6.5 6.5L33.5 18" pathLength={1} />
-        </svg>
-      </span>
-      <p className="ld-answer-k">{t("landing.based")}</p>
-      <p className="ld-answer-h">
-        {t("landing.owe")} <span className="ld-answer-num">{usd(left)}</span>
-      </p>
-      <p className="ld-answer-was">
-        {t("landing.billed")} <s>$12,741</s>
-      </p>
-      <div className="ld-meter">
-        <div className="ld-meter-track">
-          <span className="ld-meter-free" />
-          <span className="ld-meter-you" />
-        </div>
-        <div className="ld-meter-keys">
-          <span>{t("landing.you")}</span>
-          <span>{t("landing.free")}</span>
-        </div>
-      </div>
-      <p className="ld-answer-why">{t("landing.why")}</p>
-      <span className="btn btn-primary ld-bar-btn ld-block">{t("landing.letters")}</span>
-    </div>
-  );
-}
-
-function LetterScreen() {
-  const { t } = useT();
-  return (
-    <div className="ld-scr">
-      <p className="ld-scr-title">{t("landing.letterTitle")}</p>
-      <div className="ld-letter">
-        <p className="ld-letter-meta">{t("landing.letterTo")}</p>
-        <p className="ld-letter-meta">{t("landing.letterRe")}</p>
-        <p>{t("landing.letterP1")}</p>
-        <p>{t("landing.letterP2")}</p>
-        <span className="ld-letter-skel" />
-        <span className="ld-letter-skel ld-letter-skel--short" />
-      </div>
-      <p className="ld-approve">
-        <span className="ld-box">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 12.5l4.5 4.5L19 7.5" />
-          </svg>
-        </span>
-        {t("landing.letterCheck")}
-      </p>
-      <span className="btn btn-primary ld-bar-btn ld-block">{t("landing.letterApprove")}</span>
-      <p className="ld-letter-note">{t("landing.letterNote")}</p>
-    </div>
   );
 }
 
@@ -550,13 +299,6 @@ function CameraIcon() {
     <svg className="ld-ico" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.4-2h5l1.4 2h1.6A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" />
       <circle cx="12" cy="12.5" r="3.5" />
-    </svg>
-  );
-}
-function CheckIcon() {
-  return (
-    <svg className="ld-ico ld-ico--sm ld-ico--ok" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12.5l4.5 4.5L19 7.5" />
     </svg>
   );
 }
