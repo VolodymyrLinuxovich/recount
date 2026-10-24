@@ -1,0 +1,13 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Hospital prices and charity care limits",
+  "description": "One dataset item per hospital: the price transparency file used, prices for the requested billing codes (gross charge, discounted cash price, min/max negotiated), and the financial assistance policy's free and discounted care income limits with the exact quoted sentences.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Results",
+      "description": "Dataset items: hospitalName, sourceUrls, mrf {url, lastUpdated, format, prices}, fap {url, freeCareMaxFplPct, discountMaxFplPct, quotes, phone, applicationUrl}, warnings.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}
