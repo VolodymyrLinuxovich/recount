@@ -6,6 +6,7 @@ export default defineSchema({
     createdAt: v.number(),
     status: v.union(
       v.literal("reading"),
+      v.literal("confirm_hospital"),
       v.literal("needs_household"),
       v.literal("drafting"),
       v.literal("ready"),
@@ -19,6 +20,9 @@ export default defineSchema({
     bill: v.optional(v.any()),
     billSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
     hospital: v.optional(v.any()),
+    hospitalKey: v.optional(v.string()),
+    hospitalCandidates: v.optional(v.any()),
+    token: v.optional(v.string()),
     findings: v.optional(v.any()),
     policyFindings: v.optional(v.any()),
     household: v.optional(v.any()),
@@ -36,6 +40,11 @@ export default defineSchema({
     detail: v.optional(v.string()),
     state: v.union(v.literal("running"), v.literal("done"), v.literal("warn"), v.literal("error")),
   }).index("by_case", ["caseId", "at"]),
+  limits: defineTable({
+    key: v.string(),
+    windowStart: v.number(),
+    count: v.number(),
+  }).index("by_key", ["key"]),
   hospitals: defineTable({
     key: v.string(),
     data: v.any(),

@@ -15,6 +15,7 @@ import { lawLine, templateLetters, type Letter } from "./lib/letters";
 import { type Lang, isLang, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL } from "./lib/sample";
+import { byKey, matchHospital, refFromIndex } from "./lib/statewide";
 
 const MODEL = "claude-opus-5-5";
 
@@ -80,14 +81,10 @@ function fromActor(item: Record<string, unknown>, key: string, fallbackName: str
   };
 }
 
-async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string | null, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
+type Known = (typeof KNOWN_HOSPITALS)[number];
+
+async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
   const t = pick(lang);
-  const known = KNOWN_HOSPITALS.find((h) => name && h.match.test(name));
-  if (!known) {
-    await step(ctx, caseId, "hospital", t("Couldn't match the hospital", "No pudimos identificar el hospital"), "warn",
-      t(`We don't have "${name ?? "unknown"}" yet, so we'll skip the price check.`, `Todavía no tenemos "${name ?? "desconocido"}", así que no revisaremos los precios.`));
-    return null;
-  }
   await step(ctx, caseId, "hospital", t(`Pulling ${known.name}'s published prices and assistance policy`, `Buscando los precios publicados y la política de ayuda de ${known.name}`), "running");
   const token = process.env.APIFY_TOKEN;
   const actor = process.env.APIFY_ACTOR_ID;
@@ -129,19 +126,73 @@ async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, name: string 
   return snap;
 }
 
-/** Keep only warnings about codes that are actually on this bill. */
-function warningsForBill(ref: HospitalRef, bill: ParsedBill): HospitalRef {
-  const onBill = new Set(bill.lines.map((l) => (l.code ?? "").toUpperCase()));
-  const missing = bill.lines.map((l) => (l.code ?? "").toUpperCase()).filter((c) => c && ref.mrf && !ref.mrf.prices[c]);
-  const warnings = ref.warnings.filter((w) => !w.startsWith("Codes not in the price file"));
-  if (missing.length) warnings.push(`Codes on this bill that aren't in the price file: ${[...new Set(missing)].join(", ")}`);
-  void onBill;
+/** Patient-facing warnings: only codes on this bill that the price file lacks. Crawl notes stay internal. */
+function warningsForBill(ref: HospitalRef, bill: ParsedBill, lang: Lang): HospitalRef {
+  const missing = [...new Set(bill.lines.map((l) => (l.code ?? "").toUpperCase()).filter((c) => c && ref.mrf && !ref.mrf.prices[c]))];
+  const t = pick(lang);
+  const warnings = missing.length
+    ? [t(`Codes on this bill that aren't in the hospital's price file: ${missing.join(", ")}`, `Códigos de esta factura que no están en el archivo de precios del hospital: ${missing.join(", ")}`)]
+    : [];
   return { ...ref, warnings };
+}
+
+/** Build the hospital reference for a resolved statewide key (or a known SF key). */
+async function resolveRef(ctx: ActionCtx, caseId: Id<"cases">, key: string, bill: ParsedBill, lang: Lang): Promise<HospitalRef | null> {
+  const t = pick(lang);
+  const known = KNOWN_HOSPITALS.find((k) => k.key === key || k.hcai.includes(key));
+  const codes = [...new Set(bill.lines.map((l) => (l.code ?? "").toUpperCase()).filter(Boolean))];
+  if (known) {
+    const ref = await lookupHospital(ctx, caseId, known, lang, codes);
+    return ref ? warningsForBill(ref, bill, lang) : null;
+  }
+  const h = byKey(key);
+  if (!h) return null;
+  await step(ctx, caseId, "hospital", t(`Found ${h.name}'s financial assistance policy`, `Encontramos la política de asistencia financiera de ${h.name}`), "done",
+    t("From the policies California hospitals file with the state (HCAI). We don't have this hospital's price file, so charges are not compared to its prices.",
+      "De las políticas que los hospitales de California presentan al estado (HCAI). No tenemos el archivo de precios de este hospital, así que no comparamos los cargos con sus precios."));
+  return refFromIndex(h);
+}
+
+/** Second half of the check, after the hospital is known (or the patient said it isn't listed). */
+async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill, key: string | null, lang: Lang): Promise<void> {
+  const t = pick(lang);
+  const hospital = key ? await resolveRef(ctx, caseId, key, bill, lang) : null;
+  if (!key) {
+    await step(ctx, caseId, "hospital", t("Hospital not identified", "Hospital no identificado"), "warn",
+      t("We'll use California's rules only, without this hospital's own policy or prices.", "Usaremos solo las reglas de California, sin la política ni los precios de este hospital."));
+  }
+  const n = bill.lines.length;
+  await step(ctx, caseId, "check", t(`Checking ${n} charges`, `Revisando ${n} cargos`), "running");
+  const findings: Finding[] = checkBill(bill, hospital, lang);
+  const total = potentialSavings(findings);
+  const k = findings.length;
+  await step(
+    ctx,
+    caseId,
+    "check",
+    k ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar`) : t("No line-level problems found", "No encontramos problemas en las líneas"),
+    "done",
+    total > 0 ? t(`Up to $${total.toFixed(2)} in questionable charges`, `Hasta $${total.toFixed(2)} en cargos dudosos`) : undefined,
+  );
+  // What our statewide audit found in this hospital's own policy.
+  const policyFindings = (hospital ? policyFindingsFor(hospital.key) : []).map((f) =>
+    lang === "es" ? { ...f, explanationEn: f.explanation, explanation: lawLine(f.rule, "es") ?? f.explanation } : f,
+  );
+  if (policyFindings.length) {
+    const m = policyFindings.length;
+    await step(ctx, caseId, "policy",
+      t(`${hospital!.name}'s own policy has ${m} problem${m === 1 ? "" : "s"} under California law`, `La propia política de ${hospital!.name} tiene ${m} problema${m === 1 ? "" : "s"} según la ley de California`),
+      "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
+  }
+  await ctx.runMutation(internal.cases.patch, {
+    id: caseId,
+    fields: { hospital, hospitalKey: key ?? undefined, findings, policyFindings, hospitalCandidates: undefined, status: "needs_household" },
+  });
 }
 
 export const readAndCheck = internalAction({
   args: { caseId: v.id("cases") },
-  handler: async (ctx, { caseId }) => {
+  handler: async (ctx, { caseId }): Promise<void> => {
     const c = await ctx.runQuery(internal.cases.load, { id: caseId });
     if (!c) return;
     const lang: Lang = isLang(c.lang) ? c.lang : "en";
@@ -181,38 +232,42 @@ export const readAndCheck = internalAction({
       );
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { bill, billSource } });
 
-      // 2. Look up the hospital's own published numbers.
-      const codes = [...new Set(bill.lines.map((l) => (l.code ?? "").toUpperCase()).filter(Boolean))];
-      const found = await lookupHospital(ctx, caseId, bill.hospitalName, lang, codes);
-      const hospital = found ? warningsForBill(found, bill) : null;
-
-      // 3. Check every line (rules, no model).
-      await step(ctx, caseId, "check", t(`Checking ${n} charges against the hospital's own prices`, `Comparando ${n} cargos con los precios del propio hospital`), "running");
-      const findings: Finding[] = checkBill(bill, hospital, lang);
-      const total = potentialSavings(findings);
-      const k = findings.length;
-      await step(
-        ctx,
-        caseId,
-        "check",
-        k ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar`) : t("No line-level problems found", "No encontramos problemas en las líneas"),
-        "done",
-        total > 0 ? t(`Up to $${total.toFixed(2)} in questionable charges`, `Hasta $${total.toFixed(2)} en cargos dudosos`) : undefined,
-      );
-
-      // 4. What our statewide audit found in this hospital's own policy.
-      const policyFindings = (hospital ? policyFindingsFor(hospital.key) : []).map((f) =>
-        lang === "es" ? { ...f, explanationEn: f.explanation, explanation: lawLine(f.rule, "es") ?? f.explanation } : f,
-      );
-      if (policyFindings.length) {
-        const m = policyFindings.length;
-        await step(ctx, caseId, "policy",
-          t(`${hospital!.name}'s own policy has ${m} problem${m === 1 ? "" : "s"} under California law`, `La propia política de ${hospital!.name} tiene ${m} problema${m === 1 ? "" : "s"} según la ley de California`),
-          "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
+      // 2. Which hospital? Known SF hospitals first, then every California hospital on file.
+      const known = KNOWN_HOSPITALS.find((h) => bill.hospitalName && h.match.test(bill.hospitalName));
+      if (known) {
+        await finishCheck(ctx, caseId, bill, known.key, lang);
+        return;
       }
-      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { hospital, findings, policyFindings, status: "needs_household" } });
+      const m = matchHospital(bill.hospitalName, bill.hospitalAddress ?? null);
+      if (m.confident) {
+        await finishCheck(ctx, caseId, bill, m.confident.key, lang);
+        return;
+      }
+      if (m.candidates.length) {
+        await step(ctx, caseId, "hospital", t("Which hospital is this?", "¿De qué hospital es esta factura?"), "warn",
+          t(`We read "${bill.hospitalName ?? "?"}" on the bill. Please pick your hospital.`, `Leímos "${bill.hospitalName ?? "?"}" en la factura. Por favor elija su hospital.`));
+        await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { hospitalCandidates: m.candidates, status: "confirm_hospital" } });
+        return;
+      }
+      await finishCheck(ctx, caseId, bill, null, lang);
     } catch (e) {
       await step(ctx, caseId, "error", t("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
+      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: String(e).slice(0, 300) } });
+    }
+  },
+});
+
+/** Runs after the patient picks their hospital (key) or says it isn't listed (null). */
+export const continueCheck = internalAction({
+  args: { caseId: v.id("cases"), key: v.union(v.string(), v.null()) },
+  handler: async (ctx, { caseId, key }): Promise<void> => {
+    const c = await ctx.runQuery(internal.cases.load, { id: caseId });
+    if (!c?.bill) return;
+    const lang: Lang = isLang(c.lang) ? c.lang : "en";
+    try {
+      await finishCheck(ctx, caseId, c.bill as ParsedBill, key, lang);
+    } catch (e) {
+      await step(ctx, caseId, "error", pick(lang)("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: String(e).slice(0, 300) } });
     }
   },

@@ -128,3 +128,16 @@ describe("Spanish", () => {
     expect(letters[1].bodyPatient).toContain("dos veces");
   });
 });
+
+import { matchHospital } from "../convex/lib/statewide";
+
+describe("statewide hospital matching", () => {
+  it("matches clear names and asks when unsure", () => {
+    expect(matchHospital("Highland Hospital", "1411 E 31st St, Oakland, CA")?.confident?.name).toBe("Highland Hospital");
+    expect(matchHospital("Zuckerberg San Francisco General Hospital and Trauma Center", "1001 Potrero Avenue, San Francisco, CA")?.confident?.key)
+      .toBe("priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center");
+    const kaiser = matchHospital("Kaiser Permanente", "Oakland, CA");
+    expect(kaiser.confident).toBeNull();
+    expect(kaiser.candidates[0].city).toBe("Oakland");
+  });
+});

@@ -54,10 +54,10 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
   const people = h.size === 1 ? t("1 person", "1 persona") : t(`${h.size} people`, `${h.size} personas`);
   const basis: Basis[] = [
     {
-      rule: t("Poverty line", "Línea de pobreza"),
+      rule: t("Poverty line", "Nivel federal de pobreza"),
       text: t(
         `${fpl.year} federal poverty guideline for a household of ${people}: ${usd(line)}. Your income is ${fplPct}% of it.`,
-        `Guía federal de pobreza de ${fpl.year} para un hogar de ${people}: ${usd(line)}. Su ingreso es el ${fplPct}% de esa cantidad.`,
+        `Nivel federal de pobreza de ${fpl.year} para un hogar de ${people}: ${usd(line)}. Su ingreso es el ${fplPct}% de esa cantidad.`,
       ),
       source: fpl.source,
     },
@@ -108,7 +108,7 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       rule: t(`${ref!.name} free care`, `Atención gratuita de ${ref!.name}`),
       text: t(
         `The hospital's own policy gives free care up to ${freeMax}% of the poverty line. You're at ${fplPct}%.`,
-        `La propia política del hospital da atención gratuita hasta el ${freeMax}% de la línea de pobreza. Usted está en ${fplPct}%.`,
+        `La propia política del hospital da atención gratuita hasta el ${freeMax}% del nivel federal de pobreza. Usted está en ${fplPct}%.`,
       ),
       source: fap?.url ?? undefined,
     });
@@ -121,11 +121,11 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
       text: h.insured
         ? t(
             `Hospitals must offer discounted payment to patients with high medical costs with income at or below ${discountMax}% of the poverty line, and can't charge them more than a government payer would pay.`,
-            `Los hospitales deben ofrecer pago con descuento a pacientes con gastos médicos altos con ingresos de hasta el ${discountMax}% de la línea de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
+            `Los hospitales deben ofrecer pago con descuento a pacientes con gastos médicos altos con ingresos de hasta el ${discountMax}% del nivel federal de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
           )
         : t(
             `Hospitals must offer discounted payment to uninsured patients with income at or below ${discountMax}% of the poverty line, and can't charge them more than a government payer would pay.`,
-            `Los hospitales deben ofrecer pago con descuento a pacientes sin seguro con ingresos de hasta el ${discountMax}% de la línea de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
+            `Los hospitales deben ofrecer pago con descuento a pacientes sin seguro con ingresos de hasta el ${discountMax}% del nivel federal de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
           ),
       source: HSC_127405,
     });
@@ -145,7 +145,7 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
     rule: t("California discount payment", "Pago con descuento de California"),
     text: t(
       `Your income is above ${discountMax}% of the poverty line, the cutoff we found. Hospitals may still offer help, so it's worth asking.`,
-      `Su ingreso está por encima del ${discountMax}% de la línea de pobreza, el límite que encontramos. Los hospitales aún pueden ofrecer ayuda, así que vale la pena preguntar.`,
+      `Su ingreso está por encima del ${discountMax}% del nivel federal de pobreza, el límite que encontramos. Los hospitales aún pueden ofrecer ayuda, así que vale la pena preguntar.`,
     ),
     source: HSC_127405,
   });
