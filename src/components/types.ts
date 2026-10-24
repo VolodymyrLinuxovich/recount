@@ -9,7 +9,14 @@ import { type Lang, locale } from "./i18n/strings";
 
 export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter };
 
-export type Status = "reading" | "needs_household" | "drafting" | "ready" | "approved" | "error";
+export type Status = "reading" | "confirm_hospital" | "needs_household" | "drafting" | "ready" | "approved" | "error";
+
+export interface HospitalChoice {
+  key: string;
+  name: string;
+  city: string | null;
+  score?: number;
+}
 
 export interface Step {
   _id: string;
@@ -39,6 +46,10 @@ export interface CaseView {
   approvedAt?: number;
   error?: string;
   steps: Step[];
+  /** Added on the phone, never sent by the backend. */
+  token?: string;
+  hospitalKey?: string | null;
+  hospitalCandidates?: HospitalChoice[];
 }
 
 export const money = (x: number, cents = true, lang: Lang = "en") =>

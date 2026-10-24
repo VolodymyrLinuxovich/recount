@@ -3,10 +3,13 @@
 import { useQuery } from "convex/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { Answer } from "./Answer";
-import { useRememberCase } from "./bills/myBills";
+import { tokenFor, tokenFromLink, useRememberCase } from "./bills/myBills";
+import { BillTools } from "./BillTools";
+import { HospitalConfirm } from "./HospitalConfirm";
 import { BillMarkup } from "./BillMarkup";
 import { HouseholdForm } from "./HouseholdForm";
 import { useT } from "./i18n/I18nProvider";
@@ -20,11 +23,38 @@ import type { CaseView } from "./types";
 
 export function CaseScreen() {
   const { id } = useParams<{ id: string }>();
-  const c = useQuery(api.cases.get, { id: id as Id<"cases"> }) as CaseView | null | undefined;
-  useRememberCase(id, c);
+  // The bill's secret comes from the link (#t=…) or from My bills on this phone.
+  const [token, setToken] = useState<string | null | undefined>(undefined);
+  useEffect(() => {
+    const read = () => setToken(tokenFromLink() ?? tokenFor(id) ?? null);
+    read();
+    window.addEventListener("hashchange", read);
+    return () => window.removeEventListener("hashchange", read);
+  }, [id]);
+  const raw = useQuery(api.cases.get, token === undefined ? "skip" : { id: id as Id<"cases">, token: token ?? undefined }) as
+    | CaseView
+    | null
+    | undefined;
+  const c = raw ? { ...raw, token: token ?? undefined } : raw;
+  useRememberCase(id, token ?? undefined, c);
   const { t } = useT();
 
-  if (c === undefined) return <p className="quiet">{t("case.opening")}</p>;
+  if (token === null && c === null)
+    return (
+      <section className="stack">
+        <h1 className="h-answer">{t("case.private")}</h1>
+        <p>{t("case.privateBody")}</p>
+        <div className="row">
+          <Link href="/bills" className="btn btn-primary">
+            {t("bills.title")}
+          </Link>
+          <Link href="/" className="btn btn-quiet">
+            {t("case.startAgain")}
+          </Link>
+        </div>
+      </section>
+    );
+  if (c === undefined || token === undefined) return <p className="quiet">{t("case.opening")}</p>;
   if (c === null)
     return (
       <section>
@@ -33,6 +63,14 @@ export function CaseScreen() {
           <Link href="/">{t("case.startAgain")}</Link>
         </p>
       </section>
+    );
+
+  if (c.status === "confirm_hospital")
+    return (
+      <div className="stack-lg">
+        <Progress status={c.status} />
+        <HospitalConfirm c={c} />
+      </div>
     );
 
   if (c.status === "error") {
@@ -85,7 +123,7 @@ export function CaseScreen() {
       />
 
       {askHousehold ? (
-        <HouseholdForm id={c._id} prior={c.household} needsOutOfPocket={c.eligibility?.tier === "NEEDS_INFO"} />
+        <HouseholdForm id={c._id} token={c.token} prior={c.household} needsOutOfPocket={c.eligibility?.tier === "NEEDS_INFO"} />
       ) : (
         <Letters c={c} />
       )}
@@ -95,6 +133,7 @@ export function CaseScreen() {
         <summary>{t("case.log")}</summary>
         <StepLog steps={c.steps} />
       </details>
+      {c.token && <BillTools id={c._id} token={c.token} />}
     </div>
   );
 }

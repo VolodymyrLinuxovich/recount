@@ -34,7 +34,7 @@ export function MyBillsScreen() {
       </Link>
       <ul className="bill-slips">
         {bills.map((b) => (
-          <BillRow key={b.id} id={b.id} addedAt={b.addedAt} />
+          <BillRow key={b.id} id={b.id} token={b.token} addedAt={b.addedAt} />
         ))}
       </ul>
       <p className="bills-note">{t("bills.savedHere")}</p>

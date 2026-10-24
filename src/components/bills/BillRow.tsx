@@ -13,18 +13,18 @@ import "./bills.css";
 
 type Row = CaseView & { createdAt?: number };
 
-export function BillRow({ id, addedAt }: { id: string; addedAt: number }) {
+export function BillRow({ id, token, addedAt }: { id: string; token?: string; addedAt: number }) {
   if (!/^[0-9a-z]{25,40}$/.test(id)) return <GoneRow id={id} />;
   return (
     <RowBoundary fallback={<GoneRow id={id} />}>
-      <LiveRow id={id} addedAt={addedAt} />
+      <LiveRow id={id} token={token} addedAt={addedAt} />
     </RowBoundary>
   );
 }
 
-function LiveRow({ id, addedAt }: { id: string; addedAt: number }) {
+function LiveRow({ id, token, addedAt }: { id: string; token?: string; addedAt: number }) {
   const { t, lang } = useT();
-  const c = useQuery(api.cases.get, { id: id as Id<"cases"> }) as Row | null | undefined;
+  const c = useQuery(api.cases.get, { id: id as Id<"cases">, token }) as Row | null | undefined;
 
   if (c === undefined)
     return (

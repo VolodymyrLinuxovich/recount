@@ -1,0 +1,46 @@
+.install-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 12px 8px 12px 14px;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--pen);
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.install-hint p {
+  flex: 1;
+  margin: 4px 0;
+}
+
+.install-share {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: 4px;
+  color: var(--focus);
+}
+
+.install-close {
+  flex: none;
+  appearance: none;
+  width: 56px;
+  height: 56px;
+  margin: -8px -4px -8px 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.install-close:hover {
+  color: var(--ink);
+}

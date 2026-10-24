@@ -52,6 +52,32 @@ const en = {
   "case.reading": "Going through your bill, line by line.",
   "case.photoAlt": "Your bill",
   "case.log": "What Recount did",
+  // Private bills, deleting, choosing the hospital
+  "case.private": "This bill is private.",
+  "case.privateBody":
+    "Open it from My bills on the phone where you checked it, or use the private link you saved. We can’t show a bill without its private link.",
+  "case.shareH": "Open this bill on another phone or computer",
+  "case.shareBody": "Anyone with this link can see the bill, so only share it with someone you trust.",
+  "case.copyLink": "Copy private link",
+  "case.copied": "Link copied",
+  "case.delete": "Delete this bill",
+  "case.deleteAsk": "Delete this bill, its photo and your answers for good? This can’t be undone.",
+  "case.deleteYes": "Yes, delete it",
+  "case.deleteNo": "Keep it",
+  "case.deleting": "Deleting…",
+  "case.deleteFailed": "We couldn’t delete it. Try again.",
+  "start.busy": "Lots of people are checking bills right now. Please try again in a minute.",
+  "hosp.eyebrow": "One question first",
+  "hosp.h": "Which hospital is this bill from?",
+  "hosp.lede": "We want to use the right hospital’s rules and prices. Tap yours.",
+  "hosp.city": (v: { city: string }) => `in ${v.city}`,
+  "hosp.searchLabel": "Not here? Search by name or city",
+  "hosp.searchPlaceholder": "For example: Highland, Oakland",
+  "hosp.noResults": "No California hospital by that name in our list.",
+  "hosp.notListed": "My hospital isn’t listed",
+  "hosp.notListedHint": "We’ll still check your bill with California’s rules, just without this hospital’s own policy.",
+  "hosp.choosing": "Saving…",
+  "hosp.failed": "That didn’t work. Try again.",
   // Progress through a bill
   "progress.label": "Your progress",
   "progress.of": (v: { n: number; total: number }) => `Step ${v.n} of ${v.total}`,
@@ -128,6 +154,14 @@ const en = {
   "bill.totalNote": "lines don’t add up to this",
   "bill.noFindings":
     "No line-level problems found against the hospital’s published prices. Financial assistance can still cover the whole bill.",
+  "bill.cashGroupH": (v: { n: number }) => `You can ask for the cash price on ${v.n} services`,
+  "bill.cashGroupBody":
+    "The hospital publishes a lower price for patients who pay for themselves. As a self-pay patient, you can ask for it.",
+  "bill.colService": "Service",
+  "bill.colBilled": "Billed",
+  "bill.colCash": "Cash price",
+  "bill.showAll": (v: { n: number }) => `Show all ${v.n} things we found`,
+  "bill.showFewer": "Show fewer",
   "bill.confHigh": "Based on the hospital’s published number.",
   "bill.confCheck": "Worth asking. It may have a reason.",
   "bill.couldTakeOff": (v: { amount: string }) => ` Could take off ${v.amount}.`,
@@ -190,6 +224,7 @@ const en = {
   "letters.patientCopyNote": "Read-only. If you change the English letter above, this copy doesn’t change.",
 
   // Printing, the "how to send it" guide, and the home screen tip
+  "letters.change": "Change my letters",
   "print.one": "Print or save as PDF",
   "print.all": "Print all letters",
   "print.brackets": "Fill in the [brackets] before you print, or write them in by hand on the paper.",
@@ -199,7 +234,7 @@ const en = {
   "send.step1": "Ask them:",
   "send.step1Ask": "“Where do I send a financial assistance application, and is there a form?”",
   "send.inEnglish": "In English:",
-  "send.call": (v: { phone: string }) => `Call ${v.phone}`,
+  "send.call": "Call",
   "send.noPhone": "The billing phone number is on your bill, usually near the top or next to “Questions?”.",
   "send.step2H": "Send your letter",
   "send.step2": "Send it by mail, by email, or through the hospital’s patient portal. Keep a copy for yourself.",
@@ -238,7 +273,7 @@ const en = {
   "policy.headBreaks": (v: { name: string | null; n: number }) =>
     `Heads up: ${v.name ?? "the hospital"}’s own policy breaks ${v.n === 1 ? "a state rule" : `${v.n} state rules`}.`,
   "policy.headUnclear": (v: { name: string | null }) =>
-    `Heads up: part of ${v.name ?? "the hospital"}’s own policy is unclear under state law.`,
+    `One part of ${v.name ?? "the hospital"}’s policy is unclear. You may want to ask them about it.`,
   "policy.theirSays": (v: { doc: string }) => {
     const d: Record<string, string> = {
       charity_care: "charity care policy",
@@ -374,6 +409,7 @@ const en = {
   "bills.billSays": "Bill says",
   "bills.open": "Open",
   "bills.status.reading": "Reading",
+  "bills.status.confirm_hospital": "Pick your hospital",
   "bills.status.needs_household": "Needs your answers",
   "bills.status.drafting": "Writing your letters",
   "bills.status.ready": "Letters ready",
@@ -433,6 +469,31 @@ const es: Dict = {
   "case.reading": "Estamos revisando su factura, línea por línea.",
   "case.photoAlt": "Su factura",
   "case.log": "Lo que hizo Recount",
+  "case.private": "Esta factura es privada.",
+  "case.privateBody":
+    "Ábrala desde Mis facturas en el teléfono donde la revisó, o use el enlace privado que guardó. No podemos mostrar una factura sin su enlace privado.",
+  "case.shareH": "Abrir esta factura en otro teléfono o computadora",
+  "case.shareBody": "Cualquier persona con este enlace puede ver la factura. Compártalo solo con alguien de confianza.",
+  "case.copyLink": "Copiar enlace privado",
+  "case.copied": "Enlace copiado",
+  "case.delete": "Borrar esta factura",
+  "case.deleteAsk": "¿Borrar para siempre esta factura, su foto y sus respuestas? No se puede deshacer.",
+  "case.deleteYes": "Sí, borrarla",
+  "case.deleteNo": "No, conservarla",
+  "case.deleting": "Borrando…",
+  "case.deleteFailed": "No pudimos borrarla. Intente de nuevo.",
+  "start.busy": "Muchas personas están revisando facturas ahora. Intente de nuevo en un minuto.",
+  "hosp.eyebrow": "Primero, una pregunta",
+  "hosp.h": "¿De qué hospital es esta factura?",
+  "hosp.lede": "Queremos usar las reglas y los precios del hospital correcto. Toque el suyo.",
+  "hosp.city": (v: { city: string }) => `en ${v.city}`,
+  "hosp.searchLabel": "¿No aparece? Busque por nombre o ciudad",
+  "hosp.searchPlaceholder": "Por ejemplo: Highland, Oakland",
+  "hosp.noResults": "No hay ningún hospital de California con ese nombre en nuestra lista.",
+  "hosp.notListed": "Mi hospital no aparece",
+  "hosp.notListedHint": "Igual revisaremos su factura con las reglas de California, solo que sin la política propia de este hospital.",
+  "hosp.choosing": "Guardando…",
+  "hosp.failed": "No funcionó. Intente de nuevo.",
   "progress.label": "Su avance",
   "progress.of": (v: { n: number; total: number }) => `Paso ${v.n} de ${v.total}`,
   "progress.1": "Leemos su factura",
@@ -505,6 +566,14 @@ const es: Dict = {
   "bill.totalNote": "las líneas no suman esto",
   "bill.noFindings":
     "No encontramos problemas en las líneas al compararlas con los precios publicados del hospital. La asistencia financiera todavía puede cubrir toda la factura.",
+  "bill.cashGroupH": (v: { n: number }) => `Puede pedir el precio en efectivo para ${v.n} servicios`,
+  "bill.cashGroupBody":
+    "El hospital publica un precio más bajo para los pacientes que pagan por su cuenta. Como paciente sin seguro que paga por su cuenta, usted puede pedirlo.",
+  "bill.colService": "Servicio",
+  "bill.colBilled": "Cobrado",
+  "bill.colCash": "Precio en efectivo",
+  "bill.showAll": (v: { n: number }) => `Ver las ${v.n} cosas que encontramos`,
+  "bill.showFewer": "Ver menos",
   "bill.confHigh": "Se basa en el número que publica el hospital.",
   "bill.confCheck": "Vale la pena preguntar. Puede haber una razón.",
   "bill.couldTakeOff": (v) => ` Le podrían quitar ${v.amount}.`,
@@ -548,8 +617,8 @@ const es: Dict = {
     "Usted aprobó estas cartas. Recount no ha enviado nada. Envíelas usted por correo postal, correo electrónico o el portal de pacientes del hospital. Guarde una copia.",
   "letters.callFirst":
     "Primero llame a facturación. Pida la dirección postal o el correo electrónico para la asistencia financiera:",
-  "letters.emailAssist": "Enviar por correo la solicitud de asistencia",
-  "letters.emailDispute": "Enviar por correo las preguntas sobre cargos",
+  "letters.emailAssist": "Enviar la solicitud por email",
+  "letters.emailDispute": "Enviar las preguntas por email",
   "letters.lede": "Léalas. Corrija lo que esté mal y llene los [corchetes]. Nada sale hasta que usted lo envíe.",
   "letters.subject": "Asunto",
   "letters.bodyLabel": (v) => `Texto de: ${v.title}`,
@@ -565,6 +634,7 @@ const es: Dict = {
   "letters.patientCopyNote": "Solo para leer. Si cambia la carta en inglés de arriba, esta copia no cambia.",
 
   // Printing, the "how to send it" guide, and the home screen tip
+  "letters.change": "Cambiar mis cartas",
   "print.one": "Imprimir o guardar como PDF",
   "print.all": "Imprimir todas las cartas",
   "print.brackets": "Llene los [corchetes] antes de imprimir, o escríbalos a mano en el papel.",
@@ -574,7 +644,7 @@ const es: Dict = {
   "send.step1": "Pregunte (puede pedir un intérprete en español):",
   "send.step1Ask": "“¿A dónde mando una solicitud de asistencia financiera? ¿Hay un formulario?”",
   "send.inEnglish": "Si habla en inglés, diga:",
-  "send.call": (v) => `Llamar al ${v.phone}`,
+  "send.call": "Llamar al",
   "send.noPhone": "El teléfono de facturación está en su factura, casi siempre arriba o junto a “Questions?”.",
   "send.step2H": "Envíe su carta",
   "send.step2": "Mándela por correo postal, por correo electrónico o por el portal de pacientes del hospital. Guarde una copia.",
@@ -611,7 +681,7 @@ const es: Dict = {
   "policy.headBreaks": (v) =>
     `Atención: la propia política ${v.name ? `de ${v.name}` : "del hospital"} no cumple con ${v.n === 1 ? "una regla estatal" : `${v.n} reglas estatales`}.`,
   "policy.headUnclear": (v) =>
-    `Atención: una parte de la propia política ${v.name ? `de ${v.name}` : "del hospital"} no queda clara según la ley estatal.`,
+    `Una parte de la política ${v.name ? `de ${v.name}` : "del hospital"} no está clara. Quizás quiera preguntarles al respecto.`,
   "policy.theirSays": (v) => {
     const d: Record<string, string> = {
       charity_care: "La política de atención caritativa",
@@ -748,6 +818,7 @@ const es: Dict = {
   "bills.billSays": "La factura dice",
   "bills.open": "Abrir",
   "bills.status.reading": "Leyendo",
+  "bills.status.confirm_hospital": "Falta elegir el hospital",
   "bills.status.needs_household": "Faltan sus respuestas",
   "bills.status.drafting": "Escribiendo sus cartas",
   "bills.status.ready": "Cartas listas",

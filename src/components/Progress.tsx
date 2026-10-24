@@ -5,6 +5,7 @@ import type { Status } from "./types";
 
 const STEP_OF: Record<Status, 1 | 2 | 3 | 4> = {
   reading: 1,
+  confirm_hospital: 1,
   error: 1,
   needs_household: 2,
   drafting: 3,

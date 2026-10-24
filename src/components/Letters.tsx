@@ -5,6 +5,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useT } from "./i18n/I18nProvider";
+import { PrintLetters, printLetters } from "./PrintLetters";
+import { SendGuide } from "./SendGuide";
 import type { CaseView, Letter } from "./types";
 
 // What gets copied, downloaded and emailed is the English letter for the hospital.
@@ -90,6 +92,10 @@ function LetterSheet({
           {t("letters.download")}
         </button>
       </div>
+      <button className="btn btn-big letter-print" type="button" onClick={() => printLetters(letter.kind, letter.title)}>
+        {t("print.one")}
+      </button>
+      {/\[[^\]\n]+\]/.test(letter.subject + letter.body) && <p className="quiet letter-print-note">{t("print.brackets")}</p>}
       {patientCopy && (
         <div className="letter-patient-copy" lang="es">
           <h4 className="letter-patient-h">{t("letters.patientCopyH")}</h4>
@@ -104,11 +110,11 @@ function LetterSheet({
 export function Letters({ c }: { c: CaseView }) {
   const { t } = useT();
   const approve = useMutation(api.cases.approve);
+  const unapprove = useMutation(api.cases.unapprove);
   const [edits, setEdits] = useState<Letter[] | null>(null);
   const [busy, setBusy] = useState(false);
   const letters = edits ?? c.letters ?? null;
   const approved = c.status === "approved";
-  const phone = c.bill?.billingPhone ?? c.hospital?.fap?.phone ?? null;
 
   if (!letters) {
     return (
@@ -120,7 +126,6 @@ export function Letters({ c }: { c: CaseView }) {
   }
 
   const update = (i: number, l: Letter) => setEdits(letters.map((x, j) => (j === i ? l : x)));
-  const mailto = (l: Letter) => `mailto:?subject=${encodeURIComponent(l.subject)}&body=${encodeURIComponent(l.body)}`;
 
   return (
     <section className="letters" aria-labelledby="letters-h">
@@ -132,27 +137,29 @@ export function Letters({ c }: { c: CaseView }) {
       </div>
 
       {approved ? (
-        <div className="send">
-          <p>{t("letters.approvedNote")}</p>
-          {phone && (
-            <p>
-              {t("letters.callFirst")}{" "}
-              <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`} className="phone">
-                {phone}
-              </a>
-            </p>
-          )}
-          <div className="row">
-            {letters.map((l) => (
-              <a key={l.kind} href={mailto(l)} className="btn btn-primary">
-                {l.kind === "assistance" ? t("letters.emailAssist") : t("letters.emailDispute")}
-              </a>
-            ))}
-          </div>
-        </div>
+        <>
+          <SendGuide c={c} letters={letters} />
+          <button
+            type="button"
+            className="btn btn-quiet btn-big"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              try {
+                await unapprove({ id: c._id as Id<"cases">, token: c.token! });
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            {busy ? t("letters.saving") : t("letters.change")}
+          </button>
+        </>
       ) : (
         <p className="lede">{t("letters.lede")}</p>
       )}
+
+      <PrintLetters c={c} letters={letters} />
 
       {letters.map((l, i) => (
         <LetterSheet key={l.kind + i} letter={l} onChange={(nl) => update(i, nl)} readOnly={approved} />
@@ -165,7 +172,16 @@ export function Letters({ c }: { c: CaseView }) {
           onClick={async () => {
             setBusy(true);
             try {
-              await approve({ id: c._id as Id<"cases">, letters });
+              // approve accepts only these fields; drop anything else the letters carry.
+              const clean = letters.map(({ kind, title, subject, body, subjectPatient, bodyPatient }) => ({
+                kind,
+                title,
+                subject,
+                body,
+                ...(subjectPatient != null ? { subjectPatient } : {}),
+                ...(bodyPatient != null ? { bodyPatient } : {}),
+              }));
+              await approve({ id: c._id as Id<"cases">, token: c.token!, letters: clean });
               requestAnimationFrame(() => document.getElementById("letters-h")?.scrollIntoView({ behavior: "smooth", block: "start" }));
             } finally {
               setBusy(false);

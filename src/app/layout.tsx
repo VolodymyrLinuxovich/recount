@@ -14,6 +14,7 @@ const hand = Caveat({ variable: "--font-hand", subsets: ["latin"], weight: ["500
 export const metadata: Metadata = {
   title: "Recount",
   description: "Check a hospital bill against the hospital's own prices and California's charity care rules.",
+  appleWebApp: { title: "Recount", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
