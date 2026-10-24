@@ -6,7 +6,7 @@
     "hospitalUrl": {
       "title": "Hospital website",
       "type": "string",
-      "description": "The hospital's homepage (or any page on its site). The Actor looks for /cms-hhs-pricetransparency.txt on the root domain, then crawls the site for price transparency and financial assistance pages.",
+      "description": "The hospital's homepage (or any page on its site). The Actor looks for /cms-hhs-pricetransparency.txt on the root domain, then crawls the site for price transparency and financial assistance pages. Leave empty when you pass a list of hospitals below.",
       "editor": "textfield",
       "prefill": "https://zuckerbergsanfranciscogeneral.org"
     },
@@ -21,7 +21,17 @@
       "type": "array",
       "description": "CPT / HCPCS codes (or MS-DRG, NDC, etc.) to look up in the price file, e.g. 99284 (ER visit, level 4) and 80053 (comprehensive metabolic panel).",
       "editor": "stringList",
-      "prefill": ["99284", "80053", "85025"]
+      "prefill": [
+        "99284",
+        "80053",
+        "85025"
+      ]
+    },
+    "mrfUrl": {
+      "title": "Price file URL (optional)",
+      "type": "string",
+      "editor": "textfield",
+      "description": "If you already know the hospital's machine-readable standard charges file, put its URL here. The Actor skips the search and streams it directly; the site crawl then only looks for assistance pages and a phone number."
     },
     "maxMrfMB": {
       "title": "Max price file download (MB)",
@@ -45,7 +55,31 @@
       "type": "boolean",
       "description": "Also look the hospital up in the State of California's Hospital Fair Pricing Policy Lookup (HCAI), where every CA hospital must file its charity care and discount payment policies. Recommended for California hospitals.",
       "default": true
+    },
+    "hospitals": {
+      "title": "Hospitals (batch)",
+      "type": "array",
+      "editor": "json",
+      "sectionCaption": "Batch mode",
+      "description": "Check many hospitals in one run. Each entry is an object with hospitalUrl and optional hospitalName, mrfUrl, codes and key (your own ID, copied to the output). Top-level codes and limits apply to every entry unless the entry sets its own. One dataset item per hospital; a site that fails gets an item with an error field instead of failing the run.",
+      "example": [
+        {
+          "hospitalUrl": "https://zuckerbergsanfranciscogeneral.org",
+          "key": "zsfg"
+        },
+        {
+          "hospitalUrl": "https://www.ucsfhealth.org",
+          "hospitalName": "UCSF Medical Center"
+        }
+      ]
+    },
+    "maxConcurrency": {
+      "title": "Hospitals at once",
+      "type": "integer",
+      "description": "Batch mode: how many hospitals to check in parallel.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16
     }
-  },
-  "required": ["hospitalUrl"]
+  }
 }

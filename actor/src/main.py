@@ -1,7 +1,8 @@
 """Hospital Price & Charity Care Finder (Apify Actor).
 
-Input:  {hospitalUrl, hospitalName?, codes?, maxMrfMB?, maxCrawlPages?, useHcaiRegistry?}
-Output: one dataset item with the hospital's published prices for the codes and
+Input:  {hospitalUrl, hospitalName?, mrfUrl?, codes?, maxMrfMB?, maxCrawlPages?, useHcaiRegistry?}
+        or {hospitals: [{hospitalUrl, hospitalName?, mrfUrl?, key?}, ...], maxConcurrency?, ...shared settings}
+Output: one dataset item per hospital with the hospital's published prices for the codes and
         its financial assistance (charity care) FPL thresholds, with evidence.
 Never invents values: anything not found is null plus a warning.
 """
@@ -30,7 +31,7 @@ MAX_FAP_DOCS = 6
 def _normalize_url(u: str) -> str:
     u = (u or '').strip()
     if not u:
-        raise ValueError('hospitalUrl is required')
+        raise ValueError('hospitalUrl is required (or pass a list of hospitals)')
     if not re.match(r'^https?://', u, re.I):
         u = 'https://' + u
     if not urlparse(u).netloc:
@@ -62,6 +63,10 @@ def run(inp: dict, log) -> dict:
     max_mb = float(inp.get('maxMrfMB') or 300)
     max_pages = int(inp.get('maxCrawlPages') or 30)
     use_hcai = inp.get('useHcaiRegistry', True) is not False
+    given_mrf = (inp.get('mrfUrl') or '').strip() or None
+    if given_mrf:
+        # The price file is known, so the crawl only looks for assistance pages and a phone number.
+        max_pages = min(max_pages, 10)
 
     client = make_client()
 
@@ -82,7 +87,10 @@ def run(inp: dict, log) -> dict:
     # 2. Choose the machine-readable file
     mrf_url = None
     mrf_found_on = None
-    if txt:
+    if given_mrf:
+        mrf_url = given_mrf
+        mrf_found_on = 'input'
+    elif txt:
         txt_url, entries = txt
         src(txt_url)
         best = max(entries, key=lambda e: name_overlap(given_name or home_title, e.get('location-name')))
@@ -303,18 +311,60 @@ def research_fap(client, crawl, names: list[str], use_hcai: bool, log) -> dict:
     return out
 
 
+def _status(item: dict) -> str:
+    f = item.get('fap') or {}
+    prices = (item.get('mrf') or {}).get('prices') or {}
+    found = sum(1 for p in prices.values() if p)
+    return (f'{item.get("hospitalName")}: {found}/{len(prices)} codes priced; '
+            f'free care <= {f.get("freeCareMaxFplPct")}% FPL; {len(item.get("warnings") or [])} warnings')
+
+
+def _jobs(inp: dict) -> list[dict]:
+    """One job per hospital. A batch is a list of hospitals sharing the top-level settings."""
+    shared = {k: v for k, v in inp.items() if k != 'hospitals'}
+    batch = inp.get('hospitals') or []
+    if not batch:
+        return [shared]
+    jobs = []
+    for h in batch:
+        if isinstance(h, str):
+            h = {'hospitalUrl': h}
+        jobs.append({**shared, **{k: v for k, v in h.items() if v not in (None, '', [])}})
+    return jobs
+
+
 async def main() -> None:
     async with Actor:
         inp = await Actor.get_input() or {}
-        try:
-            item = await asyncio.to_thread(run, inp, Actor.log)
-        except ValueError as e:
-            await Actor.fail(status_message=str(e))
+        jobs = _jobs(inp)
+        if len(jobs) == 1:
+            try:
+                item = await asyncio.to_thread(run, jobs[0], Actor.log)
+            except ValueError as e:
+                await Actor.fail(status_message=str(e))
+                return
+            await Actor.push_data(item)
+            await Actor.set_value('OUTPUT', item)
+            await Actor.set_status_message(_status(item))
             return
-        await Actor.push_data(item)
-        await Actor.set_value('OUTPUT', item)
-        f = item['fap']
-        found = sum(1 for p in item['mrf']['prices'].values() if p)
-        await Actor.set_status_message(
-            f'{item["hospitalName"]}: {found}/{len(item["mrf"]["prices"])} codes priced; '
-            f'free care ≤{f.get("freeCareMaxFplPct")}% FPL; {len(item["warnings"])} warnings')
+
+        # Batch: several hospitals at once. One bad site never fails the run; it gets an error item.
+        limit = asyncio.Semaphore(max(1, min(int(inp.get('maxConcurrency') or 4), 16)))
+        done = {'n': 0, 'priced': 0}
+
+        async def one(job: dict) -> None:
+            async with limit:
+                try:
+                    item = await asyncio.to_thread(run, job, Actor.log)
+                except Exception as e:
+                    item = {'hospitalName': job.get('hospitalName'), 'hospitalUrl': job.get('hospitalUrl'),
+                            'error': f'{type(e).__name__}: {e}'[:300], 'mrf': None, 'fap': None, 'warnings': []}
+                if job.get('key'):
+                    item['key'] = job['key']
+                await Actor.push_data(item)
+                done['n'] += 1
+                if any((item.get('mrf') or {}).get('prices', {}).values()):
+                    done['priced'] += 1
+                await Actor.set_status_message(f'{done["n"]}/{len(jobs)} hospitals done, {done["priced"]} with prices. Last: {_status(item)}')
+
+        await asyncio.gather(*(one(j) for j in jobs))
