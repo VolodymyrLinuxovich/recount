@@ -52,32 +52,32 @@ function FindingCard({ f, rule }: { f: AuditFinding; rule?: Rule }) {
         <span className={`verdict verdict-${f.verdict}`}>{t(`verdict.pill.${f.verdict}`)}</span>
       </div>
       <div className="versus">
-        <div className="versus-col">
+        <div className="versus-col versus-policy">
           <p className="versus-label">{t("hosp.theirSays")}</p>
           <blockquote className="policy-quote">
             <InContext f={f} />
           </blockquote>
-          <div className="versus-cite">
+          <p className="versus-cite">
             <a href={f.docUrl} target="_blank" rel="noreferrer">
               {docLabel(f.docType, lang)}
               {f.page != null && t("policy.page", { n: f.page })}
             </a>
-            <span className="quiet"> · {t("doc.effective", { date: f.effectiveDate ? longDate(f.effectiveDate, lang) : null })}</span>
-          </div>
+            <span className="versus-date">{t("doc.effective", { date: f.effectiveDate ? longDate(f.effectiveDate, lang) : null })}</span>
+          </p>
         </div>
         <div className="versus-col versus-law">
           <p className="versus-label">{t("hosp.lawSays")}</p>
           <blockquote className="law-quote">{rule?.lawQuote ?? t("hosp.seeRule")}</blockquote>
           {rule && (
-            <div className="versus-cite">
+            <p className="versus-cite">
               <a href={rule.url} target="_blank" rel="noreferrer">
                 {rule.cite}
               </a>
-            </div>
+            </p>
           )}
         </div>
       </div>
-      <p className="a-explain">{f.explanation}</p>
+      {f.explanation && <p className="a-explain">{f.explanation}</p>}
     </li>
   );
 }
@@ -97,24 +97,27 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
 
   return (
     <article className="hospital" aria-labelledby="hospital-h">
-      <p className="eyebrow">{place(h, lang) || "California"}</p>
-      <h2 id="hospital-h" className="h-hospital" tabIndex={-1}>
-        {displayName(h.name)}
-      </h2>
-      <p className={`hospital-verdict verdict-text-${w}`}>
-        {h.checked === false
-          ? t("hosp.unread")
-          : w === "none"
-            ? t("hosp.none")
-            : summary(t, h)}
-      </p>
+      <div className="hospital-head rc-card">
+        <p className="hospital-place">{place(h, lang) || "California"}</p>
+        <h2 id="hospital-h" className="h-hospital" tabIndex={-1}>
+          {displayName(h.name)}
+        </h2>
+        <p className={`hospital-verdict verdict-text-${w}`}>
+          {h.checked === false ? t("hosp.unread") : w === "none" ? t("hosp.none") : summary(t, h)}
+        </p>
+        <Link href="/" className="rc-btn rc-btn--block hospital-check">
+          {t("hosp.checkBill")}
+        </Link>
+      </div>
 
-      <Link href="/" className="btn btn-primary hospital-check-top">
-        {t("hosp.checkBill")}
-      </Link>
-
-      {lang === "es" && findings.length > 0 && <p className="quiet quotes-note">{t("audit.quotesNote")}</p>}
-      {findings.length > 0 && <ol className="a-findings">{findings.map((f, i) => <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />)}</ol>}
+      {lang === "es" && findings.length > 0 && <p className="quotes-note">{t("audit.quotesNote")}</p>}
+      {findings.length > 0 && (
+        <ol className="a-findings">
+          {findings.map((f, i) => (
+            <FindingCard key={f.rule + i} f={f} rule={byId.get(f.rule)} />
+          ))}
+        </ol>
+      )}
 
       <div className="hospital-docs">
         <h3 className="hospital-docs-h">{t("hosp.docsRead")}</h3>
@@ -123,22 +126,18 @@ export function HospitalView({ h, rules }: { h: Hospital; rules: Rule[] }) {
             <li key={type}>
               <a href={d.url} target="_blank" rel="noreferrer">
                 {docLabel(type, lang)}
-              </a>{" "}
-              <span className="quiet">{t("doc.effective", { date: d.effectiveDate ? longDate(d.effectiveDate, lang) : null })}</span>
+              </a>
+              <span className="versus-date">{t("doc.effective", { date: d.effectiveDate ? longDate(d.effectiveDate, lang) : null })}</span>
             </li>
           ))}
           <li>
             <a href={h.detailUrl} target="_blank" rel="noreferrer">
               {t("hosp.stateListing")}
-            </a>{" "}
-            <span className="quiet">{hostOf(h.detailUrl)}</span>
+            </a>
+            <span className="versus-date">{hostOf(h.detailUrl)}</span>
           </li>
         </ul>
       </div>
-
-      <Link href="/" className="btn btn-primary btn-big">
-        {t("hosp.checkBill")}
-      </Link>
     </article>
   );
 }

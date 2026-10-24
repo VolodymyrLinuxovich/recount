@@ -1,9 +1,10 @@
 "use client";
 
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import { useT } from "../i18n/I18nProvider";
 import { type Hospital, type Worst, displayName, verdictLabel, worst } from "./data";
+import { useInView } from "./motion";
 
 // A simplified outline of California as [lon, lat] points.
 const OUTLINE: [number, number][] = [
@@ -50,6 +51,8 @@ export function CaMap({
   // A tap on a crowded spot lists every hospital near it instead of guessing.
   const [near, setNear] = useState<{ list: typeof placed; total: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  // The dots fade in north to south the first time the map scrolls into view.
+  const [figRef, inView] = useInView<HTMLElement>(0.15);
 
   // Each dot's hit circle is at least 26 screen pixels across, however small the map is drawn.
   const [hitR, setHitR] = useState(11);
@@ -128,7 +131,7 @@ export function CaMap({
   }
 
   return (
-    <figure className="ca-map">
+    <figure ref={figRef} className="ca-map rc-card" data-in={inView}>
       <svg ref={svgRef} viewBox={`-6 -6 ${W + 12} ${H + 12}`} role="group" aria-label={t("map.aria")} onClick={tap}>
         <path d={PATH} className="ca-outline" />
         {placed.map(({ h, w, xy: [x, y] }) => (
@@ -139,6 +142,7 @@ export function CaMap({
               else dotRefs.current.delete(h.key);
             }}
             className={`dot dot-${w}`}
+            style={{ "--d": `${Math.round((y / H) * 900)}ms` } as CSSProperties}
             role="button"
             tabIndex={active?.h.key === h.key ? 0 : -1}
             aria-label={`${displayName(h.name)}: ${verdictLabel(w, lang)}`}
@@ -147,7 +151,7 @@ export function CaMap({
             onKeyDown={(e) => onDotKey(e, placed.find((p) => p.h.key === h.key)!)}
           >
             <circle cx={x} cy={y} r={hitR} className="dot-hit" />
-            <circle cx={x} cy={y} r={w === "none" ? 3.2 : w === "conflict" ? 6 : 4.6} className="dot-mark" />
+            <circle cx={x} cy={y} r={w === "none" ? 3 : w === "conflict" ? 6.2 : w === "likely" ? 5 : 3.8} className="dot-mark" />
           </g>
         ))}
         {sel && (

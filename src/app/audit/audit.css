@@ -1,135 +1,532 @@
-/* Statewide audit page: a calm public report. Same tokens as the rest of the app (globals.css).
-   Red only for confirmed conflicts with the law; amber for likely; ink outline for worth asking. */
+/* Statewide audit page. A real product page: wide on a laptop (map left, finder and details
+   right), one clean column on a phone (search first, then the map).
+   Colors: red only for a policy that breaks the law, purple for "likely", gray for none. */
+
+/* The audit is the one wide page: let the page frame open up to 1200px of content. */
+.page:has(> .column > .audit) {
+  max-width: calc(1200px + 2 * var(--gutter, 20px));
+}
 
 .audit {
+  --a-conflict: var(--rc-flag);
+  --a-likely: #7c3aed;
+  --a-likely-bar: #a78bfa;
+  --a-ask: var(--ink-3);
+  --a-none: #cbc3dd;
+  --a-text-likely: #6d28d9;
+  font-family: var(--font-ui);
   font-size: var(--fs-base);
   line-height: var(--lh-body);
 }
 
-.audit.stack-lg > * + * {
+@media (prefers-color-scheme: dark) {
+  .audit {
+    --a-likely: #b3a4ff;
+    --a-likely-bar: #8b78e8;
+    --a-none: #5a4880;
+    --a-text-likely: #c4b5fd;
+  }
+}
+
+.audit > * + * {
   margin-top: var(--sp-8);
 }
 
-/* The search and map follow the intro closely, so the map starts on a phone's first screen. */
-.audit.stack-lg > header + section {
-  margin-top: var(--sp-6);
+.audit a {
+  color: var(--primary);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
 }
 
-.wide {
-  width: min(1040px, calc(100vw - 32px));
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+.audit a.rc-btn {
+  color: var(--rc-on-brand);
+  text-decoration: none;
+}
+
+.a-ico {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- back home ---------- */
+
+.audit .a-home {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding-right: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.audit .a-home:hover {
+  color: var(--primary);
+}
+
+.audit > .a-home + * {
+  margin-top: var(--sp-4);
 }
 
 .sample-banner {
   margin: 0;
   padding: var(--sp-3) var(--sp-4);
   font-size: var(--fs-sm);
-  color: var(--ink);
-  background: var(--sheet);
+  background: var(--rc-bg-2);
   border: 1px solid var(--rule);
   border-left: 4px solid var(--warn);
-  border-radius: 10px;
+  border-radius: var(--r-control);
 }
 
-.audit .eyebrow {
-  margin: 0 0 var(--sp-3);
-}
+/* ---------- entrance (scroll reveal, staggered) ---------- */
 
-.audit-headline {
-  font-size: var(--fs-2xl);
-  line-height: var(--lh-tight);
-  text-wrap: balance;
-}
-
-/* The headline number: set in the accent, nothing drawn around it. */
-.audit-n {
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-  margin: 0 0.12em;
-  white-space: nowrap;
-}
-
-.audit .lede {
-  margin-top: var(--sp-4);
-  font-size: var(--fs-base);
-  max-width: 38em;
-}
-
-/* "What we checked": the six rules and the scope, folded under the one-line intro. */
-.audit-what {
-  margin-top: var(--sp-4);
-  max-width: 38em;
-}
-
-.audit-what summary {
-  display: list-item;
-  width: fit-content;
-  padding: var(--sp-2) 0;
-  min-height: 44px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
-}
-
-.audit-what ul {
-  margin: var(--sp-2) 0 0;
-  padding-left: 1.25em;
-}
-
-.audit-what li + li {
-  margin-top: var(--sp-1);
-}
-
-.audit-what p {
-  margin: var(--sp-3) 0 0;
-  color: var(--ink-2);
-}
-
-/* ---------- map ----------
-   Search comes first in the page (and in Tab order), then the map, then "Most flags".
-   On wide screens the map takes the left column and the search and list stack on the right. */
-
-.map-and-search {
-  display: grid;
-  gap: var(--sp-5);
-  grid-template-areas: "find" "map" "more";
-}
-
-.map-and-search > .finder {
-  grid-area: find;
-}
-
-.map-and-search > .ca-map {
-  grid-area: map;
-}
-
-.map-and-search > .finder-more {
-  grid-area: more;
-}
-
-.finder-more:empty {
-  display: none;
-}
-
-@media (min-width: 900px) {
-  .map-and-search {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
-    grid-template-areas: "map find" "map more";
-    align-items: start;
-    gap: var(--sp-5) var(--sp-7);
+@media (prefers-reduced-motion: no-preference) {
+  .audit [data-in="false"] .rv {
+    opacity: 0;
+  }
+  .audit [data-in="true"] .rv {
+    animation: a-rise 0.7s var(--rc-ease-out) both;
+    animation-delay: calc(var(--i, 0) * 110ms);
   }
 }
 
-.ca-map {
+@keyframes a-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- hero ---------- */
+
+.a-hero {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.a-h1 {
   margin: 0;
-  background: var(--sheet);
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.a-date {
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.a-figs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+
+.a-fig {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-4) var(--sp-4) var(--sp-5);
+  background: var(--rc-surface);
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
+}
+
+.a-fig:first-child {
+  grid-column: 1 / -1;
+}
+
+.a-fig p {
+  margin: 0;
+}
+
+.a-fig-n {
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 2rem + 3vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.a-fig--brand .a-fig-n {
+  color: var(--primary);
+}
+
+.a-fig--flag .a-fig-n {
+  color: var(--pen);
+}
+
+.a-fig--lilac .a-fig-n {
+  color: var(--a-text-likely);
+}
+
+.a-fig-label {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.a-fig-sub {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.a-hero-cta {
+  margin-top: var(--sp-4);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .a-figs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .a-fig:first-child {
+    grid-column: auto;
+  }
+  .a-hero-cta {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .a-hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: var(--sp-8);
+  }
+  .a-hero-side {
+    display: grid;
+    justify-items: start;
+  }
+  .a-figs {
+    width: 100%;
+  }
+}
+
+/* ---------- disclosures ("What we checked", "How we did this") ---------- */
+
+.a-disclosure {
+  margin-top: var(--sp-5);
+  max-width: 36em;
+}
+
+.a-disclosure summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 48px;
+  padding: 0 var(--sp-4);
+  border: 1.5px solid var(--control-edge);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.a-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.a-disclosure summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s var(--rc-ease-out);
+}
+
+.a-disclosure[open] summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.a-disclosure summary:hover {
+  background: var(--rc-bg-2);
+}
+
+.a-what {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+
+.a-what li {
+  position: relative;
+  padding-left: var(--sp-6);
+}
+
+.a-what li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.35em;
+  width: 12px;
+  height: 7px;
+  border-left: 2.5px solid var(--primary);
+  border-bottom: 2.5px solid var(--primary);
+  transform: rotate(-45deg);
+}
+
+.audit > .a-found + .a-method {
+  margin-top: var(--sp-3);
+}
+
+.a-method p {
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+
+.a-method .a-method-note {
+  color: var(--ink-3);
+}
+
+/* ---------- app area: finder, map, list or details ---------- */
+
+.a-app {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-areas: "find" "map" "panel";
+}
+
+.a-app > .finder {
+  grid-area: find;
+}
+
+.a-app > .a-map-col {
+  grid-area: map;
+}
+
+.a-app > .a-panel {
+  grid-area: panel;
+  container-type: inline-size;
+  scroll-margin-top: var(--sp-4);
+  min-width: 0;
+}
+
+.a-app--list {
+  max-width: 680px;
+}
+
+@media (min-width: 1024px) {
+  .a-app:not(.a-app--list) {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "map find" "map panel";
+    gap: var(--sp-4) var(--sp-6);
+    align-items: start;
+  }
+  .a-app > .a-map-col {
+    position: sticky;
+    top: var(--sp-4);
+  }
+}
+
+/* ---------- search ---------- */
+
+.finder {
+  padding: var(--sp-5);
+}
+
+.finder-label {
+  display: block;
+  margin-bottom: var(--sp-3);
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: var(--fs-md);
+  letter-spacing: -0.01em;
+}
+
+.find-box {
+  position: relative;
+}
+
+.find-ico {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.find-input {
+  width: 100%;
+  min-height: 56px;
+  font: inherit;
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: var(--rc-bg-2);
+  border: 1.5px solid var(--control-edge);
+  border-radius: var(--r-control);
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) 50px;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.find-input::placeholder {
+  color: var(--ink-3);
+}
+
+.find-input:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-color: var(--primary);
+  background: var(--rc-surface);
+}
+
+.find-hint {
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.find-results {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-3) 0 0;
+}
+
+.find-results li + li {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.find-none {
+  padding: var(--sp-4) var(--sp-1);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+
+.find-results button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  padding: var(--sp-3) var(--sp-3);
+  border-radius: var(--r-control);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.find-results button:hover {
+  background: var(--rc-bg-2);
+}
+
+.find-results button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.find-results button[aria-current] {
+  background: var(--rc-brand-tint);
+}
+
+.find-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.find-name {
+  display: block;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+}
+
+.find-place {
+  display: block;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.find-count {
+  flex: none;
+  padding: 2px var(--sp-3);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--rc-bg-2);
+  color: var(--ink-2);
+}
+
+.find-count--conflict {
+  background: var(--rc-flag-tint);
+  color: var(--rc-flag-ink);
+}
+
+.find-count--likely {
+  background: var(--rc-brand-tint);
+  color: var(--a-text-likely);
+}
+
+.most {
+  padding: var(--sp-5) var(--sp-4) var(--sp-3);
+}
+
+@media (max-width: 479px) {
+  .finder,
+  .hospital-head,
+  :root .a-finding {
+    padding: var(--sp-4);
+  }
+  .most {
+    padding: var(--sp-4) var(--sp-2) var(--sp-2);
+  }
+  .versus-col {
+    padding: var(--sp-3);
+  }
+  .find-input::placeholder {
+    font-size: var(--fs-sm);
+  }
+}
+
+.most-h {
+  margin: 0 var(--sp-2) var(--sp-1);
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: var(--fs-md);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- map ---------- */
+
+.ca-map {
+  position: relative;
+  margin: 0;
   padding: var(--sp-4);
 }
 
@@ -138,12 +535,22 @@
   width: 100%;
   height: auto;
   max-height: 72vh;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .ca-map {
+    padding: var(--sp-5) var(--sp-6);
+  }
+  .ca-map svg {
+    max-height: calc(100vh - 150px);
+  }
 }
 
 .ca-outline {
-  fill: var(--paper);
-  stroke: var(--ink-2);
-  stroke-width: 1.2;
+  fill: var(--rc-bg-2);
+  stroke: var(--control-edge);
+  stroke-width: 1.4;
   stroke-linejoin: round;
 }
 
@@ -157,55 +564,92 @@
 }
 
 .dot-mark {
+  transform-box: fill-box;
+  transform-origin: center;
   stroke-width: 1.4;
-  transition: r 0.12s ease;
+  transition: r 0.15s var(--rc-ease-out);
 }
 
 .dot:hover .dot-mark,
 .dot:focus-visible .dot-mark {
-  r: 7;
+  r: 8;
 }
 
 .dot:focus-visible .dot-hit {
   stroke: var(--focus);
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 
 .dot-conflict .dot-mark {
-  fill: var(--pen);
-  stroke: var(--sheet);
+  fill: var(--a-conflict);
+  stroke: var(--rc-surface);
 }
 
 .dot-likely .dot-mark {
-  fill: var(--warn);
-  stroke: var(--sheet);
+  fill: var(--a-likely);
+  stroke: var(--rc-surface);
 }
 
+/* "Worth asking" stays quiet: a thin ring, so red and purple carry the map. */
 .dot-ask .dot-mark {
-  fill: var(--sheet);
-  stroke: var(--ink);
-  stroke-width: 1.8;
+  fill: var(--rc-surface);
+  stroke: var(--a-ask);
+  stroke-width: 1.4;
+  stroke-opacity: 0.6;
 }
 
 .dot-none .dot-mark {
-  fill: var(--ink-2);
-  opacity: 0.35;
+  fill: var(--a-none);
   stroke: none;
 }
 
-/* The selected hospital: one clean circle. */
+/* The selected hospital: one clean ring. */
 .dot-ring {
   fill: none;
   stroke: var(--ink);
-  stroke-width: 2;
+  stroke-width: 2.5;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ca-map[data-in="false"] .dot-mark {
+    opacity: 0;
+  }
+  .ca-map[data-in="true"] .dot-mark {
+    animation: a-dot 0.55s var(--rc-ease-out) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .dot-ring {
+    animation: a-ring 0.35s var(--rc-ease-out) both;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+}
+
+@keyframes a-dot {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes a-ring {
+  from {
+    opacity: 0;
+    transform: scale(1.6);
+  }
 }
 
 .map-legend {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--sp-2) var(--sp-5);
-  margin-top: var(--sp-4);
+  margin-top: var(--sp-3);
   font-size: var(--fs-sm);
   color: var(--ink-2);
 }
@@ -225,30 +669,43 @@
 }
 
 .dot-key.dot-conflict {
-  background: var(--pen);
+  background: var(--a-conflict);
 }
 
 .dot-key.dot-likely {
-  background: var(--warn);
+  background: var(--a-likely);
 }
 
 .dot-key.dot-ask {
-  border: 1.8px solid var(--ink);
-  background: var(--sheet);
+  border: 2px solid var(--a-ask);
+  background: var(--rc-surface);
 }
 
 .dot-key.dot-none {
-  background: var(--ink-2);
-  opacity: 0.35;
+  background: var(--a-none);
 }
 
-/* Tap on a crowded spot: list the hospitals there */
+/* Tap on a crowded spot: list the hospitals there. */
 .map-near {
   margin-top: var(--sp-4);
-  background: var(--paper);
+  background: var(--rc-surface);
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: var(--r-control);
+  box-shadow: var(--rc-shadow);
   padding: var(--sp-2) var(--sp-4);
+}
+
+@media (min-width: 1024px) {
+  .map-near {
+    position: absolute;
+    right: var(--sp-4);
+    top: var(--sp-4);
+    width: min(340px, calc(100% - 2 * var(--sp-4)));
+    max-height: calc(100% - 2 * var(--sp-4));
+    overflow: auto;
+    margin: 0;
+    z-index: 2;
+  }
 }
 
 .map-near-head {
@@ -256,17 +713,22 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: var(--fs-base);
+  font-size: var(--fs-sm);
 }
 
 .map-near-close {
   all: unset;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
   font-size: var(--fs-xl);
+  border-radius: 50%;
   cursor: pointer;
+}
+
+.map-near-close:hover {
+  background: var(--rc-bg-2);
 }
 
 .map-near-close:focus-visible {
@@ -304,135 +766,64 @@
   margin: var(--sp-2) 0 var(--sp-1);
 }
 
-/* ---------- search ---------- */
+/* ---------- hospital details ---------- */
 
-.finder .h-section {
-  display: block;
-  margin-bottom: var(--sp-3);
-}
-
-.find-input {
-  width: 100%;
-  min-height: 60px;
-  font: inherit;
-  font-size: var(--fs-base);
-  color: var(--ink);
-  background: var(--sheet);
-  border: 1.5px solid var(--ink-2);
-  border-radius: 10px;
-  padding: var(--sp-3) var(--sp-4);
-}
-
-.find-input:focus {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
-
-.find-results {
-  list-style: none;
-  padding: 0;
-  margin: var(--sp-3) 0 0;
-  border-top: 1px solid var(--rule);
-}
-
-.find-results li {
-  border-bottom: 1px solid var(--rule-soft);
-}
-
-.find-results li.quiet {
-  padding: var(--sp-4) var(--sp-1);
-}
-
-.find-results button {
+.a-back {
   all: unset;
   box-sizing: border-box;
-  display: flex;
-  gap: var(--sp-4);
+  display: inline-flex;
   align-items: center;
-  width: 100%;
-  min-height: 64px;
-  padding: var(--sp-3) var(--sp-2);
+  gap: var(--sp-2);
+  min-height: 44px;
+  margin-bottom: var(--sp-2);
+  padding: 0 var(--sp-3) 0 var(--sp-1);
+  border-radius: var(--r-control);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-2);
   cursor: pointer;
 }
 
-.find-results button:hover .find-name {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.a-back:hover {
+  color: var(--primary);
 }
 
-.find-results button:focus-visible {
+.a-back:focus-visible {
   outline: 3px solid var(--focus);
 }
 
-.find-results button[aria-current] {
-  background: var(--accent-soft);
-  border-radius: 6px;
+.hospital-head {
+  padding: var(--sp-5);
 }
 
-.find-results button[aria-current] .find-name {
-  font-weight: 700;
-}
-
-.find-name {
-  display: block;
-  font-size: var(--fs-base);
-  line-height: var(--lh-snug);
-}
-
-.find-place {
-  display: block;
-  font-size: var(--fs-sm);
-  color: var(--ink-2);
-}
-
-.find-hint {
-  font-size: var(--fs-sm);
-  margin: var(--sp-3) 0 0;
-}
-
-.most {
-  margin-top: var(--sp-6);
-}
-
-.most-h {
+.hospital-place {
   margin: 0 0 var(--sp-1);
   font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--ink-2);
-}
-
-.search-only {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-/* ---------- hospital ---------- */
-
-.hospital-anchor {
-  scroll-margin-top: 16px;
-}
-
-.hospital-anchor:empty {
-  display: none;
-}
-
-.hospital {
-  border-top: 1px solid var(--rule);
-  padding-top: var(--sp-7);
+  color: var(--ink-3);
 }
 
 .h-hospital {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: var(--fs-2xl);
-  line-height: var(--lh-tight);
   margin: 0;
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
+.h-hospital:focus {
+  outline: none;
+}
+
+.h-hospital:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
 .hospital-verdict {
-  font-size: var(--fs-base);
   margin: var(--sp-3) 0 0;
+  font-size: var(--fs-base);
 }
 
 .hospital-verdict.verdict-text-conflict {
@@ -441,34 +832,39 @@
 }
 
 .hospital-verdict.verdict-text-likely {
-  color: var(--warn);
+  color: var(--a-text-likely);
   font-weight: 600;
 }
 
-.hospital-check-top {
-  margin: var(--sp-5) 0 0;
-  min-height: 56px;
-  white-space: normal;
-  text-align: center;
+.hospital-verdict.verdict-text-none {
+  color: var(--ok);
+  font-weight: 600;
 }
 
-.hospital .quotes-note {
-  margin: var(--sp-5) 0 0;
+.hospital-check {
+  margin-top: var(--sp-5);
+  white-space: normal;
+}
+
+.quotes-note {
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
 }
 
 .a-findings {
   list-style: none;
   padding: 0;
-  margin: var(--sp-6) 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-5);
+  margin: var(--sp-4) 0 0;
+  display: grid;
+  gap: var(--sp-4);
 }
 
-.a-finding {
-  background: var(--sheet);
+:root .a-finding {
+  background: var(--rc-surface);
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
   padding: var(--sp-5);
 }
 
@@ -476,70 +872,89 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  gap: var(--sp-3) var(--sp-4);
+  align-items: flex-start;
+  gap: var(--sp-3);
   margin-bottom: var(--sp-4);
 }
 
 .a-rule {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: var(--fs-md);
-  line-height: var(--lh-snug);
+  flex: 1 1 14em;
   margin: 0;
+  font-family: var(--rc-font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
-/* Verdicts: small pills. */
+/* Verdict: a clear pill. */
 .verdict {
   display: inline-flex;
   align-items: center;
+  gap: var(--sp-2);
   min-height: 32px;
   padding: var(--sp-1) var(--sp-3);
-  border: 1px solid transparent;
   border-radius: 999px;
-  font-family: var(--font-ui);
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 700;
   line-height: var(--lh-snug);
   white-space: nowrap;
 }
 
+.verdict::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 .verdict-conflict {
-  background: color-mix(in srgb, var(--pen) 12%, transparent);
-  color: var(--pen);
+  background: var(--rc-flag-tint);
+  color: var(--rc-flag-ink);
 }
 
 .verdict-likely {
-  background: color-mix(in srgb, var(--warn) 15%, transparent);
-  color: var(--warn);
+  background: var(--rc-brand-tint);
+  color: var(--a-text-likely);
 }
 
 .verdict-ask {
-  border-color: var(--ink-2);
-  color: var(--ink);
+  background: var(--rc-bg-2);
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1.5px var(--control-edge);
 }
 
 .versus {
   display: grid;
-  gap: var(--sp-5);
+  gap: var(--sp-3);
 }
 
-@media (min-width: 700px) {
+@container (min-width: 640px) {
   .versus {
     grid-template-columns: 1fr 1fr;
-    gap: var(--sp-6);
   }
-  .versus-law {
-    border-left: 1px solid var(--rule-soft);
-    padding-left: var(--sp-6);
-  }
+}
+
+.versus-col {
+  padding: var(--sp-4);
+  border-radius: var(--r-control);
+}
+
+.versus-policy {
+  background: var(--rc-bg-2);
+}
+
+.versus-law {
+  background: var(--rc-surface);
+  box-shadow: inset 0 0 0 1.5px var(--rc-brand-tint);
+  border-left: 4px solid var(--primary);
 }
 
 .audit .versus-label {
   margin: 0 0 var(--sp-2);
-  font-family: var(--font-ui);
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink-2);
@@ -548,73 +963,72 @@
 .policy-quote,
 .law-quote {
   margin: 0;
-  font-size: var(--fs-base);
-  line-height: var(--lh-body);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
 }
 
 .policy-quote {
   color: var(--ink-2);
 }
 
-/* The flagged sentence: a soft highlight, not a squiggle. */
+/* The flagged sentence: a soft highlight. */
 .policy-mark {
   color: var(--ink);
-  background: color-mix(in srgb, var(--warn) 16%, transparent);
+  font-weight: 500;
+  background: color-mix(in srgb, var(--a-likely) 18%, transparent);
   padding: 1px var(--sp-1);
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 
 .a-conflict .policy-mark {
-  background: color-mix(in srgb, var(--pen) 11%, transparent);
+  background: color-mix(in srgb, var(--rc-flag) 20%, transparent);
 }
 
 .law-quote {
-  padding-left: var(--sp-4);
-  border-left: 3px solid var(--accent);
-  font-family: var(--font-ui);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .versus-cite {
-  margin-top: var(--sp-3);
-  font-size: var(--fs-sm);
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-xs);
 }
 
-.audit a {
-  color: var(--accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
+.versus-date {
+  display: block;
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
 }
 
-.audit a.btn {
-  color: var(--paper);
+.versus-date::first-letter {
+  text-transform: uppercase;
 }
 
 .a-explain {
-  margin: var(--sp-5) 0 0;
-  padding-top: var(--sp-4);
-  border-top: 1px solid var(--rule-soft);
-  font-size: var(--fs-base);
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
 }
 
 .hospital-docs {
-  margin: var(--sp-7) 0 var(--sp-6);
+  margin: var(--sp-6) 0 0;
+  padding: 0 var(--sp-2);
 }
 
 .hospital-docs-h {
   margin: 0 0 var(--sp-2);
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: var(--fs-md);
+  font-family: var(--rc-font-display);
+  font-weight: 700;
+  font-size: var(--fs-base);
 }
 
 .hospital-docs ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: var(--fs-base);
+  font-size: var(--fs-sm);
 }
 
 .hospital-docs li {
@@ -625,110 +1039,171 @@
 .hospital-docs li a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 36px;
 }
 
-.hospital .btn-big {
-  width: 100%;
-  white-space: normal;
-  text-align: center;
+/* ---------- what we found: the top three rules ---------- */
+
+.a-h2 {
+  margin: 0;
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
-@media (min-width: 720px) {
-  .hospital .btn-big {
-    width: auto;
-  }
+.a-sub {
+  margin: var(--sp-2) 0 0;
+  color: var(--ink-2);
 }
 
-/* ---------- rule breakdown ---------- */
-
-.audit .h-section {
-  font-size: var(--fs-xl);
-}
-
-.rule-rows {
+.a-rule-cards {
   list-style: none;
   padding: 0;
   margin: var(--sp-5) 0 0;
-  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: var(--sp-4);
 }
 
-.rule-rows li {
-  padding: var(--sp-4) 0;
-  border-bottom: 1px solid var(--rule-soft);
+@media (min-width: 720px) {
+  .a-rule-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.rule-row-head {
+.a-rule-card {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--sp-3);
+  flex-direction: column;
+  padding: var(--sp-5);
+  background: var(--rc-surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
 }
 
-.rule-title {
-  font-size: var(--fs-base);
+.a-rule-card p {
+  margin: 0;
 }
 
-.rule-count {
-  font-family: var(--font-ui);
-  font-size: var(--fs-lg);
-  color: var(--accent);
-  white-space: nowrap;
-  font-weight: 600;
+.a-rule-n {
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 2rem + 2vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
 }
 
-.rule-count .quiet {
+.a-rule-unit {
   font-family: var(--font-ui);
   font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink-2);
 }
 
-.rule-bar {
+.a-rule-title {
+  margin: var(--sp-3) 0 0;
+  font-family: var(--rc-font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.a-bar {
   display: flex;
-  height: 8px;
-  margin: var(--sp-3) 0 var(--sp-2);
-  background: var(--rule-soft);
-  border-radius: 4px;
+  height: 12px;
+  margin: var(--sp-4) 0 var(--sp-2);
+  border-radius: 999px;
+  background: var(--rc-bg-2);
   overflow: hidden;
 }
 
-.rule-bar span {
+.a-bar span {
   display: block;
   height: 100%;
 }
 
-.bar-conflict {
-  background: var(--pen);
+.a-bar-c {
+  width: var(--c);
+  background: var(--a-conflict);
 }
 
-.bar-likely {
-  background: var(--warn);
+.a-bar-l {
+  width: var(--l);
+  background: var(--a-likely-bar);
 }
 
-.bar-ask {
-  background: var(--ink-2);
-  opacity: 0.35;
+@media (prefers-reduced-motion: no-preference) {
+  .a-bar span {
+    transition: width 1s var(--rc-ease-out);
+    transition-delay: var(--d, 0ms);
+  }
+  .a-found[data-in="false"] .a-bar span {
+    width: 0;
+  }
 }
 
-.rule-cite {
+.a-rule-split {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.a-rule-why {
+  flex: 1;
+  margin-top: var(--sp-4) !important;
   font-size: var(--fs-sm);
+  line-height: 1.5;
 }
 
-.method {
-  border-top: 1px solid var(--rule);
-  padding-top: var(--sp-7);
-  font-size: var(--fs-base);
-  max-width: 40em;
+.audit .a-rule-cite {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
+  margin-top: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
 }
 
-.method .h-section {
-  margin-bottom: var(--sp-4);
+/* ---------- final call to action ---------- */
+
+.a-end {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-7) var(--sp-5);
+  text-align: center;
+  background: var(--rc-bg-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--rc-r-lg);
 }
 
-.method p {
-  margin: 0 0 var(--sp-4);
+.a-end-h {
+  margin: 0;
+  max-width: 22em;
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
-/* "Most flags" sits under the map now; the grid gap spaces it. */
-.finder-more .most {
-  margin-top: 0;
+.a-end-cta {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .a-end-cta {
+    width: auto;
+    min-width: 260px;
+  }
+}
+
+.audit > .a-method + .a-end {
+  margin-top: var(--sp-7);
 }

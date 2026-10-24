@@ -151,6 +151,9 @@ export function fillText(text: string, d: Details, today = usToday()): string {
   const cityApart = slots.has("city");
   const zipApart = slots.has("zip");
   const filled = text.replace(BRACKET, (whole, label: string) => {
+    // The writer sometimes leaves "[Your name: Alex Rivera]": the value is already there, so use it.
+    const kv = label.match(/^([^:]{2,40}):\s*(\S.*)$/);
+    if (kv && !/\b(insert|enter|fill|type|your|add|escriba|ingrese|su)\b/i.test(kv[2])) return kv[2].trim();
     let slot = slotOf(label);
     if (!slot) return whole;
     if (slot === "address" && cityApart) slot = "street";
