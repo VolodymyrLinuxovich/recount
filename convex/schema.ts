@@ -13,6 +13,7 @@ export default defineSchema({
       v.literal("error"),
     ),
     sample: v.boolean(),
+    lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
     fileId: v.optional(v.id("_storage")),
     fileType: v.optional(v.string()),
     bill: v.optional(v.any()),

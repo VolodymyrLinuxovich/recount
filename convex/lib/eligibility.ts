@@ -2,6 +2,7 @@
 // The model never decides eligibility; this file does, and every result lists the rule it used.
 
 import type { HospitalRef } from "./hospital";
+import { type Lang, pick } from "./lang";
 
 export interface FplTable {
   year: number;
@@ -44,49 +45,55 @@ export function povertyLine(fpl: FplTable, size: number): number {
   return fpl.base + fpl.perAdditional * (n - 1);
 }
 
-export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amountDue: number | null): Eligibility {
+const usd = (x: number) => `$${x.toLocaleString("en-US")}`;
+
+export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amountDue: number | null, lang: Lang = "en"): Eligibility {
+  const t = pick(lang);
   const line = povertyLine(fpl, h.size);
   const fplPct = Math.round((h.annualIncome / line) * 1000) / 10;
+  const people = h.size === 1 ? t("1 person", "1 persona") : t(`${h.size} people`, `${h.size} personas`);
   const basis: Basis[] = [
     {
-      rule: "Poverty line",
-      text: `${fpl.year} federal poverty guideline for a household of ${h.size}: $${line.toLocaleString()}. Your income is ${fplPct}% of it.`,
+      rule: t("Poverty line", "Línea de pobreza"),
+      text: t(
+        `${fpl.year} federal poverty guideline for a household of ${people}: ${usd(line)}. Your income is ${fplPct}% of it.`,
+        `Guía federal de pobreza de ${fpl.year} para un hogar de ${people}: ${usd(line)}. Su ingreso es el ${fplPct}% de esa cantidad.`,
+      ),
       source: fpl.source,
     },
   ];
+  const result = (tier: Tier, headline: string, owedEstimate: number | null, medicalLikely: boolean): Eligibility => ({
+    povertyLine: line,
+    fplPct,
+    tier,
+    headline,
+    owedEstimate,
+    basis,
+    medicalLikely,
+  });
 
   // Who the state law covers: uninsured patients, or insured patients with high medical costs.
-  let highCosts = false;
   if (h.insured) {
     if (h.outOfPocket12mo == null) {
-      return {
-        povertyLine: line,
-        fplPct,
-        tier: "NEEDS_INFO",
-        headline: "We need your out-of-pocket costs from the last 12 months",
-        owedEstimate: null,
-        basis,
-        medicalLikely: false,
-      };
+      return result("NEEDS_INFO", t("We need your out-of-pocket costs from the last 12 months", "Necesitamos sus gastos médicos de su bolsillo de los últimos 12 meses"), null, false);
     }
-    highCosts = h.outOfPocket12mo > 0.1 * h.annualIncome;
+    const highCosts = h.outOfPocket12mo > 0.1 * h.annualIncome;
+    const oop = usd(h.outOfPocket12mo);
     basis.push({
-      rule: "High medical costs",
+      rule: t("High medical costs", "Gastos médicos altos"),
       text: highCosts
-        ? `You paid or owe $${h.outOfPocket12mo.toLocaleString()} out of pocket, more than 10% of your income. California treats that as high medical costs.`
-        : `You paid or owe $${h.outOfPocket12mo.toLocaleString()} out of pocket, which is not more than 10% of your income, so the high-cost rule doesn't apply.`,
+        ? t(
+            `You paid or owe ${oop} out of pocket, more than 10% of your income. California treats that as high medical costs.`,
+            `Usted pagó o debe ${oop} de su bolsillo, más del 10% de su ingreso. California lo considera gastos médicos altos.`,
+          )
+        : t(
+            `You paid or owe ${oop} out of pocket, which is not more than 10% of your income, so the high-cost rule doesn't apply.`,
+            `Usted pagó o debe ${oop} de su bolsillo, que no es más del 10% de su ingreso, así que la regla de gastos altos no aplica.`,
+          ),
       source: HSC_127400,
     });
     if (!highCosts) {
-      return {
-        povertyLine: line,
-        fplPct,
-        tier: "NOT_ELIGIBLE",
-        headline: "Insured without high medical costs: the state program doesn't apply",
-        owedEstimate: null,
-        basis,
-        medicalLikely: false,
-      };
+      return result("NOT_ELIGIBLE", t("Insured without high medical costs: the state program doesn't apply", "Con seguro y sin gastos médicos altos: el programa estatal no aplica"), null, false);
     }
   }
 
@@ -98,53 +105,49 @@ export function assess(h: Household, fpl: FplTable, ref: HospitalRef | null, amo
 
   if (freeMax != null && fplPct <= freeMax) {
     basis.push({
-      rule: `${ref!.name} free care`,
-      text: `The hospital's own policy gives free care up to ${freeMax}% of the poverty line. You're at ${fplPct}%.`,
+      rule: t(`${ref!.name} free care`, `Atención gratuita de ${ref!.name}`),
+      text: t(
+        `The hospital's own policy gives free care up to ${freeMax}% of the poverty line. You're at ${fplPct}%.`,
+        `La propia política del hospital da atención gratuita hasta el ${freeMax}% de la línea de pobreza. Usted está en ${fplPct}%.`,
+      ),
       source: fap?.url ?? undefined,
     });
-    return {
-      povertyLine: line,
-      fplPct,
-      tier: "FREE",
-      headline: "You likely qualify for free care",
-      owedEstimate: 0,
-      basis,
-      medicalLikely,
-    };
+    return result("FREE", t("You likely qualify for free care", "Probablemente califica para atención gratuita"), 0, medicalLikely);
   }
 
   if (fplPct <= discountMax) {
     basis.push({
-      rule: "California discount payment",
-      text: `Hospitals must offer discounted payment to ${h.insured ? "patients with high medical costs" : "uninsured patients"} with income at or below ${discountMax}% of the poverty line, and can't charge them more than a government payer would pay.`,
+      rule: t("California discount payment", "Pago con descuento de California"),
+      text: h.insured
+        ? t(
+            `Hospitals must offer discounted payment to patients with high medical costs with income at or below ${discountMax}% of the poverty line, and can't charge them more than a government payer would pay.`,
+            `Los hospitales deben ofrecer pago con descuento a pacientes con gastos médicos altos con ingresos de hasta el ${discountMax}% de la línea de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
+          )
+        : t(
+            `Hospitals must offer discounted payment to uninsured patients with income at or below ${discountMax}% of the poverty line, and can't charge them more than a government payer would pay.`,
+            `Los hospitales deben ofrecer pago con descuento a pacientes sin seguro con ingresos de hasta el ${discountMax}% de la línea de pobreza, y no pueden cobrarles más de lo que pagaría un programa del gobierno.`,
+          ),
       source: HSC_127405,
     });
     if (freeMax == null) {
-      basis.push({ rule: "Hospital policy", text: "We couldn't read this hospital's free-care cutoff, so we only show the state floor. You may still qualify for free care." });
+      basis.push({
+        rule: t("Hospital policy", "Política del hospital"),
+        text: t(
+          "We couldn't read this hospital's free-care cutoff, so we only show the state floor. You may still qualify for free care.",
+          "No pudimos leer el límite de atención gratuita de este hospital, así que solo mostramos el mínimo estatal. Aún podría calificar para atención gratuita.",
+        ),
+      });
     }
-    return {
-      povertyLine: line,
-      fplPct,
-      tier: "DISCOUNT",
-      headline: "You likely qualify for a discount",
-      owedEstimate: null,
-      basis,
-      medicalLikely,
-    };
+    return result("DISCOUNT", t("You likely qualify for a discount", "Probablemente califica para un descuento"), null, medicalLikely);
   }
 
   basis.push({
-    rule: "California discount payment",
-    text: `Your income is above ${discountMax}% of the poverty line, the cutoff we found. Hospitals may still offer help, so it's worth asking.`,
+    rule: t("California discount payment", "Pago con descuento de California"),
+    text: t(
+      `Your income is above ${discountMax}% of the poverty line, the cutoff we found. Hospitals may still offer help, so it's worth asking.`,
+      `Su ingreso está por encima del ${discountMax}% de la línea de pobreza, el límite que encontramos. Los hospitales aún pueden ofrecer ayuda, así que vale la pena preguntar.`,
+    ),
     source: HSC_127405,
   });
-  return {
-    povertyLine: line,
-    fplPct,
-    tier: "NOT_ELIGIBLE",
-    headline: "Above the income cutoff we found",
-    owedEstimate: amountDue,
-    basis,
-    medicalLikely: false,
-  };
+  return result("NOT_ELIGIBLE", t("Above the income cutoff we found", "Por encima del límite de ingresos que encontramos"), amountDue, false);
 }

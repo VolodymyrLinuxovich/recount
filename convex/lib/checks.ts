@@ -3,6 +3,7 @@
 
 import type { ParsedBill } from "./bill";
 import { normalizeCode, type HospitalRef } from "./hospital";
+import { type Lang, money, pick } from "./lang";
 
 export type FindingKind =
   | "DUPLICATE_LINE"
@@ -28,10 +29,10 @@ export interface Finding {
   confidence: "high" | "check";
 }
 
-const money = (x: number) => `$${x.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const r2 = (x: number) => Math.round(x * 100) / 100;
 
-export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] {
+export function checkBill(bill: ParsedBill, ref: HospitalRef | null, lang: Lang = "en"): Finding[] {
+  const t = pick(lang);
   const out: Finding[] = [];
 
   if (!bill.isItemized || bill.lines.length === 0) {
@@ -40,8 +41,11 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
       kind: "NOT_ITEMIZED",
       lines: [],
       amount: 0,
-      title: "This is a summary bill",
-      detail: "Ask for an itemized bill with a code for every service. You can't check charges you can't see.",
+      title: t("This is a summary bill", "Esta es una factura resumida"),
+      detail: t(
+        "Ask for an itemized bill with a code for every service. You can't check charges you can't see.",
+        "Pida una factura detallada con un código para cada servicio. No se pueden revisar cargos que no se ven.",
+      ),
       evidence: [],
       confidence: "high",
     });
@@ -63,12 +67,15 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
       kind: "DUPLICATE_LINE",
       lines: [first, i],
       amount: l.charge,
-      title: `${l.description} is billed twice`,
-      detail: `Lines ${first + 1} and ${i + 1} have the same code, date and amount. Sometimes that's real (two doses), often it's a double entry. Ask the hospital to confirm or remove it.`,
+      title: t(`${l.description} is billed twice`, `${l.description} aparece cobrado dos veces`),
+      detail: t(
+        `Lines ${first + 1} and ${i + 1} have the same code, date and amount. Sometimes that's real (two doses), often it's a double entry. Ask the hospital to confirm or remove it.`,
+        `Las líneas ${first + 1} y ${i + 1} tienen el mismo código, fecha y monto. A veces es correcto (dos dosis), pero muchas veces es un cobro repetido. Pida al hospital que lo confirme o lo quite.`,
+      ),
       evidence: [
-        { label: "Code", value: code },
-        { label: "Date", value: l.date ?? "not printed" },
-        { label: "Amount", value: money(l.charge) },
+        { label: t("Code", "Código"), value: code },
+        { label: t("Date", "Fecha"), value: l.date ?? t("not printed", "no aparece") },
+        { label: t("Amount", "Monto"), value: money(l.charge) },
       ],
       confidence: "check",
     });
@@ -91,11 +98,17 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
           kind: "ABOVE_LIST_PRICE",
           lines: [i],
           amount: over,
-          title: `${l.description} is billed above the hospital's own list price`,
-          detail: `Billed ${money(perUnit)} per unit, but the hospital's published standard charge is ${money(row.grossCharge)}.`,
+          title: t(
+            `${l.description} is billed above the hospital's own list price`,
+            `${l.description} cuesta más que el precio publicado por el propio hospital`,
+          ),
+          detail: t(
+            `Billed ${money(perUnit)} per unit, but the hospital's published standard charge is ${money(row.grossCharge)}.`,
+            `Le cobraron ${money(perUnit)} por unidad, pero el precio estándar que publica el hospital es ${money(row.grossCharge)}.`,
+          ),
           evidence: [
-            { label: "Billed per unit", value: money(perUnit) },
-            { label: "Published gross charge", value: money(row.grossCharge), source: src },
+            { label: t("Billed per unit", "Cobrado por unidad"), value: money(perUnit) },
+            { label: t("Published gross charge", "Precio publicado"), value: money(row.grossCharge), source: src },
           ],
           confidence: "high",
         });
@@ -108,11 +121,17 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
           kind: "CASH_PRICE_GAP",
           lines: [i],
           amount: gap,
-          title: `${l.description}: the cash price is ${money(row.discountedCash * qty)}`,
-          detail: `You were billed ${money(l.charge)}. The hospital publishes a discounted cash price of ${money(row.discountedCash)} per unit for this service. As a self-pay patient you can ask for it.`,
+          title: t(
+            `${l.description}: the cash price is ${money(row.discountedCash * qty)}`,
+            `${l.description}: el precio en efectivo es ${money(row.discountedCash * qty)}`,
+          ),
+          detail: t(
+            `You were billed ${money(l.charge)}. The hospital publishes a discounted cash price of ${money(row.discountedCash)} per unit for this service. As a self-pay patient you can ask for it.`,
+            `Le cobraron ${money(l.charge)}. El hospital publica un precio en efectivo con descuento de ${money(row.discountedCash)} por unidad para este servicio. Como paciente sin seguro, puede pedirlo.`,
+          ),
           evidence: [
-            { label: "Billed", value: money(l.charge) },
-            { label: "Published cash price", value: money(row.discountedCash), source: src },
+            { label: t("Billed", "Cobrado"), value: money(l.charge) },
+            { label: t("Published cash price", "Precio en efectivo publicado"), value: money(row.discountedCash), source: src },
           ],
           confidence: "high",
         });
@@ -129,11 +148,14 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
         kind: "TOTAL_MISMATCH",
         lines: [],
         amount: Math.max(0, r2(bill.totalCharges - sum)),
-        title: "The lines don't add up to the total",
-        detail: `The listed charges add up to ${money(sum)}, but the bill says total charges are ${money(bill.totalCharges)}.`,
+        title: t("The lines don't add up to the total", "Las líneas no suman el total"),
+        detail: t(
+          `The listed charges add up to ${money(sum)}, but the bill says total charges are ${money(bill.totalCharges)}.`,
+          `Los cargos de la lista suman ${money(sum)}, pero la factura dice que el total es ${money(bill.totalCharges)}.`,
+        ),
         evidence: [
-          { label: "Sum of lines", value: money(sum) },
-          { label: "Printed total", value: money(bill.totalCharges) },
+          { label: t("Sum of lines", "Suma de las líneas"), value: money(sum) },
+          { label: t("Printed total", "Total impreso"), value: money(bill.totalCharges) },
         ],
         confidence: "check",
       });
@@ -141,4 +163,23 @@ export function checkBill(bill: ParsedBill, ref: HospitalRef | null): Finding[] 
   }
 
   return out;
+}
+
+/**
+ * Most a patient could save from line findings. A line can have several findings
+ * (above list price AND above cash price); count each line once, at its largest amount.
+ */
+export function potentialSavings(findings: Finding[]): number {
+  const perLine = new Map<number, number>();
+  let other = 0;
+  for (const f of findings) {
+    if (f.lines.length === 0) {
+      other += f.amount;
+      continue;
+    }
+    // A duplicate's amount belongs to its repeated line (the last index).
+    const line = f.lines[f.lines.length - 1];
+    perLine.set(line, Math.max(perLine.get(line) ?? 0, f.amount));
+  }
+  return r2(other + [...perLine.values()].reduce((a, b) => a + b, 0));
 }

@@ -10,7 +10,12 @@ export const generateUploadUrl = mutation({
 });
 
 export const create = mutation({
-  args: { fileId: v.optional(v.id("_storage")), fileType: v.optional(v.string()), sample: v.boolean() },
+  args: {
+    fileId: v.optional(v.id("_storage")),
+    fileType: v.optional(v.string()),
+    sample: v.boolean(),
+    lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
+  },
   handler: async (ctx, args) => {
     const id = await ctx.db.insert("cases", {
       createdAt: Date.now(),
@@ -18,6 +23,7 @@ export const create = mutation({
       sample: args.sample,
       fileId: args.fileId,
       fileType: args.fileType,
+      lang: args.lang,
     });
     await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });
     return id;
@@ -51,7 +57,7 @@ export const submitHousehold = mutation({
     const c = await ctx.db.get(id);
     if (!c || !c.bill) throw new Error("Bill not read yet");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new Error("Check household size and income");
-    const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null);
+    const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
     await ctx.db.patch(id, { household: h, eligibility, status: "drafting", letters: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: id });
   },

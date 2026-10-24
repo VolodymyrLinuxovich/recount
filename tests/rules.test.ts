@@ -101,3 +101,30 @@ describe("assess", () => {
     expect(e.medicalLikely).toBe(true);
   });
 });
+
+import { potentialSavings } from "../convex/lib/checks";
+import { templateLetters } from "../convex/lib/letters";
+
+describe("potentialSavings", () => {
+  it("counts a line once even when it has two findings", () => {
+    const f = checkBill(bill([L("99284", 2400)]), ref);
+    expect(f.map((x) => x.kind).sort()).toEqual(["ABOVE_LIST_PRICE", "CASH_PRICE_GAP"]);
+    expect(potentialSavings(f)).toBe(1600); // the larger of 400 and 1600, not 2000
+  });
+});
+
+describe("Spanish", () => {
+  it("translates findings and eligibility but keeps the hospital letter in English", () => {
+    const b = bill([L("85025", 100), L("85025", 100)]);
+    const es = checkBill(b, ref, "es");
+    expect(es[0].title).toContain("dos veces");
+    const e = assess({ size: 1, annualIncome: 10000, insured: false }, FPL, ref, 200, "es");
+    expect(e.headline).toContain("gratuita");
+    expect(e.basis[0].text).toContain("1 persona");
+    const letters = templateLetters({ bill: b, hospital: null, findings: es, findingsEn: checkBill(b, ref, "en"), eligibility: e, household: { size: 1, annualIncome: 10000, insured: false } }, "es");
+    expect(letters[0].body).toContain("My household has 1 person and");
+    expect(letters[0].bodyPatient).toContain("Mi hogar tiene 1 persona");
+    expect(letters[1].body).toContain("billed twice");
+    expect(letters[1].bodyPatient).toContain("dos veces");
+  });
+});
