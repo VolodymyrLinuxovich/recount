@@ -1,5 +1,7 @@
 import { useT } from "./i18n/I18nProvider";
 import type { Step } from "./types";
+import { KindBadge } from "./how/KindBadge";
+import { kindOf } from "./how/kinds";
 
 function Mark({ state }: { state: Step["state"] }) {
   const { t } = useT();
@@ -28,6 +30,7 @@ export function StepLog({ steps, live = false }: { steps: Step[]; live?: boolean
           <div>
             <div className="step-label">{s.label}</div>
             {s.detail && <div className="step-detail">{s.detail}</div>}
+            {kindOf(s) && <KindBadge kind={kindOf(s)!} />}
           </div>
         </li>
       ))}
