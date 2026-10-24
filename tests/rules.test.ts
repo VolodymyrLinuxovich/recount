@@ -25,7 +25,7 @@ const ref: HospitalRef = {
 
 function bill(lines: ParsedBill["lines"], extra: Partial<ParsedBill> = {}): ParsedBill {
   return {
-    hospitalName: "Test Hospital", hospitalWebsite: null, billingPhone: null, accountNumber: "1", patientName: null,
+    hospitalName: "Test Hospital", hospitalWebsite: null, hospitalAddress: null, billingPhone: null, accountNumber: "1", patientName: null,
     statementDate: null, serviceDate: null, insurancePayer: null, insurancePaid: 0, adjustments: 0, patientPaid: 0,
     totalCharges: lines.reduce((a, l) => a + l.charge, 0), amountDue: null, isItemized: true, lines, unreadable: [], ...extra,
   };
