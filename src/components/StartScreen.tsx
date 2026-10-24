@@ -116,10 +116,8 @@ export function StartScreen() {
     else setOnboard("sample");
   }
 
-  if (onboard) {
-    return (
-      <>
-        {fileInput}
+  // One file input for both views, so a photo picked from the intro still arrives after the intro closes.
+  const onboardingEl = onboard ? (
         <Onboarding
           path={onboard}
           busy={busy !== null}
@@ -132,13 +130,13 @@ export function StartScreen() {
           onSample={onSample}
           onClose={() => setOnboard(null)}
         />
-      </>
-    );
-  }
+  ) : null;
 
   return (
-    <div className="start">
+    <>
       {fileInput}
+      {onboardingEl ?? (
+    <div className="start">
       <section className="start-hero" aria-labelledby="start-title">
         <h1 id="start-title" className="start-title">
           {t("start.promise")}
@@ -201,5 +199,7 @@ export function StartScreen() {
         <InstallHint />
       </div>
     </div>
+      )}
+    </>
   );
 }
