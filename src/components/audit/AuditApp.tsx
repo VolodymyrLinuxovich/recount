@@ -55,6 +55,17 @@ export function AuditApp() {
   if (!data) return <p className="quiet">Loading the statewide audit…</p>;
 
   const { audit, sample } = data;
+  // Describe exactly the set of hospitals in the file, never more.
+  const statewide = audit.hospitalsChecked >= 300;
+  const counties = new Set(audit.hospitals.map((h) => h.county).filter(Boolean));
+  const sfOnly = !statewide && counties.size === 1 && counties.has("San Francisco");
+  const scopeHeadline = statewide
+    ? `We read the financial assistance policies of every California hospital (${audit.hospitalsChecked} of ${audit.hospitalsTotal}).`
+    : sfOnly
+      ? "We read the financial assistance policies of San Francisco\u2019s hospitals."
+      : `We read the financial assistance policies of ${audit.hospitalsChecked} California hospitals.`;
+  const scopeNoun = sfOnly ? "San Francisco hospitals" : "California hospitals";
+
   const confirmed = audit.hospitals.filter((h) => h.findings.some((f) => f.verdict === "conflict")).length;
   const likelyOnly = audit.hospitals.filter(isFlagged).length - confirmed;
   const selectedKey = resolveKey(audit.hospitals, selected);
@@ -93,7 +104,7 @@ export function AuditApp() {
       <header>
         <p className="eyebrow">Hospital policy audit · {longDate(audit.generatedAt)}</p>
         <h1 className="h-answer audit-headline">
-          We read the financial assistance policies of San Francisco&rsquo;s hospitals.{" "}
+          {scopeHeadline}{" "}
           {confirmed > 0 ? (
             <>
               <span className="audit-n">{confirmed}</span> of them {confirmed === 1 ? "conflicts" : "conflict"} with state law.
@@ -106,7 +117,7 @@ export function AuditApp() {
           )}
         </h1>
         <p className="lede">
-          We checked the current charity care, discount, and debt collection policies of {audit.hospitalsChecked} San Francisco hospitals
+          We checked the current charity care, discount, and debt collection policies of {audit.hospitalsChecked} {scopeNoun}
           {audit.hospitalsTotal > audit.hospitalsChecked && <> (of {audit.hospitalsTotal} listed)</>}, from the state&rsquo;s
           hospital database, against the rules in force since 2025: no deadlines to
           apply, no asset tests, simple proof of income, no credit reporting, no liens on homes, no Medi-Cal-first

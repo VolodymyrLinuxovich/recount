@@ -3,8 +3,8 @@ import { AuditApp } from "@/components/audit/AuditApp";
 import "./audit.css";
 
 export const metadata: Metadata = {
-  title: "Recount · San Francisco hospital policy audit",
-  description: "San Francisco hospitals' financial assistance policies, checked against California law.",
+  title: "Recount · Hospital policy audit",
+  description: "California hospitals' financial assistance policies, checked against state law.",
 };
 
 export default function AuditPage() {
