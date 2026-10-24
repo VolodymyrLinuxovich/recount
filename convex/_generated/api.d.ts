@@ -31,6 +31,7 @@ import type * as lib_safety from "../lib/safety.js";
 import type * as lib_sample from "../lib/sample.js";
 import type * as lib_search from "../lib/search.js";
 import type * as lib_statewide from "../lib/statewide.js";
+import type * as lib_timeout from "../lib/timeout.js";
 import type * as lib_user from "../lib/user.js";
 import type * as pipeline from "../pipeline.js";
 import type * as profile from "../profile.js";
@@ -65,6 +66,7 @@ declare const fullApi: ApiFromModules<{
   "lib/sample": typeof lib_sample;
   "lib/search": typeof lib_search;
   "lib/statewide": typeof lib_statewide;
+  "lib/timeout": typeof lib_timeout;
   "lib/user": typeof lib_user;
   pipeline: typeof pipeline;
   profile: typeof profile;
