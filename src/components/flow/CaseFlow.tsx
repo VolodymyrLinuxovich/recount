@@ -20,13 +20,20 @@ export function CaseFlow({ c }: { c: CaseView }) {
   // When the backend moves the bill to a new phase (reading done, letters written…), move with it.
   const lastStatus = useRef(c.status);
   useEffect(() => {
+    // Waiting for letters: move on to the details screen once it exists. The status can turn
+    // "ready" a moment before the letters arrive, and "details" only exists with letters.
+    if (wanted === "letters-wait" && steps.includes("details")) {
+      lastStatus.current = c.status;
+      return go("details", true);
+    }
     if (lastStatus.current !== c.status) {
       lastStatus.current = c.status;
       // Only move the patient on by itself from a screen that is waiting for the backend,
       // never while they are reading something.
       // No step in the link yet means the patient hasn't moved anywhere: follow the bill.
       const waiting = !wanted || ["reading", "hospital", "letters-wait", "q3"].includes(wanted);
-      if (waiting) return go(wanted === "letters-wait" && c.status === "ready" ? "details" : homeStep(c), true);
+      // Still writing (letters-wait is still a step): stay and keep waiting.
+      if (waiting && !(wanted === "letters-wait" && steps.includes("letters-wait"))) return go(homeStep(c), true);
       if (c.status === "error") return go("reading", true);
     }
     // A step the bill doesn't have (yet), like &s=letter-3: the fallback screen shows, so put it in the link too.
@@ -44,7 +51,7 @@ export function CaseFlow({ c }: { c: CaseView }) {
 
   // Keyed by step so each screen arrives fresh and can slide in (see useStep and flow.css).
   return (
-    <div className="step-anim" key={step}>
+    <div className="step-anim" key={step} data-step={step}>
       <Screen step={step} props={props} />
     </div>
   );

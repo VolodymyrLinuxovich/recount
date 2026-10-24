@@ -35,48 +35,78 @@ function depth(): number {
   return typeof i === "number" ? i : 0;
 }
 
-type VTDocument = Document & { startViewTransition?: (update: () => void) => unknown };
-
-/** Swap screens with a slide in `dir`. Input is never blocked: flow.css lets taps through the transition layer. */
-function slide(dir: StepDir, update: () => void) {
-  const root = document.documentElement;
-  const doc = document as VTDocument;
-  const vt = typeof doc.startViewTransition === "function";
-  root.dataset.stepDir = dir;
-  // Without View Transitions, flow.css plays a keyframe on the newly mounted screen instead.
-  root.dataset.stepVia = vt ? "vt" : "css";
-  if (!vt) return update();
-  try {
-    doc.startViewTransition!(() => flushSync(update));
-  } catch {
-    update();
-  }
+interface VT {
+  updateCallbackDone: Promise<void>;
+  finished: Promise<void>;
+  skipTransition?: () => void;
 }
+type VTDocument = Document & { startViewTransition?: (update: () => void) => VT };
 
 // ---- a tiny store over the link, shared by the (single) flow on the page ----
 
 const listeners = new Set<() => void>();
-let shown: string | null = null; // the step we're moving to (or showing)
-// What the screen renders. It changes only inside the transition's update, never earlier:
-// Next re-renders the tree as soon as the URL changes, and the View Transition must
-// photograph the old screen first.
+let shown: string | null = null; // the step the link names (where we're going)
+// What the screen renders. It catches up with `shown` inside the transition's update, never earlier:
+// Next re-renders the tree as soon as the URL changes, and the View Transition must photograph
+// the old screen first. apply() is idempotent and always uses the latest `shown`, so a skipped,
+// aborted or overlapping transition can never leave the screen behind the link.
 let committed: string | null | undefined;
 let at = 0; // depth of the entry the screen is showing
 let path = "";
+let pending: VT | null = null; // a transition whose update hasn't run yet
 
 function notify() {
   listeners.forEach((l) => l());
 }
 
+function apply() {
+  if (committed === shown) return;
+  committed = shown;
+  notify();
+  window.scrollTo({ top: 0 });
+}
+
+/** Move the screen to `next`, sliding in `dir` (no slide when null). */
 function show(dir: StepDir | null, next: string | null) {
   shown = next;
-  const update = () => {
-    committed = next;
-    notify();
-    window.scrollTo({ top: 0 });
+  const doc = document as VTDocument;
+  // No slide, no View Transitions, or one still waiting to swap: update right away.
+  // (A transition that hasn't swapped yet will just find nothing left to do.)
+  if (!dir || typeof doc.startViewTransition !== "function" || pending) {
+    if (dir) {
+      document.documentElement.dataset.stepDir = dir;
+      // Without View Transitions, flow.css plays a keyframe on the newly mounted screen instead.
+      document.documentElement.dataset.stepVia = "css";
+    }
+    apply();
+    return;
+  }
+  const root = document.documentElement;
+  root.dataset.stepDir = dir;
+  root.dataset.stepVia = "vt";
+  let t: VT;
+  try {
+    t = doc.startViewTransition(() => {
+      try {
+        flushSync(apply);
+      } catch {
+        apply();
+      }
+    });
+  } catch {
+    apply();
+    return;
+  }
+  pending = t;
+  // Whatever happens to the transition (finished, skipped, aborted), the screen ends up on the link's step.
+  const settle = () => {
+    if (pending === t) pending = null;
+    apply();
   };
-  if (dir) slide(dir, update);
-  else update();
+  t.updateCallbackDone.then(settle, settle);
+  t.finished.then(settle, settle);
+  // Belt and braces: if the browser never runs the update (hidden tab, etc.), catch up anyway.
+  setTimeout(settle, 1000);
 }
 
 function onPop() {
