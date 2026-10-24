@@ -123,14 +123,15 @@ RULES: list[Rule] = [
         title="Allows liens on a patient's home or property",
         cite="HSC 127425(h), as amended by AB 2297",
         url=PIL_24_03,
-        law_quote="liens on any real property owned by the patient are prohibited.",
+        law_quote="For patients eligible under the hospital's charity care or discount payment policies, the hospital, its assignees and collection agencies shall not use wage garnishments or liens on any real property owned by the patient as a means of collecting unpaid hospital bills.",
         doc_types=("debt_collection",),
         patterns=[r"\bliens?\b", r"\breal property\b", r"\bprimary residence\b", r"\bforeclos"],
         complies=[
-            rf"\b{NEG}\b.{{0,60}}(lien|real property|residence|foreclos)",
+            # "does not exceed 400% FPL, ... may file a lien" is not a prohibition.
+            rf"\b{NEG}\b(?!\s+exceed).{{0,60}}(lien|real property|residence|foreclos)",
             r"(lien|real property).{0,40}\b(prohibited|not permitted|not allowed)",
         ],
-        question="Does this sentence allow a lien on, foreclosure of, or sale of a patient's real property (not just liens on injury settlements)?",
+        question="Does this sentence allow a lien on, foreclosure of, or sale of the real property of a patient who is ELIGIBLE for charity care or discounted payment (or of patients generally, without excluding eligible ones)? A lien limited to ineligible patients, a lien on an injury settlement, or a federal list of what counts as an extraordinary collection action is not a violation.",
     ),
     Rule(
         id="INCOME_PROOF",
@@ -143,6 +144,9 @@ RULES: list[Rule] = [
             r"\b(must|shall|required to|are required|is required)\b.{0,120}\b(bank statements?|social security (award|statement)|unemployment|letter from (your )?employer|proof of (assets|residency|address)|photo id|identification|w-?2)",
             r"\b(no|without)\b.{0,40}\bincome\b.{0,80}\b(ineligible|not eligible|denied|will not qualify)",
             r"\bincomplete\b.{0,60}\b(denied|ineligible|will not be (processed|considered))",
+            # Bank records listed as income proof, with or without "must".
+            r"\bstatements? from (a |the |your )?(bank|financial institution)s?\b",
+            r"\b(copies|copy|photocopies|proof|provide|submit|attach|include)\b.{0,80}\bbank statements?\b",
         ],
         complies=[r"\bmay\b.{0,30}\b(accept|provide|submit)\b.{0,40}\bnot required\b", r"\boptional\b"],
         question="Does this sentence REQUIRE income documents other than recent pay stubs or tax returns, or deny help to patients who can't provide them (e.g. no verifiable income)?",
