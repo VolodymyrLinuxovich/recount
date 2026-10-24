@@ -41,6 +41,7 @@ export function CaseFlow({ t, id, token, onHome }) {
   const approve = useMutation(api.cases.approve);
   const unapprove = useMutation(api.cases.unapprove);
   const remove = useMutation(api.cases.remove);
+  const correctLine = useMutation(api.cases.correctLine);
 
   // Move to the right screen when the backend status changes (not on every update).
   // Adjusting state during render is React's recommended pattern for this.
@@ -153,7 +154,7 @@ export function CaseFlow({ t, id, token, onHome }) {
     const h = household;
     switch (page) {
       case "found":
-        return { step: 2, back: onHome, body: <Found t={t} c={c} />, primary: { label: t.continueQ, onPress: () => go("size") }, secondary: deleteButton };
+        return { step: 2, back: onHome, body: <Found t={t} c={c} busy={busy} err={err} onFix={(index, charge) => run(() => correctLine({ id, token, index, charge }))} />, primary: { label: t.continueQ, onPress: () => go("size") }, secondary: deleteButton };
       case "size":
         return {
           step: 3,
@@ -405,13 +406,26 @@ function HospitalPick({ t, c, busy, onPick }) {
 }
 
 // ---------- 2. What we found ----------
-function Found({ t, c }) {
+function Found({ t, c, busy, err, onFix }) {
   const findings = c.findings || [];
   const policy = c.policyFindings || [];
-  const unreadable = c.bill?.unreadable || [];
+  const lines = c.bill?.lines || [];
+  const checks = (c.bill?.amountChecks || []).filter((k) => lines[k.index]);
+  // Notes about amounts we're already asking about would say the same thing twice.
+  const unreadable = (c.bill?.unreadable || []).filter((u) => !checks.length || !/second look|segunda lectura/i.test(u));
   return (
     <>
       <H1>{t.foundTitle}</H1>
+      {err ? <Text style={s.error}>{err}</Text> : null}
+      {checks.map((k) => (
+        <Card key={"check" + k.index} style={{ borderColor: C.flag }}>
+          <H2>{t.whichAmount}</H2>
+          <P>{t.whichAmountBody(lines[k.index].description || lines[k.index].code || "", money(k.first), money(k.second))}</P>
+          <Button label={money(k.first)} busy={busy} onPress={() => onFix(k.index, k.first)} />
+          <View style={{ height: 10 }} />
+          <Button kind="secondary" label={money(k.second)} disabled={busy} onPress={() => onFix(k.index, k.second)} />
+        </Card>
+      ))}
       <Card style={{ backgroundColor: C.bg2 }}>
         <Text style={s.label}>{t.billFrom}</Text>
         <Text style={x.hName}>{c.hospital?.name || c.bill?.hospitalName || t.noName}</Text>
@@ -460,6 +474,8 @@ function Found({ t, c }) {
         </View>
       )}
 
+      <LineFixer t={t} lines={lines} busy={busy} onFix={onFix} />
+
       {unreadable.length > 0 && (
         <Card style={{ marginTop: 10 }}>
           <H2>{t.doubleCheck}</H2>
@@ -495,6 +511,57 @@ function Stepper({ t, value, onChange }) {
         <Text style={x.stepBtnText}>+</Text>
       </Pressable>
     </View>
+  );
+}
+
+/** "Is an amount wrong?": every line we read, each with a Fix button. */
+function LineFixer({ t, lines, busy, onFix }) {
+  const [open, setOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [value, setValue] = useState("");
+  if (!lines.length) return null;
+  if (!open) return <LinkText label={t.checkLines} onPress={() => setOpen(true)} />;
+  return (
+    <Card style={{ marginTop: 10 }}>
+      <H2>{t.linesTitle}</H2>
+      <P muted>{t.linesBody}</P>
+      {lines.map((l, i) => (
+        <View key={i} style={x.evRow}>
+          <Text style={[x.evLabel, { flex: 1 }]}>{l.description || l.code}</Text>
+          {editing === i ? (
+            <View style={{ alignItems: "flex-end" }}>
+              <TextInput
+                style={[s.input, { minWidth: 120, textAlign: "right" }]}
+                value={value}
+                onChangeText={(v) => setValue(v.replace(/[^0-9.]/g, "").slice(0, 10))}
+                keyboardType="decimal-pad"
+                autoFocus
+                accessibilityLabel={t.linesTitle}
+              />
+              <LinkText
+                label={t.save}
+                onPress={() => {
+                  const n = Number(value);
+                  if (value === "" || !Number.isFinite(n)) return;
+                  onFix(i, Math.round(n * 100) / 100);
+                  setEditing(null);
+                }}
+              />
+            </View>
+          ) : (
+            <Pressable
+              disabled={busy}
+              onPress={() => { setEditing(i); setValue(String(l.charge)); }}
+              accessibilityRole="button"
+              accessibilityLabel={t.fixAmount + " " + (l.description || "")}
+              style={{ minHeight: 44, justifyContent: "center" }}
+            >
+              <Text style={x.evValue}>{money(l.charge) + "  ✎"}</Text>
+            </Pressable>
+          )}
+        </View>
+      ))}
+    </Card>
   );
 }
 
