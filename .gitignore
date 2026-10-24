@@ -50,5 +50,6 @@ pipeline/raw/
 eval/out/
 audit/corpus/
 audit/raw/
-audit/review/
+audit/review/batches/
+audit/review/verify_batches/
 audit/.venv/
