@@ -103,6 +103,17 @@ describe("lines across pages", () => {
     expect(linesFromPages([page1, other]).map((l) => l.code)).toEqual(["99284", "85025"]);
   });
 
+  it("doesn't read a headerless payments table as more charges", () => {
+    // Same column count as the charges table, but on the same page, or a second one on page 2.
+    const payments = table([["09/01/2026", "", "", "PATIENT PAYMENT", "", "(100.00)"], ["09/05/2026", "", "", "REFUND", "", "40.00"]]);
+    expect(linesFromPages([[...page1, payments], page2]).map((l) => l.code)).toEqual(["99284", "85025", "71046"]);
+    expect(linesFromPages([page1, [...page2, payments]]).map((l) => l.code)).toEqual(["99284", "85025", "71046"]);
+  });
+
+  it("finds the continued table on page 2 after a small info table", () => {
+    expect(linesFromPages([page1, [table([["Account", "SAMPLE-1"]]), ...page2]]).map((l) => l.code)).toEqual(["99284", "85025", "71046"]);
+  });
+
   it("joinPages flattens in order", () => {
     expect(joinPages([[1, 2], [], [3]])).toEqual([1, 2, 3]);
   });

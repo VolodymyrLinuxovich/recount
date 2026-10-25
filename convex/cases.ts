@@ -5,6 +5,8 @@ import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
 import { resolveFilledBrackets } from "./lib/letters";
 import { allFindings, eobShowsInsured } from "./lib/eobChecks";
+import type { ParsedBill } from "./lib/bill";
+import type { HospitalRef } from "./lib/hospital";
 import { potentialSavings, type Finding } from "./lib/checks";
 import { type ParsedEob, typedAmountProblem, typedEob } from "./lib/eob";
 import { isLang } from "./lib/lang";
@@ -398,6 +400,23 @@ export const removeEob = mutation({
     const clear = { eobFileId: undefined, eobFileType: undefined, eobStatus: undefined, eob: undefined, eobSource: undefined, eobError: undefined };
     if (usableEob(c)) await refreshFindings(ctx, c, null, clear);
     else await ctx.db.patch(id, clear);
+  },
+});
+
+/**
+ * The end of the bill check (agent.finishCheck). Findings are computed here, in the same
+ * transaction as the save, with whatever insurance statement is stored now. One that finished
+ * reading while the check ran would otherwise be overwritten by findings made without it.
+ */
+export const finishFindings = internalMutation({
+  args: { id: v.id("cases"), bill: v.any(), hospital: v.any(), hospitalKey: v.optional(v.string()), policyFindings: v.any() },
+  handler: async (ctx, { id, bill, hospital, hospitalKey, policyFindings }) => {
+    const c = await ctx.db.get(id);
+    if (!c) return;
+    const eob = c.eobStatus === "done" ? ((c.eob ?? null) as ParsedEob | null) : null;
+    const findings = allFindings(bill as ParsedBill, (hospital ?? null) as HospitalRef | null, eob, isLang(c.lang) ? c.lang : "en");
+    await ctx.db.patch(id, { hospital, hospitalKey, findings, policyFindings, hospitalCandidates: undefined, status: "needs_household" });
+    await notifyOnStatus(ctx, c, "needs_household", findings);
   },
 });
 

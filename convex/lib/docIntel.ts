@@ -16,7 +16,7 @@ export function docIntelOn(): boolean {
 
 /** One cell as Document Intelligence returns it (only the fields we use). */
 export type Cell = { rowIndex: number; columnIndex: number; content: string; kind?: string; columnSpan?: number };
-export type Table = { rowCount: number; columnCount: number; cells: Cell[] };
+export type Table = { rowCount: number; columnCount: number; cells: Cell[]; /** Which photo it came from (set by linesFromPages). */ page?: number };
 
 export type TableLine = { code: string | null; charge: number };
 
@@ -38,12 +38,13 @@ export function money(s: string): number | null {
  * Pull the line items out of the tables: find tables whose header names a charges column, then take
  * every row with a readable amount, in reading order, skipping totals and payments. A bill whose table
  * runs over several pages comes back as several tables with the same header, so they're joined.
- * With `continued` (photos of a bill's pages, see linesFromPages), a table with no header that has the
- * same columns as the last charges table is read as that table running on onto the next page.
+ * With `continued` (photos of a bill's pages, see linesFromPages), a table with no header is read as the
+ * charges table running on when it is the first such table on the page right after that table, with
+ * the same columns. Any other headerless table (a payments or adjustments table) is skipped.
  */
 export function linesFromTables(tables: Table[], opts: { continued?: boolean } = {}): TableLine[] {
   const out: TableLine[] = [];
-  let last: { columnCount: number; chargeCol: number; codeCol: number } | null = null;
+  let last: { columnCount: number; chargeCol: number; codeCol: number; page: number } | null = null;
   for (const t of tables) {
     const rows: string[][] = Array.from({ length: t.rowCount }, () => Array(t.columnCount).fill(""));
     for (const c of t.cells) rows[c.rowIndex][c.columnIndex] = c.content.trim();
@@ -56,11 +57,12 @@ export function linesFromTables(tables: Table[], opts: { continued?: boolean } =
       const chargeCol = head.map((h, i) => (CHARGE_HEAD.test(h) ? i : -1)).filter((i) => i >= 0).pop()!;
       const codeCol = head.findIndex((h) => CODE_HEAD.test(h) && !/rev/i.test(h));
       cols = { chargeCol, codeCol };
-      last = { columnCount: t.columnCount, ...cols };
+      last = { columnCount: t.columnCount, ...cols, page: t.page ?? 0 };
       body = rows.slice(headerAt + 1);
-    } else if (opts.continued && last && t.columnCount === last.columnCount) {
+    } else if (opts.continued && last && t.columnCount === last.columnCount && (t.page ?? 0) === last.page + 1) {
       cols = last;
       body = rows;
+      last.page += 1; // one continuation per page; it may run on again
     } else continue;
     for (const r of body) {
       if (r.some((x) => NOT_A_LINE.test(x))) continue;
@@ -75,7 +77,7 @@ export function linesFromTables(tables: Table[], opts: { continued?: boolean } =
 
 /** The line items of a bill sent as several photos: each page's tables, in page order, read as one. */
 export function linesFromPages(pages: Table[][]): TableLine[] {
-  return linesFromTables(pages.flat(), { continued: pages.length > 1 });
+  return linesFromTables(pages.flatMap((p, i) => p.map((t) => ({ ...t, page: i }))), { continued: pages.length > 1 });
 }
 
 /** Send the bill to Document Intelligence and wait for the layout result. Throws on any failure. */

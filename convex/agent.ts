@@ -333,10 +333,8 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
     await step(ctx, caseId, "policy", t(`${hospital!.name}'s own policy: ${en}`, `Política de ${hospital!.name}: ${es}`),
       "warn", policyFindings.map((f) => `"${f.quote}"`).join(" "));
   }
-  await ctx.runMutation(internal.cases.patch, {
-    id: caseId,
-    fields: { hospital, hospitalKey: key ?? undefined, findings, policyFindings, hospitalCandidates: undefined, status: "needs_household" },
-  });
+  // The findings are worked out again inside the save, so a statement read meanwhile isn't lost.
+  await ctx.runMutation(internal.cases.finishFindings, { id: caseId, bill, hospital, hospitalKey: key ?? undefined, policyFindings });
 }
 
 const COLUMN_READ_MS = 25_000;

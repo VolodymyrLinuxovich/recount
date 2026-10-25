@@ -11,6 +11,7 @@ import { TypedText } from "./TypedText";
 import { Mascot } from "./Mascot";
 import { lastTrigger, setHelperOpen, useHelperOpen } from "./openStore";
 import "./helper.css";
+import { MAX_IMAGE_BYTES, MAX_PDF_BYTES } from "../../../convex/lib/attach";
 
 /** An SSN (123-45-6789, 123 45 6789) or a long run of digits like a bank account or card number. */
 const SENSITIVE = /\b\d{3}[- ]?\d{2}[- ]?\d{4}\b|\b(?:\d[ -]?){12,19}\b|\b(?:routing|account|cuenta|ruta)\s*(?:number|n[uú]mero|#|no\.?)?\s*:?\s*\d{6,}/i;
@@ -18,10 +19,6 @@ const SENSITIVE = /\b\d{3}[- ]?\d{2}[- ]?\d{4}\b|\b(?:\d[ -]?){12,19}\b|\b(?:rou
 const CASE_QS: PlainKey[] = ["helper.qCase1", "helper.qCase2", "helper.qCase3"];
 const START_QS: PlainKey[] = ["helper.qStart1", "helper.qStart2", "helper.qStart3"];
 type PanelError = SendError | "sensitive";
-
-/** Same limits as the server (convex/lib/attach.ts). */
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
-const MAX_PDF_BYTES = 10 * 1024 * 1024;
 
 type Picked = Attachment & { preview: string | null };
 
