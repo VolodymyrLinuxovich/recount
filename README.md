@@ -167,25 +167,30 @@ flowchart LR
 
 <div align="center">
 
-<img src="docs/how-it-works.gif" alt="Recount on a phone: try the sample bill, see each problem, answer three questions, get a plain answer, approve the letters, send them yourself" width="360"/>
+<img src="docs/how-it-works.gif" alt="Recount on a phone: the bill pages screen, the sample ER bill read twice with both reads agreeing, two problems found (a blood count billed twice and a chest X-ray above the hospital's list price), three questions, You likely owe $0, the letters approved, the send checklist, the complaint step, the Who did what panel, and Lupa answering Why do I owe $0" width="360"/>
 
-<sub>The real app at phone size, recorded on the live site with the sample bill.</sub>
+<sub>The live app at phone size, recorded with the sample bill: a made-up ER bill at Zuckerberg San Francisco General, priced
+from the hospital's real published charges. Cut to about 45 seconds.</sub>
 
 </div>
 
-**Also in the app:** a one-screen intro on first visit · **Lupa**, a helper chat that answers questions about your bill
-· a **Display** mode with larger type for low vision · "Change my answers" · a send checklist after you approve.
+**Also in the app:** **Lupa**, a helper chat that can read an attached photo or PDF and only answers bill questions
+· bills of up to 6 photo pages · the insurance statement as a photo or typed amounts · Spanish · optional accounts
+· the Android app, and iPhone via Home Screen · a follow-up check-in and a state complaint letter · "Not a valid
+document" for photos that aren't a bill · a **Display** mode with larger type · [/dashboard](https://recount-nu.vercel.app/dashboard)
+with live agent metrics.
 
 **Where Claude is used, and where it is not**
 
 | Step | Who does it | Why |
 |------|-------------|-----|
-| Read the bill photo | **Claude** | Bills are messy photos. Output is forced into a schema and unclear fields are flagged |
+| Read the bill photo | **Claude**, plus Azure AI Document Intelligence as a second read of the charges | Bills are messy photos. Output is forced into a schema. Code compares the two reads line by line and flags any amount they disagree on |
 | Find price files and policies | Apify Actor, plain code | No model. It crawls and streams files |
 | Flag bad charges | **Rules only** | Every flag points at a bill line and a published number |
 | Decide eligibility | **Rules only** | A wrong "you qualify" costs a family real money |
 | Draft letters | **Claude**, template fallback | Claude gets only the computed facts as JSON |
-| Lupa helper chat | **Claude** | Answers questions about this bill from its facts. It doesn't change answers or send anything |
+| Check the topic of a chat question | Rules first, then a short model check | Lupa answers only questions about bills, insurance, help paying and medical debt. A crisis message always gets the crisis reply |
+| Lupa helper chat | **Claude**, Azure OpenAI gpt-4.1-mini as backup | Answers from this bill's facts, with quotes from the hospital's policies found by Azure AI Search. Azure AI Content Safety checks every message. It doesn't change answers or send anything |
 | Review audit sentences | **Claude**, twice, with a quote check | A verdict is dropped if its quote isn't in the policy text |
 | Send anything | Nobody | The patient sends the letters |
 
