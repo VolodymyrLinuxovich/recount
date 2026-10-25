@@ -18,6 +18,7 @@ export const exportCase = query({
       bill: c.bill as ParsedBill,
       eob: c.eobStatus === "done" ? ((c.eob ?? null) as ParsedEob | null) : null,
       findings: (c.findings ?? []) as Finding[],
+      coverage: (c.household as { coverage?: "none" | "private" | "medicare" | "medi-cal" | "both" } | undefined)?.coverage ?? null,
       hospitalName: (c.hospital as { name?: string } | undefined)?.name ?? null,
       now: new Date(c.statusAt ?? c.createdAt),
     });

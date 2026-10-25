@@ -85,6 +85,14 @@ describe("HL7 FHIR R4 export", () => {
     expect(of(b, "Patient")[0].name).toBeUndefined();
   });
 
+  it("names Medicare and Medi-Cal as payors when the patient said so and there's no statement", () => {
+    const b = toFhir({ caseId: "case3", bill: SAMPLE_BILL, coverage: "both", now });
+    const [cov] = of(b, "Coverage");
+    const names = cov.payor.map((p: { reference: string }) => of(b, "Organization").find((o) => `urn:uuid:${o.id}` === p.reference)!.name);
+    expect(names).toEqual(["Medicare", "Medi-Cal"]);
+    expect(of(toFhir({ caseId: "case4", bill: SAMPLE_BILL, coverage: "private", now }), "Coverage")).toHaveLength(0);
+  });
+
   it("tells CPT from HCPCS", () => {
     expect(codeSystem("99284")).toBe(CPT);
     expect(codeSystem("0001F")).toBe(CPT);

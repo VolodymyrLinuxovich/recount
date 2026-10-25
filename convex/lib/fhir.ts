@@ -67,6 +67,8 @@ export function toFhir(input: {
   bill: ParsedBill;
   eob?: ParsedEob | null;
   findings?: Finding[];
+  /** The patient's answer to "what coverage did you have", used when there is no insurance statement. */
+  coverage?: "none" | "private" | "medicare" | "medi-cal" | "both" | null;
   /** The hospital's name as matched (falls back to the name printed on the bill). */
   hospitalName?: string | null;
   now?: Date;
@@ -177,6 +179,14 @@ export function toFhir(input: {
         ],
       }),
     );
+  }
+
+  // No statement, but the patient said Medicare or Medi-Cal: record who should pay, so the
+  // file shows the claim belongs with that program.
+  const programs = !eob ? { medicare: ["Medicare"], "medi-cal": ["Medi-Cal"], both: ["Medicare", "Medi-Cal"] }[input.coverage as string] : undefined;
+  if (programs) {
+    const payor = programs.map((name) => add({ resourceType: "Organization", id: uuid(), name }));
+    add({ resourceType: "Coverage", id: uuid(), status: "active", beneficiary: patient, payor, type: { text: programs.join(" and ") } });
   }
 
   for (const f of findings) {
