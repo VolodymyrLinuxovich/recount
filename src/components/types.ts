@@ -36,11 +36,15 @@ export interface Step {
   label: string;
   detail?: string;
   state: "running" | "done" | "warn" | "error";
+  at?: number;
 }
 
 export interface CaseView {
   _id: string;
   status: Status;
+  createdAt?: number;
+  /** When the current "reading" or "drafting" started. */
+  statusAt?: number;
   /** Language the backend wrote this case's text in. */
   lang?: Lang;
   sample: boolean;

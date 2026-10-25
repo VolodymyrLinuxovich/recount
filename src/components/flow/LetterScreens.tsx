@@ -15,16 +15,23 @@ import { PrintLetters } from "../PrintLetters";
 import { SendGuide, useSendSteps } from "../SendGuide";
 import { letterTitleKey, type CaseView, type Letter } from "../types";
 import { forApproval, useLetters } from "./letterEdits";
+import { useSlowRetry } from "./SlowRetry";
 import { StepFrame } from "./StepFrame";
 import type { ScreenProps } from "./types";
 import "../letters.css";
 import "./letters-flow.css";
 
-export function LettersWaitStep({ back }: ScreenProps) {
+export function LettersWaitStep({ c, back }: ScreenProps) {
   const { t } = useT();
+  const slow = useSlowRetry(c);
   return (
-    <StepFrame phase={3} title={t("flow.writingH")} onBack={back}>
+    <StepFrame phase={3} title={t("flow.writingH")} onBack={back} primary={slow.action}>
       <p className="flow-wait pulse">{t("flow.writingBody")}</p>
+      {slow.failed && (
+        <p className="error-note" role="alert">
+          {t("flow.slowRetryFailed")}
+        </p>
+      )}
     </StepFrame>
   );
 }

@@ -1,5 +1,6 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { choose, modelReady } from "../convex/lib/model";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { z } from "zod";
+import { choose, modelReady, structured } from "../convex/lib/model";
 import { PIPELINE, kindOf } from "../convex/lib/pipeline";
 
 const KEYS = ["MODEL_CHAT_FALLBACK_PROVIDER", "AZURE_OPENAI_DEPLOYMENT", "MODEL_PROVIDER", "MODEL_NAME", "MODEL_READ_PROVIDER", "MODEL_READ_NAME", "MODEL_FALLBACK_PROVIDER", "MODEL_FALLBACK_NAME", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY"];
@@ -68,5 +69,33 @@ describe("letter amount check", () => {
   });
   it("flags an amount the facts don't have", () => {
     expect(inventedAmounts(["You were overcharged $1,250.00 and owe $72."], facts)).toEqual([1250]);
+  });
+});
+
+describe("structured output fallback", () => {
+  const Schema = z.object({ answer: z.string() });
+  const reply = (content: string) =>
+    new Response(JSON.stringify({ model: "m", choices: [{ message: { content } }], usage: { prompt_tokens: 1, completion_tokens: 1 } }), { status: 200 });
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("tries the fallback when the first provider returns no usable data", async () => {
+    set({ MODEL_PROVIDER: "openai", OPENAI_API_KEY: "k", MODEL_FALLBACK_PROVIDER: "azure", AZURE_OPENAI_ENDPOINT: "https://x.example", AZURE_OPENAI_API_KEY: "k" });
+    const urls: string[] = [];
+    vi.stubGlobal("fetch", async (url: string) => {
+      urls.push(url);
+      return urls.length === 1 ? reply(JSON.stringify({ wrong: 1 })) : reply(JSON.stringify({ answer: "ok" }));
+    });
+    const res = await structured({ task: "letters", parts: [{ type: "text", text: "hi" }], schema: Schema });
+    expect(res.data).toEqual({ answer: "ok" });
+    expect(res.run.fallbackUsed).toBe(true);
+    expect(urls).toHaveLength(2);
+  });
+
+  it("returns no data without a fallback, as before", async () => {
+    set({ MODEL_PROVIDER: "openai", OPENAI_API_KEY: "k" });
+    vi.stubGlobal("fetch", async () => reply(JSON.stringify({ wrong: 1 })));
+    const res = await structured({ task: "letters", parts: [{ type: "text", text: "hi" }], schema: Schema });
+    expect(res.data).toBeNull();
+    expect(res.run.ok).toBe(false);
   });
 });

@@ -16,6 +16,8 @@ export default defineSchema({
   }).index("by_user", ["userId"]),
   cases: defineTable({
     createdAt: v.number(),
+    /** When the current "reading" or "drafting" started (see the watchdog in cases.ts). */
+    statusAt: v.optional(v.number()),
     status: v.union(
       v.literal("reading"),
       v.literal("confirm_hospital"),

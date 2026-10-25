@@ -17,6 +17,8 @@ export interface FollowUp {
   outcome: "denied" | "no_reply" | "collections";
   sentOn: string | null;
   status: "drafting" | "ready" | "approved";
+  /** When the current draft started; a draft older than DRAFT_STUCK_MS may be started again. */
+  startedAt?: number;
   letter?: {
     kind: "complaint";
     title: string;
@@ -53,6 +55,8 @@ export const setCheckIn = mutation({
   },
 });
 
+const DRAFT_STUCK_MS = 3 * 60_000;
+
 /** The patient says what happened; we draft a complaint to HCAI from the case's facts. */
 export const startComplaint = mutation({
   args: { id: v.id("cases"), token: Token, outcome: OutcomeV, sentOn: v.union(v.string(), v.null()) },
@@ -60,9 +64,10 @@ export const startComplaint = mutation({
     const c = await mustOwnSent(ctx, id, token);
     if (sentOn !== null && !validDay(sentOn)) throw new ConvexError("Check the date");
     const old = c.followUp as FollowUp | undefined;
-    if (old?.status === "drafting") return;
+    // A draft in progress is left alone, unless it has run so long its job must have died.
+    if (old?.status === "drafting" && Date.now() - (old.startedAt ?? 0) < DRAFT_STUCK_MS) return;
     await limit(ctx, `complaint:${id}`, 5, 10 * 60_000, "Too many drafts in a row. Please wait a few minutes.");
-    const followUp: FollowUp = { outcome, sentOn, status: "drafting" };
+    const followUp: FollowUp = { outcome, sentOn, status: "drafting", startedAt: Date.now() };
     await ctx.db.patch(id, { followUp });
     await ctx.scheduler.runAfter(0, internal.followUpAgent.draftComplaint, { caseId: id });
   },

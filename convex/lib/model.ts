@@ -52,6 +52,12 @@ const defaultModel = (p: Provider) => (p === "azure" ? env("AZURE_OPENAI_DEPLOYM
 
 // A call that hangs longer than this fails, so the fallback (or the app's non-AI path) can run.
 const TIMEOUT_MS = 120_000;
+/** With a fallback provider waiting, give up on the first one sooner and don't retry it. */
+const FALLBACK_TIMEOUT_MS = 60_000;
+
+function anthropicClient(hasFallback: boolean) {
+  return new Anthropic(hasFallback ? { timeout: FALLBACK_TIMEOUT_MS, maxRetries: 0 } : { timeout: TIMEOUT_MS, maxRetries: 1 });
+}
 
 /** Provider error text without anything that looks like a key or token. */
 const scrub = (e: unknown) => String(e).replace(/\b(sk-|key[-_]?|Bearer\s+)[A-Za-z0-9*_\-.]{4,}/gi, "[redacted]").replace(/[A-Za-z0-9]{32,}/g, "[redacted]").slice(0, 160);
@@ -104,8 +110,8 @@ function anthropicContent(parts: Part[]): Anthropic.Beta.BetaContentBlockParam[]
 
 type Out<T> = { data: T | null; refused: boolean; inputTokens: number | null; outputTokens: number | null; model: string };
 
-async function anthropicStructured<T>(model: string, system: string | undefined, parts: Part[], schema: z.ZodType<T>, maxTokens: number): Promise<Out<T>> {
-  const client = new Anthropic({ timeout: TIMEOUT_MS, maxRetries: 1 });
+async function anthropicStructured<T>(model: string, system: string | undefined, parts: Part[], schema: z.ZodType<T>, maxTokens: number, hasFallback: boolean): Promise<Out<T>> {
+  const client = anthropicClient(hasFallback);
   const res = await client.beta.messages.parse({
     model,
     max_tokens: maxTokens,
@@ -124,8 +130,8 @@ async function anthropicStructured<T>(model: string, system: string | undefined,
   };
 }
 
-async function anthropicChat(model: string, system: string, messages: ChatMessage[], maxTokens: number, onText: (t: string) => void) {
-  const client = new Anthropic({ timeout: TIMEOUT_MS, maxRetries: 1 });
+async function anthropicChat(model: string, system: string, messages: ChatMessage[], maxTokens: number, onText: (t: string) => void, hasFallback: boolean) {
+  const client = anthropicClient(hasFallback);
   const stream = client.messages.stream({ model, max_tokens: maxTokens, output_config: { effort: "low" }, system, messages });
   let text = "";
   stream.on("text", (d) => {
@@ -245,7 +251,9 @@ async function openaiChat(provider: Provider, model: string, system: string, mes
 
 async function attempt<R extends { inputTokens: number | null; outputTokens: number | null; model: string }>(
   task: Task,
-  call: (c: Choice) => Promise<R>,
+  call: (c: Choice, hasFallback: boolean) => Promise<R>,
+  /** An answer this rejects counts as a failure while another provider is left to try. */
+  accept?: (out: R) => boolean,
 ): Promise<{ out: R | null; run: Run; error?: unknown }> {
   const { primary, fallback } = choose(task);
   const order = [primary, ...(fallback ? [fallback] : [])].filter((c) => configured(c.provider));
@@ -254,7 +262,11 @@ async function attempt<R extends { inputTokens: number | null; outputTokens: num
     const c = order[i];
     const t0 = Date.now();
     try {
-      const out = await call(c);
+      const out = await call(c, i < order.length - 1);
+      if (accept && !accept(out) && i < order.length - 1) {
+        lastErr = new Error("no structured output");
+        continue;
+      }
       return {
         out,
         run: { task, provider: c.provider, model: out.model, ms: Date.now() - t0, inputTokens: out.inputTokens, outputTokens: out.outputTokens, ok: true, fallbackUsed: i > 0 },
@@ -279,8 +291,12 @@ async function attempt<R extends { inputTokens: number | null; outputTokens: num
  */
 export async function structured<T>(opts: { task: Task; system?: string; parts: Part[]; schema: z.ZodType<T>; maxTokens?: number }, record?: (r: Run) => Promise<void>): Promise<{ data: T | null; refused: boolean; run: Run }> {
   const max = opts.maxTokens ?? 8000;
-  const { out, run, error } = await attempt(opts.task, (c) =>
-    c.provider === "anthropic" ? anthropicStructured(c.model, opts.system, opts.parts, opts.schema, max) : openaiStructured(c.provider, c.model, opts.system, opts.parts, opts.schema, max),
+  const { out, run, error } = await attempt(
+    opts.task,
+    (c, hasFallback) =>
+      c.provider === "anthropic" ? anthropicStructured(c.model, opts.system, opts.parts, opts.schema, max, hasFallback) : openaiStructured(c.provider, c.model, opts.system, opts.parts, opts.schema, max),
+    // No data and no refusal (a reply that didn't match the schema): let the fallback try.
+    (o) => o.data !== null || o.refused,
   );
   const finalRun = out && !out.data ? { ...run, ok: false, error: out.refused ? "declined" : "no structured output" } : run;
   if (record) await record(finalRun).catch(() => {});
@@ -292,8 +308,8 @@ export async function structured<T>(opts: { task: Task; system?: string; parts: 
 export async function chat(opts: { task: Task; system: string; messages: ChatMessage[]; maxTokens?: number; onText?: (t: string) => void }, record?: (r: Run) => Promise<void>): Promise<{ text: string; refused: boolean; run: Run }> {
   const max = opts.maxTokens ?? 2000;
   const onText = opts.onText ?? (() => {});
-  const { out, run, error } = await attempt(opts.task, (c) =>
-    c.provider === "anthropic" ? anthropicChat(c.model, opts.system, opts.messages, max, onText) : openaiChat(c.provider, c.model, opts.system, opts.messages, max, onText),
+  const { out, run, error } = await attempt(opts.task, (c, hasFallback) =>
+    c.provider === "anthropic" ? anthropicChat(c.model, opts.system, opts.messages, max, onText, hasFallback) : openaiChat(c.provider, c.model, opts.system, opts.messages, max, onText),
   );
   if (record) await record(run).catch(() => {});
   if (!out) throw error;
