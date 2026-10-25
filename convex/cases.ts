@@ -6,7 +6,7 @@ import { assess } from "./lib/eligibility";
 import { resolveFilledBrackets } from "./lib/letters";
 import { allFindings, eobShowsInsured } from "./lib/eobChecks";
 import { potentialSavings, type Finding } from "./lib/checks";
-import type { ParsedEob } from "./lib/eob";
+import { type ParsedEob, typedAmountProblem, typedEob } from "./lib/eob";
 import { isLang } from "./lib/lang";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
@@ -382,30 +382,61 @@ export const applyEob = internalMutation({
       await ctx.db.patch(id, { eobStatus: "error", eobError: "APPROVED" });
       return null;
     }
-    const parsed = eob as ParsedEob;
-    const extra: Partial<Doc<"cases">> = { eob: parsed, eobSource, eobStatus: "done", eobError: undefined };
-    // An insurance statement means the patient has insurance: fix the answer and re-run the rules.
-    let mayRedraft = true;
-    // Not when the statement looks like it's for a different visit (EOB_MISMATCH).
-    if (c.household && c.household.insured === false && c.bill && eobShowsInsured(c.bill, c.hospital ?? null, parsed)) {
-      const household = { ...c.household, insured: true };
-      extra.household = household;
-      extra.eligibility = assess(household, FPL, c.hospital ?? null, c.bill.amountDue ?? null, isLang(c.lang) ? c.lang : "en");
-      // Insured patients also need their medical costs (NEEDS_INFO): ask that first, then write letters.
-      if (extra.eligibility.tier === "NEEDS_INFO" && (c.status === "ready" || c.status === "drafting")) {
-        extra.status = "needs_household";
-        extra.letters = undefined;
-        mayRedraft = false;
-      }
+    return await applyReadyEob(ctx, c, eob as ParsedEob, { eob, eobSource, eobStatus: "done", eobError: undefined });
+  },
+});
+
+/**
+ * Use a statement that is ready (read from a file, or typed): store it, mark the patient
+ * insured when it's for this visit, and re-run the rules. Shared by applyEob and setEobManual.
+ */
+async function applyReadyEob(ctx: MutationCtx, c: Doc<"cases">, parsed: ParsedEob, extra: Partial<Doc<"cases">>) {
+  // An insurance statement means the patient has insurance: fix the answer and re-run the rules.
+  let mayRedraft = true;
+  // Not when the statement looks like it's for a different visit (EOB_MISMATCH).
+  if (c.household && c.household.insured === false && c.bill && eobShowsInsured(c.bill, c.hospital ?? null, parsed)) {
+    const household = { ...c.household, insured: true };
+    extra.household = household;
+    extra.eligibility = assess(household, FPL, c.hospital ?? null, c.bill.amountDue ?? null, isLang(c.lang) ? c.lang : "en");
+    // Insured patients also need their medical costs (NEEDS_INFO): ask that first, then write letters.
+    if (extra.eligibility.tier === "NEEDS_INFO" && (c.status === "ready" || c.status === "drafting")) {
+      extra.status = "needs_household";
+      extra.letters = undefined;
+      mayRedraft = false;
     }
-    const { findings, redraft } = await refreshFindings(ctx, c, parsed, extra, mayRedraft);
-    const fromEob = findings.filter((f) => EOB_KINDS.has(f.kind));
-    return {
-      eobFindings: fromEob.length,
-      mismatch: fromEob.some((f) => f.kind === "EOB_MISMATCH"),
-      total: potentialSavings(findings),
-      redraft,
-    };
+  }
+  const { findings, redraft } = await refreshFindings(ctx, c, parsed, extra, mayRedraft);
+  const fromEob = findings.filter((f) => EOB_KINDS.has(f.kind));
+  return {
+    eobFindings: fromEob.length,
+    mismatch: fromEob.some((f) => f.kind === "EOB_MISMATCH"),
+    total: potentialSavings(findings),
+    redraft,
+  };
+}
+
+/**
+ * The patient types the totals from their statement instead of adding a photo. Builds a
+ * statement with no lines (lib/eob.ts typedEob), so only the total rules can fire.
+ */
+export const setEobManual = mutation({
+  args: {
+    id: v.id("cases"),
+    token: Token,
+    patientOwes: v.number(),
+    planPaid: v.optional(v.union(v.number(), v.null())),
+    network: v.optional(v.union(v.literal("in"), v.literal("out"), v.literal("unknown"))),
+    payer: v.optional(v.union(v.string(), v.null())),
+  },
+  handler: async (ctx, { id, token, patientOwes, planPaid, network, payer }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to add an insurance statement.");
+    await limit(ctx, "eob", 60, 60_000);
+    if ([patientOwes, ...(planPaid != null ? [planPaid] : [])].some((x) => typedAmountProblem(x))) throw new ConvexError("Check the amounts");
+    if ((payer ?? "").length > 200) throw new ConvexError("The insurer's name is too long");
+    const eob = typedEob({ patientOwes, planPaid, network, payer });
+    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await applyReadyEob(ctx, c, eob, { eob, eobSource: "typed", eobStatus: "done", eobError: undefined, eobFileId: undefined, eobFileType: undefined });
   },
 });
 

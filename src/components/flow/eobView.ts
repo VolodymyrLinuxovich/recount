@@ -1,6 +1,6 @@
 // Numbers and labels for the insurance statement screens. Display only: the findings
 // themselves come from the rules on the server (convex/lib/eobChecks.ts).
-import { EOB_FINDING_TARGET } from "../../../convex/lib/eob";
+import { EOB_FINDING_TARGET, typedAmountProblem } from "../../../convex/lib/eob";
 import type { EobFindingKind, Finding, ParsedBill, ParsedEob } from "../types";
 
 /* ---------- numbers, the same definitions as docs/EOB.md ---------- */
@@ -41,3 +41,16 @@ export const isEobKind =(k: string): k is EobFindingKind => k in EOB_FINDING_TAR
 
 /** Who the patient writes to about a finding. Bill findings always go to the hospital. */
 export const targetOf = (f: Finding) => (isEobKind(f.kind) ? EOB_FINDING_TARGET[f.kind] : "hospital");
+
+/**
+ * A dollar amount the patient typed from their statement: "1,250", "$1250.50", "0".
+ * Empty is { value: null, problem: null }. Up to cents, at least 0, under TYPED_MAX.
+ */
+export function parseTypedDollars(raw: string): { value: number | null; problem: null | "bad" | "tooBig" } {
+  const s = raw.trim().replace(/^\$\s*/, "").replace(/,(?=\d{3}(\D|$))/g, "").replace(/\s+/g, "");
+  if (!s) return { value: null, problem: null };
+  if (!/^\d+(\.\d{0,2})?$|^\.\d{1,2}$/.test(s)) return { value: null, problem: "bad" };
+  const value = Math.round(Number(s) * 100) / 100;
+  const problem = typedAmountProblem(value);
+  return problem ? { value: null, problem } : { value, problem: null };
+}

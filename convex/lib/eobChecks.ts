@@ -122,7 +122,12 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
   const t = pick(lang);
   const out: Finding[] = [];
   const payer = eob.payer ?? t("your insurance", "su seguro");
-  const eobSrc = eob.claimNumber
+  // Typed totals: the source is what the patient typed, not a document we read.
+  const eobSrc = eob.typed
+    ? eob.payer
+      ? t(`What you typed from your ${payer} statement`, `Lo que usted escribió de su estado de ${payer}`)
+      : t("What you typed from your insurance statement", "Lo que usted escribió de su estado del seguro")
+    : eob.claimNumber
     ? t(`EOB from ${payer}, claim ${eob.claimNumber}`, `EOB de ${payer}, reclamo ${eob.claimNumber}`)
     : t(`EOB from ${payer}`, `EOB de ${payer}`);
   const billSrc = bill.accountNumber

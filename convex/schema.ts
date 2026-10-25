@@ -57,7 +57,7 @@ export default defineSchema({
     eobFileType: v.optional(v.string()),
     eobStatus: v.optional(v.union(v.literal("reading"), v.literal("done"), v.literal("error"))),
     eob: v.optional(v.any()), // ParsedEob
-    eobSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
+    eobSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"), v.literal("typed"))),
     eobError: v.optional(v.string()),
   }).index("by_owner", ["ownerId", "createdAt"]),
   steps: defineTable({

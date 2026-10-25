@@ -41,6 +41,7 @@ export const ParsedEob = z.object({
   insurerPhone: z.string().nullable(),
   lines: z.array(EobLine),
   unreadable: z.array(z.string()).describe("Parts you could not read with confidence"),
+  typed: z.boolean().optional().describe("Set by the app, never by the model: the patient typed these totals in"),
 });
 export type ParsedEob = z.infer<typeof ParsedEob>;
 
@@ -151,5 +152,60 @@ export function normalizeEobDates(e: ParsedEob): ParsedEob {
     serviceDateFrom: isoDate(e.serviceDateFrom),
     serviceDateTo: isoDate(e.serviceDateTo),
     lines: e.lines.map((l) => ({ ...l, date: isoDate(l.date) })),
+  };
+}
+
+/** The numbers a patient types from their statement instead of adding a photo. */
+export interface TypedEob {
+  /** What the statement says the patient owes. Required. */
+  patientOwes: number;
+  planPaid?: number | null;
+  network?: "in" | "out" | "unknown";
+  payer?: string | null;
+}
+
+/** The largest amount we accept, in dollars (same limit as fixing a bill line). */
+export const TYPED_MAX = 10_000_000;
+
+/** Why a typed amount can't be used: below 0, more than cents, or too large. Null when fine. */
+export function typedAmountProblem(x: number): "bad" | "tooBig" | null {
+  if (!Number.isFinite(x) || x < 0) return "bad";
+  if (Math.abs(x * 100 - Math.round(x * 100)) > 1e-6) return "bad";
+  if (x >= TYPED_MAX) return "tooBig";
+  return null;
+}
+
+/**
+ * A ParsedEob from typed totals only. There are no lines, dates, provider or member,
+ * so the per-line rules (6, 7) and the different-visit check (1) can't fire; the total rules can.
+ * Throws on amounts that typedAmountProblem rejects.
+ */
+export function typedEob(input: TypedEob): ParsedEob {
+  const amounts = [input.patientOwes, ...(input.planPaid != null ? [input.planPaid] : [])];
+  if (amounts.some((x) => typedAmountProblem(x))) throw new Error("Check the amounts");
+  const payer = (input.payer ?? "").replace(/\s+/g, " ").trim().slice(0, 80);
+  return {
+    isEob: true,
+    payer: payer || null,
+    planType: null,
+    memberName: null,
+    memberId: null,
+    claimNumber: null,
+    providerName: null,
+    serviceDateFrom: null,
+    serviceDateTo: null,
+    network: input.network ?? "unknown",
+    emergency: null,
+    claimStatus: "processed",
+    totalBilled: null,
+    totalAllowed: null,
+    totalPlanPaid: input.planPaid ?? null,
+    totalPatientOwes: input.patientOwes,
+    appealDeadline: null,
+    appealAddress: null,
+    insurerPhone: null,
+    lines: [],
+    unreadable: [],
+    typed: true,
   };
 }
