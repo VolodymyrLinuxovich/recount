@@ -1,0 +1,101 @@
+{
+ "isEob": true,
+ "payer": "Golden Bear Health Plan HMO",
+ "planType": "HMO",
+ "memberName": "Alex Rivera",
+ "memberId": "GBH-SAMPLE-55120",
+ "claimNumber": "SAMPLE-CLM-26091207",
+ "providerName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+ "serviceDateFrom": "2026-09-12",
+ "serviceDateTo": "2026-09-12",
+ "network": "in",
+ "emergency": true,
+ "claimStatus": "partly_denied",
+ "totalBilled": 12472,
+ "totalAllowed": 2300,
+ "totalPlanPaid": 2050,
+ "totalPatientOwes": 537,
+ "appealDeadline": "180 days from the date of this notice",
+ "appealAddress": "Golden Bear Health Plan, Appeals and Grievances, P.O. Box 4410, Oakland, CA 94612",
+ "insurerPhone": "1-800-555-0142",
+ "lines": [
+  {
+   "date": "2026-09-12",
+   "code": "99284",
+   "description": "ER EXAM/TREATMENT ROOM LEVEL IV",
+   "billed": 6084,
+   "allowed": 1450,
+   "planPaid": 1200,
+   "patientOwes": 250,
+   "notCovered": 0,
+   "remark": "PR-3 Emergency room copay"
+  },
+  {
+   "date": "2026-09-12",
+   "code": "70450",
+   "description": "CT BRAIN WITHOUT CONTRAST",
+   "billed": 4403,
+   "allowed": 620,
+   "planPaid": 620,
+   "patientOwes": 0,
+   "notCovered": 0,
+   "remark": null
+  },
+  {
+   "date": "2026-09-12",
+   "code": "71046",
+   "description": "X-RAY CHEST 2 VIEWS",
+   "billed": 482,
+   "allowed": 78,
+   "planPaid": 78,
+   "patientOwes": 0,
+   "notCovered": 0,
+   "remark": null
+  },
+  {
+   "date": "2026-09-12",
+   "code": "80053",
+   "description": "COMPREHENSIVE METABOLIC PANEL",
+   "billed": 528,
+   "allowed": 32,
+   "planPaid": 32,
+   "patientOwes": 0,
+   "notCovered": 0,
+   "remark": null
+  },
+  {
+   "date": "2026-09-12",
+   "code": "85025",
+   "description": "CBC WITH PLATELETS & DIFF",
+   "billed": 269,
+   "allowed": 24,
+   "planPaid": 24,
+   "patientOwes": 0,
+   "notCovered": 0,
+   "remark": null
+  },
+  {
+   "date": "2026-09-12",
+   "code": "93005",
+   "description": "EKG TRACING ONLY",
+   "billed": 287,
+   "allowed": 0,
+   "planPaid": 0,
+   "patientOwes": 287,
+   "notCovered": 287,
+   "remark": "CO-50 Not medically necessary"
+  },
+  {
+   "date": "2026-09-12",
+   "code": "96374",
+   "description": "IV PUSH SINGLE OR INITIAL DRUG",
+   "billed": 419,
+   "allowed": 96,
+   "planPaid": 96,
+   "patientOwes": 0,
+   "notCovered": 0,
+   "remark": null
+  }
+ ],
+ "unreadable": []
+}

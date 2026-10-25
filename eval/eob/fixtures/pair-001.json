@@ -1,0 +1,234 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-63522449",
+  "patientName": "Priya Raman",
+  "patientAddress": null,
+  "statementDate": "2026-09-11",
+  "serviceDate": "2026-08-13",
+  "insurancePayer": "Fogline Health EPO",
+  "insurancePaid": 5364.11,
+  "adjustments": 0.0,
+  "patientPaid": 150.0,
+  "totalCharges": 17918.0,
+  "amountDue": 12403.89,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-13",
+    "code": "99285",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 5",
+    "quantity": 1,
+    "charge": 8003.0,
+    "chargePrinted": "8,003.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "74177",
+    "revCode": "0352",
+    "description": "HCHG CT ABD & PELVIS W/CON",
+    "quantity": 1,
+    "charge": 8287.0,
+    "chargePrinted": "8,287.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 386.0,
+    "chargePrinted": "386.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "quantity": 1,
+    "charge": 217.0,
+    "chargePrinted": "217.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HCHG CORE URNALYSIS AUTO W/ MICRO",
+    "quantity": 1,
+    "charge": 125.0,
+    "chargePrinted": "125.00"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HCHG CPMC VENIPUNCTURE BTMG",
+    "quantity": 1,
+    "charge": 28.0,
+    "chargePrinted": "28.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+    "quantity": 2,
+    "charge": 150.0,
+    "chargePrinted": "150.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HCHG IV PUSH INITIAL DRUG",
+    "quantity": 1,
+    "charge": 647.0,
+    "chargePrinted": "647.00"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "ONDANSETRON HCL 4 MG/2ML IJ SOLN",
+    "quantity": 4,
+    "charge": 75.0,
+    "chargePrinted": "75.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "EPO",
+  "memberName": "Priya Raman",
+  "memberId": "FGE561074970",
+  "claimNumber": "2375036166716",
+  "providerName": "CPMC VAN NESS CAMPUS",
+  "serviceDateFrom": "2026-08-13",
+  "serviceDateTo": "2026-08-14",
+  "network": "out",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 17918.0,
+  "totalAllowed": 6510.11,
+  "totalPlanPaid": 5364.11,
+  "totalPatientOwes": 1146.0,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-08-13",
+    "code": "99285",
+    "description": "Emergency room visit",
+    "billed": 8003.0,
+    "allowed": 2856.7,
+    "planPaid": 2076.03,
+    "patientOwes": 780.67,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "74177",
+    "description": "CT scan",
+    "billed": 8287.0,
+    "allowed": 3061.65,
+    "planPaid": 2755.48,
+    "patientOwes": 306.17,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 386.0,
+    "allowed": 138.82,
+    "planPaid": 124.94,
+    "patientOwes": 13.88,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 217.0,
+    "allowed": 79.81,
+    "planPaid": 71.83,
+    "patientOwes": 7.98,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 125.0,
+    "allowed": 46.25,
+    "planPaid": 41.63,
+    "patientOwes": 4.62,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-13",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 28.0,
+    "allowed": 10.53,
+    "planPaid": 9.48,
+    "patientOwes": 1.05,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 150.0,
+    "allowed": 53.61,
+    "planPaid": 48.25,
+    "patientOwes": 5.36,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 647.0,
+    "allowed": 235.31,
+    "planPaid": 211.78,
+    "patientOwes": 23.53,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 75.0,
+    "allowed": 27.43,
+    "planPaid": 24.69,
+    "patientOwes": 2.74,
+    "notCovered": 0.0,
+    "remark": "N830 Paid at in-network cost sharing under the No Surprises Act"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "SURPRISE_BILL",
+   "amount": 11407.89
+  }
+ ]
+}

@@ -1,0 +1,209 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "UCSF Helen Diller Medical Center at Parnassus Heights",
+  "hospitalWebsite": "ucsfhealth.org",
+  "hospitalAddress": "505 Parnassus Avenue, San Francisco, CA 94143",
+  "billingPhone": "(415) 353-1888",
+  "accountNumber": "SAMPLE-53893672",
+  "patientName": "Morgan Patel",
+  "patientAddress": null,
+  "statementDate": "2026-08-08",
+  "serviceDate": "2026-07-24",
+  "insurancePayer": "Fogline Health PPO",
+  "insurancePaid": 2905.17,
+  "adjustments": 6722.3,
+  "patientPaid": 0.0,
+  "totalCharges": 11128.76,
+  "amountDue": 1501.29,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-24",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HC EMERG LEVEL IV",
+    "quantity": 1,
+    "charge": 8501.0,
+    "chargePrinted": "8,501.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "HC 12 LEAD EKG; TRACING ONLY",
+    "quantity": 1,
+    "charge": 443.0,
+    "chargePrinted": "443.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 667.0,
+    "chargePrinted": "667.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC BLOOD COUNT COMPLETE AUTO&AUTO DIFRNTL WBC",
+    "quantity": 1,
+    "charge": 232.0,
+    "chargePrinted": "232.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HC X-RAY EXAM CHEST 2 VIEWS",
+    "quantity": 1,
+    "charge": 531.0,
+    "chargePrinted": "531.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HC COLLECTION VENOUS BLOOD VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 69.0,
+    "chargePrinted": "69.00"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "J2405",
+    "revCode": "0636",
+    "description": "NDC DESCRIPTION NOT AVAILABLE",
+    "quantity": 4,
+    "charge": 14.76,
+    "chargePrinted": "14.76"
+   },
+   {
+    "date": "2026-07-24",
+    "code": "96374",
+    "revCode": "0260",
+    "description": "HC THER/PROPH/DIAG INJ, IV PUSH",
+    "quantity": 1,
+    "charge": 671.0,
+    "chargePrinted": "671.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "PPO",
+  "memberName": "Morgan Patel",
+  "memberId": "FGL420625622",
+  "claimNumber": "2321237395606",
+  "providerName": "UCSF HELEN DILLER MEDICAL CTR",
+  "serviceDateFrom": "2026-07-24",
+  "serviceDateTo": "2026-07-24",
+  "network": "in",
+  "emergency": null,
+  "claimStatus": "processed",
+  "totalBilled": 11128.76,
+  "totalAllowed": 4406.46,
+  "totalPlanPaid": 2905.17,
+  "totalPatientOwes": 1501.29,
+  "appealDeadline": "within 180 days of the date on this statement",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-07-24",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 8501.0,
+    "allowed": 3329.33,
+    "planPaid": 2043.46,
+    "patientOwes": 1285.87,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 443.0,
+    "allowed": 179.42,
+    "planPaid": 143.54,
+    "patientOwes": 35.88,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 667.0,
+    "allowed": 277.62,
+    "planPaid": 222.1,
+    "patientOwes": 55.52,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 232.0,
+    "allowed": 97.1,
+    "planPaid": 77.68,
+    "patientOwes": 19.42,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 531.0,
+    "allowed": 218.74,
+    "planPaid": 174.99,
+    "patientOwes": 43.75,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 69.0,
+    "allowed": 28.16,
+    "planPaid": 22.53,
+    "patientOwes": 5.63,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "J2405",
+    "description": "Drugs",
+    "billed": 14.76,
+    "allowed": 5.93,
+    "planPaid": 4.74,
+    "patientOwes": 1.19,
+    "notCovered": 0.0,
+    "remark": null
+   },
+   {
+    "date": "2026-07-24",
+    "code": "96374",
+    "description": "IV push, first drug",
+    "billed": 671.0,
+    "allowed": 270.16,
+    "planPaid": 216.13,
+    "patientOwes": 54.03,
+    "notCovered": 0.0,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": []
+}

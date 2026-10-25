@@ -4,11 +4,12 @@ import type { Finding, FindingKind } from "../../convex/lib/checks";
 import type { Eligibility, Basis } from "../../convex/lib/eligibility";
 import type { HospitalRef } from "../../convex/lib/hospital";
 import type { Letter } from "../../convex/lib/letters";
+import type { EobFindingKind, EobLine, EobStatus, ParsedEob } from "../../convex/lib/eob";
 import type { ComplaintLetter, Outcome } from "../../convex/lib/complaint";
 
 import { type Lang, locale } from "./i18n/strings";
 
-export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter, ComplaintLetter, Outcome };
+export type { ParsedBill, BillLine, Finding, FindingKind, Eligibility, Basis, HospitalRef, Letter, ComplaintLetter, Outcome, EobFindingKind, EobLine, EobStatus, ParsedEob };
 
 /** After sending: what the hospital did, and the complaint to the state (convex/followUp.ts). */
 export interface FollowUp {
@@ -53,6 +54,14 @@ export interface CaseView {
   household?: { size: number; annualIncome: number; insured: boolean; outOfPocket12mo?: number };
   eligibility?: Eligibility;
   letters?: Letter[];
+  /** The insurance Explanation of Benefits, if the patient added one (docs/EOB.md). */
+  eobStatus?: EobStatus;
+  eob?: ParsedEob | null;
+  /** "NOT_AN_EOB" when the file wasn't an insurance statement; other text for other failures. */
+  eobError?: string;
+  eobSource?: "claude" | "sample-source";
+  eobFileUrl?: string | null;
+  eobFileType?: string;
   lettersSource?: "claude" | "template";
   approvedAt?: number;
   /** The day the patient wants to check in on their request, YYYY-MM-DD. */
@@ -65,6 +74,10 @@ export interface CaseView {
   hospitalKey?: string | null;
   hospitalCandidates?: HospitalChoice[];
 }
+
+/** The title of a letter in the reader's language (the drafted title is always English). */
+export const letterTitleKey = (kind: Letter["kind"] | "complaint") =>
+  kind === "assistance" ? "letters.titleAssist" : kind === "appeal" ? "letters.titleAppeal" : kind === "complaint" ? "after.complaintTitle" : "letters.titleDispute";
 
 export const money = (x: number, cents = true, lang: Lang = "en") =>
   `$${x.toLocaleString(locale(lang), { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 })}`;

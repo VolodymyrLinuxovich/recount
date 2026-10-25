@@ -2,6 +2,7 @@
 // No model is involved here: every finding points at a bill line and a published number.
 
 import type { ParsedBill } from "./bill";
+import type { EobFindingKind } from "./eob";
 import { normalizeCode, type HospitalRef } from "./hospital";
 import { type Lang, money, pick } from "./lang";
 
@@ -10,7 +11,8 @@ export type FindingKind =
   | "ABOVE_LIST_PRICE"
   | "CASH_PRICE_GAP"
   | "TOTAL_MISMATCH"
-  | "NOT_ITEMIZED";
+  | "NOT_ITEMIZED"
+  | EobFindingKind; // bill vs insurance statement, see eobChecks.ts
 
 export interface Evidence {
   label: string;

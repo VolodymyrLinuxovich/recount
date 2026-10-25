@@ -3,19 +3,22 @@
 import { filePart, modelReady, structured, type Run } from "./lib/model";
 import type { Kind } from "./lib/pipeline";
 import { inventedAmounts } from "./lib/letterCheck";
+import { DOCINTEL_MODEL, analyzeLayout, docIntelOn, linesFromTables } from "./lib/docIntel";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import { internalAction, type ActionCtx } from "./_generated/server";
 import { ParsedBill } from "./lib/bill";
-import { checkBill, potentialSavings, type Finding } from "./lib/checks";
+import { potentialSavings, type Finding } from "./lib/checks";
+import { EobRead, fromEobRead, normalizeEobDates, ParsedEob } from "./lib/eob";
+import { allFindings } from "./lib/eobChecks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
-import { lawLine, resolveFilledBrackets, templateLetters, type Letter } from "./lib/letters";
+import { lawLine, letterKinds, letterPrompt, letterTitle, resolveFilledBrackets, templateLetters, type Letter } from "./lib/letters";
 import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
-import { SAMPLE_BILL } from "./lib/sample";
+import { SAMPLE_BILL, SAMPLE_EOB } from "./lib/sample";
 import { byKey, matchHospital, pricedRefFromIndex } from "./lib/statewide";
 
 /** Registry address for a known SF hospital key (its HCAI slug is in KNOWN_HOSPITALS). */
@@ -152,6 +155,20 @@ const ChargesColumn = z.object({
  * sometimes do. Returns amounts in line order, or null if it can't be used.
  */
 async function readChargesColumn(blob: Blob, mediaType: string, record: (r: Run) => Promise<void>): Promise<number[] | null> {
+  // With Azure AI Document Intelligence on, the second read is OCR and table detection: a different
+  // method from a different vendor. If it fails or finds no table, fall back to the Claude column read.
+  if (docIntelOn()) {
+    const t0 = Date.now();
+    try {
+      const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
+      const lines = linesFromTables(await analyzeLayout(data));
+      const run: Run = { task: "column", provider: "azure-docintel", model: DOCINTEL_MODEL, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: lines.length > 0, fallbackUsed: false };
+      await record(lines.length ? run : { ...run, error: "no line-item table found" });
+      if (lines.length) return lines.map((l) => l.charge);
+    } catch (e) {
+      await record({ task: "column", provider: "azure-docintel", model: DOCINTEL_MODEL, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: false, fallbackUsed: false, error: String(e).slice(0, 200) });
+    }
+  }
   const res = await structured(
     {
       task: "column",
@@ -262,7 +279,10 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
   await step(ctx, caseId, "check",
     priced ? t(`Checking ${n} charges against the hospital's own prices`, `Comparando ${n} cargos con los precios del propio hospital`)
       : t(`Checking ${n} charges for repeats and totals`, `Revisando ${n} cargos para ver repeticiones y totales`), "running");
-  const findings: Finding[] = checkBill(bill, hospital, lang);
+  // An insurance statement the patient already added counts too (see lib/eobChecks.ts).
+  const cur = await ctx.runQuery(internal.cases.load, { id: caseId });
+  const eob = cur?.eobStatus === "done" ? ((cur.eob ?? null) as ParsedEob | null) : null;
+  const findings: Finding[] = allFindings(bill, hospital, eob, lang);
   const total = potentialSavings(findings);
   const k = findings.length;
   await step(
@@ -452,7 +472,7 @@ export const continueCheck = internalAction({
 const Letters = z.object({
   letters: z.array(
     z.object({
-      kind: z.enum(["assistance", "dispute"]),
+      kind: z.enum(["assistance", "dispute", "appeal"]),
       title: z.string(),
       subject: z.string(),
       body: z.string(),
@@ -462,13 +482,6 @@ const Letters = z.object({
   ),
 });
 
-const LETTER_PROMPT = `Write the letters a patient will send to a hospital billing office, using ONLY the facts in the JSON below.
-- Letters to the hospital are always in English.
-- "assistance": a request for financial assistance (charity care / discount payment) under the hospital's policy and California Health & Safety Code 127400-127446. Ask them to screen the patient, to send the application if one is needed, and to hold the account from collections while it is reviewed.
-- If "policyFindings" lists parts of the hospital's own policy that conflict with California law, mention them in the assistance letter politely: quote the policy and the law, and ask the hospital to apply the law.
-- "dispute": only if there are findings. Ask for an itemized bill if it's a summary bill, and list each finding with the exact amounts and the published number it's based on.
-- If "patientLanguage" is "es", also give a faithful Spanish translation of each letter: subjectPatient translates ONLY the subject line, bodyPatient translates the body. Otherwise set them to null.
-Never say the patient qualifies or is eligible; ask the hospital to screen them. Rules: plain, polite, firm. Short sentences. No legal threats, no claims beyond the facts, no invented law, amounts, dates or names. Address the letter to the hospital's mailing address from the facts when it's given. Use [brackets] ONLY for values you don't know, as short placeholders with no colon and no value inside, like "[Your street address]" or "[Signature]". When a value is known (for example the patient's name from the bill), write it plainly, never inside brackets. Sign as the patient.`;
 
 export const draftLetters = internalAction({
   args: { caseId: v.id("cases") },
@@ -479,6 +492,7 @@ export const draftLetters = internalAction({
     const t = pick(lang);
     const bill = c.bill as ParsedBill;
     const hospitalRef = (c.hospital ?? null) as HospitalRef | null;
+    const eob = c.eobStatus === "done" ? ((c.eob ?? null) as ParsedEob | null) : null;
     const facts = {
       bill,
       hospital: hospitalRef
@@ -491,7 +505,8 @@ export const draftLetters = internalAction({
         : null,
       findings: (c.findings ?? []) as Finding[],
       // The hospital letter quotes findings in English even when the patient reads Spanish.
-      findingsEn: lang === "es" ? checkBill(bill, hospitalRef, "en") : undefined,
+      findingsEn: lang === "es" ? allFindings(bill, hospitalRef, eob, "en") : undefined,
+      eob,
       policyFindings: (c.policyFindings ?? []) as PolicyFinding[],
       eligibility: c.eligibility as Eligibility,
       household: c.household,
@@ -503,14 +518,14 @@ export const draftLetters = internalAction({
       try {
         const record = recorder(ctx, caseId);
         const forModel = { ...facts, findings: facts.findingsEn ?? facts.findings, findingsEn: undefined, patientLanguage: lang };
-        const kinds: ("assistance" | "dispute")[] = facts.findings.length ? ["assistance", "dispute"] : ["assistance"];
+        const kinds = letterKinds(facts);
         // One call per letter, in parallel: about half the wait of writing both in one reply.
         const results = await Promise.all(
           kinds.map((kind) =>
             structured(
               {
                 task: "letters",
-                parts: [{ type: "text", text: `${LETTER_PROMPT}\n\nWrite ONLY the "${kind}" letter (an array with exactly one letter).\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
+                parts: [{ type: "text", text: `${letterPrompt(kind)}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
                 schema: Letters,
                 maxTokens: 8000,
               },
@@ -546,7 +561,7 @@ export const draftLetters = internalAction({
       subject: resolveFilledBrackets(l.subject),
       body: resolveFilledBrackets(l.body),
       ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
-      ...(lang === "es" ? { title: l.kind === "assistance" ? "Solicitud de ayuda financiera" : "Preguntas sobre la factura" } : {}),
+      ...(lang === "es" ? { title: letterTitle(l.kind, "es") } : {}),
     }));
     // Rule check: every dollar amount in the letters must come from the facts.
     const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null });
@@ -556,9 +571,118 @@ export const draftLetters = internalAction({
         ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)
         : t("Every dollar amount in your letters matches your bill and our checks", "Cada monto en dólares de sus cartas coincide con su factura y nuestras revisiones"),
       odd.length ? "warn" : "done");
+    // An insurance statement added or removed while we wrote makes these letters stale; a newer run writes them.
+    const now = await ctx.runQuery(internal.cases.load, { id: caseId });
+    if (!now || now.status !== "drafting" || JSON.stringify(now.findings ?? []) !== JSON.stringify(c.findings ?? []) || (now.eobStatus === "done") !== (c.eobStatus === "done")) return;
     await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready", ...(odd.length ? { letterFlags: odd } : { letterFlags: undefined }) } });
     await step(ctx, caseId, "letters",
       lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
       "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."), lettersSource === "claude" ? "ai" : "rule");
+  },
+});
+
+const EOB_PROMPT = `This is an insurance Explanation of Benefits (EOB) a patient photographed or uploaded: the insurer's statement for a hospital claim. It is not a bill. Transcribe it into the schema.
+Rules:
+- If this is not an EOB (for example a hospital bill, a receipt or a letter), set isEob to false and leave the rest empty or null.
+- Copy names, codes, dates and amounts exactly as printed. Never guess a code, a date or an amount that isn't printed: use null for a missing amount and "" for missing text. A blank cell in the table is missing, not $0, and never work it out from other cells.
+- "patientOwes" and "totalPatientOwes" are what the EOB says the patient may owe the provider (often called "your responsibility", "you may owe" or "patient responsibility"). Copy them as printed; never compute them.
+- "notCovered" is the amount the plan denied or did not cover on that line, 0 if none. Copy each remark or denial code with its text as printed.
+- network: "in" only if the provider is marked in-network or participating, "out" only if marked out-of-network or non-participating, else "unknown".
+- claimStatus: "pending" if the claim is still in process, "denied" if the whole claim was denied, "partly_denied" if some lines were denied, "processed" if it was paid or processed, else "unknown".
+- Amounts are positive numbers in dollars.
+- If a number is blurry or cut off, put your best reading in the field AND add a short plain note to "unreadable" that a patient can understand (e.g. "The amount you owe is blurry"). Never use field names in the notes.`;
+
+async function readEobFile(blob: Blob, mediaType: string, lang: Lang, record: (r: Run) => Promise<void>): Promise<ParsedEob> {
+  const res = await structured(
+    {
+      task: "read",
+      parts: [await filePart(blob, mediaType), { type: "text", text: EOB_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }],
+      schema: EobRead,
+      maxTokens: 12000,
+    },
+    record,
+  );
+  if (res.refused) throw new Error("The model declined to read this file.");
+  if (!res.data) throw new Error("Couldn't read the insurance statement into a structured form.");
+  return normalizeEobDates(fromEobRead(res.data));
+}
+
+/** Read the patient's insurance statement (EOB), then compare it with the bill by rules. */
+export const readEob = internalAction({
+  args: { caseId: v.id("cases") },
+  handler: async (ctx, { caseId }): Promise<void> => {
+    const c = await ctx.runQuery(internal.cases.load, { id: caseId });
+    if (!c || c.eobStatus !== "reading" || c.status === "approved") return;
+    const lang: Lang = isLang(c.lang) ? c.lang : "en";
+    const t = pick(lang);
+    const fileId = c.eobFileId ?? null;
+    const fail = async (code: string, label: string, detail?: string) => {
+      await step(ctx, caseId, "eob-read", label, "warn", detail, "ai");
+      await ctx.runMutation(internal.cases.eobFailed, { id: caseId, fileId: fileId ?? undefined, error: code });
+    };
+    await step(ctx, caseId, "eob-read", t("Reading your insurance statement", "Leyendo su estado del seguro"), "running", undefined, "ai");
+    let eob: ParsedEob;
+    let eobSource: "claude" | "sample-source" = "claude";
+    if (fileId && modelReady("read")) {
+      try {
+        const blob = await ctx.storage.get(fileId);
+        if (!blob) throw new Error("Uploaded file is missing");
+        eob = await readEobFile(blob, c.eobFileType ?? blob.type ?? "image/jpeg", lang, recorder(ctx, caseId));
+      } catch (e) {
+        if (!c.sample) {
+          const big = /exceeds|too large|maximum/i.test(String(e));
+          await fail(big ? "TOO_LARGE" : "RETAKE",
+            big ? t("This file is too large to read", "Este archivo es demasiado grande") : t("We couldn't read this insurance statement", "No pudimos leer este estado del seguro"),
+            String(e).slice(0, 200));
+          return;
+        }
+        eob = SAMPLE_EOB;
+        eobSource = "sample-source";
+        await step(ctx, caseId, "eob-read", t("Model unavailable, loaded the sample insurance statement's source data", "El modelo no está disponible; cargamos los datos del estado del seguro de ejemplo"), "warn", String(e).slice(0, 200), "rule");
+      }
+    } else if (c.sample) {
+      eob = SAMPLE_EOB;
+      eobSource = "sample-source";
+    } else {
+      await fail("NO_MODEL", t("Reading statements needs the model key on the server", "Para leer estados del seguro se necesita la clave del modelo en el servidor"));
+      return;
+    }
+    if (!eob.isEob) {
+      await fail("NOT_AN_EOB", t("This doesn't look like an insurance statement (EOB)", "Esto no parece un estado del seguro (EOB)"));
+      return;
+    }
+    if (!eob.lines.length && eob.totalPatientOwes == null && eob.totalPlanPaid == null && eob.claimStatus !== "pending") {
+      await fail("RETAKE", t("We couldn't read the amounts on this statement", "No pudimos leer los montos de este estado del seguro"));
+      return;
+    }
+    const n = eob.lines.length;
+    await step(ctx, caseId, "eob-read",
+      eobSource === "claude"
+        ? t(`Read ${n} line${n === 1 ? "" : "s"} from your insurance statement`, `Leímos ${n} línea${n === 1 ? "" : "s"} de su estado del seguro`)
+        : t(`Loaded the sample insurance statement (${n} lines) from its source data`, `Cargamos el estado del seguro de ejemplo (${n} líneas) desde sus datos`),
+      eob.unreadable.length ? "warn" : "done",
+      eob.unreadable.length ? t(`Please double-check: ${eob.unreadable.join("; ")}`, `Por favor revise: ${eob.unreadable.join("; ")}`) : undefined,
+      eobSource === "claude" ? "ai" : "rule");
+
+    await step(ctx, caseId, "eob-check", t("Comparing your bill with your insurance statement", "Comparando su factura con su estado del seguro"), "running", undefined, "rule");
+    const res = await ctx.runMutation(internal.cases.applyEob, { id: caseId, fileId: fileId ?? undefined, eob, eobSource });
+    if (!res) {
+      await step(ctx, caseId, "eob-check", t("Insurance statement not used", "No usamos el estado del seguro"), "warn",
+        t("The bill changed while we read it (approved, or another statement was added).", "La factura cambió mientras lo leíamos (se aprobó o se agregó otro estado)."), "rule");
+      return;
+    }
+    const k = res.eobFindings;
+    await step(ctx, caseId, "eob-check",
+      res.mismatch
+        ? t("This statement may be for a different visit", "Este estado puede ser de otra visita")
+        : k
+          ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question with your insurance statement`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar con su estado del seguro`)
+          : t("Your bill matches your insurance statement", "Su factura coincide con su estado del seguro"),
+      res.mismatch ? "warn" : "done",
+      [
+        res.total > 0 ? t(`Up to ${money(res.total)} in questionable charges.`, `Hasta ${money(res.total)} en cargos dudosos.`) : "",
+        res.redraft ? t("Rewriting your letters with it.", "Volvemos a escribir sus cartas con esto.") : "",
+      ].filter(Boolean).join(" ") || undefined,
+      "rule");
   },
 });

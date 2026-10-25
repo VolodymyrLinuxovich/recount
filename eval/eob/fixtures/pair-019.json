@@ -1,0 +1,174 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-79349383",
+  "patientName": "Priya Raman",
+  "patientAddress": null,
+  "statementDate": "2026-08-26",
+  "serviceDate": "2026-08-05",
+  "insurancePayer": "Fogline Health EPO",
+  "insurancePaid": 0.0,
+  "adjustments": 5099.81,
+  "patientPaid": 50.0,
+  "totalCharges": 7263.0,
+  "amountDue": 2113.19,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-08-05",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 4",
+    "quantity": 1,
+    "charge": 5214.0,
+    "chargePrinted": "5,214.00"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "93005",
+    "revCode": "0730",
+    "description": "HCHG EKG 12 LEAD TRACING ONLY",
+    "quantity": 1,
+    "charge": 614.0,
+    "chargePrinted": "614.00"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HCHG COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 386.0,
+    "chargePrinted": "386.00"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "quantity": 1,
+    "charge": 217.0,
+    "chargePrinted": "217.00"
+   },
+   {
+    "date": "2026-08-06",
+    "code": "71046",
+    "revCode": "0320",
+    "description": "HCHG XR CHEST FRONTAL AND LATERAL 2 VIEW",
+    "quantity": 1,
+    "charge": 804.0,
+    "chargePrinted": "804.00"
+   },
+   {
+    "date": "2026-08-06",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "HCHG CPMC VENIPUNCTURE BTMG",
+    "quantity": 1,
+    "charge": 28.0,
+    "chargePrinted": "28.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "EPO",
+  "memberName": "Priya Raman",
+  "memberId": "FGE642075909",
+  "claimNumber": "2662987406499",
+  "providerName": "CALIFORNIA PACIFIC MED CTR CPMC",
+  "serviceDateFrom": "2026-08-05",
+  "serviceDateTo": "2026-08-06",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "processed",
+  "totalBilled": 7263.0,
+  "totalAllowed": 2163.19,
+  "totalPlanPaid": 1451.87,
+  "totalPatientOwes": 711.32,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-08-05",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5214.0,
+    "allowed": 1558.94,
+    "planPaid": 908.05,
+    "patientOwes": 650.89,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "93005",
+    "description": "EKG",
+    "billed": 614.0,
+    "allowed": 176.96,
+    "planPaid": 159.26,
+    "patientOwes": 17.7,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 386.0,
+    "allowed": 119.47,
+    "planPaid": 107.52,
+    "patientOwes": 11.95,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-05",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 217.0,
+    "allowed": 63.24,
+    "planPaid": 56.92,
+    "patientOwes": 6.32,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-06",
+    "code": "71046",
+    "description": "X-ray",
+    "billed": 804.0,
+    "allowed": 236.03,
+    "planPaid": 212.43,
+    "patientOwes": 23.6,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-08-06",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 28.0,
+    "allowed": 8.55,
+    "planPaid": 7.69,
+    "patientOwes": 0.86,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "OWES_MORE_THAN_EOB",
+   "amount": 1451.87
+  }
+ ]
+}

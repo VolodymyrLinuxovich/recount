@@ -70,6 +70,7 @@ from.
 | **Web app** | Next.js 16 (App Router) · React 19 · TypeScript · English and Spanish strings for everything the patient reads |
 | **Backend** | Convex: case documents, file storage for the photo, scheduled actions, a live step log the phone subscribes to, upload rate limit |
 | **AI** | Claude (Opus 5.5) via the Anthropic API: reads the bill into a typed schema, drafts the letters, reviewed the statewide audit |
+| **Azure** | AI Document Intelligence (second read of the charges, when `AZURE_DOCINTEL_*` is set) · Azure OpenAI (backup model for letters and chat) · AI Search (policy passages for Lupa) · AI Content Safety (chat) |
 | **Rules** | Plain TypeScript: price checks, duplicate and total checks, eligibility under CA Health and Safety Code 127400 and after |
 | **Hospital data** | Apify Actor (Python): finds and streams each hospital's CMS price file, extracts charity care limits with quotes |
 | **Policy audit** | Python: HCAI crawl, PDF text extraction, regex candidates, two Claude reviews with a quote check |
@@ -231,6 +232,11 @@ errors in most of them, and renders them as clean scans, phone photos and PDFs.
   added a "please double-check" note anyway, saying the charges column looked out of line with the rows. Both were read
   correctly.
 - **Claude on the sample photo:** **8 of 8** lines and the **$12,741** total read correctly.
+- **Azure AI Document Intelligence as the second read (10/24):** its layout model (OCR and table detection, not a
+  language model) read **181 of 181** lines with the right code and charge on all 30 eval bills (10 clean scans,
+  16 phone photos, 4 PDFs) and **8 of 8** on the sample photo, in a median 7.4 s. Next to Claude's reads it agreed
+  on every charge of every bill. Same caveat as above: these are generated bills. `eval/read_docintel.py`
+  reproduces it.
 - **Live QA uploads:** a rotated, blurred photo read all 7 lines and its total; a ZSFG PDF and a CPMC photo flag exactly
   their planted errors (a total mismatch, a $647 duplicate) and nothing else.
 

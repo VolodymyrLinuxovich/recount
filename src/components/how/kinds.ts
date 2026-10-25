@@ -36,6 +36,7 @@ export type AgentRun = {
 export function providerName(p: string): string {
   if (p === "anthropic") return "Anthropic";
   if (p === "azure") return "Azure OpenAI";
+  if (p === "azure-docintel") return "Azure AI Document Intelligence";
   if (p === "openai") return "OpenAI-compatible";
   return p;
 }

@@ -1,0 +1,194 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Zuckerberg San Francisco General Hospital and Trauma Center",
+  "hospitalWebsite": null,
+  "hospitalAddress": "1001 Potrero Avenue, San Francisco, CA 94110",
+  "billingPhone": "(628) 206-8448",
+  "accountNumber": "SAMPLE-46330439",
+  "patientName": "Elena Duarte",
+  "patientAddress": null,
+  "statementDate": "2026-08-01",
+  "serviceDate": "2026-07-14",
+  "insurancePayer": "Redwood Lantern Assurance PPO",
+  "insurancePaid": 0.0,
+  "adjustments": 0.0,
+  "patientPaid": 0.0,
+  "totalCharges": 5414.0,
+  "amountDue": 5414.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-14",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HC ER EX/TX RM LEVEL III",
+    "quantity": 1,
+    "charge": 3694.0,
+    "chargePrinted": "3,694.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "HC IV HYDRATION ADMIN 1ST HOUR",
+    "quantity": 1,
+    "charge": 449.0,
+    "chargePrinted": "449.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NORMAL SALINE SOLUTION 1000 CC",
+    "quantity": 2,
+    "charge": 280.0,
+    "chargePrinted": "280.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "HC COMPREHENSIVE METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 528.0,
+    "chargePrinted": "528.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE ROUTINE",
+    "quantity": 1,
+    "charge": 45.0,
+    "chargePrinted": "45.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "HC URINALYSIS MICRO. (AUTOMATED)",
+    "quantity": 1,
+    "charge": 149.0,
+    "chargePrinted": "149.00"
+   },
+   {
+    "date": "2026-07-14",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HC CBC PLATELETS & DIFF",
+    "quantity": 1,
+    "charge": 269.0,
+    "chargePrinted": "269.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Redwood Lantern Assurance",
+  "planType": "PPO",
+  "memberName": "Elena Duarte",
+  "memberId": "RLA137069718",
+  "claimNumber": "2252045630578",
+  "providerName": "ZUCKERBERG SF GENERAL HOSP",
+  "serviceDateFrom": "2026-07-14",
+  "serviceDateTo": "2026-07-14",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "pending",
+  "totalBilled": 5414.0,
+  "totalAllowed": null,
+  "totalPlanPaid": null,
+  "totalPatientOwes": null,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Redwood Lantern Assurance, Attn: Appeals Unit, P.O. Box 77120, Sacramento, CA 95887",
+  "insurerPhone": "1-866-555-0119",
+  "lines": [
+   {
+    "date": "2026-07-14",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3694.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 449.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 280.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 528.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 45.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 149.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   },
+   {
+    "date": "2026-07-14",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 269.0,
+    "allowed": null,
+    "planPaid": null,
+    "patientOwes": null,
+    "notCovered": null,
+    "remark": null
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "CLAIM_PENDING",
+   "amount": 0
+  }
+ ]
+}

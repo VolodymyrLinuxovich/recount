@@ -1,0 +1,103 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "CPMC Van Ness Campus",
+  "hospitalWebsite": "sutterhealth.org",
+  "hospitalAddress": "1101 Van Ness Avenue, San Francisco, CA 94109",
+  "billingPhone": "(855) 398-1633",
+  "accountNumber": "SAMPLE-82239202",
+  "patientName": "Drew Martin",
+  "patientAddress": null,
+  "statementDate": "2026-08-22",
+  "serviceDate": "2026-07-17",
+  "insurancePayer": "Redwood Lantern Assurance PPO",
+  "insurancePaid": 10.33,
+  "adjustments": 6357.24,
+  "patientPaid": 100.0,
+  "totalCharges": 7622.0,
+  "amountDue": 1154.43,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-17",
+    "code": "99283",
+    "revCode": "0450",
+    "description": "HCHG ED LEVEL 3",
+    "quantity": 1,
+    "charge": 3093.0,
+    "chargePrinted": "3,093.00"
+   },
+   {
+    "date": "2026-07-17",
+    "code": "70450",
+    "revCode": "0351",
+    "description": "HCHG CT BRAIN WO CONTR",
+    "quantity": 1,
+    "charge": 4312.0,
+    "chargePrinted": "4,312.00"
+   },
+   {
+    "date": "2026-07-17",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+    "quantity": 1,
+    "charge": 217.0,
+    "chargePrinted": "217.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Redwood Lantern Assurance",
+  "planType": "PPO",
+  "memberName": "Drew Martin",
+  "memberId": "RLA502817904",
+  "claimNumber": "2591858529847",
+  "providerName": "CALIFORNIA PACIFIC MED CTR CPMC",
+  "serviceDateFrom": "2026-07-17",
+  "serviceDateTo": "2026-07-17",
+  "network": "in",
+  "emergency": null,
+  "claimStatus": "processed",
+  "totalBilled": 3310.0,
+  "totalAllowed": 1264.76,
+  "totalPlanPaid": 10.33,
+  "totalPatientOwes": 1254.43,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Redwood Lantern Assurance, Attn: Appeals Unit, P.O. Box 77120, Sacramento, CA 95887",
+  "insurerPhone": "1-866-555-0119",
+  "lines": [
+   {
+    "date": "2026-07-17",
+    "code": "99283",
+    "description": "Emergency room visit",
+    "billed": 3093.0,
+    "allowed": 1186.83,
+    "planPaid": 0.0,
+    "patientOwes": 1186.83,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   },
+   {
+    "date": "2026-07-17",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 217.0,
+    "allowed": 77.93,
+    "planPaid": 10.33,
+    "patientOwes": 67.6,
+    "notCovered": 0.0,
+    "remark": "CO-45 Charge exceeds the contracted or allowed amount"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "NOT_ON_EOB",
+   "amount": 0
+  }
+ ]
+}

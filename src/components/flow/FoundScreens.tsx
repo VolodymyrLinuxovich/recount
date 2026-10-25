@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { useT } from "../i18n/I18nProvider";
+import type { T } from "../i18n/strings";
 import { type BillLine, type CaseView, type Finding, hostOf, money } from "../types";
+import { billDue, eobStillOwes, targetOf } from "./eobView";
 import { StepFrame } from "./StepFrame";
 import { findingScreens } from "./steps";
 import type { ScreenProps } from "./types";
 import "./found.css";
 import "./found-extra.css";
+import "./eob.css";
 
 /* ---------- helpers ---------- */
 
@@ -36,7 +39,8 @@ const canFix = (c: CaseView) => c.status === "needs_household" && Boolean(c.toke
 /** Where the last problem screen leads: the questions before an answer exists, the answer after. */
 function afterFindings(c: CaseView, go: (s: string) => void, t: ReturnType<typeof useT>["t"]) {
   const beforeAnswer = c.status === "needs_household" || c.eligibility?.tier === "NEEDS_INFO";
-  return beforeAnswer ? { label: t("found.answerQs"), onClick: () => go("q1") } : { label: t("found.backToAnswer"), onClick: () => go("answer") };
+  // Before the questions comes the insurance statement screen.
+  return beforeAnswer ? { label: t("flow.next"), onClick: () => go("eob") } : { label: t("found.backToAnswer"), onClick: () => go("answer") };
 }
 
 /* ---------- the bill picture ---------- */
@@ -289,7 +293,7 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
         phase={1}
         title={t("flow.retakeH")}
         primary={{ label: t("flow.retake"), href: "/" }}
-        secondary={{ label: t("flow.continueAnyway"), onClick: n > 0 ? next : () => go("q1") }}
+        secondary={{ label: t("flow.continueAnyway"), onClick: n > 0 ? next : () => go("eob") }}
       >
         <p>{t("flow.retakeBody")}</p>
         <button className="link-btn" onClick={() => go("more")}>
@@ -449,10 +453,29 @@ function Confidence({ c, f, amount }: { c: CaseView; f: Finding; amount: number 
 }
 
 /** One finding as a clean card: what, the two numbers, what you could save, why. */
-function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
+function FindingCard({ c, f, go }: { c: CaseView; f: Finding; go: (s: string) => void }) {
   const { t, lang } = useT();
   const lines = c.bill?.lines ?? [];
   const line = lines[f.lines[f.lines.length - 1]];
+
+  switch (f.kind) {
+    case "EOB_MISMATCH":
+    case "OWES_MORE_THAN_EOB":
+    case "SURPRISE_BILL":
+    case "INSURANCE_NOT_APPLIED":
+    case "NOT_ON_EOB":
+    case "DENIED_BY_PLAN":
+    case "CLAIM_PENDING":
+      return <EobFindingCard c={c} f={f} go={go} />;
+    case "ABOVE_LIST_PRICE":
+    case "CASH_PRICE_GAP":
+    case "DUPLICATE_LINE":
+    case "TOTAL_MISMATCH":
+    case "NOT_ITEMIZED":
+      break;
+    default:
+      return unknownKind(f.kind, <p className="found-why">{(f as Finding).detail}</p>);
+  }
 
   if (f.kind === "ABOVE_LIST_PRICE" || f.kind === "CASH_PRICE_GAP") {
     const cash = f.kind === "CASH_PRICE_GAP";
@@ -523,7 +546,7 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
     );
   }
 
-  // NOT_ITEMIZED and anything new: a plain explanation.
+  // NOT_ITEMIZED: a plain explanation.
   return (
     <div className="found-card">
       <p className="found-why">{f.kind === "NOT_ITEMIZED" ? t("found.whySummary") : f.detail}</p>
@@ -532,7 +555,93 @@ function FindingCard({ c, f }: { c: CaseView; f: Finding }) {
   );
 }
 
-function titleFor(t: ReturnType<typeof useT>["t"], c: CaseView, f: Finding) {
+/** A kind this screen doesn't know yet: TypeScript fails the build here when one is added. */
+function unknownKind<R>(kind: never, fallback: R): R {
+  void kind;
+  return fallback;
+}
+
+/** "What we compared": the fields the rule read on the statement and the bill. */
+function Evidence({ f }: { f: Finding }) {
+  const { t } = useT();
+  if (!f.evidence.length) return null;
+  return (
+    <>
+      <h2 className="eob-evidence-h">{t("found.evidenceH")}</h2>
+      <dl className="eob-evidence">
+        {f.evidence.map((e, i) => (
+          <div key={i}>
+            <dt>{e.label}</dt>
+            <dd>{e.value}</dd>
+            {e.source && (/^https?:/.test(e.source) ? <dd><SourceLink url={e.source} /></dd> : <dd className="found-quiet">{e.source}</dd>)}
+          </div>
+        ))}
+      </dl>
+    </>
+  );
+}
+
+/** Who the patient should contact about this finding. */
+function Contact({ c, f }: { c: CaseView; f: Finding }) {
+  const { t } = useT();
+  const target = targetOf(f);
+  return (
+    <p className="eob-contact">
+      {target === "insurer" ? t("found.contactInsurer", { payer: c.eob?.payer ?? null }) : target === "none" ? t("found.contactNone") : t("found.contactHospital")}
+    </p>
+  );
+}
+
+/** A finding from comparing the bill with the insurance statement. The text comes from the rules, in the case's language. */
+function EobFindingCard({ c, f, go }: { c: CaseView; f: Finding; go: (s: string) => void }) {
+  const { t, lang } = useT();
+  const due = billDue(c.bill);
+  const owes = eobStillOwes(c.eob, c.bill);
+  const line = c.bill?.lines[f.lines[0]];
+  const versus =
+    (f.kind === "OWES_MORE_THAN_EOB" || f.kind === "SURPRISE_BILL") && due != null && owes != null ? (
+      <Versus left={{ label: t("eob.hospitalAsks"), value: money(due, true, lang) }} right={{ label: t("eob.youOwe"), value: money(owes, true, lang) }} />
+    ) : f.kind === "INSURANCE_NOT_APPLIED" && c.eob?.totalPlanPaid != null ? (
+      <Versus
+        left={{ label: t("eob.planPaid"), value: money(c.eob.totalPlanPaid, true, lang) }}
+        right={{ label: t("found.billShowsPaid"), value: money(c.bill?.insurancePaid ?? 0, true, lang) }}
+      />
+    ) : null;
+  return (
+    <div className="found-card eob-card">
+      {f.kind === "CLAIM_PENDING" && <p className="eob-hold">{t("found.dontPay")}</p>}
+      {line && (
+        <>
+          <p className="found-card-name" lang={billLang(lang)}>
+            {line.description}
+          </p>
+          <p className="found-quiet">{t("found.lineN", { n: f.lines[0] + 1 })}</p>
+        </>
+      )}
+      {versus}
+      {f.amount > 0 && <p className="found-save">{t("found.stopOwing", { amount: money(f.amount, true, lang) })}</p>}
+      <p className="found-why">{f.detail}</p>
+      <Evidence f={f} />
+      <Contact c={c} f={f} />
+      {f.kind === "DENIED_BY_PLAN" && <p className="found-why">{t("found.appealLetter")}</p>}
+      <p className="found-quiet">{f.confidence === "high" ? t("found.eobConfHigh") : t("found.eobConfCheck")}</p>
+      {f.kind === "EOB_MISMATCH" && c.status !== "approved" && (
+        <div className="step-links">
+          <button type="button" className="link-btn" onClick={() => go("eob")}>
+            {t("found.changeEob")}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The short title of a finding, in the reader's language. */
+export function findingTitle(t: T, c: CaseView, f: Finding) {
+  return titleFor(t, c, f);
+}
+
+function titleFor(t: T, c: CaseView, f: Finding) {
   switch (f.kind) {
     case "ABOVE_LIST_PRICE":
       return t("found.titleAbove");
@@ -544,8 +653,22 @@ function titleFor(t: ReturnType<typeof useT>["t"], c: CaseView, f: Finding) {
       return (c.bill?.unreadable ?? []).length > 0 ? t("found.titleTotalUnsure") : t("found.titleTotal");
     case "NOT_ITEMIZED":
       return t("found.titleSummary");
+    case "EOB_MISMATCH":
+      return t("found.titleEobMismatch");
+    case "OWES_MORE_THAN_EOB":
+      return t("found.titleOwesMore");
+    case "SURPRISE_BILL":
+      return t("found.titleSurprise");
+    case "INSURANCE_NOT_APPLIED":
+      return t("found.titleNotApplied");
+    case "NOT_ON_EOB":
+      return t("found.titleNotOnEob");
+    case "DENIED_BY_PLAN":
+      return t("found.titleDenied");
+    case "CLAIM_PENDING":
+      return t("found.titlePending");
     default:
-      return f.title;
+      return unknownKind(f.kind, (f as Finding).title);
   }
 }
 
@@ -607,7 +730,7 @@ export function FindingStep({ c, index, next, back, go }: ScreenProps & { index:
       primary={primary}
       onBack={back}
     >
-      {grouped ? <CashGroup c={c} items={items} /> : <FindingCard c={c} f={items[0]} />}
+      {grouped ? <CashGroup c={c} items={items} /> : <FindingCard c={c} f={items[0]} go={go} />}
     </StepFrame>
   );
 }

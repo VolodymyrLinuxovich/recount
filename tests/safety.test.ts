@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { checkText, judge } from "../convex/lib/safety";
 import { privacyFacts, processors } from "../convex/lib/privacy";
 
-const KEYS = ["AZURE_CONTENT_SAFETY_ENDPOINT", "AZURE_CONTENT_SAFETY_KEY", "AZURE_SEARCH_ENDPOINT", "AZURE_SEARCH_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY", "MODEL_CHAT_FALLBACK_PROVIDER", "MODEL_FALLBACK_PROVIDER", "MODEL_PROVIDER", "ANTHROPIC_API_KEY"];
+const KEYS = ["AZURE_DOCINTEL_ENDPOINT", "AZURE_DOCINTEL_KEY", "AZURE_CONTENT_SAFETY_ENDPOINT", "AZURE_CONTENT_SAFETY_KEY", "AZURE_SEARCH_ENDPOINT", "AZURE_SEARCH_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY", "MODEL_CHAT_FALLBACK_PROVIDER", "MODEL_FALLBACK_PROVIDER", "MODEL_PROVIDER", "ANTHROPIC_API_KEY"];
 const saved = Object.fromEntries(KEYS.map((k) => [k, process.env[k]]));
 afterEach(() => {
   for (const k of KEYS) {
@@ -42,12 +42,21 @@ describe("privacy facts", () => {
     expect(t).toContain("Anthropic");
     expect(t).toContain("Apify");
     expect(t).not.toMatch(/Azure|Microsoft/);
-    expect(processors()).toEqual({ azureOpenAI: false, openAI: false, contentSafety: false, search: false });
+    expect(processors()).toEqual({ azureOpenAI: false, openAI: false, contentSafety: false, search: false, docIntel: false });
   });
   it("names Content Safety when it is on", () => {
     clear();
     process.env.AZURE_CONTENT_SAFETY_ENDPOINT = "https://x";
     process.env.AZURE_CONTENT_SAFETY_KEY = "k";
     expect(privacyFacts()).toContain("Azure AI Content Safety");
+  });
+  it("names Document Intelligence when it is on", () => {
+    clear();
+    process.env.AZURE_DOCINTEL_ENDPOINT = "https://x";
+    process.env.AZURE_DOCINTEL_KEY = "k";
+    expect(processors().docIntel).toBe(true);
+    expect(privacyFacts()).toContain("Azure AI Document Intelligence");
+    delete process.env.AZURE_DOCINTEL_ENDPOINT;
+    delete process.env.AZURE_DOCINTEL_KEY;
   });
 });

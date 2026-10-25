@@ -1,0 +1,214 @@
+{
+ "bill": {
+  "isMedicalBill": true,
+  "hospitalName": "Saint Francis Memorial Hospital",
+  "hospitalWebsite": null,
+  "hospitalAddress": "900 Hyde Street, San Francisco, CA 94109",
+  "billingPhone": "(415) 353-6000",
+  "accountNumber": "SAMPLE-49608506",
+  "patientName": "Jordan Lee",
+  "patientAddress": null,
+  "statementDate": "2026-07-18",
+  "serviceDate": "2026-07-01",
+  "insurancePayer": "Fogline Health PPO",
+  "insurancePaid": 0.0,
+  "adjustments": 0.0,
+  "patientPaid": 0.0,
+  "totalCharges": 8129.0,
+  "amountDue": 8129.0,
+  "isItemized": true,
+  "lines": [
+   {
+    "date": "2026-07-01",
+    "code": "99284",
+    "revCode": "0450",
+    "description": "ER LEVEL 4",
+    "quantity": 1,
+    "charge": 5752.0,
+    "chargePrinted": "5,752.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "96360",
+    "revCode": "0260",
+    "description": "INF IV HYDRA INIT 31-60MN",
+    "quantity": 1,
+    "charge": 1048.0,
+    "chargePrinted": "1,048.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "J7030",
+    "revCode": "0258",
+    "description": "NACL 0.9% 1000ML INJ",
+    "quantity": 2,
+    "charge": 156.0,
+    "chargePrinted": "156.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "80053",
+    "revCode": "0301",
+    "description": "COMP METABOLIC PANEL",
+    "quantity": 1,
+    "charge": 237.0,
+    "chargePrinted": "237.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "36415",
+    "revCode": "0300",
+    "description": "VENIPUNCTURE",
+    "quantity": 1,
+    "charge": 135.0,
+    "chargePrinted": "135.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "81001",
+    "revCode": "0307",
+    "description": "UA AUTO W MICRO",
+    "quantity": 1,
+    "charge": 167.0,
+    "chargePrinted": "167.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "85025",
+    "revCode": "0305",
+    "description": "CBC W/AUTO DIFF",
+    "quantity": 1,
+    "charge": 102.0,
+    "chargePrinted": "102.00"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "96375",
+    "revCode": "0260",
+    "description": "INJ TX/DX/PRO IV PUSH SEQ",
+    "quantity": 1,
+    "charge": 532.0,
+    "chargePrinted": "532.00"
+   }
+  ],
+  "unreadable": []
+ },
+ "eob": {
+  "isEob": true,
+  "payer": "Fogline Health",
+  "planType": "PPO",
+  "memberName": "Jordan Lee",
+  "memberId": "FGL840560407",
+  "claimNumber": "2185007236667",
+  "providerName": "SAINT FRANCIS MEMORIAL HOSP",
+  "serviceDateFrom": "2026-07-01",
+  "serviceDateTo": "2026-07-01",
+  "network": "in",
+  "emergency": true,
+  "claimStatus": "denied",
+  "totalBilled": 8129.0,
+  "totalAllowed": 0.0,
+  "totalPlanPaid": 0.0,
+  "totalPatientOwes": 8129.0,
+  "appealDeadline": "180 days from the date of this notice",
+  "appealAddress": "Fogline Health Member Appeals, 2200 Harbor Point Drive, Suite 400, San Jose, CA 95134",
+  "insurerPhone": "1-888-555-0187",
+  "lines": [
+   {
+    "date": "2026-07-01",
+    "code": "99284",
+    "description": "Emergency room visit",
+    "billed": 5752.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 5752.0,
+    "notCovered": 5752.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "96360",
+    "description": "IV hydration",
+    "billed": 1048.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 1048.0,
+    "notCovered": 1048.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "J7030",
+    "description": "IV solution",
+    "billed": 156.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 156.0,
+    "notCovered": 156.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "80053",
+    "description": "Lab",
+    "billed": 237.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 237.0,
+    "notCovered": 237.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "36415",
+    "description": "Blood draw",
+    "billed": 135.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 135.0,
+    "notCovered": 135.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "81001",
+    "description": "Lab",
+    "billed": 167.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 167.0,
+    "notCovered": 167.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "85025",
+    "description": "Lab",
+    "billed": 102.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 102.0,
+    "notCovered": 102.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   },
+   {
+    "date": "2026-07-01",
+    "code": "96375",
+    "description": "IV push, added drug",
+    "billed": 532.0,
+    "allowed": 0.0,
+    "planPaid": 0.0,
+    "patientOwes": 532.0,
+    "notCovered": 532.0,
+    "remark": "PR-27 Expenses incurred after coverage ended"
+   }
+  ],
+  "unreadable": []
+ },
+ "expect": [
+  {
+   "kind": "DENIED_BY_PLAN",
+   "amount": 8129.0
+  }
+ ]
+}

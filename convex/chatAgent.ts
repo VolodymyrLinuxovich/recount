@@ -8,6 +8,9 @@ import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { internalAction } from "./_generated/server";
 import { privacyFacts } from "./lib/privacy";
+import { EOB_FINDING_TARGET, type ParsedEob } from "./lib/eob";
+
+const EOB_KINDS = new Set(Object.keys(EOB_FINDING_TARGET));
 
 
 const SYSTEM = `You are the helper inside Recount, an app for people in California who got a hospital bill they can't pay, many of them older or Spanish-speaking.
@@ -23,6 +26,7 @@ What you know:
 - California law: uninsured patients, or insured patients with high medical costs, with family income at or below 400% of the federal poverty level can get discounted or free care at the hospital (Health and Safety Code 127400-127446). Hospitals can't set deadlines to apply, can't count savings, and can't report medical debt to credit bureaus (SB 1061, since 2025). The hospital decides; the patient can ask for help any time.
 - Collections (Health and Safety Code 127425): a hospital can't sue a patient or sell the debt in the first 180 days after the first bill. While the patient is applying for help, or paying an agreed payment plan in good faith, the hospital can't send the bill to a collection agency (unless the agency follows the same rules). For patients who qualify for charity care or discounts, the hospital can't garnish wages or put a lien on their home or other real property, and outside collectors can't put a lien on or sell their real property.
 - These hospital rules depend on income and household. The law doesn't make immigration status a requirement, and Recount doesn't ask about it. Don't give immigration advice; for that, suggest a nonprofit immigration legal service.
+- Insurance statement (EOB): if <case_data> has "insurance", the patient added their insurer's Explanation of Benefits. It is the insurer's statement of what the plan allowed and paid and what the patient may owe; it is not a bill. "insuranceFindings" are the app's rule checks comparing it with the bill (for example the hospital asks for more than the EOB says, a plan payment missing from the bill, a surprise out-of-network emergency bill, a denied service the patient can appeal, or a claim still pending). Explain them from those findings, in plain words. Don't compute new amounts; use the ones in the findings. If the insurer is still processing the claim, the patient shouldn't pay yet.
 - If <case_data> has a billing or financial assistance phone number, give it when the patient asks how to reach the hospital.
 - Timing: no state deadline we know of says how fast a hospital must decide on an application. Use the hospital's own policy if <case_data> states a time; otherwise say: if you don't hear back in about 30 days, call again and ask for a written answer. If the patient already paid and later qualifies, the hospital must refund what they paid above what they owe, with interest (Health and Safety Code 127440).
 - If someone asks whether Recount is legit or a scam: Recount is free, never asks for payment, a Social Security number or bank details, and sends nothing for you; you read the letters and send them yourself. It's a tool, not the hospital or a law firm.
@@ -42,6 +46,8 @@ function caseSummary(c: Record<string, unknown> | null): string {
   const pick = (k: string) => c[k] ?? null;
   const bill = pick("bill") as Record<string, unknown> | null;
   const hospital = pick("hospital") as Record<string, unknown> | null;
+  // The member ID isn't needed to answer questions, so it stays out.
+  const eob = pick("eob") as ParsedEob | null;
   return JSON.stringify(
     {
       status: pick("status"),
@@ -62,6 +68,28 @@ function caseSummary(c: Record<string, unknown> | null): string {
         hasPriceList: Boolean(hospital.mrf),
       },
       findings: pick("findings"),
+      insurance: eob && pick("eobStatus") === "done"
+        ? {
+            payer: eob.payer,
+            planType: eob.planType,
+            claimNumber: eob.claimNumber,
+            providerName: eob.providerName,
+            network: eob.network,
+            emergency: eob.emergency,
+            claimStatus: eob.claimStatus,
+            totalBilled: eob.totalBilled,
+            totalAllowed: eob.totalAllowed,
+            totalPlanPaid: eob.totalPlanPaid,
+            totalPatientOwes: eob.totalPatientOwes,
+            appealDeadline: eob.appealDeadline,
+            appealAddress: eob.appealAddress,
+            insurerPhone: eob.insurerPhone,
+            lines: eob.lines,
+            unreadable: eob.unreadable,
+          }
+        : null,
+      insuranceStatementStatus: pick("eobStatus"),
+      insuranceFindings: Array.isArray(pick("findings")) ? (pick("findings") as { kind: string }[]).filter((f) => EOB_KINDS.has(f.kind)) : [],
       hospitalPolicyProblems: pick("policyFindings"),
       eligibility: pick("eligibility"),
       lettersReady: Array.isArray(pick("letters")),
