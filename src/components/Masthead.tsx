@@ -12,12 +12,13 @@ import { useT } from "./i18n/I18nProvider";
 import { LanguageToggle } from "./i18n/LanguageToggle";
 import "./bills/bills.css";
 
-type Where = "check" | "audit" | "bills" | null;
+type Where = "check" | "audit" | "dashboard" | "bills" | null;
 
 function whereOf(path: string | null): Where {
   if (!path) return null;
   if (path === "/") return "check";
   if (path.startsWith("/audit")) return "audit";
+  if (path.startsWith("/dashboard")) return "dashboard";
   if (path.startsWith("/bills")) return "bills";
   return null;
 }
@@ -34,6 +35,9 @@ function Links({ where, onPick }: { where: Where; onPick?: () => void }) {
       </Link>
       <Link href="/audit" aria-current={cur("audit")} onClick={onPick}>
         {t("nav.audit")}
+      </Link>
+      <Link href="/dashboard" aria-current={cur("dashboard")} onClick={onPick}>
+        {t("nav.dashboard")}
       </Link>
       <Link href="/bills" aria-current={cur("bills")} onClick={onPick} aria-label={t("nav.billsAria", { n })}>
         <span aria-hidden="true">{t("nav.bills")}</span>

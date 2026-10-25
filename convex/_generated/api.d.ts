@@ -15,6 +15,8 @@ import type * as authCheck from "../authCheck.js";
 import type * as cases from "../cases.js";
 import type * as chat from "../chat.js";
 import type * as chatAgent from "../chatAgent.js";
+import type * as crons from "../crons.js";
+import type * as dashboard from "../dashboard.js";
 import type * as followUp from "../followUp.js";
 import type * as followUpAgent from "../followUpAgent.js";
 import type * as http from "../http.js";
@@ -36,6 +38,7 @@ import type * as lib_search from "../lib/search.js";
 import type * as lib_statewide from "../lib/statewide.js";
 import type * as lib_timeout from "../lib/timeout.js";
 import type * as lib_user from "../lib/user.js";
+import type * as metrics from "../metrics.js";
 import type * as pipeline from "../pipeline.js";
 import type * as profile from "../profile.js";
 
@@ -53,6 +56,8 @@ declare const fullApi: ApiFromModules<{
   cases: typeof cases;
   chat: typeof chat;
   chatAgent: typeof chatAgent;
+  crons: typeof crons;
+  dashboard: typeof dashboard;
   followUp: typeof followUp;
   followUpAgent: typeof followUpAgent;
   http: typeof http;
@@ -74,6 +79,7 @@ declare const fullApi: ApiFromModules<{
   "lib/statewide": typeof lib_statewide;
   "lib/timeout": typeof lib_timeout;
   "lib/user": typeof lib_user;
+  metrics: typeof metrics;
   pipeline: typeof pipeline;
   profile: typeof profile;
 }>;

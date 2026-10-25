@@ -329,6 +329,8 @@ export const readAndCheck = internalAction({
             const disagree = first.lines
               .map((l, i) => ({ index: i, first: column[i], second: l.charge }))
               .filter((x) => Math.abs(x.first - x.second) > 0.005);
+            const n = Math.max(1, first.lines.length);
+            await ctx.runMutation(internal.metrics.log, { agent: "read-check", ms: 0, ok: disagree.length === 0, score: (n - disagree.length) / n });
             if (disagree.length) {
               bill = {
                 ...bill,
@@ -548,6 +550,7 @@ export const draftLetters = internalAction({
     }));
     // Rule check: every dollar amount in the letters must come from the facts.
     const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null });
+    await ctx.runMutation(internal.metrics.log, { agent: "letters-check", ms: 0, ok: odd.length === 0, score: odd.length === 0 ? 1 : 0 });
     await step(ctx, caseId, "letters-check",
       odd.length
         ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)

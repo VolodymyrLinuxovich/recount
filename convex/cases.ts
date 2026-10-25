@@ -270,7 +270,9 @@ export const recordRun = internalMutation({
     error: v.optional(v.string()),
   },
   handler: async (ctx, a) => {
-    if (!(await ctx.db.get(a.caseId))) return;
+    const { caseId, task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed } = a;
+    await ctx.db.insert("agentMetrics", { agent: task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at: Date.now() });
+    if (!(await ctx.db.get(caseId))) return;
     await ctx.db.insert("agentRuns", { ...a, at: Date.now() });
   },
 });

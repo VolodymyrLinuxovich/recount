@@ -75,6 +75,26 @@ export default defineSchema({
     fallbackUsed: v.boolean(),
     error: v.optional(v.string()),
   }).index("by_case", ["caseId", "at"]),
+  // Dashboard: one row per agent action, kept when bills are deleted. No case id, no content:
+  // which agent, which model, how long, whether it worked, and a quality score where we have one.
+  agentMetrics: defineTable({
+    at: v.number(),
+    agent: v.string(),
+    provider: v.optional(v.string()),
+    model: v.optional(v.string()),
+    ms: v.number(),
+    ok: v.boolean(),
+    inputTokens: v.optional(v.union(v.number(), v.null())),
+    outputTokens: v.optional(v.union(v.number(), v.null())),
+    fallbackUsed: v.optional(v.boolean()),
+    /** 0..1 where the agent has a checkable result (both bill reads agree, letter amounts all found, ...). */
+    score: v.optional(v.number()),
+    usd: v.optional(v.number()),
+    /** Outside id (an Apify run id), so history imports never count a run twice. */
+    ref: v.optional(v.string()),
+  })
+    .index("by_at", ["at"])
+    .index("by_ref", ["ref"]),
   chatMessages: defineTable({
     sessionId: v.string(),
     caseId: v.optional(v.id("cases")),
