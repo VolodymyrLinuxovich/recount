@@ -3,7 +3,7 @@
   "name": "hospital-price-and-charity-finder",
   "title": "Hospital Price & Charity Care Finder",
   "description": "Give it a hospital website and billing codes. Finds the hospital's CMS price transparency file and streams it for your codes, then finds its financial assistance policy and extracts the free and discounted care income limits, with quoted evidence.",
-  "version": "0.2",
+  "version": "0.3",
   "buildTag": "latest",
   "meta": {
     "templateId": "python-start"

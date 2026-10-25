@@ -6,7 +6,7 @@
     "hospitalUrl": {
       "title": "Hospital website",
       "type": "string",
-      "description": "The hospital's homepage (or any page on its site). The Actor looks for /cms-hhs-pricetransparency.txt on the root domain, then crawls the site for price transparency and financial assistance pages. Leave empty when you pass a list of hospitals below.",
+      "description": "The hospital's homepage (or any page on its site). The Actor looks for /cms-hpt.txt (the index file CMS requires) on the root domain, then crawls the site for price transparency and financial assistance pages. Leave empty when you pass a list of hospitals below.",
       "editor": "textfield",
       "prefill": "https://zuckerbergsanfranciscogeneral.org"
     },

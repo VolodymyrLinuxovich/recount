@@ -45,6 +45,52 @@ def test_json_with_bom_and_gzip():
     assert res.prices['99284']['grossCharge'] == 8501.0
 
 
+def _zip(name: str, data: bytes, method: int) -> bytes:
+    import io as _io
+    import zipfile
+    buf = _io.BytesIO()
+    with zipfile.ZipFile(buf, 'w', compression=method) as z:
+        z.writestr(name, data)
+    return buf.getvalue()
+
+
+def test_zip_deflated_and_stored():
+    import zipfile
+    for method in (zipfile.ZIP_DEFLATED, zipfile.ZIP_STORED):
+        for name in ('mrf_v3.json', 'mrf_tall.csv'):
+            raw = (FIXTURES / name).read_bytes()
+            res = scan_stream(stream_of(_zip(name, raw, method)), ['99284'])
+            assert res.error is None, (name, method, res.error)
+            assert res.prices == scan_stream(stream_of(raw), ['99284']).prices
+
+
+def test_zip_streamed_entry_without_sizes():
+    # zipfile writes the sizes after the data (flag bit 3) when the source is a stream.
+    import io as _io
+    import zipfile
+    buf = _io.BytesIO()
+    with zipfile.ZipFile(buf, 'w', compression=zipfile.ZIP_DEFLATED) as z, z.open('a.json', 'w') as f:
+        f.write((FIXTURES / 'mrf_v3.json').read_bytes())
+    unseekable = stream_of(buf.getvalue())
+    res = scan_stream(unseekable, ['80053'])
+    assert res.error is None and res.prices['80053']['grossCharge'] == 667.0
+
+
+def test_same_description_different_prices_are_kept_apart():
+    # Shape of a real file (Kindred San Diego, 2026): two chargemaster rows for CPT 80053 with one
+    # description. Merging them by description kept only the first, $2.90, and hid $531.66.
+    import json as _json
+    def item(cdm, gross):
+        return {'description': 'COMPREHEN METABOLIC PANEL',
+                'code_information': [{'code': cdm, 'type': 'CDM'}, {'code': '301', 'type': 'RC'}, {'code': '80053', 'type': 'CPT'}],
+                'standard_charges': [{'setting': 'both', 'gross_charge': gross, 'billing_class': 'facility'}]}
+    doc = {'hospital_name': 'X', 'standard_charge_information': [item('38280053', 2.9), item('38380053', 531.66)]}
+    res = scan_stream(stream_of(_json.dumps(doc).encode()), ['80053'])
+    p = res.prices['80053']
+    assert sorted(l['grossCharge'] for l in p['lines']) == [2.9, 531.66]
+    assert p['grossCharge'] == 531.66
+
+
 def test_csv_tall():
     res = scan_stream(stream_of((FIXTURES / 'mrf_tall.csv').read_bytes()), ['99284', '80053'])
     assert res.format == 'csv-tall'

@@ -13,7 +13,9 @@ from __future__ import annotations
 import csv
 import io
 import re
+import struct
 import time
+import zlib
 from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import IO, Any, Callable
@@ -21,7 +23,7 @@ from typing import IO, Any, Callable
 import httpx
 import ijson
 
-MAX_LINES_PER_CODE = 12
+MAX_LINES_PER_CODE = 40
 GRACE_JSON_ITEMS = 3000
 GRACE_CSV_ROWS = 60000
 # Chargemaster line numbers and revenue codes are not billing codes a patient sees as CPT/HCPCS.
@@ -104,7 +106,9 @@ class Collector:
         if by_key is None:
             by_key = self.found[code] = {}
             self.last_new_match_at = record_no
-        key = (setting or '', description or '')
+        # Same description and setting can still be different rows (two chargemaster numbers for one CPT,
+        # each with its own price), so the price is part of the key. Merging them kept only the first price.
+        key = (setting or '', description or '', gross, cash)
         line = by_key.get(key)
         if line is None:
             line = by_key[key] = _Line(code, code_type, description, setting)
@@ -132,8 +136,9 @@ class Collector:
                 continue
             lines = [l.to_dict() for l in by_key.values()]
             # Primary line: outpatient first (ER / clinic bills), then "both", then inpatient;
-            # prefer lines that actually carry a gross charge. Stable sort keeps file order otherwise.
-            lines.sort(key=lambda l: (l['grossCharge'] is None, rank_setting.get(l['setting'] or '', 3)))
+            # prefer lines that actually carry a gross charge.
+            # Within a setting, the highest list price first, so the cap on lines never drops it.
+            lines.sort(key=lambda l: (l['grossCharge'] is None, rank_setting.get(l['setting'] or '', 3), -(l['grossCharge'] or 0)))
             primary = dict(lines[0])
             primary['minMaxSetting'] = primary['setting'] if (primary['min'] is not None or primary['max'] is not None) else None
             if primary['min'] is None and primary['max'] is None:
@@ -168,6 +173,80 @@ class ScanResult:
     error: str | None = None
 
 
+class ZipFirstEntry(io.RawIOBase):
+    """Streams the first file inside a ZIP archive without downloading the whole archive.
+    Price files are published as one CSV or JSON per ZIP. Handles stored and deflated entries,
+    including entries whose sizes come after the data (the deflate stream ends itself)."""
+
+    def __init__(self, raw: IO[bytes]):
+        self.raw = raw
+        hdr = self._read_exact(30)
+        if hdr[:4] != b'PK\x03\x04':
+            raise ValueError('no local file header')
+        flags, method = struct.unpack('<HH', hdr[6:10])
+        csize = struct.unpack('<I', hdr[18:22])[0]
+        n, m = struct.unpack('<HH', hdr[26:30])
+        self.name = self._read_exact(n).decode('utf-8', 'replace')
+        self._read_exact(m)
+        if method not in (0, 8):
+            raise ValueError(f'compression method {method} is not supported')
+        if method == 0 and (flags & 0x08 or not csize):
+            raise ValueError('stored entry without a size')
+        self.method, self.left = method, csize if method == 0 else None
+        self.z = zlib.decompressobj(-15) if method == 8 else None
+        self.buf = b''
+        self.eof = False
+
+    def _read_exact(self, n: int) -> bytes:
+        out = b''
+        while len(out) < n:
+            ch = self.raw.read(n - len(out))
+            if not ch:
+                raise ValueError('archive ends early')
+            out += ch
+        return out
+
+    def readable(self) -> bool:
+        return True
+
+    def _fill(self, want: int) -> None:
+        while len(self.buf) < want and not self.eof:
+            if self.method == 0:
+                ch = self.raw.read(min(65536, self.left)) if self.left else b''
+                self.left = (self.left or 0) - len(ch)
+                if not ch:
+                    self.eof = True
+                self.buf += ch
+                continue
+            if self.z.eof:
+                self.eof = True
+                break
+            ch = self.raw.read(65536)
+            if not ch:
+                self.buf += self.z.flush()
+                self.eof = True
+                break
+            self.buf += self.z.decompress(ch)
+
+    def peek_bytes(self, n: int = 65536) -> bytes:
+        self._fill(n)
+        return self.buf[:n]
+
+    def read(self, size: int = -1) -> bytes:
+        if size is None or size < 0:
+            self._fill(1 << 62)
+            out, self.buf = self.buf, b''
+            return out
+        self._fill(size)
+        out, self.buf = self.buf[:size], self.buf[size:]
+        return out
+
+    def readinto(self, b) -> int:  # type: ignore[override]
+        data = self.read(len(b))
+        b[:len(data)] = data
+        return len(data)
+
+
 def _sniff(head: bytes) -> str:
     text = head.decode('utf-8', 'replace').lstrip('﻿ \t\r\n')
     if head[:2] == b'PK':
@@ -194,8 +273,12 @@ def scan_stream(stream: IO[bytes], codes: list[str], head: bytes | None = None,
             stream = io.BytesIO(data)
     kind = _sniff(head)
     if kind == 'zip':
-        res.error = 'price file is a ZIP archive; ZIP files are not supported yet'
-        return res
+        try:
+            inner = ZipFirstEntry(stream)
+        except ValueError as e:
+            res.error = f'price file is a ZIP archive that could not be opened: {e}'
+            return res
+        return scan_stream(inner, codes, head=inner.peek_bytes(), on_header=on_header)
     if kind == 'html':
         res.error = 'URL returned an HTML page, not a machine-readable file'
         return res

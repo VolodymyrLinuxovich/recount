@@ -71,7 +71,7 @@ def run(inp: dict, log) -> dict:
     client = make_client()
 
     # 1. CMS txt file + site crawl (in parallel)
-    log.info(f'Looking for cms-hhs-pricetransparency.txt and crawling {hospital_url} (max {max_pages} pages)')
+    log.info(f'Looking for cms-hpt.txt and crawling {hospital_url} (max {max_pages} pages)')
     txt_box: dict = {}
     t_txt = threading.Thread(target=lambda: txt_box.update(r=fetch_cms_txt(client, hospital_url)))
     t_txt.start()
@@ -102,7 +102,7 @@ def run(inp: dict, log) -> dict:
         if best.get('location-name'):
             names.append(best['location-name'])
     else:
-        warnings.append('No /cms-hhs-pricetransparency.txt file found on the hospital domain '
+        warnings.append('No /cms-hpt.txt file found on the hospital domain '
                         '(CMS requires it); fell back to crawling the site.')
         scored = sorted(((score_mrf_link(l.url, l.text, given_name or home_title, hospital_url), l) for l in crawl.mrf_links),
                         key=lambda t: -t[0])

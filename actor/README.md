@@ -11,13 +11,13 @@ It was built for **Recount** at Cal Hacks 13.0. Recount is an app for uninsured 
 ## Why this is hard to do by hand
 
 - Since 2021, US hospitals have had to publish a machine-readable file (MRF) with all their standard charges (45 CFR 180.50). These files often run to **hundreds of megabytes**. They come as JSON or as one of two different CSV layouts, and they are usually hidden behind Box links, CDNs or vendor pages.
-- CMS also requires a `cms-hhs-pricetransparency.txt` file at the root of the hospital's domain that points to the MRF. Many hospitals don't have one: none of the 15 California hospital sites we checked had one.
+- CMS also requires a `cms-hpt.txt` file at the root of the hospital's domain that points to the MRF. Version 0.2 looked for the older proposed name, `cms-hhs-pricetransparency.txt`, so it never found one. 193 of the domains we checked in October 2026 serve `cms-hpt.txt`, and a health system's file lists every hospital it runs.
 - Charity care policies are long PDFs. They mix the hospital's current limits with history ("in 2019 the limit was increased to 500%") and restatements of the law ("emergency physicians are required by law to give discounts up to 400%"). A plain regex for "% FPL" picks up the wrong number.
 
 ## How it works
 
 1. **Find the price file.**
-   - It reads `/cms-hhs-pricetransparency.txt` on the root domain (with and without `www`).
+   - It reads `/cms-hpt.txt` on the root domain (with and without `www`), then the legacy `/cms-hhs-pricetransparency.txt`. UTF-16 files are decoded too.
    - It also runs a small best-first crawl of the hospital site. The crawl only follows links about prices, billing and financial assistance, plus one hop onto a price transparency vendor's domain.
    - It scores candidate links: "machine readable", "standard charges", `.json` or `.csv` links, Box or CDN downloads, and a name match against the hospital. When a health system publishes one file per hospital, the best-scoring file is used and the others are listed in `warnings`.
 2. **Stream the price file.** Nothing is loaded fully into memory.
@@ -144,7 +144,7 @@ This is a real run against Zuckerberg San Francisco General (Oct 24, 2026), trim
     "hcaiHospitalName": "PRISCILLA CHAN & MARK ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL & TRAUMA CENTER"
   },
   "warnings": [
-    "No /cms-hhs-pricetransparency.txt file found on the hospital domain (CMS requires it); fell back to crawling the site."
+    "No /cms-hpt.txt file found on the hospital domain (CMS requires it); fell back to crawling the site."
   ],
   "run": { "pagesCrawled": 21, "totalSeconds": 4.7 }
 }
@@ -186,7 +186,7 @@ We ran the Actor on all 470 hospitals in California's HCAI registry, with 20 com
 
 - **Price files linked only through JavaScript** are not downloaded. The Actor reports the page in `warnings` and `sourceUrls` instead. If you know the file's URL, pass it as `mrfUrl`. Vendor download links that name the format in the query (for example `apps.para-hcfs.com/...Reports.aspx?...&fileType=CSV`, used by Adventist Health) are found and streamed.
 - Pages are read at most 5 MB each during the crawl, and a link that turns out to be a large file is never loaded into memory.
-- ZIP-compressed price files and the pre-2024 v1 JSON layout are not supported. Gzip is supported.
+- The pre-2024 v1 JSON layout is not supported. Gzip and ZIP (the first file in the archive, streamed) are supported.
 - The FPL extraction is rule-based and conservative. Unusual wording or scanned (image-only) PDFs can leave a threshold `null`, and that gap is always reported in `warnings`. Always show the user the quote, not just the number.
 - The HCAI registry only covers California. For other states, the policy must be linked from the hospital's own site.
 - A health system file can list several campuses under one license. Pass `hospitalName` to pick the right file.

@@ -35,7 +35,7 @@ def name_overlap(want: str | None, have: str | None) -> float:
 # ---------------------------------------------------------------- CMS TXT file
 
 def parse_cms_txt(text: str) -> list[dict]:
-    """Parse /cms-hhs-pricetransparency.txt: blocks of `key: value` lines (location-name,
+    """Parse /cms-hpt.txt: blocks of `key: value` lines (location-name,
     source-page-url, mrf-url, contact-name, contact-email)."""
     entries: list[dict] = []
     cur: dict = {}
@@ -63,17 +63,21 @@ def parse_cms_txt(text: str) -> list[dict]:
 
 
 def fetch_cms_txt(client: httpx.Client, hospital_url: str) -> tuple[str, list[dict]] | None:
+    # /cms-hpt.txt is the name CMS requires (45 CFR 180.50(d)(6)); the longer one is from the proposed rule.
     for root in root_variants(hospital_url):
-        url = f'{root}/cms-hhs-pricetransparency.txt'
-        try:
-            r = client.get(url, timeout=20)
-        except httpx.HTTPError:
-            continue
-        if r.status_code != 200 or 'html' in r.headers.get('content-type', '').lower():
-            continue
-        entries = parse_cms_txt(r.text)
-        if entries:
-            return str(r.url), entries
+        for name in ('cms-hpt.txt', 'cms-hhs-pricetransparency.txt'):
+            url = f'{root}/{name}'
+            try:
+                r = client.get(url, timeout=20)
+            except httpx.HTTPError:
+                continue
+            if r.status_code != 200 or 'html' in r.headers.get('content-type', '').lower():
+                continue
+            body = r.content
+            text = body.decode('utf-16', 'replace') if body[:2] in (b'\xff\xfe', b'\xfe\xff') else r.text
+            entries = parse_cms_txt(text)
+            if entries:
+                return str(r.url), entries
     return None
 
 
