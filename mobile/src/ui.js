@@ -1,12 +1,14 @@
 import { ActivityIndicator, KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { C, F } from "./theme";
+import { AskButton, useLupa } from "./Chat";
 
 export { C, F };
 
 /** One step per screen: header (Back + progress), scrolling body, buttons pinned at the bottom. */
 export function Screen({ t, step, onBack, children, primary, secondary, footer = true }) {
   const insets = useSafeAreaInsets();
+  const lupa = useLupa();
   return (
     <KeyboardAvoidingView style={s.fill} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <View style={[s.fill, { paddingTop: insets.top }]}>
@@ -25,6 +27,7 @@ export function Screen({ t, step, onBack, children, primary, secondary, footer =
               <View />
             )}
             {step ? <Progress t={t} step={step} /> : null}
+            {lupa ? <AskButton /> : null}
           </View>
         )}
         <ScrollView style={s.fill} contentContainerStyle={s.body} keyboardShouldPersistTaps="handled">
