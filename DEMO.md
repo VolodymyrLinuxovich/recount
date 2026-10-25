@@ -1,72 +1,94 @@
-# Recount demo script (about 2 minutes 20 seconds)
+# Recount demo script (about 2 minutes 50 seconds)
 
-Record on a phone, or on a laptop at phone width (390 x 844). The video opens on the home page, runs the built-in sample bill in Spanish, shows who did what on the bill, signs in to show the bill history, and ends on the statewide audit. Alex Rivera is a fictional patient at Zuckerberg San Francisco General (ZSFG). The bill is priced from ZSFG's real published charges. Say once that it is a sample.
+Record on a phone, or on a laptop at phone width (390 x 844, browser zoom 100%). Everything below is live on https://recount-nu.vercel.app. The video has two bills:
 
-Before recording:
-- Create a demo account (email + password) on another device or a private window, and check one real-looking bill there, so the account already holds a bill from "another device".
-- On the recording phone, start signed out, with no saved bills.
-- Run the sample twice and check that the bill says "Read by Claude" and the hospital data says "Fetched live". Each run starts a live Actor run in the background, so the second run uses fresh data. If Claude or the Apify Actor is down, the app falls back to the sample's source data, a saved lookup and template letters, and labels each one.
-- Run the sample once and open "More about this bill". The "Who did what" panel lists the AI calls that actually ran, with model and provider. In production Claude reads and drafts, and Azure AI Document Intelligence does the second read of the charges.
-- Rehearse the path to the panel: from the letters, go Back to the answer screen ("Lo más probable es que usted deba $0") and tap "Más sobre esta factura: fuentes, compartir, borrar".
-- Open /audit once so the map is cached. Type "PIH Health Whittier", not just "Whittier": "Whittier" also matches Whittier Hospital Medical Center.
+- **A real two-page upload** (0:15 to 0:40), to show that a paper bill can go in as several photos and that two different readers check it. It's a generated UCSF bill priced from real published charges. Its pages are in `~/Desktop/recount-demo-files/bill-page-1.png` and `bill-page-2.png`.
+- **The built-in sample bill** (0:40 to 1:50), for the full story, because its numbers are fixed and it reads fast. Alex Rivera is a fictional patient at Zuckerberg San Francisco General (ZSFG). The bill is priced from ZSFG's real published charges. Say once that it's a sample.
+
+## Before recording
+
+- Open the site once and run the sample bill once, so everything is warm. Delete that test bill after (My bills, open it, "Delete this bill").
+- Put the three files from `~/Desktop/recount-demo-files/` where the recording device can pick them: the two bill pages and `insurance-statement.png`. On a phone, AirDrop them to Photos. On a laptop, they're already on the Desktop.
+- Open https://recount-nu.vercel.app/audit once so the map is cached. You'll type "PIH Health Whittier" (not just "Whittier").
+- Do Not Disturb on, brightness up, close other tabs.
+- Cut the waiting in editing. Reading a real upload takes about 30 to 60 seconds; keep 2 or 3 seconds of the steps ticking, then cut.
 
 ---
 
-## 0:00 to 0:20. The problem
+## 0:00 to 0:15. The problem
 
-**Screen:** Home page. Hold on the headline, then scroll slowly through the stats band ("Medical debt is common. Help is often hidden.").
+**Screen:** Home page. Hold on the headline, then scroll through the stats band.
 
-> Hospital bills are often wrong, and help is often hidden. About 20 million people in the US owe medical debt. California's Attorney General warned that hospitals weren't telling patients about free care. And I checked: 14 California hospitals' own policies conflict with state law.
+> If you can't pay a hospital bill in California, the law says the hospital may have to discount it, or make it free. Most people never find out. And when I checked, 14 California hospitals' own policies conflict with state law.
 
-## 0:20 to 0:30. How it works
+## 0:15 to 0:40. A real bill, two pages
 
-**Screen:** Keep scrolling through "See how it works": snap, read, flag, three questions, the answer, the letters.
+**Screen:** Tap "Take a photo of your bill" (on a laptop it opens a file picker). Pick `bill-page-1.png`. The "Your bill's pages" screen appears with page 1. Tap "Add another page" and pick `bill-page-2.png`. Show both thumbnails for a second, then tap "Check my bill". Show the reading steps ticking for 2 or 3 seconds, cut to "Both reads agree on every amount".
 
-> Recount checks your bill the way an advocate would. Snap it, we read every line, flag the problems, ask three questions, and tell you what you really owe.
+> Real bills have more than one page, so you can send up to six photos, in order. Two different readers go through it: Claude reads the whole bill, and Azure AI Document Intelligence reads the charges again. Code compares the two, line by line. If they disagree, you tap the number on your paper bill. With only the first page, the lines wouldn't add up to the total on page two. With both, every line is there.
 
-## 0:30 to 0:45. Spanish and the sample
+(Optional, 3 seconds: show the line list, then go back home. Don't walk this bill through the questions.)
 
-**Screen:** Tap ES in the header. The page switches to Spanish. Tap "Probar con una factura de ejemplo". Watch the reading step.
+## 0:40 to 0:55. The sample bill and its problems
 
-> Everything the patient reads is in Spanish too. This is an ER bill for $12,741 with no insurance. Claude reads every line. Azure AI Document Intelligence reads the charges a second time, so a blurry number gets caught instead of quietly "fixed". The prices come from the hospital's own price file, which my Apify Actor reads. Recount has price checks for 240 California hospitals.
+**Screen:** Home. Tap "Try a sample bill". Cut the reading. Show the two problem cards: "Billed twice" (blood count) and "Charged more than their own list price" (chest X-ray).
 
-## 0:45 to 1:00. The problems
+> Here's a sample ER bill for $12,741, priced from the hospital's real published charges. Two problems. The blood count is billed twice: $269. The chest X-ray is $482, and the hospital's own list price is $402. That's $349 to question. These checks are plain code, not AI, and each one links to the hospital's own file.
 
-**Screen:** The two cards: the blood count "aparece cobrado dos veces", and the chest X-ray "cuesta más que el precio de lista del hospital". Point at "Corregir".
+## 0:55 to 1:10. Three questions, then the answer
 
-> Two problems. The blood count is billed twice: $269. The chest X-ray is $482, and the hospital's own list price is $402. Together, $349. These checks are plain code, not AI. If a number was misread, the patient taps Corregir and types the right one.
+**Screen:** "Answer 3 questions": 1 person, 20000 a year, no insurance. The answer: "You likely owe $0".
 
-## 1:00 to 1:15. Three questions, then the answer
+> Three questions, not a form. One person, twenty thousand a year, no insurance. That's 125% of the poverty line, and this hospital's own policy gives free care up to 138%. So Alex likely owes nothing. Rules decide that, never the model, and the rule is right under the answer.
 
-**Screen:** 1 person, 20000 a year, no insurance. The answer: "Lo más probable es que usted deba $0".
+**Optional, 2 seconds:** tap ES in the header and back to EN. "Every screen is in Spanish too."
 
-> One person, $20,000 a year, no insurance. That's 125% of the poverty line, and this hospital's own policy gives free care up to 138%. So Alex likely owes nothing. Rules decide this, not the model, and the source is right under the answer.
+## 1:10 to 1:25. Letters
 
-## 1:15 to 1:30. Letters
+**Screen:** "Is this bill for you or for someone else?", tap "It’s for me", fill the details. Show one letter with the hospital's mailing address filled in. Approve. Show "How to send my letters".
 
-**Screen:** "¿Esta factura es suya o de otra persona?" Tap "Es mía". Fill the details. Show the letter with the hospital's mailing address filled in, approve, then "Envíe sus cartas".
+> Claude drafts the request for financial help and the billing dispute, from only the facts on screen. Then code checks every dollar amount against the bill. Recount sends nothing for you. You read, you approve, you send.
 
-> If you're helping a parent, you say so, and Recount uses their details, not yours. The letters already have the hospital's mailing address. Recount sends nothing for you. You approve, then follow four steps: call billing, send, pause collections, apply.
+## 1:25 to 1:35. Who did what
 
-## 1:30 to 1:50. Who did what
+**Screen:** Back to the answer, tap "More about this bill", scroll to "Who did what on this bill".
 
-**Screen:** Back to the answer screen. Tap "Más sobre esta factura". Scroll to "Quién hizo qué en esta factura": the count of rule steps, then each AI call with its model, provider and seconds.
+> Every bill shows who did what: the steps done by fixed rules, and each AI call with its model and time. Claude read it, Azure read the charges a second time.
 
-> Every bill shows who did what. These steps were fixed rules. These are the AI calls: the read, the second read of the charges, the letters, each with its model and time. AI may read and write. It may never send anything, decide if you qualify, or change an amount. And every AI call goes through one layer, so I can change the model without changing the app.
+## 1:35 to 2:05. Lupa
 
-## 1:50 to 2:05. Sign in, see the history
+**Screen:** Tap "Ask" (or "Ask Lupa"). Tap the paperclip ("Attach a photo or PDF"), pick `insurance-statement.png`, type "Is this right?", send. Let the answer stream for a few seconds. Then type "What's the capital of France?" and send. Show the refusal.
 
-**Screen:** Tap "Entrar" in the header. Sign in to the demo account. Show "Agregamos 1 factura a su cuenta", then Mis facturas with both bills.
+> Lupa answers questions about your bill. You can attach a photo, like the statement your insurance sent, and it explains it in plain words. It only answers bill questions. Ask it anything else and it says so, without answering. And it never sends anything for you.
 
-> Accounts are optional. You can check a bill without one. If you sign in, the bills on this phone join your account, and your history and letter details follow you to any device.
+## 2:05 to 2:25. The statewide audit
 
-## 2:05 to 2:20. The audit
+**Screen:** Tap "Hospital audit" in the header. Show the three numbers (463, 14, 47). Search "PIH Health Whittier". Open it and scroll through its quotes.
 
-**Screen:** Tap "Hospital audit" in the header (it stays in Spanish, or switch back to EN). Search "PIH Health Whittier". Open it and scroll through its quotes.
+> I also read the financial assistance policies of all 470 California hospitals on file with the state. 14 conflict with state law, and 47 more likely do. PIH Health Whittier's own policy counts patients' assets, lets collectors report the debt to credit bureaus after 180 days, and allows a lien on the home of a patient who qualifies for help. The page and the date are right here.
 
-> I also read the policies of all 470 California hospitals. 14 conflict with state law, and 47 more likely do. PIH Health Whittier's own policy counts patients' assets, lets collectors report the debt to credit bureaus after 180 days, and allows a lien on the home of a patient who qualifies for help. Recount. Check your bill, and check your hospital.
+## 2:25 to 2:45. Close
 
-Cut for time (show only if the video runs short): Lupa. Tap "Ask Lupa" in the header and ask "¿Por qué debo $0?". It answers about this bill only, never says a patient qualifies beyond what the rules found, and stops messages that look like a Social Security or bank number.
+**Screen:** Home page, scroll to "Get the app" (Android and iPhone cards). Optional, 3 seconds: /dashboard with the live agent table.
+
+> Recount works today for any California hospital bill, with price checks for 240 hospitals. It's on the web, on Android, and on iPhone from the Home Screen, in English and Spanish. Check your bill. And check your hospital.
+
+---
+
+## Cuts if you run long
+
+1. The ES toggle (saves 2 s).
+2. "Who did what" (saves 10 s); it's also in the pitch.
+3. The off-topic question in Lupa (saves 8 s).
+4. The /dashboard flash.
+
+Don't cut the two-page upload or the audit: those are the parts nobody else has.
+
+## Optional extra shot: typed insurance amounts (if you want an insured example)
+
+Start a bill, answer the questions with "Yes" to insurance, and on "Do you have health insurance?" tap "Type the amounts instead". Type what insurance says you owe and what the plan paid. If the hospital asks for more than that, Recount flags it.
+
+> No statement handy? Type the two numbers from it. If the hospital asks for more than your insurance says you owe, Recount flags it.
 
 ---
 
@@ -74,24 +96,25 @@ Cut for time (show only if the video runs short): Lupa. Tap "Ask Lupa" in the he
 
 | Item | Value | Source |
 |---|---|---|
-| Medical debt | about 20 million people | home page stat, KFF / Peterson Health System Tracker |
-| Audit | 470 hospitals, 463 readable, 2,333 documents, 997 sentences | `public/audit/findings.json` |
-| Audit results | 14 conflict, 47 likely, 192 ask (21 conflict findings in all) | strongest verdict per hospital, main `db1069b` |
+| Audit | 470 hospitals, 463 readable | `public/audit/findings.json` |
+| Audit results | 14 conflict, 47 likely, 192 ask | strongest verdict per hospital |
 | PIH Health Whittier, assets | "Consider individual or family net worth including all liquid and non-liquid assets owned" | charity care policy p.4, effective 2026-07-10 |
 | PIH Health Whittier, credit | "Collection agencies may notify the credit reporting agencies ... only after 180 days" | debt collection policy p.3, effective 2026-07-10 |
 | PIH Health Whittier, lien | "when income does not exceed 400% FPL, PIH's collection agency may file a lien on a primary residence" | debt collection policy p.3 |
-| Bill total | $12,741.00 | 8 lines in `convex/lib/sampleBill.json` |
+| Sample bill total | $12,741.00 | 8 lines in `convex/lib/sampleBill.json` |
 | Duplicate CBC (85025) | $269.00 | lines 5 and 6 |
 | Chest X-ray (71046) | billed $482.00, list price $402.00 | `sampleBill.json`, `convex/lib/snapshots/zsfg.json` |
-| Total to question | $349.00 | |
-| 1 person, $20,000 | 125.3% FPL | 2026 FPL $15,960 |
-| ZSFG free care cutoff | 138% FPL | `zsfg.json` |
-| Hospitals with a proven free care cutoff | 159 of 470 | `convex/lib/hospitalIndex.json` |
-| AI tasks shown with models | read, column, letters, chat | `convex/pipeline.ts` `map`, `convex/lib/model.ts` |
-| Price check coverage | 240 of 470 hospitals (4 SF snapshots + 236 statewide) | `convex/lib/snapshots/`, `convex/lib/statewidePrices.json` |
+| Total to question | $349.00 | 269 + 80 |
+| 1 person, $20,000 | 125.3% of the poverty line | 2026 FPL $15,960 |
+| ZSFG free care cutoff | 138% | `zsfg.json` |
+| Price check coverage | 240 of 470 hospitals | `convex/lib/snapshots/`, `convex/lib/statewidePrices.json` |
+| Two-page bill | 8 lines, total $13,872.52 on page 2; read 8 of 8 in order on staging, both reads agreed | `eval/out/bill-011.truth.json` |
+| Pages per bill | up to 6 photos | `convex/lib/pages.ts` |
 
-Spanish labels on screen (from `es.json` and `convex/lib/checks.ts`): "Probar con una factura de ejemplo", "aparece cobrado dos veces", "cuesta más que el precio de lista del hospital", "Corregir", "Lo más probable es que usted deba", "¿Esta factura es suya o de otra persona?", "Es mía", "Otra persona", "Envíe sus cartas", "Entrar", "Agregamos 1 factura a su cuenta", "Mis facturas", "Más sobre esta factura: fuentes, compartir, borrar", "Quién hizo qué en esta factura", "Modelo de respaldo".
+## Words
 
-Say "conflicts with state law", never "breaks the law": I read the written policy, not what billing actually does. The home page, /audit and the policy card inside a bill all use this wording (`policy.vConflict` in `en.json`).
-Don't say "every flag was reviewed twice". Conflict and likely flags got two reviews. "Worth asking" flags got one.
-Don't promise password reset. There is none: the account screen tells people to write the password down.
+- Say "conflicts with state law", never "breaks the law": I read the written policy, not what billing actually does.
+- Say "likely owes", never "owes". The hospital decides.
+- Don't say "every flag was reviewed twice". Conflict and likely flags got two reviews. "Worth asking" flags got one.
+- Don't say Azure reads the whole bill. Claude reads the bill; Azure reads the charges a second time.
+- Don't promise password reset. There is none.
