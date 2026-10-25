@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CaseFlow } from "./src/CaseFlow";
+import { ChatProvider } from "./src/Chat";
 import { loadBills, rememberBill } from "./src/myBills";
 import { StartScreen } from "./src/StartScreen";
 import { STRINGS } from "./src/strings";
@@ -52,13 +53,15 @@ export default function App() {
     <ConvexProvider client={convex}>
       <SafeAreaProvider>
         <StatusBar style="dark" />
-        <View style={{ flex: 1, backgroundColor: C.bg }}>
-          {current ? (
-            <CaseFlow key={current.id} t={t} id={current.id} token={current.token} onHome={goHome} />
-          ) : (
-            <StartScreen t={t} lang={lang} setLang={setLang} bills={bills} onOpen={(b) => setCurrent({ id: b.id, token: b.token })} onStarted={onStarted} />
-          )}
-        </View>
+        <ChatProvider t={t} lang={lang} current={current}>
+          <View style={{ flex: 1, backgroundColor: C.bg }}>
+            {current ? (
+              <CaseFlow key={current.id} t={t} id={current.id} token={current.token} onHome={goHome} />
+            ) : (
+              <StartScreen t={t} lang={lang} setLang={setLang} bills={bills} onOpen={(b) => setCurrent({ id: b.id, token: b.token })} onStarted={onStarted} />
+            )}
+          </View>
+        </ChatProvider>
       </SafeAreaProvider>
     </ConvexProvider>
   );

@@ -7,6 +7,7 @@ import * as FileSystem from "expo-file-system/legacy";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { RecountLogo } from "./Logo";
+import { useLupa } from "./Chat";
 import { C, Card, F, H1, H2, LinkText, P, Screen, s } from "./ui";
 
 const api = anyApi;
@@ -60,6 +61,7 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
   const start = useMutation(api.cases.start);
   const [busy, setBusy] = useState(null); // "photo" | "sample" | null
+  const lupa = useLupa();
   const [error, setError] = useState(null);
 
   async function begin(kind, getFile) {
@@ -159,6 +161,7 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
       <View style={st.links}>
         <LinkText label={t.choosePhoto} onPress={() => !busy && begin("photo", fromLibrary)} />
         <LinkText label={t.choosePdf} onPress={() => !busy && begin("photo", fromPdf)} />
+        {lupa ? <LinkText label={t.chatAskLink} onPress={lupa.open} /> : null}
       </View>
       {error ? <Text style={s.error}>{error}</Text> : null}
 
