@@ -18,6 +18,7 @@ import { WhoDidWhat } from "../how/WhoDidWhat";
 import { money } from "../types";
 import { BadDocument } from "./BadDocument";
 import { StepFrame } from "./StepFrame";
+import { useReupload } from "./useReupload";
 import { canChangeEob, phaseOf, stepsFor } from "./steps";
 import type { ScreenProps } from "./types";
 import "./links.css";
@@ -36,6 +37,7 @@ export function parseDollars(s: string): number | null {
 
 export function ReadingStep({ c, go }: ScreenProps) {
   const { t } = useT();
+  const again = useReupload();
   if (c.status === "error") {
     const pdf = c.fileType === "application/pdf";
     const raw = c.error ?? "";
@@ -44,11 +46,17 @@ export function ReadingStep({ c, go }: ScreenProps) {
     // The backend writes these messages in the case's language: show them as they are.
     const said = code ? raw.slice(raw.indexOf(code) + code.length + 1).trim() : null;
     return (
-      <StepFrame phase={1} title={code === "RETAKE" ? t("flow.retakeH") : code === "OUT_OF_STATE" ? t("flow.outOfStateH") : notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: code === "RETAKE" ? t("flow.retake") : t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
+      <StepFrame phase={1} title={code === "RETAKE" ? t("flow.retakeH") : code === "OUT_OF_STATE" ? t("flow.outOfStateH") : notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: again.busy ? t("start.uploading") : code === "RETAKE" ? t("flow.retake") : t("case.tryAgain"), onClick: again.pick, busy: again.busy, disabled: again.busy }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
         {(notBill || code === "RETAKE") && c.fileUrl && c.fileType?.startsWith("image/") && (
           <BadDocument url={c.fileUrl} alt={t("case.photoAlt")} label={notBill ? t("flow.invalidDoc") : t("flow.unreadableDoc")} />
         )}
+        {again.fileInput}
         <p>{said || (notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf))}</p>
+        {again.error && (
+          <p className="error-note" role="alert">
+            {t(again.error)}
+          </p>
+        )}
         {!code && !notBill && (
           <details className="log-details">
             <summary>{t("case.details")}</summary>
