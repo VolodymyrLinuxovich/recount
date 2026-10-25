@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="brand/logo-512.png" alt="Recount logo" width="120"/>
+
 # Recount
 
 **Got an ER bill you can't pay?** Recount reads a photo of a California hospital bill, checks every line against the
@@ -190,6 +192,10 @@ flowchart LR
 
 ## Results
 
+![Results: bill reading on 30 eval bills, planted errors caught, and hospitals flagged by the statewide audit](docs/results.png)
+
+<sub>Made by `eval/plot_results.py`.</sub>
+
 ### The statewide policy audit
 
 We crawled HCAI's Hospital Fair Pricing Policy Lookup for **all 470** listed California hospitals and extracted text from
@@ -231,6 +237,8 @@ errors in most of them, and renders them as clean scans, phone photos and PDFs.
 - **The second read never disagreed** with the first, so no bill asked the patient to confirm an amount. Two photos
   added a "please double-check" note anyway, saying the charges column looked out of line with the rows. Both were read
   correctly.
+- **Azure gpt-4.1-mini as the reader, same 30 bills:** **95.6%** of lines right and **18 of 24** planted errors caught, so
+  Claude stays the main reader.
 - **Claude on the sample photo:** **8 of 8** lines and the **$12,741** total read correctly.
 - **Azure AI Document Intelligence as the second read (10/24):** its layout model (OCR and table detection, not a
   language model) read **181 of 181** lines with the right code and charge on all 30 eval bills (10 clean scans,
