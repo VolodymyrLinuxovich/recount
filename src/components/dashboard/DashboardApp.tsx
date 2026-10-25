@@ -22,11 +22,11 @@ const WINDOWS = [
 const GROUPS = [
   { key: "claude", agents: ["read", "column", "letters", "chat", "complaint"], color: "var(--series-1)" },
   { key: "apify", agents: ["apify"], color: "var(--series-2)" },
-  { key: "search", agents: ["search"], color: "var(--series-3)" },
+  { key: "azure", agents: ["docintel", "search", "safety"], color: "var(--series-3)" },
   { key: "checks", agents: ["read-check", "letters-check"], color: "var(--series-4)" },
 ] as const;
 
-const KNOWN_AGENTS = ["read", "column", "letters", "chat", "search", "apify", "read-check", "letters-check"];
+const KNOWN_AGENTS = ["read", "docintel", "column", "letters", "chat", "search", "safety", "apify", "read-check", "letters-check"];
 const TOOLS = ["get_agent_metrics", "get_agent_timeseries", "get_recent_agent_runs", "get_validation_results"] as const;
 const MCP_URL = "https://recount-nu.vercel.app/api/mcp";
 
@@ -82,17 +82,25 @@ function merge(list: Agent[]) {
 
 const rise = (n: number) => ({ "--i": n }) as CSSProperties;
 
-/** A muted, looping screencast that plays only while it is on screen. */
+/**
+ * A muted, looping screencast that plays only while it is on screen. MP4 (H.264) comes first
+ * because every browser plays it, including Safari on iPhone and Mac; WebM is the backup. The
+ * poster shows at once, the video starts loading right away, and playback starts a little
+ * before it scrolls into view. If no source plays, the poster image stays.
+ */
 function Screencast({ name, label }: { name: string; label: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) v.play().catch(() => {});
-      else v.pause();
-    }, { threshold: 0.3 });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.15, rootMargin: "200px 0px" },
+    );
     io.observe(v);
     return () => io.disconnect();
   }, [failed]);
@@ -101,18 +109,10 @@ function Screencast({ name, label }: { name: string; label: string }) {
     return <img className="part-video" src={`/dashboard/${name}.png`} alt={label} />;
   }
   return (
-    <video
-      ref={ref}
-      className="part-video"
-      src={`/dashboard/${name}.webm`}
-      poster={`/dashboard/${name}.png`}
-      aria-label={label}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      onError={() => setFailed(true)}
-    />
+    <video ref={ref} className="part-video" poster={`/dashboard/${name}.png`} aria-label={label} muted loop playsInline autoPlay preload="auto">
+      <source src={`/dashboard/${name}.mp4`} type="video/mp4" />
+      <source src={`/dashboard/${name}.webm`} type="video/webm" onError={() => setFailed(true)} />
+    </video>
   );
 }
 
@@ -227,7 +227,13 @@ export function DashboardApp() {
       return { key: g.key, label: t(`dash.g.${g.key}` as Parameters<T>[0]), color: g.color, points };
     });
     const maxT = Math.max(5, ...series.flatMap((x) => x.points.map((p) => p.v ?? 0)));
-    return { t0, t1, binMin, series, yMax: Math.ceil(maxT / 5) * 5 };
+    // The x axis ends at the newest point, so the lines run to the right edge instead of
+    // stopping short of an empty stretch at the end of the last time bin.
+    const lastT = Math.max(...series.flatMap((x) => x.points.filter((p) => p.v != null).map((p) => p.t)));
+    const firstT = Math.min(...series.flatMap((x) => x.points.filter((p) => p.v != null).map((p) => p.t)));
+    const end = Number.isFinite(lastT) ? lastT : t1;
+    const start = Number.isFinite(firstT) && firstT < end ? firstT : t0;
+    return { t0: start, t1: end > start ? end : t1, binMin, series, yMax: Math.ceil(maxT / 5) * 5 };
   }, [data, win, t]);
 
   const tFmt = useMemo(() => {
@@ -403,7 +409,9 @@ export function DashboardApp() {
                       <tr key={a.agent}>
                         <th scope="row">
                           {agentName(a.agent, t)}
-                          {a.models.length > 0 && <small>{a.models.join(", ")}</small>}
+                          {a.models.length > 0 && (
+                            <small>{a.models.map((m) => ((a.backupModels ?? []).includes(m) ? t("dash.backupModel", { model: m }) : m)).join(", ")}</small>
+                          )}
                         </th>
                         <td>{nf.format(a.runs)}</td>
                         <td>{pctText(a.okRate)}</td>

@@ -14,3 +14,12 @@
   align-items: center;
   text-underline-offset: 3px;
 }
+
+/* The legal note sits centred over the links. */
+.footnote {
+  text-align: center;
+}
+.footnote .footnote-text {
+  max-width: 62ch;
+  margin-inline: auto;
+}

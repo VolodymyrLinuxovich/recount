@@ -13,7 +13,7 @@ export function Footer() {
       <p className="footnote-text">{t("footer")}</p>
       <div className="footnote-links">
         <Link href="/privacy">{t("footer.privacy")}</Link>
-        <a href="/app">{t("footer.app")}</a>
+        <a href="/#get-app">{t("footer.app")}</a>
         <VisionToggle />
       </div>
     </footer>

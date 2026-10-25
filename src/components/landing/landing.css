@@ -1607,37 +1607,30 @@ html[data-contrast] .landing .ld-ledger-lines li.is-flag {
 .landing .ld-app {
   padding: 64px 0;
   border-top: 1px solid var(--rc-line, #e7e2f3);
+  scroll-margin-top: 68px;
 }
-.landing .ld-app-in {
+.landing .ld-app-head {
   display: flex;
   align-items: center;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 32px;
 }
-.landing .ld-app-copy {
-  flex: 1;
-  min-width: 0;
-}
-.landing .ld-app-copy > p {
+.landing .ld-app-head p {
   margin-top: 12px;
   font-size: 1.1875rem;
   line-height: 1.5;
 }
-.landing .ld-app-btn {
-  margin-top: 20px;
-}
-.landing .ld-app-copy .ld-app-ios {
-  font-size: 1rem;
-  color: var(--rc-ink-2, #4b4366);
-}
 .landing .ld-app-qr {
   margin: 0;
   flex: none;
+  max-width: 220px;
   text-align: center;
 }
 .landing .ld-app-qr img {
   display: block;
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
   padding: 10px;
   background: #ffffff;
   border: 1px solid var(--rc-line, #e7e2f3);
@@ -1645,12 +1638,93 @@ html[data-contrast] .landing .ld-ledger-lines li.is-flag {
 }
 .landing .ld-app-qr figcaption {
   margin-top: 8px;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
   color: var(--rc-ink-2, #4b4366);
 }
-/* On a phone the button is the way in; the QR code is for computers. */
+.landing .ld-app-cards {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+@media (min-width: 720px) {
+  .landing .ld-app-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.landing .ld-app-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--rc-surface, #ffffff);
+  border: 1px solid var(--rc-line, #e7e2f3);
+  border-radius: 20px;
+}
+.landing .ld-app-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--rc-font-display);
+  font-weight: 800;
+  font-size: 1.375rem;
+  color: var(--rc-ink, #2a004d);
+}
+.landing .ld-app-card h3 svg {
+  color: var(--rc-brand, #5b21b6);
+  flex: none;
+}
+.landing .ld-app-card > p {
+  margin-top: 8px;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.landing .ld-app-btn {
+  margin-top: auto;
+  align-self: stretch;
+  justify-content: center;
+}
+.landing .ld-app-card--android > p {
+  margin-bottom: 20px;
+}
+.landing .ld-app-steps {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  counter-reset: ld-step;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.landing .ld-app-steps li {
+  counter-increment: ld-step;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.landing .ld-app-steps li::before {
+  content: counter(ld-step);
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  background: var(--primary, #5b21b6);
+  color: var(--on-primary, #ffffff);
+  font-weight: 800;
+  font-size: 0.875rem;
+}
+.landing .ld-app-steps li + li {
+  margin-top: 8px;
+}
+/* On an iPhone, its card comes first. */
+.landing .ld-app[data-ios] .ld-app-card--ios {
+  order: -1;
+}
+/* On a phone the cards are the way in; the QR code is for computers. */
 @media (max-width: 640px) {
   .landing .ld-app-qr {
     display: none;
   }
 }
+

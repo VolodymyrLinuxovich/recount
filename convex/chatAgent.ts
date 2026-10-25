@@ -1,7 +1,7 @@
 "use node";
 
 import { chat, modelReady, type ChatMessage, type Run } from "./lib/model";
-import { CRISIS, checkText, safetyOn } from "./lib/safety";
+import { CRISIS, checkText, checkTextDetailed, safetyOn } from "./lib/safety";
 import { policyPassages, searchOn } from "./lib/search";
 import { KNOWN_HOSPITALS } from "./lib/reference";
 import { v } from "convex/values";
@@ -118,11 +118,27 @@ export const reply = internalAction({
       .filter((m) => m._id !== replyId && m.content)
       .map((m) => ({ role: m.role, content: m.content }));
     if (!messages.length || messages[messages.length - 1].role !== "user") return;
+    // Azure AI Content Safety, timed and logged for the dashboard (only when it's on).
+    const screen = async (t: string, who: "patient" | "reply") => {
+      if (!safetyOn() || !t.trim()) return checkText(t, who);
+      const start = Date.now();
+      const log = (ok: boolean, score?: number) =>
+        ctx.runMutation(internal.metrics.log, { agent: "safety", provider: "azure", model: "content-safety", ms: Date.now() - start, ok, score }).catch(() => {});
+      try {
+        // ok = Azure answered; a timeout or error lets the text through but counts as a failed run.
+        const { verdict, reached } = await checkTextDetailed(t, who);
+        await log(reached, reached ? (verdict === "ok" ? 1 : 0) : undefined);
+        return verdict;
+      } catch (e) {
+        await log(false);
+        throw e;
+      }
+    };
     const offTopic =
       lang === "es"
         ? "Solo puedo ayudar con preguntas sobre su factura del hospital y la ayuda financiera."
         : "I can only help with questions about your hospital bill and financial assistance.";
-    const inbound = await checkText(messages[messages.length - 1].content, "patient");
+    const inbound = await screen(messages[messages.length - 1].content, "patient");
     if (inbound !== "ok") {
       await ctx.runMutation(internal.chat.write, { id: replyId, content: inbound === "crisis" ? CRISIS[lang] : offTopic, pending: false });
       return;
@@ -164,7 +180,7 @@ export const reply = internalAction({
       }, 400);
       const res = await chat({ task: "chat", system, messages, maxTokens: 2000, onText: (t) => (text = t) }, record);
       text = res.refused ? sorry : res.text;
-      const outbound = safetyOn() ? await checkText(text, "reply") : "ok";
+      const outbound = safetyOn() ? await screen(text, "reply") : "ok";
       if (outbound !== "ok") text = outbound === "crisis" ? CRISIS[lang] : offTopic;
     } catch {
       // fall through to the final write

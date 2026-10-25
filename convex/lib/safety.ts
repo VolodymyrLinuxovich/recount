@@ -40,9 +40,14 @@ export function judge(sev: Record<string, number>, who: "patient" | "reply"): Ve
 }
 
 export async function checkText(text: string, who: "patient" | "reply"): Promise<Verdict> {
-  if (!safetyOn() || !text.trim()) return "ok";
+  return (await checkTextDetailed(text, who)).verdict;
+}
+
+/** The same check, plus whether Azure actually answered (false on a timeout or error, when the text passes anyway). */
+export async function checkTextDetailed(text: string, who: "patient" | "reply"): Promise<{ verdict: Verdict; reached: boolean }> {
+  if (!safetyOn() || !text.trim()) return { verdict: "ok", reached: false };
   const sev = await analyze(text);
-  return sev ? judge(sev, who) : "ok";
+  return sev ? { verdict: judge(sev, who), reached: true } : { verdict: "ok", reached: false };
 }
 
 export const CRISIS = {

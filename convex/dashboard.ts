@@ -7,6 +7,14 @@ import type { Doc } from "./_generated/dataModel";
 
 const BUCKET_MS = 15 * 60 * 1000;
 
+/**
+ * The row a run is shown under. Document Intelligence runs are logged as the "column" task
+ * (the second read of the charges) but get their own row, so the Claude backup read stays apart.
+ */
+export function displayAgent(r: Pick<Doc<"agentMetrics">, "agent" | "provider">): string {
+  return r.provider === "azure-docintel" ? "docintel" : r.agent;
+}
+
 function pct(sorted: number[], p: number): number | null {
   if (!sorted.length) return null;
   return sorted[Math.min(sorted.length - 1, Math.floor(p * sorted.length))];
@@ -28,6 +36,8 @@ function summarize(rows: Doc<"agentMetrics">[]) {
     usd: rows.reduce((s, r) => s + (r.usd ?? 0), 0),
     lastAt: rows.length ? Math.max(...rows.map((r) => r.at)) : null,
     models: [...new Set(rows.map((r) => r.model).filter((m): m is string => Boolean(m)))],
+    // Models that ran as the backup (Azure OpenAI) after the main model failed.
+    backupModels: [...new Set(rows.filter((r) => r.fallbackUsed && r.provider === "azure").map((r) => r.model).filter((m): m is string => Boolean(m)))],
   };
 }
 
@@ -39,13 +49,13 @@ export const summary = query({
     const rows = (await ctx.db.query("agentMetrics").withIndex("by_at", (q) => q.gt("at", since)).collect()).filter((r) => r.agent !== "_marker");
 
     const byAgent = new Map<string, Doc<"agentMetrics">[]>();
-    for (const r of rows) byAgent.set(r.agent, [...(byAgent.get(r.agent) ?? []), r]);
+    for (const r of rows) byAgent.set(displayAgent(r), [...(byAgent.get(displayAgent(r)) ?? []), r]);
     const agents = [...byAgent.entries()].map(([agent, rs]) => ({ agent, ...summarize(rs) })).sort((a, b) => b.runs - a.runs);
 
     // Time series: per 15 minutes, per agent: runs, successes, median time, mean score.
     const buckets = new Map<string, Doc<"agentMetrics">[]>();
     for (const r of rows) {
-      const k = `${Math.floor(r.at / BUCKET_MS) * BUCKET_MS}|${r.agent}`;
+      const k = `${Math.floor(r.at / BUCKET_MS) * BUCKET_MS}|${displayAgent(r)}`;
       buckets.set(k, [...(buckets.get(k) ?? []), r]);
     }
     const series = [...buckets.entries()]
@@ -59,7 +69,7 @@ export const summary = query({
     const recent = rows
       .slice(-15)
       .reverse()
-      .map((r) => ({ at: r.at, agent: r.agent, model: r.model ?? null, ms: r.ms, ok: r.ok }));
+      .map((r) => ({ at: r.at, agent: displayAgent(r), model: r.model ?? null, ms: r.ms, ok: r.ok }));
 
     // Convex itself: how much the real-time backend has handled.
     const cases = (await ctx.db.query("cases").take(20000)).length;

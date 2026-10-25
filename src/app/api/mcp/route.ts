@@ -15,7 +15,7 @@ const TOOLS = [
   {
     name: "get_agent_metrics",
     title: "Agent metrics",
-    description: "Per agent (bill reading, letter writing, chat, vector search, Apify price lookups, rule checks): number of runs, success rate, median and 90th percentile time, quality score, models used. Plus totals and how many bills, live steps and chat messages Convex has handled.",
+    description: "Per agent (bill reading, Azure AI Document Intelligence second read, letter writing, chat, Azure AI Search, Azure AI Content Safety, Apify price lookups, rule checks): number of runs, success rate, median and 90th percentile time, quality score, models used. Plus totals and how many bills, live steps and chat messages Convex has handled.",
     inputSchema: { type: "object", properties: { hours }, additionalProperties: false },
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
@@ -25,7 +25,7 @@ const TOOLS = [
     description: "Runs, successes, median time and quality score per agent in 15-minute buckets.",
     inputSchema: {
       type: "object",
-      properties: { hours, agent: { type: "string", description: "Optional: one agent, e.g. read, letters, chat, search, apify, read-check, letters-check." } },
+      properties: { hours, agent: { type: "string", description: "Optional: one agent, e.g. read, docintel, column, letters, chat, search, safety, apify, read-check, letters-check." } },
       additionalProperties: false,
     },
     annotations: { readOnlyHint: true, openWorldHint: false },

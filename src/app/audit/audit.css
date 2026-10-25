@@ -194,16 +194,12 @@
   width: 100%;
 }
 
-@media (min-width: 640px) {
-  .a-figs {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .a-fig:first-child {
-    grid-column: auto;
-  }
-  .a-hero-cta {
-    width: auto;
-  }
+/* On every width: hospitals checked on top, the two flag counts side by side under it, and the
+   button as wide as the cards above it. */
+.a-hero-cta {
+  min-height: 60px;
+  font-size: var(--fs-md, 1.125rem);
+  justify-content: center;
 }
 
 @media (min-width: 1024px) {
@@ -214,7 +210,7 @@
   }
   .a-hero-side {
     display: grid;
-    justify-items: start;
+    justify-items: stretch;
   }
   .a-figs {
     width: 100%;
@@ -343,6 +339,19 @@
   .a-app > .a-map-col {
     position: sticky;
     top: var(--sp-4);
+  }
+  /* Before a hospital is opened, the map card is exactly as tall as the search and
+     "Most flags" cards beside it, with the map centred inside. */
+  .a-app:not(.a-app--list):not(:has(.a-back)) > .a-map-col {
+    position: static;
+    align-self: stretch;
+    display: flex;
+  }
+  .a-app:not(.a-app--list):not(:has(.a-back)) > .a-map-col > .ca-map {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -1281,6 +1290,22 @@ html[data-contrast] .audit .verdict-likely {
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
+  }  /* Hover or keyboard focus shows the name beside the icon, like a tooltip. */
+  body:has(.audit) .helper-launcher:is(:hover, :focus-visible) .helper-launcher-text {
+    right: calc(100% + 10px);
+    top: 50%;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    transform: translateY(-50%);
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: var(--ink);
+    color: var(--sheet);
+    font-size: var(--fs-sm);
+    box-shadow: var(--shadow);
+    pointer-events: none;
   }
 }
 
