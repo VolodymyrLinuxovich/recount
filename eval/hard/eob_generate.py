@@ -118,21 +118,22 @@ def blocks(eob: dict, shares: list | None, rng: random.Random, **_) -> tuple[Ima
     rows = []
     lines = eob.get("lines") or []
     bw = (W - 2 * M - 24) // 2
-    bh = 262 if shares else 210
+    split = bool(shares) and len(lines) <= 6  # the cost-share rows only fit with up to 3 rows of boxes
+    bh = 262 if split else 210
     for n, l in enumerate(lines):
         col = n % 2
         x0 = M + col * (bw + 24)
         if col == 0 and n:
             y += bh + 18
         if y + bh > H - 150:
-            break  # out of room: the rest won't fit (generator keeps EOBs short enough)
+            raise ValueError("blocks layout ran out of room")
         p.d.rounded_rectangle([x0, y, x0 + bw, y + bh], radius=10, outline=(200, 205, 210), width=2)
         head = f"{l.get('description') or ''}"
         p.text((x0 + 16, y + 12), p.fit(head, font("arialb", 18), bw - 180), font("arialb", 18))
         p.text((x0 + bw - 16, y + 14), f"{us_date(l.get('date'))}  {l.get('code') or ''}", font("arial", 15), (100, 104, 110), "ra")
         items = [("Amount billed", l.get("billed")), ("Plan discount", None if l.get("allowed") is None or l.get("billed") is None else round(l["billed"] - l["allowed"], 2)),
                  ("Allowed amount", l.get("allowed")), ("Not covered", l.get("notCovered"))]
-        if shares and n < len(shares) and shares[n]:
+        if split and n < len(shares) and shares[n]:
             s = shares[n]
             items += [("Deductible", s["deductible"]), ("Copay", s["copay"]), ("Coinsurance", s["coinsurance"])]
         items += [("Plan paid", l.get("planPaid")), ("You owe", l.get("patientOwes"))]

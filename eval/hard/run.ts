@@ -165,12 +165,11 @@ async function readAndCheck(id: string, pages: PageFile[], rec: (r: Run) => Prom
   let bill: ParsedBill = first;
   let compare = "no second read";
   if (col && col.length === first.lines.length) {
-    const disagree = first.lines.map((l, i) => ({ index: i, first: col[i], second: l.charge })).filter((x) => Math.abs(x.first - x.second) > 0.005);
+    const disagree = first.lines.map((l, i) => ({ index: i, first: l.charge, second: col[i] })).filter((x) => Math.abs(x.first - x.second) > 0.005);
     compare = disagree.length ? `disagree on ${disagree.length}` : "agree";
     if (disagree.length) {
       bill = {
         ...bill,
-        lines: first.lines.map((l, i) => ({ ...l, charge: col[i] })),
         amountChecks: disagree,
         unreadable: [...bill.unreadable, ...disagree.map((x) => `Line ${x.index + 1}: we read $${x.first.toFixed(2)}, but a second look read $${x.second.toFixed(2)}. Please check this amount on your bill.`)],
       } as ParsedBill;
@@ -249,7 +248,12 @@ async function onePair(t: Truth) {
     mine.push(r);
     await record(r);
   };
-  const [b, e] = await Promise.all([readAndCheck(t.id, loadPages(src, [t.files.bill]), rec), readEob(loadPages(src, [t.files.eob])[0], rec)]);
+  // With --reuse, an earlier run's EOB read is used as it was kept (EOB_PROMPT and the schema must be unchanged).
+  const reusedEob = reuse && existsSync(join(reuse, `${t.id}.eob.json`)) ? (JSON.parse(readFileSync(join(reuse, `${t.id}.eob.json`), "utf8")) as ParsedEob | null) : undefined;
+  const eobRead = reusedEob !== undefined
+    ? Promise.resolve({ eob: reusedEob, outcome: (JSON.parse(readFileSync(join(reuse!, `${t.id}.meta.json`), "utf8")).eobOutcome as string) ?? "ok" })
+    : readEob(loadPages(src, [t.files.eob])[0], rec);
+  const [b, e] = await Promise.all([readAndCheck(t.id, loadPages(src, [t.files.bill]), rec), eobRead]);
   const hosp = hospitalFor(b.bill, t.hospitalKey);
   const eob = e.outcome === "ok" ? e.eob : null;
   const findings = b.outcome === "ok" ? allFindings(b.bill, hosp.ref, eob) : [];
@@ -302,7 +306,7 @@ async function prefetch(truths: Truth[]) {
           ms += Date.now() - t0;
           break;
         } catch (e) {
-          if (!/429/.test(String(e)) || attempt > 8) throw e;
+          if (!/429|timed out/.test(String(e)) || attempt > 8) throw e;
           await new Promise((r) => setTimeout(r, 15_000));
         }
       }

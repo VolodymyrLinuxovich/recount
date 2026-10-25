@@ -389,8 +389,10 @@ export const readAndCheck = internalAction({
         try {
           // Two reads in parallel (no extra wait): the full bill, and a narrow copy of just the CHARGES
           // column. A full read sometimes "fixes" a line so the lines match the printed total, which
-          // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
-          // literal column copy AND show the patient both numbers to check against the paper bill.
+          // hides a real billing error; the narrow copy has no reason to. Where they disagree we keep the
+          // full read's amount until the patient picks, and show them both numbers to check against the
+          // paper bill. On the hard eval set (eval/hard) the full read was right far more often than the
+          // second read when the two disagreed on a blurry, dim or marked-up photo.
           // The second read is only a check: past its time limit we go on without it ("couldn't compare").
           // Each extra photo page gets a little more time.
           const columnMs = Math.min(60_000, COLUMN_READ_MS + 8_000 * (pages.length - 1));
@@ -398,14 +400,13 @@ export const readAndCheck = internalAction({
           bill = first;
           if (column && column.length === first.lines.length) {
             const disagree = first.lines
-              .map((l, i) => ({ index: i, first: column[i], second: l.charge }))
+              .map((l, i) => ({ index: i, first: l.charge, second: column[i] }))
               .filter((x) => Math.abs(x.first - x.second) > 0.005);
             const n = Math.max(1, first.lines.length);
             await ctx.runMutation(internal.metrics.log, { agent: "read-check", ms: 0, ok: disagree.length === 0, score: (n - disagree.length) / n });
             if (disagree.length) {
               bill = {
                 ...bill,
-                lines: first.lines.map((l, i) => ({ ...l, charge: column[i] })),
                 amountChecks: disagree,
                 unreadable: [
                   ...bill.unreadable,
