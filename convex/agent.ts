@@ -564,7 +564,9 @@ export const draftLetters = internalAction({
       ...(lang === "es" ? { title: letterTitle(l.kind, "es") } : {}),
     }));
     // Rule check: every dollar amount in the letters must come from the facts.
-    const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null });
+    // The letters may also total the findings ("$349 in all"), so that sum counts as a known amount.
+    const findingsTotal = Math.round(facts.findings.reduce((s, f) => s + (f.amount || 0), 0) * 100) / 100;
+    const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null, findingsTotal });
     await ctx.runMutation(internal.metrics.log, { agent: "letters-check", ms: 0, ok: odd.length === 0, score: odd.length === 0 ? 1 : 0 });
     await step(ctx, caseId, "letters-check",
       odd.length

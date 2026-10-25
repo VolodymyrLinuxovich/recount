@@ -1184,5 +1184,7 @@
   "landing.appIosP": "Agregue Recount a su pantalla de inicio. Se abre en pantalla completa, como una aplicación.",
   "landing.appIos1": "Abra esta página en Safari.",
   "landing.appIos2": "Toque Compartir (el cuadrado con una flecha).",
-  "landing.appIos3": "Toque Agregar a inicio."
+  "landing.appIos3": "Toque Agregar a inicio.",
+  "flow.invalidDoc": "No es un documento válido",
+  "flow.unreadableDoc": "No pudimos leer esta foto"
 }

@@ -19,6 +19,7 @@ import type { ScreenProps } from "./types";
 import "./links.css";
 import "./found.css";
 import "./eob.css";
+import { BadDocument } from "./BadDocument";
 
 const isImage = (type: string | undefined, url: string) => (type ? type.startsWith("image/") : /\.(png|jpe?g|webp)$/i.test(url));
 
@@ -201,6 +202,7 @@ export function EobStep({ c, go, back }: ScreenProps) {
         onBack={onBack}
       >
         {inputs}
+        {notEob && c.eobFileUrl && isImage(c.eobFileType, c.eobFileUrl) && <BadDocument url={c.eobFileUrl} alt={t("eob.statementAlt")} label={t("flow.invalidDoc")} />}
         <p>{notEob ? t("eob.notEobBody") : /TOO_LARGE/.test(c.eobError ?? "") ? t("eob.tooLargeBody") : /APPROVED/.test(c.eobError ?? "") ? t("eob.approvedBody") : t("eob.failedBody")}</p>
         {changeable && (
           <div className="step-links">

@@ -6,6 +6,7 @@
 // Privacy: a conversation is bound to the case it started with, and every read or write
 // of a case's conversation needs that case's secret token.
 
+import { limit } from "./lib/limit";
 import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
@@ -85,6 +86,10 @@ export const send = mutation({
     if (msgs.some((m) => m.role === "assistant" && m.pending && now - m.at < STALE_MS)) {
       throw new ConvexError(es ? "Espere a que termine la respuesta." : "Please wait for the answer to finish.");
     }
+    // Overall and per-bill caps, since a new session id is free to make.
+    const busy = es ? "Muchas personas están preguntando ahora. Intente en un minuto." : "Lots of questions right now. Please try again in a minute.";
+    await limit(ctx, "chat", 120, 60_000, busy);
+    if (caseId) await limit(ctx, `chat:${caseId}`, 30, 10 * 60_000, busy);
     // Close any reply that got stuck, so it never blocks the conversation.
     for (const m of msgs) if (m.pending) await ctx.db.patch(m._id, { pending: false, content: m.content || "…" });
 

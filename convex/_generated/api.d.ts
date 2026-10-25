@@ -31,6 +31,7 @@ import type * as lib_hospital from "../lib/hospital.js";
 import type * as lib_lang from "../lib/lang.js";
 import type * as lib_letterCheck from "../lib/letterCheck.js";
 import type * as lib_letters from "../lib/letters.js";
+import type * as lib_limit from "../lib/limit.js";
 import type * as lib_model from "../lib/model.js";
 import type * as lib_pipeline from "../lib/pipeline.js";
 import type * as lib_privacy from "../lib/privacy.js";
@@ -75,6 +76,7 @@ declare const fullApi: ApiFromModules<{
   "lib/lang": typeof lib_lang;
   "lib/letterCheck": typeof lib_letterCheck;
   "lib/letters": typeof lib_letters;
+  "lib/limit": typeof lib_limit;
   "lib/model": typeof lib_model;
   "lib/pipeline": typeof lib_pipeline;
   "lib/privacy": typeof lib_privacy;

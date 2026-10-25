@@ -13,6 +13,7 @@ import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { FPL } from "./lib/reference";
 import { HOSPITALS, tokens } from "./lib/statewide";
 import { kindOf } from "./lib/pipeline";
+import { limit } from "./lib/limit";
 
 // ---- access: each case has a random secret kept only on the patient's phone ----
 
@@ -35,19 +36,6 @@ async function mustOwn(ctx: MutationCtx, id: Id<"cases">, token: string | undefi
   const c = await owned(ctx, id, token);
   if (!c) throw new ConvexError("Case not found");
   return c;
-}
-
-/** Simple fixed-window limit shared by everyone, to stop runaway uploads. */
-async function limit(ctx: MutationCtx, key: string, max: number, windowMs: number) {
-  const now = Date.now();
-  const row = await ctx.db.query("limits").withIndex("by_key", (q) => q.eq("key", key)).first();
-  if (!row || now - row.windowStart > windowMs) {
-    if (row) await ctx.db.patch(row._id, { windowStart: now, count: 1 });
-    else await ctx.db.insert("limits", { key, windowStart: now, count: 1 });
-    return;
-  }
-  if (row.count >= max) throw new ConvexError("Too many uploads right now. Please try again in a minute.");
-  await ctx.db.patch(row._id, { count: row.count + 1 });
 }
 
 export const generateUploadUrl = mutation({
@@ -124,6 +112,8 @@ export const submitHousehold = mutation({
   handler: async (ctx, { id, token, ...h }) => {
     const c = await mustOwn(ctx, id, token);
     if (!c.bill) throw new ConvexError("Bill not read yet");
+    if (c.status === "drafting") return; // letters are already being written
+    await limit(ctx, `draft:${id}`, 10, 10 * 60_000, "Too many changes in a row. Please wait a few minutes.");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
     await ctx.db.patch(id, { household: h, eligibility, status: "drafting", letters: undefined });

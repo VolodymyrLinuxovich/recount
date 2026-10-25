@@ -15,6 +15,7 @@ export const remove = mutation({
         for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(m._id);
         for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(r._id);
         if (c.fileId) await ctx.storage.delete(c.fileId);
+        if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
         await ctx.db.delete(c._id);
       } else {
         // Keep the bills, reachable only by their private links again.

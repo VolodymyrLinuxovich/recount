@@ -16,6 +16,7 @@ import { Sources } from "../Sources";
 import { StepLog } from "../StepLog";
 import { WhoDidWhat } from "../how/WhoDidWhat";
 import { money } from "../types";
+import { BadDocument } from "./BadDocument";
 import { StepFrame } from "./StepFrame";
 import { canChangeEob, phaseOf, stepsFor } from "./steps";
 import type { ScreenProps } from "./types";
@@ -44,6 +45,9 @@ export function ReadingStep({ c, go }: ScreenProps) {
     const said = code ? raw.slice(raw.indexOf(code) + code.length + 1).trim() : null;
     return (
       <StepFrame phase={1} title={code === "RETAKE" ? t("flow.retakeH") : code === "OUT_OF_STATE" ? t("flow.outOfStateH") : notBill ? t("flow.notBillH") : t("case.cantRead", { pdf })} primary={{ label: code === "RETAKE" ? t("flow.retake") : t("case.tryAgain"), href: "/" }} secondary={c.token ? { label: t("case.delete"), onClick: () => go("more") } : undefined}>
+        {(notBill || code === "RETAKE") && c.fileUrl && c.fileType?.startsWith("image/") && (
+          <BadDocument url={c.fileUrl} alt={t("case.photoAlt")} label={notBill ? t("flow.invalidDoc") : t("flow.unreadableDoc")} />
+        )}
         <p>{said || (notBill ? t("flow.notBillBody") : plainError(t, c.error, pdf))}</p>
         {!code && !notBill && (
           <details className="log-details">

@@ -542,3 +542,36 @@ body:has(.step-screen) .footnote-text {
     mask-image: none;
   }
 }
+
+/* A rejected photo: red frame, red label under it, no scanning animation. */
+.bad-doc {
+  margin: var(--sp-4) 0;
+  border: 2px solid var(--pen);
+  border-radius: var(--r-control);
+  overflow: hidden;
+  background: var(--sheet);
+}
+.bad-doc-img {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(0.6);
+  opacity: 0.85;
+}
+.bad-doc-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0.6em 0.9em;
+  background: var(--pen);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+.bad-doc-x {
+  font-size: 1.1em;
+  line-height: 1;
+}

@@ -1,5 +1,6 @@
 // After the letters are sent: a check-in date, and a complaint to HCAI if the hospital says no,
 // never answers, or sends the bill to collections anyway. Recount never files anything.
+import { limit } from "./lib/limit";
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
@@ -60,6 +61,7 @@ export const startComplaint = mutation({
     if (sentOn !== null && !validDay(sentOn)) throw new ConvexError("Check the date");
     const old = c.followUp as FollowUp | undefined;
     if (old?.status === "drafting") return;
+    await limit(ctx, `complaint:${id}`, 5, 10 * 60_000, "Too many drafts in a row. Please wait a few minutes.");
     const followUp: FollowUp = { outcome, sentOn, status: "drafting" };
     await ctx.db.patch(id, { followUp });
     await ctx.scheduler.runAfter(0, internal.followUpAgent.draftComplaint, { caseId: id });
