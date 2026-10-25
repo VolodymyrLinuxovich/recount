@@ -3,7 +3,7 @@
 import { type PointerEvent, useEffect, useRef, useState } from "react";
 
 // A small SVG line chart: one y axis, thin 2px lines, markers on each point, a legend above,
-// direct labels at each line's end, and a crosshair tooltip on hover.
+// direct labels at each line's end, and a crosshair tooltip on hover. Lines draw in from the left.
 
 export interface Series {
   key: string;
@@ -13,7 +13,6 @@ export interface Series {
   points: { t: number; v: number | null; n: number }[];
 }
 
-const H = 220;
 const PAD = { top: 12, right: 112, bottom: 28, left: 44 };
 
 export function LineChart({
@@ -25,6 +24,7 @@ export function LineChart({
   tFmt,
   runsLabel,
   empty,
+  height = 220,
 }: {
   series: Series[];
   t0: number;
@@ -34,7 +34,9 @@ export function LineChart({
   tFmt: (t: number) => string;
   runsLabel: string;
   empty: string;
+  height?: number;
 }) {
+  const H = height;
   const wrap = useRef<HTMLDivElement>(null);
   const [w, setW] = useState(640);
   const [hover, setHover] = useState<number | null>(null);
@@ -118,7 +120,7 @@ export function LineChart({
             const d = pts.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join(" ");
             return (
               <g key={s.key}>
-                <path d={d} fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+                <path d={d} pathLength={1} className="lc-line" fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
                 {pts.map((p) => (
                   <circle key={p.t} cx={x(p.t)} cy={y(p.v)} r={pts.length > 40 ? 2 : 3.5} fill={s.color} className="lc-dot" />
                 ))}

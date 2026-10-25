@@ -55,33 +55,11 @@
   justify-content: space-between;
   gap: var(--sp-3);
 }
-.dash-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.dash-updated {
   margin: 0;
-  font-weight: 600;
-  color: var(--ink);
-}
-.dash-ago {
-  font-weight: 400;
+  font-size: var(--fs-sm);
   color: var(--ink-3);
-}
-.dash-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--ok);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
-  animation: dash-pulse 2s ease-out infinite;
-}
-@keyframes dash-pulse {
-  70% {
-    box-shadow: 0 0 0 10px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
+  font-variant-numeric: tabular-nums;
 }
 .dash-window {
   display: inline-flex;
@@ -139,244 +117,139 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* The three pillars */
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-4);
-}
-.pillar {
-  background: var(--sheet);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-card);
-  box-shadow: var(--shadow-card);
-  padding: var(--sp-5);
+/* How it works: one row per part, text on one side and a looping screencast on the other. */
+.parts {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
+  gap: var(--sp-6);
 }
-.pillar-head {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.pillar-n {
-  flex: none;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
+.part {
   display: grid;
-  place-items: center;
-  background: var(--primary);
-  color: var(--on-primary);
-  font-weight: 700;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: var(--sp-6);
 }
-.pillar-body {
-  margin: 0;
+.part:nth-child(even) .part-copy {
+  order: 2;
+}
+.part-copy p {
   color: var(--ink-2);
-  font-size: var(--fs-sm);
-  line-height: 1.5;
+  margin: var(--sp-2) 0 var(--sp-4);
+  max-width: 34em;
 }
-.pillar-tabs {
-  display: flex;
-  gap: 0.25rem;
-  border-bottom: 1px solid var(--rule);
-}
-.pillar-tabs button {
-  font: inherit;
-  font-size: var(--fs-sm);
-  background: none;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  padding: 0.5rem 0.75rem;
-  color: var(--ink-3);
-  cursor: pointer;
-  min-height: 44px;
-}
-.pillar-tabs button[aria-selected="true"] {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  font-weight: 600;
-}
-.pillar-stage {
-  min-height: 300px;
-  display: flex;
-  align-items: stretch;
-}
-.pillar-video {
-  width: 100%;
+.part-n {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--sp-3);
   border-radius: 12px;
   border: 1px solid var(--rule);
-  align-self: flex-start;
-  background: var(--rule-soft);
+  background: var(--sheet);
+  color: var(--accent);
+  font-weight: 800;
 }
-.pillar-missing {
-  color: var(--ink-3);
-  align-self: center;
+.part-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  margin: 0;
 }
-.pillar-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-2);
-  margin: auto 0 0;
-  padding-top: var(--sp-3);
-  border-top: 1px solid var(--rule);
+.part-stats div {
+  display: flex;
+  flex-direction: column;
 }
-.pillar-stats dt {
-  font-size: 0.8125rem;
-  color: var(--ink-3);
-}
-.pillar-stats dd small {
-  display: block;
-  font-weight: 400;
-  font-size: 0.8125rem;
-  color: var(--ink-3);
-}
-.pillar-stats dd {
-  margin: 0.15rem 0 0;
+.part-stats dd {
+  margin: 0;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
-
-/* Animated "what does what": each step lights up in turn, a dot travels down the line. */
-.flow {
-  --cycle: calc(var(--n) * 1.4s);
-  list-style: none;
+.part-stats dt {
+  order: 2;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+.part-frame {
   margin: 0;
-  padding: var(--sp-2) 0 0;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--sheet);
+  box-shadow: var(--shadow-card);
+}
+.part-bar {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  width: 100%;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
 }
-.flow-step {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0 0 1.35rem;
-}
-.flow-step:last-child {
-  padding-bottom: 0;
-}
-.flow-step:not(:last-child)::before {
-  /* the line to the next step */
-  content: "";
-  position: absolute;
-  left: calc(1.125rem - 1px);
-  top: 2.25rem;
-  bottom: 0;
-  width: 2px;
+.part-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
   background: var(--rule);
 }
-.flow-step:not(:last-child)::after {
-  /* the travelling dot */
-  content: "";
-  position: absolute;
-  left: calc(1.125rem - 4px);
-  top: 2.25rem;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0;
-  animation: flow-dot var(--cycle) linear infinite;
-  animation-delay: calc(var(--i) * 1.4s + 0.7s);
+.part-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  background: var(--rule-soft);
 }
-.flow-num {
-  flex: none;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: var(--fs-sm);
-  border: 2px solid var(--control-edge);
-  color: var(--ink-3);
-  background: var(--sheet);
-  animation: flow-on var(--cycle) ease-in-out infinite;
-  animation-delay: calc(var(--i) * 1.4s);
-}
-.flow-text {
-  font-size: var(--fs-sm);
-  color: var(--ink-2);
-  line-height: 1.35;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
-  flex: 1;
-  animation: flow-text var(--cycle) ease-in-out infinite;
-  animation-delay: calc(var(--i) * 1.4s);
-}
-@keyframes flow-on {
-  0%,
-  100% {
-    background: var(--sheet);
-    color: var(--ink-3);
-    border-color: var(--control-edge);
+
+/* Entrance: the headline rises word by word, then the rest follows. Rows rise as they scroll in. */
+@media (prefers-reduced-motion: no-preference) {
+  .dash-word {
+    display: inline-block;
+    animation: dash-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
   }
-  4%,
-  15% {
-    background: var(--primary);
-    color: var(--on-primary);
-    border-color: var(--primary);
+  .dash-in {
+    animation: dash-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 80ms);
   }
-  22% {
-    background: var(--sheet);
-    color: var(--ink-3);
-    border-color: var(--control-edge);
-  }
-}
-@keyframes flow-text {
-  0%,
-  100% {
-    background: transparent;
-    color: var(--ink-2);
-  }
-  4%,
-  15% {
-    background: var(--accent-soft);
-    color: var(--ink);
-  }
-  22% {
-    background: transparent;
-    color: var(--ink-2);
-  }
-}
-@keyframes flow-dot {
-  0% {
+  .part[data-in="false"] .dash-rise {
     opacity: 0;
-    transform: translateY(0);
   }
-  2% {
-    opacity: 1;
+  .part[data-in="true"] .dash-rise {
+    animation: dash-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 120ms);
   }
-  12% {
-    opacity: 1;
-    transform: translateY(1.6rem);
+  .lc-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: lc-draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
   }
-  14%,
-  100% {
-    opacity: 0;
-    transform: translateY(1.6rem);
+  .lc-dot {
+    animation: lc-fade 0.4s ease-out 1.2s both;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .flow-num,
-  .flow-text,
-  .flow-step::after,
-  .dash-dot {
-    animation: none;
+@keyframes dash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes lc-fade {
+  from {
+    opacity: 0;
   }
 }
 
 /* Charts */
-.dash-charts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--sp-4);
-}
 .dash-chart {
   margin: 0;
   background: var(--sheet);
@@ -517,68 +390,12 @@
   font-size: 0.8125rem;
 }
 
-.dash-two {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: var(--sp-6);
-}
-.dash-feed {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-.dash-feed li {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  padding: 0.55rem 0;
-  border-bottom: 1px solid var(--rule-soft);
-  animation: feed-in 0.4s ease-out;
-}
-@keyframes feed-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-}
-.feed-ok,
-.feed-bad {
-  flex: none;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-.feed-ok {
-  background: var(--ok-soft);
-  color: var(--ok);
-}
-.feed-bad {
-  background: var(--pen-soft);
-  color: var(--pen);
-}
-.feed-what {
-  display: flex;
-  flex-direction: column;
-  color: var(--ink);
-}
-.feed-what small {
-  color: var(--ink-3);
-  font-size: 0.8125rem;
-}
-
-/* Fixed checks */
 .dash-checks {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-3);
 }
 .dash-checks li {
@@ -588,21 +405,17 @@
   padding: var(--sp-4);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-}
-.check-k {
-  color: var(--ink-3);
-  font-size: var(--fs-sm);
+  gap: 0.25rem;
 }
 .dash-checks strong {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
   color: var(--ink);
-  font-size: var(--fs-base);
-  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
 }
-.dash-checks small {
-  color: var(--ink-3);
-  font-size: 0.8125rem;
-  overflow-wrap: anywhere;
+.dash-checks span {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.35;
 }
 
 /* MCP */
@@ -674,17 +487,15 @@
 }
 
 @media (max-width: 960px) {
-  .pillars,
-  .dash-charts,
-  .dash-two,
-  .mcp-grid,
-  .dash-checks {
+  .part,
+  .mcp-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .dash-kpis {
-    grid-template-columns: repeat(2, 1fr);
+  .part:nth-child(even) .part-copy {
+    order: 0;
   }
-  .pillar-stage {
-    min-height: 0;
+  .dash-kpis,
+  .dash-checks {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
