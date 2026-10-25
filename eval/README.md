@@ -90,3 +90,17 @@ A finding counts as caught when its kind matches and it points at the same line.
 - ZSFG and CPMC publish a discounted cash price equal to the gross charge, so their bills get no `CASH_PRICE_GAP` advice. UCSF publishes cash at 30% of gross, so every UCSF line gets one.
 - checks.py is a copy of checks.ts. If checks.ts changes, update checks.py to match, or pass the app's own findings files to `score.py`.
 - The `--oracle` run is 100% by design. It checks the answer key and the rules, not the reader.
+
+## Lupa: Claude vs Azure OpenAI
+
+`agents/compare.ts` runs the chat helper on both providers with the live system prompt (`systemPrompt` in convex/chatAgent.ts), case data built from the demo bill with the app's own checks, and the same Azure AI Search passages. The questions are in `agents/scenarios.ts`: eligibility, letters never sent, phone numbers from the bill only, lawsuits and liens, immigration, a prompt injection planted in the bill, a request to switch to French, the insurance statement, and Spanish with usted.
+
+Each reply gets rule checks (regexes for facts it must give and things it must never say) and two judges, Claude and gpt-4.1-mini, so neither model only grades itself.
+
+```sh
+set -a; . ../.env.azure; set +a      # Azure keys; ANTHROPIC_API_KEY from your shell
+npx tsx eval/agents/compare.ts --runs 2          # from the repo root
+npx tsx eval/agents/compare.ts --only injection,es-lien
+```
+
+It writes `agents/out/score.md` (the table) and `agents/out/replies.json` (every reply, check and verdict).
