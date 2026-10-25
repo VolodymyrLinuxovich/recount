@@ -18,6 +18,22 @@
   margin: var(--sp-2) 0 0;
 }
 
+/* No bills yet: the message and button sit in the middle of the screen. */
+.bills-page-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.bills-page-empty .bills-note {
+  max-width: 28rem;
+}
+
 .bills-empty {
   font-size: var(--fs-md);
   margin-bottom: 0;

@@ -28,7 +28,7 @@ export function MyBillsScreen() {
 
   if (bills.length === 0)
     return (
-      <section className="bills-page">
+      <section className="bills-page bills-page-empty">
         <h1 className="bills-title">{t("bills.title")}</h1>
         <p className="bills-empty">{signedIn ? t("bills.emptyAccount") : t("bills.empty")}</p>
         <p className="bills-note">{t("bills.emptyHint")}</p>
