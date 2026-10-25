@@ -6,11 +6,11 @@
     "sections": [
       {
         "h": "What we store",
-        "p": "In our database (Convex): the bill photo or PDF you upload, what we read from it (hospital, charges, account number, and the patient's name and address if they're printed), your answers to the questions (household size, yearly income, insurance, medical costs), the letters, the steps the app took, a record of each AI call (which service and model, how long, how many words; never the content), and your questions to Lupa. Long numbers that look like Social Security or account numbers are removed from Lupa messages before they're stored."
+        "p": "In our database (Convex): the bill photo or PDF you upload, what we read from it (hospital, charges, account number, and the patient's name and address if they're printed), your answers to the questions (household size, yearly income, insurance, medical costs), the letters, the steps the app took, a record of each AI call (which service and model, how long, how many words; never the content), your questions to Lupa, and any photo or PDF you attach in the chat with Lupa. Long numbers that look like Social Security or account numbers are removed from Lupa messages before they're stored."
       },
       {
         "h": "Who helps process it",
-        "p": "To read your bill, write your letters and answer your questions, the bill image and the facts about your bill are sent to Anthropic's Claude API. Anthropic handles that data under its own commercial terms and retention policy. To look up a hospital's prices, our Apify Actor receives only the hospital's name, website and the billing codes on the bill. Never your name, account number or income. The web app is hosted on Vercel."
+        "p": "To read your bill, write your letters and answer your questions, the bill image, the facts about your bill, and any photo or PDF you attach in the chat with Lupa are sent to Anthropic's Claude API. Anthropic handles that data under its own commercial terms and retention policy. To look up a hospital's prices, our Apify Actor receives only the hospital's name, website and the billing codes on the bill. Never your name, account number or income. The web app is hosted on Vercel."
       },
       {
         "h": "Who can see it",
@@ -26,19 +26,19 @@
       },
       {
         "h": "How long we keep it",
-        "p": "Until you delete it. There is no automatic deletion yet."
+        "p": "Until you delete it. The one exception: a photo or PDF you attach in the chat with Lupa is deleted 30 days after you send it."
       },
       {
         "h": "How to delete it",
-        "p": "Open the bill and tap \"Delete this bill\". It removes the bill, the photo, the steps, the AI call records and its Lupa chat from our database right away. To delete your account, go to Your account and tap \"Delete my account\": it removes your email, password hash, profile and sign-in records, and, if you choose, all your bills. Copies the AI and safety services may hold follow their own policies, not ours."
+        "p": "Open the bill and tap \"Delete this bill\". It removes the bill, the photo, the steps, the AI call records and its Lupa chat, with any files you attached there, from our database right away. To delete your account, go to Your account and tap \"Delete my account\": it removes your email, password hash, profile and sign-in records, and, if you choose, all your bills. Copies the AI and safety services may hold follow their own policies, not ours."
       }
     ],
     "back": "Back to Recount",
     "azure": {
-      "fallback": "If Claude is unavailable, the facts for your letters and your questions to Lupa go to Microsoft's Azure OpenAI Service instead.",
+      "fallback": "If Claude is unavailable, the facts for your letters, your questions to Lupa and any file you attach in that chat go to Microsoft's Azure OpenAI Service instead.",
       "retention": "Microsoft may keep data sent to Azure OpenAI for up to 30 days to check for abuse.",
       "search": "To find passages in hospitals' public policies, each question to Lupa and the hospital's name are sent to Microsoft Azure (Azure OpenAI and Azure AI Search).",
-      "safety": "Each message to Lupa and each reply is also checked by Microsoft's Azure AI Content Safety service.",
+      "safety": "The text of each message to Lupa and each reply is also checked by Microsoft's Azure AI Content Safety service. Attached files are not sent to it.",
       "docIntel": "Your bill image is also sent to Microsoft's Azure AI Document Intelligence, which reads the charges a second time so we can compare the two reads."
     }
   },
@@ -49,11 +49,11 @@
     "sections": [
       {
         "h": "Qué guardamos",
-        "p": "En nuestra base de datos (Convex): la foto o el PDF de la factura que usted sube, lo que leemos de ella (el hospital, los cargos, el número de cuenta, y el nombre y la dirección del paciente si aparecen), sus respuestas a las preguntas (cuántas personas hay en su hogar, ingresos anuales del hogar, seguro, gastos médicos), las cartas, los pasos que hizo la aplicación, un registro de cada uso de IA (qué servicio y modelo, cuánto tardó y cuántas palabras; nunca el contenido) y sus preguntas a Lupa. Los números largos que parecen de Seguro Social o de cuenta se borran de los mensajes a Lupa antes de guardarlos."
+        "p": "En nuestra base de datos (Convex): la foto o el PDF de la factura que usted sube, lo que leemos de ella (el hospital, los cargos, el número de cuenta, y el nombre y la dirección del paciente si aparecen), sus respuestas a las preguntas (cuántas personas hay en su hogar, ingresos anuales del hogar, seguro, gastos médicos), las cartas, los pasos que hizo la aplicación, un registro de cada uso de IA (qué servicio y modelo, cuánto tardó y cuántas palabras; nunca el contenido) sus preguntas a Lupa, y cualquier foto o PDF que adjunte en el chat con Lupa. Los números largos que parecen de Seguro Social o de cuenta se borran de los mensajes a Lupa antes de guardarlos."
       },
       {
         "h": "Quién nos ayuda a procesarlo",
-        "p": "Para leer su factura, escribir sus cartas y responder sus preguntas, la imagen de la factura y los datos de la factura se envían a la API de Claude de Anthropic. Anthropic trata esos datos según los términos comerciales y la política de retención de Anthropic. Para buscar los precios de un hospital, nuestro Actor de Apify recibe solo el nombre del hospital, su sitio web y los códigos de facturación. Nunca su nombre, su número de cuenta ni los ingresos de su hogar. La aplicación web está alojada en Vercel."
+        "p": "Para leer su factura, escribir sus cartas y responder sus preguntas, la imagen de la factura, los datos de la factura y cualquier foto o PDF que adjunte en el chat con Lupa se envían a la API de Claude de Anthropic. Anthropic trata esos datos según los términos comerciales y la política de retención de Anthropic. Para buscar los precios de un hospital, nuestro Actor de Apify recibe solo el nombre del hospital, su sitio web y los códigos de facturación. Nunca su nombre, su número de cuenta ni los ingresos de su hogar. La aplicación web está alojada en Vercel."
       },
       {
         "h": "Quién puede verlo",
@@ -69,19 +69,19 @@
       },
       {
         "h": "Cuánto tiempo lo guardamos",
-        "p": "Hasta que usted lo borre. Todavía no hay borrado automático."
+        "p": "Hasta que usted lo borre. La única excepción: una foto o un PDF que adjunte en el chat con Lupa se borra 30 días después de enviarlo."
       },
       {
         "h": "Cómo borrarlo",
-        "p": "Abra la factura y toque \"Borrar esta factura\". Se borran de nuestra base de datos, de inmediato, la factura, la foto, los pasos, los registros de uso de IA y su chat con Lupa. Para borrar su cuenta, vaya a Su cuenta y toque \"Borrar mi cuenta\": se borran su correo, el código de su contraseña (hash), sus datos y sus registros de inicio de sesión y, si usted lo elige, todas sus facturas. Las copias que los servicios de IA y de seguridad puedan tener siguen sus propias políticas, no la nuestra."
+        "p": "Abra la factura y toque \"Borrar esta factura\". Se borran de nuestra base de datos, de inmediato, la factura, la foto, los pasos, los registros de uso de IA y su chat con Lupa, con los archivos que haya adjuntado ahí. Para borrar su cuenta, vaya a Su cuenta y toque \"Borrar mi cuenta\": se borran su correo, el código de su contraseña (hash), sus datos y sus registros de inicio de sesión y, si usted lo elige, todas sus facturas. Las copias que los servicios de IA y de seguridad puedan tener siguen sus propias políticas, no la nuestra."
       }
     ],
     "back": "Volver a Recount",
     "azure": {
-      "fallback": "Si Claude no está disponible, los datos para sus cartas y sus preguntas a Lupa se envían al servicio Azure OpenAI de Microsoft.",
+      "fallback": "Si Claude no está disponible, los datos para sus cartas, sus preguntas a Lupa y cualquier archivo que adjunte en ese chat se envían al servicio Azure OpenAI de Microsoft.",
       "retention": "Microsoft puede guardar los datos enviados a Azure OpenAI hasta 30 días para detectar abusos.",
       "search": "Para encontrar partes de las políticas públicas de los hospitales, cada pregunta a Lupa y el nombre del hospital se envían a Microsoft Azure (Azure OpenAI y Azure AI Search).",
-      "safety": "Cada mensaje a Lupa y cada respuesta también pasan por el servicio Azure AI Content Safety de Microsoft.",
+      "safety": "El texto de cada mensaje a Lupa y de cada respuesta también pasa por el servicio Azure AI Content Safety de Microsoft. Los archivos adjuntos no se envían a ese servicio.",
       "docIntel": "La imagen de su factura también se envía al servicio Azure AI Document Intelligence de Microsoft, que lee los cargos una segunda vez para que podamos comparar las dos lecturas."
     }
   }

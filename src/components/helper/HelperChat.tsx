@@ -1,11 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Component, type FormEvent, type ReactNode, type RefObject, Suspense, type KeyboardEvent, type PointerEvent, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { type ChangeEvent, Component, type FormEvent, type ReactNode, type RefObject, Suspense, type KeyboardEvent, type PointerEvent, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { tokenFor, tokenFromLink } from "../bills/myBills";
 import { useT } from "../i18n/I18nProvider";
 import type { PlainKey } from "../i18n/strings";
-import { type SendError, useChat, useSessionId } from "./chatApi";
+import { type Attachment, type ChatMessage, type SendError, useChat, useSessionId } from "./chatApi";
+import { FileProblem, prepareFile } from "../prepareFile";
 import { TypedText } from "./TypedText";
 import { Mascot } from "./Mascot";
 import { lastTrigger, setHelperOpen, useHelperOpen } from "./openStore";
@@ -17,6 +18,12 @@ const SENSITIVE = /\b\d{3}[- ]?\d{2}[- ]?\d{4}\b|\b(?:\d[ -]?){12,19}\b|\b(?:rou
 const CASE_QS: PlainKey[] = ["helper.qCase1", "helper.qCase2", "helper.qCase3"];
 const START_QS: PlainKey[] = ["helper.qStart1", "helper.qStart2", "helper.qStart3"];
 type PanelError = SendError | "sensitive";
+
+/** Same limits as the server (convex/lib/attach.ts). */
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const MAX_PDF_BYTES = 10 * 1024 * 1024;
+
+type Picked = Attachment & { preview: string | null };
 
 function errorText(e: PanelError, t: ReturnType<typeof useT>["t"]) {
   if (e === "sensitive") return t("helper.sensitive");
@@ -162,6 +169,13 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
   const error = errorState?.key === ctxKey ? errorState.e : null;
   const [sending, setSending] = useState(false);
   const [drag, setDrag] = useState(0);
+  const [file, setFile] = useState<Picked | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const attachRef = useRef<HTMLButtonElement>(null);
+  // A thumbnail's object URL is freed when the file is removed, sent or the panel goes away.
+  useEffect(() => () => {
+    if (file?.preview) URL.revokeObjectURL(file.preview);
+  }, [file]);
 
   const launcherRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -228,18 +242,45 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
 
   async function ask(text: string) {
     const q = text.trim();
-    if (!q || busy) return;
+    if ((!q && !file) || busy) return;
     // Never send a Social Security number or bank account details, even by accident.
-    if (SENSITIVE.test(q)) {
+    if (q && SENSITIVE.test(q)) {
       setErrorState({ e: "sensitive", key: ctxKey });
       return;
     }
     setSending(true);
     setErrorState(null);
-    const err = await send(q, lang);
+    const err = await send(q, lang, file);
     setSending(false);
     if (err) setErrorState({ e: err, key: ctxKey });
-    else setDraft("");
+    else {
+      setDraft("");
+      setFile(null);
+    }
+  }
+
+  async function onPickFile(e: ChangeEvent<HTMLInputElement>) {
+    const picked = e.target.files?.[0];
+    e.target.value = ""; // choosing the same file again still fires
+    if (!picked) return;
+    setErrorState(null);
+    try {
+      const { blob, type } = await prepareFile(picked);
+      if (blob.size > (type === "application/pdf" ? MAX_PDF_BYTES : MAX_IMAGE_BYTES)) {
+        setErrorState({ e: { text: t("helper.fileTooBig") }, key: ctxKey });
+        return;
+      }
+      setFile({ blob, type, name: picked.name || (type === "application/pdf" ? "document.pdf" : "photo.jpg"), preview: type.startsWith("image/") ? URL.createObjectURL(blob) : null });
+    } catch (err) {
+      const key = err instanceof FileProblem ? (err.key === "file.pdfTooBig" ? "helper.fileTooBig" : err.key) : "file.cantOpen";
+      setErrorState({ e: { text: t(key) }, key: ctxKey });
+    }
+    inputRef.current?.focus({ preventScroll: true });
+  }
+
+  function removeFile() {
+    setFile(null);
+    attachRef.current?.focus({ preventScroll: true });
   }
 
   // The chips disappear once a question is sent, so keep keyboard focus in the chat: on the input.
@@ -381,7 +422,10 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
             m.role === "user" ? (
               <div key={m.id} className="helper-msg helper-msg--you">
                 <span className="visually-hidden">{t("helper.you")}: </span>
-                <p className="helper-bubble helper-bubble--you">{m.content}</p>
+                <div className="helper-you-stack">
+                  {m.file && <SentFile file={m.file} t={t} />}
+                  {m.content && <p className="helper-bubble helper-bubble--you">{m.content}</p>}
+                </div>
               </div>
             ) : m.pending && !m.content ? null : (
               <div key={m.id} className="helper-msg helper-msg--lupa">
@@ -402,7 +446,61 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
         </div>
 
         <form className="helper-form" onSubmit={onSubmit}>
+          {file && (
+            <div className="helper-attached">
+              {file.preview ? (
+                // eslint-disable-next-line @next/next/no-img-element -- a local preview (blob: URL)
+                <img src={file.preview} alt="" className="helper-attached-thumb" />
+              ) : (
+                <span className="helper-attached-pdf" aria-hidden="true">
+                  {t("helper.pdf")}
+                </span>
+              )}
+              <span className="helper-attached-name">
+                <span className="visually-hidden">{t("helper.attachedFile")}: </span>
+                {file.name}
+              </span>
+              <button type="button" className="helper-attached-remove" onClick={removeFile} disabled={sending} aria-label={t("helper.removeFile", { name: file.name })}>
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+          )}
+          {sending && file && (
+            <p className="helper-note" role="status">
+              {t("helper.uploading")}
+            </p>
+          )}
           <div className="helper-input-row">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,application/pdf,.pdf,.heic,.heif"
+              hidden
+              tabIndex={-1}
+              onChange={onPickFile}
+            />
+            <button
+              ref={attachRef}
+              type="button"
+              className="helper-attach"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={busy}
+              aria-label={t("helper.attach")}
+              title={t("helper.attachHint")}
+            >
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path
+                  d="M20 11.5l-7.8 7.8a5 5 0 01-7.1-7.1l8.5-8.5a3.3 3.3 0 014.7 4.7l-8.5 8.5a1.7 1.7 0 01-2.4-2.4l7.8-7.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
             <label htmlFor="helper-input" className="visually-hidden">
               {t("helper.inputLabel")}
             </label>
@@ -418,7 +516,7 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={onInputKey}
             />
-            <button type="submit" className="helper-send" disabled={busy || !draft.trim()} aria-label={t("helper.send")}>
+            <button type="submit" className="helper-send" disabled={busy || (!draft.trim() && !file)} aria-label={t("helper.send")}>
               <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
                 <path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -443,5 +541,27 @@ function HelperChatInner({ offline = false }: { offline?: boolean }) {
         </form>
       </div>
     </>
+  );
+}
+
+/** The photo or PDF in the patient's own bubble. */
+function SentFile({ file, t }: { file: NonNullable<ChatMessage["file"]>; t: ReturnType<typeof useT>["t"] }) {
+  if (!file.url) return <p className="helper-sent-file helper-sent-file--gone">{t("helper.fileGone")}</p>;
+  if (file.type.startsWith("image/")) {
+    return (
+      <a href={file.url} target="_blank" rel="noopener noreferrer" className="helper-sent-photo" aria-label={t("helper.openFile")}>
+        {/* eslint-disable-next-line @next/next/no-img-element -- a private Convex storage URL */}
+        <img src={file.url} alt={t("helper.attachedPhoto")} loading="lazy" />
+      </a>
+    );
+  }
+  return (
+    <a href={file.url} target="_blank" rel="noopener noreferrer" className="helper-sent-file">
+      <span className="helper-attached-pdf" aria-hidden="true">
+        {t("helper.pdf")}
+      </span>
+      <span className="helper-attached-name">{file.name ?? t("helper.attachedFile")}</span>
+      <span className="visually-hidden"> ({t("helper.openFile")})</span>
+    </a>
   );
 }

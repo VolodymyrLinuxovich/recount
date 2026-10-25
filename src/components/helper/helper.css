@@ -600,3 +600,125 @@
   color: var(--pen);
   font-weight: 700;
 }
+
+/* ---- attachments ---- */
+
+.helper-attach {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1.5px solid var(--ink-2);
+  background: var(--sheet);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.helper-attach:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.helper-attach:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.helper-attached {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  padding: 6px 6px 6px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--sheet);
+}
+
+.helper-attached-thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex: none;
+}
+
+.helper-attached-pdf {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-size: var(--fs-xs, 14px);
+  font-weight: 700;
+}
+
+.helper-attached-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+}
+
+.helper-attached-remove {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.helper-attached-remove:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.helper-you-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-1);
+  width: 100%;
+}
+
+.helper-sent-photo img {
+  display: block;
+  max-width: 180px;
+  max-height: 180px;
+  border-radius: 12px;
+  border: 1px solid var(--rule);
+  object-fit: cover;
+}
+
+.helper-sent-file {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  max-width: 260px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: var(--accent-soft);
+  color: var(--ink);
+  text-decoration: none;
+  margin: 0;
+}
+
+.helper-sent-file--gone {
+  padding: 8px 12px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}

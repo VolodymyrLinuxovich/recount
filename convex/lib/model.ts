@@ -26,7 +26,8 @@ export type Provider = "anthropic" | "openai" | "azure";
 /** A piece of the user's message: text, or a file (image or PDF) as base64. */
 export type Part = { type: "text"; text: string } | { type: "file"; mediaType: string; data: string };
 
-export type ChatMessage = { role: "user" | "assistant"; content: string };
+/** A chat turn. A patient's turn may carry files (a photo or PDF they attached), sent before the text. */
+export type ChatMessage = { role: "user" | "assistant"; content: string; files?: Part[] };
 
 /** What we record about every model call. Never the prompt or the bill. */
 export type Run = {
@@ -132,7 +133,7 @@ async function anthropicStructured<T>(model: string, system: string | undefined,
 
 async function anthropicChat(model: string, system: string, messages: ChatMessage[], maxTokens: number, onText: (t: string) => void, hasFallback: boolean) {
   const client = anthropicClient(hasFallback);
-  const stream = client.messages.stream({ model, max_tokens: maxTokens, output_config: { effort: "low" }, system, messages });
+  const stream = client.messages.stream({ model, max_tokens: maxTokens, output_config: { effort: "low" }, system, messages: messages.map(anthropicTurn) });
   let text = "";
   stream.on("text", (d) => {
     text += d;
@@ -146,6 +147,12 @@ async function anthropicChat(model: string, system: string, messages: ChatMessag
     outputTokens: final.usage?.output_tokens ?? null,
     model: final.model ?? model,
   };
+}
+
+function anthropicTurn(m: ChatMessage): Anthropic.MessageParam {
+  if (m.role !== "user" || !m.files?.length) return { role: m.role, content: m.content };
+  // The beta and plain block shapes are the same for text, image and document blocks.
+  return { role: "user", content: anthropicContent([...m.files, { type: "text", text: m.content }]) as Anthropic.ContentBlockParam[] };
 }
 
 // ---------- OpenAI-compatible (OpenAI, Azure OpenAI, Azure AI Foundry, others) ----------
@@ -209,7 +216,10 @@ async function openaiChat(provider: Provider, model: string, system: string, mes
     max_completion_tokens: maxTokens,
     stream: true,
     stream_options: { include_usage: true },
-    messages: [{ role: "system", content: system }, ...messages],
+    messages: [
+      { role: "system", content: system },
+      ...messages.map((m) => (m.role === "user" && m.files?.length ? { role: "user", content: openaiContent([...m.files, { type: "text", text: m.content }]) } : { role: m.role, content: m.content })),
+    ],
   });
   let text = "";
   let usage: { prompt_tokens?: number; completion_tokens?: number } | undefined;

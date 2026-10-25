@@ -15,6 +15,15 @@ export interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   pending: boolean;
+  /** An attached photo or PDF: its type, a short name, and a link while the file is kept (30 days). */
+  file: { type: string; name?: string; url: string | null } | null;
+}
+
+/** A file ready to send with the next message (see prepareFile). */
+export interface Attachment {
+  blob: Blob;
+  type: string;
+  name: string;
 }
 
 /** Why a send failed: the server's own words (already in the patient's language), or a generic failure. */
@@ -85,28 +94,37 @@ export function useChat({
   const id = caseId as Id<"cases"> | undefined;
   const rows = useQuery(api.chat.list, sessionId ? { sessionId, caseId: id, token } : "skip");
   const sendMutation = useMutation(api.chat.send);
+  const uploadUrl = useMutation(api.chat.generateUploadUrl);
 
   const messages: ChatMessage[] | undefined = rows?.map((m) => ({
     id: m._id,
     role: m.role,
     content: m.content,
     pending: m.pending,
+    file: m.fileType ? { type: m.fileType, name: m.fileName, url: m.fileUrl } : null,
   }));
   /** A reply was asked for and nothing has arrived yet: show the mascot thinking. */
   const waiting = !!messages?.some((m) => m.role === "assistant" && m.pending && !m.content);
   const streaming = !!messages?.some((m) => m.role === "assistant" && m.pending);
 
   const send = useCallback(
-    async (content: string, lang: Lang): Promise<SendError | null> => {
+    async (content: string, lang: Lang, file?: Attachment | null): Promise<SendError | null> => {
       if (!sessionId) return "failed";
       try {
-        await sendMutation({ sessionId, caseId: id, token, lang, content });
+        let attach = {};
+        if (file) {
+          const res = await fetch(await uploadUrl({ lang }), { method: "POST", headers: { "Content-Type": file.type }, body: file.blob });
+          if (!res.ok) return "failed";
+          const { storageId } = (await res.json()) as { storageId: Id<"_storage"> };
+          attach = { fileId: storageId, fileType: file.type, fileName: file.name };
+        }
+        await sendMutation({ sessionId, caseId: id, token, lang, content, ...attach });
         return null;
       } catch (e) {
         return readError(e);
       }
     },
-    [sendMutation, sessionId, id, token],
+    [sendMutation, uploadUrl, sessionId, id, token],
   );
 
   return { messages, waiting, streaming, send };
