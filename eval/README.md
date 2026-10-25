@@ -91,6 +91,53 @@ A finding counts as caught when its kind matches and it points at the same line.
 - checks.py is a copy of checks.ts. If checks.ts changes, update checks.py to match, or pass the app's own findings files to `score.py`.
 - The `--oracle` run is 100% by design. It checks the answer key and the rules, not the reader.
 
+## Hard set (`hard/`)
+
+The 30-bill set above is one layout in printed type, so it says little about real paper. `hard/` makes it harder:
+
+- **Six bill layouts** (`hard/layouts.py`): the classic statement; an itemized statement like big hospital billing systems print (lines grouped by revenue code with a subtotal row per group, payments in their own table, a payment coupon); a summary with revenue codes only; a 2 to 4 page bill with page subtotals and the total only on the last page; a UB-04-like claim form (MMDDYY dates, dollars and cents in separate boxes, totals on line 23 with revenue code 0001); a collection agency letter, with the hospital's itemization or with only the balance.
+- **Hard photo conditions** (`hard/conditions.py`, PIL, numpy and OpenCV): crumpled, folded, shot at an angle with up to 12 degrees of tilt, hard hand shadows, low light, blur, glare, cropped edges, pen circles, check marks and notes (some next to a charge, like "450" or "paid 50"), highlighter and coffee rings.
+- **24 insurance statement pairs** (`hard/eob_generate.py`): claims from the EOB eval in four EOB layouts (the classic one, a box per service, a dense table with footnoted reason codes, a claim decision letter), some with a second claim (the ER doctors' group) on the same page, under the same conditions. Denied lines, whole denied claims, pending claims, out-of-network ER, a bill that skips the plan discount, a line the plan never got, a statement for another provider.
+- **Two splits.** `dev` (25 bills, 12 pairs) is what we looked at and fixed against. `holdout` (25 bills, 12 pairs, other seeds) is only scored.
+
+`hard/run.ts` runs the app's own code, not a copy: `structured()` in convex/lib/model.ts, the prompts read from convex/agent.ts, Document Intelligence through convex/lib/docIntel.ts, the hospital match, and `allFindings`. It repeats only the glue of `readAndCheck` (the two reads, the comparison, the RETAKE and NOT_A_BILL stops). Document Intelligence results are cached in `out/hard-docintel/`.
+
+```sh
+python -I hard/generate.py && python -I hard/eob_generate.py            # images + answer keys -> out/hard/, out/hard-eob/
+npx tsx eval/hard/run.ts --set bills --oracle                              # the app's rules on the answer keys: must be 50/50
+npx tsx eval/hard/run.ts --set bills --env .env.local --docintel-only      # fill the Document Intelligence cache, waiting out 429s
+npx tsx eval/hard/run.ts --set bills --env .env.local --out hard-after     # read and check every bill
+npx tsx eval/hard/run.ts --set eob --env .env.local --out hard-eob-after
+python -I hard/score.py --set bills --pred hard-after                      # out/hard-after/score.md
+python -I hard/score.py --set eob --pred hard-eob-after
+```
+
+`hard/sample/` has a few of the images, small. The full set (about 15 MB) is generated, not committed.
+
+### Results (2026-10-25, synthetic documents only)
+
+Bills, Claude Opus 5.5 reading, Document Intelligence as the second read, then the rules:
+
+| | lines right | totals right | errors caught | false alarms | clean bills with an alarm | bills fully right | stopped as "retake" |
+|---|---|---|---|---|---|---|---|
+| before fixes, dev (25) | 261/271 | 23/25 | 19/22 | 10 | 0/4 | 21/25 | 2 |
+| before fixes, held out (25) | 250/265 | 23/25 | 19/22 | 5 | 0/4 | 18/25 | 2 |
+| after fixes, dev | 266/271 | 25/25 | 22/22 | 4 | 0/4 | 23/25 | 0 |
+| **after fixes, held out** | **260/265** | **25/25** | **22/22** | **4** | **0/4** | **23/25** | **0** |
+
+After the fixes, per condition (a bill counts under each of its conditions): crumpled, folded, angle, shadow, glare, crop, coffee and highlighter bills read 100% of their lines; pen marks 120/123; low light 35/45 and blur 33/43. Every false alarm left is on a photo that is both dim and blurred, where the reader misread an amount (and said it was unsure). Per layout: classic, multi-page and collection letters 100%; itemized-by-department 65/69; UB-04 57/60; summary 28/31.
+
+The "after" run reuses the "before" run's Claude reads (the read prompt didn't change), so the difference is the fixes alone. The second read lined up with the first, line for line, on 34 of 50 bills. On the rest it found fewer lines (a crumpled or angled photo, a 3-page PDF on the free tier, which reads only 2 pages, or no table at all on 8 bills, where the app falls back to a Claude read of the charges column), so the comparison is skipped and the app says so.
+
+Insurance statements (24 pairs, read bill + read statement, then the rules): **22 of 22** planted problems caught with the right dollar amount, **0** false alarms, 129 of 129 statement lines read. The "you may owe" total was right on 23 of 24; the miss is a crumpled, cropped statement with two claims on one page, where the reader mixed the claims. The fixes didn't change these numbers.
+
+### What the hard set found, and the fixes
+
+1. **UB-04 split cents.** "11963 00" (dollars and cents in separate boxes) was parsed as $1,196,300 by stripping the space, so every line looked far above the list price. `convex/lib/amount.ts` now reads printed amounts one way for every read: split cents, a pen mark next to a charge ("135.00 45" was read as 135.0045 by the table parser), parentheses, and nothing else.
+2. **Collection letters and summaries with only a balance** were sent back as "retake the photo" because no lines were read. `balanceOnly` (convex/lib/bill.ts) lets them through, and the checks ask for an itemized bill.
+3. **When the two reads disagree,** the app used to take the second read's amount. On these photos the full read was right on 18 of 25 disagreeing lines and the second read on 3, so the app now keeps the full read's amount and still asks the patient to pick.
+4. Not fixed: Document Intelligence on the free tier answers 429 under load (the app falls back to a Claude read of the charges column), and dim plus blurred photos are still misread now and then. The reader flags those as hard to read, so the total check says the gap may be our misreading.
+
 ## Lupa: Claude vs Azure OpenAI
 
 `agents/compare.ts` runs the chat helper on both providers with the live system prompt (`systemPrompt` in convex/chatAgent.ts), case data built from the demo bill with the app's own checks, and the same Azure AI Search passages. The questions are in `agents/scenarios.ts`: eligibility, letters never sent, phone numbers from the bill only, lawsuits and liens, immigration, a prompt injection planted in the bill, a request to switch to French, the insurance statement, and Spanish with usted.

@@ -18,7 +18,7 @@ Judging: Sun 10:30 AM to 12:30 PM at my table. 3 minutes of pitch, 2 minutes of 
 | **$349** | Two billing errors on it: a duplicate blood count ($269) and an X-ray $80 over the hospital's own list price. | "we saved $349" (Recount flags; the patient asks) |
 | **$0** | What a single person earning $20,000 likely owes there: 125% of poverty, and SF General's policy gives free care up to 138%. | "you owe $0" (say "likely owes") |
 
-Backup numbers, only if asked: price checks for 240 of 470 hospitals, at 4 of 6 SF hospitals the cash price is the full sticker price on every item, 2,333 policy documents, 997 sentences reviewed, 181 of 181 bill lines read right on 30 test bills, about 4 cents of model cost per bill read, about 17 seconds for a live Actor run.
+Backup numbers, only if asked: price checks for 240 of 470 hospitals, at 4 of 6 SF hospitals the cash price is the full sticker price on every item, 2,333 policy documents, 997 sentences reviewed, 181 of 181 bill lines read right on 30 test bills, and on 25 held-out hard bills (crumpled, dim, blurred, pen marks, six layouts) 260 of 265 lines with 22 of 22 errors caught, all synthetic, about 4 cents of model cost per bill read, about 17 seconds for a live Actor run.
 
 ---
 
@@ -165,7 +165,7 @@ Say this unprompted if a judge looks skeptical. It earns trust.
 Two independent reads of the charges. If they disagree, the patient taps the number printed on their paper. Totals are checked against the printed total, any line can be corrected on screen, and eligibility comes from the patient's own answers, not the photo.
 
 **"30 of 30 sounds too good."**
-It is good on clean, typical bills, and that's all it shows. They're generated: printed type, one layout, photos with tilt and blur. Crumpled, dim or handwritten bills are harder, and that's why the second read and the tap-to-confirm exist.
+It is good on clean, typical bills, and that's all it shows. So I made a harder set: 50 bills in six layouts, including a UB-04-like form and collection letters, photographed crumpled, folded, at an angle, dim, blurred, with glare and pen notes. I held half out and only scored it. On that half Claude read 260 of 265 lines and the app caught 22 of 22 errors, with no false alarm on a clean bill. Dim and blurred photos are the weak spot, 78% of lines, and the reader says when it's unsure. It also found three real bugs I fixed, like a UB-04's split cents read as $1.2 million. Still synthetic: real patient bills can't be used.
 
 **"Isn't 24 of 24 just your rules grading themselves?"**
 The rules alone, on a perfect reading, is a sanity check, yes. The meaningful number is end to end: Claude reads the image, then the rules run on what it read. That still caught 24 of 24 with no false alarms on the 8 clean bills.
@@ -273,6 +273,9 @@ Checked 2026-10-24 against main at ef6778b and the live site.
 | Sample income | 125% of poverty | 20,000 / 15,960 = 125.3% |
 | Eval reading (Claude) | 30 of 30 bills, 181 of 181 lines | `eval/score.py --pred preds`, rerun 2026-10-24; README "The bill checks" |
 | Eval errors (Claude, end to end) | 24 of 24 caught, 0 false alarms on 8 clean bills | same run |
+| Hard eval, held-out bills (after fixes) | 25 bills: 260 of 265 lines, 25 of 25 totals, 22 of 22 caught, 4 false alarms (all dim + blurred photos), 0 on clean bills; before fixes 250 of 265, 19 of 22, 2 sent back as retake | `eval/hard/run.ts` + `score.py`, 2026-10-25; eval/README "Hard set" |
+| Hard eval, all 50 bills per condition | crumpled, folded, angled, shadow, glare, crop, coffee, highlighter 100% of lines; pen 98%; low light 78%; blur 77% | same run |
+| Hard eval, insurance statements | 24 pairs, 4 statement layouts: 22 of 22 planted problems caught with the right amount, 0 false alarms, 129 of 129 statement lines | same run |
 | Eval (Azure gpt-4.1-mini as reader) | 30 bills, 173 of 181 lines (95.6%), 18 of 24 caught (missed 4 not itemized, 2 above list price), 0 false alarms on clean bills | `eval/score.py --pred preds-azure`, rerun 2026-10-24 evening |
 | Lupa comparison | Claude 47 of 47 rule checks (47 of 48 replies came back); gpt-4.1-mini 42 of 48; median full reply 4.6 s vs 2.5 s | `eval/agents/compare.ts --runs 2`, `eval/agents/out/score.md`; commit ef6778b |
 | Cost per read | about $0.04 (2,449 in, 1,422 out tokens) | `docs/NUMBERS-CHECK.md` |

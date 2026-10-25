@@ -19,7 +19,8 @@ import { z } from "zod";
 import { internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import { internalAction, type ActionCtx } from "./_generated/server";
-import { ParsedBill } from "./lib/bill";
+import { balanceOnly, ParsedBill } from "./lib/bill";
+import { printedAmount } from "./lib/amount";
 import { potentialSavings, type Finding } from "./lib/checks";
 import { EobRead, fromEobRead, normalizeEobDates, ParsedEob } from "./lib/eob";
 import { allFindings } from "./lib/eobChecks";
@@ -100,8 +101,8 @@ async function readBill(pages: PageFile[], lang: Lang, record: (r: Run) => Promi
   const bill = {
     ...parsed,
     lines: parsed.lines.map((l) => {
-      const fromText = Number(String(l.chargePrinted ?? "").replace(/[^0-9.\-]/g, ""));
-      return Number.isFinite(fromText) && /\d/.test(l.chargePrinted ?? "") ? { ...l, charge: fromText } : l;
+      const fromText = printedAmount(l.chargePrinted);
+      return fromText !== null ? { ...l, charge: fromText } : l;
     }),
   };
   // Bills print names in capitals; letters read better as "Maria Hernandez".
@@ -206,8 +207,8 @@ async function readChargesColumn(pages: PageFile[], record: (r: Run) => Promise<
   );
   const raw = res.data?.charges;
   if (!raw) return null;
-  const nums = raw.map((x) => Number(x.replace(/[^0-9.\-]/g, "")));
-  return nums.every((n) => Number.isFinite(n)) ? nums : null;
+  const nums = raw.map(printedAmount);
+  return nums.every((n) => n !== null) ? (nums as number[]) : null;
 }
 
 async function lookupHospital(ctx: ActionCtx, caseId: Id<"cases">, known: Known, lang: Lang, codes: string[]): Promise<HospitalRef | null> {
@@ -388,8 +389,10 @@ export const readAndCheck = internalAction({
         try {
           // Two reads in parallel (no extra wait): the full bill, and a narrow copy of just the CHARGES
           // column. A full read sometimes "fixes" a line so the lines match the printed total, which
-          // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
-          // literal column copy AND show the patient both numbers to check against the paper bill.
+          // hides a real billing error; the narrow copy has no reason to. Where they disagree we keep the
+          // full read's amount until the patient picks, and show them both numbers to check against the
+          // paper bill. On the hard eval set (eval/hard) the full read was right far more often than the
+          // second read when the two disagreed on a blurry, dim or marked-up photo.
           // The second read is only a check: past its time limit we go on without it ("couldn't compare").
           // Each extra photo page gets a little more time.
           const columnMs = Math.min(60_000, COLUMN_READ_MS + 8_000 * (pages.length - 1));
@@ -397,14 +400,13 @@ export const readAndCheck = internalAction({
           bill = first;
           if (column && column.length === first.lines.length) {
             const disagree = first.lines
-              .map((l, i) => ({ index: i, first: column[i], second: l.charge }))
+              .map((l, i) => ({ index: i, first: l.charge, second: column[i] }))
               .filter((x) => Math.abs(x.first - x.second) > 0.005);
             const n = Math.max(1, first.lines.length);
             await ctx.runMutation(internal.metrics.log, { agent: "read-check", ms: 0, ok: disagree.length === 0, score: (n - disagree.length) / n });
             if (disagree.length) {
               bill = {
                 ...bill,
-                lines: first.lines.map((l, i) => ({ ...l, charge: column[i] })),
                 amountChecks: disagree,
                 unreadable: [
                   ...bill.unreadable,
@@ -435,7 +437,9 @@ export const readAndCheck = internalAction({
       } else {
         throw new Error(t("Reading photos needs the Claude API key on the server.", "Para leer fotos se necesita la clave de Claude en el servidor."));
       }
-      if (bill.lines.length === 0 && bill.isMedicalBill !== false && !/not a (hospital|medical)/i.test(bill.unreadable.join(" "))) {
+      // No lines is a bad photo, unless the document only gives a balance (a summary bill or a collection
+      // letter): then it goes on, and the checks ask for an itemized bill.
+      if (bill.lines.length === 0 && bill.isMedicalBill !== false && !balanceOnly(bill) && !/not a (hospital|medical)/i.test(bill.unreadable.join(" "))) {
         throw new Error(t("RETAKE: We couldn't read the charges on this photo. Please take a new photo in good light, flat and close enough to read.", "RETAKE: No pudimos leer los cargos en esta foto. Tome otra foto con buena luz, plana y de cerca."));
       }
       const addr = `${bill.hospitalAddress ?? ""}`;

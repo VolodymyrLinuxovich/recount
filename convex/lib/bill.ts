@@ -38,3 +38,11 @@ export type ParsedBill = z.infer<typeof ParsedBill> & {
   /** Lines where a second look at a blurry photo read a different amount. Set by the app, never by the model; the bill keeps the first reading until the patient confirms. */
   amountChecks?: { index: number; first: number; second: number }[];
 };
+
+/**
+ * A document that lists no services, only what is owed: a summary bill or a collection letter. Its
+ * empty line list is what is printed, not a bad photo, so the app goes on and asks for an itemized bill.
+ */
+export function balanceOnly(bill: Pick<ParsedBill, "isItemized" | "lines" | "amountDue" | "totalCharges">): boolean {
+  return bill.lines.length === 0 && bill.isItemized === false && (bill.amountDue != null || bill.totalCharges != null);
+}
