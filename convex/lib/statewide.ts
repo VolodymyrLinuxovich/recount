@@ -2,7 +2,7 @@
 // (convex/lib/hospitalIndex.json, built by pipeline/build_hospital_index.py).
 // When the match isn't clear, the patient picks from the closest few; we never guess silently.
 
-import type { HospitalRef, PriceRow } from "./hospital";
+import type { HospitalRef, PriceGap, PriceRow } from "./hospital";
 import index from "./hospitalIndex.json";
 import statewidePrices from "./statewidePrices.json";
 
@@ -91,6 +91,7 @@ export function refFromIndex(h: IndexedHospital): HospitalRef {
     // Not a lookup date: these hospitals come from the state's policy filings. See fap.effectiveDate.
     fetchedAt: "",
     policyOnly: true,
+    priceGap: priceGap(h.key),
     mrf: null,
     fap: {
       url: h.fap.url,
@@ -117,6 +118,13 @@ interface StatewidePrices {
 // Prices our Apify Actor read from each hospital's own price file in a statewide batch
 // (pipeline/build_statewide_prices.py). Only files that name the hospital are kept.
 const PRICED = (statewidePrices as unknown as { hospitals: Record<string, StatewidePrices> }).hospitals;
+const SKIPPED = (statewidePrices as unknown as { skipped: Record<string, { reason: PriceGap }> }).skipped;
+
+/** Why a hospital has no price check, so the app can say so plainly. Null when it has prices. */
+export function priceGap(key: string): PriceGap | null {
+  if (PRICED[key]) return null;
+  return SKIPPED[key]?.reason ?? "notFound";
+}
 
 export const hasStatewidePrices = (key: string) => Boolean(PRICED[key]);
 
@@ -130,6 +138,7 @@ export function pricedRefFromIndex(h: IndexedHospital): HospitalRef {
     source: "apify-live",
     fetchedAt: p.fetchedAt,
     policyOnly: false,
+    priceGap: null,
     mrf: { url: p.url, lastUpdated: p.lastUpdated, prices: p.prices },
   };
 }

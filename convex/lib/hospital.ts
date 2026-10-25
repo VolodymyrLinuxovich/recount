@@ -13,6 +13,10 @@ export interface PriceRow {
   govPayer?: string | null;
 }
 
+/** notFound: no price file found. notNamed: files found, none is this hospital's. unreadable: its file
+ *  couldn't be downloaded or read. noCodes: its file has none of the ER codes we check. */
+export type PriceGap = "notFound" | "notNamed" | "unreadable" | "noCodes";
+
 export interface HospitalRef {
   key: string;
   name: string;
@@ -39,6 +43,8 @@ export interface HospitalRef {
   } | null;
   /** True for hospitals we only know from the state's policy filings (no price file). */
   policyOnly?: boolean;
+  /** Why there is no price check, when there isn't one (pipeline/build_statewide_prices.py). */
+  priceGap?: PriceGap | null;
   warnings: string[];
 }
 

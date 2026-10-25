@@ -25,7 +25,7 @@ import { potentialSavings, type Finding } from "./lib/checks";
 import { EobRead, fromEobRead, normalizeEobDates, ParsedEob } from "./lib/eob";
 import { allFindings } from "./lib/eobChecks";
 import type { Eligibility } from "./lib/eligibility";
-import type { HospitalRef } from "./lib/hospital";
+import type { HospitalRef, PriceGap } from "./lib/hospital";
 import { lawLine, letterKinds, letterPrompt, letterTitle, resolveFilledBrackets, templateLetters, type Letter, type LetterFacts } from "./lib/letters";
 import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
@@ -268,6 +268,15 @@ function warningsForBill(ref: HospitalRef, bill: ParsedBill, lang: Lang): Hospit
   return { ...ref, warnings };
 }
 
+/** Why a hospital has no price check, in the step log (the bill screen says the same, i18n bill.noPriceList). */
+const PRICE_GAP: Record<PriceGap, [string, string]> = {
+  notFound: ["We couldn't find this hospital's price file", "No encontramos el archivo de precios de este hospital"],
+  unreadable: ["We found this hospital's price file but couldn't read it", "Encontramos el archivo de precios de este hospital, pero no pudimos leerlo"],
+  notNamed: ["The price files we found don't clearly belong to this hospital", "Los archivos de precios que encontramos no son claramente de este hospital"],
+  noCodes: ["This hospital's price file doesn't list the ER and lab codes we check",
+    "El archivo de precios de este hospital no incluye los códigos de emergencias y análisis que revisamos"],
+};
+
 /** Build the hospital reference for a resolved statewide key (or a known SF key). */
 async function resolveRef(ctx: ActionCtx, caseId: Id<"cases">, key: string, bill: ParsedBill, lang: Lang): Promise<HospitalRef | null> {
   const t = pick(lang);
@@ -287,9 +296,10 @@ async function resolveRef(ctx: ActionCtx, caseId: Id<"cases">, key: string, bill
         `Precios leídos del archivo de precios del propio hospital por nuestro Actor de Apify el ${day}. Política de las presentaciones que los hospitales de California hacen al estado (HCAI).`));
     return warningsForBill(ref, bill, lang);
   }
+  const [gapEn, gapEs] = PRICE_GAP[ref.priceGap ?? "notFound"];
   await step(ctx, caseId, "hospital", t(`Found ${h.name}'s financial assistance policy`, `Encontramos la política de asistencia financiera de ${h.name}`), "done",
-    t("From the policies California hospitals file with the state (HCAI). We don't have this hospital's price file, so charges are not compared to its prices.",
-      "De las políticas que los hospitales de California presentan al estado (HCAI). No tenemos el archivo de precios de este hospital, así que no comparamos los cargos con sus precios."));
+    t(`From the policies California hospitals file with the state (HCAI). ${gapEn}, so charges are not compared to its prices.`,
+      `De las políticas que los hospitales de California presentan al estado (HCAI). ${gapEs}, así que no comparamos los cargos con sus precios.`));
   return ref;
 }
 

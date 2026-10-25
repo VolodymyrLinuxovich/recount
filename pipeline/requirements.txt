@@ -1,3 +1,4 @@
 pypdf>=5
 ijson>=3.3
 certifi
+httpx

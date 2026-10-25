@@ -352,7 +352,7 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
       {!c.hospital?.mrf && (
         <div className="found-noprice">
           <p className="found-noprice-lead">{t("bill.noPriceLead")}</p>
-          <p className="found-quiet">{t("bill.noPriceList")}</p>
+          <p className="found-quiet">{t("bill.noPriceList", { why: c.hospital?.priceGap ?? "other" })}</p>
         </div>
       )}
 

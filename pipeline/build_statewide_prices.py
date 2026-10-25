@@ -1,61 +1,38 @@
 """Turn statewide Actor batch results into price data the app can check bills against.
 
-Input:  a folder of per-hospital results from running our Apify Actor once per California
-        hospital (one JSON per hospital: {key, site, runId, item}).
-Output: convex/lib/statewidePrices.json  {generatedAt, codes, hospitals: {key: {...}}, skipped: {key: reason}}
+Input:  folders of per-hospital results from our Apify Actor (one JSON per hospital: {key, site, runId,
+        finishedAt, item}); a later folder wins for the same hospital and file. Plus
+        pipeline/out/price_files.json from find_price_files.py: the one file verified as each hospital's own.
+Output: convex/lib/statewidePrices.json  {generatedAt, codes, hospitals: {key: {...}}, skipped: {key: {reason, detail}}}
 
 Rules, all chosen so a price check never accuses a hospital of overcharging by mistake:
-- The price file must name this hospital (file name, header name or site domain). Health systems
-  publish one file per hospital, and the wrong campus's file is worse than none.
+- Only the verified file counts. It must state the hospital's CA license, or name the hospital and state
+  no other California hospital's license (find_price_files.py). The wrong campus's file is worse than none.
 - Per code, prefer outpatient rows with a list price, then emergency-room rows, then the HIGHEST
   list price among them. Billed above that means billed above every matching row.
 - Drop prices that can't be real (zero, negative, over $1M) and cash prices above the list price.
+- Every hospital without prices gets a reason the app can show: notFound, notNamed, unreadable, noCodes.
 
-Usage: python pipeline/build_statewide_prices.py <results_dir>
+Usage: python pipeline/build_statewide_prices.py <results_dir> [<newer_results_dir> ...]
 """
 
 from __future__ import annotations
 
 import json
-import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "convex/lib/hospitalIndex.json"
 OUT = ROOT / "convex/lib/statewidePrices.json"
+FILES = ROOT / "pipeline/out/price_files.json"
 # Hospitals the app already prices from hand-checked snapshots.
 HAND_CHECKED = {"priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center", "ucsf-medical-center",
                 "california-pacific-medical-center-van-ness-campus", "st-francis-memorial-hospital"}
 
-STOP = {"the", "of", "and", "inc", "llc", "hospital", "hospitals", "medical", "center", "centre", "health", "healthcare",
-        "care", "campus", "regional", "community", "california", "ca", "memorial", "standardcharges", "standard",
-        "charges", "csv", "json", "zip", "machine", "readable", "file", "www", "com", "org", "net", "https", "http"}
-
-
-def tokens(s: str | None) -> set[str]:
-    s = unquote(s or "").lower().replace("&", " and ")
-    return {w for w in re.findall(r"[a-z]+", s) if w not in STOP and len(w) > 2}
-
-
-def names_file(h: dict, item: dict, site: str) -> bool:
-    """Does the price file belong to this hospital?"""
-    want = set()
-    for n in [h["name"], *h.get("names", [])]:
-        want |= tokens(n)
-    mrf = item.get("mrf") or {}
-    path = urlparse(mrf.get("url") or "").path
-    got = tokens(path.rsplit("/", 1)[-1]) | tokens(mrf.get("hospitalNameInFile"))
-    if want & got:
-        return True
-    # A hospital's own single-site domain (e.g. chinesehospital-sf.org) also counts, when the
-    # file sits on that domain and the domain carries the hospital's name.
-    site_dom = urlparse(site).netloc.lower()
-    file_dom = urlparse(mrf.get("url") or "").netloc.lower()
-    flat = site_dom.replace("-", "").replace(".", "")
-    return file_dom.endswith(site_dom.removeprefix("www.")) and any(w in flat for w in want if len(w) > 4)
+# Why a hospital has no line-by-line price check. The app shows these in plain words (i18n bill.noPrice.*).
+NOT_FOUND, NOT_NAMED, UNREADABLE, NO_CODES = "notFound", "notNamed", "unreadable", "noCodes"
 
 
 def is_er(desc: str | None) -> bool:
@@ -87,23 +64,52 @@ def pick_row(p: dict) -> dict | None:
     }
 
 
-def main(results_dir: str) -> None:
+def load_results(dirs: list[str]) -> dict[str, list[dict]]:
+    """Every Actor record per hospital, newest folder first."""
+    out: dict[str, list[dict]] = {}
+    for d in reversed(dirs):
+        for f in sorted(Path(d).glob("*.json")):
+            rec = json.loads(f.read_text())
+            if not rec.get("finishedAt"):
+                rec["finishedAt"] = datetime.fromtimestamp(f.stat().st_mtime, timezone.utc).isoformat()
+            out.setdefault(rec["key"], []).append(rec)
+    return out
+
+
+def gap_reason(rejected: list[dict]) -> tuple[str, str]:
+    if not rejected:
+        return NOT_FOUND, "no price file found on the hospital's site or in a cms-hpt.txt index"
+    refused = [r for r in rejected if r["why"].startswith("download refused") and "not identified" not in r["why"]]
+    if refused:
+        return UNREADABLE, f"{refused[0]['why']}: {refused[0]['url'][:160]}"
+    return NOT_NAMED, f"{len(rejected)} candidate file(s), none is this hospital's; first: {rejected[0]['why']}"
+
+
+def main(dirs: list[str]) -> None:
     index = {h["key"]: h for h in json.loads(INDEX.read_text())["hospitals"]}
+    verified = json.loads(FILES.read_text())
+    results = load_results(dirs)
     hospitals: dict[str, dict] = {}
-    skipped: dict[str, str] = {}
+    skipped: dict[str, dict] = {}
     codes: set[str] = set()
-    for f in sorted(Path(results_dir).glob("*.json")):
-        rec = json.loads(f.read_text())
-        key, item = rec["key"], rec.get("item") or {}
-        h = index.get(key)
-        if not h or key in HAND_CHECKED:
+    for key in index:
+        if key in HAND_CHECKED:
             continue
-        mrf = item.get("mrf") or {}
-        if not mrf.get("url"):
-            skipped[key] = "price file not found"
+        pick = verified["chosen"].get(key)
+        if not pick:
+            r, why = gap_reason(verified["rejected"].get(key, []))
+            skipped[key] = {"reason": r, "detail": why}
             continue
-        if not names_file(h, item, rec.get("site", "")):
-            skipped[key] = f"price file may belong to another hospital: {mrf['url'][:160]}"
+        recs = [r for r in results.get(key, []) if ((r.get("item") or {}).get("mrf") or {}).get("url") == pick["url"]]
+        if not recs:
+            skipped[key] = {"reason": UNREADABLE, "detail": f"verified file not read yet: {pick['url'][:160]}"}
+            continue
+        rec = recs[0]
+        item = rec["item"]
+        mrf = item["mrf"]
+        if (mrf.get("scan") or {}).get("stoppedBecause") == "size-limit":
+            # Rows past the limit could hold a higher price, and a lower "highest" price could flag a fair charge.
+            skipped[key] = {"reason": UNREADABLE, "detail": f"file too large to read to the end: {pick['url'][:160]}"}
             continue
         prices = {}
         for code, p in (mrf.get("prices") or {}).items():
@@ -112,18 +118,25 @@ def main(results_dir: str) -> None:
             if row:
                 prices[code] = row
         if not prices:
-            skipped[key] = "price file has none of the ER codes we look up"
+            scan = mrf.get("scan") or {}
+            if item.get("error") or (not scan.get("complete") and scan.get("stoppedBecause") != "all-codes-found"):
+                why = item.get("error") or f"read stopped ({scan.get('stoppedBecause')}) after {scan.get('recordsScanned')} records"
+                skipped[key] = {"reason": UNREADABLE, "detail": f"{why}: {pick['url'][:160]}"}
+            else:
+                skipped[key] = {"reason": NO_CODES,
+                                "detail": f"read all {scan.get('recordsScanned')} records; none has the ER codes we look up"}
             continue
         hospitals[key] = {
             "url": mrf["url"],
             "lastUpdated": mrf.get("lastUpdated"),
-            "fetchedAt": (rec.get("finishedAt") or datetime.fromtimestamp(f.stat().st_mtime, timezone.utc).isoformat())[:19] + "Z",
+            "fetchedAt": rec["finishedAt"][:19] + "Z",
             "runId": rec.get("runId"),
+            "verifiedBy": pick["verifiedBy"],
             "prices": prices,
         }
     out = {
         "generatedAt": datetime.now(timezone.utc).isoformat()[:19] + "Z",
-        "source": "Apify Actor NXiKTRZKK6p6qCSXk, one run per hospital",
+        "source": "Apify Actor NXiKTRZKK6p6qCSXk; each file verified as the hospital's own by pipeline/find_price_files.py",
         "codes": sorted(codes),
         "hospitals": hospitals,
         "skipped": skipped,
@@ -133,10 +146,10 @@ def main(results_dir: str) -> None:
     print(f"{len(hospitals)} hospitals priced ({n_codes} code prices); {len(skipped)} skipped -> {OUT.relative_to(ROOT)}")
     reasons: dict[str, int] = {}
     for r in skipped.values():
-        reasons[r.split(":")[0]] = reasons.get(r.split(":")[0], 0) + 1
+        reasons[r["reason"]] = reasons.get(r["reason"], 0) + 1
     for r, n in sorted(reasons.items(), key=lambda t: -t[1]):
         print(f"  skipped, {r}: {n}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1:])
