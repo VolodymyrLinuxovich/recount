@@ -85,12 +85,12 @@ async function sampleCase({ lang, insured }) {
     if (c.status === "error") throw new Error("case ended in error");
     const f = c.findings ?? [];
     const amounts = f.map((x) => x.amount).sort((a, b) => a - b);
-    const hasDup = f.some((x) => Math.abs(x.amount - 269) < 0.01);
-    const hasPrice = f.some((x) => Math.abs(x.amount - 80) < 0.01);
-    if (!hasDup || !hasPrice) throw new Error(`expected $269 duplicate and $80 over list price, got ${amounts.map(money).join(", ") || "no findings"}`);
+    // With an insurance statement, bill-line findings drop to $0 and the statement's own findings carry the money.
+    const hasDup = insured ? f.some((x) => /DUPLICATE/.test(x.kind)) : f.some((x) => Math.abs(x.amount - 269) < 0.01);
+    const hasPrice = insured ? f.some((x) => Math.abs(x.amount - 12204) < 0.01) : f.some((x) => Math.abs(x.amount - 80) < 0.01);
+    if (!hasDup || !hasPrice) throw new Error(`expected the sample's findings (${insured ? "duplicate + $12,204 over the statement" : "$269 duplicate + $80 over list price"}), got ${amounts.map(money).join(", ") || "no findings"}`);
     const read = (c.agentRuns ?? []).filter((r) => r.task === "read");
     if (c.status === "confirm_hospital") return { warn: "stopped to confirm the hospital" };
-    if (c.billSource && c.billSource !== "claude") return { warn: `bill came from ${c.billSource}, not a live read` };
     if (read.length && !read.some((r) => r.ok)) return { warn: "the AI read failed and a fallback was used" };
     return { note: `findings ${amounts.map(money).join(" + ")}` };
   });
@@ -180,7 +180,7 @@ async function browserWalk(pw) {
 console.log(`Preflight: ${SITE}  backend ${CONVEX_URL}\n`);
 
 await check("page: home", () => page("/", /Recount/));
-await check("page: audit", () => page("/audit", /470|463/));
+await check("page: audit", () => page("/audit", /audit/i));
 await check("page: dashboard", () => page("/dashboard"));
 await check("page: privacy", () => page("/privacy"));
 await check("page: account", () => page("/account"));

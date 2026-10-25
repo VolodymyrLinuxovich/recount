@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "convex/react";
 import { anyApi } from "convex/server";
 import * as Clipboard from "expo-clipboard";
 import { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Alert, BackHandler, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Alert, BackHandler, Image, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -133,6 +133,14 @@ export function CaseFlow({ t, id, token, onHome }) {
       body: (
         <>
           <H1>{notBill ? t.notABill : retake ? t.retakeTitle : outside ? t.outOfStateTitle : t.errorTitle}</H1>
+          {(notBill || retake) && c.fileUrl && (c.fileType || "image/").startsWith("image/") ? (
+            <View style={bad.frame}>
+              <Image source={{ uri: c.fileUrl }} style={bad.img} resizeMode="cover" accessibilityLabel={t.invalidDoc} />
+              <View style={bad.bar} accessibilityRole="alert">
+                <Text style={bad.text}>✕  {notBill ? t.invalidDoc : t.unreadableDoc}</Text>
+              </View>
+            </View>
+          ) : null}
           <P muted>{notBill ? t.notABillBody : plain}</P>
         </>
       ),
@@ -815,4 +823,12 @@ const x = StyleSheet.create({
   headline: { fontFamily: F.display800, fontSize: 29, lineHeight: 36, letterSpacing: -0.4, color: C.ink, marginBottom: 12 },
   letterBody: { minHeight: 320, fontSize: 17, lineHeight: 25 },
   row: { flexDirection: "row", marginTop: 14 },
+});
+
+// A rejected photo: red frame and a red label under it.
+const bad = StyleSheet.create({
+  frame: { borderWidth: 2, borderColor: C.flag, borderRadius: 12, overflow: "hidden", marginVertical: 14, backgroundColor: "#fff" },
+  img: { width: "100%", height: 200, opacity: 0.85 },
+  bar: { backgroundColor: C.flag, paddingVertical: 9, paddingHorizontal: 12 },
+  text: { color: "#fff", fontWeight: "700", fontSize: 16 },
 });
