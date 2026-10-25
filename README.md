@@ -356,6 +356,8 @@ npx convex dev                                   # starts a Convex dev backend, 
 npx convex env set ANTHROPIC_API_KEY sk-ant-...  # needed to read real photos and write letters
 npx convex env set APIFY_TOKEN ...               # optional: live hospital lookups
 npx convex env set APIFY_ACTOR_ID NXiKTRZKK6p6qCSXk
+npx convex env set AUTH_RESEND_KEY re_...          # optional, with AUTH_EMAIL_FROM: password reset by email
+npx convex env set AUTH_EMAIL_FROM "Recount <help@your-domain>"  # a sender on a domain verified in Resend
 npm run dev                                      # http://localhost:3000
 npx vitest run                                   # rule tests (tests/)
 ```
@@ -433,7 +435,8 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 - **Audit gaps.** 7 hospitals have only scanned PDFs. "Worth asking" flags got one review, not two. Some policies on file
   are from 2022, and the audit judges the latest one HCAI holds.
 - **Accounts are optional and basic.** Without one, My bills lives on one phone and anyone with a bill's private link can
-  open it. Accounts use email and password, or Google: no email check for password accounts and no password reset.
+  open it. Accounts use email and password, or Google: no email check for password accounts and no password reset yet. Reset by
+  emailed code is built and switches on when the deployment has a Resend key (`AUTH_RESEND_KEY` and `AUTH_EMAIL_FROM`).
 - **Not legal or medical advice.** Recount checks a bill against public rules and prices.
 
 ---

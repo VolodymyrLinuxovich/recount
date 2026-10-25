@@ -1,10 +1,13 @@
 "use client";
 
 import { useAuthActions } from "@convex-dev/auth/react";
+import { useQuery } from "convex/react";
 import { type FormEvent, useId, useState } from "react";
+import { api } from "../../../convex/_generated/api";
 import { useT } from "../i18n/I18nProvider";
 import { authError } from "./errors";
 import { GoogleButton } from "./GoogleButton";
+import { ResetPassword } from "./ResetPassword";
 
 type Mode = "signUp" | "signIn";
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -20,6 +23,9 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [exists, setExists] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  // Password reset shows only when the backend has an email sender.
+  const resetOn = useQuery(api.auth.providers)?.reset === true;
   const uid = useId();
 
   const pick = (m: Mode) => {
@@ -45,6 +51,18 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
       setExists(msg === t("acct.errExists"));
       setBusy(false);
     }
+  }
+
+  if (resetting && resetOn) {
+    return (
+      <ResetPassword
+        startEmail={email}
+        onBack={() => {
+          setResetting(false);
+          pick("signIn");
+        }}
+      />
+    );
   }
 
   return (
@@ -107,7 +125,7 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
             </button>
           </div>
         </div>
-        {mode === "signUp" && <p className="acct-warn">{t("acct.noReset")}</p>}
+        {mode === "signUp" && <p className="acct-warn">{resetOn ? t("acct.resetHint") : t("acct.noReset")}</p>}
         {error && (
           <p className="error-note acct-error" role="alert">
             {error}
@@ -126,7 +144,16 @@ export function AuthCard({ startIn = "signUp", next = null, googleFailed = false
         </button>
       </form>
       <GoogleButton next={next} />
-      {mode === "signIn" && <p className="acct-quiet">{t("acct.noForgot")}</p>}
+      {mode === "signIn" &&
+        (resetOn ? (
+          <p className="acct-quiet">
+            <button type="button" className="link-btn" onClick={() => setResetting(true)}>
+              {t("acct.forgot")}
+            </button>
+          </p>
+        ) : (
+          <p className="acct-quiet">{t("acct.noForgot")}</p>
+        ))}
     </section>
   );
 }

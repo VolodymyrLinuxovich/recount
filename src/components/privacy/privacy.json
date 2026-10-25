@@ -3,6 +3,7 @@
     "title": "Privacy",
     "lede": "What Recount keeps, who sees it, and how to delete it. In plain words.",
     "updated": "These facts match how the app works today.",
+    "accountsReset": "If you make an account, we store your email, a hashed password (never the password itself) or your Google sign-in, and, if you add them, your name, address, phone and date of birth to fill in letters. We don't verify emails when you sign up. If you forget your password, we can email you a 6-digit code to set a new one. That's the only email we send.",
     "sections": [
       {
         "h": "What we store",
@@ -46,6 +47,7 @@
     "title": "Privacidad",
     "lede": "Qué guarda Recount, quién lo ve y cómo borrarlo. En palabras sencillas.",
     "updated": "Esta información describe cómo funciona la aplicación hoy.",
+    "accountsReset": "Si crea una cuenta, guardamos su correo, su contraseña guardada como un código irreversible (hash), nunca la contraseña misma, o su inicio de sesión con Google, y, si los agrega, su nombre, dirección, teléfono y fecha de nacimiento para llenar las cartas. No verificamos el correo al crear la cuenta. Si olvida su contraseña, podemos enviarle por correo un código de 6 dígitos para poner una nueva. Es el único correo que enviamos.",
     "sections": [
       {
         "h": "Qué guardamos",

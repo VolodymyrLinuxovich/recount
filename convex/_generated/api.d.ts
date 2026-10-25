@@ -25,6 +25,7 @@ import type * as lib_attach from "../lib/attach.js";
 import type * as lib_bill from "../lib/bill.js";
 import type * as lib_checks from "../lib/checks.js";
 import type * as lib_complaint from "../lib/complaint.js";
+import type * as lib_coverage from "../lib/coverage.js";
 import type * as lib_docIntel from "../lib/docIntel.js";
 import type * as lib_eligibility from "../lib/eligibility.js";
 import type * as lib_eob from "../lib/eob.js";
@@ -41,6 +42,7 @@ import type * as lib_pages from "../lib/pages.js";
 import type * as lib_pipeline from "../lib/pipeline.js";
 import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
+import type * as lib_resetEmail from "../lib/resetEmail.js";
 import type * as lib_safety from "../lib/safety.js";
 import type * as lib_sample from "../lib/sample.js";
 import type * as lib_search from "../lib/search.js";
@@ -50,6 +52,7 @@ import type * as lib_topic from "../lib/topic.js";
 import type * as lib_user from "../lib/user.js";
 import type * as metrics from "../metrics.js";
 import type * as notify from "../notify.js";
+import type * as passwordReset from "../passwordReset.js";
 import type * as pipeline from "../pipeline.js";
 import type * as profile from "../profile.js";
 
@@ -77,6 +80,7 @@ declare const fullApi: ApiFromModules<{
   "lib/bill": typeof lib_bill;
   "lib/checks": typeof lib_checks;
   "lib/complaint": typeof lib_complaint;
+  "lib/coverage": typeof lib_coverage;
   "lib/docIntel": typeof lib_docIntel;
   "lib/eligibility": typeof lib_eligibility;
   "lib/eob": typeof lib_eob;
@@ -93,6 +97,7 @@ declare const fullApi: ApiFromModules<{
   "lib/pipeline": typeof lib_pipeline;
   "lib/privacy": typeof lib_privacy;
   "lib/reference": typeof lib_reference;
+  "lib/resetEmail": typeof lib_resetEmail;
   "lib/safety": typeof lib_safety;
   "lib/sample": typeof lib_sample;
   "lib/search": typeof lib_search;
@@ -102,6 +107,7 @@ declare const fullApi: ApiFromModules<{
   "lib/user": typeof lib_user;
   metrics: typeof metrics;
   notify: typeof notify;
+  passwordReset: typeof passwordReset;
   pipeline: typeof pipeline;
   profile: typeof profile;
 }>;

@@ -7,7 +7,7 @@ import { ConvexError } from "convex/values";
 import { useEffect, useRef, useState } from "react";
 import { BackHandler, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
-import { C, Card, F, H1, P, Screen, s } from "./ui";
+import { C, Card, F, H1, LinkText, P, Screen, s } from "./ui";
 
 const api = anyApi;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -50,6 +50,130 @@ function authError(t, e, mode) {
   return mode === "signIn" ? t.acctErrWrong : t.acctErrSignUp;
 }
 
+// Password reset: a wrong, expired or rate-limited code all come back as the same generic error.
+function resetError(t, e, step) {
+  const raw = e instanceof ConvexError ? String(e.data) : e instanceof Error ? e.message : String(e);
+  if (/valid email/i.test(raw)) return t.acctErrEmail;
+  if (/at least 8/i.test(raw)) return t.acctErrShort;
+  if (/too long/i.test(raw)) return t.acctErrLong;
+  if (/too many code requests/i.test(raw)) return t.acctErrResetMany;
+  if (/network|fetch|offline|connection/i.test(raw)) return t.acctErrNetwork;
+  return step === "send" ? t.acctErrSend : t.acctErrCodeWrong;
+}
+
+/** Forgot password: email, then a 6-digit code from the email and a new password, which signs in.
+ *  The "code sent" line is the same whether or not the email has an account. */
+function ResetScreen({ t, startEmail, onBack }) {
+  const { signIn } = useAuthActions();
+  const [email, setEmail] = useState(startEmail);
+  const [sentTo, setSentTo] = useState(null);
+  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+
+  async function send() {
+    const em = (sentTo ?? email).trim().toLowerCase();
+    if (!EMAIL.test(em)) return setError(t.acctErrEmail);
+    setBusy(true);
+    setError(null);
+    try {
+      await signIn("password", { email: em, flow: "reset" });
+      setSentTo(em);
+      setCode("");
+    } catch (e) {
+      setError(resetError(t, e, "send"));
+    }
+    setBusy(false);
+  }
+
+  async function verify() {
+    const c = code.replace(/\s/g, "");
+    if (!/^\d{6}$/.test(c)) return setError(t.acctErrCode);
+    if (password.length < 8) return setError(t.acctErrShort);
+    setBusy(true);
+    setError(null);
+    try {
+      // Signed in after this: the account screen switches to "Your account".
+      await signIn("password", { email: sentTo, code: c, newPassword: password, flow: "reset-verification" });
+      setPassword("");
+    } catch (e) {
+      setError(resetError(t, e, "verify"));
+    }
+    setBusy(false);
+  }
+
+  const err = error ? <Text style={s.error} accessibilityLiveRegion="polite">{error}</Text> : null;
+
+  if (sentTo === null) {
+    return (
+      <Screen t={t} onBack={onBack} primary={{ label: busy ? t.acctWorking : t.acctSendCode, onPress: send, busy }}>
+        <H1>{t.acctResetH}</H1>
+        <P>{t.acctResetLede}</P>
+        <Text style={st.label} nativeID="reset-email">{t.acctEmail}</Text>
+        <TextInput
+          style={st.input}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          accessibilityLabelledBy="reset-email"
+          accessibilityLabel={t.acctEmail}
+          onSubmitEditing={send}
+        />
+        {err}
+        <LinkText label={t.acctBackToSignIn} onPress={onBack} style={st.linkGap} />
+      </Screen>
+    );
+  }
+
+  return (
+    <Screen t={t} onBack={onBack} primary={{ label: busy ? t.acctWorking : t.acctSetPassword, onPress: verify, busy }}>
+      <H1>{t.acctResetH}</H1>
+      <Text style={s.p} accessibilityLiveRegion="polite">{t.acctCodeSent(sentTo)}</Text>
+      <Text style={st.label} nativeID="reset-code">{t.acctCode}</Text>
+      <TextInput
+        style={st.input}
+        value={code}
+        onChangeText={(v) => setCode(v.replace(/\D/g, "").slice(0, 6))}
+        keyboardType="number-pad"
+        autoComplete="one-time-code"
+        textContentType="oneTimeCode"
+        maxLength={6}
+        accessibilityLabelledBy="reset-code"
+        accessibilityLabel={t.acctCode}
+      />
+      <Text style={st.label} nativeID="reset-pw">{t.acctNewPassword}</Text>
+      <Text style={st.hint}>{t.acctPasswordHint}</Text>
+      <View style={st.pwRow}>
+        <TextInput
+          style={[st.input, { flex: 1, marginBottom: 0 }]}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!show}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="new-password"
+          textContentType="newPassword"
+          accessibilityLabelledBy="reset-pw"
+          accessibilityLabel={t.acctNewPassword}
+          onSubmitEditing={verify}
+        />
+        <Pressable onPress={() => setShow((v) => !v)} style={st.showBtn} accessibilityRole="button">
+          <Text style={st.showText}>{show ? t.acctHide : t.acctShow}</Text>
+        </Pressable>
+      </View>
+      <View style={{ marginTop: 12 }}>{err}</View>
+      <LinkText label={t.acctResendCode} onPress={busy ? undefined : send} style={st.linkGap} />
+      <LinkText label={t.acctBackToSignIn} onPress={onBack} style={st.linkGap} />
+    </Screen>
+  );
+}
+
 /** Signed out: create an account or sign in. Signed in: who you are, and Sign out. */
 export function AccountScreen({ t, onBack, billCount }) {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -61,15 +185,19 @@ export function AccountScreen({ t, onBack, billCount }) {
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  const [resetting, setResetting] = useState(false);
+  // Password reset shows only when the backend has an email sender.
+  const resetOn = useQuery(api.auth.providers)?.reset === true;
 
-  // Android's back button closes this screen, like Back at the top.
+  // Android's back button closes this screen, like Back at the top (or leaves password reset).
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
-      onBack();
+      if (resetting) setResetting(false);
+      else onBack();
       return true;
     });
     return () => sub.remove();
-  }, [onBack]);
+  }, [onBack, resetting]);
 
   const pick = (m) => {
     setMode(m);
@@ -108,6 +236,10 @@ export function AccountScreen({ t, onBack, billCount }) {
         <P>{billCount ? t.acctSynced(billCount) : t.acctWhy}</P>
       </Screen>
     );
+  }
+
+  if (resetting && resetOn) {
+    return <ResetScreen t={t} startEmail={email} onBack={() => { setResetting(false); pick("signIn"); }} />;
   }
 
   return (
@@ -164,7 +296,13 @@ export function AccountScreen({ t, onBack, billCount }) {
           <Text style={st.showText}>{show ? t.acctHide : t.acctShow}</Text>
         </Pressable>
       </View>
-      {mode === "signUp" ? <P muted style={{ marginTop: 12 }}>{t.acctNoReset}</P> : <P muted style={{ marginTop: 12 }}>{t.acctNoForgot}</P>}
+      {mode === "signUp" ? (
+        <P muted style={{ marginTop: 12 }}>{resetOn ? t.acctResetHint : t.acctNoReset}</P>
+      ) : resetOn ? (
+        <LinkText label={t.acctForgot} onPress={() => { setError(null); setResetting(true); }} style={st.linkGap} />
+      ) : (
+        <P muted style={{ marginTop: 12 }}>{t.acctNoForgot}</P>
+      )}
       {error ? (
         <Text style={s.error} accessibilityLiveRegion="polite">
           {error}
@@ -218,4 +356,5 @@ const st = StyleSheet.create({
   showBtn: { minHeight: 52, paddingHorizontal: 14, justifyContent: "center", marginLeft: 8 },
   showText: { fontFamily: F.body600, fontSize: 16, color: C.brand },
   inlineLink: { color: C.brand, textDecorationLine: "underline" },
+  linkGap: { marginTop: 8 },
 });

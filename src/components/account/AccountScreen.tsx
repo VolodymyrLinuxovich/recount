@@ -33,6 +33,7 @@ export function AccountScreen() {
   const wasOut = useRef(false);
   // Back from Google: the sign-in code is still being exchanged while the URL carries ?code=.
   const [fromGoogle] = useState(() => typeof window !== "undefined" && googlePending());
+  const resetOn = useQuery(api.auth.providers)?.reset === true;
 
   // Signed in from this page with somewhere to go back to (the bill they were on): go there.
   useEffect(() => {
@@ -59,7 +60,7 @@ export function AccountScreen() {
         <p className="acct-optional">{t("acct.optional")}</p>
         <AuthCard next={next} googleFailed={googleFailed} />
         <ul className="acct-limits">
-          <li>{t("acct.limitVerify")}</li>
+          <li>{resetOn ? t("acct.limitVerifyReset") : t("acct.limitVerify")}</li>
           <li>{t("acct.limitPrivacy")}</li>
         </ul>
         <Link href="/" className="acct-back">

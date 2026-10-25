@@ -5,6 +5,7 @@ import { choose, type Provider, type Task } from "./model";
 import { safetyOn } from "./safety";
 import { searchOn } from "./search";
 import { docIntelOn } from "./docIntel";
+import { resetOn } from "./resetEmail";
 
 /** Which outside services this deployment sends data to, by purpose. */
 export function processors() {
@@ -46,7 +47,7 @@ export function privacyFacts(): string {
 - What we store, in our database (Convex): the bill photo or PDF you upload (up to 6 photos for a bill with several pages), what we read from it (hospital, charges, account number, the patient's name and address if printed), the insurance statement (EOB) if you add one and what we read from it (insurer, member ID, claim number, amounts and denials), or the amounts you type from it instead (what you owe, what the plan paid, network, insurer name), stored with the bill like your answers, your answers to the questions (household size, yearly income, insurance, medical costs), the letters, the steps the app took, a record of each AI call (which service and model, how long, how many words; never the content), helper chat messages, and any photo or PDF attached in the chat (deleted 30 days after it's sent, or sooner with the bill). Long numbers that look like Social Security or account numbers are removed from chat messages before they're stored or sent anywhere.
 ${modelLine()}
 - Who can see it: accounts are optional. Without one, a bill opens only with its private link, which holds a secret key kept on your phone. With an account, you can also open your own bills by signing in. The small Recount team can see the database to run and fix the service.
-- Accounts (optional): we store your email, a hashed password (never the password itself) or your Google sign-in, and, if you add them, your name, address, phone and date of birth to fill in letters. There's no email verification and no password reset by email.
+- Accounts (optional): we store your email, a hashed password (never the password itself) or your Google sign-in, and, if you add them, your name, address, phone and date of birth to fill in letters. ${resetOn() ? "We don't verify emails when you sign up. If you forget your password, we can email you a 6-digit code to set a new one; that's the only email we send." : "There's no email verification and no password reset by email."}
 - What we never do: we don't sell or share your information, we don't send anything to the hospital (you send your own letters), and we never ask for payment, a Social Security number or bank details.
 - How long we keep it: until you delete it. The one exception: a photo or PDF attached in the chat is deleted 30 days after it's sent.
 - How to delete: the "Delete this bill" button removes the bill, the photo, the insurance statement, the step log, the AI call records and its chat, with any files attached in the chat, from our database right away. Deleting your account removes your email, password hash, profile and sign-in records, and, if you choose, all your bills. Copies the AI and safety services may hold follow their own policies, not ours.`;

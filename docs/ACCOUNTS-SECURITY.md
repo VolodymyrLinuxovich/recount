@@ -67,7 +67,7 @@ What held up (tested live, all pass):
   // authCheck.ts (internalQuery)
   accountExists: ({ email }) => ctx.db.query("authAccounts").withIndex("providerAndAccountId", q => q.eq("provider", "password").eq("providerAccountId", email)).unique() !== null
   ```
-  This gives away nothing new, because sign-up already reveals that an email exists (L2). Also, since `flow` is client-controlled, refuse any `flow` other than `signIn`/`signUp` (no `reset`/`email-verification` providers are configured; today they throw anyway). Retest: 30 `signUp` guesses must all fail with no token, and the correct password via `signUp` must not sign in.
+  This gives away nothing new, because sign-up already reveals that an email exists (L2). Also, since `flow` is client-controlled, refuse any `flow` other than `signIn`/`signUp` (no `reset`/`email-verification` providers are configured; today they throw anyway). Done: convex/auth.ts refuses every other flow, and allows `reset`/`reset-verification` only when password reset by email is switched on. Retest: 30 `signUp` guesses must all fail with no token, and the correct password via `signUp` must not sign in.
 
 ### M1. A deleted account's login keeps working for up to an hour (Medium)
 

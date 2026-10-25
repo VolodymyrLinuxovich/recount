@@ -27,6 +27,16 @@ export function authError(t: T, e: unknown, flow: "signIn" | "signUp"): string {
   return flow === "signIn" ? t("acct.errWrong") : t("acct.errSignUp");
 }
 
+/** Password reset: asking for a code ("send") or using it ("verify"). A wrong, expired or
+ *  rate-limited code all come back as the library's generic error, so they read the same. */
+export function resetError(t: T, e: unknown, step: "send" | "verify"): string {
+  const raw = rawError(e);
+  if (KNOWN[raw]) return t(KNOWN[raw]);
+  if (/too many code requests/i.test(raw)) return t("acct.errResetMany");
+  if (/network|fetch|offline|connection/i.test(raw)) return t("acct.errNetwork");
+  return step === "send" ? t("acct.errSend") : t("acct.errCodeWrong");
+}
+
 export function saveError(t: T, e: unknown): string {
   const raw = rawError(e);
   if (raw === "Please enter a valid email address.") return t("letters.errEmail");

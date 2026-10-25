@@ -115,7 +115,7 @@ These are my readings of public documents, not legal findings. The /audit page w
 - Compute the Medicare payment cap from the CMS OPPS fee schedule.
 - Test reading on real patients' bills, not only generated ones.
 - Chinese and Tagalog, after Spanish.
-- Password reset by email for accounts.
+- Password reset by email for accounts. It's built (a 6-digit code by email, good for 15 minutes) and switches on when we add an email sending key.
 
 ## Path to production
 

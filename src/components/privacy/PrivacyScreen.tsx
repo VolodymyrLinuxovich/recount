@@ -8,11 +8,13 @@ import copy from "./privacy.json";
 import "./privacy.css";
 
 /** The privacy page. Mirrors convex/lib/privacy.ts (what Lupa tells people); keep both true.
- *  The Microsoft lines appear only when the server says that Azure service is switched on. */
+ *  The Microsoft lines appear only when the server says that Azure service is switched on, and the
+ *  accounts line mentions password reset only when the server has an email sender. */
 export function PrivacyScreen() {
   const { lang } = useT();
   const c = copy[lang] ?? copy.en;
   const map = useQuery(api.pipeline.map);
+  const reset = useQuery(api.auth.providers)?.reset === true;
   const p = map?.processors;
   const azureBackup = !!map && (["letters", "chat"] as const).some((t) => map.models[t]?.fallback?.provider === "azure");
   const extra = [
@@ -23,6 +25,7 @@ export function PrivacyScreen() {
     p?.docIntel && c.azure.docIntel,
   ].filter(Boolean);
   const processIdx = 1; // "Who helps process it"
+  const accountsIdx = 3; // "Accounts (optional)": says so when password reset by email is on
   return (
     <article className="privacy">
       <h1 className="privacy-h">{c.title}</h1>
@@ -31,7 +34,7 @@ export function PrivacyScreen() {
         <section key={s.h} className="privacy-sec">
           <h2>{s.h}</h2>
           <p>
-            {s.p}
+            {i === accountsIdx && reset ? c.accountsReset : s.p}
             {i === processIdx && extra.length > 0 && ` ${extra.join(" ")}`}
           </p>
         </section>
