@@ -32,7 +32,7 @@ Backup numbers, only if asked: price checks for 240 of 470 hospitals, at 4 of 6 
 - Don't say "HIPAA compliant", "legal advice", "guaranteed", "every hospital follows" or "the AI checked".
 - Azure is running in production (checked 2026-10-24, 5 PM): Document Intelligence does the second read of every uploaded bill's charges, Azure OpenAI is the backup model for letters and chat, AI Search finds policy passages for Lupa, and Content Safety screens the chat. Claude still does the main read and writes the letters. Don't say Azure reads the whole bill.
 - Don't promise password reset. There is none.
-- Don't say Lupa reads photos or files in chat, or that it refuses every off-topic question. Neither is live.
+- Lupa reads a photo or PDF attached in the chat (a bill, insurance statement or collection letter) and declines anything else. Off-topic questions get a fixed refusal before any model answers. Say "it only answers bill questions", not "it can't be tricked".
 
 ---
 
