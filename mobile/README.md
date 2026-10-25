@@ -16,7 +16,7 @@ The Recount phone app, built with Expo (SDK 58, React Native, plain JavaScript).
 
 3. Scan the QR code in the terminal. On iPhone use the Camera app; on Android scan from inside Expo Go.
 
-The tunnel works from any network, so judges can scan it too. The laptop has to keep `npm run tunnel` running. If you see a `exp://...exp.direct` URL instead of a QR code (for example when the server runs in the background), paste that URL into Expo Go or turn it into a QR code.
+The tunnel works from any network. On a real iPhone, Expo Go opens it only when Expo Go and the laptop's Expo CLI are signed in to the same Expo account, so iPhone judges can't scan it themselves; Android phones can. Since May 2026 Expo Go also opens published EAS Updates only for the project's owner or organization members, so an `exp://u.expo.dev/...` link is not a public iPhone install either. For other people on iPhone, the website from the Home Screen is the way in. The laptop has to keep `npm run tunnel` running. If you see a `exp://...exp.direct` URL instead of a QR code (for example when the server runs in the background), paste that URL into Expo Go or turn it into a QR code.
 
 On the same Wi-Fi you can skip the tunnel: `npx expo start` and scan the QR code.
 
