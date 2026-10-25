@@ -15,6 +15,27 @@ import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
 import "./start.css";
 
+const STEP_TIMEOUT_MS = 25_000;
+const NAV_FALLBACK_MS = 6_000;
+
+// Each network step of getting a bill gets a time limit, so a stalled request ends in the
+// "upload failed" note instead of leaving the "getting your bill" screen up forever.
+function withinTime<T>(p: Promise<T>, ms = STEP_TIMEOUT_MS): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`timed out after ${ms} ms`)), ms);
+    p.then(
+      (v) => {
+        clearTimeout(timer);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(timer);
+        reject(e);
+      },
+    );
+  });
+}
+
 export function StartScreen() {
   const router = useRouter();
   const { t, lang } = useT();
@@ -49,11 +70,22 @@ export function StartScreen() {
   useEffect(() => () => reset(), []);
 
   async function upload(file: Blob): Promise<Id<"_storage">> {
-    const url = await generateUploadUrl();
-    const res = await fetch(url, { method: "POST", headers: { "Content-Type": file.type || "image/jpeg" }, body: file });
+    const url = await withinTime(generateUploadUrl());
+    const res = await withinTime(
+      fetch(url, { method: "POST", headers: { "Content-Type": file.type || "image/jpeg" }, body: file }),
+    );
     if (!res.ok) throw new Error("Upload failed");
-    const { storageId } = (await res.json()) as { storageId: Id<"_storage"> };
+    const { storageId } = (await withinTime(res.json())) as { storageId: Id<"_storage"> };
     return storageId;
+  }
+
+  // A client-side push can stall (a deploy swapping chunks, a flaky network). If we're still
+  // here after a few seconds, load the bill page the plain way.
+  function goToCase(url: string) {
+    router.push(url);
+    setTimeout(() => {
+      if (!window.location.pathname.startsWith("/case/")) window.location.assign(url);
+    }, NAV_FALLBACK_MS);
   }
 
   async function onFile(file: File | undefined) {
@@ -70,10 +102,10 @@ export function StartScreen() {
       setGetting((g) => g && { ...g, stage: 1 });
       const fileId = await upload(blob);
       setGetting((g) => g && { ...g, stage: 2 });
-      const { id, token } = await start({ fileId, fileType: type, sample: false, lang, ...hospitalHint() });
+      const { id, token } = await withinTime(start({ fileId, fileType: type, sample: false, lang, ...hospitalHint() }));
       rememberCase(id, token);
       setGetting((g) => g && { ...g, stage: 3 });
-      router.push(`/case/${id}#t=${token}`);
+      goToCase(`/case/${id}#t=${token}`);
     } catch (e) {
       setError(e instanceof FileProblem ? e.key : /too many/i.test(String(e)) ? "start.busy" : "start.uploadFailed");
       reset();
@@ -91,17 +123,17 @@ export function StartScreen() {
     try {
       let fileId: Id<"_storage"> | undefined;
       let fileType: string | undefined;
-      const res = await fetch("/sample-bill.png", { cache: "no-store" }).catch(() => null);
+      const res = await withinTime(fetch("/sample-bill.png", { cache: "no-store" })).catch(() => null);
       if (res?.ok && res.headers.get("content-type")?.startsWith("image/")) {
-        const blob = await res.blob();
+        const blob = await withinTime(res.blob());
         fileId = await upload(blob);
         fileType = blob.type || "image/png";
       }
       setGetting((g) => g && { ...g, stage: 2 });
-      const { id, token } = await start({ fileId, fileType, sample: true, lang, ...hospitalHint() });
+      const { id, token } = await withinTime(start({ fileId, fileType, sample: true, lang, ...hospitalHint() }));
       rememberCase(id, token);
       setGetting((g) => g && { ...g, stage: 3 });
-      router.push(`/case/${id}#t=${token}`);
+      goToCase(`/case/${id}#t=${token}`);
     } catch (e) {
       setError(/too many/i.test(String(e)) ? "start.busy" : "start.sampleFailed");
       reset();
