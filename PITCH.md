@@ -134,13 +134,14 @@ Say this unprompted if a judge looks skeptical. It earns trust.
 | Real and live | Sample or limited | Not built or not live |
 |---|---|---|
 | The statewide audit: 470 hospitals, real policies, quotes with page and date | The bill on stage: fictional patient, real SF General prices | Price checks for the other 230 hospitals |
-| Reading any uploaded bill photo or PDF | Price checks cover common ER codes only: 17 to 23 per SF hospital, up to 20 in the statewide run | Sending letters for the patient (on purpose) |
+| Reading any uploaded bill, as a PDF or up to 6 photos | Price checks cover common ER codes only: 17 to 23 per SF hospital, up to 20 in the statewide run | Sending letters for the patient (on purpose) |
 | Eligibility under state law for any CA hospital; hospital's own free care cutoff for 159 of 470 | Test bills are generated: printed type, one layout | Live price refresh for the 236 statewide hospitals (prices are from one run on 10/24) |
 | Price checks for 240 of 470 hospitals: 4 SF hand-checked, 236 from one statewide Actor run | | Price file audit beyond San Francisco |
-| Price file audit of 6 SF hospitals (Rust, offline) | | Lupa reading photos or files in chat |
-| Live Apify refresh for ZSFG, UCSF and CPMC; public Actor | | Azure reading the whole bill (it reads the charges only) |
-| Letters, Spanish, optional accounts (email or Google), My bills, Android app with Lupa, iPhone via Home Screen | | Password reset |
-| Insurance statement (EOB) check, follow-up screens and state complaint letter, "Not a valid document" for non-bill photos, browser notifications | | |
+| Price file audit of 6 SF hospitals (Rust, offline) | | Azure reading the whole bill (it reads the charges only) |
+| Live Apify refresh for ZSFG, UCSF and CPMC; public Actor | | Password reset |
+| Letters, Spanish, optional accounts (email or Google), My bills, Android app with Lupa, iPhone via Home Screen | | |
+| Lupa reading a photo or PDF you attach in chat | | |
+| Insurance statement (EOB) check, follow-up screens and state complaint letter, "Not a valid document" for non-bill photos, notifications in the browser and the Android app | | |
 | /dashboard with live agent metrics, read-only MCP server at /api/mcp | | |
 
 ---
