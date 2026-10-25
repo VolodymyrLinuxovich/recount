@@ -180,7 +180,7 @@ sequenceDiagram
 ### The statewide policy audit
 
 ```mermaid
-flowchart LR
+flowchart TD
     H[HCAI Fair Pricing<br/>Policy Lookup] --> CR[crawl.py<br/>470 hospitals]
     CR --> EX[extract.py<br/>2,333 documents]
     EX --> RX[rules.py<br/>997 candidate sentences]
