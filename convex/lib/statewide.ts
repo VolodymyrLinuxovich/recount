@@ -2,8 +2,9 @@
 // (convex/lib/hospitalIndex.json, built by pipeline/build_hospital_index.py).
 // When the match isn't clear, the patient picks from the closest few; we never guess silently.
 
-import type { HospitalRef } from "./hospital";
+import type { HospitalRef, PriceRow } from "./hospital";
 import index from "./hospitalIndex.json";
+import statewidePrices from "./statewidePrices.json";
 
 export interface IndexedHospital {
   key: string;
@@ -103,5 +104,32 @@ export function refFromIndex(h: IndexedHospital): HospitalRef {
       method: h.fap.method ?? "rules",
     },
     warnings: [],
+  };
+}
+
+interface StatewidePrices {
+  url: string;
+  lastUpdated: string | null;
+  fetchedAt: string;
+  prices: Record<string, PriceRow>;
+}
+
+// Prices our Apify Actor read from each hospital's own price file in a statewide batch
+// (pipeline/build_statewide_prices.py). Only files that name the hospital are kept.
+const PRICED = (statewidePrices as unknown as { hospitals: Record<string, StatewidePrices> }).hospitals;
+
+export const hasStatewidePrices = (key: string) => Boolean(PRICED[key]);
+
+/** Policy facts plus the hospital's published prices, when the statewide batch found its price file. */
+export function pricedRefFromIndex(h: IndexedHospital): HospitalRef {
+  const base = refFromIndex(h);
+  const p = PRICED[h.key];
+  if (!p) return base;
+  return {
+    ...base,
+    source: "apify-live",
+    fetchedAt: p.fetchedAt,
+    policyOnly: false,
+    mrf: { url: p.url, lastUpdated: p.lastUpdated, prices: p.prices },
   };
 }

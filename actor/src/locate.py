@@ -79,6 +79,8 @@ def fetch_cms_txt(client: httpx.Client, hospital_url: str) -> tuple[str, list[di
 
 # ---------------------------------------------------------------- link scoring
 
+# Download endpoints that name the format in the query (apps.para-hcfs.com/...Reports.aspx?fileType=CSV).
+FILE_QUERY_RE = re.compile(r'(?:file_?type|format|filetype)=(?:csv|json)\b', re.I)
 FILE_EXT_RE = re.compile(r'\.(pdf|csv|json|zip|gz|xlsx?|docx?|txt|mp3|mp4|jpg|jpeg|png|gif)(?:\?|$)', re.I)
 PRICE_PAGE_RE = re.compile(r'price[\s_-]*transparen|standard[\s_-]*charges?|machine[\s_-]*readable|chargemaster|'
                            r'pricing[\s_-]*transparen|hospital[\s_-]*prices?|price[\s_-]*estimat|shoppable', re.I)
@@ -89,7 +91,8 @@ FAP_PAGE_RE = re.compile(r'financial[\s_-]*assist|charity|discount[\s_-]*payment
 
 def score_mrf_link(href: str, text: str, hospital_name: str | None, site_url: str | None = None) -> float:
     h, t = href.lower(), text.lower()
-    if re.search(r'\.(xlsx?|pdf|docx?|html?|aspx?|php)(?:\?|$)', h) and 'box_download' not in h:
+    file_query = bool(FILE_QUERY_RE.search(h))
+    if re.search(r'\.(xlsx?|pdf|docx?|html?|aspx?|php)(?:\?|$)', h) and 'box_download' not in h and not file_query:
         return 0
     s = 0.0
     if re.search(r'machine[\s-]*readable', t):
@@ -98,7 +101,7 @@ def score_mrf_link(href: str, text: str, hospital_name: str | None, site_url: st
         s += 4
     if re.search(r'\bmrf\b', t):
         s += 3
-    if re.search(r'\.(json|csv|zip|gz)(?:\?|$)', h):
+    if re.search(r'\.(json|csv|zip|gz)(?:\?|$)', h) or file_query:
         s += 4
     if re.search(r'box\.com|boxcloud|blob\.core|s3\.amazonaws|cloudfront|download|attachment|file_id', h):
         s += 2
@@ -108,6 +111,9 @@ def score_mrf_link(href: str, text: str, hospital_name: str | None, site_url: st
         return 0
     if hospital_name:
         s += 3 * name_overlap(hospital_name, text + ' ' + unquote(href))
+        # Vendors pack the name into one code (dbAHCLCLEARLAKECA, ..._adventist_lodi_memorial_...).
+        flat = re.sub(r'[^a-z0-9]', '', unquote(h))
+        s += 2 * min(2, sum(1 for t in name_tokens(hospital_name) if len(t) >= 4 and t in flat))
     if site_url:
         # Words of the link text that appear in the hospital's domain ("ucsf" in ucsfhealth.org).
         label = urlparse(site_url).netloc.lower().removeprefix('www.').split('.')[0]
@@ -175,6 +181,9 @@ def _extract_links(html: str, base: str) -> list[tuple[str, str]]:
     return out
 
 
+MAX_PAGE_BYTES = 5 * 1024 * 1024
+
+
 def crawl_site(client: httpx.Client, start_url: str, max_pages: int = 30, max_depth: int = 3) -> CrawlResult:
     """Small best-first crawl of the hospital site that only follows links about prices,
     billing and financial assistance, and records candidate files/documents."""
@@ -191,12 +200,22 @@ def crawl_site(client: httpx.Client, start_url: str, max_pages: int = 30, max_de
     vendor_hosts: set[str] = set()
     price_urls: set[str] = set()
 
-    def fetch(url: str) -> tuple[str, httpx.Response | None, str | None]:
+    def fetch(url: str) -> tuple[str, httpx.Response | None, str | None, str]:
+        # Stream, and read the body only for HTML pages (capped). A link without a file
+        # extension can still serve a 500 MB price file; reading that whole would exhaust memory.
         try:
-            r = client.get(url, timeout=25)
-            return url, r, None
+            with client.stream('GET', url, timeout=25) as r:
+                ctype = r.headers.get('content-type', '').lower()
+                if r.status_code >= 400 or 'html' not in ctype:
+                    return url, r, None, ''
+                buf = bytearray()
+                for chunk in r.iter_bytes():
+                    buf += chunk
+                    if len(buf) > MAX_PAGE_BYTES:
+                        break
+                return url, r, None, bytes(buf).decode(r.encoding or 'utf-8', errors='replace')
         except httpx.HTTPError as e:
-            return url, None, f'{type(e).__name__}'
+            return url, None, f'{type(e).__name__}', ''
 
     with ThreadPoolExecutor(max_workers=6) as pool:
         while queue and len(res.visited) < max_pages:
@@ -205,15 +224,14 @@ def crawl_site(client: httpx.Client, start_url: str, max_pages: int = 30, max_de
             while queue and len(batch) < 6 and len(res.visited) + len(batch) < max_pages:
                 batch.append(queue.pop(0))
             depth_of = {u: d for _, d, u in batch}
-            for url, r, err in pool.map(lambda q: fetch(q[2]), batch):
+            for url, r, err, html in pool.map(lambda q: fetch(q[2]), batch):
                 res.visited.append(url)
                 if err or r is None:
                     res.errors.append(f'{url}: {err}')
                     continue
                 ctype = r.headers.get('content-type', '').lower()
-                if r.status_code >= 400 or 'html' not in ctype:
+                if r.status_code >= 400 or 'html' not in ctype or not html:
                     continue
-                html = r.text
                 final = str(r.url)
                 title = html_title(html) or ''
                 res.titles[final] = title
@@ -226,9 +244,9 @@ def crawl_site(client: httpx.Client, start_url: str, max_pages: int = 30, max_de
                 on_vendor = urlparse(final).netloc in vendor_hosts
                 for link, text in _extract_links(html, final):
                     on_site = same_site(link, start_url)
-                    is_file = bool(FILE_EXT_RE.search(link)) or re.search(r'download|attachment|file_id|box\.com', link, re.I)
+                    is_file = bool(FILE_EXT_RE.search(link) or FILE_QUERY_RE.search(link)) or re.search(r'download|attachment|file_id|box\.com', link, re.I)
                     if link not in mrf_seen and (PRICE_PAGE_RE.search(text) or PRICE_PAGE_RE.search(link)
-                                                 or re.search(r'\.(json|csv)(?:\?|$)', link, re.I)):
+                                                 or re.search(r'\.(json|csv)(?:\?|$)', link, re.I) or FILE_QUERY_RE.search(link)):
                         mrf_seen.add(link)
                         res.mrf_links.append(Link(link, text, final))
                     if link not in app_seen and is_application_link(link, text):

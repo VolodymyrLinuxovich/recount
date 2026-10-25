@@ -16,7 +16,7 @@ import { lawLine, resolveFilledBrackets, templateLetters, type Letter } from "./
 import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL } from "./lib/sample";
-import { byKey, matchHospital, refFromIndex } from "./lib/statewide";
+import { byKey, matchHospital, pricedRefFromIndex } from "./lib/statewide";
 
 /** Registry address for a known SF hospital key (its HCAI slug is in KNOWN_HOSPITALS). */
 function hcaiAddress(key: string): string | null {
@@ -235,10 +235,18 @@ async function resolveRef(ctx: ActionCtx, caseId: Id<"cases">, key: string, bill
   }
   const h = byKey(key);
   if (!h) return null;
+  const ref = pricedRefFromIndex(h);
+  if (ref.mrf) {
+    const day = ref.fetchedAt.slice(0, 10);
+    await step(ctx, caseId, "hospital", t(`Using ${h.name}'s published prices and assistance policy`, `Usamos los precios publicados y la política de ayuda de ${h.name}`), "done",
+      t(`Prices read from the hospital's own price file by our Apify Actor on ${day}. Policy from the filings California hospitals make with the state (HCAI).`,
+        `Precios leídos del archivo de precios del propio hospital por nuestro Actor de Apify el ${day}. Política de las presentaciones que los hospitales de California hacen al estado (HCAI).`));
+    return warningsForBill(ref, bill, lang);
+  }
   await step(ctx, caseId, "hospital", t(`Found ${h.name}'s financial assistance policy`, `Encontramos la política de asistencia financiera de ${h.name}`), "done",
     t("From the policies California hospitals file with the state (HCAI). We don't have this hospital's price file, so charges are not compared to its prices.",
       "De las políticas que los hospitales de California presentan al estado (HCAI). No tenemos el archivo de precios de este hospital, así que no comparamos los cargos con sus precios."));
-  return refFromIndex(h);
+  return ref;
 }
 
 /** Second half of the check, after the hospital is known (or the patient said it isn't listed). */
