@@ -1,12 +1,12 @@
 # Recount demo script (about 2 minutes 20 seconds)
 
-Record on a phone, or on a laptop at phone width (390 x 844). The video opens on the home page, runs the built-in sample bill in Spanish, shows who did what on the bill and the /how page, signs in to show the bill history, and ends on the statewide audit. Alex Rivera is a fictional patient at Zuckerberg San Francisco General (ZSFG). The bill is priced from ZSFG's real published charges. Say once that it is a sample.
+Record on a phone, or on a laptop at phone width (390 x 844). The video opens on the home page, runs the built-in sample bill in Spanish, shows who did what on the bill, signs in to show the bill history, and ends on the statewide audit. Alex Rivera is a fictional patient at Zuckerberg San Francisco General (ZSFG). The bill is priced from ZSFG's real published charges. Say once that it is a sample.
 
 Before recording:
 - Create a demo account (email + password) on another device or a private window, and check one real-looking bill there, so the account already holds a bill from "another device".
 - On the recording phone, start signed out, with no saved bills.
 - Run the sample once and check that the bill says "read by Claude" and the hospital data says "Fetched live". If Claude or the Apify Actor is down, the app falls back to the sample's source data, a saved lookup and template letters, and labels each one.
-- Open /how and check "Models in use right now" lists the models you expect. The "Who did what" panel shows whatever models actually ran, so if Azure is set for a task, it will show there. [CHECK BEFORE SUBMITTING: decide which models the recording should show.]
+- Run the sample once and open "More about this bill". The "Who did what" panel lists the AI calls that actually ran, with model and provider. In production Claude reads and drafts, and Azure AI Document Intelligence does the second read of the charges.
 - Rehearse the path to the panel: from the letters, go Back to the answer screen ("Lo más probable es que usted deba $0") and tap "Más sobre esta factura: fuentes, compartir, borrar".
 - Open /audit once so the map is cached. Type "PIH Health Whittier", not just "Whittier": "Whittier" also matches Whittier Hospital Medical Center.
 
@@ -50,9 +50,9 @@ Before recording:
 
 ## 1:30 to 1:50. Who did what
 
-**Screen:** Back to the answer screen. Tap "Más sobre esta factura". Scroll to "Quién hizo qué en esta factura": the count of rule steps, then each AI call with its model, provider and seconds. Tap "Cómo decide Recount". On /how, scroll the 11 steps with their Rules, AI and You labels, pause on "La IA nunca puede", then "Modelos que usamos ahora".
+**Screen:** Back to the answer screen. Tap "Más sobre esta factura". Scroll to "Quién hizo qué en esta factura": the count of rule steps, then each AI call with its model, provider and seconds.
 
-> Every bill shows who did what. These steps were fixed rules. These are the AI calls: the read, the second read of the charges, the letters, each with its model and time. The How page labels every step Rules, AI or You. AI may read and write. It may never send anything, decide if you qualify, or change an amount. And every AI call goes through one layer, so we can change the model without changing the app.
+> Every bill shows who did what. These steps were fixed rules. These are the AI calls: the read, the second read of the charges, the letters, each with its model and time. AI may read and write. It may never send anything, decide if you qualify, or change an amount. And every AI call goes through one layer, so we can change the model without changing the app.
 
 ## 1:50 to 2:05. Sign in, see the history
 
@@ -87,8 +87,6 @@ Cut for time (show only if the video runs short): Lupa. Tap "Ask Lupa" in the he
 | 1 person, $20,000 | 125.3% FPL | 2026 FPL $15,960 |
 | ZSFG free care cutoff | 138% FPL | `zsfg.json` |
 | Hospitals with a proven free care cutoff | 159 of 470 | `convex/lib/hospitalIndex.json` |
-| /how steps | 11: 5 Rules, 3 AI, 3 You | `src/components/how/HowScreen.tsx` |
-| AI may / may never | 4 / 5 items | `how.may1`-`4`, `how.mayNot1`-`5` in `en.json` |
 | AI tasks shown with models | read, column, letters, chat | `convex/pipeline.ts` `map`, `convex/lib/model.ts` |
 
 Spanish labels on screen (from `es.json` and `convex/lib/checks.ts`): "Probar con una factura de ejemplo", "aparece cobrado dos veces", "cuesta más que el precio de lista del hospital", "Corregir", "Lo más probable es que usted deba", "¿Esta factura es suya o de otra persona?", "Es mía", "Otra persona", "Envíe sus cartas", "Entrar", "Agregamos 1 factura a su cuenta", "Mis facturas", "Más sobre esta factura: fuentes, compartir, borrar", "Quién hizo qué en esta factura", "Modelo de respaldo", "Cómo decide Recount", "La IA nunca puede", "Modelos que usamos ahora".
