@@ -179,12 +179,12 @@ function complaintEs(f: ComplaintFacts): Pick<Letter, "subjectPatient" | "bodyPa
       ``,
       ...(h && f.fplPct != null
         ? [
-            `Mi hogar tiene ${h.size === 1 ? "1 persona" : `${h.size} personas`} y nuestro ingreso anual es de aproximadamente ${money(h.annualIncome)}, que es el ${f.fplPct}% de la guía federal de pobreza. ${h.insured ? "Tengo seguro médico." : "No tenía seguro médico para esta visita."}`,
+            `En mi hogar ${h.size === 1 ? "vive 1 persona" : `viven ${h.size} personas`} y entre todos ganamos aproximadamente ${money(h.annualIncome)} al año, que es el ${f.fplPct}% del nivel federal de pobreza. ${h.insured ? "Tengo seguro médico." : "No tenía seguro médico para esta visita."}`,
             ``,
           ]
         : []),
       ...(quotesEligibility(f)
-        ? [`El Código de Salud y Seguridad 127405(a)(1)(A) dice que los pacientes sin seguro o con gastos médicos altos cuyo ingreso está en el 400% del nivel federal de pobreza o menos pueden solicitar atención caritativa o pago con descuento.`, ``]
+        ? [`El Código de Salud y Seguridad 127405(a)(1)(A) dice que los pacientes sin seguro o con gastos médicos altos cuyos ingresos familiares son del 400% del nivel federal de pobreza o menos pueden solicitar atención caritativa o pago con descuento.`, ``]
         : []),
       ...(f.outcome === "collections"
         ? [`El Código de Salud y Seguridad 127425(g) dice que el hospital no debe mandar la factura sin pagar a una agencia de cobranza, a un comprador de deudas ni a otro cesionario mientras el paciente trata de calificar para la asistencia, a menos que esa agencia acepte cumplir la ley.`, ``]
@@ -192,7 +192,7 @@ function complaintEs(f: ComplaintFacts): Pick<Letter, "subjectPatient" | "bodyPa
       ...(p.policy.length
         ? ["La política del propio hospital dice:", ...p.policy.map((x) => `"${x.quote}" ${lawLine(x.rule, "es")}`), ""]
         : []),
-      `Por favor revisen cómo el hospital manejó mi solicitud.`,
+      `Por favor, revisen cómo el hospital manejó mi solicitud.`,
       ``,
       `Adjunto copias de ${attach.slice(0, -1).join(", ")} y ${attach[attach.length - 1]}.`,
       ``,

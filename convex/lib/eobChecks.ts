@@ -127,8 +127,8 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
   // Typed totals: the source is what the patient typed, not a document we read.
   const eobSrc = eob.typed
     ? eob.payer
-      ? t(`What you typed from your ${payer} statement`, `Lo que usted escribió de su estado de ${payer}`)
-      : t("What you typed from your insurance statement", "Lo que usted escribió de su estado del seguro")
+      ? t(`What you typed from your ${payer} statement`, `Lo que usted escribió de su resumen de ${payer}`)
+      : t("What you typed from your insurance statement", "Lo que usted escribió de su resumen del seguro")
     : eob.claimNumber
     ? t(`EOB from ${payer}, claim ${eob.claimNumber}`, `EOB de ${payer}, reclamo ${eob.claimNumber}`)
     : t(`EOB from ${payer}`, `EOB de ${payer}`);
@@ -147,35 +147,35 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
         kind: "EOB_MISMATCH",
         lines: [],
         amount: 0,
-        title: t("This insurance statement may be for a different visit", "Este estado del seguro puede ser de otra visita"),
+        title: t("This insurance statement may be for a different visit", "Este resumen del seguro puede ser de otra visita"),
         detail:
           why === "dates"
             ? t(
                 "The dates on the insurance statement don't match the dates on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
-                "Las fechas del estado del seguro no coinciden con las de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
+                "Las fechas del resumen del seguro no coinciden con las de su factura. Revise que agregó el resumen de esta visita. No lo comparamos con su factura.",
               )
             : why === "patient"
               ? t(
                   "The member name on the insurance statement doesn't match the patient on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
-                  "El nombre del miembro en el estado del seguro no coincide con el paciente de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
+                  "El nombre del miembro en el resumen del seguro no coincide con el paciente de su factura. Revise que agregó el resumen de esta visita. No lo comparamos con su factura.",
                 )
               : t(
                   "The provider on the insurance statement doesn't look like the hospital on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
-                  "El proveedor del estado del seguro no parece ser el hospital de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
+                  "El proveedor del resumen del seguro no parece ser el hospital de su factura. Revise que agregó el resumen de esta visita. No lo comparamos con su factura.",
                 ),
         evidence:
           why === "dates"
             ? [
-                { label: t("Dates on the insurance statement", "Fechas en el estado del seguro"), value: range, source: eobSrc },
+                { label: t("Dates on the insurance statement", "Fechas en el resumen del seguro"), value: range, source: eobSrc },
                 { label: t("Date of service on your bill", "Fecha del servicio en su factura"), value: bill.serviceDate ?? bill.lines.find((l) => l.date)?.date ?? t("not printed", "no aparece"), source: billSrc },
               ]
             : why === "patient"
               ? [
-                  { label: t("Member on the insurance statement", "Miembro en el estado del seguro"), value: eob.memberName ?? "", source: eobSrc },
+                  { label: t("Member on the insurance statement", "Miembro en el resumen del seguro"), value: eob.memberName ?? "", source: eobSrc },
                   { label: t("Patient on your bill", "Paciente en su factura"), value: bill.patientName ?? "", source: billSrc },
                 ]
               : [
-                  { label: t("Provider on the insurance statement", "Proveedor en el estado del seguro"), value: eob.providerName ?? "", source: eobSrc },
+                  { label: t("Provider on the insurance statement", "Proveedor en el resumen del seguro"), value: eob.providerName ?? "", source: eobSrc },
                   { label: t("Hospital on your bill", "Hospital en su factura"), value: bill.hospitalName ?? t("not printed", "no aparece"), source: billSrc },
                 ],
         confidence: "check",
@@ -194,7 +194,7 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
         title: t("Your insurance hasn't finished this claim", "Su seguro todavía no termina este reclamo"),
         detail: t(
           `${payer} is still processing this claim. Don't pay the hospital until it finishes. Ask the hospital to hold the bill and not send it to collections until then.`,
-          `${payer} todavía está procesando este reclamo. No le pague al hospital hasta que termine. Pida al hospital que detenga la factura y no la mande a cobranzas mientras tanto.`,
+          `${payer} todavía está procesando este reclamo. No le pague al hospital hasta que termine. Pida al hospital que ponga la factura en pausa y que no la mande a cobranza mientras tanto.`,
         ),
         evidence: [{ label: t("Claim status", "Estado del reclamo"), value: t("Pending", "Pendiente"), source: eobSrc }],
         confidence: "high",
@@ -241,7 +241,7 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
       title: t("This looks like a surprise bill for emergency care", "Esto parece una factura sorpresa por atención de emergencia"),
       detail: t(
         `Your insurance says you owe ${money(still!)}. The hospital is asking for ${money(due!)}. For emergency care, a hospital that is out of your network can't bill you more than your in-network cost sharing. That is the federal No Surprises Act (Public Health Service Act section 2799B-1, 42 U.S.C. 300gg-131). Ask the hospital to correct the bill to the amount on your insurance statement. For help, call the federal No Surprises Help Desk at 1-800-985-3059.`,
-        `Su seguro dice que usted debe ${money(still!)}. El hospital le cobra ${money(due!)}. En una emergencia, un hospital fuera de su red no le puede cobrar más de lo que pagaría dentro de la red. Así lo dice la ley federal contra facturas sorpresa, No Surprises Act (Ley del Servicio de Salud Pública, sección 2799B-1, 42 U.S.C. 300gg-131). Pida al hospital que corrija la factura al monto de su estado del seguro. Para ayuda, llame a la línea federal No Surprises Help Desk al 1-800-985-3059.`,
+        `Su seguro dice que usted debe ${money(still!)}. El hospital le cobra ${money(due!)}. En una emergencia, un hospital fuera de su red no le puede cobrar más de lo que pagaría dentro de la red. Así lo dice la ley federal contra facturas sorpresa, No Surprises Act (Ley del Servicio de Salud Pública, sección 2799B-1, 42 U.S.C. 300gg-131). Pida al hospital que corrija la factura al monto de su resumen del seguro. Para ayuda, llame a la línea federal No Surprises Help Desk al 1-800-985-3059.`,
       ),
       evidence: [
         ...owesEvidence(),
@@ -258,11 +258,11 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
       eob.network === "in"
         ? t(
             " The hospital is in your plan's network. In-network providers agree not to bill you above the plan's allowed amount. Ask the hospital to correct the bill to the amount on your insurance statement.",
-            " El hospital está en la red de su plan. Los proveedores de la red aceptan no cobrarle más que el monto permitido por el plan. Pida al hospital que corrija la factura al monto de su estado del seguro.",
+            " El hospital está en la red de su plan. Los proveedores de la red aceptan no cobrarle más que el monto permitido por el plan. Pida al hospital que corrija la factura al monto de su resumen del seguro.",
           )
         : t(
             " Ask the hospital to explain the difference, and not to send the bill to collections while you ask.",
-            " Pida al hospital que le explique la diferencia, y que no mande la factura a cobranzas mientras pregunta.",
+            " Pida al hospital que le explique la diferencia, y que no mande la factura a cobranza mientras pregunta.",
           );
     out.push({
       id: "eob-owes-more",
@@ -324,14 +324,14 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
         kind: "NOT_ON_EOB",
         lines: [i],
         amount: 0,
-        title: t(`${l.description} isn't on your insurance statement`, `${l.description} no aparece en su estado del seguro`),
+        title: t(`${l.description} isn't on your insurance statement`, `${l.description} no aparece en su resumen del seguro`),
         detail: t(
           `Line ${i + 1} of your bill (code ${c}) isn't on the insurance statement. Ask the hospital whether this charge was sent to your insurance.`,
-          `La línea ${i + 1} de su factura (código ${c}) no aparece en el estado del seguro. Pregunte al hospital si mandó este cargo a su seguro.`,
+          `La línea ${i + 1} de su factura (código ${c}) no aparece en el resumen del seguro. Pregunte al hospital si mandó este cargo a su seguro.`,
         ),
         evidence: [
           { label: t("On your bill", "En su factura"), value: `${c} · ${money(l.charge)}`, source: billSrc },
-          { label: t("On the insurance statement", "En el estado del seguro"), value: t("Not listed", "No aparece"), source: eobSrc },
+          { label: t("On the insurance statement", "En el resumen del seguro"), value: t("Not listed", "No aparece"), source: eobSrc },
         ],
         confidence: "check",
       });
@@ -359,7 +359,7 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
     const appeal = publicPlan(eob)
       ? t(
           " Follow the appeal steps on your statement.",
-          " Siga los pasos para apelar que vienen en su estado del seguro.",
+          " Siga los pasos para apelar que vienen en su resumen del seguro.",
         )
       : t(
           " In California, after the plan's own appeal (or right away if it's urgent), you can ask the state for an Independent Medical Review. For HMOs and most plans, that's the DMHC: 1-888-466-2219, healthhelp.ca.gov. For some PPO policies, it's the Department of Insurance: 1-800-927-4357.",
@@ -382,7 +382,7 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
               `${payer} didn't cover ${denied.length === 1 ? "1 service" : `${denied.length} services`}${amount ? ` (${money(amount)})` : ""}.`,
               `${payer} no cubrió ${denied.length === 1 ? "1 servicio" : `${denied.length} servicios`}${amount ? ` (${money(amount)})` : ""}.`,
             )) +
-        t(" You can appeal to your insurance and ask them to pay.", " Usted puede apelar a su seguro y pedir que paguen.") +
+        t(" You can appeal to your insurance and ask them to pay.", " Puede apelar ante su seguro y pedirle que pague.") +
         (eob.appealDeadline ? t(` Appeal deadline: ${eob.appealDeadline}.`, ` Plazo para apelar: ${eob.appealDeadline}.`) : "") +
         appeal,
       evidence: [
@@ -444,7 +444,7 @@ function billAndEobFindings(bill: ParsedBill, hospital: HospitalRef | null, eob:
       f.amount = 0;
       f.detail += t(
         " Your insurance statement sets what you owe, so this amount is already counted in the insurance finding.",
-        " Su estado del seguro fija lo que usted debe, así que este monto ya está contado en el hallazgo del seguro.",
+        " Su resumen del seguro fija lo que usted debe, así que este monto ya está contado en el hallazgo del seguro.",
       );
     } else if (f.lines.some((i) => denied.has(i))) {
       f.amount = 0;
@@ -470,7 +470,7 @@ function billAndEobFindings(bill: ParsedBill, hospital: HospitalRef | null, eob:
         still != null && ceiling === still
           ? t(
               ` Your insurance statement says you owe ${money(ceiling)}, so all findings together count at most that much.`,
-              ` Su estado del seguro dice que usted debe ${money(ceiling)}, así que todos los hallazgos juntos cuentan como máximo ese monto.`,
+              ` Su resumen del seguro dice que usted debe ${money(ceiling)}, así que todos los hallazgos juntos cuentan como máximo ese monto.`,
             )
           : t(
               ` The bill asks for ${money(ceiling)}, so all findings together count at most that much.`,

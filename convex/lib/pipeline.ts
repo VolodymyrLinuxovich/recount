@@ -13,7 +13,7 @@ export const PIPELINE: { key: string; kind: Kind; en: string; es: string }[] = [
   { key: "hospital", kind: "rule", en: "Code matches the hospital and loads its published prices", es: "El código identifica el hospital y carga sus precios publicados" },
   { key: "check", kind: "rule", en: "Code checks duplicates, list prices, cash prices and the total", es: "El código revisa duplicados, precios de lista, precios en efectivo y el total" },
   { key: "policy", kind: "rule", en: "Code looks up the statewide policy audit for this hospital", es: "El código busca la auditoría estatal de la política de este hospital" },
-  { key: "eob-read", kind: "ai", en: "If you have insurance, AI reads your insurance statement (EOB)", es: "Si tiene seguro, la IA lee su estado del seguro (EOB)" },
+  { key: "eob-read", kind: "ai", en: "If you have insurance, AI reads your insurance statement (EOB)", es: "Si tiene seguro, la IA lee su resumen del seguro (EOB)" },
   { key: "eob-check", kind: "rule", en: "Code compares the bill with what your insurance says you owe, and finds denials you can appeal", es: "El código compara la factura con lo que su seguro dice que usted debe, y encuentra negaciones que puede apelar" },
   { key: "household", kind: "person", en: "You answer 3 questions about your household", es: "Usted responde 3 preguntas sobre su hogar" },
   { key: "eligibility", kind: "rule", en: "Code applies California's charity care rules", es: "El código aplica las reglas de ayuda financiera de California" },

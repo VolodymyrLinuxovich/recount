@@ -185,7 +185,7 @@ describe("dispute letter with an EOB", () => {
     const letters = templateLetters(pf, "es");
     expect(letters.map((l) => l.kind)).toEqual(["assistance", "dispute"]);
     expect(letters[1].body).toContain("hold this bill and do not send it to collections until my insurance finishes");
-    expect(letters[1].bodyPatient).toContain("no la envíen a cobranzas");
+    expect(letters[1].bodyPatient).toContain("no la envíen a cobranza");
   });
 
   it("keeps bill checks and EOB findings in one numbered list", () => {

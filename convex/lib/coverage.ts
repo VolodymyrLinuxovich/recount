@@ -68,7 +68,7 @@ const usableEob = (eob: ParsedEob | null | undefined) => !!eob && eob.isEob !== 
 export const COVERAGE_LAW_LINE: Record<CoverageFindingKind, [string, string]> = {
   MEDI_CAL_BALANCE_BILL: [
     "California law says a provider that accepts a Medi-Cal patient may not seek payment from the patient for covered services, except an unmet share of cost (Welfare and Institutions Code section 14019.4).",
-    "La ley de California dice que un proveedor que atiende a un paciente de Medi-Cal no puede cobrarle por servicios cubiertos, excepto la parte del costo (share of cost) que el paciente aún no haya cubierto (Código de Bienestar e Instituciones, sección 14019.4).",
+    "La ley de California dice que un proveedor que atiende a un paciente de Medi-Cal no puede cobrarle por servicios cubiertos, excepto la parte del costo (share of cost) que el paciente todavía no haya pagado (Código de Bienestar e Instituciones, sección 14019.4).",
   ],
   QMB_BILLED: [
     "Federal law says providers may not bill a Qualified Medicare Beneficiary for Medicare deductibles, coinsurance or copayments (Social Security Act section 1902(n)(3)(B), 42 U.S.C. 1396a(n)(3)(B)). California law also bars billing a Medi-Cal patient for covered services beyond share of cost (Welfare and Institutions Code section 14019.4).",
@@ -161,7 +161,7 @@ export function coverageFindings(
           )
         : t(
             "You have Medicare, but the bill shows no Medicare payment. Give the hospital your Medicare card and ask it to bill Medicare. Then you owe at most the Medicare deductible and coinsurance for covered care.",
-            "Usted tiene Medicare, pero la factura no muestra ningún pago de Medicare. Dele al hospital su tarjeta de Medicare y pídale que le cobre a Medicare. Así usted debe como máximo el deducible y el coseguro de Medicare por la atención cubierta.",
+            "Usted tiene Medicare, pero la factura no muestra ningún pago de Medicare. Dele al hospital su tarjeta de Medicare y pídale que le cobre a Medicare. Así, por la atención cubierta, solo le pueden cobrar el deducible y el coseguro de Medicare.",
           ),
       evidence: [
         { label: t("Insurance paid on the bill", "Pago del seguro en la factura"), value: money(bill.insurancePaid ?? 0) },
@@ -181,13 +181,13 @@ export function coverageFindings(
         kind: "RETRO_MEDI_CAL",
         lines: [],
         amount: 0,
-        title: t("Medi-Cal may pay this bill, even now", "Medi-Cal podría pagar esta factura, aún ahora"),
+        title: t("Medi-Cal may pay this bill, even now", "Medi-Cal podría pagar esta factura, incluso ahora"),
         detail: t(
           `Your income looks low enough for Medi-Cal (${MEDI_CAL_FPL_PCT}% of the poverty line or less for most adults). Medi-Cal can cover care from up to 3 months before the month you apply. For applications from January 1, 2027, that drops to 1 or 2 months, so apply soon. Ask the hospital to hold the bill and help you apply. If you already paid, the hospital must refund you once Medi-Cal pays.`,
-          `Sus ingresos parecen lo bastante bajos para Medi-Cal (${MEDI_CAL_FPL_PCT}% del nivel federal de pobreza o menos para la mayoría de los adultos). Medi-Cal puede cubrir atención de hasta 3 meses antes del mes en que usted solicita. Para solicitudes desde el 1 de enero de 2027, son solo 1 o 2 meses, así que solicite pronto. Pídale al hospital que detenga la factura y le ayude a solicitar. Si usted ya pagó, el hospital debe devolverle el dinero cuando Medi-Cal pague.`,
+          `Los ingresos de su hogar parecen lo bastante bajos para Medi-Cal (${MEDI_CAL_FPL_PCT}% del nivel federal de pobreza o menos para la mayoría de los adultos). Medi-Cal puede cubrir atención de hasta 3 meses antes del mes en que usted solicita. Para solicitudes desde el 1 de enero de 2027, el plazo baja a 1 o 2 meses, así que solicite pronto. Pídale al hospital que ponga la factura en pausa y que le ayude a solicitar Medi-Cal. Si usted ya pagó, el hospital debe devolverle el dinero cuando Medi-Cal pague.`,
         ),
         evidence: [
-          { label: t("Your income", "Sus ingresos"), value: t(`${Math.round(pct * 10) / 10}% of the poverty line`, `${Math.round(pct * 10) / 10}% del nivel de pobreza`) },
+          { label: t("Your income", "Ingresos de su hogar"), value: t(`${Math.round(pct * 10) / 10}% of the poverty line`, `${Math.round(pct * 10) / 10}% del nivel de pobreza`) },
           { label: t("Federal rule", "Regla federal"), value: "42 CFR 435.915", source: SRC.RETRO },
           { label: t("Refund", "Reembolso"), value: t("Welfare and Institutions Code 14019.3", "Código de Bienestar e Instituciones 14019.3"), source: SRC.WI_14019_3 },
           { label: t("Apply", "Solicitar"), value: "dhcs.ca.gov", source: SRC.MEDI_CAL_APPLY },

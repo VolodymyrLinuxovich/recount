@@ -34,7 +34,7 @@ export async function hashEmail(email: string): Promise<string> {
 
 /** The email, in English and Spanish, since we don't know which the person reads. */
 export function resetMessage(code: string) {
-  const subject = `Your Recount code: ${code}`;
+  const subject = `Your Recount code / Su código de Recount: ${code}`;
   const text = [
     `Your code to reset your Recount password is ${code}.`,
     `It works for ${RESET_CODE_MINUTES} minutes. If you didn't ask for it, ignore this email. Your password stays the same.`,

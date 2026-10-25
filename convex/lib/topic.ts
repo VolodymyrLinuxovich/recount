@@ -106,5 +106,5 @@ export function topicInput(history: { role: "user" | "assistant"; content: strin
 /** The fixed reply to anything off topic. It never answers the off topic part. */
 export const OFF_TOPIC = {
   en: "Sorry, I can't help with that. I can only answer questions about hospital bills, insurance statements, help paying the hospital, and medical debt. I can also explain how Recount works. What would you like to know about your bill?",
-  es: "Lo siento, no puedo ayudarle con eso. Solo puedo responder preguntas sobre facturas del hospital, estados de cuenta del seguro, ayuda para pagar el hospital y deudas médicas. También puedo explicarle cómo funciona Recount. ¿Qué le gustaría saber sobre su factura?",
+  es: "Lo siento, no puedo ayudarle con eso. Solo puedo responder preguntas sobre facturas del hospital, resúmenes del seguro (EOB), ayuda para pagar el hospital y deudas médicas. También puedo explicarle cómo funciona Recount. ¿Qué le gustaría saber sobre su factura?",
 };

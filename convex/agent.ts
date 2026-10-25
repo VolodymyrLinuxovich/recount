@@ -272,9 +272,9 @@ function warningsForBill(ref: HospitalRef, bill: ParsedBill, lang: Lang): Hospit
 const PRICE_GAP: Record<PriceGap, [string, string]> = {
   notFound: ["We couldn't find this hospital's price file", "No encontramos el archivo de precios de este hospital"],
   unreadable: ["We found this hospital's price file but couldn't read it", "Encontramos el archivo de precios de este hospital, pero no pudimos leerlo"],
-  notNamed: ["The price files we found don't clearly belong to this hospital", "Los archivos de precios que encontramos no son claramente de este hospital"],
+  notNamed: ["The price files we found don't clearly belong to this hospital", "Los archivos de precios que encontramos no parecen ser de este hospital"],
   noCodes: ["This hospital's price file doesn't list the ER and lab codes we check",
-    "El archivo de precios de este hospital no incluye los códigos de emergencias y análisis que revisamos"],
+    "El archivo de precios de este hospital no incluye los códigos de sala de emergencias y de análisis de laboratorio que revisamos"],
 };
 
 /** Build the hospital reference for a resolved statewide key (or a known SF key). */
@@ -721,7 +721,7 @@ export const readEob = internalAction({
       await step(ctx, caseId, "eob-read", label, "warn", detail, "ai");
       await ctx.runMutation(internal.cases.eobFailed, { id: caseId, fileId: fileId ?? undefined, error: code });
     };
-    await step(ctx, caseId, "eob-read", t("Reading your insurance statement", "Leyendo su estado del seguro"), "running", undefined, "ai");
+    await step(ctx, caseId, "eob-read", t("Reading your insurance statement", "Leyendo su resumen del seguro"), "running", undefined, "ai");
     let eob: ParsedEob;
     let eobSource: "claude" | "sample-source" = "claude";
     if (fileId && modelReady("read")) {
@@ -733,42 +733,42 @@ export const readEob = internalAction({
         if (!c.sample) {
           const big = /exceeds|too large|maximum/i.test(String(e));
           await fail(big ? "TOO_LARGE" : "RETAKE",
-            big ? t("This file is too large to read", "Este archivo es demasiado grande") : t("We couldn't read this insurance statement", "No pudimos leer este estado del seguro"),
+            big ? t("This file is too large to read", "Este archivo es demasiado grande") : t("We couldn't read this insurance statement", "No pudimos leer este resumen del seguro"),
             String(e).slice(0, 200));
           return;
         }
         eob = SAMPLE_EOB;
         eobSource = "sample-source";
-        await step(ctx, caseId, "eob-read", t("Model unavailable, loaded the sample insurance statement's source data", "El modelo no está disponible; cargamos los datos del estado del seguro de ejemplo"), "warn", String(e).slice(0, 200), "rule");
+        await step(ctx, caseId, "eob-read", t("Model unavailable, loaded the sample insurance statement's source data", "El modelo no está disponible; cargamos los datos del resumen del seguro de ejemplo"), "warn", String(e).slice(0, 200), "rule");
       }
     } else if (c.sample) {
       eob = SAMPLE_EOB;
       eobSource = "sample-source";
     } else {
-      await fail("NO_MODEL", t("Reading statements needs the model key on the server", "Para leer estados del seguro se necesita la clave del modelo en el servidor"));
+      await fail("NO_MODEL", t("Reading statements needs the model key on the server", "Para leer resúmenes del seguro se necesita la clave del modelo en el servidor"));
       return;
     }
     if (!eob.isEob) {
-      await fail("NOT_AN_EOB", t("This doesn't look like an insurance statement (EOB)", "Esto no parece un estado del seguro (EOB)"));
+      await fail("NOT_AN_EOB", t("This doesn't look like an insurance statement (EOB)", "Esto no parece un resumen del seguro (EOB)"));
       return;
     }
     if (!eob.lines.length && eob.totalPatientOwes == null && eob.totalPlanPaid == null && eob.claimStatus !== "pending") {
-      await fail("RETAKE", t("We couldn't read the amounts on this statement", "No pudimos leer los montos de este estado del seguro"));
+      await fail("RETAKE", t("We couldn't read the amounts on this statement", "No pudimos leer los montos de este resumen del seguro"));
       return;
     }
     const n = eob.lines.length;
     await step(ctx, caseId, "eob-read",
       eobSource === "claude"
-        ? t(`Read ${n} line${n === 1 ? "" : "s"} from your insurance statement`, `Leímos ${n} línea${n === 1 ? "" : "s"} de su estado del seguro`)
-        : t(`Loaded the sample insurance statement (${n} lines) from its source data`, `Cargamos el estado del seguro de ejemplo (${n} líneas) desde sus datos`),
+        ? t(`Read ${n} line${n === 1 ? "" : "s"} from your insurance statement`, `Leímos ${n} línea${n === 1 ? "" : "s"} de su resumen del seguro`)
+        : t(`Loaded the sample insurance statement (${n} lines) from its source data`, `Cargamos el resumen del seguro de ejemplo (${n} líneas) desde sus datos`),
       eob.unreadable.length ? "warn" : "done",
       eob.unreadable.length ? t(`Please double-check: ${eob.unreadable.join("; ")}`, `Por favor revise: ${eob.unreadable.join("; ")}`) : undefined,
       eobSource === "claude" ? "ai" : "rule");
 
-    await step(ctx, caseId, "eob-check", t("Comparing your bill with your insurance statement", "Comparando su factura con su estado del seguro"), "running", undefined, "rule");
+    await step(ctx, caseId, "eob-check", t("Comparing your bill with your insurance statement", "Comparando su factura con su resumen del seguro"), "running", undefined, "rule");
     const res = await ctx.runMutation(internal.cases.applyEob, { id: caseId, fileId: fileId ?? undefined, eob, eobSource });
     if (!res) {
-      await step(ctx, caseId, "eob-check", t("Insurance statement not used", "No usamos el estado del seguro"), "warn",
+      await step(ctx, caseId, "eob-check", t("Insurance statement not used", "No usamos el resumen del seguro"), "warn",
         t("The bill changed while we read it (approved, or another statement was added).", "La factura cambió mientras lo leíamos (se aprobó o se agregó otro estado)."), "rule");
       return;
     }
@@ -777,8 +777,8 @@ export const readEob = internalAction({
       res.mismatch
         ? t("This statement may be for a different visit", "Este estado puede ser de otra visita")
         : k
-          ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question with your insurance statement`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar con su estado del seguro`)
-          : t("Your bill matches your insurance statement", "Su factura coincide con su estado del seguro"),
+          ? t(`Found ${k} thing${k === 1 ? "" : "s"} to question with your insurance statement`, `Encontramos ${k} ${k === 1 ? "cosa" : "cosas"} para preguntar con su resumen del seguro`)
+          : t("Your bill matches your insurance statement", "Su factura coincide con su resumen del seguro"),
       res.mismatch ? "warn" : "done",
       [
         res.total > 0 ? t(`Up to ${money(res.total)} in questionable charges.`, `Hasta ${money(res.total)} en cargos dudosos.`) : "",

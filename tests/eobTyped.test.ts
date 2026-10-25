@@ -88,7 +88,7 @@ describe("rules with typed totals", () => {
 
   it("says the source in Spanish too", () => {
     const f = checkEob(b, typedEob({ patientOwes: 350 }), "es");
-    expect(f[0].evidence[0].source).toBe("Lo que usted escribió de su estado del seguro");
+    expect(f[0].evidence[0].source).toBe("Lo que usted escribió de su resumen del seguro");
   });
 
   it("never fires line rules: no lines, no codes, no dates", () => {

@@ -128,7 +128,7 @@ function assistanceEs(f: LetterFacts): Pick<Letter, "subjectPatient" | "bodyPati
       ...(p.policy.length
         ? ["Noté que su política dice:", ...p.policy.map((x) => `"${x.quote}" ${LAW_LINE[x.rule][1]} Por favor apliquen la ley estatal a mi solicitud.`), ""]
         : []),
-      `Mientras revisan mi solicitud, por favor no envíen esta cuenta a cobranzas ni la reporten a una agencia de crédito.`,
+      `Mientras revisan mi solicitud, por favor no envíen esta cuenta a cobranza ni la reporten a una agencia de crédito.`,
       ``,
       `Gracias,`,
       p.patient,
@@ -153,7 +153,7 @@ const EOB_LAW_LINE: Record<"NO_SURPRISES" | "IN_NETWORK" | "IMR" | "PLAN_APPEAL_
   ],
   PLAN_APPEAL_STEPS: [
     "I am following the appeal steps on my statement. If you uphold this decision, please tell me in writing what my next appeal rights are.",
-    "Estoy siguiendo los pasos de apelación de mi estado de cuenta. Si ustedes mantienen esta decisión, por favor díganme por escrito cuáles son mis siguientes derechos de apelación.",
+    "Estoy siguiendo los pasos de apelación de mi Explicación de Beneficios. Si ustedes mantienen esta decisión, por favor díganme por escrito cuáles son mis siguientes derechos de apelación.",
   ],
 };
 export type EobLawRule = keyof typeof EOB_LAW_LINE;
@@ -213,7 +213,7 @@ function eobItem(x: Finding, f: LetterFacts, lang: Lang): [string, string] | nul
   const payer = e.payer ?? (es ? "[compañía de seguros]" : "[insurance company]");
   const claim = e.claimNumber ?? (es ? "[número de reclamo]" : "[claim number]");
   const ref = es
-    ? `Mi estado de cuenta del seguro (Explicación de Beneficios) de ${payer}, reclamo ${claim},`
+    ? `Mi resumen del seguro (Explicación de Beneficios) de ${payer}, reclamo ${claim},`
     : `My insurance statement (Explanation of Benefits) from ${payer}, claim ${claim},`;
   const due = billDue(f.bill);
   const owes = eobOwes(e) ?? r2(due - x.amount);
@@ -221,16 +221,16 @@ function eobItem(x: Finding, f: LetterFacts, lang: Lang): [string, string] | nul
   const planPaid = e.totalPlanPaid ?? 0;
   const noPayment = planPaid > 0 && f.bill.insurancePaid === 0;
   const share = es
-    ? `${ref} dice que mi parte es ${money(owes)}.${paid > 0 ? ` Ya pagué ${money(paid)}.` : ""} Su factura pide ${money(due)}, es decir, ${money(x.amount)} más.${noPayment ? ` El estado de cuenta también muestra que mi plan pagó ${money(planPaid)}, y su factura no muestra ningún pago del seguro.` : ""}`
+    ? `${ref} dice que mi parte es ${money(owes)}.${paid > 0 ? ` Ya pagué ${money(paid)}.` : ""} Su factura pide ${money(due)}, es decir, ${money(x.amount)} más.${noPayment ? ` El resumen también muestra que mi plan pagó ${money(planPaid)}, y su factura no muestra ningún pago del seguro.` : ""}`
     : `${ref} says my share is ${money(owes)}.${paid > 0 ? ` I have already paid ${money(paid)}.` : ""} Your bill asks for ${money(due)}, which is ${money(x.amount)} more.${noPayment ? ` The statement also shows my plan paid ${money(planPaid)}, and your bill shows no insurance payment.` : ""}`;
   switch (x.kind) {
     case "OWES_MORE_THAN_EOB":
       return es
-        ? ["El saldo es mayor que lo que dice mi seguro", `${share}${e.network === "in" ? ` ${eobLawLine("IN_NETWORK", lang)}` : ""} Por favor corrijan mi saldo para que coincida con el estado de cuenta, o explíquenme la diferencia por escrito.`]
+        ? ["El saldo es mayor que lo que dice mi seguro", `${share}${e.network === "in" ? ` ${eobLawLine("IN_NETWORK", lang)}` : ""} Por favor corrijan mi saldo para que coincida con el resumen, o explíquenme la diferencia por escrito.`]
         : ["My balance is higher than my insurance statement says", `${share}${e.network === "in" ? ` ${eobLawLine("IN_NETWORK", lang)}` : ""} Please correct my balance to match the statement, or explain the difference in writing.`];
     case "SURPRISE_BILL":
       return es
-        ? ["Atención de emergencia cobrada por encima del costo dentro de la red", `Fue atención de emergencia, y mi plan indica que su hospital está fuera de la red. ${eobLawLine("NO_SURPRISES", lang)} ${share} Por favor corrijan mi factura al costo compartido dentro de la red que muestra el estado de cuenta.`]
+        ? ["Atención de emergencia cobrada por encima del costo dentro de la red", `Fue atención de emergencia, y mi plan indica que su hospital está fuera de la red. ${eobLawLine("NO_SURPRISES", lang)} ${share} Por favor corrijan mi factura al costo compartido dentro de la red que muestra el resumen.`]
         : ["Emergency care billed above in-network cost sharing", `This was emergency care, and my plan lists your hospital as out of network. ${eobLawLine("NO_SURPRISES", lang)} ${share} Please correct my bill to the in-network cost sharing shown on the statement.`];
     case "INSURANCE_NOT_APPLIED":
       return es
@@ -245,12 +245,12 @@ function eobItem(x: Finding, f: LetterFacts, lang: Lang): [string, string] | nul
           : `Line ${i + 1}, ${l.description}${l.code ? ` (code ${l.code})` : ""}, ${money(l.charge)},`
         : es ? "Uno de los cargos" : "One of the charges";
       return es
-        ? ["Cargo que no aparece en mi estado de cuenta del seguro", `${what} no aparece en mi estado de cuenta del seguro. Por favor díganme si este cargo se envió a mi seguro. Si no se envió, por favor cóbrenle a mi seguro antes de cobrarme a mí.`]
+        ? ["Cargo que no aparece en mi resumen del seguro", `${what} no aparece en mi resumen del seguro. Por favor, díganme si este cargo se envió a mi seguro. Si no se envió, por favor cóbrenle a mi seguro antes de cobrarme a mí.`]
         : ["Charge not on my insurance statement", `${what} is not on my insurance statement. Please tell me whether this charge was sent to my insurance. If it was not, please bill my insurance before you bill me.`];
     }
     case "CLAIM_PENDING":
       return es
-        ? ["Mi seguro todavía está procesando el reclamo", `Mi seguro (${payer}) todavía no termina de procesar este reclamo (reclamo ${claim}). Por favor detengan esta factura y no la envíen a cobranzas hasta que mi seguro termine. Después, por favor envíenme una factura que muestre lo que pagó el plan.`]
+        ? ["Mi seguro todavía está procesando el reclamo", `Mi seguro (${payer}) todavía no termina de procesar este reclamo (reclamo ${claim}). Por favor detengan esta factura y no la envíen a cobranza hasta que mi seguro termine. Después, por favor envíenme una factura que muestre lo que pagó el plan.`]
         : ["My insurance is still processing the claim", `My insurance (${payer}) has not finished processing this claim (claim ${claim}). Please hold this bill and do not send it to collections until my insurance finishes. Then please send me a bill that shows what the plan paid.`];
     default:
       return null;
@@ -333,7 +333,7 @@ function disputeEs(f: LetterFacts): Pick<Letter, "subjectPatient" | "bodyPatient
       `A la oficina de facturación de ${p.hosp}:`,
       ``,
       f.eob && hasEobItem(f.findings)
-        ? `Revisé mi factura de la cuenta ${p.acct} y la comparé con mi estado de cuenta del seguro. Tengo preguntas sobre lo siguiente:`
+        ? `Revisé mi factura de la cuenta ${p.acct} y la comparé con mi resumen del seguro (Explicación de Beneficios). Tengo preguntas sobre lo siguiente:`
         : `Revisé mi factura de la cuenta ${p.acct} y tengo preguntas sobre estos cargos:`,
       ``,
       ...disputeItems(f.findings, f, "es"),
@@ -391,11 +391,11 @@ function appealText(f: LetterFacts, lang: Lang): { subject: string; body: string
       `${t("Date of service", "Fecha del servicio")}: ${dos}`,
       ``,
       ...(shown.length
-        ? [t(`Your statement shows these services were denied or not covered:`, `Su estado de cuenta muestra que estos servicios fueron negados o no cubiertos:`), ...shown.map(item)]
-        : [t(`Your statement shows that services on this claim were denied or not covered.`, `Su estado de cuenta muestra que se negaron o no se cubrieron servicios de este reclamo.`)]),
+        ? [t(`Your statement shows these services were denied or not covered:`, `Su Explicación de Beneficios muestra que estos servicios fueron negados o no cubiertos:`), ...shown.map(item)]
+        : [t(`Your statement shows that services on this claim were denied or not covered.`, `Su Explicación de Beneficios muestra que se negaron o no se cubrieron servicios de este reclamo.`)]),
       ...(denied.amount > 0 ? [t(`Total not covered: ${money(denied.amount)}.`, `Total no cubierto: ${money(denied.amount)}.`)] : []),
       ``,
-      ...(e?.appealDeadline ? [t(`Your statement lists this time limit for appeals: "${e.appealDeadline}".`, `Su estado de cuenta indica este plazo para apelar: "${e.appealDeadline}".`), ``] : []),
+      ...(e?.appealDeadline ? [t(`Your statement lists this time limit for appeals: "${e.appealDeadline}".`, `Su Explicación de Beneficios indica este plazo para apelar: "${e.appealDeadline}".`), ``] : []),
       t(
         `Please review this decision in full. Please send me your decision in writing, with the reasons for it. Please also send me, free of charge, copies of the guidelines, criteria and other documents you used to make this decision.`,
         `Por favor revisen esta decisión por completo. Por favor envíenme su decisión por escrito, con sus razones. Por favor envíenme también, sin costo, copias de las guías, los criterios y los demás documentos que usaron para tomar esta decisión.`,
