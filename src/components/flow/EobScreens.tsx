@@ -11,7 +11,7 @@ import { useT } from "../i18n/I18nProvider";
 import type { Key } from "../i18n/strings";
 import { FileProblem, prepareFile } from "../prepareFile";
 import { type CaseView, type Finding, type ParsedEob, money } from "../types";
-import { billDue, cents, eobStillOwes, isEobKind, targetOf } from "./eobView";
+import { billDue, eobGap, eobNumbersApply, eobStillOwes, isEobKind, targetOf } from "./eobView";
 import { findingTitle } from "./FoundScreens";
 import { StepFrame } from "./StepFrame";
 import { canChangeEob, findingScreens } from "./steps";
@@ -292,7 +292,9 @@ function EobResult({ c, eob, go }: { c: CaseView; eob: ParsedEob; go: ScreenProp
   const { t, lang } = useT();
   const due = billDue(c.bill);
   const owes = eobStillOwes(eob, c.bill);
-  const gap = due != null && owes != null && due - owes >= 1 ? cents(due - owes) : 0;
+  // A statement for another visit, or a claim still in process: don't compare its numbers.
+  const numbersApply = eobNumbersApply(c.findings ?? []);
+  const gap = eobGap(due, owes, c.findings ?? []);
   const file = statementFile(c);
   const amount = (x: number | null) => (x == null ? t("eob.notShown") : money(x, true, lang));
   const net = eob.network === "in" ? t("eob.netIn") : eob.network === "out" ? t("eob.netOut") : t("eob.notShown");
@@ -333,10 +335,12 @@ function EobResult({ c, eob, go }: { c: CaseView; eob: ParsedEob; go: ScreenProp
             <dt>{t("eob.hospitalAsks")}</dt>
             <dd>{amount(due)}</dd>
           </div>
-          <div className="eob-num">
-            <dt>{t("eob.youOwe")}</dt>
-            <dd>{amount(owes)}</dd>
-          </div>
+          {numbersApply && (
+            <div className="eob-num">
+              <dt>{t("eob.youOwe")}</dt>
+              <dd>{amount(owes)}</dd>
+            </div>
+          )}
           <div className="eob-num">
             <dt>{t("eob.planPaid")}</dt>
             <dd>{amount(eob.totalPlanPaid)}</dd>

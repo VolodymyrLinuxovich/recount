@@ -4,7 +4,7 @@ import { internalMutation, internalQuery, mutation, query } from "./_generated/s
 import { internal } from "./_generated/api";
 import { assess } from "./lib/eligibility";
 import { resolveFilledBrackets } from "./lib/letters";
-import { allFindings } from "./lib/eobChecks";
+import { allFindings, eobShowsInsured } from "./lib/eobChecks";
 import { potentialSavings, type Finding } from "./lib/checks";
 import type { ParsedEob } from "./lib/eob";
 import { isLang } from "./lib/lang";
@@ -109,9 +109,11 @@ export const submitHousehold = mutation({
     insured: v.boolean(),
     outOfPocket12mo: v.optional(v.number()),
   },
-  handler: async (ctx, { id, token, ...h }) => {
+  handler: async (ctx, { id, token, ...answers }) => {
     const c = await mustOwn(ctx, id, token);
     if (!c.bill) throw new ConvexError("Bill not read yet");
+    // An insurance statement for this visit means the patient is insured, so the letters agree.
+    const h = eobShowsInsured(c.bill, c.hospital ?? null, usableEob(c)) ? { ...answers, insured: true } : answers;
     await limit(ctx, `draft:${id}`, 10, 10 * 60_000, "Too many changes in a row. Please wait a few minutes.");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
@@ -295,7 +297,8 @@ export const applyEob = internalMutation({
     const extra: Partial<Doc<"cases">> = { eob: parsed, eobSource, eobStatus: "done", eobError: undefined };
     // An insurance statement means the patient has insurance: fix the answer and re-run the rules.
     let mayRedraft = true;
-    if (c.household && c.household.insured === false && c.bill) {
+    // Not when the statement looks like it's for a different visit (EOB_MISMATCH).
+    if (c.household && c.household.insured === false && c.bill && eobShowsInsured(c.bill, c.hospital ?? null, parsed)) {
       const household = { ...c.household, insured: true };
       extra.household = household;
       extra.eligibility = assess(household, FPL, c.hospital ?? null, c.bill.amountDue ?? null, isLang(c.lang) ? c.lang : "en");

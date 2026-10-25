@@ -328,3 +328,26 @@ describe("letter amount check with an EOB", () => {
     expect([...numbersIn({ a: null, b: undefined, c: [null, { d: NaN, e: 12.345 }], f: "$5.00" })].sort()).toEqual([12.35, 5]);
   });
 });
+
+describe("appeal letter without line amounts", () => {
+  it("doesn't appeal a copay remark; uses the general sentence", () => {
+    const e = eob({
+      totalPatientOwes: 250, totalPlanPaid: 750,
+      lines: [{ date: "2026-09-02", code: "99284", description: "Emergency visit", billed: 1000, allowed: 1000, planPaid: 750, patientOwes: 250, notCovered: null, remark: "PR-3 Emergency room copay" }],
+    });
+    const appeal = templateLetters(facts([finding("DENIED_BY_PLAN", 0)], { eob: e })).find((l) => l.kind === "appeal")!;
+    expect(appeal.body).not.toContain("copay");
+    expect(appeal.body).toContain("Your statement shows that services on this claim were denied or not covered.");
+  });
+  it("still lists a line with a CO- denial code", () => {
+    const e = eob({
+      lines: [
+        { date: "2026-09-02", code: "99284", description: "Emergency visit", billed: 1000, allowed: 1000, planPaid: 750, patientOwes: 250, notCovered: null, remark: "PR-3 Emergency room copay" },
+        { date: "2026-09-02", code: "85025", description: "Blood count", billed: 100, allowed: 0, planPaid: 0, patientOwes: null, notCovered: null, remark: "CO-50 Not medically necessary" },
+      ],
+    });
+    const appeal = templateLetters(facts([finding("DENIED_BY_PLAN", 0)], { eob: e })).find((l) => l.kind === "appeal")!;
+    expect(appeal.body).toContain("Blood count");
+    expect(appeal.body).not.toContain("copay");
+  });
+});

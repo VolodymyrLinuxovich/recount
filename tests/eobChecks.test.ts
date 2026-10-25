@@ -3,7 +3,8 @@ import type { ParsedBill } from "../convex/lib/bill";
 import { potentialSavings, type Finding } from "../convex/lib/checks";
 import type { EobLine, ParsedEob } from "../convex/lib/eob";
 import { EOB_FINDING_TARGET } from "../convex/lib/eob";
-import { allFindings, billDue, checkEob, eobOwes, erVisit } from "../convex/lib/eobChecks";
+import { allFindings, billDue, checkEob, eobOwes, eobShowsInsured, erVisit } from "../convex/lib/eobChecks";
+import { eobGap } from "../src/components/flow/eobView";
 import type { HospitalRef } from "../convex/lib/hospital";
 import { SNAPSHOTS } from "../convex/lib/reference";
 import { SAMPLE_BILL, SAMPLE_EOB } from "../convex/lib/sample";
@@ -87,10 +88,33 @@ describe("rule 1: EOB_MISMATCH", () => {
   });
   it("fires when the provider shares no real word with the hospital", () => {
     expect(kinds(checkEob(b, eob([], { providerName: "Riverside Medical Center" })))).toEqual(["EOB_MISMATCH"]);
-    // Generic words don't count as a match.
-    expect(kinds(checkEob(b, eob([], { providerName: "The Health Hospital Medical Center" })))).toEqual(["EOB_MISMATCH"]);
+    // Generic words don't count as a match, and a name of only generic words can't be told apart.
+    expect(kinds(checkEob(b, eob([], { providerName: "Riverside Community Hospital" })))).toEqual(["EOB_MISMATCH"]);
+    expect(kinds(checkEob(b, eob([], { providerName: "The Health Hospital Medical Center" })))).not.toContain("EOB_MISMATCH");
     expect(kinds(checkEob(b, eob([], { providerName: "OAKVIEW HOSP" })))).not.toContain("EOB_MISMATCH");
     expect(kinds(checkEob(b, eob([], { providerName: null })))).not.toContain("EOB_MISMATCH");
+  });
+  it("common words like memorial don't make two hospitals match", () => {
+    const sf = bill([L("1001", 1000)], { hospitalName: "Saint Francis Memorial Hospital", amountDue: 1000 });
+    expect(kinds(checkEob(sf, eob([EL("1001", 1000)], { providerName: "Mills-Peninsula Memorial Hospital", totalPatientOwes: 100 })))).toEqual(["EOB_MISMATCH"]);
+    expect(kinds(checkEob(sf, eob([EL("1001", 1000)], { providerName: "SAINT FRANCIS MEMORIAL HOSP", totalPatientOwes: 100 })))).not.toContain("EOB_MISMATCH");
+    const zsfg = bill([L("1001", 1000)], { hospitalName: "Zuckerberg San Francisco General Hospital", amountDue: 1000 });
+    expect(kinds(checkEob(zsfg, eob([EL("1001", 1000)], { providerName: "San Francisco General Hospital", totalPatientOwes: 1000 })))).not.toContain("EOB_MISMATCH");
+  });
+  it("fires when the member's last name clearly differs from the patient's", () => {
+    const f = checkEob(b, eob([EL("1001", 500)], { memberName: "Someone Else", totalPatientOwes: 0 }));
+    expect(kinds(f)).toEqual(["EOB_MISMATCH"]);
+    expect(f[0].detail).toContain("member name");
+    expect(f[0].evidence.map((e) => e.value)).toEqual(["Someone Else", "Pat Doe"]);
+    for (const memberName of ["DOE, PAT", "Patricia Doe", "Pat Doe Jr", "Pat Garcia-Doe", "Pat", null]) {
+      expect(kinds(checkEob(b, eob([EL("1001", 500)], { memberName, totalPatientOwes: 500 })))).not.toContain("EOB_MISMATCH");
+    }
+    expect(kinds(checkEob(bill([L("1001", 500)], { patientName: "Pat Garcia Lopez", amountDue: 500 }), eob([EL("1001", 500)], { memberName: "Pat Garcia", totalPatientOwes: 500 })))).not.toContain("EOB_MISMATCH");
+  });
+  it("reads bill dates as printed (MM/DD/YYYY)", () => {
+    const us = bill([L("1001", 500, { date: "03/01/2025" })], { serviceDate: "03/01/2025", amountDue: 500 });
+    expect(kinds(checkEob(us, eob([EL("1001", 500)], { totalPatientOwes: 100 })))).toEqual(["EOB_MISMATCH"]);
+    expect(kinds(checkEob(us, eob([EL("1001", 500)], { serviceDateFrom: "2025-03-01", serviceDateTo: "2025-03-01", totalPatientOwes: 500 })))).toEqual([]);
   });
   it("also accepts the matched hospital's official name", () => {
     expect(kinds(checkEob(b, eob([], { providerName: "Oak Valley Regional" }), "en", ["Oak Valley Regional Hospital"]))).not.toContain("EOB_MISMATCH");
@@ -184,9 +208,21 @@ describe("rule 4: OWES_MORE_THAN_EOB", () => {
 
 describe("rule 5: INSURANCE_NOT_APPLIED", () => {
   it("fires when the plan paid and the bill shows no payment", () => {
-    const f = checkEob(bill([L("1001", 1000)], { amountDue: 200 }), eob([EL("1001", 1000)], { totalPlanPaid: 800, totalPatientOwes: 200 }));
+    // The EOB doesn't say what the patient owes: up to what the plan paid.
+    const f = checkEob(bill([L("1001", 1000)], { amountDue: 200 }), eob([EL("1001", 1000)], { totalPlanPaid: 800 }));
     expect(kinds(f)).toEqual(["INSURANCE_NOT_APPLIED"]);
     expect(f[0].amount).toBe(200); // min(plan paid, due)
+  });
+  it("doesn't fire when the amount due already matches the EOB (the bill nets the payment)", () => {
+    const b = bill([L("1001", 1000)], { amountDue: 300 });
+    const f = checkEob(b, eob([EL("1001", 1000)], { totalPlanPaid: 700, totalPatientOwes: 300 }));
+    expect(f).toEqual([]);
+    expect(potentialSavings(allFindings(b, null, eob([EL("1001", 1000)], { totalPlanPaid: 700, totalPatientOwes: 300 })))).toBe(0);
+  });
+  it("counts only what the bill asks above the EOB's number", () => {
+    const f = checkEob(bill([L("1001", 1000)], { amountDue: 300.5 }), eob([EL("1001", 1000)], { totalPlanPaid: 700, totalPatientOwes: 300 }));
+    expect(kinds(f)).toEqual(["INSURANCE_NOT_APPLIED"]);
+    expect(f[0].amount).toBe(0.5);
   });
   it("is folded into OWES_MORE_THAN_EOB instead of counting twice", () => {
     const f = checkEob(bill([L("1001", 1000)], { amountDue: 1000 }), eob([EL("1001", 1000)], { totalPlanPaid: 800, totalPatientOwes: 200 }));
@@ -307,7 +343,8 @@ describe("Spanish", () => {
     const all = [
       ...checkEob(er, eob([EL("99285", 3000, { notCovered: 100, patientOwes: 100 })], { network: "out", totalPatientOwes: 400, totalPlanPaid: 100 }), "es"),
       ...checkEob(er, eob([EL("99285", 3000)], { totalPatientOwes: 400 }), "es"),
-      ...checkEob(bill([L("1001", 100)], { amountDue: 100 }), eob([], { totalPlanPaid: 100, totalPatientOwes: 100 }), "es"),
+      ...checkEob(bill([L("1001", 100)], { amountDue: 100 }), eob([], { totalPlanPaid: 100 }), "es"),
+      ...checkEob(bill([L("1001", 100)], { amountDue: 100 }), eob([], { memberName: "Someone Else", totalPatientOwes: 100 }), "es"),
       ...checkEob(er, eob([], { claimStatus: "pending" }), "es"),
       ...checkEob(er, eob([], { providerName: "Riverside" }), "es"),
     ];
@@ -425,6 +462,66 @@ describe("EOB read form", () => {
     const json = JSON.stringify(z.toJSONSchema(EobRead));
     const unions = (json.match(/"anyOf"|"type":\[/g) ?? []).length;
     expect(unions).toBeLessThanOrEqual(15);
+  });
+});
+
+describe("money is never counted twice or above the bill", () => {
+  it("out of network: a not covered amount above what the patient owes isn't counted again", () => {
+    const b = bill([L("99284", 5000)], { amountDue: 5000 });
+    const e = eob([EL("99284", 5000, { allowed: 1000, planPaid: 800, patientOwes: 200, notCovered: 4000, remark: "Amount exceeds allowed" })], {
+      network: "out", totalPatientOwes: 200, totalPlanPaid: 800,
+    });
+    const f = allFindings(b, null, e);
+    expect(find(f, "SURPRISE_BILL")!.amount).toBe(4800);
+    expect(find(f, "DENIED_BY_PLAN")!.amount).toBe(200);
+    expect(potentialSavings(f)).toBe(5000);
+  });
+  it("a denial never takes the total above the amount due", () => {
+    const b = bill([L("1001", 1000)], { amountDue: 300 });
+    const f = checkEob(b, eob([EL("1001", 1000, { notCovered: 1000 })], { claimStatus: "denied", totalPatientOwes: 300 }));
+    expect(kinds(f)).toEqual(["DENIED_BY_PLAN"]);
+    expect(f[0].amount).toBe(300);
+    const g = checkEob(bill([L("1001", 1000)], { amountDue: 300, patientPaid: 50 }), eob([EL("1001", 1000, { notCovered: null })], { claimStatus: "denied", totalPatientOwes: 350 }));
+    expect(g[0].amount).toBe(300);
+  });
+  it("bill findings are capped at what the patient still owes per the EOB", () => {
+    const b = bill([L("1001", 500), L("1001", 500)], { amountDue: 200 });
+    const f = allFindings(b, null, eob([EL("1001", 1000)], { totalPatientOwes: 200 }));
+    expect(kinds(f)).toEqual(["DUPLICATE_LINE"]);
+    expect(find(f, "DUPLICATE_LINE")!.amount).toBe(200);
+    expect(find(f, "DUPLICATE_LINE")!.detail).toContain("says you owe $200.00");
+    expect(potentialSavings(f)).toBe(200);
+  });
+  it("the sample case keeps its numbers", () => {
+    const f = allFindings(SAMPLE_BILL, SNAPSHOTS.zsfg ?? null, SAMPLE_EOB);
+    expect(SAMPLE_BILL.amountDue).toBe(12741);
+    expect(find(f, "DUPLICATE_LINE")!.amount).toBe(0);
+    expect(find(f, "OWES_MORE_THAN_EOB")!.amount).toBe(12204);
+    expect(find(f, "DENIED_BY_PLAN")!.amount).toBe(287);
+    expect(potentialSavings(f)).toBe(12491);
+  });
+});
+
+describe("whether the EOB shows the patient is insured", () => {
+  it("yes for a statement for this visit, no for a mismatch or no statement", () => {
+    const b = bill([L("1001", 500)], { amountDue: 500 });
+    expect(eobShowsInsured(b, null, eob([EL("1001", 500)], { totalPatientOwes: 100 }))).toBe(true);
+    expect(eobShowsInsured(b, null, eob([EL("1001", 500)], { memberName: "Someone Else" }))).toBe(false);
+    expect(eobShowsInsured(b, null, eob([EL("1001", 500)], { providerName: "Riverside Medical Center" }))).toBe(false);
+    expect(eobShowsInsured(b, null, eob([], { isEob: false }))).toBe(false);
+    expect(eobShowsInsured(b, null, null)).toBe(false);
+    expect(eobShowsInsured(SAMPLE_BILL, SNAPSHOTS.zsfg ?? null, SAMPLE_EOB)).toBe(true);
+  });
+});
+
+describe("the red gap on the statement screen", () => {
+  const f = (kind: Finding["kind"]): Finding => ({ id: kind, kind, lines: [], amount: 0, title: "", detail: "", evidence: [], confidence: "check" });
+  it("shows the difference, but not for a statement from another visit or a claim still in process", () => {
+    expect(eobGap(1000, 200, [])).toBe(800);
+    expect(eobGap(1000, 999.5, [])).toBe(0);
+    expect(eobGap(1000, 200, [f("EOB_MISMATCH")])).toBe(0);
+    expect(eobGap(1000, 200, [f("CLAIM_PENDING")])).toBe(0);
+    expect(eobGap(null, 200, [])).toBe(0);
   });
 });
 import { z } from "zod";

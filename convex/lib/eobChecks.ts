@@ -3,8 +3,8 @@
 // in the same order. eval/eob/eobchecks.py mirrors checkEob; keep the two in sync.
 
 import type { ParsedBill } from "./bill";
-import { checkBill, type Evidence, type Finding } from "./checks";
-import type { EobLine, ParsedEob } from "./eob";
+import { checkBill, type Evidence, type Finding, potentialSavings } from "./checks";
+import { CO_DENIAL, type EobLine, isoDate, type ParsedEob } from "./eob";
 import { normalizeCode, type HospitalRef } from "./hospital";
 import { type Lang, money, pick } from "./lang";
 
@@ -27,7 +27,11 @@ export function eobOwes(eob: ParsedEob): number | null {
   return vals.length ? vals.reduce((a, b) => a + b, 0) : null;
 }
 
-const STOP_WORDS = new Set(["hospital", "medical", "center", "health", "the"]);
+// Words many unrelated hospitals share, so they can't show two names are the same place.
+const STOP_WORDS = new Set([
+  "hospital", "medical", "center", "health", "the",
+  "memorial", "community", "general", "francisco", "regional", "university", "saint",
+]);
 
 /** Name words of 4+ letters, without the generic ones every hospital has. */
 function nameWords(s: string | null | undefined): Set<string> {
@@ -36,14 +40,28 @@ function nameWords(s: string | null | undefined): Set<string> {
 }
 
 const DAY = 86_400_000;
-function day(s: string | null | undefined): number | null {
+function day(raw: string | null | undefined): number | null {
+  // Bill dates are copied as printed (e.g. 03/01/2025), so normalize them first.
+  const s = isoDate(raw);
   if (!s || !/^\d{4}-\d{2}-\d{2}/.test(s)) return null;
   const t = Date.parse(s.slice(0, 10) + "T00:00:00Z");
   return Number.isFinite(t) ? t : null;
 }
 
+const plainWords = (s: string | null | undefined): string[] =>
+  (s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().match(/[a-z]+/g) ?? [];
+const SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv"]);
+
+/** A person's last name, from "Pat Doe" or "DOE, PAT". Null when it can't tell. */
+function lastName(s: string | null | undefined): string | null {
+  const comma = (s ?? "").includes(",");
+  const words = plainWords(comma ? s!.split(",")[0] : s).filter((w) => !SUFFIXES.has(w));
+  if (!words.length || (!comma && words.length < 2)) return null;
+  return words[words.length - 1];
+}
+
 /** Why the EOB looks like it is for a different visit, or null if it matches. */
-function mismatchReason(bill: ParsedBill, eob: ParsedEob, otherNames: string[]): "dates" | "provider" | null {
+function mismatchReason(bill: ParsedBill, eob: ParsedEob, otherNames: string[]): "dates" | "provider" | "patient" | null {
   const billDays = [bill.serviceDate, ...bill.lines.map((l) => l.date)].map(day).filter((d): d is number => d != null);
   let from = day(eob.serviceDateFrom);
   let to = day(eob.serviceDateTo);
@@ -56,9 +74,15 @@ function mismatchReason(bill: ParsedBill, eob: ParsedEob, otherNames: string[]):
   const names = [bill.hospitalName, ...otherNames].filter((n): n is string => !!n);
   if (eob.providerName && names.length) {
     const eobWords = nameWords(eob.providerName);
-    const shared = names.some((n) => [...nameWords(n)].some((w) => eobWords.has(w)));
+    const billWords = names.map(nameWords).filter((ws) => ws.size > 0);
+    // Only generic words on one side (e.g. "General Hospital"): we can't tell, so don't flag it.
+    const shared = !eobWords.size || !billWords.length || billWords.some((ws) => [...ws].some((w) => eobWords.has(w)));
     if (!shared) return "provider";
   }
+  // Different patient: the last names clearly differ (neither name has the other's last name in it).
+  const member = lastName(eob.memberName);
+  const patient = lastName(bill.patientName);
+  if (member && patient && !plainWords(bill.patientName).includes(member) && !plainWords(eob.memberName).includes(patient)) return "patient";
   return null;
 }
 
@@ -123,20 +147,30 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
                 "The dates on the insurance statement don't match the dates on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
                 "Las fechas del estado del seguro no coinciden con las de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
               )
-            : t(
-                "The provider on the insurance statement doesn't look like the hospital on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
-                "El proveedor del estado del seguro no parece ser el hospital de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
-              ),
+            : why === "patient"
+              ? t(
+                  "The member name on the insurance statement doesn't match the patient on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
+                  "El nombre del miembro en el estado del seguro no coincide con el paciente de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
+                )
+              : t(
+                  "The provider on the insurance statement doesn't look like the hospital on your bill. Please check that you added the statement for this visit. We didn't compare it with your bill.",
+                  "El proveedor del estado del seguro no parece ser el hospital de su factura. Revise que agregó el estado de esta visita. No lo comparamos con su factura.",
+                ),
         evidence:
           why === "dates"
             ? [
                 { label: t("Dates on the insurance statement", "Fechas en el estado del seguro"), value: range, source: eobSrc },
                 { label: t("Date of service on your bill", "Fecha del servicio en su factura"), value: bill.serviceDate ?? bill.lines.find((l) => l.date)?.date ?? t("not printed", "no aparece"), source: billSrc },
               ]
-            : [
-                { label: t("Provider on the insurance statement", "Proveedor en el estado del seguro"), value: eob.providerName ?? "", source: eobSrc },
-                { label: t("Hospital on your bill", "Hospital en su factura"), value: bill.hospitalName ?? t("not printed", "no aparece"), source: billSrc },
-              ],
+            : why === "patient"
+              ? [
+                  { label: t("Member on the insurance statement", "Miembro en el estado del seguro"), value: eob.memberName ?? "", source: eobSrc },
+                  { label: t("Patient on your bill", "Paciente en su factura"), value: bill.patientName ?? "", source: billSrc },
+                ]
+              : [
+                  { label: t("Provider on the insurance statement", "Proveedor en el estado del seguro"), value: eob.providerName ?? "", source: eobSrc },
+                  { label: t("Hospital on your bill", "Hospital en su factura"), value: bill.hospitalName ?? t("not printed", "no aparece"), source: billSrc },
+                ],
         confidence: "check",
       },
     ];
@@ -167,6 +201,11 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
   const over = due != null && still != null && more(due, still);
   const planPaid = eob.totalPlanPaid;
   const notApplied = planPaid != null && planPaid > 0 && (bill.insurancePaid ?? 0) === 0;
+  // Rule 5's amount: what the bill asks for above what the EOB says (the bill may already net
+  // the plan's payment without listing it). Without the EOB's number, up to what the plan paid.
+  const notAppliedAmount = notApplied
+    ? r2(Math.max(0, due != null ? (still != null ? due - still : Math.min(planPaid!, due)) : planPaid!))
+    : 0;
 
   const owesEvidence = (): Evidence[] => [
     { label: t("Your insurance says you owe", "Su seguro dice que usted debe"), value: money(owes!), source: eobSrc },
@@ -243,10 +282,10 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
       ],
       confidence: "high",
     });
-  } else if (notApplied) {
+  } else if (notApplied && notAppliedAmount > 0) {
     // 5. The plan paid, but the bill doesn't show it. Only when 3 and 4 didn't fire,
     // so the same dollars never count twice.
-    const amount = r2(Math.max(0, due != null ? Math.min(planPaid!, due) : planPaid!));
+    const amount = notAppliedAmount;
     out.push({
       id: "eob-not-applied",
       kind: "INSURANCE_NOT_APPLIED",
@@ -295,10 +334,15 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
   // 7. The plan denied or didn't cover lines: the patient can appeal to the insurer.
   const denied = eob.lines.filter((l) => (l.notCovered ?? 0) > 0);
   if (denied.length || eob.claimStatus === "denied" || eob.claimStatus === "partly_denied") {
-    let amount = r2(denied.reduce((a, l) => a + (l.notCovered ?? 0), 0));
+    // Per line, only the part the patient is asked to pay: an out-of-network "not covered"
+    // amount above what the patient owes is already in the surprise bill / owes more gap.
+    let amount = r2(denied.reduce((a, l) => a + Math.min(l.notCovered ?? 0, l.patientOwes ?? Infinity), 0));
     if (eob.claimStatus === "denied" && !denied.length) amount = r2(eob.totalPatientOwes ?? 0);
+    // With the money finding above, never count more than the bill asks for in total.
+    if (due != null) amount = r2(Math.max(0, Math.min(amount, due - out.reduce((a, f) => a + f.amount, 0))));
     const codes = new Set(denied.map((l) => normalizeCode(l.code)).filter((c): c is string => !!c));
-    const shown: EobLine[] = denied.length ? denied : eob.lines.filter((l) => l.remark).slice(0, 10);
+    // No line amounts: show only lines with a denial (CO-) code, never a copay or deductible remark.
+    const shown: EobLine[] = denied.length ? denied : eob.lines.filter((l) => l.remark && CO_DENIAL.test(l.remark)).slice(0, 10);
     const lineEvidence: Evidence[] = shown.map((l) => ({
       label: l.description,
       value: [money(l.notCovered ?? l.billed ?? 0), l.remark].filter(Boolean).join(" · "),
@@ -346,6 +390,15 @@ export function checkEob(bill: ParsedBill, eob: ParsedEob, lang: Lang = "en", ot
   return out;
 }
 
+/**
+ * Whether the case's EOB shows the patient is insured: there is one, it was read, and it is
+ * for this visit (no EOB_MISMATCH). Then the household answer "insured" must be yes.
+ */
+export function eobShowsInsured(bill: ParsedBill, hospital: HospitalRef | null, eob: ParsedEob | null | undefined): boolean {
+  if (!eob || eob.isEob === false) return false;
+  return !checkEob(bill, eob, "en", hospital?.name ? [hospital.name] : []).some((f) => f.kind === "EOB_MISMATCH");
+}
+
 /** Kinds whose amount resets what the patient owes to the EOB's number. */
 const RESETS = new Set(["SURPRISE_BILL", "OWES_MORE_THAN_EOB", "INSURANCE_NOT_APPLIED"]);
 
@@ -380,6 +433,35 @@ export function allFindings(bill: ParsedBill, hospital: HospitalRef | null, eob:
         " Your insurance denied this service, so its amount is counted in the appeal.",
         " Su seguro negó este servicio, así que su monto está contado en la apelación.",
       );
+    }
+  }
+  // The bill findings can't save more than the patient still owes per the EOB (and the bill),
+  // less what the EOB findings already count. Scale them down to fit when they'd go over.
+  const owes = eobOwes(eob);
+  const due = billDue(bill);
+  const still = owes != null ? Math.max(0, owes - (bill.patientPaid ?? 0)) : null;
+  const ceilings = [still, due].filter((x): x is number => x != null);
+  if (!resets && ceilings.length) {
+    const ceiling = Math.min(...ceilings);
+    const room = Math.max(0, ceiling - potentialSavings(fromEob));
+    const total = potentialSavings(fromBill);
+    if (total > room) {
+      const k = room / total;
+      const why =
+        still != null && ceiling === still
+          ? t(
+              ` Your insurance statement says you owe ${money(ceiling)}, so all findings together count at most that much.`,
+              ` Su estado del seguro dice que usted debe ${money(ceiling)}, así que todos los hallazgos juntos cuentan como máximo ese monto.`,
+            )
+          : t(
+              ` The bill asks for ${money(ceiling)}, so all findings together count at most that much.`,
+              ` La factura le cobra ${money(ceiling)}, así que todos los hallazgos juntos cuentan como máximo ese monto.`,
+            );
+      for (const f of fromBill) {
+        if (f.amount <= 0) continue;
+        f.amount = Math.floor(f.amount * k * 100 + 1e-6) / 100; // round down, so the total never goes over
+        f.detail += why;
+      }
     }
   }
   return [...fromBill, ...fromEob];

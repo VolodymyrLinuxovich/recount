@@ -12,7 +12,9 @@ from __future__ import annotations
 import re
 from datetime import date, timedelta
 
-STOP_WORDS = {"hospital", "medical", "center", "health", "the"}
+STOP_WORDS = {"hospital", "medical", "center", "health", "the",
+              "memorial", "community", "general", "francisco", "regional", "university", "saint"}
+SUFFIXES = {"jr", "sr", "ii", "iii", "iv"}
 EOB_KINDS = ["EOB_MISMATCH", "CLAIM_PENDING", "SURPRISE_BILL", "OWES_MORE_THAN_EOB",
              "INSURANCE_NOT_APPLIED", "NOT_ON_EOB", "DENIED_BY_PLAN"]
 
@@ -58,9 +60,25 @@ def name_words(s: str | None) -> set[str]:
     return {w for w in re.findall(r"[a-z]+", (s or "").lower()) if len(w) >= 4 and w not in STOP_WORDS}
 
 
+def last_name(s: str | None) -> str | None:
+    """lastName in eobChecks.ts: from "Pat Doe" or "DOE, PAT"."""
+    s = s or ""
+    comma = "," in s
+    words = [w for w in re.findall(r"[a-z]+", (s.split(",")[0] if comma else s).lower()) if w not in SUFFIXES]
+    if not words or (not comma and len(words) < 2):
+        return None
+    return words[-1]
+
+
 def _d(s: str | None) -> date | None:
+    """A date, also from US month/day/year as printed on bills (isoDate in eob.ts)."""
+    if not s:
+        return None
+    m = re.match(r"^(\d{1,2})[/.-](\d{1,2})[/.-](\d{2}|\d{4})$", s.strip())
+    if m:
+        s = f"{'20' + m[3] if len(m[3]) == 2 else m[3]}-{m[1].zfill(2)}-{m[2].zfill(2)}"
     try:
-        return date.fromisoformat(s) if s else None
+        return date.fromisoformat(s.strip()[:10])
     except ValueError:
         return None
 
@@ -74,7 +92,14 @@ def is_mismatch(bill: dict, eob: dict) -> bool:
         if e_from > max(bill_dates) + slack or e_to < min(bill_dates) - slack:
             return True
     if eob.get("providerName") and bill.get("hospitalName"):
-        if not name_words(eob["providerName"]) & name_words(bill["hospitalName"]):
+        e_words, b_words = name_words(eob["providerName"]), name_words(bill["hospitalName"])
+        # Only generic words on one side: can't tell, so not a mismatch.
+        if e_words and b_words and not e_words & b_words:
+            return True
+    member, patient = last_name(eob.get("memberName")), last_name(bill.get("patientName"))
+    if member and patient:
+        words = lambda s: re.findall(r"[a-z]+", (s or "").lower())
+        if member not in words(bill.get("patientName")) and patient not in words(eob.get("memberName")):
             return True
     return False
 
@@ -121,9 +146,14 @@ def check_eob(bill: dict, eob: dict) -> list[dict]:
 
     # 5. Plan paid, bill shows no insurance payment (folded into 3/4 when they fired).
     paid = eob.get("totalPlanPaid")
+    # Its amount is what the bill asks above the EOB's number; none when the bill already matches.
     if not money_finding and paid is not None and paid > 0 and float(bill.get("insurancePaid") or 0) == 0:
-        amt = min(float(paid), due) if due is not None else float(paid)
-        out.append({"kind": "INSURANCE_NOT_APPLIED", "lines": [], "amount": r2(max(0.0, amt))})
+        if due is None:
+            amt = float(paid)
+        else:
+            amt = due - still if still is not None else min(float(paid), due)
+        if r2(max(0.0, amt)) > 0:
+            out.append({"kind": "INSURANCE_NOT_APPLIED", "lines": [], "amount": r2(max(0.0, amt))})
 
     # 6. Bill lines the EOB doesn't list.
     eob_codes = {norm_code(l.get("code")) for l in eob.get("lines") or []} - {None}
@@ -140,9 +170,13 @@ def check_eob(bill: dict, eob: dict) -> list[dict]:
     denied = [l for l in eob.get("lines") or [] if (l.get("notCovered") or 0) > 0]
     status = eob.get("claimStatus")
     if denied or status in ("denied", "partly_denied"):
-        amt = sum(float(l["notCovered"]) for l in denied)
+        # Per line only what the patient is asked to pay; never more than the bill asks in total.
+        amt = sum(min(float(l["notCovered"]), float(l["patientOwes"]) if l.get("patientOwes") is not None else float("inf"))
+                  for l in denied)
         if status == "denied" and not denied:
             amt = float(eob.get("totalPatientOwes") or 0)
+        if due is not None:
+            amt = max(0.0, min(amt, due - sum(f["amount"] for f in out)))
         codes = {norm_code(l.get("code")) for l in denied} - {None}
         idx = [i for i, l in enumerate(lines)
                if norm_code(l.get("code")) in codes or norm_code(l.get("revCode")) in codes]
