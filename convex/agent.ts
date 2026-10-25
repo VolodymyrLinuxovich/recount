@@ -558,7 +558,7 @@ export const draftLetters = internalAction({
           : null,
         findings: (c.findings ?? []) as Finding[],
         // The hospital letter quotes findings in English even when the patient reads Spanish.
-        findingsEn: lang === "es" ? allFindings(bill, hospitalRef, eob, "en") : undefined,
+        findingsEn: lang === "es" ? allFindings(bill, hospitalRef, eob, "en", c.household ?? null) : undefined,
         eob,
         policyFindings: (c.policyFindings ?? []) as PolicyFinding[],
         eligibility: c.eligibility as Eligibility,

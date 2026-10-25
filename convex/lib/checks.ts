@@ -2,6 +2,7 @@
 // No model is involved here: every finding points at a bill line and a published number.
 
 import type { ParsedBill } from "./bill";
+import type { CoverageFindingKind } from "./coverage";
 import type { EobFindingKind } from "./eob";
 import { normalizeCode, type HospitalRef } from "./hospital";
 import { type Lang, money, pick } from "./lang";
@@ -12,7 +13,8 @@ export type FindingKind =
   | "CASH_PRICE_GAP"
   | "TOTAL_MISMATCH"
   | "NOT_ITEMIZED"
-  | EobFindingKind; // bill vs insurance statement, see eobChecks.ts
+  | EobFindingKind // bill vs insurance statement, see eobChecks.ts
+  | CoverageFindingKind; // Medicare and Medi-Cal rules from the coverage answer, see coverage.ts
 
 export interface Evidence {
   label: string;

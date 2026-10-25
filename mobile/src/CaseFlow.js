@@ -22,7 +22,7 @@ export function CaseFlow({ t, id, token, onHome }) {
   useBackgroundNotice(id, c);
   const [page, setPage] = useState(null);
   const [letterIndex, setLetterIndex] = useState(0);
-  const [household, setHousehold] = useState({ size: 1, income: "", insured: null, oop: "" });
+  const [household, setHousehold] = useState({ size: 1, income: "", insured: null, plan: null, oop: "" });
   const [drafts, setDrafts] = useState(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(null);
@@ -199,8 +199,10 @@ export function CaseFlow({ t, id, token, onHome }) {
             <>
               <H1>{t.qInsuredTitle}</H1>
               <P muted>{t.qInsuredBody}</P>
-              <Choice label={t.yes} on={h.insured === true} onPress={() => setHousehold({ ...h, insured: true })} />
-              <Choice label={t.no} on={h.insured === false} onPress={() => setHousehold({ ...h, insured: false })} />
+              {/* The coverage type: Medicare and Medi-Cal have their own billing rules. */}
+              {["none", "private", "medicare", "medi-cal", "both"].map((p) => (
+                <Choice key={p} label={t.plans[p]} on={h.plan === p} onPress={() => setHousehold({ ...h, plan: p, insured: p !== "none" })} />
+              ))}
               {err ? <Text style={s.error}>{err}</Text> : null}
             </>
           ),
@@ -331,6 +333,7 @@ export function CaseFlow({ t, id, token, onHome }) {
         size: h.size,
         annualIncome: Number(h.income || 0),
         insured: !!h.insured,
+        ...(h.plan ? { coverage: h.plan } : {}),
         ...(h.insured ? { outOfPocket12mo: Number(h.oop || 0) } : {}),
       });
       setPage("answer");

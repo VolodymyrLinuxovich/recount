@@ -57,7 +57,13 @@ export interface CaseView {
   hospital?: HospitalRef | null;
   findings?: Finding[];
   policyFindings?: import("./PolicyAside").PolicyFinding[];
-  household?: { size: number; annualIncome: number; insured: boolean; outOfPocket12mo?: number };
+  household?: {
+    size: number;
+    annualIncome: number;
+    insured: boolean;
+    outOfPocket12mo?: number;
+    coverage?: "none" | "private" | "medicare" | "medi-cal" | "both";
+  };
   eligibility?: Eligibility;
   letters?: Letter[];
   /** The insurance Explanation of Benefits, if the patient added one (docs/EOB.md). */

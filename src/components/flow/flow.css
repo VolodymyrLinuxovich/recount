@@ -360,6 +360,13 @@ body:has(.step-screen) .footnote-text {
   font-size: var(--fs-md);
 }
 
+/* Four coverage types: two per row on phones, long labels wrap. */
+.choice-big.plan-choices button {
+  min-height: 60px;
+  padding: var(--sp-2) var(--sp-3);
+  line-height: 1.25;
+}
+
 .step-body .q-sub {
   margin: var(--sp-5) 0 0;
 }

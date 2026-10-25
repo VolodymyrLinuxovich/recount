@@ -6,6 +6,7 @@
 import type { ParsedBill } from "./bill";
 import type { Finding, FindingKind } from "./checks";
 import type { Eligibility } from "./eligibility";
+import { COVERAGE_KINDS, COVERAGE_LAW_LINE, type CoverageFindingKind, coverageLawLine } from "./coverage";
 import { CO_DENIAL, EOB_FINDING_TARGET, type ParsedEob } from "./eob";
 import { type Lang, money } from "./lang";
 
@@ -256,13 +257,41 @@ function eobItem(x: Finding, f: LetterFacts, lang: Lang): [string, string] | nul
   }
 }
 
-/** Numbered lines for the dispute letter: bill checks as today, insurance statement findings in fixed words. */
+/** One numbered item in the dispute letter for a Medicare or Medi-Cal finding, with its law line. [title, text] */
+function coverageItem(x: Finding, f: LetterFacts, lang: Lang): [string, string] | null {
+  if (!COVERAGE_KINDS.has(x.kind)) return null;
+  const es = lang === "es";
+  const law = coverageLawLine(x.kind as CoverageFindingKind, lang);
+  const due = money(billDue(f.bill));
+  switch (x.kind) {
+    case "MEDI_CAL_BALANCE_BILL":
+      return es
+        ? ["Tengo Medi-Cal", `Tengo Medi-Cal. Su factura me pide ${due}. ${law} Por favor cóbrenle esta cuenta a Medi-Cal y quiten de mi factura todo lo que esté por encima de mi parte del costo.`]
+        : ["I have Medi-Cal", `I have Medi-Cal. Your bill asks me for ${due}. ${law} Please bill Medi-Cal for this account and remove any amount above my share of cost from my bill.`];
+    case "QMB_BILLED":
+      return es
+        ? ["Tengo Medicare y Medi-Cal", `Tengo Medicare y Medi-Cal. Su factura me pide ${due}. ${law} Por favor cóbrenle a Medi-Cal el costo compartido de Medicare y quiten este monto de mi factura.`]
+        : ["I have Medicare and Medi-Cal", `I have Medicare and Medi-Cal. Your bill asks me for ${due}. ${law} Please bill Medi-Cal for the Medicare cost sharing and remove this amount from my bill.`];
+    case "MEDICARE_NOT_BILLED":
+      return es
+        ? ["No aparece ningún pago de Medicare", `Tengo Medicare, y su factura no muestra ningún pago de Medicare. ${law} Por favor díganme si enviaron el reclamo a Medicare. Si no, por favor envíenlo y mándenme una factura nueva después de que Medicare pague.`]
+        : ["No Medicare payment shown", `I have Medicare, and your bill shows no Medicare payment. ${law} Please tell me whether you sent the claim to Medicare. If you did not, please send it, and send me a new bill after Medicare pays.`];
+    case "RETRO_MEDI_CAL":
+      return es
+        ? ["Puedo calificar para Medi-Cal", `Mis ingresos pueden calificarme para Medi-Cal. ${law} Por favor ayúdenme a solicitar Medi-Cal, cóbrenle esta cuenta si me aprueban y detengan esta factura mientras tanto.`]
+        : ["I may qualify for Medi-Cal", `My income may qualify me for Medi-Cal. ${law} Please help me apply for Medi-Cal, bill it for this account if I am approved, and hold this bill in the meantime.`];
+    default:
+      return null;
+  }
+}
+
+/** Numbered lines for the dispute letter: bill checks as today, insurance and coverage findings in fixed words. */
 function disputeItems(findings: Finding[], f: LetterFacts, lang: Lang): string[] {
   return findings
     .filter((x) => findingTarget(x.kind) === "hospital")
     .map((x, i) => {
-      const eob = isEobKind(x.kind) ? eobItem(x, f, lang) : null;
-      return eob ? `${i + 1}. ${eob[0]}. ${eob[1]}` : `${i + 1}. ${x.title}. ${x.detail}${x.amount ? ` (${money(x.amount)})` : ""}`;
+      const fixed = isEobKind(x.kind) ? eobItem(x, f, lang) : coverageItem(x, f, lang);
+      return fixed ? `${i + 1}. ${fixed[0]}. ${fixed[1]}` : `${i + 1}. ${x.title}. ${x.detail}${x.amount ? ` (${money(x.amount)})` : ""}`;
     });
 }
 
@@ -427,6 +456,13 @@ const EOB_PROMPT_LINES = `If "eob" is in the facts, it is the patient's insuranc
 
 const APPEAL_PROMPT_LINES = `- "appeal": a letter to the patient's insurance company, not the hospital. It is also in English. Address it to eob.appealAddress, or "[insurer appeals address]" if it's missing. Give the member name, member ID, claim number, provider and date of service from the statement. List each denied or not covered line with its amount and its remark exactly as printed. Ask for a full internal appeal (grievance) and a written decision with the reasons, and ask for free copies of the guidelines and criteria used to decide. End with the Independent Medical Review law line, or with the appeal steps law line if the plan is Medi-Cal or Medicare. Don't add medical arguments that aren't in the facts. Sign as the patient.`;
 
+const COVERAGE_PROMPT_LINES = `Findings about Medicare and Medi-Cal go in the "dispute" letter, each with its law line word for word:
+- MEDI_CAL_BALANCE_BILL: the patient has Medi-Cal. Ask the hospital to bill Medi-Cal and remove any amount above the patient's share of cost.
+- QMB_BILLED: the patient has Medicare and Medi-Cal. Ask the hospital to bill Medi-Cal for the Medicare cost sharing and remove it from the bill.
+- MEDICARE_NOT_BILLED: the patient has Medicare and the bill shows no Medicare payment. Ask whether the claim went to Medicare, and to send it if not.
+- RETRO_MEDI_CAL: the patient may qualify for Medi-Cal. Ask for help applying, to bill Medi-Cal if approved, and to hold the bill meanwhile.
+${(Object.keys(COVERAGE_LAW_LINE) as CoverageFindingKind[]).map((k) => `- ${k} law line: "${COVERAGE_LAW_LINE[k][0]}"`).join("\n")}`;
+
 const LAW_LINES_FOR: Record<LetterKind, EobLawRule[]> = {
   assistance: [],
   dispute: ["NO_SURPRISES", "IN_NETWORK"],
@@ -439,6 +475,7 @@ export function letterPrompt(kind: LetterKind): string {
   return [
     LETTER_PROMPT,
     ...(kind === "assistance" ? [] : [kind === "appeal" ? `${APPEAL_PROMPT_LINES}\n${EOB_PROMPT_LINES.split("\n")[0]}` : EOB_PROMPT_LINES]),
+    ...(kind === "dispute" ? [COVERAGE_PROMPT_LINES] : []),
     ...(laws.length
       ? [`When a law line below applies, use it word for word. Don't cite any other law for the insurance statement findings.\n${laws.map((r) => `- ${r}: "${EOB_LAW_LINE[r][0]}"`).join("\n")}`]
       : []),

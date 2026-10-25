@@ -103,19 +103,38 @@ export function HospitalStep({ c, go }: ScreenProps) {
 
 // ---------- 2. Three questions, one per screen ----------
 
+type Plan = "private" | "medicare" | "medi-cal" | "both";
+const PLANS: Plan[] = ["private", "medicare", "medi-cal", "both"];
+
 interface Draft {
   size: number;
   income: string;
   insured: boolean | null;
+  /** Which coverage, when insured. Medicare and Medi-Cal have their own billing rules. */
+  plan: Plan | null;
   oop: string;
 }
 
-function useDraft(id: string, prior: ScreenProps["c"]["household"], hasEob: boolean): [Draft, (d: Partial<Draft>) => void] {
+/** A best guess at the coverage type from the insurer's name on a statement. */
+function planFromPayer(payer: string | null | undefined): Plan | null {
+  const p = payer ?? "";
+  const mc = /medi-?\s?cal|medicaid/i.test(p);
+  const mr = /medicare/i.test(p);
+  return mc && mr ? "both" : mc ? "medi-cal" : mr ? "medicare" : null;
+}
+
+function useDraft(id: string, prior: ScreenProps["c"]["household"], hasEob: boolean, eobPayer: string | null): [Draft, (d: Partial<Draft>) => void] {
   const key = `recount.draft.${id}`;
   const [d, setD] = useState<Draft>(() => {
     const base: Draft = prior
-      ? { size: prior.size, income: String(prior.annualIncome), insured: prior.insured, oop: prior.outOfPocket12mo != null ? String(prior.outOfPocket12mo) : "" }
-      : { size: 1, income: "", insured: null, oop: "" };
+      ? {
+          size: prior.size,
+          income: String(prior.annualIncome),
+          insured: prior.insured,
+          plan: prior.coverage && prior.coverage !== "none" ? prior.coverage : null,
+          oop: prior.outOfPocket12mo != null ? String(prior.outOfPocket12mo) : "",
+        }
+      : { size: 1, income: "", insured: null, plan: null, oop: "" };
     try {
       const saved = typeof window !== "undefined" ? window.sessionStorage.getItem(key) : null;
       return saved ? { ...base, ...(JSON.parse(saved) as Partial<Draft>) } : base;
@@ -128,7 +147,7 @@ function useDraft(id: string, prior: ScreenProps["c"]["household"], hasEob: bool
   const [eobSeen, setEobSeen] = useState(false);
   if (hasEob && !eobSeen) {
     setEobSeen(true);
-    if (!d.insured) setD({ ...d, insured: true });
+    if (!d.insured) setD({ ...d, insured: true, plan: d.plan ?? planFromPayer(eobPayer) });
   }
   const update = (p: Partial<Draft>) =>
     setD((old) => {
@@ -145,7 +164,7 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
   const { t, lang } = useT();
   const submit = useMutation(api.cases.submitHousehold);
   const hasEob = c.eobStatus === "done" && Boolean(c.eob);
-  const [d, set] = useDraft(c._id, c.household, hasEob);
+  const [d, set] = useDraft(c._id, c.household, hasEob, c.eob?.payer ?? null);
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -158,7 +177,7 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
   const title = n === 1 ? t("hh.q1") : n === 2 ? t("hh.q2") : t("hh.q3");
 
   async function finish() {
-    if (income == null || d.insured === null || (d.insured && oop == null)) return;
+    if (income == null || d.insured === null || (d.insured && (oop == null || !d.plan))) return;
     setBusy(true);
     setFailed(false);
     try {
@@ -168,6 +187,7 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
         size: d.size,
         annualIncome: income,
         insured: d.insured,
+        coverage: d.insured ? d.plan! : "none",
         outOfPocket12mo: d.insured ? oop! : undefined,
       });
       try {
@@ -179,7 +199,7 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
     }
   }
 
-  const q3Ready = d.insured !== null && (!d.insured || oop != null);
+  const q3Ready = d.insured !== null && (!d.insured || (oop != null && d.plan != null));
   const primary =
     n === 1
       ? { label: t("flow.next"), onClick: next }
@@ -190,7 +210,14 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
             onClick: finish,
             disabled: !q3Ready || income == null,
             busy,
-            hint: income == null ? t("flow.goBackIncome") : d.insured === null ? t("hh.missing", { list: t("hh.answerIns") }) : null,
+            hint:
+              income == null
+                ? t("flow.goBackIncome")
+                : d.insured === null
+                  ? t("hh.missing", { list: t("hh.answerIns") })
+                  : d.insured && !d.plan
+                    ? t("hh.missing", { list: t("hh.answerPlan") })
+                    : null,
           };
 
   return (
@@ -247,13 +274,27 @@ export function QuestionStep({ c, n, next, back }: ScreenProps & { n: 1 | 2 | 3 
             </p>
           )}
           <div className="choice choice-big">
-            <button type="button" aria-pressed={d.insured === false} onClick={() => set({ insured: false })}>
+            <button type="button" aria-pressed={d.insured === false} onClick={() => set({ insured: false, plan: null })}>
               {t("hh.no")}
             </button>
             <button type="button" aria-pressed={d.insured === true} onClick={() => set({ insured: true })}>
               {t("hh.yes")}
             </button>
           </div>
+          {d.insured && (
+            <div className="q-sub" role="group" aria-labelledby="plan-h">
+              <p className="q-label-sm" id="plan-h">
+                {t("hh.planQ")}
+              </p>
+              <div className="choice choice-big plan-choices">
+                {PLANS.map((p) => (
+                  <button key={p} type="button" aria-pressed={d.plan === p} onClick={() => set({ plan: p })}>
+                    {t(`hh.plan.${p}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           {d.insured && (
             <div className="q-sub">
               <label className="q-label-sm" htmlFor="oop">

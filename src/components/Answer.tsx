@@ -2,6 +2,8 @@ import { useT } from "./i18n/I18nProvider";
 import { locale } from "./i18n/strings";
 import { type CaseView, hostOf, money, questionableTotal } from "./types";
 
+const COVERAGE_KINDS = new Set(["MEDI_CAL_BALANCE_BILL", "QMB_BILLED", "MEDICARE_NOT_BILLED", "RETRO_MEDI_CAL"]);
+
 export function Answer({ c }: { c: CaseView }) {
   const { t, lang } = useT();
   const e = c.eligibility!;
@@ -11,6 +13,8 @@ export function Answer({ c }: { c: CaseView }) {
   const h = c.household;
   const insured = Boolean(h?.insured || c.bill?.insurancePayer);
   const marked = (c.findings ?? []).length > 0;
+  // Medicare and Medi-Cal findings come from the coverage answer, so this is where they first show.
+  const coverage = (c.findings ?? []).filter((f) => COVERAGE_KINDS.has(f.kind));
 
   let big: React.ReactNode = e.headline;
   if (e.tier === "FREE") big = <>{t("answer.freeLead")} <span className="answer-amt">$0</span></>;
@@ -47,6 +51,12 @@ export function Answer({ c }: { c: CaseView }) {
       )}
       {e.tier === "DISCOUNT" && e.owedEstimate == null && <p className="answer-note">{t("answer.discountNoAmount")}</p>}
 
+      {coverage.map((f) => (
+        <p key={f.id} className="aside">
+          <strong>{f.title}.</strong> {f.detail}
+        </p>
+      ))}
+
       <div className="receipts">
         <h2 className="receipts-h">{t("answer.why")}</h2>
         <ol>
@@ -64,7 +74,7 @@ export function Answer({ c }: { c: CaseView }) {
         </ol>
       </div>
 
-      {e.medicalLikely && (
+      {e.medicalLikely && !coverage.some((f) => f.kind === "RETRO_MEDI_CAL") && (
         <p className="aside">
           <strong>{t("answer.mediStrong")}</strong> {t("answer.mediBody", { pct: e.fplPct.toLocaleString(locale(lang)) })}{" "}
           <a href="https://www.coveredca.com/" target="_blank" rel="noreferrer">

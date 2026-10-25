@@ -223,17 +223,23 @@ export const submitHousehold = mutation({
     annualIncome: v.number(),
     insured: v.boolean(),
     outOfPocket12mo: v.optional(v.number()),
+    /** Which coverage, when the app asks (lib/coverage.ts). Older apps send only insured. */
+    coverage: v.optional(v.union(v.literal("none"), v.literal("private"), v.literal("medicare"), v.literal("medi-cal"), v.literal("both"))),
   },
-  handler: async (ctx, { id, token, ...answers }) => {
+  handler: async (ctx, { id, token, ...raw }) => {
     const c = await mustOwn(ctx, id, token);
     if (!c.bill) throw new ConvexError("Bill not read yet");
+    // The coverage answer sets insured, so the two always agree.
+    const answers = raw.coverage ? { ...raw, insured: raw.coverage !== "none" } : raw;
     // An insurance statement for this visit means the patient is insured, so the letters agree.
     const h = eobShowsInsured(c.bill, c.hospital ?? null, usableEob(c)) ? { ...answers, insured: true } : answers;
     await limit(ctx, `draft:${id}`, 10, 10 * 60_000, "Too many changes in a row. Please wait a few minutes.");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
+    // Medicare and Medi-Cal rules need the coverage answer, so the findings are worked out again.
+    const findings = allFindings(c.bill, c.hospital ?? null, usableEob(c), isLang(c.lang) ? c.lang : "en", h);
     const statusAt = Date.now();
-    await ctx.db.patch(id, { household: h, eligibility, status: "drafting", statusAt, letters: undefined });
+    await ctx.db.patch(id, { household: h, eligibility, findings, status: "drafting", statusAt, letters: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: id });
     await watch(ctx, id, "drafting", statusAt);
   },
@@ -355,7 +361,7 @@ async function refreshFindings(ctx: MutationCtx, c: Doc<"cases">, eob: ParsedEob
   const lang = isLang(c.lang) ? c.lang : "en";
   // Before the hospital step finishes there are no findings yet; finishCheck picks up the EOB itself.
   const ready = c.bill && c.status !== "reading" && c.status !== "confirm_hospital" && c.status !== "error";
-  const findings: Finding[] = ready ? allFindings(c.bill, c.hospital ?? null, eob, lang) : (c.findings ?? []);
+  const findings: Finding[] = ready ? allFindings(c.bill, c.hospital ?? null, eob, lang, extra.household ?? c.household ?? null) : (c.findings ?? []);
   const redraft = Boolean(mayRedraft && ready && (c.status === "ready" || c.status === "drafting") && c.eligibility);
   const statusAt = Date.now();
   await ctx.db.patch(c._id, { ...extra, ...(ready ? { findings } : {}), ...(redraft ? { status: "drafting" as const, statusAt, letters: undefined } : {}) });

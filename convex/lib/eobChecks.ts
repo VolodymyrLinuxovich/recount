@@ -4,9 +4,11 @@
 
 import type { ParsedBill } from "./bill";
 import { checkBill, type Evidence, type Finding, potentialSavings } from "./checks";
+import { type CoverageHousehold, coverageFindings, withCoverage } from "./coverage";
 import { CO_DENIAL, type EobLine, isoDate, type ParsedEob } from "./eob";
 import { normalizeCode, type HospitalRef } from "./hospital";
 import { type Lang, money, pick } from "./lang";
+import { FPL } from "./reference";
 
 const cents = (x: number) => Math.round(x * 100);
 const r2 = (x: number) => cents(x) / 100;
@@ -414,8 +416,20 @@ const RESETS = new Set(["SURPRISE_BILL", "OWES_MORE_THAN_EOB", "INSURANCE_NOT_AP
  * - When an EOB finding resets what the patient owes (rules 3 to 5), the bill's own line
  *   amounts are part of that gap, so they show $0 and say so.
  * - A bill line the plan denied is counted in the appeal finding, not twice.
+ * With the household answers, the Medicare and Medi-Cal rules run too (lib/coverage.ts).
  */
-export function allFindings(bill: ParsedBill, hospital: HospitalRef | null, eob: ParsedEob | null | undefined, lang: Lang = "en"): Finding[] {
+export function allFindings(
+  bill: ParsedBill,
+  hospital: HospitalRef | null,
+  eob: ParsedEob | null | undefined,
+  lang: Lang = "en",
+  household?: CoverageHousehold | null,
+): Finding[] {
+  const base = billAndEobFindings(bill, hospital, eob, lang);
+  return household ? withCoverage(base, coverageFindings(bill, household, eob, FPL, lang), lang) : base;
+}
+
+function billAndEobFindings(bill: ParsedBill, hospital: HospitalRef | null, eob: ParsedEob | null | undefined, lang: Lang): Finding[] {
   if (!eob || eob.isEob === false) return checkBill(bill, hospital, lang);
   const t = pick(lang);
   const fromEob = checkEob(bill, eob, lang, hospital?.name ? [hospital.name] : []);

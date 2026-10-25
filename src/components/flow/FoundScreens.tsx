@@ -469,6 +469,11 @@ function FindingCard({ c, f, go }: { c: CaseView; f: Finding; go: (s: string) =>
     case "DENIED_BY_PLAN":
     case "CLAIM_PENDING":
       return <EobFindingCard c={c} f={f} go={go} />;
+    case "MEDI_CAL_BALANCE_BILL":
+    case "QMB_BILLED":
+    case "MEDICARE_NOT_BILLED":
+    case "RETRO_MEDI_CAL":
+      return <CoverageFindingCard f={f} />;
     case "ABOVE_LIST_PRICE":
     case "CASH_PRICE_GAP":
     case "DUPLICATE_LINE":
@@ -595,6 +600,19 @@ function Contact({ c, f }: { c: CaseView; f: Finding }) {
 }
 
 /** A finding from comparing the bill with the insurance statement. The text comes from the rules, in the case's language. */
+/** A Medicare or Medi-Cal finding from the coverage answer: what to ask for, and the law. */
+function CoverageFindingCard({ f }: { f: Finding }) {
+  const { t, lang } = useT();
+  return (
+    <div className="found-card eob-card">
+      {f.amount > 0 && <p className="found-save">{t("found.stopOwing", { amount: money(f.amount, true, lang) })}</p>}
+      <p className="found-why">{f.detail}</p>
+      <Evidence f={f} />
+      <p className="found-quiet">{t("found.coverageConf")}</p>
+    </div>
+  );
+}
+
 function EobFindingCard({ c, f, go }: { c: CaseView; f: Finding; go: (s: string) => void }) {
   const { t, lang } = useT();
   const due = billDue(c.bill);
@@ -669,6 +687,12 @@ function titleFor(t: T, c: CaseView, f: Finding) {
       return t("found.titleDenied");
     case "CLAIM_PENDING":
       return t("found.titlePending");
+    case "MEDI_CAL_BALANCE_BILL":
+    case "QMB_BILLED":
+    case "MEDICARE_NOT_BILLED":
+    case "RETRO_MEDI_CAL":
+      // Written by the rules in the patient's language (convex/lib/coverage.ts).
+      return f.title;
     default:
       return unknownKind(f.kind, (f as Finding).title);
   }
