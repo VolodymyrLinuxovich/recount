@@ -30,7 +30,13 @@ for you.**
 **Hackathon:** Cal Hacks 13.0 (San Francisco, Oct 23 to 25, 2026)<br/>
 **Tracks:** Microsoft Built for the Real World · Anthropic Claude for Public Benefit · Best Use of Apify · Best Actor (Apify) · Best Use of Convex · Best People-First Hack<br/>
 **Team:** Volodymyr Borysenko<br/>
-**Live demo:** [recount-nu.vercel.app](https://recount-nu.vercel.app) (open it on a phone, tap **Try a sample bill**)
+**Live demo:** [recount-nu.vercel.app](https://recount-nu.vercel.app) (open it on a phone, tap **Try a sample bill**)<br/>
+**Demo video:** [youtu.be/24TXyeufQPs](https://youtu.be/24TXyeufQPs)
+
+<table><tr><td align="center">
+<a href="https://recount-nu.vercel.app/app"><img src="public/app-qr.svg" alt="QR code that opens recount-nu.vercel.app/app and downloads the Android app" width="140"/></a><br/>
+<sub><b>Android:</b> scan to download the app.<br/>iPhone: open the website and add it to the Home Screen.</sub>
+</td></tr></table>
 
 | Page | What you'll find |
 |------|------------------|
