@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 // line changed. Android (and anything that isn't an iPhone or iPad) gets the Expo app, which
 // updates itself after it's installed. iPhones and iPads go to the home page's "Get the app"
 // section, which shows how to add Recount to the Home Screen.
-const APK_URL = "https://expo.dev/artifacts/eas/Wcsx-6EwcgMjTyNtfPZ0E4dWNB_XredZx_Wvxz_WQvE.apk";
+const APK_URL = "https://expo.dev/artifacts/eas/By0CXz5JAOlEsQQMWguI0D52ShsBFt-xVDnBlvMLuxk.apk";
 
 export function GET(req: NextRequest) {
   const ua = req.headers.get("user-agent") ?? "";

@@ -41,7 +41,7 @@ for you.**
 | [Privacy](https://recount-nu.vercel.app/privacy) | What Recount keeps, and how to delete it |
 | [Hospital policy audit](https://recount-nu.vercel.app/audit) | All 470 California hospitals on a map: whose own policy conflicts with state law, with the quote |
 | [Apify Actor](https://apify.com/enterprising_arboretum_iq2/hospital-price-and-charity-finder) | Hospital Price & Charity Care Finder, public on the Apify Store |
-| [Android app](https://expo.dev/artifacts/eas/Wcsx-6EwcgMjTyNtfPZ0E4dWNB_XredZx_Wvxz_WQvE.apk) | The same flow as a native app (Expo), on the same backend |
+| [Android app](https://expo.dev/artifacts/eas/By0CXz5JAOlEsQQMWguI0D52ShsBFt-xVDnBlvMLuxk.apk) | The same flow as a native app (Expo), on the same backend |
 
 ---
 

@@ -145,6 +145,6 @@ claude, anthropic-api, azure-openai, azure-ai-search, azure-ai-content-safety, a
 ## Links
 
 - Live app: https://recount-nu.vercel.app
-- Android app (APK): https://expo.dev/artifacts/eas/Wcsx-6EwcgMjTyNtfPZ0E4dWNB_XredZx_Wvxz_WQvE.apk
+- Android app (APK): https://expo.dev/artifacts/eas/By0CXz5JAOlEsQQMWguI0D52ShsBFt-xVDnBlvMLuxk.apk
 - Code: https://github.com/VolodymyrLinuxovich/recount
 - Apify Actor: https://apify.com/enterprising_arboretum_iq2/hospital-price-and-charity-finder
