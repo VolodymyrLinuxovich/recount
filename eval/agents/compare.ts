@@ -6,9 +6,10 @@
 //
 //   set -a; . ./.env.azure; set +a          # Azure keys; ANTHROPIC_API_KEY from your shell
 //   npx tsx eval/agents/compare.ts [--runs 2] [--only id,id]
+//   npx tsx eval/agents/compare.ts --rescore      # rule checks again on the saved replies
 //
 // Writes eval/agents/out/replies.json and eval/agents/out/score.md.
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import { systemPrompt } from "../../convex/chatAgent";
@@ -97,6 +98,16 @@ async function judge(j: (typeof AGENTS)[number], system: string, s: Scenario, re
 
 async function main() {
   mkdirSync(OUT, { recursive: true });
+  if (args.includes("--rescore")) {
+    // Rerun the rule checks on saved replies (after a check is fixed), without calling any model.
+    const saved = JSON.parse(readFileSync(join(OUT, "replies.json"), "utf8")) as (Row & { reply: string })[];
+    const byId = new Map(SCENARIOS.map((s) => [s.id, s]));
+    for (const r of saved) r.rules = ruleCheck(byId.get(r.id)!, r.reply);
+    writeFileSync(join(OUT, "replies.json"), JSON.stringify(saved, null, 1));
+    writeFileSync(join(OUT, "score.md"), report(saved));
+    console.log(report(saved));
+    return;
+  }
   const scenarios = SCENARIOS.filter((s) => !ONLY || ONLY.has(s.id));
   const hcai = KNOWN_HOSPITALS.find((h) => h.key === "zsfg")!.hcai;
   const rows: Record<string, unknown>[] = [];
@@ -151,7 +162,8 @@ function report(rows: Row[]): string {
   const by = (a: string) => rows.filter((r) => r.agent === a);
   const add = (label: string, f: (rs: Row[]) => string) => lines.push(`| ${label} | ${AGENTS.map((a) => f(by(a.name))).join(" | ")} |`);
   add("Replies that came back", (rs) => `${rs.filter((r) => r.ok).length}/${rs.length}`);
-  add("Rule checks passed", (rs) => `${rs.filter((r) => r.rules.pass).length}/${rs.length} (${pct(rs.filter((r) => r.rules.pass).length, rs.length)})`);
+  // Rule checks count only replies that came back; a network error is in the row above.
+  add("Rule checks passed", (rs) => { const got = rs.filter((r) => r.ok); const n = got.filter((r) => r.rules.pass).length; return `${n}/${got.length} (${pct(n, got.length)})`; });
   for (const j of AGENTS) {
     add(`Mean score, ${j.name} judging (1-5)`, (rs) => { const v = rs.map((r) => r.judges[j.name]?.score).filter((x): x is number => typeof x === "number"); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(2) : "-"; });
     add(`Broke a rule, ${j.name} judging`, (rs) => `${rs.filter((r) => r.judges[j.name]?.brokeRule).length}`);
@@ -160,7 +172,7 @@ function report(rows: Row[]): string {
   add("Median full reply", (rs) => `${(median(rs.map((r) => r.ms)) / 1000).toFixed(1)} s`);
   add("Median words", (rs) => `${median(rs.map((r) => r.words))}`);
   lines.push("", "## Rule check failures", "");
-  for (const r of rows.filter((r) => !r.rules.pass)) lines.push(`- ${r.agent}, ${r.id}: ${r.rules.failed.join("; ")}`);
+  for (const r of rows.filter((r) => r.ok && !r.rules.pass)) lines.push(`- ${r.agent}, ${r.id}: ${r.rules.failed.join("; ")}`);
   return lines.join("\n") + "\n";
 }
 
