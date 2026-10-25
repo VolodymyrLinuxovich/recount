@@ -20,13 +20,13 @@ const WINDOWS = [
 ] as const;
 
 const GROUPS = [
-  { key: "claude", agents: ["read", "column", "letters", "chat", "complaint"], color: "var(--series-1)" },
+  { key: "claude", agents: ["read", "column", "letters", "chat", "topic", "complaint"], color: "var(--series-1)" },
   { key: "apify", agents: ["apify"], color: "var(--series-2)" },
   { key: "azure", agents: ["docintel", "search", "safety"], color: "var(--series-3)" },
   { key: "checks", agents: ["read-check", "letters-check"], color: "var(--series-4)" },
 ] as const;
 
-const KNOWN_AGENTS = ["read", "docintel", "column", "letters", "chat", "search", "safety", "apify", "read-check", "letters-check"];
+const KNOWN_AGENTS = ["read", "docintel", "column", "letters", "chat", "topic", "search", "safety", "apify", "read-check", "letters-check"];
 const TOOLS = ["get_agent_metrics", "get_agent_timeseries", "get_recent_agent_runs", "get_validation_results"] as const;
 const MCP_URL = "https://recount-nu.vercel.app/api/mcp";
 

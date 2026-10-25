@@ -15,6 +15,7 @@ import { HOSPITALS, tokens } from "./lib/statewide";
 import { kindOf } from "./lib/pipeline";
 import { limit } from "./lib/limit";
 import { notifyOnStatus, removeTokens } from "./notify";
+import { deleteChatForCase, deleteStored } from "./chat";
 
 // ---- access: each case has a random secret kept only on the patient's phone ----
 
@@ -296,10 +297,10 @@ export const remove = mutation({
     const c = await owned(ctx, id, token);
     if (!c) return;
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
-    for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
+    await deleteChatForCase(ctx, id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
-    if (c.fileId) await ctx.storage.delete(c.fileId);
-    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await deleteStored(ctx, c.fileId);
+    await deleteStored(ctx, c.eobFileId);
     await removeTokens(ctx, id);
     await ctx.db.delete(id);
   },
@@ -521,10 +522,10 @@ export const adminRemove = internalMutation({
     const c = await ctx.db.get(id);
     if (!c) return "not found";
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
-    for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
+    await deleteChatForCase(ctx, id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
-    if (c.fileId) await ctx.storage.delete(c.fileId);
-    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await deleteStored(ctx, c.fileId);
+    await deleteStored(ctx, c.eobFileId);
     await removeTokens(ctx, id);
     await ctx.db.delete(id);
     return "deleted";

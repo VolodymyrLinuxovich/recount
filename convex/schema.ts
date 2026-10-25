@@ -111,9 +111,14 @@ export default defineSchema({
     content: v.string(),
     at: v.number(),
     pending: v.boolean(),
+    /** A photo or PDF the patient attached (see lib/attach.ts). Deleted after 30 days or with the bill. */
+    fileId: v.optional(v.id("_storage")),
+    fileType: v.optional(v.string()),
+    fileName: v.optional(v.string()),
   })
     .index("by_session", ["sessionId", "at"])
-    .index("by_case", ["caseId"]),
+    .index("by_case", ["caseId"])
+    .index("by_file", ["fileId"]),
   limits: defineTable({
     key: v.string(),
     windowStart: v.number(),

@@ -6,15 +6,22 @@ import { useMutation, useQuery } from "convex/react";
 import { anyApi } from "convex/server";
 import { ConvexError } from "convex/values";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { KeyboardAvoidingView, Linking, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
+import { Image, KeyboardAvoidingView, Linking, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import Svg, { Path } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Lupa } from "./Lupa";
 import { C, F } from "./theme"; // not "./ui": ui.js imports this file
+import { imageType, uploadFile } from "./upload";
 
 
 const api = anyApi;
 const MAX_MESSAGE = 1000;
 const PERSON_URL = "https://healthconsumer.org/";
+// Same limits as the server (convex/lib/attach.ts). Photos are shrunk before upload anyway.
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const MAX_PDF_BYTES = 10 * 1024 * 1024;
 // Same check as the web helper: never send what looks like an SSN, card or bank number.
 export const SENSITIVE = /\b\d{3}[- ]?\d{2}[- ]?\d{4}\b|\b(?:\d[ -]?){12,19}\b|\b(?:routing|account|cuenta|ruta)\s*(?:number|n[uú]mero|#|no\.?)?\s*:?\s*\d{6,}/i;
 
@@ -85,7 +92,10 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
   const sessionId = useSessionId(caseId);
   const messages = useQuery(api.chat.list, sessionId ? { sessionId, ...(caseId ? { caseId, token } : {}) } : "skip");
   const send = useMutation(api.chat.send);
+  const uploadUrl = useMutation(api.chat.generateUploadUrl);
   const [text, setText] = useState("");
+  const [file, setFile] = useState(null); // { uri, type, name }
+  const [menu, setMenu] = useState(false);
   const [error, setError] = useState(null);
   const [sending, setSending] = useState(false);
   const scroll = useRef(null);
@@ -98,16 +108,23 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
 
   async function ask(q) {
     const question = q.trim();
-    if (!question || !sessionId || sending || waiting) return;
-    if (SENSITIVE.test(question)) {
+    if ((!question && !file) || !sessionId || sending || waiting) return;
+    if (question && SENSITIVE.test(question)) {
       setError(t.chatSensitive);
       return;
     }
     setError(null);
+    setMenu(false);
     setSending(true);
     try {
-      await send({ sessionId, ...(caseId ? { caseId, token } : {}), lang, content: question.slice(0, MAX_MESSAGE) });
+      let attach = {};
+      if (file) {
+        const up = await uploadFile(() => uploadUrl({ lang }), file.uri, file.type);
+        attach = { fileId: up.storageId, fileType: up.type, fileName: file.name };
+      }
+      await send({ sessionId, ...(caseId ? { caseId, token } : {}), lang, content: question.slice(0, MAX_MESSAGE), ...attach });
       setText("");
+      setFile(null);
     } catch (e) {
       setError(e instanceof ConvexError ? String(e.data) : t.chatFailed);
     } finally {
@@ -115,9 +132,58 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
     }
   }
 
+  // Picking an attachment: a photo (camera or library) or a PDF. Big photos are shrunk on upload.
+  async function pick(kind) {
+    setMenu(false);
+    setError(null);
+    try {
+      let picked = null;
+      if (kind === "pdf") {
+        const r = await DocumentPicker.getDocumentAsync({ type: ["application/pdf", "image/*"], copyToCacheDirectory: true });
+        if (r.canceled || !r.assets?.length) return;
+        const a = r.assets[0];
+        const pdf = a.mimeType === "application/pdf" || /\.pdf$/i.test(a.name || "");
+        if (!pdf && !(a.mimeType || "").startsWith("image/")) {
+          setError(t.chatFileType);
+          return;
+        }
+        if (pdf && a.size && a.size > MAX_PDF_BYTES) {
+          setError(t.chatFileTooBig);
+          return;
+        }
+        picked = { uri: a.uri, type: pdf ? "application/pdf" : imageType(a), name: a.name || (pdf ? "document.pdf" : "photo.jpg") };
+      } else {
+        let r;
+        if (kind === "camera") {
+          const perm = await ImagePicker.requestCameraPermissionsAsync().catch(() => null);
+          if (!perm?.granted) {
+            setError(t.noCamera);
+            r = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], quality: 0.7 });
+          } else {
+            r = await ImagePicker.launchCameraAsync({ mediaTypes: ["images"], quality: 0.7 });
+          }
+        } else {
+          r = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], quality: 0.7 });
+        }
+        if (r.canceled || !r.assets?.length) return;
+        const a = r.assets[0];
+        // The photo is shrunk to a small JPEG on upload, so only a huge original is refused.
+        if (a.fileSize && a.fileSize > 8 * MAX_IMAGE_BYTES) {
+          setError(t.chatFileTooBig);
+          return;
+        }
+        picked = { uri: a.uri, type: imageType(a), name: a.fileName || "photo.jpg" };
+      }
+      setFile(picked);
+    } catch {
+      setError(t.uploadFailed);
+    }
+  }
+
   const suggestions = caseId ? [t.chatQCase1, t.chatQCase2, t.chatQCase3] : [t.chatQStart1, t.chatQStart2, t.chatQStart3];
   const empty = messages !== undefined && messages.length === 0;
-  const canSend = !!text.trim() && !!sessionId && !sending && !waiting;
+  const canSend = (!!text.trim() || !!file) && !!sessionId && !sending && !waiting;
+  const canAttach = !!sessionId && !sending && !waiting;
 
   return (
     <KeyboardAvoidingView style={st.fill} behavior={Platform.OS === "ios" ? "padding" : undefined}>
@@ -156,7 +222,10 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
           ) : null}
           {(messages ?? []).map((m) =>
             m.role === "user" ? (
-              <Bubble key={m._id} who="you" text={m.content} />
+              <View key={m._id} style={st.youStack}>
+                {m.fileType ? <SentFile t={t} type={m.fileType} name={m.fileName} url={m.fileUrl} /> : null}
+                {m.content ? <Bubble who="you" text={m.content} /> : null}
+              </View>
             ) : m.pending && !m.content ? null : (
               <Bubble key={m._id} who="lupa" text={plain(m.content)} />
             ),
@@ -174,7 +243,72 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
         </ScrollView>
 
         {error ? <Text style={st.error} accessibilityLiveRegion="polite">{error}</Text> : null}
+        {menu ? (
+          <View style={st.menu} accessibilityLabel={t.chatAttachHint}>
+            <Text style={st.menuHint}>{t.chatAttachHint}</Text>
+            <View style={st.menuRow}>
+              {[
+                ["camera", t.chatAttachCamera],
+                ["photo", t.chatAttachPhoto],
+                ["pdf", t.chatAttachPdf],
+              ].map(([k, label]) => (
+                <Pressable key={k} onPress={() => pick(k)} accessibilityRole="button">
+                  {({ pressed }) => (
+                    <View style={[st.chip, pressed && st.chipPressed]}>
+                      <Text style={st.chipText}>{label}</Text>
+                    </View>
+                  )}
+                </Pressable>
+              ))}
+            </View>
+          </View>
+        ) : null}
+        {file ? (
+          <View style={st.attached}>
+            {file.type.startsWith("image/") ? (
+              <Image source={{ uri: file.uri }} style={st.attachedThumb} accessibilityIgnoresInvertColors />
+            ) : (
+              <View style={st.pdfBox}>
+                <Text style={st.pdfText}>PDF</Text>
+              </View>
+            )}
+            <Text style={st.attachedName} numberOfLines={1} accessibilityLabel={`${t.chatAttachedFile}: ${file.name}`}>
+              {file.name}
+            </Text>
+            {sending ? <Text style={st.uploading}>{t.chatUploading}</Text> : null}
+            <Pressable onPress={() => setFile(null)} disabled={sending} hitSlop={8} accessibilityRole="button" accessibilityLabel={`${t.chatRemoveFile}: ${file.name}`}>
+              {({ pressed }) => (
+                <View style={[st.remove, pressed && st.chipPressed]}>
+                  <Text style={st.removeText}>×</Text>
+                </View>
+              )}
+            </Pressable>
+          </View>
+        ) : null}
         <View style={[st.inputRow, { paddingBottom: Math.max(insets.bottom, 12) }]}>
+          <Pressable
+            onPress={() => setMenu((v) => !v)}
+            disabled={!canAttach}
+            accessibilityRole="button"
+            accessibilityLabel={t.chatAttach}
+            accessibilityHint={t.chatAttachHint}
+            accessibilityState={{ disabled: !canAttach, expanded: menu }}
+          >
+            {({ pressed }) => (
+              <View style={[st.attach, !canAttach && { opacity: 0.45 }, (pressed || menu) && st.chipPressed]}>
+                <Svg width={24} height={24} viewBox="0 0 24 24">
+                  <Path
+                    d="M20 11.5l-7.8 7.8a5 5 0 01-7.1-7.1l8.5-8.5a3.3 3.3 0 014.7 4.7l-8.5 8.5a1.7 1.7 0 01-2.4-2.4l7.8-7.8"
+                    fill="none"
+                    stroke={C.ink}
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </Svg>
+              </View>
+            )}
+          </Pressable>
           <TextInput
             style={st.input}
             value={text}
@@ -201,6 +335,29 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
         </View>
       </View>
     </KeyboardAvoidingView>
+  );
+}
+
+/** The photo or PDF in the patient's own bubble; tapping opens it. */
+function SentFile({ t, type, name, url }) {
+  if (!url) return <Text style={st.gone}>{t.chatFileGone}</Text>;
+  const open = () => Linking.openURL(url).catch(() => {});
+  const photo = type.startsWith("image/");
+  return (
+    <Pressable onPress={open} accessibilityRole="link" accessibilityLabel={`${photo ? t.chatAttachedPhoto : t.chatAttachedFile}. ${t.chatOpenFile}`}>
+      {photo ? (
+        <Image source={{ uri: url }} style={st.sentPhoto} resizeMode="cover" />
+      ) : (
+        <View style={st.sentFile}>
+          <View style={st.pdfBox}>
+            <Text style={st.pdfText}>PDF</Text>
+          </View>
+          <Text style={st.attachedName} numberOfLines={1}>
+            {name || t.chatAttachedFile}
+          </Text>
+        </View>
+      )}
+    </Pressable>
   );
 }
 
@@ -246,4 +403,20 @@ const st = StyleSheet.create({
   sendOff: { backgroundColor: C.disabled },
   sendPressed: { backgroundColor: C.brandPressed, transform: [{ translateY: 1 }] },
   sendText: { fontFamily: F.body600, fontSize: 17, color: C.onBrand },
+  attach: { minHeight: 50, width: 50, borderRadius: 14, borderWidth: 1.5, borderColor: C.secondaryEdge, backgroundColor: C.surface, alignItems: "center", justifyContent: "center" },
+  menu: { paddingHorizontal: 12, paddingTop: 10, gap: 8, borderTopWidth: 1, borderTopColor: C.line },
+  menuHint: { fontFamily: F.body, fontSize: 15, lineHeight: 21, color: C.ink2 },
+  menuRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  attached: { flexDirection: "row", alignItems: "center", gap: 10, marginHorizontal: 12, marginTop: 8, padding: 6, borderWidth: 1, borderColor: C.line, borderRadius: 12, backgroundColor: C.surface },
+  attachedThumb: { width: 44, height: 44, borderRadius: 8 },
+  attachedName: { flex: 1, fontFamily: F.body, fontSize: 16, color: C.ink },
+  uploading: { fontFamily: F.body, fontSize: 14, color: C.ink2 },
+  pdfBox: { width: 44, height: 44, borderRadius: 8, backgroundColor: C.bg2, alignItems: "center", justifyContent: "center" },
+  pdfText: { fontFamily: F.body600, fontSize: 14, color: C.ink },
+  remove: { width: 44, height: 44, borderRadius: 10, alignItems: "center", justifyContent: "center" },
+  removeText: { fontFamily: F.body600, fontSize: 26, lineHeight: 30, color: C.ink },
+  youStack: { width: "100%", alignItems: "flex-end", gap: 6 },
+  sentPhoto: { width: 170, height: 170, borderRadius: 14, borderWidth: 1, borderColor: C.line, backgroundColor: C.bg2 },
+  sentFile: { flexDirection: "row", alignItems: "center", gap: 10, maxWidth: 260, padding: 6, paddingRight: 12, borderRadius: 14, backgroundColor: C.surface, borderWidth: 1, borderColor: C.line },
+  gone: { fontFamily: F.body, fontSize: 15, color: C.ink2, paddingVertical: 4 },
 });
