@@ -312,9 +312,32 @@ errors in most of them, and renders them as clean scans, phone photos and PDFs.
 - **Live QA uploads:** a rotated, blurred photo read all 7 lines and its total; a ZSFG PDF and a CPMC photo flag exactly
   their planted errors (a total mismatch, a $647 duplicate) and nothing else.
 
-**Caveat.** These are generated bills: printed type, one layout, and photos with tilt, shadow and light blur. Real
-bills that are crumpled, cut off, dim or handwritten are harder, and 30 bills read once can't show how often a rare
-misread happens. So 30 of 30 means the reader handles clean, typical bills. It doesn't mean it never misreads.
+**A harder set (10/25).** `eval/hard/` adds 50 more synthetic bills in six layouts (an itemized statement grouped by
+revenue code with subtotals, a revenue-code summary, 2 to 4 page bills with the total on the last page, a UB-04-like
+claim form, collection agency letters, and the classic one), photographed crumpled, folded, at an angle, in hard
+shadow, in low light, blurred, with glare, cut off, and marked with pen notes, highlighter and coffee rings. Plus 24
+bill and insurance statement pairs in four statement layouts. Half of each set was held out: looked at only for the
+score, never for a fix. Everything ran through the app's own reading code and rules.
+
+- **Held-out bills, after the fixes below:** **260 of 265** lines read right, every total and amount due right
+  (25 of 25), **22 of 22** planted errors caught, **0** false alarms on clean bills, 4 false alarms in all, every one
+  on a photo that is both dim and blurred. Before the fixes: 250 of 265 lines, 19 of 22 caught, 2 letters sent back as
+  "retake".
+- **Per condition, all 50 bills:** crumpled, folded, angled, shadowed, glare, cropped, coffee and highlighter bills
+  read 100% of their lines; pen marks 98%; low light 78% and blur 77%. The reader marks those amounts as hard to read.
+- **Insurance statements, all 24 pairs:** **22 of 22** planted problems (denied lines and claims, pending claims,
+  out-of-network ER, a bill skipping the plan discount, a line the plan never got, a statement for another provider)
+  caught with the right dollar amount, **0** false alarms, 129 of 129 statement lines read. One crumpled statement with
+  two claims on a page had its "you may owe" total wrong; no false finding came of it.
+- **What it found and fixed:** a UB-04's split cents ("11963 00") read as $1,196,300; collection letters with only a
+  balance sent back as "retake the photo"; and when the two reads disagreed, the second read's amount replaced the
+  first even though the first was right on 18 of 25 such lines. Now amounts are parsed one way everywhere
+  (`convex/lib/amount.ts`), balance-only letters go on to ask for an itemized bill, and the first read's amount stays
+  until the patient picks. Details and per-layout tables: `eval/README.md`.
+
+**Caveat.** All of these are generated bills and statements, made to look like real paper. No real patient bill was
+used, by law and by choice. A dim, blurry photo is still misread now and then, and 50 bills read once can't show how
+often a rare misread happens.
 
 ### The sample bill
 

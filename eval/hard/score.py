@@ -173,8 +173,10 @@ def score_pair(t: dict, pred_dir: Path) -> dict:
     pb = load(pred_dir / f"{pid}.parsed.json")
     te = t["eob"]
     eob_ok = meta.get("eobOutcome") == "ok" and pe is not None
-    totals = {k: eob_ok and cents(pe.get(k)) == cents(te.get(k)) for k in ["totalBilled", "totalAllowed", "totalPlanPaid", "totalPatientOwes"]}
-    fields = {k: eob_ok and pe.get(k) == te.get(k) for k in ["network", "claimStatus", "emergency", "serviceDateFrom", "serviceDateTo"]}
+    # Only what the layout prints: the blocks layout has no total allowed, and only some layouts say "emergency".
+    tk = ["totalBilled", "totalPlanPaid", "totalPatientOwes"] + ([] if t["eobLayout"] == "blocks" else ["totalAllowed"])
+    totals = {k: eob_ok and cents(pe.get(k)) == cents(te.get(k)) for k in tk}
+    fields = {k: eob_ok and pe.get(k) == te.get(k) for k in ["network", "claimStatus", "serviceDateFrom", "serviceDateTo"]}
     el = te["lines"]
     pel = (pe or {}).get("lines") or [] if eob_ok else []
     ekey = lambda l: (norm(l.get("code")), cents(l.get("billed")))
@@ -222,7 +224,7 @@ def agg_pairs(rows: list[dict]) -> dict:
     }
 
 
-EOB_COLS = [("pairs", "pairs"), ("EOB 'you owe' right", "owes"), ("all 4 EOB totals", "allTotals"), ("claim status", "status"),
+EOB_COLS = [("pairs", "pairs"), ("EOB 'you owe' right", "owes"), ("EOB totals right", "allTotals"), ("claim status", "status"),
             ("network", "network"), ("EOB lines", "eobLines"), ("bill lines", "billLines"), ("planted caught", "caught"),
             ("amount right", "amounts"), ("false alarms", "falseAlarms"), ("clean w/ alarm", "cleanWithFA"),
             ("pairs all right", "allRight"), ("caught, true bill", "caughtTB"), ("FA, true bill", "faTB")]
@@ -284,7 +286,7 @@ def main() -> None:
                       f"false alarms {r['falseAlarms'] or '-'}")
     (pred / "score.md").write_text("\n".join(md) + "\n")
     (pred / "score.json").write_text(json.dumps({"summary": agg(rows), "sections": {n: {g: agg(rs) for g, rs in gs} for n, gs in sections}, "cases": rows}, indent=1))
-    print("\n".join(md[:6 + 0]))
+    print(md[0])
     print(table([("all", rows)], agg, cols, "set"))
     for name, groups in sections:
         print(f"\nBy {name}")
