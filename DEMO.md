@@ -84,11 +84,19 @@ Record on a phone, or on a laptop at phone width (390 x 844, browser zoom 100%).
 
 Don't cut the two-page upload or the audit: those are the parts nobody else has.
 
-## Optional extra shot: typed insurance amounts (if you want an insured example)
+## Optional extra shot (if you want an insured example)
+
+### Typed insurance amounts
 
 Start a bill, answer the questions with "Yes" to insurance, and on "Do you have health insurance?" tap "Type the amounts instead". Type what insurance says you owe and what the plan paid. If the hospital asks for more than that, Recount flags it.
 
 > No statement handy? Type the two numbers from it. If the hospital asks for more than your insurance says you owe, Recount flags it.
+
+### Medicare or Medi-Cal
+
+Run the sample bill. On "Did you have health insurance for this visit?" tap "Yes", then "Medi-Cal". Answer the rest. On the answer screen, show the note "You have Medi-Cal, but the bill asks you to pay".
+
+> Have Medi-Cal? Then the hospital usually can't bill you for covered care. Recount catches it.
 
 ---
 
