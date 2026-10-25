@@ -145,10 +145,5 @@
   ],
   "unreadable": []
  },
- "expect": [
-  {
-   "kind": "INSURANCE_NOT_APPLIED",
-   "amount": 1175.45
-  }
- ]
+ "expect": []
 }

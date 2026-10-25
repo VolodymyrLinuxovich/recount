@@ -228,7 +228,7 @@
  "expect": [
   {
    "kind": "DENIED_BY_PLAN",
-   "amount": 7764.0
+   "amount": 7714.0
   }
  ]
 }

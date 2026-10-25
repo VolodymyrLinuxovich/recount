@@ -360,7 +360,8 @@ WANT = {
     "clean": [], "mismatch_date": ["EOB_MISMATCH"], "mismatch_provider": ["EOB_MISMATCH"],
     "pending": ["CLAIM_PENDING"], "surprise": ["SURPRISE_BILL"], "owes_more": ["OWES_MORE_THAN_EOB"],
     "owes_more_unknown": ["OWES_MORE_THAN_EOB"], "not_posted": ["OWES_MORE_THAN_EOB"],
-    "not_applied": ["INSURANCE_NOT_APPLIED"], "not_on_eob": ["NOT_ON_EOB"],
+    # The amount due already matches the EOB, so there is nothing to claim back: no finding.
+    "not_applied": [], "not_on_eob": ["NOT_ON_EOB"],
     "not_on_eob_billed": ["OWES_MORE_THAN_EOB", "NOT_ON_EOB"], "denied_line": ["DENIED_BY_PLAN"],
     "denied_claim": ["DENIED_BY_PLAN"], "sample_like": ["OWES_MORE_THAN_EOB", "DENIED_BY_PLAN"],
 }
@@ -376,18 +377,22 @@ def planted_amounts(p: dict) -> list[float]:
     due = bill["amountDue"]
     if kind in ("surprise", "owes_more", "owes_more_unknown", "not_posted"):
         return [r2(due - still)]
-    if kind == "not_applied":
-        return [r2(min(eob["totalPlanPaid"], due))]
+    # A denial counts only what the patient is asked to pay for that line, and never more than the bill asks.
+    def denied(cap: float) -> float:
+        amt = sum(min(l["notCovered"], l["patientOwes"]) if l["patientOwes"] is not None else l["notCovered"]
+                  for l in eob["lines"] if l["notCovered"])
+        return r2(max(0.0, min(amt, cap)))
+
     if kind == "not_on_eob":
         return [0]
     if kind == "not_on_eob_billed":
         return [bill["lines"][p["dropped"]]["charge"], 0]
     if kind == "denied_line":
-        return [r2(sum(l["notCovered"] for l in eob["lines"]))]
+        return [denied(due)]
     if kind == "denied_claim":
-        return [eob["totalPatientOwes"] if eob["lines"][0]["notCovered"] is None else r2(sum(l["notCovered"] for l in eob["lines"]))]
+        return [r2(min(eob["totalPatientOwes"], due)) if eob["lines"][0]["notCovered"] is None else denied(due)]
     if kind == "sample_like":
-        return [r2(due - still), r2(sum(l["notCovered"] for l in eob["lines"]))]
+        return [r2(due - still), denied(still)]
     return [0] * len(WANT[kind])
 
 

@@ -127,6 +127,9 @@ export const EOB_FINDING_TARGET: Record<EobFindingKind, "hospital" | "insurer" |
   CLAIM_PENDING: "hospital",
 };
 
+/** A CARC denial code with group CO (e.g. "CO-50"): the plan denied it. PR codes (copay, deductible) aren't denials. */
+export const CO_DENIAL = /\bCO\s*-?\s*\d+/i;
+
 /** Where the case's EOB is in its life. Stored on the case as `eobStatus`. */
 export type EobStatus = "reading" | "done" | "error";
 

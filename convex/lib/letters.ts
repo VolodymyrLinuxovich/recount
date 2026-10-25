@@ -6,7 +6,7 @@
 import type { ParsedBill } from "./bill";
 import type { Finding, FindingKind } from "./checks";
 import type { Eligibility } from "./eligibility";
-import { EOB_FINDING_TARGET, type ParsedEob } from "./eob";
+import { CO_DENIAL, EOB_FINDING_TARGET, type ParsedEob } from "./eob";
 import { type Lang, money } from "./lang";
 
 export type LetterKind = "assistance" | "dispute" | "appeal";
@@ -335,7 +335,8 @@ function appealText(f: LetterFacts, lang: Lang): { subject: string; body: string
   const lines = e?.lines ?? [];
   let shown = lines.filter((l) => (l.notCovered ?? 0) > 0);
   const wholeClaim = !shown.length && (e?.claimStatus === "denied" || e?.claimStatus === "partly_denied");
-  if (wholeClaim) shown = e?.claimStatus === "denied" ? lines : lines.filter((l) => l.remark);
+  // Only a CO- denial code marks a denied line; a copay or deductible remark (PR-) isn't appealable.
+  if (wholeClaim) shown = e?.claimStatus === "denied" ? lines : lines.filter((l) => l.remark && CO_DENIAL.test(l.remark));
   const item = (l: ParsedEob["lines"][number], i: number) => {
     const amt = (l.notCovered ?? 0) > 0 ? l.notCovered : l.patientOwes ?? l.billed;
     const code = l.code ? ` (${t("code", "código")} ${l.code})` : "";
