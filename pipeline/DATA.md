@@ -13,6 +13,11 @@ Rebuild everything: `python3 -m venv .venv && .venv/bin/pip install -r requireme
 | `hcai_policies.json` | HCAI policy lookup scrape: all filed charity/discount/debt-collection policy PDFs (with effective dates) for the SF hospitals, plus the 17 SF search results; per hospital also `name` (display name), `hcai_name`, `hcai_id`, `city`, `county`, `lat`, `lon` (Census geocode of the HCAI address; Mission Bay uses an OpenStreetMap fallback) | `scripts/hcai.py` | yes |
 | `prices_<key>.json` | ER-code extract from each hospital's CMS MRF: gross, discounted cash, file min/max, every payer rate, plus `summary_by_code` | `scripts/mrf_extract.py` (streams CSV tall/wide and JSON v3) | yes, straight from the files |
 | `price_audit.json` | Per price file: cash price = gross share, median cash discount, lowest insurer rate vs cash, min/max consistency, update date, attestation, NPI check digits | `price-audit/` (Rust); findings in `docs/PRICE-FILES.md` | every number recomputed by `price-audit/xcheck.py` (Python), all match |
+| `hcai_licenses.json` | CA license number, HCAI ID, aliases and address of all 470 hospitals | `find_price_files.py licenses` (HCAI policy lookup pages) | yes |
+| `cms_hpt.json` | Every `/cms-hpt.txt` price file index found at hospital and health system domains | `find_price_files.py txt` | as published |
+| `price_file_headers.json` | What each candidate price file says about itself: hospital name, license, locations, addresses | `find_price_files.py probe` (first 3 MB of each file) | as published |
+| `price_files.json` | The one file verified as each hospital's own, with the evidence, and why every other candidate was rejected | `find_price_files.py select` | rule in the file |
+| `snapshot_check.json`, `price_spot_checks.json` | Statewide price path vs the hand-checked SF files; a second parser vs the statewide prices | `check_against_snapshots.py`, `spot_check_prices.py` | checked by `tests/statewidePrices.test.ts` |
 
 Price files: `zsfg`, `ucsf` (Parnassus/Mission Bay/Mt Zion, one file), `cpmc_vanness`, `stfrancis_hyde`, `stmarys`, `kaiser_sf`.
 
@@ -27,7 +32,7 @@ Each price file has `source_url`, `mrf_last_updated_on` (as written) and `mrf_la
 | St. Mary's / UCSF Stanyan | 2026-02-28 | v3.0.0 JSON | 91 MB |
 | Kaiser SF | 2026-04-01 | v3.0.1 CSV wide | 216 MB |
 
-None of the five hospital domains serve `/cms-hhs-pricetransparency.txt` (all returned 404). Each MRF was found from the hospital's price-transparency page instead (see `found_via` in hospitals.json).
+None of the five hospital domains serve `/cms-hhs-pricetransparency.txt` (all returned 404). That is the proposed-rule name; the required index is `/cms-hpt.txt`, which `find_price_files.py` reads for the statewide prices (see `docs/PRICE-FILES.md`). Each MRF was found from the hospital's price-transparency page instead (see `found_via` in hospitals.json).
 
 ## Free care and discount thresholds as written in each FAP
 

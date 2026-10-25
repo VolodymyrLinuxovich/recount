@@ -88,7 +88,7 @@ Back to you. Now you can smile.
 
 - **Who did what** (10 s), after Lupa. Screen: "More about this bill", scroll to "Who did what on this bill".
   > Every bill shows who did what. Which steps were rules, and every AI call with its model and time.
-- "One statewide run gave me prices for 236 hospitals" (4 s), after the Apify line.
+- "The Actor gave me prices for 336 hospitals, each from its own file" (4 s), after the Apify line.
 
 Don't cut the opener, the two-page upload or the audit.
 
@@ -111,7 +111,7 @@ Run the sample bill. On "Did you have health insurance for this visit?" tap "Yes
 | Sample bill total | $12,741.00 ("twelve thousand") | `convex/lib/sampleBill.json` |
 | 1 person, $20,000 | 125.3% of the poverty line | 2026 FPL $15,960 |
 | ZSFG free care cutoff | 138% | `convex/lib/snapshots/zsfg.json` |
-| Apify statewide run | 236 hospitals with usable ER prices | `convex/lib/statewidePrices.json` |
+| Apify statewide runs | 336 hospitals with usable ER prices, each file verified as the hospital's own | `convex/lib/statewidePrices.json`, `pipeline/out/price_files.json` |
 | Pages per bill | up to 6 photos | `convex/lib/pages.ts` |
 
 ## Words

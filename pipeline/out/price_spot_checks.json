@@ -1,0 +1,1339 @@
+{
+ "note": "Spot-check statewide prices with a second, independent reader of the same price files.\n\nThe statewide prices come from the Actor's streaming scanner (actor/src/mrf.py). This re-reads the\nhospital's whole file with pipeline/scripts/mrf_extract.py (a separate parser, written for the\nhand-checked San Francisco extracts), applies the same row rule as build_statewide_prices.pick_row\n(outpatient rows, ER rows first, highest list price) and compares every code.",
+ "hospitals": {
+  "modoc-medical-center": {
+   "url": "https://apps.para-hcfs.com/PTT/FinalLinks/Reports.aspx?dbName=dbMMCALTURASCA&type=CDMWithoutLabel&fileType=CSV",
+   "rowsRead": 59526,
+   "checkedAt": "2026-10-25T10:01:16Z",
+   "codes": {
+    "12002": {
+     "app": 458.11,
+     "secondReader": 458.11,
+     "same": true,
+     "valueInFile": true
+    },
+    "36415": {
+     "app": 22.98,
+     "secondReader": 22.98,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 1843.91,
+     "secondReader": 1843.91,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 481.08,
+     "secondReader": 481.08,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 3961.06,
+     "secondReader": 3961.06,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 264.07,
+     "secondReader": 264.07,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 79.22,
+     "secondReader": 79.22,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 126.3,
+     "secondReader": 126.3,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 257.56,
+     "secondReader": 257.56,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 381.18,
+     "secondReader": 381.18,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 244.55,
+     "secondReader": 244.55,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 181.41,
+     "secondReader": 181.41,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 282.44,
+     "secondReader": 282.44,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 461.54,
+     "secondReader": 461.54,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 757.77,
+     "secondReader": 757.77,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 1222.77,
+     "secondReader": 1222.77,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 1828.97,
+     "secondReader": 1828.97,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 2674.01,
+     "secondReader": 2674.01,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 39.36,
+     "secondReader": 39.36,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 1.67,
+     "secondReader": 1.67,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 20,
+   "compared": 20
+  },
+  "tenet-health-central-coast-twin-cities-community-hospital": {
+   "url": "https://apps.para-hcfs.com/PTT/FinalLinks/Reports.aspx?dbName=dbTCCHTEMPLETONCA&type=CDMWithoutLabel&fileType=CSV",
+   "rowsRead": 107088,
+   "checkedAt": "2026-10-25T10:01:36Z",
+   "codes": {
+    "36415": {
+     "app": 132.0,
+     "secondReader": 132.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 8261.0,
+     "secondReader": 8261.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 1648.0,
+     "secondReader": 1648.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 17329.0,
+     "secondReader": 17329.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 2643.0,
+     "secondReader": 2643.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 930.0,
+     "secondReader": 35.0,
+     "same": false,
+     "valueInFile": false
+    },
+    "85025": {
+     "app": 1339.0,
+     "secondReader": 130.0,
+     "same": false,
+     "valueInFile": false
+    },
+    "93005": {
+     "app": 1358.0,
+     "secondReader": 1358.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 1411.0,
+     "secondReader": 1411.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 748.0,
+     "secondReader": 748.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 555.0,
+     "secondReader": 555.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 553.0,
+     "secondReader": 553.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 3753.0,
+     "secondReader": 3753.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 6547.0,
+     "secondReader": 6547.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 10926.0,
+     "secondReader": 10926.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 13255.0,
+     "secondReader": 13255.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 9810.0,
+     "secondReader": 9810.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 18.0,
+     "secondReader": 18.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 73.0,
+     "secondReader": 73.0,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 17,
+   "compared": 19
+  },
+  "kindred-hospital-san-diego": {
+   "url": "https://hospitalpricedisclosure.com/download.aspx?pi=KbpF*__*gXMyZOR4N*__*7IM3qYA*-*",
+   "rowsRead": 14685,
+   "checkedAt": "2026-10-25T10:01:45Z",
+   "codes": {
+    "70450": {
+     "app": 3978.24,
+     "secondReader": 3978.24,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 690.84,
+     "secondReader": 690.84,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 7536.32,
+     "secondReader": 7536.32,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 531.66,
+     "secondReader": 531.66,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 163.48,
+     "secondReader": 163.48,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 218.19,
+     "secondReader": 218.19,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 524.79,
+     "secondReader": 524.79,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 25.0,
+     "secondReader": 25.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 49.1,
+     "secondReader": 49.1,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 9,
+   "compared": 9
+  },
+  "marshall-medical-center": {
+   "url": "https://www.marshallmedical.org/documents/standard_charges/941450151_marshall-medical-center_standardcharges.csv",
+   "rowsRead": 338049,
+   "checkedAt": "2026-10-25T10:01:48Z",
+   "codes": {
+    "36415": {
+     "app": 30.76,
+     "secondReader": 30.76,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 4525.08,
+     "secondReader": 4525.08,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 1010.0,
+     "secondReader": 1010.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 11398.12,
+     "secondReader": 11398.12,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 392.31,
+     "secondReader": 392.31,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 125.29,
+     "secondReader": 125.29,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 187.54,
+     "secondReader": 187.54,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 589.82,
+     "secondReader": 589.82,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 484.36,
+     "secondReader": 484.36,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 482.2,
+     "secondReader": 482.2,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 63.51,
+     "secondReader": 63.51,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 735.0,
+     "secondReader": 735.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 1230.0,
+     "secondReader": 1230.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 2210.0,
+     "secondReader": 2210.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 3710.0,
+     "secondReader": 3710.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 5450.0,
+     "secondReader": 5450.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 6510.85,
+     "secondReader": 6510.85,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 143.0,
+     "secondReader": 143.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 143.0,
+     "secondReader": 143.0,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 19,
+   "compared": 19
+  },
+  "ucsf-benioff-childrens-hospital-oakland": {
+   "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=pkobyi0jmi5a4ybe6wu06bk99lki5qnu&file_id=f_1959275788430",
+   "rowsRead": 26302,
+   "checkedAt": "2026-10-25T10:01:49Z",
+   "codes": {
+    "12002": {
+     "app": 1087.0,
+     "secondReader": 1087.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "36415": {
+     "app": 80.0,
+     "secondReader": 80.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 4901.0,
+     "secondReader": 4901.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 806.0,
+     "secondReader": 806.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 9554.0,
+     "secondReader": 9554.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 577.0,
+     "secondReader": 577.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 163.0,
+     "secondReader": 163.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 290.0,
+     "secondReader": 290.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 442.0,
+     "secondReader": 442.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 1159.0,
+     "secondReader": 1159.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 829.0,
+     "secondReader": 829.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 544.0,
+     "secondReader": 544.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 952.0,
+     "secondReader": 952.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 1661.0,
+     "secondReader": 1661.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 3248.0,
+     "secondReader": 3248.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 5413.0,
+     "secondReader": 5413.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 9183.0,
+     "secondReader": 9183.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 13440.0,
+     "secondReader": 13440.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 26.22,
+     "secondReader": 26.22,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 7.5,
+     "secondReader": 7.5,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 20,
+   "compared": 20
+  },
+  "plumas-district-hospital": {
+   "url": "https://apps.para-hcfs.com/PTT/FinalLinks/Reports.aspx?dbName=dbPDHQUINCYCA&type=CDMWithoutLabel&fileType=CSV",
+   "rowsRead": 23442,
+   "checkedAt": "2026-10-25T10:01:54Z",
+   "codes": {
+    "12002": {
+     "app": 643.0,
+     "secondReader": 643.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "36415": {
+     "app": 62.0,
+     "secondReader": 62.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 1773.0,
+     "secondReader": 1773.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 434.0,
+     "secondReader": 434.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 2272.0,
+     "secondReader": 2272.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 252.0,
+     "secondReader": 252.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 126.0,
+     "secondReader": 126.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 176.0,
+     "secondReader": 176.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 331.0,
+     "secondReader": 331.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 538.0,
+     "secondReader": 538.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 329.0,
+     "secondReader": 329.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 136.0,
+     "secondReader": 136.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 367.0,
+     "secondReader": 367.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 573.0,
+     "secondReader": 573.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 957.0,
+     "secondReader": 957.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 1438.0,
+     "secondReader": 1438.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 2121.0,
+     "secondReader": 2121.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 2852.0,
+     "secondReader": 2852.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 49.74,
+     "secondReader": 49.74,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 7.0,
+     "secondReader": 7.0,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 20,
+   "compared": 20
+  },
+  "barstow-community-hospital": {
+   "url": "https://apps.para-hcfs.com/PTT/FinalLinks/Reports.aspx?dbName=dbBCHBARSTOWCA&type=CDMWithoutLabel&fileType=CSV",
+   "rowsRead": 35378,
+   "checkedAt": "2026-10-25T10:02:00Z",
+   "codes": {
+    "36415": {
+     "app": 84.1,
+     "secondReader": 84.1,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 7748.0,
+     "secondReader": 7748.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 1061.84,
+     "secondReader": 1061.84,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 17043.52,
+     "secondReader": 17043.52,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 1816.44,
+     "secondReader": 1816.44,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 122.66,
+     "secondReader": 122.66,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 297.88,
+     "secondReader": 297.88,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 1012.62,
+     "secondReader": 1012.62,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 2445.25,
+     "secondReader": 2445.25,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 2445.25,
+     "secondReader": 2445.25,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 495.13,
+     "secondReader": 495.13,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 917.27,
+     "secondReader": 917.27,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 1735.99,
+     "secondReader": 1735.99,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 3899.0,
+     "secondReader": 3899.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 7926.97,
+     "secondReader": 7926.97,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 9437.92,
+     "secondReader": 9437.92,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 11161.75,
+     "secondReader": 11161.75,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 67.2,
+     "secondReader": 67.2,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 8.34,
+     "secondReader": 8.34,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 19,
+   "compared": 19
+  },
+  "kindred-hospital-brea": {
+   "url": "https://hospitalpricedisclosure.com/download.aspx?pi=D6z3SsUBiiOS9RRgqbgO5w*-*",
+   "rowsRead": 14717,
+   "checkedAt": "2026-10-25T10:02:12Z",
+   "codes": {
+    "70450": {
+     "app": 3978.24,
+     "secondReader": 3978.24,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 690.84,
+     "secondReader": 690.84,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 7536.32,
+     "secondReader": 7536.32,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 531.66,
+     "secondReader": 531.66,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 163.48,
+     "secondReader": 163.48,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 238.67,
+     "secondReader": 238.67,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 524.79,
+     "secondReader": 524.79,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 25.0,
+     "secondReader": 25.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 53.08,
+     "secondReader": 53.08,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 9,
+   "compared": 9
+  },
+  "banner-lassen-medical-center": {
+   "url": "https://images.pricetransparency.healthcare/public-mrfs/banner/680422620_banner-lassen-medical-center_standardcharges.csv",
+   "rowsRead": 104591,
+   "checkedAt": "2026-10-25T10:02:13Z",
+   "codes": {
+    "36415": {
+     "app": 34.0,
+     "secondReader": 34.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 1711.0,
+     "secondReader": 1711.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 492.0,
+     "secondReader": 492.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 5237.0,
+     "secondReader": 5237.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 124.0,
+     "secondReader": 124.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 10.0,
+     "secondReader": 10.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 24.0,
+     "secondReader": 24.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 488.0,
+     "secondReader": 488.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 694.0,
+     "secondReader": 694.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 463.0,
+     "secondReader": 463.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 175.0,
+     "secondReader": 175.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 360.0,
+     "secondReader": 360.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 657.0,
+     "secondReader": 657.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 1153.0,
+     "secondReader": 1153.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 1886.0,
+     "secondReader": 1886.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 2735.0,
+     "secondReader": 2735.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 3595.0,
+     "secondReader": 3595.0,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 17,
+   "compared": 17
+  },
+  "sierra-view-medical-center": {
+   "url": "https://sierraview.pt.panaceainc.com/MRFDownload/sierraview/medicalcenter",
+   "rowsRead": 277517,
+   "checkedAt": "2026-10-25T10:02:21Z",
+   "codes": {
+    "36415": {
+     "app": 61.5,
+     "secondReader": 61.5,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 1720.6,
+     "secondReader": 1720.6,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 351.5,
+     "secondReader": 351.5,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 2681.9,
+     "secondReader": 2681.9,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 216.7,
+     "secondReader": 216.7,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 90.8,
+     "secondReader": 90.8,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 108.1,
+     "secondReader": 108.1,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 207.1,
+     "secondReader": 207.1,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 362.5,
+     "secondReader": 362.5,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 535.6,
+     "secondReader": 535.6,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 155.7,
+     "secondReader": 155.7,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 5516.0,
+     "secondReader": 5516.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 460.0,
+     "secondReader": 460.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 613.0,
+     "secondReader": 613.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 1226.0,
+     "secondReader": 1226.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 2298.0,
+     "secondReader": 2298.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 5516.0,
+     "secondReader": 5516.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 101.66,
+     "secondReader": 101.66,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 98.75,
+     "secondReader": 98.75,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 19,
+   "compared": 19
+  },
+  "oak-valley-hospital-district": {
+   "url": "https://apps.para-hcfs.com/PTT/FinalLinks/Reports.aspx?dbName=dbOVHOAKDALECA&type=CDMWithoutLabel&fileType=CSV",
+   "rowsRead": 64311,
+   "checkedAt": "2026-10-25T10:02:32Z",
+   "codes": {
+    "36415": {
+     "app": 102.0,
+     "secondReader": 102.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 3098.0,
+     "secondReader": 3098.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 1042.0,
+     "secondReader": 1042.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 8873.0,
+     "secondReader": 8873.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 28.0,
+     "secondReader": 28.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 294.0,
+     "secondReader": 294.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 205.0,
+     "secondReader": 205.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 2064.0,
+     "secondReader": 2064.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 407.0,
+     "secondReader": 407.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 196.0,
+     "secondReader": 196.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 342.0,
+     "secondReader": 342.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 95.0,
+     "secondReader": 95.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 265.0,
+     "secondReader": 265.0,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 13,
+   "compared": 13
+  },
+  "community-hospital-of-huntington-park": {
+   "url": "https://sthpiprd.blob.core.windows.net/machine-readable-files/8427/272133159_pipeline-health-system-holdings,-llc_standardcharges.csv",
+   "rowsRead": 1175467,
+   "checkedAt": "2026-10-25T10:05:33Z",
+   "codes": {
+    "12002": {
+     "app": 521.85,
+     "secondReader": 521.85,
+     "same": true,
+     "valueInFile": true
+    },
+    "36415": {
+     "app": 40.95,
+     "secondReader": 40.95,
+     "same": true,
+     "valueInFile": true
+    },
+    "70450": {
+     "app": 4674.6,
+     "secondReader": 4674.6,
+     "same": true,
+     "valueInFile": true
+    },
+    "71046": {
+     "app": 592.2,
+     "secondReader": 592.2,
+     "same": true,
+     "valueInFile": true
+    },
+    "74177": {
+     "app": 7366.8,
+     "secondReader": 7366.8,
+     "same": true,
+     "valueInFile": true
+    },
+    "80053": {
+     "app": 998.55,
+     "secondReader": 998.55,
+     "same": true,
+     "valueInFile": true
+    },
+    "81001": {
+     "app": 181.65,
+     "secondReader": 181.65,
+     "same": true,
+     "valueInFile": true
+    },
+    "85025": {
+     "app": 300.3,
+     "secondReader": 300.3,
+     "same": true,
+     "valueInFile": true
+    },
+    "93005": {
+     "app": 460.95,
+     "secondReader": 460.95,
+     "same": true,
+     "valueInFile": true
+    },
+    "96360": {
+     "app": 973.35,
+     "secondReader": 973.35,
+     "same": true,
+     "valueInFile": true
+    },
+    "96374": {
+     "app": 924.0,
+     "secondReader": 924.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "96375": {
+     "app": 278.25,
+     "secondReader": 278.25,
+     "same": true,
+     "valueInFile": true
+    },
+    "99281": {
+     "app": 420.0,
+     "secondReader": 420.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99282": {
+     "app": 1230.0,
+     "secondReader": 1230.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99283": {
+     "app": 1780.0,
+     "secondReader": 1780.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99284": {
+     "app": 2930.0,
+     "secondReader": 2930.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99285": {
+     "app": 4420.0,
+     "secondReader": 4420.0,
+     "same": true,
+     "valueInFile": true
+    },
+    "99291": {
+     "app": 5045.25,
+     "secondReader": 5045.25,
+     "same": true,
+     "valueInFile": true
+    },
+    "J1885": {
+     "app": 124.51,
+     "secondReader": 124.51,
+     "same": true,
+     "valueInFile": true
+    },
+    "J2405": {
+     "app": 98.05,
+     "secondReader": 98.05,
+     "same": true,
+     "valueInFile": true
+    }
+   },
+   "same": 20,
+   "compared": 20
+  }
+ },
+ "compared": 204,
+ "same": 202
+}

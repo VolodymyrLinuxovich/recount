@@ -1,0 +1,604 @@
+{
+ "checkedAt": "2026-10-25T09:34:39Z",
+ "compared": 81,
+ "same": 80,
+ "higher": 1,
+ "lower": 0,
+ "snapshots": {
+  "cpmc": {
+   "url": "https://edge.sitecorecloud.io/sutterhealt962c-sutterhealt8fce-production57cc-4860/media/Project/SutterHealth/SutterHealth/Files/billing-insurance/costs-and-charges/940562680-1740348929_california-pacific-medical-center-van-ness-campus_standardcharges.csv",
+   "snapshotFileUpdated": "2026-04-01",
+   "fileUpdatedNow": "2026-04-01",
+   "codes": {
+    "99281": {
+     "snapshot": 603.0,
+     "batch": 603.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED LEVEL 1",
+     "batchRow": "HCHG ED LEVEL 1"
+    },
+    "99282": {
+     "snapshot": 1527.0,
+     "batch": 1527.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED LEVEL 2",
+     "batchRow": "HCHG ED LEVEL 2"
+    },
+    "99283": {
+     "snapshot": 3093.0,
+     "batch": 3093.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED LEVEL 3",
+     "batchRow": "HCHG ED LEVEL 3"
+    },
+    "99284": {
+     "snapshot": 5214.0,
+     "batch": 5214.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED LEVEL 4",
+     "batchRow": "HCHG ED LEVEL 4"
+    },
+    "99285": {
+     "snapshot": 8003.0,
+     "batch": 8003.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED LEVEL 5",
+     "batchRow": "HCHG ED LEVEL 5"
+    },
+    "99291": {
+     "snapshot": 9840.0,
+     "batch": 9840.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG ED CC 1ST 30-74 MN W/PROC",
+     "batchRow": "HCHG ED CRIT CARE 1ST 30-74 MN"
+    },
+    "96374": {
+     "snapshot": 647.0,
+     "batch": 647.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG IV PUSH INITIAL DRUG",
+     "batchRow": "HCHG IV PUSH INITIAL DRUG"
+    },
+    "96375": {
+     "snapshot": 484.0,
+     "batch": 484.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG INJECTION IVP ADDL SEQ NEW DRG",
+     "batchRow": "HCHG INJECTION IVP ADDL SEQ NEW DRG"
+    },
+    "96360": {
+     "snapshot": 1160.0,
+     "batch": 1160.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR",
+     "batchRow": "HCHG INFUSION HYDRATION INITIAL UP TO 1 HR"
+    },
+    "71046": {
+     "snapshot": 804.0,
+     "batch": 804.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG XR CHEST FRONTAL AND LATERAL 2 VIEW",
+     "batchRow": "HCHG XR CHEST FRONTAL AND LATERAL 2 VIEW"
+    },
+    "70450": {
+     "snapshot": 4312.0,
+     "batch": 4312.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG CT BRAIN WO CONTR",
+     "batchRow": "HCHG CT BRAIN WO CONTR"
+    },
+    "74177": {
+     "snapshot": 8287.0,
+     "batch": 8287.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG CT ABD & PELVIS W/CON",
+     "batchRow": "HCHG CT ABD & PELVIS W/CON"
+    },
+    "80053": {
+     "snapshot": 386.0,
+     "batch": 386.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG COMPREHENSIVE METABOLIC PANEL",
+     "batchRow": "HCHG CORE COMPR MET PNL"
+    },
+    "85025": {
+     "snapshot": 217.0,
+     "batch": 217.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL",
+     "batchRow": "HCHG CORE CBC AUTO W AUTO DIFF WBC"
+    },
+    "81001": {
+     "snapshot": 125.0,
+     "batch": 125.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG CORE URNALYSIS AUTO W/ MICRO",
+     "batchRow": "HCHG CORE URNALYSIS AUTO W/ MICRO"
+    },
+    "93005": {
+     "snapshot": 614.0,
+     "batch": 614.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG EKG 12 LEAD TRACING ONLY",
+     "batchRow": "HCHG EKG 12 LEAD TRACING ONLY"
+    },
+    "36415": {
+     "snapshot": 50.0,
+     "batch": 50.0,
+     "verdict": "same",
+     "snapshotRow": "HCHG OBS VENIPUNCTURE",
+     "batchRow": "HCHG VENIPUNCTURE"
+    },
+    "J7030": {
+     "snapshot": 75.0,
+     "batch": 75.0,
+     "verdict": "same",
+     "snapshotRow": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE",
+     "batchRow": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE"
+    },
+    "J7050": {
+     "snapshot": 75.0,
+     "batch": 75.0,
+     "verdict": "same",
+     "snapshotRow": "NACL 0.9% IV SOLN",
+     "batchRow": "NACL 0.9% IV SOLN"
+    },
+    "J1885": {
+     "snapshot": 72.23,
+     "batch": 72.23,
+     "verdict": "same",
+     "snapshotRow": "KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN",
+     "batchRow": "KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN"
+    },
+    "J2405": {
+     "snapshot": 18.75,
+     "batch": 18.75,
+     "verdict": "same",
+     "snapshotRow": "ONDANSETRON HCL 4 MG/2ML IJ SOLN",
+     "batchRow": "ONDANSETRON HCL 4 MG/2ML IJ SOLN"
+    }
+   }
+  },
+  "saintfrancis": {
+   "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=8wogrqzbbev45c7pup8v9298ul2ymlpr&file_id=f_1732346032300",
+   "snapshotFileUpdated": "2026-02-28",
+   "fileUpdatedNow": "2026-02-28",
+   "codes": {
+    "99281": {
+     "snapshot": 1438.0,
+     "batch": 1438.0,
+     "verdict": "same",
+     "snapshotRow": "ER LEVEL 1",
+     "batchRow": "ER LEVEL 1"
+    },
+    "99282": {
+     "snapshot": 2301.0,
+     "batch": 2301.0,
+     "verdict": "same",
+     "snapshotRow": "ER LEVEL 2",
+     "batchRow": "ER LEVEL 2"
+    },
+    "99283": {
+     "snapshot": 3854.0,
+     "batch": 3854.0,
+     "verdict": "same",
+     "snapshotRow": "ER LEVEL 3",
+     "batchRow": "ER LEVEL 3"
+    },
+    "99284": {
+     "snapshot": 5752.0,
+     "batch": 5752.0,
+     "verdict": "same",
+     "snapshotRow": "ER LEVEL 4",
+     "batchRow": "ER LEVEL 4"
+    },
+    "99285": {
+     "snapshot": 11963.0,
+     "batch": 11963.0,
+     "verdict": "same",
+     "snapshotRow": "ER LEVEL 5",
+     "batchRow": "ER LEVEL 5"
+    },
+    "99291": {
+     "snapshot": 15375.0,
+     "batch": 15375.0,
+     "verdict": "same",
+     "snapshotRow": "ER CRITICAL CARE 30-74MIN",
+     "batchRow": "ER CRITICAL CARE 30-74MIN"
+    },
+    "96374": {
+     "snapshot": 564.0,
+     "batch": 564.0,
+     "verdict": "same",
+     "snapshotRow": "INJ FOR MICROBUBBLE STUDY",
+     "batchRow": "INJ FOR MICROBUBBLE STUDY"
+    },
+    "96375": {
+     "snapshot": 532.0,
+     "batch": 532.0,
+     "verdict": "same",
+     "snapshotRow": "INJ TX/DX/PRO IV PUSH SEQ",
+     "batchRow": "INJ TX/DX/PRO IV PUSH SEQ"
+    },
+    "96360": {
+     "snapshot": 1048.0,
+     "batch": 1048.0,
+     "verdict": "same",
+     "snapshotRow": "INF IV HYDRA INIT 31-60MN",
+     "batchRow": "INF IV HYDRA INIT 31-60MN"
+    },
+    "71046": {
+     "snapshot": 1074.0,
+     "batch": 1074.0,
+     "verdict": "same",
+     "snapshotRow": "XR CHEST 2 VIEWS",
+     "batchRow": "XR CHEST 2 VIEWS"
+    },
+    "70450": {
+     "snapshot": 5710.0,
+     "batch": 5710.0,
+     "verdict": "same",
+     "snapshotRow": "CT HEAD WO CON CT",
+     "batchRow": "CT HEAD WO CON CT"
+    },
+    "74177": {
+     "snapshot": 11940.0,
+     "batch": 11940.0,
+     "verdict": "same",
+     "snapshotRow": "CT ABDOMEN PELV W CON CT",
+     "batchRow": "CT ABDOMEN PELV W CON CT"
+    },
+    "80053": {
+     "snapshot": 237.0,
+     "batch": 237.0,
+     "verdict": "same",
+     "snapshotRow": "COMP METABOLIC PANEL",
+     "batchRow": "COMP METABOLIC PANEL"
+    },
+    "85025": {
+     "snapshot": 102.0,
+     "batch": 102.0,
+     "verdict": "same",
+     "snapshotRow": "CBC W/AUTO DIFF",
+     "batchRow": "CBC W/AUTO DIFF"
+    },
+    "81001": {
+     "snapshot": 167.0,
+     "batch": 167.0,
+     "verdict": "same",
+     "snapshotRow": "UA AUTO W MICRO",
+     "batchRow": "UA AUTO W MICRO"
+    },
+    "93005": {
+     "snapshot": 882.0,
+     "batch": 882.0,
+     "verdict": "same",
+     "snapshotRow": "ECG 12 LEAD TRACING ONLY",
+     "batchRow": "ECG 12 LEAD TRACING ONLY"
+    },
+    "36415": {
+     "snapshot": 135.0,
+     "batch": 135.0,
+     "verdict": "same",
+     "snapshotRow": "VENIPUNCTURE",
+     "batchRow": "VENIPUNCTURE"
+    },
+    "J7030": {
+     "snapshot": 80.0,
+     "batch": 80.0,
+     "verdict": "same",
+     "snapshotRow": "NACL 0.9% 1000ML INJ",
+     "batchRow": "NACL 0.9% 1000ML INJ"
+    },
+    "J7050": {
+     "snapshot": 80.0,
+     "batch": 80.0,
+     "verdict": "same",
+     "snapshotRow": "NACL 0.9% 150ML INJ",
+     "batchRow": "NACL 0.9% 150ML INJ"
+    },
+    "J1885": {
+     "snapshot": 42.0,
+     "batch": 42.0,
+     "verdict": "same",
+     "snapshotRow": "KETOROL 15MG/1ML ADMJZTB",
+     "batchRow": "KETOROL 15MG/1ML ADMJZTB"
+    },
+    "J2405": {
+     "snapshot": 42.0,
+     "batch": 42.0,
+     "verdict": "same",
+     "snapshotRow": "ONDANSETRON 4MG/2ML SDV",
+     "batchRow": "ONDANSETRON 4MG/2ML SDV"
+    }
+   }
+  },
+  "ucsf": {
+   "url": "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=ldckxfm5nm9wah74gqi7fdhe6mrtpg5e&file_id=f_1959275070690",
+   "snapshotFileUpdated": "2026-04-01",
+   "fileUpdatedNow": "2026-04-01",
+   "codes": {
+    "99281": {
+     "snapshot": 844.0,
+     "batch": 844.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level I",
+     "batchRow": "Hc Emerg Level I"
+    },
+    "99282": {
+     "snapshot": 1784.0,
+     "batch": 1784.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level Ii",
+     "batchRow": "Hc Emerg Level Ii"
+    },
+    "99283": {
+     "snapshot": 3297.0,
+     "batch": 3297.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level Iii",
+     "batchRow": "Hc Emerg Level Iii"
+    },
+    "99284": {
+     "snapshot": 8501.0,
+     "batch": 8501.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level Iv",
+     "batchRow": "Hc Emerg Level Iv"
+    },
+    "99285": {
+     "snapshot": 11901.0,
+     "batch": 11901.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level V",
+     "batchRow": "Hc Emerg Level V"
+    },
+    "99291": {
+     "snapshot": 14433.0,
+     "batch": 14433.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Emerg Level Vi (C.C.)",
+     "batchRow": "Hc Emerg Level Vi (C.C.)"
+    },
+    "96374": {
+     "snapshot": 671.0,
+     "batch": 671.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Ther/Proph/Diag Inj, Iv Push",
+     "batchRow": "Hc Ther/Proph/Diag Inj, Iv Push"
+    },
+    "96375": {
+     "snapshot": 504.0,
+     "batch": 504.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Tx/Pro/Dx Inj New Drug Addon",
+     "batchRow": "Hc Tx/Pro/Dx Inj New Drug Addon"
+    },
+    "96360": {
+     "snapshot": 934.0,
+     "batch": 934.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Hydration Iv Infusion, Init",
+     "batchRow": "Hc Hydration Iv Infusion, Init"
+    },
+    "71046": {
+     "snapshot": 531.0,
+     "batch": 531.0,
+     "verdict": "same",
+     "snapshotRow": "Hc X-Ray Exam Chest 2 Views",
+     "batchRow": "Hc X-Ray Exam Chest 2 Views"
+    },
+    "70450": {
+     "snapshot": 3288.0,
+     "batch": 3288.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Ct - Head/Brain Wo Contrast",
+     "batchRow": "Hc Ct - Head/Brain Wo Contrast"
+    },
+    "74177": {
+     "snapshot": 8272.0,
+     "batch": 8272.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Ct Abdomen & Pelvis W/Contrast",
+     "batchRow": "Hc Ct Abdomen & Pelvis W/Contrast"
+    },
+    "80053": {
+     "snapshot": 667.0,
+     "batch": 667.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Comprehensive Metabolic Panel",
+     "batchRow": "Hc Comprehensive Metabolic Panel"
+    },
+    "85025": {
+     "snapshot": 232.0,
+     "batch": 232.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Blood Count Complete Auto&Auto Difrntl Wbc",
+     "batchRow": "Hc Cbc W/Auto Diff & Plt Co"
+    },
+    "81001": {
+     "snapshot": 133.0,
+     "batch": 133.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Urinalysis Auto W/Micro",
+     "batchRow": "Hc Urinalysis Auto W/Micro"
+    },
+    "93005": {
+     "snapshot": 443.0,
+     "batch": 443.0,
+     "verdict": "same",
+     "snapshotRow": "Hc 12 Lead Ekg; Tracing Only",
+     "batchRow": "Hc 12 Lead Ekg; Tracing Only"
+    },
+    "36415": {
+     "snapshot": 69.0,
+     "batch": 69.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Collection Venous Blood Venipuncture",
+     "batchRow": "Hc Venipnct For Lab Spec"
+    },
+    "12002": {
+     "snapshot": 1654.0,
+     "batch": 1654.0,
+     "verdict": "same",
+     "snapshotRow": "Hc Lac Smpl 2.6-7.5Cm",
+     "batchRow": "Hc Lac Smpl 2.6-7.5Cm"
+    },
+    "J7030": {
+     "snapshot": 611.68,
+     "batch": 611.68,
+     "verdict": "same",
+     "snapshotRow": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE",
+     "batchRow": "SODIUM CHLORIDE 0.9 % (FLUSH) INJECTION SYRINGE"
+    },
+    "J7050": {
+     "snapshot": 66.21,
+     "batch": 66.21,
+     "verdict": "same",
+     "snapshotRow": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION",
+     "batchRow": "SODIUM CHLORIDE 0.9 % INTRAVENOUS SOLUTION"
+    },
+    "J1885": {
+     "snapshot": 34.88,
+     "batch": 34.88,
+     "verdict": "same",
+     "snapshotRow": "KETOROLAC 15 MG/ML INJECTION SOLUTION",
+     "batchRow": "KETOROLAC 15 MG/ML INJECTION SOLUTION"
+    },
+    "J2405": {
+     "snapshot": 5.23,
+     "batch": 5.23,
+     "verdict": "same",
+     "snapshotRow": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION",
+     "batchRow": "ONDANSETRON HCL (PF) 4 MG/2 ML INJECTION SOLUTION"
+    }
+   }
+  },
+  "zsfg": {
+   "url": "https://sanfranciscogeneralhospitalfou.box.com/shared/static/bj0pj6iqcpc6bmb4yp7kobuz772j0jtl.csv",
+   "snapshotFileUpdated": "3/19/2026",
+   "fileUpdatedNow": "3/19/2026",
+   "codes": {
+    "99281": {
+     "snapshot": 576.0,
+     "batch": 576.0,
+     "verdict": "same",
+     "snapshotRow": "HC ER Ex/Tx Rm Level I",
+     "batchRow": "HC ER Ex/Tx Rm Level I"
+    },
+    "99282": {
+     "snapshot": 1726.0,
+     "batch": 1726.0,
+     "verdict": "same",
+     "snapshotRow": "HC ER Ex/Tx Rm Level II",
+     "batchRow": "HC ER Ex/Tx Rm Level II"
+    },
+    "99283": {
+     "snapshot": 3694.0,
+     "batch": 3694.0,
+     "verdict": "same",
+     "snapshotRow": "HC ER Ex/Tx Rm Level III",
+     "batchRow": "HC ER Ex/Tx Rm Level III"
+    },
+    "99284": {
+     "snapshot": 6084.0,
+     "batch": 6084.0,
+     "verdict": "same",
+     "snapshotRow": "HC ER Ex/Tx Rm Level IV",
+     "batchRow": "HC ER Ex/Tx Rm Level IV"
+    },
+    "99285": {
+     "snapshot": 12281.0,
+     "batch": 18248.0,
+     "verdict": "higher",
+     "snapshotRow": "HC ER Ex/Tx Rm Level V",
+     "batchRow": "HC ED Level 5 Team Trauma"
+    },
+    "99291": {
+     "snapshot": 6771.0,
+     "batch": 6771.0,
+     "verdict": "same",
+     "snapshotRow": "HC ED Critical Care 30-74 Mins.",
+     "batchRow": "HC ED Critical Care 30-74 Mins."
+    },
+    "96374": {
+     "snapshot": 419.0,
+     "batch": 419.0,
+     "verdict": "same",
+     "snapshotRow": "HC IV Push (Infusion <= 15 Min)",
+     "batchRow": "HC IV Push Single or Initial Drug"
+    },
+    "96375": {
+     "snapshot": 218.0,
+     "batch": 218.0,
+     "verdict": "same",
+     "snapshotRow": "HC IV Push Ea Addl New Drug",
+     "batchRow": "HC IV Push Ea Addl New Drug"
+    },
+    "96360": {
+     "snapshot": 449.0,
+     "batch": 449.0,
+     "verdict": "same",
+     "snapshotRow": "HC IV Hydration Admin 1st Hour",
+     "batchRow": "HC IV Hydration Admin 1st Hour"
+    },
+    "71046": {
+     "snapshot": 402.0,
+     "batch": 402.0,
+     "verdict": "same",
+     "snapshotRow": "HC Chest Any 2 Views",
+     "batchRow": "HC Chest Any 2 Views"
+    },
+    "70450": {
+     "snapshot": 4403.0,
+     "batch": 4403.0,
+     "verdict": "same",
+     "snapshotRow": "HC CT Brain WO Contr",
+     "batchRow": "HC CT Brain WO Contr"
+    },
+    "74177": {
+     "snapshot": 3596.0,
+     "batch": 3596.0,
+     "verdict": "same",
+     "snapshotRow": "HC CT Abdomen/Pelvis W/Cont.",
+     "batchRow": "HC CT Abdomen/Pelvis W/Cont."
+    },
+    "80053": {
+     "snapshot": 528.0,
+     "batch": 528.0,
+     "verdict": "same",
+     "snapshotRow": "HC Comprehensive Metabolic Panel",
+     "batchRow": "HC Comprehensive Metabolic Panel"
+    },
+    "85025": {
+     "snapshot": 269.0,
+     "batch": 269.0,
+     "verdict": "same",
+     "snapshotRow": "HC Cbc Platelets & Diff",
+     "batchRow": "HC Cbc Platelets & Diff"
+    },
+    "81001": {
+     "snapshot": 149.0,
+     "batch": 149.0,
+     "verdict": "same",
+     "snapshotRow": "HC Urinalysis Micro. (Automated)",
+     "batchRow": "HC Urinalysis Micro. (Automated)"
+    },
+    "93005": {
+     "snapshot": 287.0,
+     "batch": 287.0,
+     "verdict": "same",
+     "snapshotRow": "HC Ekg Tracing Only",
+     "batchRow": "HC Ekg Tracing Only"
+    },
+    "12002": {
+     "snapshot": 892.0,
+     "batch": 892.0,
+     "verdict": "same",
+     "snapshotRow": "HC Laceration Repair",
+     "batchRow": "HC Laceration Repair"
+    }
+   }
+  }
+ }
+}

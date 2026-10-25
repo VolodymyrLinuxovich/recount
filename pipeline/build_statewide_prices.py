@@ -136,7 +136,7 @@ def main(dirs: list[str]) -> None:
         }
     out = {
         "generatedAt": datetime.now(timezone.utc).isoformat()[:19] + "Z",
-        "source": "Apify Actor NXiKTRZKK6p6qCSXk; each file verified as the hospital's own by pipeline/find_price_files.py",
+        "source": "Apify Actor NXiKTRZKK6p6qCSXk: batch runs found and read the files; runId local-actor-scanner means the file was re-read with the Actor 0.3 scanner (actor/src/mrf.py) on a laptop. Each file verified as the hospital's own by pipeline/find_price_files.py",
         "codes": sorted(codes),
         "hospitals": hospitals,
         "skipped": skipped,

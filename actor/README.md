@@ -178,8 +178,10 @@ We ran the Actor on all 470 hospitals in California's HCAI registry, with 20 com
 
 - Hospital websites came from Apify's Google Search Scraper (one query per hospital, about $2).
 - Each hospital was one Actor run. Hospitals where the price page loads its links with JavaScript were run again in batch mode with a known `mrfUrl`: all 35 Kaiser hospitals in one run for $0.08.
-- **236 hospitals** ended with usable ER prices, a price file that names the hospital and at least one of the 20 codes. Most of the rest are psychiatric, rehab or long-term care hospitals with no ER codes, or sites whose file link is loaded with JavaScript.
-- Checked against 75 prices we had verified by hand, the batch matched 73 exactly; the other 2 used a higher row of the same code.
+- The first pass (2026-10-24) kept 236 hospitals. A review found that 42 of those files don't name the hospital they were used for (one shared word such as "Mercy" was enough), and that version 0.2 looked for the wrong index file name.
+- The second pass (2026-10-25) found files through each domain's `cms-hpt.txt`, kept a file only when it states the hospital's California license number or names the hospital and no other hospital's license (`pipeline/find_price_files.py`), and re-ran the Actor in batch mode with a known `mrfUrl` for 178 hospitals.
+- A second parser then showed that version 0.2 merged rows with the same description, which could hide a higher price. Version 0.3 fixes that and reads ZIP files; every verified file was re-read with it.
+- **336 hospitals** now have usable ER prices. On the four hand-checked San Francisco files, 80 of 81 prices match exactly and the other 1 are higher, never lower.
 - Total Apify usage for the whole state: about $5.
 
 ## Limitations

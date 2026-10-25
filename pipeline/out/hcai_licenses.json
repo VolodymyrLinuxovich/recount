@@ -1,0 +1,2822 @@
+{
+ "adventist-health-and-rideout": {
+  "license": "230000126",
+  "hcaiId": "106580996",
+  "aliases": "RIDEOUT MEMORIAL HOSPITAL, 726 FOURTH ST, MARYSVILLE, CA 95901",
+  "address": "726 FOURTH ST, MARYSVILLE, CA 95901"
+ },
+ "adventist-health-bakersfield": {
+  "license": "120000187",
+  "hcaiId": "106150788",
+  "aliases": "SAN JOAQUIN COMMUNITY HOSPITAL, 2615 CHESTER AVENUE, BAKERSFIELD, CA 93301",
+  "address": "2615 CHESTER AVENUE, BAKERSFIELD, CA 93301"
+ },
+ "adventist-health-clearlake": {
+  "license": "110000174",
+  "hcaiId": "106171049",
+  "aliases": "ST. HELENA HOSPITAL - CLEARLAKE, 15630 18TH AVE - HWY 53, CLEARLAKE, CA 95422",
+  "address": "15630 18TH AVE, CLEARLAKE, CA 95422"
+ },
+ "adventist-health-delano": {
+  "license": "120000180",
+  "hcaiId": "106150706",
+  "aliases": "DELANO REGIONAL MEDICAL CENTER, 1401 GARCES HIGHWAY, DELANO, CA 93215",
+  "address": "1401 GARCES HIGHWAY, DELANO, CA 93215"
+ },
+ "adventist-health-glendale": {
+  "license": "930000059",
+  "hcaiId": "106190323",
+  "aliases": "GLENDALE ADVENTIST MEDICAL CENTER, 1509 WILSON TERRACE, GLENDALE, CA 91206; GLENDALE ADVENTIST MEDICAL CENTER D/P APH, 1509 WILSON TER, GLENDALE, CA 91206",
+  "address": "1509 WILSON TERRACE, GLENDALE, CA 91206"
+ },
+ "adventist-health-hanford": {
+  "license": "550001439",
+  "hcaiId": "106164029",
+  "aliases": "ADVENTIST MEDICAL CENTER, 115 MALL DRIVE, HANFORD, CA 93230",
+  "address": "115 MALL DRIVE, HANFORD, CA 93230"
+ },
+ "adventist-health-howard-memorial": {
+  "license": "110000013",
+  "hcaiId": "106234038",
+  "aliases": "FRANK R. HOWARD MEMORIAL HOSPITAL, 1 MARCELA DRIVE, WILLITS, CA 95490",
+  "address": "1 MARCELA DRIVE, WILLITS, CA 95490"
+ },
+ "adventist-health-lodi-memorial": {
+  "license": "030000056",
+  "hcaiId": "106390923",
+  "aliases": "LODI MEMORIAL HOSPITAL, 975 SOUTH FAIRMONT AVENUE, LODI, CA 95240-5179",
+  "address": "975 SOUTH FAIRMONT AVENUE, LODI, CA 95240-5179"
+ },
+ "adventist-health-mendocino-coast": {
+  "license": "110000040",
+  "hcaiId": "106231013",
+  "aliases": "MENDOCINO COAST DISTRICT HOSPITAL, 700 RIVER DRIVE, FORT BRAGG, CA 95437",
+  "address": "700 RIVER DRIVE, FORT BRAGG, CA 95437"
+ },
+ "adventist-health-reedley": {
+  "license": "040000149",
+  "hcaiId": "106100797",
+  "aliases": "ADVENTIST MEDICAL CENTER - REEDLEY, 372 WEST CYPRESS AVENUE, REEDLEY, CA 93654",
+  "address": "372 WEST CYPRESS AVENUE, REEDLEY, CA 93654"
+ },
+ "adventist-health-selma": {
+  "license": "550001439",
+  "hcaiId": "106100793",
+  "aliases": "ADVENTIST MEDICAL CENTER - SELMA, 1141 ROSE AVENUE, SELMA, CA 93662",
+  "address": "1141 ROSE AVENUE, SELMA, CA 93662"
+ },
+ "tenet-health-central-coast-sierra-vista-regional-medical-center": {
+  "license": "050000059",
+  "hcaiId": "106400524",
+  "aliases": "SIERRA VISTA REGIONAL MEDICAL CENTER, 1010 MURRAY STREET, SAN LUIS OBISPO, CA 93405; TENET HEALTH CENTRAL COAST SIERRA VISTA REGIONAL MEDICAL CENTER, 1010 MURRAY STREET, SAN LUIS OBISPO, CA 93405",
+  "address": "1010 MURRAY AVE, SAN LUIS OBISPO, CA 93405"
+ },
+ "adventist-health-simi-valley": {
+  "license": "050000216",
+  "hcaiId": "106560525",
+  "aliases": "SIMI VALLEY HOSPITAL AND HEALTH CARE SVCS-SYCAMORE, 2975 NORTH SYCAMORE DRIVE, SIMI VALLEY, CA 93065",
+  "address": "2975 SYCAMORE DRIVE, SIMI VALLEY, CA 93065"
+ },
+ "adventist-health-sonora-fairview": {
+  "license": "030000094",
+  "hcaiId": "106552209",
+  "aliases": "SONORA REGIONAL MEDICAL CENTER - FAIRVIEW, 179 SOUTH FAIRVIEW LANE, SONORA, CA 95370",
+  "address": "179 FAIRVIEW LANE, SONORA, CA 95370"
+ },
+ "adventist-health-sonora-greenley": {
+  "license": "030000094",
+  "hcaiId": "106554011",
+  "aliases": "SONORA REGIONAL MEDICAL CENTER - GREENLEY, 1000 Greenley Road, Sonora, CA 95370",
+  "address": "1000 GREENLEY RD, SONORA, CA 95370"
+ },
+ "bakersfield-heart-hospital": {
+  "license": "120000187",
+  "hcaiId": "106154101",
+  "aliases": "BAKERSFIELD HEART HOSPITAL, 3001 SILLECT AVENUE, BAKERSFIELD, CA 93308",
+  "address": "3001 SILLECT AVENUE, BAKERSFIELD, CA 93308"
+ },
+ "adventist-health-st-helena": {
+  "license": "110000073",
+  "hcaiId": "106281078",
+  "aliases": "ST. HELENA HOSPITAL, 10 WOODLAND RD., ST. HELENA, CA 94574",
+  "address": "10 WOODLAND RD., ST. HELENA, CA 94574"
+ },
+ "adventist-health-tehachapi-valley": {
+  "license": "120000188",
+  "hcaiId": "106154168",
+  "aliases": null,
+  "address": null
+ },
+ "adventist-health-tulare": {
+  "license": "120000585",
+  "hcaiId": "106540816",
+  "aliases": "TULARE REGIONAL MEDICAL CENTER, 869 NORTH CHERRY STREET, TULARE, CA 93274",
+  "address": "869 NORTH CHERRY STREET, TULARE, CA 93274"
+ },
+ "tenet-health-central-coast-twin-cities-community-hospital": {
+  "license": "050000078",
+  "hcaiId": "106400548",
+  "aliases": "TENET HEALTH CENTRAL COAST TWIN CITIES COMMUNITY HOSPITAL, 1100 LAS TABLAS ROAD, TEMPLETON, CA 93465; TWIN CITIES COMMUNITY HOSPITAL, 1100 LAS TABLAS ROAD, TEMPLETON, CA 93465",
+  "address": "1100 LAS TABLAS ROAD, TEMPLETON, CA 93465"
+ },
+ "adventist-health-ukiah-valley": {
+  "license": "110000095",
+  "hcaiId": "106231396",
+  "aliases": "UKIAH VALLEY MEDICAL CENTER, 275 HOSPITAL DRIVE, UKIAH, CA 95482",
+  "address": "275 HOSPITAL DRIVE, UKIAH, CA 95482"
+ },
+ "adventist-health-vallejo": {
+  "license": "110000042",
+  "hcaiId": "106481015",
+  "aliases": "ST. HELENA HOSPITAL CENTER FOR BEHAVIORAL HEALTH, 525 OREGON STREET, VALLEJO, CA 94590",
+  "address": "525 OREGON STREET, VALLEJO, CA 94590"
+ },
+ "adventist-health-white-memorial": {
+  "license": "930000195",
+  "hcaiId": "106190878",
+  "aliases": "WHITE MEMORIAL MEDICAL CENTER, 1720 CESAR E. CHAVEZ AVENUE, LOS ANGELES, CA 90033; WHITE MEMORIAL MEDICAL CENTER D/P APH, 1720 E CESAR E CHAVEZ AVE, LOS ANGELES, CA 90033",
+  "address": "1720 E. CESAR E. CHAVEZ AVENUE, LOS ANGELES, CA 90033"
+ },
+ "adventist-health-white-memorial-montebello": {
+  "license": "930000195",
+  "hcaiId": "106190081",
+  "aliases": "BEVERLY HOSPITAL, 309 WEST BEVERLY BOULEVARD, MONTEBELLO, CA 90640",
+  "address": "309 WEST BEVERLY BOULEVARD, MONTEBELLO, CA 90640"
+ },
+ "ahmc-anaheim-regional-medical-center": {
+  "license": "060000080",
+  "hcaiId": "106301098",
+  "aliases": null,
+  "address": null
+ },
+ "ahmc-seton-medical-center": {
+  "license": "220000026",
+  "hcaiId": "106410817",
+  "aliases": "Advanced Hospital Management Corporation SETON MEDICAL CENTER D/P APH, 1900 SULLIVAN AVE, DALY CITY, CA 94015; SETON MEDICAL CENTER, 1900 SULLIVAN AVENUE, DALY CITY, CA 94015",
+  "address": "1900 SULLIVAN AVENUE, DALY CITY, CA 94015"
+ },
+ "ahmc-seton-medical-center-coastside": {
+  "license": "220000026",
+  "hcaiId": "106410828",
+  "aliases": "SETON COASTSIDE, 600 MARINE BOULEVARD, MOSS BEACH, CA 94038",
+  "address": "600 MARINE BOULEVARD, MOSS BEACH, CA 94038"
+ },
+ "alameda-hospital": {
+  "license": "140000002",
+  "hcaiId": "106010735",
+  "aliases": null,
+  "address": null
+ },
+ "alhambra-hospital-medical-center": {
+  "license": "930000005",
+  "hcaiId": "106190017",
+  "aliases": null,
+  "address": null
+ },
+ "aliso-ridge-behavioral-health-llc": {
+  "license": "550007782",
+  "hcaiId": "106304589",
+  "aliases": null,
+  "address": null
+ },
+ "alta-bates-summit-medical-center": {
+  "license": "140000284",
+  "hcaiId": "106010937",
+  "aliases": null,
+  "address": null
+ },
+ "alta-bates-summit-medical-center-summit-campus": {
+  "license": "140000284",
+  "hcaiId": "106013626",
+  "aliases": null,
+  "address": null
+ },
+ "alta-bates-summit-medical-center-alta-bates-campus": {
+  "license": "140000004",
+  "hcaiId": "106010739",
+  "aliases": null,
+  "address": null
+ },
+ "alta-bates-summit-medical-center-herrick-campus": {
+  "license": "140000004",
+  "hcaiId": "106010844",
+  "aliases": "Alta Bates Summit Medical Center - HERRICK CAMPUS D/P APH, 2001 DWIGHT WAY, BERKELEY, CA 94704",
+  "address": "2001 DWIGHT WAY, BERKELEY, CA 94704"
+ },
+ "alvarado-parkway-institute-b-h-s": {
+  "license": "080000079",
+  "hcaiId": "106370749",
+  "aliases": null,
+  "address": null
+ },
+ "anaheim-community-hospital-llc": {
+  "license": "060000079",
+  "hcaiId": "106301097",
+  "aliases": "PACIFIC ORANGE HOSPITAL, LLC, 3350 WEST BALL ROAD, ANAHEIM, CA 92804",
+  "address": "3350 WEST BALL ROAD, ANAHEIM, CA 92804"
+ },
+ "anaheim-global-medical-center": {
+  "license": "060000117",
+  "hcaiId": "106301188",
+  "aliases": "ANAHEIM GLOBAL MEDICAL CENTER D/P APH, 1025 S ANAHEIM BLVD, ANAHEIM, CA 92805",
+  "address": "1025 SOUTH ANAHEIM BLVD., ANAHEIM, CA 92805"
+ },
+ "antelope-valley-medical-center": {
+  "license": "930000008",
+  "hcaiId": "106190034",
+  "aliases": "ANTELOPE VALLEY HOSPITAL D/P APH, 1600 W AVENUE J, LANCASTER, CA 93534; ANTELOPE VALLEY HOSPITAL, 1600 WEST AVENUE J, LANCASTER, CA 93534",
+  "address": "1600 WEST AVENUE J, LANCASTER, CA 93534"
+ },
+ "arrowhead-regional-medical-center": {
+  "license": "240000197",
+  "hcaiId": "106364231",
+  "aliases": "ARROWHEAD REGIONAL MEDICAL CENTER D/P APH, 400 N PEPPER AVE, COLTON, CA 92324",
+  "address": "400 N. PEPPER AVENUE, COLTON, CA 92324-1816"
+ },
+ "aurora-behavioral-healthcare-santa-rosa-llc": {
+  "license": "550001413",
+  "hcaiId": "106494048",
+  "aliases": null,
+  "address": null
+ },
+ "aurora-charter-oak": {
+  "license": "930000031",
+  "hcaiId": "106190163",
+  "aliases": null,
+  "address": null
+ },
+ "aurora-las-encinas-hospital": {
+  "license": "930000087",
+  "hcaiId": "106190462",
+  "aliases": null,
+  "address": null
+ },
+ "aurora-san-diego": {
+  "license": "080000310",
+  "hcaiId": "106374024",
+  "aliases": null,
+  "address": null
+ },
+ "aurora-vista-del-mar-hospital": {
+  "license": "050000016",
+  "hcaiId": "106560203",
+  "aliases": null,
+  "address": null
+ },
+ "bakersfield-behavorial-healthcare-hospital-llc": {
+  "license": "550003535",
+  "hcaiId": "106154044",
+  "aliases": "BAKERSFIELD BEHAVORIAL HEALTHCARE HOSPITAL, LLC, 5201 WHITE LANE, BAKERSFIELD, CA 93309; GOOD SAMARITAN HOSPITAL-SOUTHWEST D/P APH, 5201 WHITE LANE, BAKERSFIELD, CA 93309",
+  "address": "5201 WHITE LANE, BAKERSFIELD, CA 93309"
+ },
+ "bakersfield-memorial-hospital": {
+  "license": "120000181",
+  "hcaiId": "106150722",
+  "aliases": null,
+  "address": null
+ },
+ "ballard-rehabilitation-hospital": {
+  "license": "240000502",
+  "hcaiId": "106364121",
+  "aliases": null,
+  "address": null
+ },
+ "banner-lassen-medical-center": {
+  "license": "230000020",
+  "hcaiId": "106184008",
+  "aliases": null,
+  "address": null
+ },
+ "barlow-respiratory-hospital": {
+  "license": "930000011",
+  "hcaiId": "106190052",
+  "aliases": null,
+  "address": null
+ },
+ "barstow-community-hospital": {
+  "license": "240000110",
+  "hcaiId": "106364430",
+  "aliases": null,
+  "address": null
+ },
+ "barton-memorial-hospital": {
+  "license": "030000013",
+  "hcaiId": "106090793",
+  "aliases": null,
+  "address": null
+ },
+ "bear-valley-community-hospital": {
+  "license": "240000111",
+  "hcaiId": "106361110",
+  "aliases": null,
+  "address": null
+ },
+ "bhc-alhambra-hospital": {
+  "license": "930000006",
+  "hcaiId": "106190020",
+  "aliases": null,
+  "address": null
+ },
+ "california-hospital-medical-center-los-angeles": {
+  "license": "930000024",
+  "hcaiId": "106190125",
+  "aliases": null,
+  "address": null
+ },
+ "california-pacific-medical-center-davies-campus-hospital": {
+  "license": "220000197",
+  "hcaiId": "106380933",
+  "aliases": "CALIFORNIA PACIFIC MEDICAL CENTER - DAVIES CAMPUS (D/P) APH, 601 DUBOCE AVE, SAN FRANCISCO, CA 94117; CALIFORNIA PACIFIC MEDICAL CENTER - DAVIES CAMPUS HOSPITAL D/P APH, 601 DUBOCE AVE, SAN FRANCISCO, CA 94117; CALIFORNIA PACIFIC MED CTR-DAVIES CAMPUS, 601 DUBOCE AVENUE, SAN FRANCISCO, CA 94117",
+  "address": "601 DUBOCE AVENUE, SAN FRANCISCO, CA 94117"
+ },
+ "california-pacific-medical-center-mission-bernal-campus": {
+  "license": "220000070",
+  "hcaiId": "106384202",
+  "aliases": null,
+  "address": null
+ },
+ "california-pacific-medical-center-van-ness-campus": {
+  "license": "220000197",
+  "hcaiId": "106384176",
+  "aliases": null,
+  "address": null
+ },
+ "california-rehabilitation-institute-llc": {
+  "license": "930000029",
+  "hcaiId": "106190155",
+  "aliases": "CALIFORNIA REHABILITATION INSTITUTE, 2070 CENTURY PARK EAST, LOS ANGELES, CA 90067; CENTURY CITY DOCTORS HOSPITAL, 2070 CENTURY PARK EAST, LOS ANGELES, CA 90067",
+  "address": "2070 CENTURY PARK EAST, LOS ANGELES, CA 90067"
+ },
+ "canyon-ridge-hospital": {
+  "license": "240000357",
+  "hcaiId": "106364050",
+  "aliases": null,
+  "address": null
+ },
+ "casa-colina-hospital": {
+  "license": "930000026",
+  "hcaiId": "106190137",
+  "aliases": "CASA COLINA HOSPITAL AND CENTERS FOR HEALTHCARE, 255 EAST BONITA AVENUE, POMONA, CA 91767",
+  "address": "255 EAST BONITA AVENUE, POMONA, CA 91767"
+ },
+ "catalina-island-medical-center": {
+  "license": "930000010",
+  "hcaiId": "106190045",
+  "aliases": null,
+  "address": null
+ },
+ "cedars-sinai-marina-del-rey-hospital": {
+  "license": "930000096",
+  "hcaiId": "106190500",
+  "aliases": "CEDARS-SINAI MARINA DEL REY HOSPITAL, 4650 LINCOLN BOULEVARD, MARINA DEL REY, CA 90292; MARINA DEL REY HOSPITAL, 4650 LINCOLN BOULEVARD, MARINA DEL REY, CA 90292; MARINA DEL REY HOSPITAL D/P APH, 4650 LINCOLN BLVD, MARINA DEL REY, CA 90292",
+  "address": "4650 LINCOLN BOULEVARD, MARINA DEL REY, CA 90292"
+ },
+ "cedars-sinai-medical-center": {
+  "license": "930000110",
+  "hcaiId": "106190555",
+  "aliases": "CEDARS SINAI MEDICAL CENTER, 8700 BEVERLY BOULEVARD, LOS ANGELES, CA 90048",
+  "address": "8700 BEVERLY BOULEVARD, LOS ANGELES, CA 90048"
+ },
+ "centinela-hospital-medical-center": {
+  "license": "930000027",
+  "hcaiId": "106190148",
+  "aliases": null,
+  "address": null
+ },
+ "bakersfield-rehabilitation-hospital": {
+  "license": "550007875",
+  "hcaiId": "106150820",
+  "aliases": "BAKERSFIELD REHABILITATION HOSPITAL, 4400 KIRKCALDY DRIVE, BAKERSFIELD, CA 93306",
+  "address": "4400 KIRKCALDY DRIVE, BAKERSFIELD, CA 93306"
+ },
+ "central-valley-specialty-hospital": {
+  "license": "030000464",
+  "hcaiId": "106500954",
+  "aliases": null,
+  "address": null
+ },
+ "chapman-global-medical-center": {
+  "license": "060000097",
+  "hcaiId": "106301140",
+  "aliases": "CHAPMAN GLOBAL MEDICAL CENTER D/P APH, 2601 E CHAPMAN AVE, ORANGE, CA 92869",
+  "address": "2601 EAST CHAPMAN AVENUE, ORANGE, CA 92869"
+ },
+ "childrens-healthcare-organization-of-northern-ca-pediatric-hospital": {
+  "license": "070000320",
+  "hcaiId": "106434051",
+  "aliases": "CHILDRENS RECOVERY CENTER OF NORTHERN CALIFORNIA, 3777 SOUTH BASCOM AVENUE, CAMPBELL, CA 95008",
+  "address": "3777 SOUTH BASCOM AVENUE, CAMPBELL, CA 95008"
+ },
+ "childrens-hospital-at-mission": {
+  "license": "060000348",
+  "hcaiId": "106304113",
+  "aliases": null,
+  "address": null
+ },
+ "childrens-hospital-of-los-angeles": {
+  "license": "930000032",
+  "hcaiId": "106190170",
+  "aliases": null,
+  "address": null
+ },
+ "chinese-hospital": {
+  "license": "220000122",
+  "hcaiId": "106382715",
+  "aliases": null,
+  "address": null
+ },
+ "chino-valley-medical-center": {
+  "license": "240000125",
+  "hcaiId": "106361144",
+  "aliases": null,
+  "address": null
+ },
+ "city-of-hope-helford-clinical-research-hospital": {
+  "license": "930000033",
+  "hcaiId": "106190176",
+  "aliases": null,
+  "address": null
+ },
+ "city-of-hope-orange-county-cancer-specialty-hospital": {
+  "license": "550009999",
+  "hcaiId": "106300020",
+  "aliases": null,
+  "address": null
+ },
+ "clovis-community-medical-center": {
+  "license": "040000004",
+  "hcaiId": "106100005",
+  "aliases": null,
+  "address": null
+ },
+ "coachella-valley-behavioral-health": {
+  "license": "550009586",
+  "hcaiId": "106330901",
+  "aliases": null,
+  "address": null
+ },
+ "coalinga-regional-medical-center": {
+  "license": "040000085",
+  "hcaiId": "106100697",
+  "aliases": null,
+  "address": null
+ },
+ "coast-plaza-hospital": {
+  "license": "930000162",
+  "hcaiId": "106190766",
+  "aliases": null,
+  "address": null
+ },
+ "college-hospital": {
+  "license": "930000036",
+  "hcaiId": "106190184",
+  "aliases": null,
+  "address": null
+ },
+ "college-hospital-costa-mesa": {
+  "license": "060000100",
+  "hcaiId": "106301155",
+  "aliases": "COLLEGE HOSPITAL COSTA MESA D/P APH, 301 VICTORIA ST, COSTA MESA, CA 92627",
+  "address": "301 VICTORIA STREET, COSTA MESA, CA 92627"
+ },
+ "college-medical-center": {
+  "license": "930000117",
+  "hcaiId": "106190587",
+  "aliases": null,
+  "address": null
+ },
+ "college-medical-center-hawthorne-campus": {
+  "license": "930000117",
+  "hcaiId": "106190523",
+  "aliases": null,
+  "address": null
+ },
+ "college-medical-center-south-campus-d-p-aph": {
+  "license": "930000117",
+  "hcaiId": "106190477",
+  "aliases": null,
+  "address": null
+ },
+ "colorado-river-medical-center": {
+  "license": "240000227",
+  "hcaiId": "106361458",
+  "aliases": null,
+  "address": null
+ },
+ "colusa-medical-center": {
+  "license": "230000149",
+  "hcaiId": "106060870",
+  "aliases": "COLUSA REGIONAL MEDICAL CENTER, 199 EAST WEBSTER STREET, COLUSA, CA 95932",
+  "address": "199 E WEBSTER STREET, COLUSA, CA 95932"
+ },
+ "community-behavioral-health-center": {
+  "license": "040000096",
+  "hcaiId": "106104008",
+  "aliases": null,
+  "address": null
+ },
+ "community-hospital-of-huntington-park": {
+  "license": "930000038",
+  "hcaiId": "106190197",
+  "aliases": null,
+  "address": null
+ },
+ "community-hospital-of-san-bernardino": {
+  "license": "240000198",
+  "hcaiId": "106361323",
+  "aliases": "COMMUNITY HOSPITAL OF SAN BERNARDINO D/P APH, 1805 MEDICAL CENTER DR, SAN BERNARDINO, CA 92411",
+  "address": "1805 MEDICAL CENTER DRIVE, SAN BERNARDINO, CA 92411"
+ },
+ "community-hospital-of-the-monterey-peninsula": {
+  "license": "070000026",
+  "hcaiId": "106270744",
+  "aliases": "COMMUNITY HOSPITAL OF THE MONTEREY PENINSULA D/P A, 23625 W.R. HOLMAN HWY, MONTEREY, CA 93940",
+  "address": "23625 W. R. HOLMAN HIGHWAY, MONTEREY, CA 93940"
+ },
+ "community-memorial-hospital-ojai": {
+  "license": "050000045",
+  "hcaiId": "106560501",
+  "aliases": "OJAI VALLEY COMMUNITY HOSPITAL, 1306 MARICOPA HIGHWAY, OJAI, CA 93023",
+  "address": "1306 MARICOPA HIGHWAY, OJAI, CA 93023"
+ },
+ "community-memorial-hospital-san-buenaventura": {
+  "license": "050000026",
+  "hcaiId": "106560473",
+  "aliases": null,
+  "address": null
+ },
+ "community-regional-medical-center-fresno": {
+  "license": "040000096",
+  "hcaiId": "106100717",
+  "aliases": null,
+  "address": null
+ },
+ "contra-costa-regional-medical-center": {
+  "license": "140000090",
+  "hcaiId": "106070924",
+  "aliases": "CONTRA COSTA REGIONAL MEDICAL CENTER D/P APH, 2500 ALHAMBRA AVENUE, MARTINEZ, CA 94553",
+  "address": "2500 ALHAMBRA AVENUE, MARTINEZ, CA 94553"
+ },
+ "corona-regional-medical-center-magnolia": {
+  "license": "250000126",
+  "hcaiId": "106331145",
+  "aliases": null,
+  "address": null
+ },
+ "corona-regional-medical-center-main": {
+  "license": "250000126",
+  "hcaiId": "106331152",
+  "aliases": "CORONA REGIONAL MEDICAL CENTER D/P APH, 730 MAGNOLIA AVE, CORONA, CA 92879",
+  "address": "800 SOUTH MAIN STREET, CORONA, CA 92882"
+ },
+ "cottage-rehabilitation-hospital": {
+  "license": "050000140",
+  "hcaiId": "106424047",
+  "aliases": null,
+  "address": null
+ },
+ "dameron-hospital": {
+  "license": "030000024",
+  "hcaiId": "106390846",
+  "aliases": null,
+  "address": null
+ },
+ "del-amo-behavioral-health-system": {
+  "license": "930000045",
+  "hcaiId": "106190232",
+  "aliases": "DEL AMO HOSPITAL, 23700 CAMINO DEL SOL, TORRANCE, CA 90505",
+  "address": "23700 CAMINO DEL SOL, TORRANCE, CA 90505"
+ },
+ "desert-regional-medical-center": {
+  "license": "250000139",
+  "hcaiId": "106331164",
+  "aliases": null,
+  "address": null
+ },
+ "desert-valley-hospital": {
+  "license": "240000562",
+  "hcaiId": "106364144",
+  "aliases": null,
+  "address": null
+ },
+ "docs-surgical-hospital": {
+  "license": "930000143",
+  "hcaiId": "106190681",
+  "aliases": "MIRACLE MILE MEDICAL CENTER, 6000 SAN VICENTE BOULEVARD, LOS ANGELES, CA 90036",
+  "address": "6000 SAN VICENTE BOULEVARD, LOS ANGELES, CA 90036"
+ },
+ "doctors-hospital-of-manteca": {
+  "license": "030000203",
+  "hcaiId": "106392287",
+  "aliases": null,
+  "address": null
+ },
+ "doctors-hospital-of-riverside": {
+  "license": "250000186",
+  "hcaiId": "106331293",
+  "aliases": "PARKVIEW COMMUNITY HOSPITAL MEDICAL CENTER, 3865 JACKSON STREET, RIVERSIDE, CA 92503",
+  "address": "3865 JACKSON STREET, RIVERSIDE, CA 92503"
+ },
+ "doctors-medical-center": {
+  "license": "030000026",
+  "hcaiId": "106500852",
+  "aliases": null,
+  "address": null
+ },
+ "doctors-medical-center-behavioral-health-department": {
+  "license": "030000026",
+  "hcaiId": "106501016",
+  "aliases": null,
+  "address": null
+ },
+ "dominican-hospital": {
+  "license": "070000030",
+  "hcaiId": "106440755",
+  "aliases": null,
+  "address": null
+ },
+ "east-los-angeles-doctors-hospital": {
+  "license": "930000049",
+  "hcaiId": "106190256",
+  "aliases": null,
+  "address": null
+ },
+ "eastern-plumas-hospital-portola-campus": {
+  "license": "230000014",
+  "hcaiId": "106320859",
+  "aliases": null,
+  "address": null
+ },
+ "eden-medical-center": {
+  "license": "140000030",
+  "hcaiId": "106014233",
+  "aliases": null,
+  "address": null
+ },
+ "eisenhower-medical-center": {
+  "license": "250000142",
+  "hcaiId": "106331168",
+  "aliases": null,
+  "address": null
+ },
+ "el-camino-health": {
+  "license": "070000660",
+  "hcaiId": "106430763",
+  "aliases": "EL CAMINO HOSPITAL, 2500 GRANT ROAD, MOUNTAIN VIEW, CA 94040; EL CAMINO HOSPITAL D/P APH, 2590 GRANT RD, MOUNTAIN VIEW, CA 94040",
+  "address": "2500 GRANT ROAD, MOUNTAIN VIEW, CA 94040"
+ },
+ "el-camino-hospital-d-p-aph": {
+  "license": "070000660",
+  "hcaiId": "106430047",
+  "aliases": null,
+  "address": null
+ },
+ "el-camino-hospital-los-gatos": {
+  "license": "070000660",
+  "hcaiId": "106430743",
+  "aliases": null,
+  "address": null
+ },
+ "emanate-health-foothill-presbyterian-hospital": {
+  "license": "930000052",
+  "hcaiId": "106190298",
+  "aliases": "FOOTHILL PRESBYTERIAN HOSPITAL-JOHNSTON MEMORIAL, 250 SOUTH GRAND AVENUE, GLENDORA, CA 91741",
+  "address": "250 SOUTH GRAND AVENUE, GLENDORA, CA 91741"
+ },
+ "emanate-health-inter-community-hospital": {
+  "license": "930000131",
+  "hcaiId": "106190413",
+  "aliases": "CITRUS VALLEY MEDICAL CENTER - IC CAMPUS, 210 W. SAN BERNARDINO ROAD, COVINA, CA 91723; EMANATE HEALTH INTER-COMMUNITY HOSPITAL, D/P APH, 210 W SAN BERNARDINO RD, COVINA, CA 91723",
+  "address": "210 W. SAN BERNARDINO ROAD, COVINA, CA 91723"
+ },
+ "emanate-health-queen-of-the-valley-hospital": {
+  "license": "930000131",
+  "hcaiId": "106190636",
+  "aliases": "CITRUS VALLEY MEDICAL CENTER - QV CAMPUS, 1115 SOUTH SUNSET AVENUE, WEST COVINA, CA 91790",
+  "address": "1115 SOUTH SUNSET AVENUE, WEST COVINA, CA 91790"
+ },
+ "emanuel-medical-center": {
+  "license": "030000035",
+  "hcaiId": "106500867",
+  "aliases": null,
+  "address": null
+ },
+ "encino-hospital-medical-center": {
+  "license": "930000051",
+  "hcaiId": "106190280",
+  "aliases": null,
+  "address": null
+ },
+ "encompass-health-rehabilitation-hospital-of-bakersfield": {
+  "license": "120000248",
+  "hcaiId": "106154022",
+  "aliases": "HEALTHSOUTH BAKERSFIELD REHABILITATION HOSPITAL, 5001 COMMERCE DRIVE, BAKERSFIELD, CA 93309",
+  "address": "5001 COMMERCE DRIVE, BAKERSFIELD, CA 93309"
+ },
+ "encompass-health-rehabilitation-hospital-of-modesto": {
+  "license": "550003684",
+  "hcaiId": "106504079",
+  "aliases": "HEALTHSOUTH REHABILITATION HOSPITAL OF MODESTO, 1303 MABLE AVE, MODESTO, CA 95355",
+  "address": "1303 MABLE AVE, MODESTO, CA 95355"
+ },
+ "encompass-health-rehabilitation-hospital-of-murrieta": {
+  "license": "550005282",
+  "hcaiId": "106334678",
+  "aliases": null,
+  "address": null
+ },
+ "encompass-health-rehabilitation-hospital-of-tustin": {
+  "license": "060000303",
+  "hcaiId": "106304585",
+  "aliases": null,
+  "address": null
+ },
+ "enloe-health": {
+  "license": "230000027",
+  "hcaiId": "106040962",
+  "aliases": "ENLOE MEDICAL CENTER- ESPLANADE, 1531 ESPLANADE, CHICO, CA 95926",
+  "address": "1531 ESPLANADE, CHICO, CA 95926"
+ },
+ "enloe-medical-center-cohasset": {
+  "license": "230000027",
+  "hcaiId": "106040828",
+  "aliases": "ENLOE MEDICAL CENTER - COHASSET D/P APH, 560 COHASSET RD, CHICO, CA 95926",
+  "address": "560 COHASSET ROAD, CHICO, CA 95926"
+ },
+ "enloe-rehabilitation-center": {
+  "license": "230000027",
+  "hcaiId": "106044011",
+  "aliases": null,
+  "address": null
+ },
+ "fairchild-medical-center": {
+  "license": "230000035",
+  "hcaiId": "106474007",
+  "aliases": null,
+  "address": null
+ },
+ "fairmont-hospital": {
+  "license": "140000046",
+  "hcaiId": "106010811",
+  "aliases": null,
+  "address": null
+ },
+ "foothill-regional-medical-center": {
+  "license": "060000178",
+  "hcaiId": "106301357",
+  "aliases": null,
+  "address": null
+ },
+ "fremont-hospital": {
+  "license": "140000347",
+  "hcaiId": "106014034",
+  "aliases": null,
+  "address": null
+ },
+ "french-hospital-medical-center": {
+  "license": "050000031",
+  "hcaiId": "106400480",
+  "aliases": null,
+  "address": null
+ },
+ "fresno-heart-and-surgical-hospital": {
+  "license": "040000096",
+  "hcaiId": "106105029",
+  "aliases": null,
+  "address": null
+ },
+ "fresno-surgical-hospital": {
+  "license": "040000332",
+  "hcaiId": "106104047",
+  "aliases": null,
+  "address": null
+ },
+ "garden-grove-hospital-and-medical-center": {
+  "license": "060000152",
+  "hcaiId": "106301283",
+  "aliases": null,
+  "address": null
+ },
+ "garfield-medical-center": {
+  "license": "930000057",
+  "hcaiId": "106190315",
+  "aliases": null,
+  "address": null
+ },
+ "gateways-hospital-and-mental-health-center": {
+  "license": "930000058",
+  "hcaiId": "106190317",
+  "aliases": null,
+  "address": null
+ },
+ "george-l-mee-memorial-hospital": {
+  "license": "070000047",
+  "hcaiId": "106270777",
+  "aliases": "GEORGE L MEE MEMORIAL HOSPITAL, 300 CANAL STREET, KING CITY, CA 93930",
+  "address": "300 CANAL STREET, KING CITY, CA 93930"
+ },
+ "glendale-memorial-hospital-and-health-center": {
+  "license": "930000099",
+  "hcaiId": "106190522",
+  "aliases": "GLENDALE MEMORIAL HOSPITAL AND HEALTH Center. D/P APH, 1420 S CENTRAL AVE, GLENDALE, CA 91204",
+  "address": "1420 SOUTH CENTRAL AVENUE, GLENDALE, CA 91204"
+ },
+ "glendora-hospital": {
+  "license": "930000060",
+  "hcaiId": "106190328",
+  "aliases": "GLENDORA COMMUNITY HOSPITAL, 150 WEST ROUTE 66, GLENDORA, CA 91740; GLENDORA OAKS BEHAVIORAL HEALTH HOSPITAL, 150 WEST ROUTE 66, GLENDORA, CA 91740",
+  "address": "150 W ROUTE 66, GLENDORA, CA 91740"
+ },
+ "glenn-medical-center": {
+  "license": "230000018",
+  "hcaiId": "106110889",
+  "aliases": null,
+  "address": null
+ },
+ "goleta-valley-cottage-hospital": {
+  "license": "050000034",
+  "hcaiId": "106420483",
+  "aliases": null,
+  "address": null
+ },
+ "good-samaritan-hospital-bakersfield": {
+  "license": "120000146",
+  "hcaiId": "106150775",
+  "aliases": "GOOD SAMARITAN HOSPITAL D/P APH, 901 OLIVE DR, BAKERSFIELD, CA 93308",
+  "address": "901 OLIVE DRIVE, BAKERSFIELD, CA 93308"
+ },
+ "good-samaritan-hospital-san-jose": {
+  "license": "070000048",
+  "hcaiId": "106430779",
+  "aliases": "MISSION OAKS HOSPITAL - D/P APH, 15891 LOS GATOS ALMADEN RD, LOS GATOS, CA 95032",
+  "address": "2425 SAMARITAN DRIVE, SAN JOSE, CA 95124"
+ },
+ "greater-el-monte-community-hospital": {
+  "license": "930000063",
+  "hcaiId": "106190352",
+  "aliases": "BROTMAN MEDICAL CENTER D/P APH, 3828 DELMAS TER, CULVER CITY, CA 90232",
+  "address": "1701 SANTA ANITA AVENUE, SOUTH EL MONTE, CA 91733"
+ },
+ "grossmont-hospital": {
+  "license": "080000006",
+  "hcaiId": "106370714",
+  "aliases": "GROSSMONT HOSPITAL D/P APH, 5555 GROSSMONT CENTER DR, LA MESA, CA 91942",
+  "address": "5555 GROSSMONT CENTER DRIVE, LA MESA, CA 91942"
+ },
+ "hazel-hawkins-memorial-hospital": {
+  "license": "070000004",
+  "hcaiId": "106350784",
+  "aliases": null,
+  "address": null
+ },
+ "healdsburg-hospital": {
+  "license": "110000019",
+  "hcaiId": "106490964",
+  "aliases": "HEALDSBURG DISTRICT HOSPITAL, 1375 UNIVERSITY STREET, HEALDSBURG, CA 95448",
+  "address": "1375 UNIVERSITY STREET, HEALDSBURG, CA 95448"
+ },
+ "healthbridge-childrens-hospital-orange": {
+  "license": "060000530",
+  "hcaiId": "106304159",
+  "aliases": null,
+  "address": null
+ },
+ "hemet-global-medical-center": {
+  "license": "250000145",
+  "hcaiId": "106331194",
+  "aliases": "HEMET VALLEY MEDICAL CENTER, 1117 EAST DEVONSHIRE, HEMET, CA 92543",
+  "address": "1117 EAST DEVONSHIRE, HEMET, CA 92543"
+ },
+ "henry-mayo-newhall-hospital": {
+  "license": "930000206",
+  "hcaiId": "106190949",
+  "aliases": "HENRY MAYO NEWHALL MEMORIAL HOSPITAL D/P APH, 25727 MCBEAN PKWY, VALENCIA, CA 91355",
+  "address": "23845 MCBEAN PARKWAY, VALENCIA, CA 91355"
+ },
+ "henry-mayo-newhall-memorial-hospital-d-p-aph": {
+  "license": "930000206",
+  "hcaiId": "106190050",
+  "aliases": null,
+  "address": null
+ },
+ "heritage-oaks-hospital": {
+  "license": "030000357",
+  "hcaiId": "106344021",
+  "aliases": null,
+  "address": null
+ },
+ "hi-desert-medical-center": {
+  "license": "240000231",
+  "hcaiId": "106362041",
+  "aliases": null,
+  "address": null
+ },
+ "highland-hospital": {
+  "license": "140000046",
+  "hcaiId": "106010846",
+  "aliases": "JOHN GEORGE PSYCHIATRIC HOSPITAL, 2060 FAIRMONT DRIVE, SAN LEANDRO, CA 94578",
+  "address": "1411 EAST 31ST STREET, OAKLAND, CA 94602"
+ },
+ "hoag-hospital-irvine": {
+  "license": "060000122",
+  "hcaiId": "106304045",
+  "aliases": null,
+  "address": null
+ },
+ "hoag-memorial-hospital-presbyterian": {
+  "license": "060000122",
+  "hcaiId": "106301205",
+  "aliases": null,
+  "address": null
+ },
+ "hoag-orthopedic-institute": {
+  "license": "550001431",
+  "hcaiId": "106304460",
+  "aliases": null,
+  "address": null
+ },
+ "hollywood-presbyterian-medical-center": {
+  "license": "930000067",
+  "hcaiId": "106190382",
+  "aliases": null,
+  "address": null
+ },
+ "huntington-beach-hospital": {
+  "license": "060000124",
+  "hcaiId": "106301209",
+  "aliases": "HUNTINGTON BEACH HOSPITAL D/P APH, 17772 BEACH BLVD, HUNTINGTON BEACH, CA 92647",
+  "address": "17772 BEACH BOULEVARD, HUNTINGTON BEACH, CA 92647"
+ },
+ "huntington-hospital": {
+  "license": "930000372",
+  "hcaiId": "106190400",
+  "aliases": "HUNTINGTON MEMORIAL HOSPITAL D/P APH, 100 W CALIFORNIA BLVD, PASADENA, CA 91105; HUNTINGTON MEMORIAL HOSPITAL, 100 W. CALIFORNIA BOULEVARD, PASADENA, CA 91105",
+  "address": "100 W. CALIFORNIA BOULEVARD, PASADENA, CA 91105"
+ },
+ "el-centro-regional-medical-center": {
+  "license": "090000004",
+  "hcaiId": "106130699",
+  "aliases": "EL CENTRO REGIONAL MEDICAL CENTER, 1415 ROSS AVENUE, EL CENTRO, CA 92243",
+  "address": "1415 ROSS AVENUE, EL CENTRO, CA 92243"
+ },
+ "jerold-phelps-community-hospital": {
+  "license": "110000052",
+  "hcaiId": "106121031",
+  "aliases": null,
+  "address": null
+ },
+ "jewish-home-rehab-center": {
+  "license": "220000224",
+  "hcaiId": "106380842",
+  "aliases": "JEWISH HOME, 302 SILVER AVENUE, SAN FRANCISCO, CA 94112-1596",
+  "address": "302 SILVER AVENUE, SAN FRANCISCO, CA 94112-1596"
+ },
+ "john-c-fremont-healthcare-district": {
+  "license": "040000108",
+  "hcaiId": "106220733",
+  "aliases": null,
+  "address": null
+ },
+ "john-f-kennedy-memorial-hospital": {
+  "license": "250000155",
+  "hcaiId": "106331216",
+  "aliases": "JOHN F KENNEDY MEMORIAL HOSPITAL, 47111 MONROE STREET, INDIO, CA 92201",
+  "address": "47111 MONROE STREET, INDIO, CA 92201"
+ },
+ "john-george-psychiatric-hospital": {
+  "license": "140000046",
+  "hcaiId": "106010042",
+  "aliases": null,
+  "address": null
+ },
+ "john-muir-behavioral-health-center": {
+  "license": "140000418",
+  "hcaiId": "106074039",
+  "aliases": null,
+  "address": null
+ },
+ "john-muir-medical-center-concord-campus": {
+  "license": "140000128",
+  "hcaiId": "106071018",
+  "aliases": null,
+  "address": null
+ },
+ "john-muir-medical-center-walnut-creek-campus": {
+  "license": "140000265",
+  "hcaiId": "106070988",
+  "aliases": null,
+  "address": null
+ },
+ "joyce-eisenberg-keefer-medical-center": {
+  "license": "550000621",
+  "hcaiId": "106196404",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-antioch": {
+  "license": "550000614",
+  "hcaiId": "106074097",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-baldwin-park": {
+  "license": "930000920",
+  "hcaiId": "106196035",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-downey": {
+  "license": "930000078",
+  "hcaiId": "106196403",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-fontana": {
+  "license": "240000159",
+  "hcaiId": "106361223",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-fremont": {
+  "license": "140000053",
+  "hcaiId": "106014132",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-fresno": {
+  "license": "040000384",
+  "hcaiId": "106104062",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-los-angeles": {
+  "license": "930000077",
+  "hcaiId": "106190429",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-manteca": {
+  "license": "030000393",
+  "hcaiId": "106394009",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-mental-health-center-d-p-aph": {
+  "license": "930000077",
+  "hcaiId": "106190646",
+  "aliases": "KAISER FOUNDATION HOSPITAL - MENTAL HEALTH CENTER, 765 COLLEGE STREET, LOS ANGELES, CA 90012",
+  "address": "765 COLLEGE STREET, LOS ANGELES, CA 90012"
+ },
+ "kaiser-foundation-hospital-modesto": {
+  "license": "030000393",
+  "hcaiId": "106504042",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-moreno-valley": {
+  "license": "550000810",
+  "hcaiId": "106334048",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-oakland-richmond": {
+  "license": "140000052",
+  "hcaiId": "106014326",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-ontario": {
+  "license": "240000159",
+  "hcaiId": "106364265",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-orange-county-anaheim": {
+  "license": "060000091",
+  "hcaiId": "106304409",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-orange-county-irvine": {
+  "license": "060000091",
+  "hcaiId": "106304306",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-panorama-city": {
+  "license": "930000080",
+  "hcaiId": "106190432",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-redwood-city": {
+  "license": "220000021",
+  "hcaiId": "106414139",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-richmond-campus": {
+  "license": "140000052",
+  "hcaiId": "106074093",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-riverside": {
+  "license": "250000327",
+  "hcaiId": "106334025",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-roseville": {
+  "license": "550001681",
+  "hcaiId": "106314024",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-sacramento": {
+  "license": "030000052",
+  "hcaiId": "106340913",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-diego-clairemont-mesa": {
+  "license": "080000062",
+  "hcaiId": "106374465",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-diego-zion": {
+  "license": "080000062",
+  "hcaiId": "106370730",
+  "aliases": "KAISER FOUNDATION HOSPITAL - SAN DIEGO, 4647 ZION AVENUE, SAN DIEGO, CA 92120",
+  "address": "4647 ZION AVENUE, SAN DIEGO, CA 92120"
+ },
+ "kaiser-foundation-hospital-san-francisco": {
+  "license": "220000188",
+  "hcaiId": "106380857",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-jose": {
+  "license": "070000117",
+  "hcaiId": "106431506",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-leandro": {
+  "license": "550002678",
+  "hcaiId": "106014337",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-marcos": {
+  "license": "550008664",
+  "hcaiId": "106370028",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-san-rafael": {
+  "license": "110000357",
+  "hcaiId": "106210992",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-santa-clara": {
+  "license": "070000661",
+  "hcaiId": "106434153",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-santa-rosa": {
+  "license": "110000213",
+  "hcaiId": "106494019",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-south-bay": {
+  "license": "930000079",
+  "hcaiId": "106190431",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-south-sacramento": {
+  "license": "030000228",
+  "hcaiId": "106342344",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-south-san-francisco": {
+  "license": "220000022",
+  "hcaiId": "106410806",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-vacaville": {
+  "license": "550001207",
+  "hcaiId": "106484044",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-walnut-creek": {
+  "license": "140000290",
+  "hcaiId": "106070990",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-west-la": {
+  "license": "930000081",
+  "hcaiId": "106190434",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-woodland-hills": {
+  "license": "930000358",
+  "hcaiId": "106191450",
+  "aliases": null,
+  "address": null
+ },
+ "kaiser-foundation-hospital-rehab-center-vallejo": {
+  "license": "110000026",
+  "hcaiId": "106480989",
+  "aliases": "KAISER FOUNDATION HOSPITAL - REHABILITATION CENTER VALLEJO, 975 SERENO DRIVE, VALLEJO, CA 94589",
+  "address": "975 SERENO DRIVE, VALLEJO, CA 94589"
+ },
+ "kaweah-health-medical-center": {
+  "license": "120000580",
+  "hcaiId": "106540734",
+  "aliases": "KAWEAH DELTA MEDICAL CENTER, 400 WEST MINERAL KING, VISALIA, CA 93291",
+  "address": "400 WEST MINERAL KING, VISALIA, CA 93291"
+ },
+ "kaweah-health-mental-health-hospital": {
+  "license": "120000580",
+  "hcaiId": "106544009",
+  "aliases": "KAWEAH DELTA MENTAL HEALTH HOSPITAL D/P APH, 1100 SO. AKERS STREET, VISALIA, CA 93277; KAWEAH DELTA MENTAL HEALTH HOSPITAL D/P APH, 1100 SO. AKERS STREET, VISALIA, CA 93277",
+  "address": "1100 SO. AKERS STREET, VISALIA, CA 93277"
+ },
+ "kaweah-health-rehabilitation-hospital": {
+  "license": "120000580",
+  "hcaiId": "106544075",
+  "aliases": null,
+  "address": null
+ },
+ "keck-hospital-of-usc": {
+  "license": "930000459",
+  "hcaiId": "106194219",
+  "aliases": "KECK HOSPITAL OF University of Southern California, 1500 SAN PABLO ST, LOS ANGELES, CA 90033",
+  "address": "1500 SAN PABLO STREET, LOS ANGELES, CA 90033"
+ },
+ "kedren-community-mental-health-center": {
+  "license": "930000028",
+  "hcaiId": "106190150",
+  "aliases": null,
+  "address": null
+ },
+ "kentfield-hospital": {
+  "license": "110000358",
+  "hcaiId": "106210993",
+  "aliases": "KENTFIELD REHABILITATION & SPECIALTY HOSPITAL, 1125 SIR FRANCIS DRAKE BLVD., KENTFIELD, CA 94904",
+  "address": "1125 SIR FRANCIS DRAKE BLVD., KENTFIELD, CA 94904"
+ },
+ "kentfield-hospital-san-francisco": {
+  "license": "110000358",
+  "hcaiId": "106384238",
+  "aliases": null,
+  "address": null
+ },
+ "kern-medical-center": {
+  "license": "120000182",
+  "hcaiId": "106150736",
+  "aliases": "KERN MEDICAL CENTER D/P APH, 1700 MOUNT VERNON AVE, BAKERSFIELD, CA 93306",
+  "address": "1700 MOUNT VERNON AVENUE, BAKERSFIELD, CA 93306"
+ },
+ "kern-valley-healthcare-district": {
+  "license": "120000183",
+  "hcaiId": "106150737",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-baldwin-park": {
+  "license": "930000390",
+  "hcaiId": "106190049",
+  "aliases": "VISTA SPECIALTY HOSPITAL OF SAN GABRIEL VALLEY D/P, 14148 FRANCISQUITO AVE, BALDWIN PARK, CA 91706",
+  "address": "14148 FRANCISQUITO AVENUE, BALDWIN PARK, CA 91706"
+ },
+ "kindred-hospital-los-angeles": {
+  "license": "930000053",
+  "hcaiId": "106190305",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-ontario": {
+  "license": "240000561",
+  "hcaiId": "106361274",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-riverside": {
+  "license": "250000234",
+  "hcaiId": "106332172",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-san-diego": {
+  "license": "090000059",
+  "hcaiId": "106370721",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-san-francisco-bay-area": {
+  "license": "140000066",
+  "hcaiId": "106010887",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-san-gabriel-valley": {
+  "license": "060000407",
+  "hcaiId": "106190458",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-santa-ana": {
+  "license": "060000407",
+  "hcaiId": "106301167",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-south-bay": {
+  "license": "930000037",
+  "hcaiId": "106190196",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-brea": {
+  "license": "060000407",
+  "hcaiId": "106301127",
+  "aliases": "KINDRED HOSPITAL - BREA, 875 NORTH BREA BOULEVARD, BREA, CA 92821",
+  "address": "875 NORTH BREA BOULEVARD, BREA, CA 92821"
+ },
+ "kindred-hospital-paramount": {
+  "license": "930000088",
+  "hcaiId": "106190599",
+  "aliases": "PROMISE HOSPITAL OF EAST LOS ANGELES-SUBURBAN CAMPUS, 16453 SOUTH COLORADO AVENUE, PARAMOUNT, CA 90723",
+  "address": "16453 COLORADO AVENUE, PARAMOUNT, CA 90723"
+ },
+ "kindred-hospital-rancho": {
+  "license": "240000652",
+  "hcaiId": "106364188",
+  "aliases": "KINDRED HOSPITAL - RANCHO, 10841 WHITE OAK AVENUE, RANCHO CUCAMONGA, CA 91730",
+  "address": "10841 WHITE OAK AVENUE, RANCHO CUCAMONGA, CA 91730"
+ },
+ "kindred-hospital-westminster": {
+  "license": "060000183",
+  "hcaiId": "106301380",
+  "aliases": "KINDRED HOSPITAL - WESTMINSTER, 200 HOSPITAL CIRCLE, WESTMINSTER, CA 92683",
+  "address": "200 HOSPITAL CIRCLE, WESTMINSTER, CA 92683"
+ },
+ "l-a-downtown-medical-center": {
+  "license": "930000137",
+  "hcaiId": "106190661",
+  "aliases": "SILVER LAKE MEDICAL CENTER - DOWNTOWN CAMPUS, 1711 WEST TEMPLE STREET, LOS ANGELES, CA 90026; Los Angeles DOWNTOWN MEDICAL CENTER-D/P APH, 1711 W TEMPLE ST, LOS ANGELES, CA 90026",
+  "address": "1711 WEST TEMPLE STREET, LOS ANGELES, CA 90026"
+ },
+ "l-a-downtown-medical-center-ingleside-campus-d-p-aph": {
+  "license": "930000137",
+  "hcaiId": "106190410",
+  "aliases": "SILVER LAKE MEDICAL CENTER - INGLESIDE CAMPUS D/P APH, 7500 HELLMAN AVENUE, ROSEMEAD, CA 91770",
+  "address": "7500 HELLMAN AVENUE, ROSEMEAD, CA 91770"
+ },
+ "la-palma-intercommunity-hospital": {
+  "license": "060000136",
+  "hcaiId": "106301234",
+  "aliases": "LA PALMA INTERCOMMUNITY HOSPITAL D/P APH, 7901 WALKER ST, LA PALMA, CA 90623",
+  "address": "7901 WALKER STREET, LA PALMA, CA 90623"
+ },
+ "lac-harbor-ucla-medical-center": {
+  "license": "060000129",
+  "hcaiId": "106191227",
+  "aliases": "LAC/HARBOR-UCLA MEDICAL CENTER D/P APH, 1000 W CARSON ST, TORRANCE, CA 90502; LAC+USC MEDICAL CENTER D/P APH, 1200 N STATE ST, LOS ANGELES, CA 90033; Los Angeles County/ Harbor University of California Medical Center, 1000 W CARSON ST, TORRANCE, CA 90502; Los Angeles County/ Harbor University of California Medical Center D/P APH, 1000 W CARSON ST, TORRANCE, CA 90502; Los Angeles County+Univertisy Southern California MEDICAL CENTER D/P APH, 1200 N STATE ST, LOS ANGELES, CA 90033",
+  "address": "1000 WEST CARSON STREET, TORRANCE, CA 90502"
+ },
+ "lac-rancho-los-amigos-national-rehab-center": {
+  "license": "060000161",
+  "hcaiId": "106191306",
+  "aliases": null,
+  "address": null
+ },
+ "laguna-honda-hospital-and-rehabilitation-center": {
+  "license": "220000040",
+  "hcaiId": "106380865",
+  "aliases": null,
+  "address": null
+ },
+ "langley-porter-psychiatric-institute": {
+  "license": "220000377",
+  "hcaiId": "106380046",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-univ-med-center-east-campus-hospital": {
+  "license": "240000169",
+  "hcaiId": "106361245",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-university-behavioral-medicine-center": {
+  "license": "240000169",
+  "hcaiId": "106364014",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-university-childrens-hospital": {
+  "license": "550002873",
+  "hcaiId": "106364502",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-university-medical-center": {
+  "license": "240000169",
+  "hcaiId": "106361246",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-university-medical-center-murrieta": {
+  "license": "550001535",
+  "hcaiId": "106334589",
+  "aliases": null,
+  "address": null
+ },
+ "loma-linda-university-surgical-hospital": {
+  "license": "240000169",
+  "hcaiId": "106364268",
+  "aliases": null,
+  "address": null
+ },
+ "lompoc-valley-medical-center": {
+  "license": "050000038",
+  "hcaiId": "106420491",
+  "aliases": null,
+  "address": null
+ },
+ "los-angeles-community-hospital": {
+  "license": "930000039",
+  "hcaiId": "106190198",
+  "aliases": "BELLFLOWER MEDICAL CENTER D/P APH, 9542 ARTESIA BLVD, BELLFLOWER, CA 90706",
+  "address": "4081 EAST OLYMPIC BOULEVARD, LOS ANGELES, CA 90023"
+ },
+ "los-angeles-community-hospital-at-bellflower": {
+  "license": "930000039",
+  "hcaiId": "106190066",
+  "aliases": null,
+  "address": null
+ },
+ "los-angeles-county-olive-view-ucla-medical-center": {
+  "license": "060000133",
+  "hcaiId": "106191231",
+  "aliases": "LOS ANGELES COUNTY OLIVE VIEW-University of California Los Angeles MEDICAL CENTER D/P APH, 14445 OLIVE VIEW DR, SYLMAR, CA 91342",
+  "address": "14445 OLIVE VIEW DRIVE, SYLMAR, CA 91342"
+ },
+ "los-angeles-general-medical-center": {
+  "license": "060000130",
+  "hcaiId": "106191228",
+  "aliases": "Los Angeles County + University of Southern California Medical Center, 1200 N STATE ST, LOS ANGELES, CA 90033; LAC+USC MEDICAL CENTER, 1200 NORTH STATE STREET, LOS ANGELES, CA 90033",
+  "address": "2051 MARENGO STREET, LOS ANGELES, CA 90033"
+ },
+ "los-robles-hospital-medical-center": {
+  "license": "050000039",
+  "hcaiId": "106560492",
+  "aliases": null,
+  "address": null
+ },
+ "los-robles-hospital-medical-center-east-campus": {
+  "license": "050000039",
+  "hcaiId": "106564018",
+  "aliases": null,
+  "address": null
+ },
+ "lucile-packard-childrens-hospital-stanford": {
+  "license": "070000659",
+  "hcaiId": "106434040",
+  "aliases": "LUCILE SALTER PACKARD CHILDREN'S HOSP. AT STANFORD, 725 WELCH ROAD, PALO ALTO, CA 94304",
+  "address": "725 WELCH ROAD, PALO ALTO, CA 94304"
+ },
+ "mad-river-community-hospital": {
+  "license": "110000031",
+  "hcaiId": "106121002",
+  "aliases": null,
+  "address": null
+ },
+ "madera-community-hospital": {
+  "license": "040000191",
+  "hcaiId": "106201281",
+  "aliases": null,
+  "address": null
+ },
+ "mammoth-hospital": {
+  "license": "240000008",
+  "hcaiId": "106260011",
+  "aliases": null,
+  "address": null
+ },
+ "marian-regional-medical-center": {
+  "license": "050000040",
+  "hcaiId": "106420493",
+  "aliases": null,
+  "address": null
+ },
+ "marian-regional-medical-center-arroyo-grande": {
+  "license": "050000040",
+  "hcaiId": "106400466",
+  "aliases": null,
+  "address": null
+ },
+ "marinhealth-medical-center": {
+  "license": "110000361",
+  "hcaiId": "106211006",
+  "aliases": "MARINHEALTH MEDICAL CENTER D/P APH, 250 BON AIR RD, GREENBRAE, CA 94904; MARIN GENERAL HOSPITAL, 250 BON AIR ROAD, GREENBRAE, CA 94904",
+  "address": "250 BON AIR ROAD, GREENBRAE, CA 94904"
+ },
+ "mark-twain-medical-center": {
+  "license": "030000058",
+  "hcaiId": "106050932",
+  "aliases": null,
+  "address": null
+ },
+ "marshall-medical-center": {
+  "license": "030000059",
+  "hcaiId": "106090933",
+  "aliases": "MARSHALL MEDICAL CENTER, 1100 MARSHALL WAY, PLACERVILLE, CA 95667",
+  "address": "1100 MARSHALL WAY, PLACERVILLE, CA 95667"
+ },
+ "martin-luther-king-jr-community-hospital": {
+  "license": "060000132",
+  "hcaiId": "106191230",
+  "aliases": null,
+  "address": null
+ },
+ "mayers-memorial-hospital": {
+  "license": "230000021",
+  "hcaiId": "106450936",
+  "aliases": null,
+  "address": null
+ },
+ "memorial-hospital-los-banos": {
+  "license": "040000177",
+  "hcaiId": "106240924",
+  "aliases": null,
+  "address": null
+ },
+ "memorial-hospital-of-gardena": {
+  "license": "930000098",
+  "hcaiId": "106190521",
+  "aliases": null,
+  "address": null
+ },
+ "memorial-medical-center-modesto": {
+  "license": "030000061",
+  "hcaiId": "106500939",
+  "aliases": "MEMORIAL HOSPITAL MEDICAL CENTER - MODESTO, 1700 COFFEE ROAD, MODESTO, CA 95355",
+  "address": "1700 COFFEE ROAD, MODESTO, CA 95355"
+ },
+ "memorialcare-long-beach-medical-center": {
+  "license": "930000102",
+  "hcaiId": "106190525",
+  "aliases": "LONG BEACH MEMORIAL MEDICAL CENTER, 2801 ATLANTIC AVENUE, LONG BEACH, CA 90806",
+  "address": "2801 ATLANTIC AVENUE, LONG BEACH, CA 90806"
+ },
+ "memorialcare-miller-childrens-womens-hospital-long-beach": {
+  "license": "930000949",
+  "hcaiId": "106196168",
+  "aliases": "EARL AND LORAINE MILLER CHILDRENS HOSPITAL, 2801 ATLANTIC AVENUE, LONG BEACH, CA 90806",
+  "address": "2801 ATLANTIC AVENUE, LONG BEACH, CA 90806"
+ },
+ "memorialcare-orange-coast-medical-center": {
+  "license": "060000066",
+  "hcaiId": "106300225",
+  "aliases": "ORANGE COAST MEMORIAL MEDICAL CENTER, 9920 TALBERT AVENUE, FOUNTAIN VALLEY, CA 92708",
+  "address": "9920 TALBERT AVENUE, FOUNTAIN VALLEY, CA 92708"
+ },
+ "memorialcare-saddleback-medical-center": {
+  "license": "060000166",
+  "hcaiId": "106301317",
+  "aliases": "SADDLEBACK MEMORIAL MEDICAL CENTER, 24451 HEALTH CENTER DRIVE, LAGUNA HILLS, CA 92653",
+  "address": "24451 HEALTH CENTER DRIVE, LAGUNA HILLS, CA 92653"
+ },
+ "menifee-global-medical-center": {
+  "license": "250000338",
+  "hcaiId": "106334018",
+  "aliases": "MENIFEE VALLEY MEDICAL CENTER, 28400 MCCALL BOULEVARD, SUN CITY, CA 92585",
+  "address": "28400 MCCALL BOULEVARD, SUN CITY, CA 92585"
+ },
+ "mercy-general-hospital": {
+  "license": "030000062",
+  "hcaiId": "106340947",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-hospital-bakersfield": {
+  "license": "120000184",
+  "hcaiId": "106150761",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-hospital-of-folsom": {
+  "license": "030000372",
+  "hcaiId": "106344029",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-medical-center-merced": {
+  "license": "040000178",
+  "hcaiId": "106240942",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-medical-center-redding": {
+  "license": "230000024",
+  "hcaiId": "106450949",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-medical-center-mt-shasta": {
+  "license": "230000015",
+  "hcaiId": "106470871",
+  "aliases": null,
+  "address": null
+ },
+ "mercy-san-juan-medical-center": {
+  "license": "030000063",
+  "hcaiId": "106340950",
+  "aliases": "MERCY SAN JUAN HOSPITAL, 6501 COYLE AVENUE, CARMICHAEL, CA 95608",
+  "address": "6501 COYLE AVENUE, CARMICHAEL, CA 95608"
+ },
+ "mercy-southwest-hospital": {
+  "license": "120000184",
+  "hcaiId": "106154108",
+  "aliases": null,
+  "address": null
+ },
+ "methodist-hospital-of-sacramento": {
+  "license": "030000064",
+  "hcaiId": "106340951",
+  "aliases": null,
+  "address": null
+ },
+ "mills-health-center-d-p-aph": {
+  "license": "220000037",
+  "hcaiId": "106414145",
+  "aliases": null,
+  "address": null
+ },
+ "mills-peninsula-medical-center": {
+  "license": "220000037",
+  "hcaiId": "106410852",
+  "aliases": null,
+  "address": null
+ },
+ "mission-community-hospital-panorama-campus": {
+  "license": "930000101",
+  "hcaiId": "106190524",
+  "aliases": "MISSION COMMUNITY HOSPITAL-PANORAMA CAMPUS-D/P APH, 14850 ROSCOE BLVD, PANORAMA CITY, CA 91402",
+  "address": "14850 ROSCOE BOULEVARD, PANORAMA CITY, CA 91402"
+ },
+ "mission-oaks-hospital": {
+  "license": "070000048",
+  "hcaiId": "106430915",
+  "aliases": null,
+  "address": null
+ },
+ "modoc-medical-center": {
+  "license": "230000026",
+  "hcaiId": "106254005",
+  "aliases": null,
+  "address": null
+ },
+ "monrovia-memorial-hospital": {
+  "license": "930000107",
+  "hcaiId": "106190541",
+  "aliases": null,
+  "address": null
+ },
+ "montclair-hospital-medical-center": {
+  "license": "240000141",
+  "hcaiId": "106361166",
+  "aliases": null,
+  "address": null
+ },
+ "monterey-park-hospital": {
+  "license": "930000108",
+  "hcaiId": "106190547",
+  "aliases": null,
+  "address": null
+ },
+ "motion-picture-and-television-hospital": {
+  "license": "930000109",
+  "hcaiId": "106190552",
+  "aliases": null,
+  "address": null
+ },
+ "mountains-community-hospital": {
+  "license": "240000176",
+  "hcaiId": "106361266",
+  "aliases": null,
+  "address": null
+ },
+ "natividad-medical-center": {
+  "license": "070000070",
+  "hcaiId": "106274043",
+  "aliases": "NATIVIDAD MEDICAL CENTER D/P APH, 1441 CONSTITUTION BLVD, SALINAS, CA 93906",
+  "address": "1441 CONSTITUTION BOULEVARD, SALINAS, CA 93906"
+ },
+ "northbay-medical-center": {
+  "license": "110000093",
+  "hcaiId": "106481357",
+  "aliases": "NORTH BAY MEDICAL CENTER, 1200 B. GALE WILSON BLVD., FAIRFIELD, CA 94533",
+  "address": "1200 B. GALE WILSON BLVD., FAIRFIELD, CA 94533"
+ },
+ "northbay-vacavalley-hospital": {
+  "license": "110000093",
+  "hcaiId": "106484001",
+  "aliases": "NORTH BAY VACAVALLEY HOSPITAL, 1000 NUT TREE ROAD, VACAVILLE, CA 95687",
+  "address": "1000 NUT TREE ROAD, VACAVILLE, CA 95687"
+ },
+ "northern-inyo-hospital": {
+  "license": "240000179",
+  "hcaiId": "106141273",
+  "aliases": null,
+  "address": null
+ },
+ "northridge-hospital-medical-center": {
+  "license": "930000114",
+  "hcaiId": "106190568",
+  "aliases": "NORTHRIDGE HOSPITAL MEDICAL CENTER D/P APH, 18300 ROSCOE BLVD, NORTHRIDGE, CA 91325",
+  "address": "18300 ROSCOE BOULEVARD, NORTHRIDGE, CA 91325"
+ },
+ "norwalk-community-hospital": {
+  "license": "930000039",
+  "hcaiId": "106190570",
+  "aliases": null,
+  "address": null
+ },
+ "novato-community-hospital": {
+  "license": "110000375",
+  "hcaiId": "106214034",
+  "aliases": null,
+  "address": null
+ },
+ "oconnor-hospital": {
+  "license": "070000085",
+  "hcaiId": "106430837",
+  "aliases": null,
+  "address": null
+ },
+ "oak-valley-hospital-district": {
+  "license": "030000069",
+  "hcaiId": "106500967",
+  "aliases": null,
+  "address": null
+ },
+ "orange-county-global-medical-center": {
+  "license": "060000188",
+  "hcaiId": "106301566",
+  "aliases": "ORANGE COUNTY GLOBAL MEDICAL CENTER D/P APH, 1001 N TUSTIN AVE, SANTA ANA, CA 92705",
+  "address": "1001 NORTH TUSTIN AVENUE, SANTA ANA, CA 92705"
+ },
+ "orchard-hospital": {
+  "license": "230000007",
+  "hcaiId": "106040802",
+  "aliases": null,
+  "address": null
+ },
+ "oroville-hospital": {
+  "license": "230000022",
+  "hcaiId": "106040937",
+  "aliases": null,
+  "address": null
+ },
+ "pacific-grove-hospital": {
+  "license": "250000476",
+  "hcaiId": "106331226",
+  "aliases": null,
+  "address": null
+ },
+ "pacifica-hospital-of-the-valley": {
+  "license": "930000148",
+  "hcaiId": "106190696",
+  "aliases": "PACIFICA HOSPITAL OF THE VALLEY D/P APH, 9449 SAN FERNANDO RD, SUN VALLEY, CA 91352",
+  "address": "9449 SAN FERNANDO ROAD, SUN VALLEY, CA 91352"
+ },
+ "palmdale-regional-medical-center": {
+  "license": "930000085",
+  "hcaiId": "106196405",
+  "aliases": null,
+  "address": null
+ },
+ "palo-verde-hospital": {
+  "license": "250000184",
+  "hcaiId": "106331288",
+  "aliases": null,
+  "address": null
+ },
+ "palomar-rehabilitation-institute": {
+  "license": "550006213",
+  "hcaiId": "106374572",
+  "aliases": null,
+  "address": null
+ },
+ "palomar-medical-center": {
+  "license": "080000083",
+  "hcaiId": "106374382",
+  "aliases": "PALOMAR MEDICAL CENTER, 2185 W. CITRACADO PARKWAY, ESCONDIDO, CA 92029",
+  "address": "2185 W. CITRACADO PARKWAY, ESCONDIDO, CA 92029"
+ },
+ "palomar-medical-center-poway": {
+  "license": "080000127",
+  "hcaiId": "106370977",
+  "aliases": "POMERADO HOSPITAL, 15615 POMERADO ROAD, POWAY, CA 92064; PALOMAR MEDICAL CENTER POWAY D/P APH, 15615 POMERADO RD, POWAY, CA 92064; PALOMAR MEDICAL CENTER POWAY, 15615 POMERADO ROAD, POWAY, CA 92064",
+  "address": "15615 POMERADO ROAD, POWAY, CA 92064"
+ },
+ "paradise-valley-hospital": {
+  "license": "090000086",
+  "hcaiId": "106370759",
+  "aliases": "PARADISE VALLEY HOSPITAL D/P APH, 2400 E 4TH ST, NATIONAL CITY, CA 91950",
+  "address": "2400 EAST FOURTH STREET, NATIONAL CITY, CA 91950"
+ },
+ "paradise-valley-hsp-d-p-aph-bayview-beh-hlth": {
+  "license": "090000086",
+  "hcaiId": "106370775",
+  "aliases": null,
+  "address": null
+ },
+ "patients-hospital-of-redding": {
+  "license": "230000195",
+  "hcaiId": "106454013",
+  "aliases": null,
+  "address": null
+ },
+ "petaluma-valley-hospital": {
+  "license": "110000001",
+  "hcaiId": "106491001",
+  "aliases": null,
+  "address": null
+ },
+ "pih-health-hospital-downey": {
+  "license": "930000048",
+  "hcaiId": "106190243",
+  "aliases": "PIH HEALTH HOSPITAL - DOWNEY, 11500 BROOKSHIRE AVENUE, DOWNEY, CA 90241; PIH HEALTH HOSPITAL DOWNEY, 11500 BROOKSHIRE AVENUE, DOWNEY, CA 90241; PIH HOSPITAL - DOWNEY, 11500 BROOKSHIRE AVENUE, DOWNEY, CA 90241",
+  "address": "11500 BROOKSHIRE AVENUE, DOWNEY, CA 90241"
+ },
+ "pih-health-good-samaritan-hospital": {
+  "license": "930000071",
+  "hcaiId": "106190392",
+  "aliases": "GOOD SAMARITAN HOSPITAL-LOS ANGELES, 1225 WILSHIRE BOULEVARD, LOS ANGELES, CA 90017",
+  "address": "1225 WILSHIRE BOULEVARD, LOS ANGELES, CA 90017"
+ },
+ "pih-health-whittier-hospital": {
+  "license": "930000129",
+  "hcaiId": "106190631",
+  "aliases": "PIH HEALTH HOSPITAL - WHITTIER, 12401 WASHINGTON BLVD., WHITTIER, CA 90602; PRESBYTERIAN INTERCOMMUNITY HOSPITAL, 12401 EAST WASHINGTON BLVD., WHITTIER, CA 90602",
+  "address": "12401 WASHINGTON BLVD., WHITTIER, CA 90602"
+ },
+ "pioneers-memorial-healthcare-district": {
+  "license": "090000087",
+  "hcaiId": "106130760",
+  "aliases": "PIONEERS MEMORIAL HEALTHCARE DISTRICT, 207 WEST LEGION ROAD, BRAWLEY, CA 92227",
+  "address": "207 WEST LEGION ROAD, BRAWLEY, CA 92227"
+ },
+ "plumas-district-hospital": {
+  "license": "230000030",
+  "hcaiId": "106320986",
+  "aliases": null,
+  "address": null
+ },
+ "pomona-valley-hospital-medical-center": {
+  "license": "930000128",
+  "hcaiId": "106190630",
+  "aliases": null,
+  "address": null
+ },
+ "porterville-developmental-center": {
+  "license": "170000837",
+  "hcaiId": "106541123",
+  "aliases": null,
+  "address": null
+ },
+ "priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center": {
+  "license": "220000063",
+  "hcaiId": "106380939",
+  "aliases": "SAN FRANCISCO GENERAL HOSPITAL D/P APH, 1001 POTRERO AVE, SAN FRANCISCO, CA 94110; SAN FRANCISCO GENERAL HOSPITAL, 1001 POTRERO AVENUE, SAN FRANCISCO, CA 94110",
+  "address": "1001 POTRERO AVENUE, SAN FRANCISCO, CA 94110"
+ },
+ "providence-cedars-sinai-tarzana-medical-center": {
+  "license": "930000097",
+  "hcaiId": "106190517",
+  "aliases": "PROVIDENCE TARZANA MEDICAL CENTER, 18321 CLARK STREET, TARZANA, CA 91356",
+  "address": "18321 CLARK STREET, TARZANA, CA 91356"
+ },
+ "providence-holy-cross-medical-center": {
+  "license": "930000404",
+  "hcaiId": "106190385",
+  "aliases": null,
+  "address": null
+ },
+ "providence-little-company-of-mary-mc-san-pedro": {
+  "license": "930000142",
+  "hcaiId": "106190680",
+  "aliases": "PROVIDENCE LITTLE COMPANY OF MARY MEDICAL CENTER SAN PEDRO, 1300 W 7TH ST, SAN PEDRO, CA 90732",
+  "address": "1300 WEST SEVENTH STREET, SAN PEDRO, CA 90732"
+ },
+ "providence-little-company-of-mary-medical-center-torrance": {
+  "license": "930000089",
+  "hcaiId": "106190470",
+  "aliases": null,
+  "address": null
+ },
+ "providence-mission-hospital": {
+  "license": "060000146",
+  "hcaiId": "106301262",
+  "aliases": "MISSION HOSPITAL LAGUNA BEACH D/P APH, 31872 COAST HWY, LAGUNA BEACH, CA 92651; MISSION HOSPITAL REGIONAL MEDICAL CENTER, 27700 MEDICAL CENTER ROAD, MISSION VIEJO, CA 92691",
+  "address": "27700 MEDICAL CENTER ROAD, MISSION VIEJO, CA 92691"
+ },
+ "providence-mission-hospital-laguna-beach": {
+  "license": "060000146",
+  "hcaiId": "106301337",
+  "aliases": "MISSION HOSPITAL LAGUNA BEACH, 31872 COAST HIGHWAY, LAGUNA BEACH, CA 92651",
+  "address": "31872 COAST HIGHWAY, LAGUNA BEACH, CA 92651"
+ },
+ "providence-queen-of-the-valley-medical-center": {
+  "license": "110000060",
+  "hcaiId": "106281047",
+  "aliases": "QUEEN OF THE VALLEY MEDICAL CENTER, 1000 TRANCAS STREET, NAPA, CA 94558",
+  "address": "1000 TRANCAS STREET, NAPA, CA 94558"
+ },
+ "providence-redwood-memorial-hospital": {
+  "license": "110000173",
+  "hcaiId": "106121051",
+  "aliases": "REDWOOD MEMORIAL HOSPITAL, 3300 RENNER DRIVE, FORTUNA, CA 95540",
+  "address": "3300 RENNER DRIVE, FORTUNA, CA 95540"
+ },
+ "providence-saint-joseph-medical-center": {
+  "license": "930000159",
+  "hcaiId": "106190758",
+  "aliases": null,
+  "address": null
+ },
+ "providence-santa-rosa-memorial-hospital-montgomery": {
+  "license": "140000648",
+  "hcaiId": "106491064",
+  "aliases": "SANTA ROSA MEMORIAL HOSPITAL-MONTGOMERY, 1165 MONTGOMERY DRIVE, SANTA ROSA, CA 95405",
+  "address": "1165 MONTGOMERY DRIVE, SANTA ROSA, CA 95405"
+ },
+ "providence-santa-rosa-memorial-hospital-sotoyome": {
+  "license": "140000648",
+  "hcaiId": "106490907",
+  "aliases": "SANTA ROSA MEMORIAL HOSPITAL-SOTOYOME, 151 SOTOYOME STREET, SANTA ROSA, CA 95405",
+  "address": "151 SOTOYOME STREET, SANTA ROSA, CA 95405"
+ },
+ "providence-st-joseph-hospital": {
+  "license": "060000172",
+  "hcaiId": "106301340",
+  "aliases": "ST. JOSEPH HOSPITAL - ORANGE, 1100 WEST STEWART DRIVE, ORANGE, CA 92868; Saint JOSEPH HOSPITAL D/P APH, 1100 W STEWART DR, ORANGE, CA 92868",
+  "address": "1100 WEST STEWART DRIVE, ORANGE, CA 92868"
+ },
+ "providence-st-joseph-hospital-eureka": {
+  "license": "110000075",
+  "hcaiId": "106121080",
+  "aliases": "PROVIDENCE ST. JOSEPH HOSPITAL - EUREKA, 2700 DOLBEER STREET, EUREKA, CA 95501; ST. JOSEPH HOSPITAL - EUREKA, 2700 DOLBEER STREET, EUREKA, CA 95501",
+  "address": "2700 DOLBEER STREET, EUREKA, CA 95501"
+ },
+ "providence-st-jude-medical-center": {
+  "license": "060000173",
+  "hcaiId": "106301342",
+  "aliases": "ST. JUDE MEDICAL CENTER, 101 EAST VALENCIA MESA DRIVE, FULLERTON, CA 92835",
+  "address": "101 EAST VALENCIA MESA DRIVE, FULLERTON, CA 92835"
+ },
+ "providence-st-mary-medical-center": {
+  "license": "240000207",
+  "hcaiId": "106361343",
+  "aliases": "PROVDENCE ST. MARY MEDICAL CENTER, 18300 US HIGHWAY 18, APPLE VALLEY, CA 92307; ST. MARY MEDICAL CENTER - APPLE VALLEY, 18300 US HIGHWAY 18, APPLE VALLEY, CA 92307",
+  "address": "18300 US HIGHWAY 18, APPLE VALLEY, CA 92307"
+ },
+ "childrens-hospital-of-orange-county": {
+  "license": "060000011",
+  "hcaiId": "106300032",
+  "aliases": "CHILDREN'S HOSPITAL OF ORANGE COUNTY, 1201 WEST LA VETA AVENUE, ORANGE, CA 92868",
+  "address": "1201 WEST LA VETA AVENUE, ORANGE, CA 92868"
+ },
+ "rady-childrens-hospital-san-diego": {
+  "license": "080000028",
+  "hcaiId": "106370673",
+  "aliases": "RADY CHILDREN'S HOSPITAL - SAN DIEGO, 3020 CHILDREN'S WAY, SAN DIEGO, CA 92123",
+  "address": "3020 CHILDREN'S WAY, SAN DIEGO, CA 92123"
+ },
+ "redlands-community-hospital": {
+  "license": "240000191",
+  "hcaiId": "106361308",
+  "aliases": null,
+  "address": null
+ },
+ "regional-medical-center-of-san-jose": {
+  "license": "070000085",
+  "hcaiId": "106430705",
+  "aliases": "REGIONAL MEDICAL OF SAN JOSE, 225 NORTH JACKSON AVENUE, SAN JOSE, CA 95116",
+  "address": "225 NORTH JACKSON AVENUE, SAN JOSE, CA 95116"
+ },
+ "rehabilitation-hospital-of-southern-california": {
+  "license": "550004348",
+  "hcaiId": "106334533",
+  "aliases": "VIBRA REHABILITATION HOSPITAL OF RANCHO MIRAGE, 70077 RAMON RD, RANCHO MIRAGE, CA 92270",
+  "address": "70077 RAMON RD, RANCHO MIRAGE, CA 92270"
+ },
+ "resnick-neuropsychiatric-hospital-at-ucla": {
+  "license": "930000204",
+  "hcaiId": "106190930",
+  "aliases": "RESNICK NEUROPSYCHIATRIC HOSPITAL AT University of California Los Angeles, 150 MEDICAL PLAZA, LOS ANGELES, CA 90095",
+  "address": "150 Medical Plaza, LOS ANGELES, CA 90095"
+ },
+ "ridgecrest-regional-hospital": {
+  "license": "120000186",
+  "hcaiId": "106150782",
+  "aliases": null,
+  "address": null
+ },
+ "river-vista-behavioral-health": {
+  "license": "550008678",
+  "hcaiId": "106200030",
+  "aliases": null,
+  "address": null
+ },
+ "riverside-community-hospital": {
+  "license": "250000194",
+  "hcaiId": "106331312",
+  "aliases": null,
+  "address": null
+ },
+ "riverside-university-health-system-d-p-aph": {
+  "license": "250000195",
+  "hcaiId": "106331314",
+  "aliases": "RIVERSIDE COUNTY REGIONAL MEDICAL CENTER - D/P APH, 9990 COUNTY FARM ROAD, RIVERSIDE, CA 92503",
+  "address": "9990 COUNTY FARM ROAD, RIVERSIDE, CA 92503"
+ },
+ "riverside-university-health-system-medical-center": {
+  "license": "250000195",
+  "hcaiId": "106334487",
+  "aliases": "RIVERSIDE COUNTY REGIONAL MEDICAL CENTER, 26520 CACTUS AVENUE, MORENO VALLEY, CA 92555",
+  "address": "26520 CACTUS AVENUE, MORENO VALLEY, CA 92555"
+ },
+ "ronald-reagan-ucla-medical-center": {
+  "license": "930000165",
+  "hcaiId": "106190796",
+  "aliases": "RONALD REAGAN University of California Los Angeles MEDICAL CENTER, 757 WESTWOOD PLZ, LOS ANGELES, CA 90095",
+  "address": "757 WESTWOOD PLAZA, LOS ANGELES, CA 90095"
+ },
+ "sacramento-behavioral-healthcare-hospital-llc": {
+  "license": "550007457",
+  "hcaiId": "106344210",
+  "aliases": null,
+  "address": null
+ },
+ "sacramento-rehabilitation-hospital": {
+  "license": "550008395",
+  "hcaiId": "106341326",
+  "aliases": null,
+  "address": null
+ },
+ "saint-johns-health-center": {
+  "license": "930000158",
+  "hcaiId": "106190756",
+  "aliases": "PROVIDENCE SAINT JOHN'S HEALTH CENTER, 2121 SANTA MONICA BLVD., SANTA MONICA, CA 90404",
+  "address": "2121 SANTA MONICA BLVD., SANTA MONICA, CA 90404"
+ },
+ "salinas-valley-health-medical-center": {
+  "license": "070000083",
+  "hcaiId": "106270875",
+  "aliases": "SALINAS VALLEY MEMORIAL HOSPITAL, 450 EAST ROMIE LANE, SALINAS, CA 93901",
+  "address": "450 EAST ROMIE LANE, SALINAS, CA 93901"
+ },
+ "san-antonio-regional-hospital": {
+  "license": "240000196",
+  "hcaiId": "106361318",
+  "aliases": null,
+  "address": null
+ },
+ "san-diego-county-psychiatric-hospital": {
+  "license": "090000092",
+  "hcaiId": "106374055",
+  "aliases": null,
+  "address": null
+ },
+ "san-dimas-community-hospital": {
+  "license": "930000139",
+  "hcaiId": "106190673",
+  "aliases": null,
+  "address": null
+ },
+ "san-gabriel-valley-medical-center": {
+  "license": "930000041",
+  "hcaiId": "106190200",
+  "aliases": "SAN GABRIEL VALLEY MEDICAL CENTER D/P APH, 438 W LAS TUNAS DR, SAN GABRIEL, CA 91776",
+  "address": "438 W. LAS TUNAS DRIVE, SAN GABRIEL, CA 91776"
+ },
+ "san-gorgonio-memorial-hospital": {
+  "license": "250000199",
+  "hcaiId": "106331326",
+  "aliases": null,
+  "address": null
+ },
+ "san-joaquin-general-hospital": {
+  "license": "030000087",
+  "hcaiId": "106391010",
+  "aliases": null,
+  "address": null
+ },
+ "san-joaquin-valley-rehabilitation-hospital": {
+  "license": "040000280",
+  "hcaiId": "106104023",
+  "aliases": null,
+  "address": null
+ },
+ "san-jose-behavioral-health": {
+  "license": "550003449",
+  "hcaiId": "106434032",
+  "aliases": null,
+  "address": null
+ },
+ "san-leandro-hospital": {
+  "license": "140000046",
+  "hcaiId": "106013619",
+  "aliases": null,
+  "address": null
+ },
+ "san-mateo-medical-center": {
+  "license": "220000015",
+  "hcaiId": "106410782",
+  "aliases": "SAN MATEO MEDICAL CENTER D/P APH, 222 W 39TH AVE, SAN MATEO, CA 94403",
+  "address": "222 WEST 39TH AVENUE, SAN MATEO, CA 94403"
+ },
+ "san-ramon-regional-medical-center": {
+  "license": "140000345",
+  "hcaiId": "106074017",
+  "aliases": null,
+  "address": null
+ },
+ "san-ramon-regional-medical-center-south-building": {
+  "license": "140000345",
+  "hcaiId": "106074011",
+  "aliases": null,
+  "address": null
+ },
+ "santa-barbara-cottage-hospital": {
+  "license": "050000140",
+  "hcaiId": "106420514",
+  "aliases": "SANTA BARBARA COTTAGE HOSPITAL - D/P APH, 400 W PUEBLO ST, SANTA BARBARA, CA 93105",
+  "address": "400 W. PUEBLO STREET, SANTA BARBARA, CA 93105"
+ },
+ "santa-clara-valley-medical-center": {
+  "license": "070000085",
+  "hcaiId": "106430883",
+  "aliases": "SANTA CLARA VALLEY MEDICAL CENTER DP/APH, 751 S BASCOM AVE, SAN JOSE, CA 95128",
+  "address": "751 SOUTH BASCOM AVENUE, SAN JOSE, CA 95128-2699"
+ },
+ "santa-monica-ucla-medical-center-and-orthopaedic-hospital": {
+  "license": "930000146",
+  "hcaiId": "106190687",
+  "aliases": "SANTA MONICA - University of California Los Angeles MEDICAL CENTER AND ORTHOPAEDIC HOSPITAL, 1250 16TH ST, SANTA MONICA, CA 90404",
+  "address": "1250 16TH STREET, SANTA MONICA, CA 90404"
+ },
+ "santa-ynez-valley-cottage-hospital": {
+  "license": "050000057",
+  "hcaiId": "106420522",
+  "aliases": null,
+  "address": null
+ },
+ "scripps-green-hospital": {
+  "license": "080000139",
+  "hcaiId": "106371256",
+  "aliases": null,
+  "address": null
+ },
+ "scripps-memorial-hospital-encinitas": {
+  "license": "080000148",
+  "hcaiId": "106371394",
+  "aliases": null,
+  "address": null
+ },
+ "scripps-memorial-hospital-la-jolla": {
+  "license": "080000050",
+  "hcaiId": "106370771",
+  "aliases": null,
+  "address": null
+ },
+ "scripps-mercy-hospital": {
+  "license": "090000074",
+  "hcaiId": "106370744",
+  "aliases": "SCRIPPS MERCY HOSPITAL D/P APH, 4077 5TH AVE, SAN DIEGO, CA 92103",
+  "address": "4077 FIFTH AVENUE, SAN DIEGO, CA 92103-2180"
+ },
+ "scripps-mercy-hospital-chula-vista": {
+  "license": "090000074",
+  "hcaiId": "106370658",
+  "aliases": null,
+  "address": null
+ },
+ "select-specialty-hospital-san-diego": {
+  "license": "090000404",
+  "hcaiId": "106374094",
+  "aliases": "VIBRA HOSPITAL OF SAN DIEGO, 555 WASHINGTON STREET, SAN DIEGO, CA 92103",
+  "address": "555 WASHINGTON STREET, SAN DIEGO, CA 92103"
+ },
+ "seneca-district-hospital": {
+  "license": "230000032",
+  "hcaiId": "106321016",
+  "aliases": null,
+  "address": null
+ },
+ "sequoia-hospital": {
+  "license": "220000045",
+  "hcaiId": "106410891",
+  "aliases": null,
+  "address": null
+ },
+ "sharp-chula-vista-medical-center": {
+  "license": "090000008",
+  "hcaiId": "106370875",
+  "aliases": null,
+  "address": null
+ },
+ "sharp-coronado-hospital-and-healthcare-center": {
+  "license": "090000036",
+  "hcaiId": "106370689",
+  "aliases": null,
+  "address": null
+ },
+ "sharp-mary-birch-hospital-for-women-and-newborns": {
+  "license": "080000039",
+  "hcaiId": "106370695",
+  "aliases": null,
+  "address": null
+ },
+ "sharp-memorial-hospital": {
+  "license": "080000039",
+  "hcaiId": "106370694",
+  "aliases": null,
+  "address": null
+ },
+ "sharp-mesa-vista-hospital": {
+  "license": "550000273",
+  "hcaiId": "106370745",
+  "aliases": null,
+  "address": null
+ },
+ "shasta-regional-medical-center": {
+  "license": "230000023",
+  "hcaiId": "106450940",
+  "aliases": null,
+  "address": null
+ },
+ "sherman-oaks-hospital": {
+  "license": "930000149",
+  "hcaiId": "106190708",
+  "aliases": "SHERMAN OAKS HOSPITAL AND HEALTH CENTER, D/P APH, 4929 VAN NUYS BLVD, SHERMAN OAKS, CA 91403",
+  "address": "4929 VAN NUYS BOULEVARD, SHERMAN OAKS, CA 91403"
+ },
+ "shriners-hospitals-for-children-northern-calif": {
+  "license": "030000620",
+  "hcaiId": "106344114",
+  "aliases": null,
+  "address": null
+ },
+ "sierra-nevada-memorial-hospital": {
+  "license": "230000152",
+  "hcaiId": "106291023",
+  "aliases": null,
+  "address": null
+ },
+ "sierra-view-medical-center": {
+  "license": "120000584",
+  "hcaiId": "106540798",
+  "aliases": null,
+  "address": null
+ },
+ "sierra-vista-hospital-inc": {
+  "license": "030000290",
+  "hcaiId": "106342392",
+  "aliases": "SIERRA VISTA HOSPITAL, 8001 BRUCEVILLE ROAD, SACRAMENTO, CA 95823",
+  "address": "8001 BRUCEVILLE ROAD, SACRAMENTO, CA 95823"
+ },
+ "sonoma-specialty-hospital": {
+  "license": "110000091",
+  "hcaiId": "106491338",
+  "aliases": "SONOMA WEST MEDICAL CENTER, 501 PETALUMA AVENUE, SEBASTOPOL, CA 95472",
+  "address": "501 PETALUMA AVENUE, SEBASTOPOL, CA 95472"
+ },
+ "sonoma-valley-hospital": {
+  "license": "110000072",
+  "hcaiId": "106491076",
+  "aliases": null,
+  "address": null
+ },
+ "south-coast-global-medical-center": {
+  "license": "060000143",
+  "hcaiId": "106301258",
+  "aliases": "SOUTH COAST GLOBAL MEDICAL CENTER, INC. D/P APH, 2701 S BRISTOL ST, SANTA ANA, CA 92704",
+  "address": "2701 S. BRISTOL STREET, SANTA ANA, CA 92704"
+ },
+ "southern-california-hospital-at-culver-city": {
+  "license": "930000066",
+  "hcaiId": "106190110",
+  "aliases": null,
+  "address": null
+ },
+ "southern-california-hospital-at-hollywood": {
+  "license": "930000066",
+  "hcaiId": "106190380",
+  "aliases": null,
+  "address": null
+ },
+ "southern-california-hospital-at-van-nuys-d-p-aph": {
+  "license": "930000066",
+  "hcaiId": "106190814",
+  "aliases": null,
+  "address": null
+ },
+ "southern-inyo-hospital": {
+  "license": "240000205",
+  "hcaiId": "106141338",
+  "aliases": null,
+  "address": null
+ },
+ "southwest-healthcare-system-wildomar": {
+  "license": "250000262",
+  "hcaiId": "106334001",
+  "aliases": "SOUTHWEST HEALTHCARE SYSTEM-WILDOMAR, 36485 INLAND VALLEY, WILDOMAR, CA 92595",
+  "address": "36485 INLAND VALLEY, WILDOMAR, CA 92595"
+ },
+ "southwest-healthcare-system-murrieta": {
+  "license": "250000262",
+  "hcaiId": "106334068",
+  "aliases": "SOUTHWEST HEALTHCARE SYSTEM-MURRIETA, 25500 MEDICAL CENTER DRIVE, MURRIETA, CA 92562",
+  "address": "25500 MEDICAL CENTER DRIVE, MURRIETA, CA 92562"
+ },
+ "st-agnes-medical-center": {
+  "license": "040000173",
+  "hcaiId": "106100899",
+  "aliases": null,
+  "address": null
+ },
+ "st-bernardine-medical-center": {
+  "license": "240000206",
+  "hcaiId": "106361339",
+  "aliases": null,
+  "address": null
+ },
+ "st-elizabeth-community-hospital": {
+  "license": "230000036",
+  "hcaiId": "106521041",
+  "aliases": null,
+  "address": null
+ },
+ "st-francis-medical-center": {
+  "license": "930000157",
+  "hcaiId": "106190754",
+  "aliases": "SAINT FRANCIS MEDICAL CENTER, 3630 E. IMPERIAL HIGHWAY, LYNWOOD, CA 90262; SAINT FRANCIS MEDICAL CENTER D/P APH, 3630 E IMPERIAL HWY, LYNWOOD, CA 90262",
+  "address": "3630 E. IMPERIAL HIGHWAY, LYNWOOD, CA 90262"
+ },
+ "st-johns-hospital-camarillo": {
+  "license": "050000064",
+  "hcaiId": "106560508",
+  "aliases": "ST. JOHN'S PLEASANT VALLEY HOSPITAL, 2309 ANTONIO AVENUE, CAMARILLO, CA 93010",
+  "address": "2309 ANTONIO AVENUE, CAMARILLO, CA 93010"
+ },
+ "st-johns-regional-medical-center": {
+  "license": "050000064",
+  "hcaiId": "106560529",
+  "aliases": "ST. JOHN'S REGIONAL MEDICAL CENTER, 1600 NORTH ROSE AVENUE, OXNARD, CA 93030",
+  "address": "1600 NORTH ROSE AVENUE, OXNARD, CA 93030"
+ },
+ "st-josephs-behavioral-health-center": {
+  "license": "030000367",
+  "hcaiId": "106392232",
+  "aliases": null,
+  "address": null
+ },
+ "st-josephs-medical-center-of-stockton": {
+  "license": "030000284",
+  "hcaiId": "106391042",
+  "aliases": null,
+  "address": null
+ },
+ "st-louise-regional-hospital": {
+  "license": "070000085",
+  "hcaiId": "106434138",
+  "aliases": null,
+  "address": null
+ },
+ "st-mary-medical-center-long-beach": {
+  "license": "930000012",
+  "hcaiId": "106190053",
+  "aliases": null,
+  "address": null
+ },
+ "st-rose-hospital": {
+  "license": "140000107",
+  "hcaiId": "106010967",
+  "aliases": null,
+  "address": null
+ },
+ "stanford-health-care": {
+  "license": "070000662",
+  "hcaiId": "106430905",
+  "aliases": "STANFORD HOSPITAL D/P APH, 300 PASTEUR DR, STANFORD, CA 94305",
+  "address": "300 PASTEUR DRIVE, PALO ALTO, CA 94305"
+ },
+ "stanford-health-care-2": {
+  "license": "070000662",
+  "hcaiId": "106430035",
+  "aliases": null,
+  "address": null
+ },
+ "stanford-health-care-tri-valley": {
+  "license": "140000114",
+  "hcaiId": "106014050",
+  "aliases": "STANDFORD HEALTH CARE - VALLEYCARE, 5555 WEST LAS POSITAS BLVD., PLEASANTON, CA 94588; STANFORD HEALTH CARE - VALLEYCARE, 5555 WEST LAS POSITAS BLVD., PLEASANTON, CA 94588; VALLEYCARE MEDICAL CENTER, 5555 WEST LAS POSITAS BLVD., PLEASANTON, CA 94588",
+  "address": "5555 WEST LAS POSITAS BLVD., PLEASANTON, CA 94588"
+ },
+ "stanford-health-care-tri-valley-2": {
+  "license": "140000114",
+  "hcaiId": "106010983",
+  "aliases": "VALLEY MEMORIAL HOSPITAL, 1111 E. STANLEY BOULEVARD, LIVERMORE, CA 94550; STANFORD HEALTH CARE TRI-VALLEY D/P APH, 1111 E STANLEY BOULEVARD, LIVERMORE, CA 94550",
+  "address": "1111 E. STANLEY BOULEVARD, LIVERMORE, CA 94550"
+ },
+ "stanislaus-surgical-hospital": {
+  "license": "030000695",
+  "hcaiId": "106504038",
+  "aliases": null,
+  "address": null
+ },
+ "stockton-regional-rehabilitation-hospital": {
+  "license": "550008586",
+  "hcaiId": "106394128",
+  "aliases": null,
+  "address": null
+ },
+ "surprise-valley-community-hospital": {
+  "license": "230000025",
+  "hcaiId": "106250955",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-amador-hospital": {
+  "license": "030000008",
+  "hcaiId": "106034002",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-auburn-faith-hospital": {
+  "license": "030000012",
+  "hcaiId": "106310791",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-center-for-psychiatry": {
+  "license": "030000347",
+  "hcaiId": "106344017",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-coast-hospital": {
+  "license": "110000067",
+  "hcaiId": "106084001",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-davis-hospital": {
+  "license": "030000124",
+  "hcaiId": "106574010",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-delta-medical-center": {
+  "license": "140000258",
+  "hcaiId": "106070934",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-lakeside-hospital": {
+  "license": "110000094",
+  "hcaiId": "106171395",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-maternity-and-surgery-center-of-santa-cruz": {
+  "license": "070000399",
+  "hcaiId": "106444012",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-medical-center-sacramento": {
+  "license": "030000102",
+  "hcaiId": "106341051",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-roseville-medical-center": {
+  "license": "030000083",
+  "hcaiId": "106311000",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-santa-rosa-regional-hospital": {
+  "license": "110000005",
+  "hcaiId": "106494106",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-solano-medical-center": {
+  "license": "110000082",
+  "hcaiId": "106481094",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-surgical-hospital-north-valley": {
+  "license": "550000989",
+  "hcaiId": "106514030",
+  "aliases": null,
+  "address": null
+ },
+ "sutter-tracy-community-hospital": {
+  "license": "030000105",
+  "hcaiId": "106391056",
+  "aliases": null,
+  "address": null
+ },
+ "tahoe-forest-hospital": {
+  "license": "230000151",
+  "hcaiId": "106291053",
+  "aliases": null,
+  "address": null
+ },
+ "tarzana-treatment-center": {
+  "license": "930000163",
+  "hcaiId": "106190782",
+  "aliases": null,
+  "address": null
+ },
+ "temecula-valley-hospital": {
+  "license": "550002434",
+  "hcaiId": "106334564",
+  "aliases": null,
+  "address": null
+ },
+ "the-general-hospital": {
+  "license": "110000075",
+  "hcaiId": "106120981",
+  "aliases": "GENERAL HOSPITAL, THE, 2200 HARRISON AVENUE, EUREKA, CA 95501",
+  "address": "2200 HARRISON AVENUE, EUREKA, CA 95501"
+ },
+ "thousand-oaks-surgical-hospital-a-campus-of-los-robles-hosp-med-ctr": {
+  "license": "050000039",
+  "hcaiId": "106564121",
+  "aliases": null,
+  "address": null
+ },
+ "torrance-memorial-medical-center": {
+  "license": "930000076",
+  "hcaiId": "106190422",
+  "aliases": null,
+  "address": null
+ },
+ "totally-kids-rehabilitation-hospital": {
+  "license": "550002720",
+  "hcaiId": "106364451",
+  "aliases": null,
+  "address": null
+ },
+ "tri-city-medical-center": {
+  "license": "080000099",
+  "hcaiId": "106370780",
+  "aliases": "TRI-CITY MEDICAL CENTER D/P APH, 4002 VISTA WAY, OCEANSIDE, CA 92056",
+  "address": "4002 VISTA WAY, OCEANSIDE, CA 92056"
+ },
+ "trinity-hospital": {
+  "license": "230000038",
+  "hcaiId": "106531059",
+  "aliases": null,
+  "address": null
+ },
+ "uc-davis-rehabilitation-hospital": {
+  "license": "550008538",
+  "hcaiId": "106340025",
+  "aliases": null,
+  "address": null
+ },
+ "uc-san-diego-health-east-campus-medical-center": {
+  "license": "090000101",
+  "hcaiId": "106370652",
+  "aliases": "Alvarado Hospital Medical Center, 6655 ALVARADO ROAD, SAN DIEGO, CA 92120-5298",
+  "address": "6655 ALVARADO ROAD, SAN DIEGO, CA 92120-5298"
+ },
+ "uc-san-diego-health-hillcrest-hillcrest-medical-center": {
+  "license": "090000101",
+  "hcaiId": "106370782",
+  "aliases": "University of California SAN DIEGO HEALTH HILLCREST - HILLCREST MEDICAL CENTER, 200 W ARBOR DR, SAN DIEGO, CA 92103; UNIVERSITY OF CALIF-SAN DIEGO MEDICAL CENTER, 200 WEST ARBOR DRIVE, SAN DIEGO, CA 92103",
+  "address": "200 WEST ARBOR DRIVE, SAN DIEGO, CA 92103"
+ },
+ "fountain-valley-regional-hospital-medical-center-euclid": {
+  "license": "060000148",
+  "hcaiId": "106301175",
+  "aliases": "FOUNTAIN VALLEY REGIONAL HOSPITAL & MEDICAL CENTER - EUCLID, 17100 EUCLID STREET, FOUNTAIN VALLEY, CA 92708",
+  "address": "17100 EUCLID STREET, FOUNTAIN VALLEY, CA 92708"
+ },
+ "uci-health-fountain-valley": {
+  "license": "060000148",
+  "hcaiId": "106304039",
+  "aliases": "FOUNTAIN VALLEY REGIONAL HOSPITAL & MEDICAL CENTER - WARNER, 11250 WARNER AVENUE, FOUNTAIN VALLEY, CA 92708",
+  "address": "11250 WARNER AVENUE, FOUNTAIN VALLEY, CA 92708"
+ },
+ "lakewood-regional-medical-center": {
+  "license": "060000148",
+  "hcaiId": "106190240",
+  "aliases": "LAKEWOOD REGIONAL MEDICAL CENTER, 3700 EAST SOUTH STREET, LAKEWOOD, CA 90712",
+  "address": "3700 SOUTH STREET, LAKEWOOD, CA 90712"
+ },
+ "los-alamitos-medical-center": {
+  "license": "060000148",
+  "hcaiId": "106301248",
+  "aliases": "LOS ALAMITOS MEDICAL CENTER, 3751 KATELLA AVENUE, LOS ALAMITOS, CA 90720",
+  "address": "3751 KATELLA AVENUE, LOS ALAMITOS, CA 90720"
+ },
+ "university-of-california-irvine-medical-center": {
+  "license": "060000148",
+  "hcaiId": "106301279",
+  "aliases": "UNIVERSITY OF CALIFORNIA IRVINE MEDICAL CENTER, 101 THE CITY DR S, ORANGE, CA 92868",
+  "address": "101 CITY DRIVE SOUTH, ORANGE, CA 92868"
+ },
+ "placentia-linda-hospital": {
+  "license": "060000148",
+  "hcaiId": "106301297",
+  "aliases": "PLACENTIA LINDA HOSPITAL, 1301 NORTH ROSE DRIVE, PLACENTIA, CA 92870",
+  "address": "1301 NORTH ROSE DRIVE, PLACENTIA, CA 92870"
+ },
+ "west-hills-hospital-and-medical-center": {
+  "license": "930000189",
+  "hcaiId": "106190859",
+  "aliases": "WEST HILLS HOSPITAL AND MEDICAL CENTER, 7300 MEDICAL CENTER DRIVE, WEST HILLS, CA 91307",
+  "address": "7300 MEDICAL CENTER DRIVE, WEST HILLS, CA 91307"
+ },
+ "ucsd-health-la-jolla-jacobs-medical-center-sulpizio-cardiovascular-center": {
+  "license": "090000101",
+  "hcaiId": "106374141",
+  "aliases": "UCSD-La Jolla, John M/Sally B Thornton Hosp & Sulpizo Cardiovascular Center, 9300 CAMPUS POINT DRIVE, LA JOLLA, CA 92037; University of California SAN DIEGO HEALTH LA JOLLA - JACOBS MEDICAL CENTER & SULPIZIO CARDIOVASCU, 9300 CAMPUS POINT DR, LA JOLLA, CA 92037",
+  "address": "9300 CAMPUS POINT DRIVE, LA JOLLA, CA 92037"
+ },
+ "ucsf-benioff-childrens-hospital-oakland": {
+  "license": "140000015",
+  "hcaiId": "106010776",
+  "aliases": "CHILDRENS HOSPITAL AND RESEARCH CENTER AT OAKLAND, 747 52ND STREET, OAKLAND, CA 94609; University of California San Francisco BENIOFF CHILDREN'S HOSPITAL OAKLAND, 747 52ND STREET, OAKLAND, CA 94609",
+  "address": "747 52ND STREET, OAKLAND, CA 94609"
+ },
+ "st-marys-medical-center": {
+  "license": "220000071",
+  "hcaiId": "106380965",
+  "aliases": "ST. MARY'S MEDICAL CENTER, 450 STANYAN STREET, SAN FRANCISCO, CA 94117; ST. MARY'S MEDICAL CENTER, SAN FRANCISCO, 450 STANYAN STREET, SAN FRANCISCO, CA 94117; Saint MARY'S MEDICAL CENTER D/P APH, 450 STANYAN ST, SAN FRANCISCO, CA 94117",
+  "address": "450 STANYAN STREET, SAN FRANCISCO, CA 94117"
+ },
+ "st-francis-memorial-hospital": {
+  "license": "220000069",
+  "hcaiId": "106380960",
+  "aliases": "SAINT FRANCIS MEMORIAL HOSPITAL D/P APH, 900 HYDE ST, SAN FRANCISCO, CA 94109; UCSF HEALTH SAINT FRANCIS HOSPITAL, 900 HYDE STREET, SAN FRANCISCO, CA 94109; ST. FRANCIS MEMORIAL HOSPITAL, 900 HYDE STREET, SAN FRANCISCO, CA 94109; UCSF HEALTH - SAINT FRANCIS HOSPITAL, 900 HYDE STREET, SAN FRANCISCO, CA 94109",
+  "address": "900 HYDE STREET, SAN FRANCISCO, CA 94109"
+ },
+ "ucsf-medical-center": {
+  "license": "220000091",
+  "hcaiId": "106381154",
+  "aliases": "University of California San Francisco MEDICAL CENTER, 505 PARNASSUS AVE, SAN FRANCISCO, CA 94143",
+  "address": "505 PARNASSUS AVENUE, SAN FRANCISCO, CA 94143"
+ },
+ "ucsf-medical-center-at-mission-bay": {
+  "license": "220000091",
+  "hcaiId": "106384200",
+  "aliases": "University of California San Francisco MEDICAL CENTER AT MISSION BAY, 1975 4TH STREET, SAN FRANCISCO, CA 94158",
+  "address": "1975 4TH STREET, SAN FRANCISCO, CA 94158"
+ },
+ "ucsf-medical-center-at-mount-zion": {
+  "license": "220000091",
+  "hcaiId": "106380895",
+  "aliases": "University of California San Francisco MEDICAL CENTER AT MOUNT ZION, 1600 DIVISADERO ST, SAN FRANCISCO, CA 94115",
+  "address": "1600 DIVISADERO STREET, SAN FRANCISCO, CA 94115"
+ },
+ "university-of-california-davis-medical-center": {
+  "license": "030000086",
+  "hcaiId": "106341006",
+  "aliases": null,
+  "address": null
+ },
+ "usc-arcadia-hospital": {
+  "license": "930000103",
+  "hcaiId": "106190529",
+  "aliases": "METHODIST HOSPITAL OF SOUTHERN CALIFORNIA, 300 WEST HUNTINGTON DRIVE, ARCADIA, CA 91007; University of Southern California ARCADIA HOSPITAL, 300 W HUNTINGTON DR, ARCADIA, CA 91007",
+  "address": "300 WEST HUNTINGTON DRIVE, ARCADIA, CA 91007"
+ },
+ "usc-kenneth-norris-jr-cancer-hospital": {
+  "license": "930000267",
+  "hcaiId": "106191216",
+  "aliases": "University of Southern California KENNETH NORRIS JR. CANCER HOSPITAL, 1441 EASTLAKE AVE, LOS ANGELES, CA 90089; USC KENNETH NORRIS, JR. CANCER HOSPITAL, 1441 EASTLAKE AVENUE, LOS ANGELES, CA 90089",
+  "address": "1441 EASTLAKE AVENUE, LOS ANGELES, CA 90089"
+ },
+ "usc-verdugo-hills-hospital": {
+  "license": "930000173",
+  "hcaiId": "106190818",
+  "aliases": "VERDUGO HILLS HOSPITAL D/P APH, 1812 VERDUGO BLVD, GLENDALE, CA 91208; University of Southern California VERDUGO HILLS HOSPITAL, 1812 VERDUGO BLVD, GLENDALE, CA 91208",
+  "address": "1812 VERDUGO BOULEVARD, GLENDALE, CA 91208"
+ },
+ "valley-childrens-hospital": {
+  "license": "040000160",
+  "hcaiId": "106204019",
+  "aliases": null,
+  "address": null
+ },
+ "valley-presbyterian-hospital": {
+  "license": "930000170",
+  "hcaiId": "106190812",
+  "aliases": null,
+  "address": null
+ },
+ "ventura-county-medical-center": {
+  "license": "050000032",
+  "hcaiId": "106560481",
+  "aliases": "VENTURA COUNTY MEDICAL CENTER INPATIENT D/P APH, 200 HILLMONT AVE, VENTURA, CA 93003",
+  "address": "300 HILLMONT AVE, VENTURA, CA 93003"
+ },
+ "ventura-county-medical-center-santa-paula-hospital": {
+  "license": "050000032",
+  "hcaiId": "106560521",
+  "aliases": "VENTURA COUNTY MEDICAL CENTER - SANTA PAULA HOSPITAL, 825 NORTH 10TH STREET, SANTA PAULA, CA 93060",
+  "address": "825 NORTH 10TH STREET, SANTA PAULA, CA 93060"
+ },
+ "ventura-county-medical-center-inpatient-d-p-aph": {
+  "license": "050000032",
+  "hcaiId": "106560051",
+  "aliases": null,
+  "address": null
+ },
+ "vibra-hospital-of-northern-california": {
+  "license": "230000191",
+  "hcaiId": "106454012",
+  "aliases": null,
+  "address": null
+ },
+ "vibra-hospital-of-sacramento": {
+  "license": "030000377",
+  "hcaiId": "106344035",
+  "aliases": null,
+  "address": null
+ },
+ "victor-valley-global-medical-center": {
+  "license": "240000218",
+  "hcaiId": "106361370",
+  "aliases": null,
+  "address": null
+ },
+ "kindred-hospital-la-mirada": {
+  "license": "930000084",
+  "hcaiId": "106190449",
+  "aliases": "KINDRED HOSPITAL - LA MIRADA, 14900 IMPERIAL HIGHWAY, LA MIRADA, CA 90638",
+  "address": "14900 IMPERIAL HIGHWAY, LA MIRADA, CA 90638"
+ },
+ "washington-hospital-fremont": {
+  "license": "140000116",
+  "hcaiId": "106010987",
+  "aliases": null,
+  "address": null
+ },
+ "watsonville-community-hospital": {
+  "license": "070000097",
+  "hcaiId": "106444013",
+  "aliases": null,
+  "address": null
+ },
+ "west-anaheim-medical-center": {
+  "license": "060000182",
+  "hcaiId": "106301379",
+  "aliases": "WEST ANAHEIM MEDICAL CENTER D/P APH, 3033 W ORANGE AVE, ANAHEIM, CA 92804",
+  "address": "3033 WEST ORANGE AVENUE, ANAHEIM, CA 92804"
+ },
+ "west-covina-medical-center": {
+  "license": "930000137",
+  "hcaiId": "106190857",
+  "aliases": null,
+  "address": null
+ },
+ "whittier-hospital-medical-center": {
+  "license": "930000402",
+  "hcaiId": "106190883",
+  "aliases": null,
+  "address": null
+ },
+ "woodland-memorial-hospital": {
+  "license": "030000115",
+  "hcaiId": "106571086",
+  "aliases": "WOODLAND MEMORIAL HOSPITAL D/P APH, 1325 COTTONWOOD STREET, WOODLAND, CA 95695",
+  "address": "1325 COTTONWOOD STREET, WOODLAND, CA 95695"
+ }
+}

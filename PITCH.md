@@ -18,7 +18,7 @@ Judging: Sun 10:30 AM to 12:30 PM at my table. 3 minutes of pitch, 2 minutes of 
 | **$349** | Two billing errors on it: a duplicate blood count ($269) and an X-ray $80 over the hospital's own list price. | "we saved $349" (Recount flags; the patient asks) |
 | **$0** | What a single person earning $20,000 likely owes there: 125% of poverty, and SF General's policy gives free care up to 138%. | "you owe $0" (say "likely owes") |
 
-Backup numbers, only if asked: price checks for 240 of 470 hospitals, at 4 of 6 SF hospitals the cash price is the full sticker price on every item, 2,333 policy documents, 997 sentences reviewed, 181 of 181 bill lines read right on 30 test bills, and on 25 held-out hard bills (crumpled, dim, blurred, pen marks, six layouts) 260 of 265 lines with 22 of 22 errors caught, all synthetic, about 4 cents of model cost per bill read, about 17 seconds for a live Actor run.
+Backup numbers, only if asked: price checks for 340 of 470 hospitals, at 4 of 6 SF hospitals the cash price is the full sticker price on every item, 2,333 policy documents, 997 sentences reviewed, 181 of 181 bill lines read right on 30 test bills, and on 25 held-out hard bills (crumpled, dim, blurred, pen marks, six layouts) 260 of 265 lines with 22 of 22 errors caught, all synthetic, about 4 cents of model cost per bill read, about 17 seconds for a live Actor run.
 
 ---
 
@@ -94,7 +94,7 @@ Scroll to the quotes. Read one, slowly.
 
 ### 2:40 to 3:00. Close
 
-> Recount works today for any California hospital bill. It reads the bill, checks eligibility under state law, and shows if the hospital's own policy conflicts with it. Line-by-line price checks cover 240 of 470 California hospitals. It's live at recount-nu.vercel.app, with an Android app.
+> Recount works today for any California hospital bill. It reads the bill, checks eligibility under state law, and shows if the hospital's own policy conflicts with it. Line-by-line price checks cover 340 of 470 California hospitals. It's live at recount-nu.vercel.app, with an Android app.
 > Check your bill. And check your hospital.
 
 Stop talking. Hand them the phone.
@@ -121,7 +121,7 @@ Pick the judge's company. One sentence only. If several are at the table, use th
 
 - **Microsoft (Built for the Real World):** "Every bill is read twice, by two vendors with two methods: Claude reads the whole bill, Azure AI Document Intelligence reads the charges table, and code compares them line by line. On my 30 test bills Azure got 181 of 181 lines right. Azure OpenAI is the backup model, AI Search grounds the chat in hospitals' own policies, and Content Safety screens every message. Everything falls back instead of failing, and every AI call is logged on the bill."
 - **Anthropic (Claude for Public Benefit):** "The people are uninsured and underinsured ER patients in California, many Spanish-speaking. Claude does the two things only it can do well, reading messy bill photos and writing plain letters. I kept it out of every money decision on purpose, because a wrong 'you qualify' costs a family real money."
-- **Apify (Best Use and Best Actor):** "The Actor does the hardest data work: it finds a hospital's price file, streams it in any of three formats, some over 90 MB, and pulls the income limits out of its charity policy with the sentence behind each one. When it can't find a value, it returns nothing and a warning instead of guessing. It's public on the Apify Store with over 1,200 runs, and 98% succeeded. One statewide batch run gave the app price checks for 236 hospitals beyond San Francisco."
+- **Apify (Best Use and Best Actor):** "The Actor does the hardest data work: it finds a hospital's price file, streams it in any of three formats, some over 90 MB, and pulls the income limits out of its charity policy with the sentence behind each one. When it can't find a value, it returns nothing and a warning instead of guessing. It's public on the Apify Store with over 1,200 runs, and 98% succeeded. Statewide batch runs gave the app price checks for 336 hospitals beyond San Francisco, each from a file that states the hospital's own license or name."
 - **Convex:** "Each bill is a reactive document. Scheduled actions do the reading and drafting and write each step to a table the phone subscribes to, so the patient watches each check land instead of staring at a spinner. File storage holds the photo, auth is optional, and a limits table caps uploads."
 - **People-First / Cal Hacks:** "One question per screen, Spanish throughout, large type, no account needed, a path for helping a parent with their bill, and nothing ever sent without your approval."
 
@@ -135,8 +135,8 @@ Say this unprompted if a judge looks skeptical. It earns trust.
 |---|---|---|
 | The statewide audit: 470 hospitals, real policies, quotes with page and date | The bill on stage: fictional patient, real SF General prices | Price checks for the other 230 hospitals |
 | Reading any uploaded bill, as a PDF or up to 6 photos | Price checks cover common ER codes only: 17 to 23 per SF hospital, up to 20 in the statewide run | Sending letters for the patient (on purpose) |
-| Eligibility under state law for any CA hospital; hospital's own free care cutoff for 159 of 470 | Test bills are generated: printed type, one layout | Live price refresh for the 236 statewide hospitals (prices are from one run on 10/24) |
-| Price checks for 240 of 470 hospitals: 4 SF hand-checked, 236 from one statewide Actor run | | Price file audit beyond San Francisco |
+| Eligibility under state law for any CA hospital; hospital's own free care cutoff for 159 of 470 | Test bills are generated: printed type, one layout | Live price refresh for the 336 statewide hospitals (prices are from the 10/25 runs) |
+| Price checks for 340 of 470 hospitals: 4 SF hand-checked, 336 from statewide Actor runs | | Price file audit beyond San Francisco |
 | Price file audit of 6 SF hospitals (Rust, offline) | | Azure reading the whole bill (it reads the charges only) |
 | Live Apify refresh for ZSFG, UCSF and CPMC; public Actor | | Password reset |
 | Letters, Spanish, optional accounts (email or Google), My bills, Android app with Lupa, iPhone via Home Screen | | |
@@ -225,7 +225,7 @@ No account is needed. The bill sits behind a secret link only you have. Delete r
 Free for patients. The paying side is people who do this by hand today: financial counselors, legal aid, community clinics, patient advocates. The audit is useful to regulators and journalists.
 
 **"Does it scale past San Francisco?"**
-Eligibility and the audit already cover the whole state, and price checks cover 240 of 470 California hospitals. Federal rules make every US hospital publish a price file, and the Actor already reads the common formats, so a new hospital means running the Actor, not writing code. Other states have their own charity care laws, and those would be new rule files.
+Eligibility and the audit already cover the whole state, and price checks cover 340 of 470 California hospitals. Federal rules make every US hospital publish a price file, and the Actor already reads the common formats, so a new hospital means running the Actor, not writing code. Other states have their own charity care laws, and those would be new rule files.
 
 **"What did it cost to run?"**
 About 4 cents of model cost to read one bill. The audit was a one-time offline run.
@@ -281,9 +281,10 @@ Checked 2026-10-24 against main at ef6778b and the live site.
 | Lupa comparison | Claude 47 of 47 rule checks (47 of 48 replies came back); gpt-4.1-mini 42 of 48; median full reply 4.6 s vs 2.5 s | `eval/agents/compare.ts --runs 2`, `eval/agents/out/score.md`; commit ef6778b |
 | Cost per read | about $0.04 (2,449 in, 1,422 out tokens) | `docs/NUMBERS-CHECK.md` |
 | Live Apify lookup | about 17 s | `docs/LOGBOOK.md` 03:36 |
-| Price check coverage | 240 of 470: 4 SF snapshots (ZSFG, UCSF, CPMC Van Ness, Saint Francis) + 236 statewide | `convex/lib/snapshots/*.json`; `convex/lib/statewidePrices.json` (236 hospitals, read 2026-10-24); `convex/agent.ts` `resolveRef`; live `/api/mcp` `get_validation_results` shows 240/470 |
+| Price check coverage | 340 of 470: 4 SF snapshots (ZSFG, UCSF, CPMC Van Ness, Saint Francis) + 336 statewide | `convex/lib/snapshots/*.json`; `convex/lib/statewidePrices.json` (336 hospitals, read 2026-10-25); `pipeline/out/price_files.json`; `convex/agent.ts` `resolveRef`; `/api/mcp` `get_validation_results` shows 340/470 after the next deploy |
 | Live Actor refresh | 3 hospitals (ZSFG, UCSF, CPMC; Saint Francis is `live: false`) | `convex/lib/reference.ts` `KNOWN_HOSPITALS`, `convex/agent.ts` `lookupHospital` |
-| Statewide batch vs hand-checked prices | 73 of 75 exact, other 2 higher | `actor/README.md` "Statewide run"; `src/components/dashboard/facts.ts` |
+| Statewide path vs hand-checked prices | 80 of 81 exact, 1 higher, 0 lower | `pipeline/out/snapshot_check.json`; `src/components/dashboard/facts.ts` |
+| Statewide prices vs a second reader | 202 of 204 same at 12 hospitals, the rest higher, none lower | `pipeline/out/price_spot_checks.json` |
 | Codes in the statewide run | 20 (2 to 20 found per hospital) | `statewidePrices.json` `codes` |
 | Actor runs on Apify | 1,242 total runs | Apify API `acts/enterprising_arboretum_iq2~hospital-price-and-charity-finder` `stats.totalRuns`, 2026-10-24 8 PM PDT |
 | Actor success | 98% (1,218 of 1,240 runs ok) | live `dashboard:summary` (30 days), agent `apify`, 2026-10-24 8 PM PDT |

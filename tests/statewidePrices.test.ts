@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import data from "../convex/lib/statewidePrices.json";
-import { HOSPITALS, hasStatewidePrices, pricedRefFromIndex } from "../convex/lib/statewide";
+import verified from "../pipeline/out/price_files.json";
+import spotChecks from "../pipeline/out/price_spot_checks.json";
+import snapshotCheck from "../pipeline/out/snapshot_check.json";
+import { HOSPITALS, hasStatewidePrices, priceGap, pricedRefFromIndex } from "../convex/lib/statewide";
 import { checkBill } from "../convex/lib/checks";
 
 const priced = Object.keys((data as { hospitals: Record<string, unknown> }).hospitals);
@@ -31,6 +34,58 @@ describe("statewide prices from the Apify batch", () => {
     const b = pricedRefFromIndex(without);
     expect(b.mrf).toBeNull();
     expect(b.policyOnly).toBe(true);
+  });
+
+  it("uses only the file verified as each hospital's own", () => {
+    const files = verified as { chosen: Record<string, { url: string; verifiedBy: string }> };
+    const hospitals = (data as { hospitals: Record<string, { url: string; verifiedBy: string }> }).hospitals;
+    for (const [k, h] of Object.entries(hospitals)) {
+      expect(files.chosen[k]?.url, k).toBe(h.url);
+      expect(["license", "name"]).toContain(h.verifiedBy);
+    }
+    // One hospital's file is never used for another, unless the file itself lists both locations.
+    const byUrl = new Map<string, string[]>();
+    for (const [k, h] of Object.entries(hospitals)) byUrl.set(h.url, [...(byUrl.get(h.url) ?? []), k]);
+    for (const [, keys] of byUrl) if (keys.length > 1) for (const k of keys) expect(files.chosen[k].verifiedBy, k).toBe("license");
+  });
+
+  it("gives every hospital without prices a plain reason", () => {
+    const skipped = (data as { skipped: Record<string, { reason: string }> }).skipped;
+    const hand = new Set(["priscilla-chan-mark-zuckerberg-san-francisco-general-hospital-trauma-center", "ucsf-medical-center",
+      "california-pacific-medical-center-van-ness-campus", "st-francis-memorial-hospital"]);
+    for (const h of HOSPITALS) {
+      if (hand.has(h.key)) continue;
+      if (hasStatewidePrices(h.key)) {
+        expect(priceGap(h.key)).toBeNull();
+        expect(skipped[h.key]).toBeUndefined();
+      } else {
+        expect(["notFound", "notNamed", "unreadable", "noCodes"]).toContain(skipped[h.key]?.reason);
+        expect(pricedRefFromIndex(h).priceGap).toBe(skipped[h.key].reason);
+      }
+    }
+  });
+
+  it("reads the hand-checked SF files the same way (pipeline/check_against_snapshots.py)", () => {
+    const c = snapshotCheck as { compared: number; same: number; lower: number; snapshots: Record<string, unknown> };
+    expect(Object.keys(c.snapshots).length).toBe(4);
+    expect(c.compared).toBeGreaterThanOrEqual(75);
+    expect(c.lower).toBe(0);
+    expect(c.same / c.compared).toBeGreaterThan(0.95);
+  });
+
+  it("matches a second, independent reader of the same files (spot checks)", () => {
+    const spot = spotChecks as { hospitals: Record<string, { url: string; codes: Record<string, { app: number; secondReader: number | null }> }> };
+    const hospitals = (data as { hospitals: Record<string, { url: string; prices: Record<string, { grossCharge: number }> }> }).hospitals;
+    expect(Object.keys(spot.hospitals).length).toBeGreaterThanOrEqual(10);
+    for (const [k, s] of Object.entries(spot.hospitals)) {
+      const h = hospitals[k];
+      expect(h?.url, k).toBe(s.url);
+      for (const [code, c] of Object.entries(s.codes)) {
+        expect(h.prices[code].grossCharge, `${k} ${code}`).toBe(c.app);
+        // The app's price is never below the highest matching row the second reader found.
+        if (c.secondReader != null) expect(c.app, `${k} ${code}`).toBeGreaterThanOrEqual(c.secondReader);
+      }
+    }
   });
 
   it("flags a charge above the published list price", () => {
