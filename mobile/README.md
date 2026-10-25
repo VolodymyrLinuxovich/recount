@@ -60,4 +60,4 @@ npx expo export --platform ios --output-dir /tmp/recount-ios   # bundle builds
 npx expo-doctor
 ```
 
-Not legal or medical advice. The hospital makes the final decision.
+Not legal or medical advice. Recount checks a bill against public rules and prices.

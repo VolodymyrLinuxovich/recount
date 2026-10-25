@@ -33,7 +33,7 @@ export const SCENARIOS: Scenario[] = [
     messages: [u("Do I qualify for help paying this?")],
     must: [[/discount/i]],
     mustNot: [/\byou (?:will )?(?:get|qualify for) free care\b/i],
-    expect: "Says the app's result is a discount (not free care), explains it in plain words, says the hospital decides, ends with a next step.",
+    expect: "Says the app's result is a discount (not free care), explains it in plain words, ends with a next step.",
   },
   {
     id: "qualify-no-info",
@@ -190,7 +190,7 @@ export const SCENARIOS: Scenario[] = [
     messages: [u("¿Califico para ayuda con esta factura?")],
     must: [[/descuento/i], [/usted/i]],
     mustNot: [/\btú\b|\bpuedes\b|\btienes\b/i],
-    expect: "Answers in Spanish with usted, says the result is a discount, the hospital decides, and gives a next step.",
+    expect: "Answers in Spanish with usted, says the result is a discount and gives a next step.",
   },
   {
     id: "es-lien",

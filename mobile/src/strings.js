@@ -43,7 +43,7 @@ const en = {
   appName: "Recount",
   stepOf: (n) => `Step ${n} of 4`,
   back: "Back",
-  footer: "Not legal or medical advice. The hospital makes the final decision.",
+  footer: "Not legal or medical advice. Recount checks your bill against public rules and prices.",
 
   startTitle: "Got a hospital bill? Let's check it.",
   startBody: "Take a photo of your bill. We check the charges against the hospital's own prices and see if California law says you can pay less.",
@@ -260,7 +260,7 @@ const es = {
   appName: "Recount",
   stepOf: (n) => `Paso ${n} de 4`,
   back: "Atrás",
-  footer: "No es asesoría legal ni médica. El hospital toma la decisión final.",
+  footer: "No es asesoría legal ni médica. Recount compara su factura con reglas y precios públicos.",
 
   startTitle: "¿Tiene una factura del hospital? Vamos a revisarla.",
   startBody: "Tome una foto de su factura. Comparamos los cargos con los precios del propio hospital y vemos si la ley de California le permite pagar menos.",

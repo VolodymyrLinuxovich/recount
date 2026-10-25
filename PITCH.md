@@ -25,7 +25,7 @@ Backup numbers, only if asked: price checks for 240 of 470 hospitals, at 4 of 6 
 ## Words on stage
 
 - **"Conflicts with state law."** I read the written policy, not what billing actually does. A judge from a hospital or a law school will catch "breaks the law".
-- **"Likely owes."** Rules give a likely answer from the patient's own answers. The hospital still decides.
+- **"Likely owes."** Rules give a likely answer from the patient's own answers.
 - **"Sample bill."** Say it once, early. Alex Rivera is made up. The prices are SF General's real published charges.
 - **"Rules decide. AI reads and writes."** Repeat it. It's my answer to half the hard questions.
 - **"Recount never sends anything for you."** The patient approves and sends.

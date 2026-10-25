@@ -114,7 +114,7 @@ Start a bill, answer the questions with "Yes" to insurance, and on "Do you have 
 ## Words
 
 - Say "conflicts with state law", never "breaks the law": I read the written policy, not what billing actually does.
-- Say "likely owes", never "owes". The hospital decides.
+- Say "likely owes", never "owes". The answer comes from the patient's own answers.
 - Don't say "every flag was reviewed twice". Conflict and likely flags got two reviews. "Worth asking" flags got one.
 - Don't say Azure reads the whole bill. Claude reads the bill; Azure reads the charges a second time.
 - Don't promise password reset. There is none.

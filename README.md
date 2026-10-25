@@ -370,5 +370,4 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
   are from 2022, and the audit judges the latest one HCAI holds.
 - **Accounts are optional and basic.** Without one, My bills lives on one phone and anyone with a bill's private link can
   open it. Accounts use email and password, or Google: no email check for password accounts and no password reset.
-- **Not legal or medical advice.** Recount checks a bill against public rules and prices. The hospital makes the final
-  decision.
+- **Not legal or medical advice.** Recount checks a bill against public rules and prices.
