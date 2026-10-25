@@ -1,5 +1,9 @@
 "use node";
 
+// Lupa's reply, run in the background after chat.send. In order: a crisis check (988/911 reply),
+// Content Safety on the message (lib/safety.ts), the topic gate (lib/topic.ts) beside the policy search (lib/search.ts), the reply
+// from the model (lib/model.ts) with the case data, then Content Safety on the reply.
+
 import { chat, filePart, modelReady, structured, type ChatMessage, type Run } from "./lib/model";
 import { OFF_TOPIC, TOPIC_SYSTEM, TopicSchema, quickTopic, topicInput, type Gate } from "./lib/topic";
 import type { ActionCtx } from "./_generated/server";

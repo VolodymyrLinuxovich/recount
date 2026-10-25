@@ -1,3 +1,7 @@
+// The database tables. cases = one bill and its results; steps = what the patient sees happen;
+// agentRuns = each AI call for a bill (no content); agentMetrics = the dashboard's anonymous log;
+// chatMessages = Lupa; limits = rate limits; hospitals = cached price lookups; pushTokens = phones
+// to notify; profiles = optional account details for letters.
 import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";

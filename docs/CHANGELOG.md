@@ -1,0 +1,205 @@
+# Change log
+
+Every change to Recount, newest first. Made from git history by `scripts/changelog.sh`; the reasons behind the big ones are in [LOGBOOK.md](LOGBOOK.md).
+
+## Sat Oct 24
+
+- 21:44 `f8ed6f6` Bill check keeps an insurance statement read while it ran (findings computed in the save); second read of a multi-photo bill takes only the table that continues onto the next page, not a payments table; web chat uses the server's file limits
+- 21:10 `75755f4` Review fixes: a chat attachment can't reuse any page of the bill; bill pages are checked by their stored type; a failed send deletes its upload; everyday words like letter or delete go to the topic check; push is scheduled only for bills with a phone; one storage delete path
+- 20:59 `330f32d` README: new How It Works GIF of the current app; update the feature line and the Claude table
+- 20:47 `d65bebe` Demo script for tonight's app: two-page upload, sample bill, Lupa with an attachment and the topic check, audit, phone apps
+- 20:36 `354b05b` Devpost and pitch: chat attachments, the topic check, bills of up to 6 photos, typed insurance amounts
+- 20:26 `58240f0` Insurance step: no sample statement; type the amounts instead (setEobManual), checked by the same total rules
+- 20:25 `d1c381b` Complaint screen ends with Back to my bills and Back to home
+- 20:21 `3abd8a6` Bills of up to 6 photo pages: pages screen on web and phone, all pages read as one bill, Document Intelligence per page
+- 20:17 `c5504d6` Lupa: attach a photo or PDF to a chat message, and a topic gate for off-topic questions
+- 20:14 `551c1b8` Submission texts match the live app: price checks for 240 of 470 hospitals, Azure roles, follow-up, EOB, dashboard, phone app; drop placeholders and /how mentions; first person in the pitch
+- 19:58 `ef6778b` Lupa comparison results: Claude 47 of 47 rule checks, gpt-4.1-mini 42 of 48; rescore mode; lawsuit check no longer flags 'can't say if you will win'
+- 19:42 `dcec1e6` Notify the patient when a bill check finishes
+- 19:40 `75aa911` Lupa comparison: the chat helper on Claude and Azure OpenAI with the live prompt, rule checks and two judges
+- 19:31 `6b31fa4` My bills: the empty state sits in the middle of the screen
+- 19:28 `32595d6` Bill we couldn't read: Try again opens the camera right there instead of going home
+- 19:26 `2690c46` Get the app: jumping to it lands at the section's top, no strip of the section above
+- 19:26 `32ee209` Fix insurance statement money checks so savings never pass the bill
+- 19:25 `83a824e` Bills never stay reading or writing forever: a watchdog ends stuck runs, failures end in standard letters or an error, a Try again button after 3 minutes, a stuck complaint can restart, and chat replies always finish
+- 19:25 `ec564ad` Give up on the first model sooner when a fallback is set, and fall back when a reply has no usable data
+- 19:25 `2f7ef78` Getting a bill can't hang: each upload step has a 25 second limit, and a stalled page change falls back to a full load
+- 19:18 `db23391` Android app: rejected photos show in a red frame labeled Not a valid document; preflight checks match the insured sample
+- 19:17 `93c7410` Changed answers while letters are drafting are kept (the per-bill limit is the guard)
+- 19:16 `82db412` Rejected photos show in a red frame labeled Not a valid document; per-bill limits on letter and complaint drafting; chat caps; account delete removes the insurance statement; letter check knows the findings total; preflight script for the live app
+- 19:03 `eab29a2` Audit: headline centred, the three counts on one line under it, button as wide as the cards
+- 18:42 `0182d4d` Get the app for Android and iPhone; audit hero stacked with a full-width button, map as tall as the cards beside it; centred footer; Ask Lupa label on hover; dashboard: Azure services in their own rows, Content Safety timed, chart lines to the edge, MP4 screencasts that load faster
+- 17:58 `897b483` Policy search index: int8 vector compression and no stored vector copy (60 MB to 14 MB), --index flag
+- 17:49 `5af57e0` Android app: sign up / sign in like the website; home page QR code and /app download link
+- 17:48 `9cf2fbd` Dashboard: animated hero, how-it-works rows with screencasts, one full-width timing chart, less text
+- 17:34 `b20c773` Pitch with sources for every number; Rust price file audit of 6 SF hospitals (cash price vs gross and insurer rates), cross-checked in Python
+- 17:39 `b8e05f2` README: logo on top and a results plot
+- 17:34 `69f8d7b` Mobile: Lupa chat on the phone (same helper as the web), Ask button on every bill screen and on the start screen
+- 17:32 `f9a6e39` Devpost: drop CRS track, add Best Solo Hack, write in first person
+- 17:33 `74d4d3f` Dashboard screencasts: vector search, agents, Convex live sync
+- 17:25 `4b47bb7` Demo script: drop the removed /how page; Who did what panel shows the models
+- 17:25 `74fb546` Devpost: Azure as it runs in production, Claude vs gpt-4.1-mini reading results, Who did what panel instead of /how
+- 17:24 `09de43e` Dashboard: live agent metrics, what each part does, performance over time, and a read-only MCP server
+- 15:53 `fb1edfd` EOB read: a form with fewer nullable fields, so structured output accepts it; ISO dates
+- 15:40 `ca43d02` Insured patients: read the insurance EOB and check the bill against it
+- 15:23 `2a15532` Insured patients: EOB contract (schema, finding kinds, docs/EOB.md)
+- 16:37 `bd01b40` Second read of the charges with Azure AI Document Intelligence (layout model) when AZURE_DOCINTEL_* is set; Claude column read is its backup; eval script and results
+- 16:14 `17ecee6` Lupa's replies type out a few words at a time instead of appearing all at once
+- 15:42 `8da6cd9` Revert "Landing: remove the how it works scroll story"
+- 15:12 `9b7f10e` Remove the /how page and its links; /how now goes to the home page
+- 15:04 `63856f1` Landing: remove the how it works scroll story
+- 14:52 `5587e59` Price checks for 236 more California hospitals from a statewide Actor run
+- 13:09 `bad2f17` Complaint drafting goes through the shared model layer, with the dollar amount check
+- 13:02 `25397fe` Regenerate Convex bindings
+- 12:57 `d93bd67` Timeouts use a plain timer: AbortSignal.timeout fired at once in Convex and failed every Azure call
+- 12:31 `69b8186` Actor: stream crawl pages so large files can't exhaust memory; find vendor download links (fileType=CSV)
+- 12:18 `618c888` Devpost, pitch and demo drafts; audit re-review batch
+- 12:14 `84008f7` Landing: three key stats instead of four
+- 12:14 `a705011` Actor 0.2: batch mode for many hospitals and a known price file URL
+- 12:02 `cd8ee2e` Privacy page: Microsoft lines appear only when each Azure service is on; Google sign-in and AI call records listed
+- 11:47 `3dade05` Privacy text follows which Azure services are on; crisis reply for self-harm; timeouts on every outside call
+- 11:39 `c8b8da4` /how claims made exact (backup line only when a backup exists, flags, questions, audit), Spanish review round 3
+- 11:36 `7bf4da9` Spanish readers no longer see English first on load
+- 11:35 `67b1377` Azure: deployment-name default, per-task fallback, policy search for the helper, index builder, Azure reads in the eval, env script
+- 11:23 `e68ac6a` Name Azure OpenAI exactly
+- 11:19 `c0d70d8` Letters: name any amount the letter check couldn't match to the bill
+- 11:16 `96f6ad9` Who did what on each bill (every AI call with its model), models in use and AI limits on /how
+- 11:14 `a8383df` Letters: rule check that every dollar amount comes from the bill or our checks; optional Azure AI Content Safety on the helper chat
+- 11:10 `029506e` Model layer: every AI call goes through one interface (Claude by default, OpenAI-compatible or Azure by env), with fallback, a per-bill log of each call, and a rule/AI/person map of every step
+- 11:07 `5abe4a9` How Recount decides: which steps are rules, AI or the patient; labels on each bill's steps
+- 10:55 `9abe741` Profile menu (view profile, sign out) and a structured profile page with details and bills
+- 10:50 `14ca209` Prefill name from the account
+- 10:47 `1f3fa0c` Google button under the email form, name and email filled from the account, birthday picked from a calendar
+- 10:47 `e6793e8` Profile: name from the Google account
+- 10:00 `20e1d87` Continue with Google on the account page, shown when Google sign-in is set up
+- 10:00 `12b590a` WIP google
+- 09:59 `6dc53e0` Sign in with Google when its keys are set; never merge it into a password account with the same email
+- 09:43 `6629ada` Mobile: a changed name replaces the bill's name in the letters; readable income placeholder
+- 09:43 `415aed1` Mobile: link to what happens next and the state's complaint page after sending
+- 09:42 `cb8e7f4` Follow-up: one answer per row on the outcome question
+- 09:39 `2bb24d4` README: accounts are optional, account and privacy pages
+- 09:39 `df8dcc7` My bills: show the check-in day on sent bills
+- 09:39 `d542595` What happens next, check-in day and complaint to the state after sending (English and Spanish)
+- 09:39 `f458550` Calendar file for the check-in day, with tests
+- 09:37 `d8e486d` Mobile: ask which amount is on the bill when two reads disagree; fix any line amount
+- 09:35 `9b0482b` Mobile: fix crash when opening a bill; your-details step fills the letters
+- 09:32 `a64a621` README: live reading scores on the eval set
+- 09:32 `f0a8508` Eval reader: mirror the app's two reads
+- 09:35 `22252f6` Follow-up after sending: check-in date, outcome, complaint draft and approval
+- 09:35 `8fb0241` Complaint to HCAI's Hospital Bill Complaint Program: template from the case facts, with tests
+- 09:33 `9b9f856` Privacy page: missing space in Spanish
+- 09:33 `f72dd43` Privacy page: missing space
+- 09:26 `1ad137b` Account as a round profile picture in the header corner
+- 09:19 `8dcd0d0` Clear account button in the header on every screen size; no bills list on the home page
+- 09:19 `5831060` Mobile: delete a bill from the findings screen
+- 09:13 `83f7f1c` Sign-in messages: too many tries, existing email with a link to sign in
+- 09:13 `47cfe16` Regenerate Convex API types for authCheck
+- 09:11 `1386a7b` README: price file size, conflict wording, lien rule scope, what the 24 of 24 measures
+- 09:11 `15a264b` Plain error for oversized files, Spanish letter titles; mobile: shrink photos on web, working delete on web, no approving letters with blanks
+- 09:09 `b70f9e4` Accounts: refuse sign-up for existing emails, check sessions on every request
+- 09:09 `884c57a` Spanish review fixes, 'conflicts with' wording for hospital policies, amount question strings, review notes
+- 09:09 `d617468` Ask the patient which amount is on the bill when two reads disagree
+- 09:05 `5fa7b45` Optional accounts in the app, for-me question, delete on My bills, Largest text at 140%, audit hero fits at large text
+- 09:03 `3134eaa` Check bill amounts with a separate charges-column read
+- 09:00 `4f20257` Home page: styled 'Snap your bill', no layout shift from the Lupa demo, solid hairlines, conflict wording, tighter desktop steps, high contrast and large text
+- 08:49 `30b9d99` QA fixes: cash table fits on phones, clean policy card with verdict pills, neutral problem chips, bottom buttons fit, 'You can still ask for help', Lupa 'Ask' label on phones, high-contrast chips
+- 08:48 `89f3512` Audit: confirmed conflicts first with matching chips, conflict wording, precise phone taps, no layout shift while loading, readable high-contrast chips, Check it carries the hospital
+- 08:46 `d5ee092` Optional accounts: email + password (Convex Auth), claim bills from the phone, owner access, My bills from the server, profile, account deletion; privacy facts updated
+- 08:41 `9e1fcd1` Privacy page in plain words, from the verified facts; linked in the footer
+- 08:39 `742b19f` Helper: verified privacy facts, 'is this a scam' answer, reply-timing guidance (no invented deadline; refund-with-interest rule); capitalize patient names from bills
+- 08:36 `840afa7` A bill started from a hospital's audit page tells the reader which hospital to expect
+- 08:36 `5ed0abf` Re-read amounts when lines don't add up (accepted only if they then match the printed total); hospital mailing address in letters; optional hospitalHint on cases.start
+- 08:03 `4558902` Translations live in en.json and es.json with a small formatter; test that Spanish never misses a phrase; mark Convex generated code
+- 07:41 `594544e` Selected answers stay strong on hover and touch; home sections show as soon as they peek into view
+- 07:39 `e4aedb4` README animation: re-recorded on the purple redesign
+- 07:22 `6434371` Letters: known values are written plainly; [Label: value] brackets resolve to the value when drafting and approving
+- 07:22 `e276781` New home page (problem first, scroll story of how it works), audit page for laptop and phone with the top 3 rules, letters accept pre-filled brackets
+- 07:18 `9fbcd62` New look across the app: white and deep purple, Plus Jakarta Sans and Lexend, new logo and Lupa avatar, one header with Check a bill, Hospital audit and My bills, text size moved to the footer, entrance motion
+- 07:15 `5273d14` README: link the current Android APK
+- 07:04 `0619748` Mobile: new design (white + purple, Plus Jakarta Sans + Lexend, RecountMark logo, Lupa avatar)
+- 06:58 `3452f05` New logo: Lupa's lens over a bill (return-arrow rim, total struck through); regenerate web, iOS and Android icons from brand/make_icons.py
+- 06:30 `ba22207` Accessibility: focus follows every screen change, Escape always closes Lupa, nothing hides under the button bar, the audit map is one Tab stop with arrow keys, readable yellow-on-black, a header that never overlaps, shorter audit intro
+- 06:18 `47485b2` README animation: re-recorded with the correct styles
+- 06:12 `d1af09e` README animation: re-recorded on the new design
+- 06:10 `218fe20` Persona fixes: insured savings wording, folded policy quotes, call from your phone on desktop, shared-device wording, date of birth check, Copied feedback, errors only after typing, announced ready screen
+- 06:01 `16a85c1` One color for primary actions; 'Text size' button
+- 05:57 `1a6e8f1` Lien rule stated as the law does: only for patients who qualify for help
+- 05:57 `67bc378` Helper knows collections timing, lien protection for eligible patients, immigration scope, and the hospital's phone numbers; basis notes the letter asks for free care
+- 05:57 `f37f110` A bill waiting for its hospital can be deleted
+- 05:57 `9c1740a` README: final audit counts, 159 free-care cutoffs, PIH lien quote, Lupa and display mode
+- 05:51 `beaef74` Audit: spot-check round 2 wording fixes (lien rule scoped to eligible patients)
+- 05:51 `3b1c10b` One type scale and spacing scale, Atkinson Hyperlegible, one left edge everywhere, the logo in a one-row header, Lupa opens from the header on phones
+- 05:49 `a227103` Test: demo path (ZSFG 138% free care at 125% FPL)
+- 05:49 `5516113` Commit audit review decisions and packets so findings.json can be regenerated from the repo
+- 05:48 `db1069b` Audit: lien rule limited to eligible patients, reviewers see California addenda, second pass over likely findings
+- 05:48 `04f4806` Photo picked from the intro is no longer lost
+- 05:48 `7a92cb0` Free-care cutoffs only where the policy's own words show that exact free tier (fixes 400% table misreads); hand-checked overrides; regression tests
+- 05:44 `ddf483a` Statewide hospitals show the policy's effective date
+- 05:42 `430909f` Chat: bound to its case with token checks, redacts SSN/account numbers, never stuck pending, EN/ES only, gravamen not embargo; remove token-less create; delete chat with the bill; policy-only hospital labels; no-cap discounts; safer out-of-state check; Spanish wording from native review
+- 05:40 `f7b2418` Lupa red-team and audit spot-check reports
+- 05:39 `ce9efb9` Spanish review: 28 smaller wording fixes
+- 05:39 `0ff9221` Recognize 'sin seguro' price labels
+- 05:39 `89182d7` Spanish: the hospital's list price, not 'su precio'; 'precio sin seguro' instead of 'en efectivo'; ask for the whole household's income
+- 05:33 `bcb62bb` Screen always matches the step: wait for letters before moving on, and settle overlapping transitions
+- 05:32 `4ec741e` Logbook and code guide for the new version
+- 05:32 `73caecd` README animation: re-recorded on the faster flow
+- 05:26 `494f50e` Logo: paper bill with a red check; web, iOS and Android icons
+- 05:25 `cd2c29f` README: show how it works as a phone recording instead of text
+- 05:23 `c6e2ac8` Faster: live price lookup runs in the background, letters drafted in parallel, medium-effort reading; mobile uses native upload with resized photos
+- 05:22 `74cd5f0` Start page resets after opening a bill
+- 05:19 `151b891` README: what Recount does, architecture, audit results, path to production, how to run
+- 05:12 `e38aea4` Internal admin cleanup for a case, its log, chat and file
+- 05:09 `fee03ab` New version: Back and Next side by side with slide transitions, Display mode for low vision, Lupa the helper with chat, before-you-start screens
+- 05:05 `6e1e076` Required details with a saved profile, Approve only when every blank is filled, a ready check mark, and a step-by-step send checklist
+- 05:02 `be85572` Mobile: Android APK build profile
+- 05:02 `69ca54c` Retake and out-of-state screens from the reader; price cards read list and cash prices from the evidence
+- 05:00 `a9090cd` No false price flags: hand-checked snapshot prices win over live rows; retake and out-of-state states; plain-language unreadable notes; one finding per overpriced line; likely vs confirmed policy counts; UCSF name match; opt-in approve check
+- 04:59 `af1b19d` Retake screen when nothing is readable, change my answers, More links, softer wording for likely policy conflicts, friendly page for bad links, tighter map taps
+- 04:56 `ef8a7e0` User-facing errors as ConvexError so production shows the message; corrections clear stale notes; patient-city tie-break for hospital matches; fixed Spanish subjects
+- 04:56 `349af13` Unreadable bills can be deleted; step labels match each screen
+- 04:52 `54c6659` Mobile: publish with EAS Update (Expo Go compatible runtime)
+- 04:50 `1758e52` Design research for a health app used by older, low-vision and Spanish-speaking patients
+- 04:48 `089816b` Clean look everywhere: My bills, More about this bill, audit page and policy note; remove the old pen components and unused styles
+- 04:46 `00c1217` Approve check: signature lines are signed by hand, never block approval
+- 04:46 `384df07` Mobile: show the fill-in message plainly
+- 04:46 `94a066f` Helper chat: streamed replies with case context, injection-safe prompt, per-conversation limits; patient address from the bill; approve requires filled-in placeholders
+- 04:42 `99514a0` Add Expo mobile app: camera upload, step-by-step case flow, letters with share/copy, My bills on the phone, EN/ES
+- 04:31 `9d25988` One letter per screen with details, approve and send guide; fix the answer looping back to findings; move on by itself only from waiting screens
+- 04:22 `52cd4a9` Add Actor output schema
+- 04:08 `b2e4dcd` Clean finding cards, one problem per screen; calmer landing page
+- 04:07 `38af824` Solid pinned bar with room underneath
+- 04:06 `123eff4` Step-by-step bill flow (wip), fill-in details for letters, Spanish letters first, fix a misread amount, honest no-price-list text, My bills copy link, audit search and sorting, one-row header
+- 03:58 `3ef7f99` Reject non-bills; misread-safe total check; correctLine to fix a misread amount; Spanish unreadable notes; tighter Spanish letter subjects
+- 03:58 `f674d24` Audit map: a tap on a crowded spot lists the hospitals there
+- 03:56 `3e9456d` Step log counts conflicts vs worth-asking; formatted money; no-price-list wording; family medical costs; letters never claim eligibility
+- 03:54 `af1ca5d` Private bill links, delete a bill, pick the hospital, change letters after approving, print-ready letters, send guide, install to home screen, grouped findings
+- 03:51 `fece012` Claude fills income cutoffs the rules missed, kept only with a verbatim quote containing the number; 'full or partial' wording never becomes free care
+- 03:46 `fc2cb1e` Merge bilingual UI; add hospitalAddress to fixtures
+- 03:46 `0618d22` Step 1 of 4 progress on each bill
+- 03:45 `c2172a8` Any of 470 California hospitals: statewide hospital index with free-care cutoffs, matching with a confirm step; per-case secret token, delete, unapprove, upload limits
+- 03:44 `d95c67d` Logbook: plan to the deadline
+- 03:42 `18169f3` Spanish for My bills and audit rule titles
+- 03:41 `7b059aa` Logbook and code guide: backend fixes, review counts, frontend features
+- 03:39 `cab223b` Smaller audit headline on wide screens
+- 03:37 `52bd035` Spanish and English, My bills saved on this phone, larger and easier type, logbook and code guide for judges
+- 03:36 `e999ff1` Use each hospital's own free-care cutoff; live Apify lookups over REST; honest data labels; stricter hospital matching; validated approvals; SB 1061 citation
+- 03:32 `5038f8d` Shorten Actor description for the Apify Store
+- 03:26 `109104d` Spanish for everything the patient reads; sample photo rendered from the sample data; savings count each line once; bill-only price warnings
+- 03:21 `3588f83` Header and language provider slots
+- 03:21 `aa928ae` QA fixes: plain error screen, resize big photos, check file types, read 28k as 28,000, form hints
+- 03:20 `3874a9b` Audit page with statewide data: readable names, unread hospitals, shorter quote context, larger conflict dots
+- 03:17 `faf9bbb` Statewide audit: 470 hospitals, 980 candidate sentences reviewed twice; 15 with plain conflicts
+- 03:16 `df2c857` Pipeline: real names, city, county and coordinates for the SF hospitals
+- 03:13 `33ad925` Audit headline scope follows the data: statewide, San Francisco, or a count
+- 03:12 `ea815ba` Add statewide HCAI policy crawler and text extraction
+- 03:12 `fb62e95` Audit page: San Francisco wording, confirmed vs likely counts, hide map without coordinates
+- 03:07 `6e5d16c` Show the hospital's own policy conflicts in the case flow and link to the audit
+- 03:05 `f305209` Flag the hospital's own policy conflicts in each case and cite them in letters
+- 03:04 `82fd605` Count unclear policy wording separately in the hospital summary
+- 03:04 `14c71ea` Add statewide audit page: hospital policy map, search, policy vs law findings
+- 03:02 `a7d0d74` Add Apify Actor (hospital price file + assistance policy finder) and data pipeline
+- 03:01 `32bfee1` Add hospital price snapshots, sample bill with real ZSFG charges, and policy audit rules
+- 02:55 `73f5877` Add phone-first UI: marked-up bill, household questions, answer with sources, editable letters
+- 02:53 `5bf00c7` Add bill generator, renderer and scoring for the eval set
+- 02:43 `ee7f2eb` Add Convex backend: bill reading, price checks, charity-care eligibility
+- 02:38 `5d65702` Initial commit from Create Next App

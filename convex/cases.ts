@@ -1,3 +1,6 @@
+// A bill ("case") and everything the patient does with it: upload, start, answers, line fixes,
+// hospital choice, insurance statement, approve, delete, retry. The background work is in agent.ts.
+// Every public call needs the bill's secret token or the signed-in owner (see owned below).
 import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";

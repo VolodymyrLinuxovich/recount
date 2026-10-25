@@ -1,5 +1,14 @@
 "use node";
 
+// The bill pipeline, run in the background after an upload.
+//   readAndCheck   read the bill (Claude; second read by Document Intelligence or a column read),
+//                  match the hospital, then finishCheck runs the rule checks (lib/checks.ts, lib/eobChecks.ts)
+//   continueCheck  the same second half, after the patient picks the hospital
+//   draftLetters   letters from the facts (lib/model.ts), checked for invented amounts (lib/letterCheck.ts),
+//                  standard letters (lib/letters.ts) if the model fails
+//   readEob        read an insurance statement and compare it with the bill
+// Every step is written to the steps table so the patient sees it as it happens.
+
 import { filePart, modelReady, structured, type Part, type Run } from "./lib/model";
 import type { Kind } from "./lib/pipeline";
 import { inventedAmounts } from "./lib/letterCheck";

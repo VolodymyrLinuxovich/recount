@@ -1,3 +1,4 @@
+// Convex Auth: tokens are issued by this deployment itself.
 export default {
   providers: [
     {

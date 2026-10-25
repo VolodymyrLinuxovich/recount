@@ -319,26 +319,42 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 
 | Path | What |
 |------|------|
-| `src/app/` | Pages: start (`/`), a bill (`/case/[id]`), My bills (`/bills`), the audit (`/audit`) |
-| `src/components/flow/` | The step-by-step bill screens |
+| `src/app/` | Pages: start (`/`), a bill (`/case/[id]`), My bills (`/bills`), the audit (`/audit`), `/dashboard`, `/privacy`, `/account`, the app download (`/app`), the MCP server (`/api/mcp`) |
+| `src/components/flow/` | The step-by-step bill screens, including the insurance statement screens |
+| `src/components/helper/` | Lupa, the chat helper (web) |
 | `src/components/audit/` | Audit map, search and the policy-vs-law view |
+| `src/components/dashboard/` | The public dashboard: agent timings, Azure services, Apify runs |
 | `src/components/i18n/` | English and Spanish strings, language toggle |
-| `src/components/bills/` | My bills, saved in this phone's storage |
-| `convex/schema.ts` | Tables: cases, steps, hospitals, limits, chatMessages |
-| `convex/cases.ts` | Upload, start, household answers, line fixes, approve, delete |
-| `convex/agent.ts` | The agent action: read with Claude, hospital lookup, checks, letters |
+| `src/components/bills/` | My bills, on this phone or in your account |
+| `src/components/account/`, `privacy/` | Optional accounts; the privacy page, built from what's switched on |
+| `convex/schema.ts` | Tables: cases, steps, agentRuns, agentMetrics, chatMessages, limits, hospitals, pushTokens, profiles |
+| `convex/cases.ts` | Upload, start, household answers, line fixes, hospital choice, insurance statement, approve, delete, retry |
+| `convex/agent.ts` | The background pipeline: read the bill, second read, hospital lookup, checks, letters, insurance statement |
+| `convex/chat.ts`, `chatAgent.ts` | Lupa: messages and attachments; the reply (crisis check, Content Safety, topic gate, policy search, model) |
+| `convex/followUp.ts`, `followUpAgent.ts` | After sending: check-in date and the complaint to HCAI |
+| `convex/notify.ts` | Phone notifications when a bill check finishes (Expo push) |
+| `convex/metrics.ts`, `dashboard.ts`, `crons.ts` | The dashboard's anonymous log, its summary, and the Apify run sync |
+| `convex/lib/model.ts` | The one place that calls a model: Anthropic, Azure OpenAI or OpenAI-compatible, per task, with a fallback |
 | `convex/lib/checks.ts` | Line checks: duplicates, list price, cash price, totals |
+| `convex/lib/eobChecks.ts`, `eob.ts` | Bill vs insurance statement rules; what an insurance statement read returns |
 | `convex/lib/eligibility.ts` | Charity care rules: poverty line, hospital cutoff, 400% floor |
-| `convex/lib/hospital.ts` | Matching a bill to one of 470 hospitals |
-| `convex/lib/letters.ts` | Letter templates and facts handed to Claude |
+| `convex/lib/hospital.ts`, `statewide.ts` | One hospital's reference data; matching a bill to one of 470 hospitals |
+| `convex/lib/letters.ts`, `letterCheck.ts`, `complaint.ts` | Letter templates and facts; the invented-amount check; the HCAI complaint |
+| `convex/lib/docIntel.ts` | Azure AI Document Intelligence second read of the charges |
+| `convex/lib/search.ts`, `safety.ts`, `topic.ts` | Azure AI Search policy passages; Azure AI Content Safety; Lupa's topic gate |
+| `convex/lib/privacy.ts` | What Recount stores and who processes it, built from the deployment's settings |
+| `convex/lib/pages.ts`, `attach.ts`, `notice.ts` | Multi-photo bills; chat attachment limits; notification text |
 | `convex/lib/snapshots/` | Saved price data for the four SF hospitals |
 | `actor/` | Apify Actor: price file finder and streamer, charity policy limit extractor |
-| `audit/` | Statewide HCAI crawl, extraction, rule candidates, two reviews, report |
+| `audit/` | Statewide HCAI crawl, extraction, rule candidates, two reviews, report; `index_search.py` builds the Azure AI Search index |
 | `pipeline/` | Hospital index, price snapshots, income cutoffs with quotes |
 | `pipeline/price-audit/` | Rust price file audit: cash price vs gross and insurer rates, min/max consistency, NPI check digits |
-| `eval/` | Synthetic bill generator, renderer and scorer |
-| `mobile/` | Expo app on the same Convex backend |
+| `eval/` | Synthetic bill generator, renderer and scorer; `eval/eob/` for insurance statements; `eval/agents/` Lupa on Claude vs Azure OpenAI |
+| `mobile/` | Expo app (Android, iPhone) on the same Convex backend |
+| `scripts/preflight.mjs` | Live check of the deployed app: pages, sample bills end to end, Lupa |
+| `scripts/set-azure-env.sh` | Copies the Azure settings into a Convex deployment |
 | `docs/HOW-IT-WORKS.md` | A code tour with line links |
+| `docs/LOGBOOK.md`, `docs/CHANGELOG.md` | What changed and why; every commit with its time |
 
 ---
 
