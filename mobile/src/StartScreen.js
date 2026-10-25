@@ -6,6 +6,7 @@ import { useState } from "react";
 import * as FileSystem from "expo-file-system/legacy";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { AccountIcon } from "./Account";
 import { RecountLogo } from "./Logo";
 import { useLupa } from "./Chat";
 import { C, Card, F, H1, H2, LinkText, P, Screen, s } from "./ui";
@@ -57,7 +58,7 @@ function imageType(asset) {
   return "image/jpeg"; // the picker re-encodes to JPEG when quality < 1
 }
 
-export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
+export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted, onAccount }) {
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
   const start = useMutation(api.cases.start);
   const [busy, setBusy] = useState(null); // "photo" | "sample" | null
@@ -137,7 +138,8 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
     >
       <View style={st.top}>
         <RecountLogo size={40} label={t.appName} />
-        <View style={st.lang} accessibilityRole="radiogroup" accessibilityLabel={t.language}>
+        <View style={st.right}>
+          <View style={st.lang} accessibilityRole="radiogroup" accessibilityLabel={t.language}>
           {["en", "es"].map((code) => {
             const on = lang === code;
             return (
@@ -154,6 +156,8 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
               </Pressable>
             );
           })}
+          </View>
+          <AccountIcon t={t} onPress={onAccount} />
         </View>
       </View>
       <H1>{t.startTitle}</H1>
@@ -189,6 +193,7 @@ export function StartScreen({ t, lang, setLang, bills, onOpen, onStarted }) {
 
 const st = StyleSheet.create({
   top: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 12, marginBottom: 28 },
+  right: { flexDirection: "row", alignItems: "center" },
   lang: { flexDirection: "row", padding: 3, borderWidth: 1, borderColor: C.line, borderRadius: 12, backgroundColor: C.surface },
   langBtn: { minWidth: 48, minHeight: 42, borderRadius: 9, alignItems: "center", justifyContent: "center", paddingHorizontal: 8 },
   langBtnOn: { backgroundColor: C.brand },

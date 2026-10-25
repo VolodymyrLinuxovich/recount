@@ -1602,3 +1602,55 @@ html[data-contrast] .landing :is(.ld-flag, .ld-find-tag, .ld-saved, .ld-ledger-l
 html[data-contrast] .landing .ld-ledger-lines li.is-flag {
   border-color: var(--rc-flag);
 }
+
+/* ───────── get the Android app ───────── */
+.landing .ld-app {
+  padding: 64px 0;
+  border-top: 1px solid var(--rc-line, #e7e2f3);
+}
+.landing .ld-app-in {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.landing .ld-app-copy {
+  flex: 1;
+  min-width: 0;
+}
+.landing .ld-app-copy > p {
+  margin-top: 12px;
+  font-size: 1.1875rem;
+  line-height: 1.5;
+}
+.landing .ld-app-btn {
+  margin-top: 20px;
+}
+.landing .ld-app-copy .ld-app-ios {
+  font-size: 1rem;
+  color: var(--rc-ink-2, #4b4366);
+}
+.landing .ld-app-qr {
+  margin: 0;
+  flex: none;
+  text-align: center;
+}
+.landing .ld-app-qr img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid var(--rc-line, #e7e2f3);
+  border-radius: 16px;
+}
+.landing .ld-app-qr figcaption {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  color: var(--rc-ink-2, #4b4366);
+}
+/* On a phone the button is the way in; the QR code is for computers. */
+@media (max-width: 640px) {
+  .landing .ld-app-qr {
+    display: none;
+  }
+}

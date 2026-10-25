@@ -10,6 +10,7 @@ import { setHelperOpen } from "../helper/openStore";
 import { useT } from "../i18n/I18nProvider";
 import type { Key, PlainKey } from "../i18n/strings";
 import { useCountUp, useInView, useReducedMotion } from "./hooks";
+import { GetApp } from "./GetApp";
 import { Lupa } from "./Lupa";
 import "./landing.css";
 
@@ -44,6 +45,7 @@ export function Landing({ actions, error, install }: { actions: Actions; error: 
       <Problem />
       <How />
       <AskLupa />
+      <GetApp />
       <FinalCta actions={actions} />
       {install && <div className="ld-wrap ld-install">{install}</div>}
     </div>
