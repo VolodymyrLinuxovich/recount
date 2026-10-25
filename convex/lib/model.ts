@@ -31,7 +31,8 @@ export type ChatMessage = { role: "user" | "assistant"; content: string };
 /** What we record about every model call. Never the prompt or the bill. */
 export type Run = {
   task: Task;
-  provider: Provider;
+  /** A model provider, or "azure-docintel" for the Document Intelligence second read (convex/lib/docIntel.ts). */
+  provider: Provider | "azure-docintel";
   model: string;
   ms: number;
   inputTokens: number | null;

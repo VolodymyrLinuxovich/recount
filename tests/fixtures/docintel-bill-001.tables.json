@@ -1,0 +1,440 @@
+[
+{
+"rowCount": 5,
+"columnCount": 2,
+"cells": [
+{
+"rowIndex": 0,
+"columnIndex": 0,
+"content": "ITEMIZED STATEMENT"
+},
+{
+"rowIndex": 1,
+"columnIndex": 0,
+"content": "Statement Date"
+},
+{
+"rowIndex": 1,
+"columnIndex": 1,
+"content": "09/11/2026 SAMPLE-63522449"
+},
+{
+"rowIndex": 2,
+"columnIndex": 0,
+"content": "Account Number"
+},
+{
+"rowIndex": 3,
+"columnIndex": 0,
+"content": "Page"
+},
+{
+"rowIndex": 3,
+"columnIndex": 1,
+"content": "1 of 1"
+},
+{
+"rowIndex": 4,
+"columnIndex": 0,
+"content": "AMOUNT DUE"
+},
+{
+"rowIndex": 4,
+"columnIndex": 1,
+"content": "$18,565.00"
+}
+]
+},
+{
+"rowCount": 11,
+"columnCount": 6,
+"cells": [
+{
+"rowIndex": 0,
+"columnIndex": 0,
+"content": "DATE"
+},
+{
+"rowIndex": 0,
+"columnIndex": 1,
+"content": "REV"
+},
+{
+"rowIndex": 0,
+"columnIndex": 2,
+"content": "CPT/HCPCS"
+},
+{
+"rowIndex": 0,
+"columnIndex": 3,
+"content": "DESCRIPTION"
+},
+{
+"rowIndex": 0,
+"columnIndex": 4,
+"content": "QTY"
+},
+{
+"rowIndex": 0,
+"columnIndex": 5,
+"content": "CHARGES"
+},
+{
+"rowIndex": 1,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 1,
+"columnIndex": 1,
+"content": "0450"
+},
+{
+"rowIndex": 1,
+"columnIndex": 2,
+"content": "99285"
+},
+{
+"rowIndex": 1,
+"columnIndex": 3,
+"content": "HCHG ED LEVEL 5"
+},
+{
+"rowIndex": 1,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 1,
+"columnIndex": 5,
+"content": "8,003.00"
+},
+{
+"rowIndex": 2,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 2,
+"columnIndex": 1,
+"content": "0352"
+},
+{
+"rowIndex": 2,
+"columnIndex": 2,
+"content": "74177"
+},
+{
+"rowIndex": 2,
+"columnIndex": 3,
+"content": "HCHG CT ABD & PELVIS W/CON"
+},
+{
+"rowIndex": 2,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 2,
+"columnIndex": 5,
+"content": "8,287.00"
+},
+{
+"rowIndex": 3,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 3,
+"columnIndex": 1,
+"content": "0301"
+},
+{
+"rowIndex": 3,
+"columnIndex": 2,
+"content": "80053"
+},
+{
+"rowIndex": 3,
+"columnIndex": 3,
+"content": "HCHG COMPREHENSIVE METABOLIC PANEL"
+},
+{
+"rowIndex": 3,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 3,
+"columnIndex": 5,
+"content": "386.00"
+},
+{
+"rowIndex": 4,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 4,
+"columnIndex": 1,
+"content": "0305"
+},
+{
+"rowIndex": 4,
+"columnIndex": 2,
+"content": "85025"
+},
+{
+"rowIndex": 4,
+"columnIndex": 3,
+"content": "HCHG CBC AUTOMATED W/ AUTOMATED DIFFERENTIAL"
+},
+{
+"rowIndex": 4,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 4,
+"columnIndex": 5,
+"content": "217.00"
+},
+{
+"rowIndex": 5,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 5,
+"columnIndex": 1,
+"content": "0307"
+},
+{
+"rowIndex": 5,
+"columnIndex": 2,
+"content": "81001"
+},
+{
+"rowIndex": 5,
+"columnIndex": 3,
+"content": "HCHG CORE URNALYSIS AUTO W/ MICRO"
+},
+{
+"rowIndex": 5,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 5,
+"columnIndex": 5,
+"content": "125.00"
+},
+{
+"rowIndex": 6,
+"columnIndex": 0,
+"content": "08/13/2026"
+},
+{
+"rowIndex": 6,
+"columnIndex": 1,
+"content": "0300"
+},
+{
+"rowIndex": 6,
+"columnIndex": 2,
+"content": "36415"
+},
+{
+"rowIndex": 6,
+"columnIndex": 3,
+"content": "HCHG CPMC VENIPUNCTURE BTMG"
+},
+{
+"rowIndex": 6,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 6,
+"columnIndex": 5,
+"content": "28.00"
+},
+{
+"rowIndex": 7,
+"columnIndex": 0,
+"content": "08/14/2026"
+},
+{
+"rowIndex": 7,
+"columnIndex": 1,
+"content": "0258"
+},
+{
+"rowIndex": 7,
+"columnIndex": 2,
+"content": "J7030"
+},
+{
+"rowIndex": 7,
+"columnIndex": 3,
+"content": "NACL 0.9% BOLUS IV SOLN CUSTOM CREATE"
+},
+{
+"rowIndex": 7,
+"columnIndex": 4,
+"content": "2"
+},
+{
+"rowIndex": 7,
+"columnIndex": 5,
+"content": "150.00"
+},
+{
+"rowIndex": 8,
+"columnIndex": 0,
+"content": "08/14/2026"
+},
+{
+"rowIndex": 8,
+"columnIndex": 1,
+"content": "0260"
+},
+{
+"rowIndex": 8,
+"columnIndex": 2,
+"content": "96374"
+},
+{
+"rowIndex": 8,
+"columnIndex": 3,
+"content": "HCHG IV PUSH INITIAL DRUG"
+},
+{
+"rowIndex": 8,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 8,
+"columnIndex": 5,
+"content": "647.00"
+},
+{
+"rowIndex": 9,
+"columnIndex": 0,
+"content": "08/14/2026"
+},
+{
+"rowIndex": 9,
+"columnIndex": 1,
+"content": "0636"
+},
+{
+"rowIndex": 9,
+"columnIndex": 2,
+"content": "J2405"
+},
+{
+"rowIndex": 9,
+"columnIndex": 3,
+"content": "ONDANSETRON HCL 4 MG/2ML IJ SOLN"
+},
+{
+"rowIndex": 9,
+"columnIndex": 4,
+"content": "4"
+},
+{
+"rowIndex": 9,
+"columnIndex": 5,
+"content": "75.00"
+},
+{
+"rowIndex": 10,
+"columnIndex": 0,
+"content": "08/14/2026"
+},
+{
+"rowIndex": 10,
+"columnIndex": 1,
+"content": "0260"
+},
+{
+"rowIndex": 10,
+"columnIndex": 2,
+"content": "96374"
+},
+{
+"rowIndex": 10,
+"columnIndex": 3,
+"content": "HCHG IV PUSH INITIAL DRUG"
+},
+{
+"rowIndex": 10,
+"columnIndex": 4,
+"content": "1"
+},
+{
+"rowIndex": 10,
+"columnIndex": 5,
+"content": "647.00"
+}
+]
+},
+{
+"rowCount": 5,
+"columnCount": 2,
+"cells": [
+{
+"rowIndex": 0,
+"columnIndex": 0,
+"content": "Total Charges"
+},
+{
+"rowIndex": 0,
+"columnIndex": 1,
+"content": "18,565.00"
+},
+{
+"rowIndex": 1,
+"columnIndex": 0,
+"content": "Insurance Payments"
+},
+{
+"rowIndex": 1,
+"columnIndex": 1,
+"content": "0.00"
+},
+{
+"rowIndex": 2,
+"columnIndex": 0,
+"content": "Adjustments"
+},
+{
+"rowIndex": 2,
+"columnIndex": 1,
+"content": "0.00"
+},
+{
+"rowIndex": 3,
+"columnIndex": 0,
+"content": "Patient Payments"
+},
+{
+"rowIndex": 3,
+"columnIndex": 1,
+"content": "0.00"
+},
+{
+"rowIndex": 4,
+"columnIndex": 0,
+"content": "AMOUNT DUE"
+},
+{
+"rowIndex": 4,
+"columnIndex": 1,
+"content": "$18,565.00"
+}
+]
+}
+]

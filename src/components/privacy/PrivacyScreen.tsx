@@ -20,6 +20,7 @@ export function PrivacyScreen() {
     (azureBackup || p?.search) && c.azure.retention,
     p?.search && c.azure.search,
     p?.contentSafety && c.azure.safety,
+    p?.docIntel && c.azure.docIntel,
   ].filter(Boolean);
   const processIdx = 1; // "Who helps process it"
   return (
