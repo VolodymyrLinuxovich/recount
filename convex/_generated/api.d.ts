@@ -35,6 +35,7 @@ import type * as lib_letters from "../lib/letters.js";
 import type * as lib_limit from "../lib/limit.js";
 import type * as lib_model from "../lib/model.js";
 import type * as lib_notice from "../lib/notice.js";
+import type * as lib_pages from "../lib/pages.js";
 import type * as lib_pipeline from "../lib/pipeline.js";
 import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
@@ -84,6 +85,7 @@ declare const fullApi: ApiFromModules<{
   "lib/limit": typeof lib_limit;
   "lib/model": typeof lib_model;
   "lib/notice": typeof lib_notice;
+  "lib/pages": typeof lib_pages;
   "lib/pipeline": typeof lib_pipeline;
   "lib/privacy": typeof lib_privacy;
   "lib/reference": typeof lib_reference;

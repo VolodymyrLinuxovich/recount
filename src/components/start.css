@@ -306,3 +306,98 @@
     transition: none;
   }
 }
+
+/* ---------- the pages of a paper bill, before it's sent ---------- */
+
+.bill-pages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding-top: var(--sp-2);
+}
+
+.bp-h:focus {
+  outline: none;
+}
+
+.bill-pages .bp-body {
+  font-size: var(--fs-md);
+  color: var(--ink-2);
+}
+
+.bill-pages .bp-count,
+.bill-pages .bp-max {
+  font-weight: 600;
+}
+
+.bp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.bp-item {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  padding: var(--sp-3);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--sheet);
+}
+
+.bp-thumb {
+  flex: none;
+  width: 84px;
+  height: 108px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--rule-soft);
+}
+
+.bp-side {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.bill-pages .bp-label {
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+
+.bp-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.bp-tool {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--sp-2) var(--sp-3);
+}
+
+.bp-adds {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.bp-lib,
+.bp-over {
+  min-height: 48px;
+  font-size: var(--fs-base);
+}
+
+.bp-check {
+  margin-top: var(--sp-2);
+  min-height: 64px;
+  font-size: var(--fs-md);
+}

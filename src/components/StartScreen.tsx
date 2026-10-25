@@ -14,6 +14,8 @@ import { hasOnboarded } from "./onboarding/seen";
 import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
 import { askNoticePermission } from "./flow/useDoneNotice";
+import { BillPages, type BillPage } from "./BillPages";
+import { MAX_PAGES, MAX_TOTAL_BYTES, addPages, isPdf, movePage, removePage } from "./pageList";
 import "./start.css";
 
 const STEP_TIMEOUT_MS = 25_000;
@@ -43,6 +45,13 @@ export function StartScreen() {
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
   const start = useMutation(api.cases.start);
   const input = useRef<HTMLInputElement>(null);
+  // "Choose pages from your photos": the same picker without the camera, several at once.
+  const library = useRef<HTMLInputElement>(null);
+  // A paper bill photographed page by page, before it's sent. Null until the first photo.
+  const [pages, setPages] = useState<BillPage[] | null>(null);
+  const [adding, setAdding] = useState(false);
+  // The same list for event handlers (every setPages below updates it too).
+  const pagesRef = useRef<BillPage[] | null>(null);
   const [busy, setBusy] = useState<null | "photo" | "sample">(null);
   const [error, setError] = useState<PlainKey | null>(null);
   const [onboard, setOnboard] = useState<OnboardPath | null>(null);
@@ -57,9 +66,16 @@ export function StartScreen() {
     previewUrl.current = null;
   }
 
+  function freePages() {
+    for (const p of pagesRef.current ?? []) URL.revokeObjectURL(p.url);
+    pagesRef.current = null;
+    setPages(null);
+  }
+
   function reset() {
     running.current = false;
     freePreview();
+    freePages();
     setGetting(null);
     setBusy(null);
     setOnboard(null);
@@ -115,6 +131,88 @@ export function StartScreen() {
     }
   }
 
+  /** Files from either picker. One PDF goes straight through; photos become pages to review. */
+  async function onFiles(list: FileList | null) {
+    const files = Array.from(list ?? []);
+    if (input.current) input.current.value = "";
+    if (library.current) library.current.value = "";
+    if (!files.length || running.current || adding) return;
+    const current = pagesRef.current ?? [];
+    if (!current.length && files.length === 1 && isPdf(files[0])) return onFile(files[0]);
+    if (files.some(isPdf)) {
+      setError("pages.pdfAlone");
+      return;
+    }
+    setError(null);
+    setAdding(true);
+    const room = Math.max(0, MAX_PAGES - current.length);
+    const ready: BillPage[] = [];
+    let problem: PlainKey | null = files.length > room ? "pages.tooMany" : null;
+    for (const f of files.slice(0, room)) {
+      try {
+        const { blob, type } = await prepareFile(f);
+        ready.push({ id: crypto.randomUUID(), blob, type, url: URL.createObjectURL(blob) });
+      } catch (e) {
+        problem = e instanceof FileProblem ? e.key : "file.cantOpen";
+      }
+    }
+    setAdding(false);
+    const next = addPages(pagesRef.current ?? [], ready);
+    for (const p of next.dropped) URL.revokeObjectURL(p.url);
+    if (next.list.length) {
+      pagesRef.current = next.list;
+      setPages(next.list);
+    }
+    if (problem) setError(problem);
+  }
+
+  function changePages(f: (list: BillPage[]) => BillPage[]) {
+    const list = f(pagesRef.current ?? []);
+    pagesRef.current = list;
+    setPages(list);
+    setError(null);
+  }
+
+  function removeAt(i: number) {
+    const gone = pagesRef.current?.[i];
+    if (gone) URL.revokeObjectURL(gone.url);
+    const left = removePage(pagesRef.current ?? [], i);
+    if (left.length) changePages(() => left);
+    else freePages();
+  }
+
+  /** "Check my bill": send every page, in order, as one bill. */
+  async function onCheck() {
+    const list = pagesRef.current;
+    if (!list?.length || running.current) return;
+    if (list.length > 1 && list.reduce((n, p) => n + p.blob.size, 0) > MAX_TOTAL_BYTES) {
+      setError("pages.tooBig");
+      return;
+    }
+    running.current = true;
+    askNoticePermission();
+    setBusy("photo");
+    setError(null);
+    setGetting({ preview: list[0].url, pdf: false, stage: 1 });
+    try {
+      const ids = await Promise.all(list.map((p) => upload(p.blob)));
+      setGetting((g) => g && { ...g, stage: 2 });
+      const morePages = list.slice(1).map((p, i) => ({ fileId: ids[i + 1], type: p.type }));
+      const { id, token } = await withinTime(
+        start({ fileId: ids[0], fileType: list[0].type, ...(morePages.length ? { morePages } : {}), sample: false, lang, ...hospitalHint() }),
+      );
+      rememberCase(id, token);
+      setGetting((g) => g && { ...g, stage: 3 });
+      goToCase(`/case/${id}#t=${token}`);
+    } catch (e) {
+      // Keep the pages so the patient can try again without taking the photos again.
+      setError(/too many/i.test(String(e)) ? "start.busy" : "start.uploadFailed");
+      running.current = false;
+      setGetting(null);
+      setBusy(null);
+    }
+  }
+
   async function onSample() {
     if (running.current) return;
     running.current = true;
@@ -149,12 +247,25 @@ export function StartScreen() {
       type="file"
       accept="image/*,application/pdf"
       capture="environment"
+      multiple
       className="visually-hidden"
       id="bill-file"
       // The visible "Take a photo" / "Upload" buttons open it; it's not a Tab stop of its own.
       tabIndex={-1}
       aria-hidden="true"
-      onChange={(e) => onFile(e.target.files?.[0])}
+      onChange={(e) => onFiles(e.target.files)}
+    />
+  );
+  const libraryInput = (
+    <input
+      ref={library}
+      type="file"
+      accept="image/*"
+      multiple
+      className="visually-hidden"
+      tabIndex={-1}
+      aria-hidden="true"
+      onChange={(e) => onFiles(e.target.files)}
     />
   );
   const errorNote = error && (
@@ -194,7 +305,25 @@ export function StartScreen() {
   return (
     <>
       {fileInput}
-      {getting ? <GettingBill {...getting} /> : onboardingEl ?? (
+      {libraryInput}
+      {getting ? (
+        <GettingBill {...getting} />
+      ) : pages?.length ? (
+        <BillPages
+          pages={pages}
+          adding={adding}
+          error={errorNote}
+          onAddCamera={() => input.current?.click()}
+          onAddLibrary={() => library.current?.click()}
+          onMove={(i, dir) => changePages((l) => movePage(l, i, dir))}
+          onRemove={removeAt}
+          onCheck={onCheck}
+          onStartOver={() => {
+            freePages();
+            setError(null);
+          }}
+        />
+      ) : onboardingEl ?? (
         <div className="start">
           <Landing
             actions={{
