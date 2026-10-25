@@ -13,6 +13,7 @@ import { Onboarding, type OnboardPath } from "./onboarding/Onboarding";
 import { hasOnboarded } from "./onboarding/seen";
 import type { PlainKey } from "./i18n/strings";
 import { FileProblem, prepareFile } from "./prepareFile";
+import { askNoticePermission } from "./flow/useDoneNotice";
 import "./start.css";
 
 const STEP_TIMEOUT_MS = 25_000;
@@ -91,6 +92,7 @@ export function StartScreen() {
   async function onFile(file: File | undefined) {
     if (!file || running.current) return;
     running.current = true;
+    askNoticePermission();
     setBusy("photo");
     setError(null);
     freePreview();
@@ -116,6 +118,7 @@ export function StartScreen() {
   async function onSample() {
     if (running.current) return;
     running.current = true;
+    askNoticePermission();
     setBusy("sample");
     setError(null);
     freePreview();

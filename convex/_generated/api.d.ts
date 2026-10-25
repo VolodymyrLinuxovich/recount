@@ -33,6 +33,7 @@ import type * as lib_letterCheck from "../lib/letterCheck.js";
 import type * as lib_letters from "../lib/letters.js";
 import type * as lib_limit from "../lib/limit.js";
 import type * as lib_model from "../lib/model.js";
+import type * as lib_notice from "../lib/notice.js";
 import type * as lib_pipeline from "../lib/pipeline.js";
 import type * as lib_privacy from "../lib/privacy.js";
 import type * as lib_reference from "../lib/reference.js";
@@ -43,6 +44,7 @@ import type * as lib_statewide from "../lib/statewide.js";
 import type * as lib_timeout from "../lib/timeout.js";
 import type * as lib_user from "../lib/user.js";
 import type * as metrics from "../metrics.js";
+import type * as notify from "../notify.js";
 import type * as pipeline from "../pipeline.js";
 import type * as profile from "../profile.js";
 
@@ -78,6 +80,7 @@ declare const fullApi: ApiFromModules<{
   "lib/letters": typeof lib_letters;
   "lib/limit": typeof lib_limit;
   "lib/model": typeof lib_model;
+  "lib/notice": typeof lib_notice;
   "lib/pipeline": typeof lib_pipeline;
   "lib/privacy": typeof lib_privacy;
   "lib/reference": typeof lib_reference;
@@ -88,6 +91,7 @@ declare const fullApi: ApiFromModules<{
   "lib/timeout": typeof lib_timeout;
   "lib/user": typeof lib_user;
   metrics: typeof metrics;
+  notify: typeof notify;
   pipeline: typeof pipeline;
   profile: typeof profile;
 }>;

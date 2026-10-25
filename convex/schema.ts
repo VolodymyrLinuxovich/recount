@@ -124,4 +124,11 @@ export default defineSchema({
     data: v.any(),
     fetchedAt: v.number(),
   }).index("by_key", ["key"]),
+  /** Expo push tokens of phones that asked to hear when a bill is done (see convex/notify.ts). */
+  pushTokens: defineTable({
+    caseId: v.id("cases"),
+    pushToken: v.string(),
+    platform: v.optional(v.string()),
+    createdAt: v.number(),
+  }).index("by_case", ["caseId"]),
 });

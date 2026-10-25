@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CaseFlow } from "./flow/CaseFlow";
+import { useDoneNotice } from "./flow/useDoneNotice";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { tokenFor, tokenFromLink, useRememberCase } from "./bills/myBills";
@@ -29,6 +30,7 @@ export function CaseScreen() {
     | undefined;
   const c = raw ? { ...raw, token: token ?? undefined } : raw;
   useRememberCase(id, token ?? undefined, c);
+  useDoneNotice(c);
   const { t, lang } = useT();
 
   if (!validId)

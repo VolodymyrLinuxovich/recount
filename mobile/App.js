@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
+import { anyApi } from "convex/server";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import { AccountScreen, useAccountBills } from "./src/Account";
 import { CaseFlow } from "./src/CaseFlow";
 import { ChatProvider } from "./src/Chat";
 import { loadBills, rememberBill } from "./src/myBills";
+import { askForBill, onNoticeTap, setOpenBill, setupNotifications } from "./src/notify";
 import { StartScreen } from "./src/StartScreen";
 import { STRINGS } from "./src/strings";
 import { Platform, View } from "react-native";
@@ -17,6 +19,7 @@ import { C, FONTS } from "./src/theme";
 export const CONVEX_URL = process.env.EXPO_PUBLIC_CONVEX_URL || "https://zealous-grouse-384.convex.cloud";
 const convex = new ConvexReactClient(CONVEX_URL, { unsavedChangesWarning: false });
 const LANG_KEY = "recount.lang";
+setupNotifications();
 
 // Sign-in tokens stay on the phone, in the same storage as My bills.
 const authStorage = Platform.OS === "web" ? undefined : AsyncStorage;
@@ -37,6 +40,18 @@ export default function App() {
       .catch(() => {});
   }, [refresh]);
 
+  // Tapping "your bill check is done" opens that bill.
+  useEffect(
+    () =>
+      onNoticeTap(async (caseId) => {
+        const b = (await loadBills()).find((x) => x.id === caseId);
+        setAccount(false);
+        setCurrent({ id: caseId, token: b?.token });
+      }),
+    [],
+  );
+  useEffect(() => setOpenBill(current?.id), [current]);
+
   const setLang = (l) => {
     setLangState(l);
     AsyncStorage.setItem(LANG_KEY, l).catch(() => {});
@@ -45,6 +60,8 @@ export default function App() {
   async function onStarted({ id, token }) {
     await rememberBill({ id, token, hospitalName: null, createdAt: Date.now() });
     setCurrent({ id, token });
+    // Ask about notifications now, while the bill is being read, so the patient can leave the app.
+    askForBill(id, token, (args) => convex.mutation(anyApi.notify.register, args));
   }
 
   function goHome() {

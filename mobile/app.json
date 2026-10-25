@@ -32,7 +32,8 @@
           "cameraPermission": "Recount uses the camera so you can take a picture of your hospital bill."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-notifications"
     ],
     "web": {
       "favicon": "./assets/favicon.png"

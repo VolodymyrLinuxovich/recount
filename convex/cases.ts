@@ -14,6 +14,7 @@ import { FPL } from "./lib/reference";
 import { HOSPITALS, tokens } from "./lib/statewide";
 import { kindOf } from "./lib/pipeline";
 import { limit } from "./lib/limit";
+import { notifyOnStatus, removeTokens } from "./notify";
 
 // ---- access: each case has a random secret kept only on the patient's phone ----
 
@@ -73,6 +74,7 @@ export const expire = internalMutation({
       await ctx.scheduler.runAfter(60_000, internal.cases.expire, { caseId, status, since: statusAt, templateOnly: true });
       return;
     }
+    await notifyOnStatus(ctx, c, "error");
     await ctx.db.patch(caseId, {
       status: "error",
       error:
@@ -298,6 +300,7 @@ export const remove = mutation({
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await removeTokens(ctx, id);
     await ctx.db.delete(id);
   },
 });
@@ -449,7 +452,11 @@ export const load = internalQuery({
 
 export const patch = internalMutation({
   args: { id: v.id("cases"), fields: v.any() },
-  handler: async (ctx, { id, fields }) => ctx.db.patch(id, fields),
+  handler: async (ctx, { id, fields }) => {
+    const c = await ctx.db.get(id);
+    await ctx.db.patch(id, fields);
+    if (c) await notifyOnStatus(ctx, c, fields?.status, fields?.findings);
+  },
 });
 
 /** Log one model call for a case (see lib/model.ts). */
@@ -518,6 +525,7 @@ export const adminRemove = internalMutation({
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
     if (c.fileId) await ctx.storage.delete(c.fileId);
     if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await removeTokens(ctx, id);
     await ctx.db.delete(id);
     return "deleted";
   },

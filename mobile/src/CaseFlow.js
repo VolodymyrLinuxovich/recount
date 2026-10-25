@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, BackHandler, Image, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import { money } from "./strings";
 import { forgetBill, updateBill } from "./myBills";
+import { useBackgroundNotice } from "./notify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { EMPTY_DETAILS, checkDetails, fillLetter } from "./letterFill";
 
@@ -18,6 +19,7 @@ const QUESTION_PAGES = ["found", "size", "income", "insured", "oop"];
 export function CaseFlow({ t, id, token, onHome }) {
   const c = useQuery(api.cases.get, { id, token });
   const status = c?.status;
+  useBackgroundNotice(id, c);
   const [page, setPage] = useState(null);
   const [letterIndex, setLetterIndex] = useState(0);
   const [household, setHousehold] = useState({ size: 1, income: "", insured: null, oop: "" });

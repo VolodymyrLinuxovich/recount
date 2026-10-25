@@ -2,6 +2,7 @@
 import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { mutation } from "./_generated/server";
+import { removeTokens } from "./notify";
 
 export const remove = mutation({
   args: { deleteBills: v.boolean() },
@@ -16,6 +17,7 @@ export const remove = mutation({
         for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(r._id);
         if (c.fileId) await ctx.storage.delete(c.fileId);
         if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+        await removeTokens(ctx, c._id);
         await ctx.db.delete(c._id);
       } else {
         // Keep the bills, reachable only by their private links again.
