@@ -15,6 +15,7 @@ import { HOSPITALS, tokens } from "./lib/statewide";
 import { kindOf } from "./lib/pipeline";
 import { limit } from "./lib/limit";
 import { notifyOnStatus, removeTokens } from "./notify";
+import { billPages, pagesMessage, pagesProblem } from "./lib/pages";
 
 // ---- access: each case has a random secret kept only on the patient's phone ----
 
@@ -124,8 +125,11 @@ export const generateUploadUrl = mutation({
 });
 
 const CreateArgs = {
+  /** Page 1 of the bill (or its only file: a photo or a PDF). */
   fileId: v.optional(v.id("_storage")),
   fileType: v.optional(v.string()),
+  /** Pages 2..N when the bill is several photos, in order. Photos only, up to 6 pages in all. */
+  morePages: v.optional(v.array(v.object({ fileId: v.id("_storage"), type: v.string() }))),
   sample: v.boolean(),
   lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
   /** A hospital key (HCAI slug) the patient came from, e.g. the audit page. Settles unclear matches. */
@@ -137,6 +141,18 @@ export const start = mutation({
   args: CreateArgs,
   handler: async (ctx, args) => {
     await limit(ctx, "create", 60, 60_000);
+    const morePages = args.morePages?.length ? args.morePages : undefined;
+    if (morePages) {
+      const lang = args.lang ?? "en";
+      if (!args.fileId) throw new ConvexError(pagesMessage("count", lang));
+      const ids = [args.fileId, ...morePages.map((p) => p.fileId)];
+      const types = [args.fileType ?? "", ...morePages.map((p) => p.type)];
+      if (new Set(ids).size !== ids.length) throw new ConvexError(pagesMessage("count", lang));
+      let total = 0;
+      for (const fid of ids) total += (await ctx.db.system.get(fid))?.size ?? 0;
+      const problem = pagesProblem(types, total);
+      if (problem) throw new ConvexError(pagesMessage(problem, lang));
+    }
     const token = crypto.randomUUID();
     const ownerId = (await currentUser(ctx)) ?? undefined;
     const now = Date.now();
@@ -148,6 +164,7 @@ export const start = mutation({
       sample: args.sample,
       fileId: args.fileId,
       fileType: args.fileType,
+      morePages,
       lang: args.lang,
       hospitalHint: args.hospitalHint,
       token,
@@ -168,6 +185,10 @@ export const get = query({
       .withIndex("by_case", (q) => q.eq("caseId", id))
       .collect();
     const fileUrl = c.fileId ? await ctx.storage.getUrl(c.fileId) : null;
+    // Every page's picture, page 1 first (a single file is a list of one).
+    const pageUrls = c.morePages?.length
+      ? (await Promise.all(billPages(c).map((p) => ctx.storage.getUrl(p.fileId)))).filter((u): u is string => !!u)
+      : fileUrl ? [fileUrl] : [];
     const eobFileUrl = c.eobFileId ? await ctx.storage.getUrl(c.eobFileId) : null;
     const { token: _secret, ownerId, ...rest } = c;
     void _secret;
@@ -175,7 +196,7 @@ export const get = query({
     const runs = await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect();
     const agentRuns = runs.map(({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }) => ({ task, provider, model, ms, inputTokens, outputTokens, ok, fallbackUsed, at }));
     // rest carries eobStatus, eob, eobError and eobSource; eobFileId stays internal like fileId's url.
-    return { ...rest, steps, fileUrl, eobFileUrl, agentRuns, mine: !!ownerId && userId === ownerId };
+    return { ...rest, steps, fileUrl, pageUrls, eobFileUrl, agentRuns, mine: !!ownerId && userId === ownerId };
   },
 });
 
@@ -298,7 +319,7 @@ export const remove = mutation({
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
-    if (c.fileId) await ctx.storage.delete(c.fileId);
+    for (const p of billPages(c)) await ctx.storage.delete(p.fileId);
     if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
     await removeTokens(ctx, id);
     await ctx.db.delete(id);
@@ -523,7 +544,7 @@ export const adminRemove = internalMutation({
     for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(s._id);
     for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(m._id);
     for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", id)).collect()) await ctx.db.delete(r._id);
-    if (c.fileId) await ctx.storage.delete(c.fileId);
+    for (const p of billPages(c)) await ctx.storage.delete(p.fileId);
     if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
     await removeTokens(ctx, id);
     await ctx.db.delete(id);

@@ -1,9 +1,10 @@
 "use node";
 
-import { filePart, modelReady, structured, type Run } from "./lib/model";
+import { filePart, modelReady, structured, type Part, type Run } from "./lib/model";
 import type { Kind } from "./lib/pipeline";
 import { inventedAmounts } from "./lib/letterCheck";
-import { DOCINTEL_MODEL, analyzeLayout, docIntelOn, linesFromTables } from "./lib/docIntel";
+import { DOCINTEL_MODEL, analyzeLayout, docIntelOn, linesFromPages } from "./lib/docIntel";
+import { billPages, inOrder, pagesNote } from "./lib/pages";
 import { v } from "convex/values";
 import { z } from "zod";
 import { internal } from "./_generated/api";
@@ -61,11 +62,22 @@ function niceName(name: string): string {
     .trim();
 }
 
-async function readBill(blob: Blob, mediaType: string, lang: Lang, record: (r: Run) => Promise<void>): Promise<ParsedBill> {
+/** One file of a bill, read from storage. */
+type PageFile = { blob: Blob; type: string };
+
+/** The bill's files as message parts. Several pages are labeled "Page k of N" so the order is plain. */
+async function pageParts(pages: PageFile[]): Promise<Part[]> {
+  if (pages.length === 1) return [await filePart(pages[0].blob, pages[0].type)];
+  const parts: Part[] = [];
+  for (const [i, p] of pages.entries()) parts.push({ type: "text", text: `Page ${i + 1} of ${pages.length}:` }, await filePart(p.blob, p.type));
+  return parts;
+}
+
+async function readBill(pages: PageFile[], lang: Lang, record: (r: Run) => Promise<void>): Promise<ParsedBill> {
   const res = await structured(
     {
       task: "read",
-      parts: [await filePart(blob, mediaType), { type: "text", text: READ_PROMPT + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }],
+      parts: [...(await pageParts(pages)), { type: "text", text: READ_PROMPT + pagesNote(pages.length) + (lang === "es" ? "\n- Write the notes in \"unreadable\" in Spanish (the patient reads Spanish). Keep everything else exactly as printed." : "") }],
       schema: ParsedBill,
       maxTokens: 16000,
     },
@@ -154,14 +166,16 @@ const ChargesColumn = z.object({
  * else (no totals), it has no reason to "fix" a line so the lines add up, which full-bill reads
  * sometimes do. Returns amounts in line order, or null if it can't be used.
  */
-async function readChargesColumn(blob: Blob, mediaType: string, record: (r: Run) => Promise<void>): Promise<number[] | null> {
+async function readChargesColumn(pages: PageFile[], record: (r: Run) => Promise<void>): Promise<number[] | null> {
   // With Azure AI Document Intelligence on, the second read is OCR and table detection: a different
   // method from a different vendor. If it fails or finds no table, fall back to the Claude column read.
+  // Several photos are read one per request (two at a time) and their lines joined in page order;
+  // if any page fails, the whole second read falls back.
   if (docIntelOn()) {
     const t0 = Date.now();
     try {
-      const data = Buffer.from(await blob.arrayBuffer()).toString("base64");
-      const lines = linesFromTables(await analyzeLayout(data));
+      const tables = await inOrder(pages, 2, async (p) => analyzeLayout(Buffer.from(await p.blob.arrayBuffer()).toString("base64")));
+      const lines = linesFromPages(tables);
       const run: Run = { task: "column", provider: "azure-docintel", model: DOCINTEL_MODEL, ms: Date.now() - t0, inputTokens: null, outputTokens: null, ok: lines.length > 0, fallbackUsed: false };
       await record(lines.length ? run : { ...run, error: "no line-item table found" });
       if (lines.length) return lines.map((l) => l.charge);
@@ -172,7 +186,10 @@ async function readChargesColumn(blob: Blob, mediaType: string, record: (r: Run)
   const res = await structured(
     {
       task: "column",
-      parts: [await filePart(blob, mediaType), { type: "text", text: "Copy the CHARGES column of the itemized line table, top to bottom across all pages, exactly as printed, one string per line item. Only the line items: no totals, payments or amount due." }],
+      parts: [
+        ...(await pageParts(pages)),
+        { type: "text", text: "Copy the CHARGES column of the itemized line table, top to bottom across all pages, exactly as printed, one string per line item. Only the line items: no totals, payments or amount due." + (pages.length > 1 ? ` The ${pages.length} images are pages 1 to ${pages.length} of one bill, in order: go through them in that order.` : "") },
+      ],
       schema: ChargesColumn,
       maxTokens: 4000,
     },
@@ -353,17 +370,23 @@ export const readAndCheck = internalAction({
       await step(ctx, caseId, "read", t("Reading your bill", "Leyendo su factura"), "running");
       let bill: ParsedBill;
       let billSource: "claude" | "sample-source" = "claude";
-      if (c.fileId && modelReady("read")) {
-        const blob = await ctx.storage.get(c.fileId);
-        if (!blob) throw new Error("Uploaded file is missing");
+      const files = billPages(c);
+      if (files.length && modelReady("read")) {
+        const pages: PageFile[] = [];
+        for (const f of files) {
+          const blob = await ctx.storage.get(f.fileId);
+          if (!blob) throw new Error("Uploaded file is missing");
+          pages.push({ blob, type: f.type ?? (blob.type || "image/jpeg") });
+        }
         try {
           // Two reads in parallel (no extra wait): the full bill, and a narrow copy of just the CHARGES
           // column. A full read sometimes "fixes" a line so the lines match the printed total, which
           // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
           // literal column copy AND show the patient both numbers to check against the paper bill.
-          const type = c.fileType ?? blob.type ?? "image/jpeg";
-          // The second read is only a check: past COLUMN_READ_MS we go on without it ("couldn't compare").
-          const [first, column] = await Promise.all([readBill(blob, type, lang, recorder(ctx, caseId)), nullAfter(readChargesColumn(blob, type, recorder(ctx, caseId)), COLUMN_READ_MS)]);
+          // The second read is only a check: past its time limit we go on without it ("couldn't compare").
+          // Each extra photo page gets a little more time.
+          const columnMs = Math.min(60_000, COLUMN_READ_MS + 8_000 * (pages.length - 1));
+          const [first, column] = await Promise.all([readBill(pages, lang, recorder(ctx, caseId)), nullAfter(readChargesColumn(pages, recorder(ctx, caseId)), columnMs)]);
           bill = first;
           if (column && column.length === first.lines.length) {
             const disagree = first.lines

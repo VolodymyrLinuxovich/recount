@@ -31,6 +31,8 @@ export default defineSchema({
     lang: v.optional(v.union(v.literal("en"), v.literal("es"))),
     fileId: v.optional(v.id("_storage")),
     fileType: v.optional(v.string()),
+    /** Pages 2..N of a bill sent as several photos, in order (page 1 is fileId). See lib/pages.ts. */
+    morePages: v.optional(v.array(v.object({ fileId: v.id("_storage"), type: v.string() }))),
     bill: v.optional(v.any()),
     billSource: v.optional(v.union(v.literal("claude"), v.literal("sample-source"))),
     hospital: v.optional(v.any()),

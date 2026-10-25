@@ -518,3 +518,8 @@
   margin: var(--sp-1) 0 0;
   font-size: var(--fs-sm);
 }
+
+/* A bill sent as several photos shows every page, one under the other. */
+.found-viewer-scroll img + img {
+  margin-top: var(--sp-3);
+}

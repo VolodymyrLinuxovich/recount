@@ -38,27 +38,44 @@ export function money(s: string): number | null {
  * Pull the line items out of the tables: find tables whose header names a charges column, then take
  * every row with a readable amount, in reading order, skipping totals and payments. A bill whose table
  * runs over several pages comes back as several tables with the same header, so they're joined.
+ * With `continued` (photos of a bill's pages, see linesFromPages), a table with no header that has the
+ * same columns as the last charges table is read as that table running on onto the next page.
  */
-export function linesFromTables(tables: Table[]): TableLine[] {
+export function linesFromTables(tables: Table[], opts: { continued?: boolean } = {}): TableLine[] {
   const out: TableLine[] = [];
+  let last: { columnCount: number; chargeCol: number; codeCol: number } | null = null;
   for (const t of tables) {
     const rows: string[][] = Array.from({ length: t.rowCount }, () => Array(t.columnCount).fill(""));
     for (const c of t.cells) rows[c.rowIndex][c.columnIndex] = c.content.trim();
     const headerAt = rows.findIndex((r) => r.some((x) => CHARGE_HEAD.test(x)) && r.some((x) => CODE_HEAD.test(x) || DESC_HEAD.test(x)));
-    if (headerAt < 0) continue;
-    const head = rows[headerAt];
-    // The charges column is the last money-like header ("CHARGES" after "QTY" and "UNIT PRICE").
-    const chargeCol = head.map((h, i) => (CHARGE_HEAD.test(h) ? i : -1)).filter((i) => i >= 0).pop()!;
-    const codeCol = head.findIndex((h) => CODE_HEAD.test(h) && !/rev/i.test(h));
-    for (const r of rows.slice(headerAt + 1)) {
+    let cols: { chargeCol: number; codeCol: number };
+    let body: string[][];
+    if (headerAt >= 0) {
+      const head = rows[headerAt];
+      // The charges column is the last money-like header ("CHARGES" after "QTY" and "UNIT PRICE").
+      const chargeCol = head.map((h, i) => (CHARGE_HEAD.test(h) ? i : -1)).filter((i) => i >= 0).pop()!;
+      const codeCol = head.findIndex((h) => CODE_HEAD.test(h) && !/rev/i.test(h));
+      cols = { chargeCol, codeCol };
+      last = { columnCount: t.columnCount, ...cols };
+      body = rows.slice(headerAt + 1);
+    } else if (opts.continued && last && t.columnCount === last.columnCount) {
+      cols = last;
+      body = rows;
+    } else continue;
+    for (const r of body) {
       if (r.some((x) => NOT_A_LINE.test(x))) continue;
-      const charge = money(r[chargeCol] ?? "");
+      const charge = money(r[cols.chargeCol] ?? "");
       if (charge === null) continue;
-      const code = codeCol >= 0 ? r[codeCol] || null : null;
+      const code = cols.codeCol >= 0 ? r[cols.codeCol] || null : null;
       out.push({ code, charge });
     }
   }
   return out;
+}
+
+/** The line items of a bill sent as several photos: each page's tables, in page order, read as one. */
+export function linesFromPages(pages: Table[][]): TableLine[] {
+  return linesFromTables(pages.flat(), { continued: pages.length > 1 });
 }
 
 /** Send the bill to Document Intelligence and wait for the layout result. Throws on any failure. */

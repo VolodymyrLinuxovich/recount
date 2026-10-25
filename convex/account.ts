@@ -3,6 +3,7 @@ import { currentUser } from "./lib/user";
 import { ConvexError, v } from "convex/values";
 import { mutation } from "./_generated/server";
 import { removeTokens } from "./notify";
+import { billPages } from "./lib/pages";
 
 export const remove = mutation({
   args: { deleteBills: v.boolean() },
@@ -15,7 +16,7 @@ export const remove = mutation({
         for (const s of await ctx.db.query("steps").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(s._id);
         for (const m of await ctx.db.query("chatMessages").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(m._id);
         for (const r of await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", c._id)).collect()) await ctx.db.delete(r._id);
-        if (c.fileId) await ctx.storage.delete(c.fileId);
+        for (const p of billPages(c)) await ctx.storage.delete(p.fileId);
         if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
         await removeTokens(ctx, c._id);
         await ctx.db.delete(c._id);

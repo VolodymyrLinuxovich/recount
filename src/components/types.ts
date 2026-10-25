@@ -50,6 +50,8 @@ export interface CaseView {
   sample: boolean;
   fileType?: string;
   fileUrl: string | null;
+  /** Every page of the bill, page 1 first (a bill can be several photos). */
+  pageUrls?: string[];
   bill?: ParsedBill;
   billSource?: "claude" | "sample-source";
   hospital?: HospitalRef | null;

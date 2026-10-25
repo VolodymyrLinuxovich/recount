@@ -80,8 +80,10 @@ function BillThumb({ c }: { c: CaseView }) {
             {t("found.closeBill")}
           </button>
           <div className="found-viewer-scroll">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.fileUrl} alt={t("found.billAlt")} />
+            {(c.pageUrls?.length ? c.pageUrls : [c.fileUrl]).map((u, i, all) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={u} src={u} alt={all.length > 1 ? t("pages.pageAlt", { n: i + 1, total: all.length }) : t("found.billAlt")} />
+            ))}
           </div>
         </div>
       )}
