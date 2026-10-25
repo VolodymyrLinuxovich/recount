@@ -106,10 +106,18 @@ def index_schema(name: str) -> dict:
             s("explanation", searchable=True),
             s("text", searchable=True),
             s("url"),
+            # stored=False: no second, retrievable copy of each vector (we never read them back).
             {"name": "vector", "type": "Collection(Edm.Single)", "searchable": True, "retrievable": False,
-             "dimensions": DIMS, "vectorSearchProfile": "v"},
+             "stored": False, "dimensions": DIMS, "vectorSearchProfile": "v"},
         ],
-        "vectorSearch": {"algorithms": [{"name": "hnsw", "kind": "hnsw"}], "profiles": [{"name": "v", "algorithm": "hnsw"}]},
+        # int8 scalar quantization keeps the vector index about 4x smaller; the top hits are re-ranked
+        # with the full vectors, so results barely change.
+        "vectorSearch": {
+            "algorithms": [{"name": "hnsw", "kind": "hnsw"}],
+            "compressions": [{"name": "sq", "kind": "scalarQuantization", "scalarQuantizationParameters": {"quantizedDataType": "int8"},
+                              "rerankWithOriginalVectors": True, "defaultOversampling": 4}],
+            "profiles": [{"name": "v", "algorithm": "hnsw", "compression": "sq"}],
+        },
     }
 
 
@@ -117,6 +125,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--env", type=Path, required=True, help="file with the Azure keys")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--index", help="index name (default: AZURE_SEARCH_INDEX or recount-policies)")
     a = ap.parse_args()
     docs = documents()
     print(f"{len(docs)} documents, {sum(len(d['text']) for d in docs) / 1e6:.2f} MB of text, "
@@ -126,7 +135,7 @@ def main() -> None:
         return
     e = read_env(a.env)
     search, skey = e["AZURE_SEARCH_ENDPOINT"].rstrip("/"), e["AZURE_SEARCH_KEY"]
-    index = e.get("AZURE_SEARCH_INDEX", "recount-policies")
+    index = a.index or e.get("AZURE_SEARCH_INDEX", "recount-policies")
     aoai, akey = e["AZURE_OPENAI_ENDPOINT"].rstrip("/"), e["AZURE_OPENAI_API_KEY"]
     dep = e.get("AZURE_OPENAI_EMBEDDING_DEPLOYMENT", "text-embedding-3-small")
     ver = e.get("AZURE_OPENAI_API_VERSION", "2024-10-21")
