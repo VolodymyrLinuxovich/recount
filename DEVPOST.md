@@ -150,6 +150,7 @@ Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7,
 
 ## Links
 
+- Demo video: https://youtu.be/24TXyeufQPs
 - Live app: https://recount-nu.vercel.app
 - Android app (APK): https://expo.dev/artifacts/eas/By0CXz5JAOlEsQQMWguI0D52ShsBFt-xVDnBlvMLuxk.apk
 - Code: https://github.com/VolodymyrLinuxovich/recount
