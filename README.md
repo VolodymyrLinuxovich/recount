@@ -232,18 +232,24 @@ from the hospital's real published charges. Cut to about 45 seconds.</sub>
 
 </div>
 
-**Where Claude is used, and where it is not**
+**Who does each step**
+
+In the order a bill goes through Recount. Some steps use two sponsors together.
 
 | Step | Who does it | Why |
 |------|-------------|-----|
-| Read the bill photo | **Claude**, plus Azure AI Document Intelligence as a second read of the charges | Bills are messy photos. Output is forced into a schema. Code compares the two reads line by line and flags any amount they disagree on |
-| Find price files and policies | Apify Actor, plain code | No model. It crawls and streams files |
+| Take the photo and start the check | **Convex** file storage and a scheduled action | The photo goes straight to Convex. The check runs in the background, so closing the app doesn't stop it |
+| Read the bill photo | **Claude**, plus **Azure** AI Document Intelligence as a second read of the charges | Bills are messy photos. Output is forced into a schema. Code compares the two reads line by line and flags any amount they disagree on |
+| Find price files and policies | **Apify** Actor, plain code | No model. It crawls and streams files |
+| Show each step as it happens | **Convex** live queries on the step log | The phone subscribes to the case, so every step and finding appears without a refresh |
 | Flag bad charges | **Rules only** | Every flag points at a bill line and a published number |
 | Decide eligibility | **Rules only** | A wrong "you qualify" costs a family real money |
-| Draft letters | **Claude**, template fallback | Claude gets only the computed facts as JSON |
+| Draft letters | **Claude**, template fallback, scheduled by **Convex** | Claude gets only the computed facts as JSON |
 | Check the topic of a chat question | Rules first, then a short model check | Lupa answers only questions about bills, insurance, help paying and medical debt. A crisis message always gets the crisis reply |
-| Lupa helper chat | **Claude**, Azure OpenAI gpt-4.1-mini as backup | Answers from this bill's facts, with quotes from the hospital's policies found by Azure AI Search. Azure AI Content Safety checks every message. It doesn't change answers or send anything |
+| Lupa helper chat | **Claude**, **Azure** OpenAI gpt-4.1-mini as backup, messages kept in **Convex** | Answers from this bill's facts, with quotes from the hospital's policies found by **Azure** AI Search. **Azure** AI Content Safety checks every message. It doesn't change answers or send anything |
+| Follow-up and state complaint | **Convex** for the check-in date, **Claude** for the complaint letter, template fallback | If the hospital says no, the patient gets a complaint to HCAI with the same facts |
 | Review audit sentences | **Claude**, twice, with a quote check | A verdict is dropped if its quote isn't in the policy text |
+| Dashboard metrics | **Convex** cron, pulling **Apify**'s run records | Live counts from an anonymous log, with no bill contents |
 | Send anything | Nobody | The patient sends the letters |
 
 ---
