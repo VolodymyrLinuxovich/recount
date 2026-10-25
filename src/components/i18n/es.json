@@ -124,6 +124,8 @@
   "flow.foundH": "{n, plural, =0 {Revisamos su factura} one {Encontramos # cosa que vale la pena preguntarle al hospital} other {Encontramos # cosas que vale la pena preguntarle al hospital}}",
   "flow.writingH": "Estamos escribiendo sus cartas",
   "flow.writingBody": "Tarda más o menos medio minuto. Puede quedarse en esta pantalla.",
+  "flow.slowRetry": "¿Está tardando mucho? Intentar de nuevo",
+  "flow.slowRetryFailed": "No funcionó. Inténtelo de nuevo en un minuto.",
   "flow.detailsH": "Sus datos para la carta",
   "flow.sendH": "Envíe sus cartas",
   "flow.seeLettersAgain": "Ver mis cartas",

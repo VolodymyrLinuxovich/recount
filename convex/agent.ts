@@ -15,7 +15,7 @@ import { EobRead, fromEobRead, normalizeEobDates, ParsedEob } from "./lib/eob";
 import { allFindings } from "./lib/eobChecks";
 import type { Eligibility } from "./lib/eligibility";
 import type { HospitalRef } from "./lib/hospital";
-import { lawLine, letterKinds, letterPrompt, letterTitle, resolveFilledBrackets, templateLetters, type Letter } from "./lib/letters";
+import { lawLine, letterKinds, letterPrompt, letterTitle, resolveFilledBrackets, templateLetters, type Letter, type LetterFacts } from "./lib/letters";
 import { type Lang, isLang, money, pick } from "./lib/lang";
 import { KNOWN_HOSPITALS, SNAPSHOTS, policyFindingsFor, type PolicyFinding } from "./lib/reference";
 import { SAMPLE_BILL, SAMPLE_EOB } from "./lib/sample";
@@ -322,6 +322,25 @@ async function finishCheck(ctx: ActionCtx, caseId: Id<"cases">, bill: ParsedBill
   });
 }
 
+const COLUMN_READ_MS = 25_000;
+
+/** p's value, or null if it fails or hasn't settled within ms (a plain timer; see lib/timeout.ts). */
+function nullAfter<T>(p: Promise<T>, ms: number): Promise<T | null> {
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(null), ms);
+    p.then(
+      (v) => {
+        clearTimeout(timer);
+        resolve(v);
+      },
+      () => {
+        clearTimeout(timer);
+        resolve(null);
+      },
+    );
+  });
+}
+
 export const readAndCheck = internalAction({
   args: { caseId: v.id("cases") },
   handler: async (ctx, { caseId }): Promise<void> => {
@@ -343,7 +362,8 @@ export const readAndCheck = internalAction({
           // hides a real billing error; the narrow copy has no reason to. Where they disagree we use the
           // literal column copy AND show the patient both numbers to check against the paper bill.
           const type = c.fileType ?? blob.type ?? "image/jpeg";
-          const [first, column] = await Promise.all([readBill(blob, type, lang, recorder(ctx, caseId)), readChargesColumn(blob, type, recorder(ctx, caseId)).catch(() => null)]);
+          // The second read is only a check: past COLUMN_READ_MS we go on without it ("couldn't compare").
+          const [first, column] = await Promise.all([readBill(blob, type, lang, recorder(ctx, caseId)), nullAfter(readChargesColumn(blob, type, recorder(ctx, caseId)), COLUMN_READ_MS)]);
           bill = first;
           if (column && column.length === first.lines.length) {
             const disagree = first.lines
@@ -437,8 +457,8 @@ export const readAndCheck = internalAction({
       }
       await finishCheck(ctx, caseId, bill, null, lang);
     } catch (e) {
-      await step(ctx, caseId, "error", t("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: patientError(e, t) } });
+      await step(ctx, caseId, "error", t("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300)).catch(() => {});
     }
   },
 });
@@ -463,8 +483,8 @@ export const continueCheck = internalAction({
     try {
       await finishCheck(ctx, caseId, c.bill as ParsedBill, key, lang);
     } catch (e) {
-      await step(ctx, caseId, "error", pick(lang)("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300));
       await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { status: "error", error: patientError(e, pick(lang)) } });
+      await step(ctx, caseId, "error", pick(lang)("Something went wrong", "Algo salió mal"), "error", String(e).slice(0, 300)).catch(() => {});
     }
   },
 });
@@ -484,104 +504,139 @@ const Letters = z.object({
 
 
 export const draftLetters = internalAction({
-  args: { caseId: v.id("cases") },
-  handler: async (ctx, { caseId }) => {
+  // templateOnly: the watchdog's second try (cases.expire), our standard letters without the model.
+  args: { caseId: v.id("cases"), templateOnly: v.optional(v.boolean()) },
+  handler: async (ctx, { caseId, templateOnly }) => {
     const c = await ctx.runQuery(internal.cases.load, { id: caseId });
     if (!c?.bill || !c.eligibility) return;
     const lang: Lang = isLang(c.lang) ? c.lang : "en";
     const t = pick(lang);
-    const bill = c.bill as ParsedBill;
-    const hospitalRef = (c.hospital ?? null) as HospitalRef | null;
-    const eob = c.eobStatus === "done" ? ((c.eob ?? null) as ParsedEob | null) : null;
-    const facts = {
-      bill,
-      hospital: hospitalRef
-        ? {
-            name: hospitalRef.name,
-            policyUrl: hospitalRef.fap?.url ?? null,
-            // Mailing address: the one printed on the bill, else the state registry's.
-            address: bill.hospitalAddress ?? byKey(c.hospitalKey ?? "")?.address ?? hcaiAddress(hospitalRef.key),
-          }
-        : null,
-      findings: (c.findings ?? []) as Finding[],
-      // The hospital letter quotes findings in English even when the patient reads Spanish.
-      findingsEn: lang === "es" ? allFindings(bill, hospitalRef, eob, "en") : undefined,
-      eob,
-      policyFindings: (c.policyFindings ?? []) as PolicyFinding[],
-      eligibility: c.eligibility as Eligibility,
-      household: c.household,
-    };
-    await step(ctx, caseId, "letters", t("Writing your letters", "Escribiendo sus cartas"), "running");
-    let letters: Letter[] | null = null;
-    let lettersSource: "claude" | "template" = "template";
-    if (modelReady("letters")) {
-      try {
-        const record = recorder(ctx, caseId);
-        const forModel = { ...facts, findings: facts.findingsEn ?? facts.findings, findingsEn: undefined, patientLanguage: lang };
-        const kinds = letterKinds(facts);
-        // One call per letter, in parallel: about half the wait of writing both in one reply.
-        const results = await Promise.all(
-          kinds.map((kind) =>
-            structured(
-              {
-                task: "letters",
-                parts: [{ type: "text", text: `${letterPrompt(kind)}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
-                schema: Letters,
-                maxTokens: 8000,
-              },
-              record,
+    let fallback: LetterFacts | null = null;
+    try {
+      const bill = c.bill as ParsedBill;
+      const hospitalRef = (c.hospital ?? null) as HospitalRef | null;
+      const eob = c.eobStatus === "done" ? ((c.eob ?? null) as ParsedEob | null) : null;
+      const facts = {
+        bill,
+        hospital: hospitalRef
+          ? {
+              name: hospitalRef.name,
+              policyUrl: hospitalRef.fap?.url ?? null,
+              // Mailing address: the one printed on the bill, else the state registry's.
+              address: bill.hospitalAddress ?? byKey(c.hospitalKey ?? "")?.address ?? hcaiAddress(hospitalRef.key),
+            }
+          : null,
+        findings: (c.findings ?? []) as Finding[],
+        // The hospital letter quotes findings in English even when the patient reads Spanish.
+        findingsEn: lang === "es" ? allFindings(bill, hospitalRef, eob, "en") : undefined,
+        eob,
+        policyFindings: (c.policyFindings ?? []) as PolicyFinding[],
+        eligibility: c.eligibility as Eligibility,
+        household: c.household,
+      };
+      fallback = facts;
+      await step(ctx, caseId, "letters", t("Writing your letters", "Escribiendo sus cartas"), "running");
+      let letters: Letter[] | null = null;
+      let lettersSource: "claude" | "template" = "template";
+      if (!templateOnly && modelReady("letters")) {
+        try {
+          const record = recorder(ctx, caseId);
+          const forModel = { ...facts, findings: facts.findingsEn ?? facts.findings, findingsEn: undefined, patientLanguage: lang };
+          const kinds = letterKinds(facts);
+          // One call per letter, in parallel: about half the wait of writing both in one reply.
+          const results = await Promise.all(
+            kinds.map((kind) =>
+              structured(
+                {
+                  task: "letters",
+                  parts: [{ type: "text", text: `${letterPrompt(kind)}\n\n<facts>\n${JSON.stringify(forModel, null, 2)}\n</facts>` }],
+                  schema: Letters,
+                  maxTokens: 8000,
+                },
+                record,
+              ),
             ),
-          ),
-        );
-        const got = results.flatMap((res, i) =>
-          !res.refused && res.data?.letters?.[0] ? [{ ...res.data.letters[0], kind: kinds[i] }] : [],
-        );
-        if (got.length === kinds.length) {
-          letters = got.map((l) => ({
-            kind: l.kind,
-            title: l.title,
-            subject: l.subject,
-            body: l.body,
-            ...(lang === "es" && l.bodyPatient ? { subjectPatient: l.subjectPatient ?? undefined, bodyPatient: l.bodyPatient } : {}),
-          }));
-          lettersSource = "claude";
-          if (lang === "es") {
-            // Subjects are short and fixed; use our own Spanish wording so the model can't garble them.
-            const fixed = templateLetters(facts, "es");
-            letters = letters.map((l) => ({ ...l, subjectPatient: fixed.find((f) => f.kind === l.kind)?.subjectPatient ?? l.subjectPatient }));
+          );
+          const got = results.flatMap((res, i) =>
+            !res.refused && res.data?.letters?.[0] ? [{ ...res.data.letters[0], kind: kinds[i] }] : [],
+          );
+          if (got.length === kinds.length) {
+            letters = got.map((l) => ({
+              kind: l.kind,
+              title: l.title,
+              subject: l.subject,
+              body: l.body,
+              ...(lang === "es" && l.bodyPatient ? { subjectPatient: l.subjectPatient ?? undefined, bodyPatient: l.bodyPatient } : {}),
+            }));
+            lettersSource = "claude";
+            if (lang === "es") {
+              // Subjects are short and fixed; use our own Spanish wording so the model can't garble them.
+              const fixed = templateLetters(facts, "es");
+              letters = letters.map((l) => ({ ...l, subjectPatient: fixed.find((f) => f.kind === l.kind)?.subjectPatient ?? l.subjectPatient }));
+            }
           }
+        } catch (e) {
+          await step(ctx, caseId, "letters", t("Model unavailable, used our standard letters", "El modelo no está disponible; usamos nuestras cartas estándar"), "warn", String(e).slice(0, 200));
         }
-      } catch (e) {
-        await step(ctx, caseId, "letters", t("Model unavailable, used our standard letters", "El modelo no está disponible; usamos nuestras cartas estándar"), "warn", String(e).slice(0, 200));
       }
+      if (!letters) letters = templateLetters(facts, lang);
+      letters = letters.map((l) => ({
+        ...l,
+        subject: resolveFilledBrackets(l.subject),
+        body: resolveFilledBrackets(l.body),
+        ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
+        ...(lang === "es" ? { title: letterTitle(l.kind, "es") } : {}),
+      }));
+      // Rule check: every dollar amount in the letters must come from the facts.
+      // The letters may also total the findings ("$349 in all"), so that sum counts as a known amount.
+      const findingsTotal = Math.round(facts.findings.reduce((s, f) => s + (f.amount || 0), 0) * 100) / 100;
+      const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null, findingsTotal });
+      await ctx.runMutation(internal.metrics.log, { agent: "letters-check", ms: 0, ok: odd.length === 0, score: odd.length === 0 ? 1 : 0 });
+      await step(ctx, caseId, "letters-check",
+        odd.length
+          ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)
+          : t("Every dollar amount in your letters matches your bill and our checks", "Cada monto en dólares de sus cartas coincide con su factura y nuestras revisiones"),
+        odd.length ? "warn" : "done");
+      // An insurance statement added or removed while we wrote makes these letters stale; a newer run writes them.
+      if (await staleDraft(ctx, c)) return;
+      await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready", ...(odd.length ? { letterFlags: odd } : { letterFlags: undefined }) } });
+      await step(ctx, caseId, "letters",
+        lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
+        "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."), lettersSource === "claude" ? "ai" : "rule");
+    } catch (e) {
+      // Anything above failing must not leave the bill "drafting": our standard letters, else an error.
+      console.error("draftLetters failed", e);
+      if (await staleDraft(ctx, c).catch(() => false)) return;
+      let letters: Letter[] | null = null;
+      try {
+        if (fallback) letters = templateLetters(fallback, lang).map((l) => ({
+          ...l,
+          subject: resolveFilledBrackets(l.subject),
+          body: resolveFilledBrackets(l.body),
+          ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
+          ...(lang === "es" ? { title: letterTitle(l.kind, "es") } : {}),
+        }));
+      } catch (e2) {
+        console.error("templateLetters failed", e2);
+      }
+      await ctx.runMutation(internal.cases.patch, {
+        id: caseId,
+        fields: letters
+          ? { letters, lettersSource: "template", status: "ready", letterFlags: undefined }
+          : { status: "error", error: t("Something went wrong while writing your letters. Please try again.", "Algo salió mal al escribir sus cartas. Inténtelo de nuevo.") },
+      });
+      await step(ctx, caseId, "letters",
+        letters ? t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar") : t("Something went wrong", "Algo salió mal"),
+        letters ? "done" : "error", String(e).slice(0, 200), "rule").catch(() => {});
     }
-    if (!letters) letters = templateLetters(facts, lang);
-    letters = letters.map((l) => ({
-      ...l,
-      subject: resolveFilledBrackets(l.subject),
-      body: resolveFilledBrackets(l.body),
-      ...(l.bodyPatient ? { bodyPatient: resolveFilledBrackets(l.bodyPatient) } : {}),
-      ...(lang === "es" ? { title: letterTitle(l.kind, "es") } : {}),
-    }));
-    // Rule check: every dollar amount in the letters must come from the facts.
-    // The letters may also total the findings ("$349 in all"), so that sum counts as a known amount.
-    const findingsTotal = Math.round(facts.findings.reduce((s, f) => s + (f.amount || 0), 0) * 100) / 100;
-    const odd = inventedAmounts(letters.flatMap((l) => [l.subject, l.body]), { ...facts, findingsEn: facts.findingsEn ?? null, findingsTotal });
-    await ctx.runMutation(internal.metrics.log, { agent: "letters-check", ms: 0, ok: odd.length === 0, score: odd.length === 0 ? 1 : 0 });
-    await step(ctx, caseId, "letters-check",
-      odd.length
-        ? t(`Please check these amounts in your letters against your bill: ${odd.map((n) => money(n)).join(", ")}`, `Revise estos montos de sus cartas contra su factura: ${odd.map((n) => money(n)).join(", ")}`)
-        : t("Every dollar amount in your letters matches your bill and our checks", "Cada monto en dólares de sus cartas coincide con su factura y nuestras revisiones"),
-      odd.length ? "warn" : "done");
-    // An insurance statement added or removed while we wrote makes these letters stale; a newer run writes them.
-    const now = await ctx.runQuery(internal.cases.load, { id: caseId });
-    if (!now || now.status !== "drafting" || JSON.stringify(now.findings ?? []) !== JSON.stringify(c.findings ?? []) || (now.eobStatus === "done") !== (c.eobStatus === "done")) return;
-    await ctx.runMutation(internal.cases.patch, { id: caseId, fields: { letters, lettersSource, status: "ready", ...(odd.length ? { letterFlags: odd } : { letterFlags: undefined }) } });
-    await step(ctx, caseId, "letters",
-      lettersSource === "claude" ? t("Drafted your letters", "Redactamos sus cartas") : t("Prepared your letters from our standard templates", "Preparamos sus cartas con nuestras plantillas estándar"),
-      "done", t("Nothing is sent until you review and approve.", "No se envía nada hasta que usted lo revise y apruebe."), lettersSource === "claude" ? "ai" : "rule");
   },
 });
+
+/** An insurance statement added or removed while we wrote makes these letters stale; a newer run writes them. */
+async function staleDraft(ctx: ActionCtx, c: { _id: Id<"cases">; findings?: unknown; eobStatus?: string }): Promise<boolean> {
+  const now = await ctx.runQuery(internal.cases.load, { id: c._id });
+  return !now || now.status !== "drafting" || JSON.stringify(now.findings ?? []) !== JSON.stringify(c.findings ?? []) || (now.eobStatus === "done") !== (c.eobStatus === "done");
+}
 
 const EOB_PROMPT = `This is an insurance Explanation of Benefits (EOB) a patient photographed or uploaded: the insurer's statement for a hospital claim. It is not a bill. Transcribe it into the schema.
 Rules:

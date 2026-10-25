@@ -38,6 +38,81 @@ async function mustOwn(ctx: MutationCtx, id: Id<"cases">, token: string | undefi
   return c;
 }
 
+// ---- watchdog: a bill never stays "reading" or "drafting" forever ----
+
+/** After this long in "reading" or "drafting" the background job is presumed dead. */
+const STUCK_MS = 5 * 60_000;
+/** After this long the patient may ask us to try again (the client shows the button at 3 minutes). */
+const RETRY_AFTER_MS = 2 * 60_000;
+
+/** Schedules the check that ends a busy phase (started at statusAt) if its background job dies. */
+async function watch(ctx: MutationCtx, caseId: Id<"cases">, status: "reading" | "drafting", statusAt: number) {
+  await ctx.scheduler.runAfter(STUCK_MS, internal.cases.expire, { caseId, status, since: statusAt });
+}
+
+/**
+ * Runs STUCK_MS after a busy phase started. Does nothing if the bill moved on (other status, or a
+ * newer start of the same phase). Stuck writing: our standard letters, and if even that dies, an
+ * error. Stuck reading: an error the patient can retry from.
+ */
+export const expire = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    status: v.union(v.literal("reading"), v.literal("drafting")),
+    since: v.number(),
+    templateOnly: v.optional(v.boolean()),
+  },
+  handler: async (ctx, { caseId, status, since, templateOnly }) => {
+    const c = await ctx.db.get(caseId);
+    if (!c || c.status !== status || (c.statusAt ?? c.createdAt) !== since) return;
+    const es = c.lang === "es";
+    if (status === "drafting" && c.bill && c.eligibility && !templateOnly) {
+      const statusAt = Date.now();
+      await ctx.db.patch(caseId, { statusAt });
+      await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId, templateOnly: true });
+      await ctx.scheduler.runAfter(60_000, internal.cases.expire, { caseId, status, since: statusAt, templateOnly: true });
+      return;
+    }
+    await ctx.db.patch(caseId, {
+      status: "error",
+      error:
+        status === "drafting"
+          ? es ? "Algo salió mal al escribir sus cartas. Inténtelo de nuevo." : "Something went wrong while writing your letters. Please try again."
+          : es ? "Algo salió mal al leer su factura. Inténtelo de nuevo." : "Something went wrong while reading your bill. Please try again.",
+    });
+  },
+});
+
+/** "Taking too long? Try again": restarts a reading or writing that has run longer than SLOW_MS. */
+export const retry = mutation({
+  args: { id: v.id("cases"), token: Token },
+  handler: async (ctx, { id, token }) => {
+    const c = await mustOwn(ctx, id, token);
+    if (c.status !== "reading" && c.status !== "drafting") return;
+    if (Date.now() - (c.statusAt ?? c.createdAt) < RETRY_AFTER_MS) return;
+    await limit(ctx, `retry:${id}`, 5, 10 * 60_000, "Too many tries in a row. Please wait a few minutes.");
+    const statusAt = Date.now();
+    if (c.status === "drafting") {
+      if (!c.bill || !c.eligibility) {
+        await ctx.db.patch(id, { status: "needs_household", statusAt });
+        return;
+      }
+      await ctx.db.patch(id, { statusAt });
+      await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: id });
+      await watch(ctx, id, "drafting", statusAt);
+      return;
+    }
+    // Reading after the hospital pick: ask for the hospital again, the bill is already read.
+    if (c.bill && c.hospitalCandidates) {
+      await ctx.db.patch(id, { status: "confirm_hospital", statusAt });
+      return;
+    }
+    await ctx.db.patch(id, { statusAt });
+    await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });
+    await watch(ctx, id, "reading", statusAt);
+  },
+});
+
 export const generateUploadUrl = mutation({
   args: {},
   handler: async (ctx) => {
@@ -62,9 +137,11 @@ export const start = mutation({
     await limit(ctx, "create", 60, 60_000);
     const token = crypto.randomUUID();
     const ownerId = (await currentUser(ctx)) ?? undefined;
+    const now = Date.now();
     const id = await ctx.db.insert("cases", {
       ownerId,
-      createdAt: Date.now(),
+      createdAt: now,
+      statusAt: now,
       status: "reading",
       sample: args.sample,
       fileId: args.fileId,
@@ -74,6 +151,7 @@ export const start = mutation({
       token,
     });
     await ctx.scheduler.runAfter(0, internal.agent.readAndCheck, { caseId: id });
+    await watch(ctx, id, "reading", now);
     return { id, token };
   },
 });
@@ -115,8 +193,10 @@ export const submitHousehold = mutation({
     await limit(ctx, `draft:${id}`, 10, 10 * 60_000, "Too many changes in a row. Please wait a few minutes.");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
-    await ctx.db.patch(id, { household: h, eligibility, status: "drafting", letters: undefined });
+    const statusAt = Date.now();
+    await ctx.db.patch(id, { household: h, eligibility, status: "drafting", statusAt, letters: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: id });
+    await watch(ctx, id, "drafting", statusAt);
   },
 });
 
@@ -198,8 +278,10 @@ export const confirmHospital = mutation({
     const c = await mustOwn(ctx, id, token);
     if (c.status !== "confirm_hospital") throw new ConvexError("This bill isn't waiting for a hospital choice");
     if (key !== null && !HOSPITALS.some((h) => h.key === key)) throw new ConvexError("Unknown hospital");
-    await ctx.db.patch(id, { status: "reading" });
+    const statusAt = Date.now();
+    await ctx.db.patch(id, { status: "reading", statusAt });
     await ctx.scheduler.runAfter(0, internal.agent.continueCheck, { caseId: id, key });
+    await watch(ctx, id, "reading", statusAt);
   },
 });
 
@@ -235,8 +317,12 @@ async function refreshFindings(ctx: MutationCtx, c: Doc<"cases">, eob: ParsedEob
   const ready = c.bill && c.status !== "reading" && c.status !== "confirm_hospital" && c.status !== "error";
   const findings: Finding[] = ready ? allFindings(c.bill, c.hospital ?? null, eob, lang) : (c.findings ?? []);
   const redraft = Boolean(mayRedraft && ready && (c.status === "ready" || c.status === "drafting") && c.eligibility);
-  await ctx.db.patch(c._id, { ...extra, ...(ready ? { findings } : {}), ...(redraft ? { status: "drafting" as const, letters: undefined } : {}) });
-  if (redraft) await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: c._id });
+  const statusAt = Date.now();
+  await ctx.db.patch(c._id, { ...extra, ...(ready ? { findings } : {}), ...(redraft ? { status: "drafting" as const, statusAt, letters: undefined } : {}) });
+  if (redraft) {
+    await ctx.scheduler.runAfter(0, internal.agent.draftLetters, { caseId: c._id });
+    await watch(ctx, c._id, "drafting", statusAt);
+  }
   return { findings, redraft };
 }
 

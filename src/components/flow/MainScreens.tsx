@@ -17,6 +17,7 @@ import { StepLog } from "../StepLog";
 import { WhoDidWhat } from "../how/WhoDidWhat";
 import { money } from "../types";
 import { BadDocument } from "./BadDocument";
+import { useSlowRetry } from "./SlowRetry";
 import { StepFrame } from "./StepFrame";
 import { canChangeEob, phaseOf, stepsFor } from "./steps";
 import type { ScreenProps } from "./types";
@@ -36,6 +37,7 @@ export function parseDollars(s: string): number | null {
 
 export function ReadingStep({ c, go }: ScreenProps) {
   const { t } = useT();
+  const slow = useSlowRetry(c);
   if (c.status === "error") {
     const pdf = c.fileType === "application/pdf";
     const raw = c.error ?? "";
@@ -59,8 +61,13 @@ export function ReadingStep({ c, go }: ScreenProps) {
     );
   }
   return (
-    <StepFrame phase={1} eyebrow={t("case.eyebrow")} title={t("case.reading")}>
+    <StepFrame phase={1} eyebrow={t("case.eyebrow")} title={t("case.reading")} primary={slow.action}>
       <p className="quiet">{t("progress.now1")}</p>
+      {slow.failed && (
+        <p className="error-note" role="alert">
+          {t("flow.slowRetryFailed")}
+        </p>
+      )}
       {c.fileUrl && c.fileType?.startsWith("image/") && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={c.fileUrl} alt={t("case.photoAlt")} className="bill-thumb" />

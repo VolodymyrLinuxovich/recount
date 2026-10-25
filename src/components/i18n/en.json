@@ -124,6 +124,8 @@
   "flow.foundH": "{n, plural, =0 {We checked your bill} one {We found # thing to ask about} other {We found # things to ask about}}",
   "flow.writingH": "Writing your letters",
   "flow.writingBody": "This takes about half a minute. You can stay on this screen.",
+  "flow.slowRetry": "Taking too long? Try again",
+  "flow.slowRetryFailed": "That didn't work. Please try again in a minute.",
   "flow.detailsH": "Your details for the letter",
   "flow.sendH": "Send your letters",
   "flow.seeLettersAgain": "See my letters",
