@@ -348,6 +348,6 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 - **Audit gaps.** 7 hospitals have only scanned PDFs. "Worth asking" flags got one review, not two. Some policies on file
   are from 2022, and the audit judges the latest one HCAI holds.
 - **Accounts are optional and basic.** Without one, My bills lives on one phone and anyone with a bill's private link can
-  open it. Accounts use email and password only: no email check and no password reset.
+  open it. Accounts use email and password, or Google: no email check for password accounts and no password reset.
 - **Not legal or medical advice.** Recount checks a bill against public rules and prices. The hospital makes the final
   decision.
