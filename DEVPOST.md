@@ -10,6 +10,8 @@ An uninsured ER visit in San Francisco can produce a five figure bill. Californi
 
 Most patients don't know this. The numbers they would need to check a bill are public, but they sit in hospital price files of up to 90 MB and in policy PDFs. I wanted a patient to be able to check one bill from their phone in a few minutes.
 
+How a hospital bill is made: the patient gets care. The physician, nurse or care coordinator documents it, and it is coded. The hospital sends the claim to the insurer, or to Medicare or Medi-Cal. The payer reviews it and reimburses the hospital, and the patient is billed the rest. Uninsured patients skip the payer and get the full list price.
+
 ## What it does
 
 The home page starts with the problem, not a form: a stats band with sources (about 20 million people in the US owe medical debt; California's Attorney General warned hospitals weren't telling patients about free care; 14 of 470 California hospital policies conflict with state law), then a "See how it works" scroll story that walks through a bill before asking for a photo. The header has Check a bill, Hospital audit, Dashboard, My bills, EN|ES, Ask Lupa and an optional Sign in. A "Get the app" section links the phone app. The design is white with one deep purple and a magnifying glass logo.
@@ -141,6 +143,10 @@ These are my readings of public documents, not legal findings. The /audit page w
 
 claude, anthropic-api, azure-openai, azure-ai-search, azure-ai-content-safety, azure-ai-document-intelligence, convex, apify, next.js, react, typescript, expo, react-native, python, rust, ijson, pypdf, beautifulsoup
 
+
+## Thanks
+
+Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7.
 
 ## Links
 

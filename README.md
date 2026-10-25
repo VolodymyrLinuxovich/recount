@@ -57,8 +57,38 @@ patients owe much less:
 - Many hospitals give **free** care below their own cutoff. Zuckerberg San Francisco General's is **138%** of the poverty
   line, about $22,000 a year for one person.
 
+**How a hospital bill is made.** The patient gets care. The physician, nurse or care coordinator documents it, and it is
+coded (CPT, HCPCS and revenue codes). The hospital sends the claim to the insurer, or to Medicare or Medi-Cal. The payer
+reviews it and reimburses the hospital. The patient is billed the rest. Uninsured patients skip the payer and get the
+full list price.
+
 Most patients never find out. The numbers needed to check a bill are public, but they sit in **hospital price files of
 up to 90 MB** and in **40-page policy PDFs**. So people pay, or the bill goes to collections.
+
+**Hospital billing rules** (✓ = Recount checks it; sources and limits in [docs/REIMBURSEMENT.md](docs/REIMBURSEMENT.md)):
+
+- ✓ [No Surprises Act](https://www.cms.gov/medical-bill-rights): out-of-network emergency care can't be billed above
+  in-network cost sharing ([42 U.S.C. 300gg-131](https://www.law.cornell.edu/uscode/text/42/300gg-131)). Recount
+  checks this from the insurance statement. The same law covers out-of-network doctors at in-network hospitals
+  ([300gg-132](https://www.law.cornell.edu/uscode/text/42/300gg-132)) and good faith estimates for uninsured patients
+  ([300gg-136](https://www.law.cornell.edu/uscode/text/42/300gg-136)). Recount doesn't check those two.
+- ✓ [Federal hospital price transparency rule](https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-E/part-180)
+  (45 CFR 180): hospitals publish every standard charge in a machine-readable file. Recount checks each line against it.
+- ✓ [California Hospital Fair Pricing Act](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=127405)
+  (Health and Safety Code 127400 and after): free or discounted care up to 400% of the poverty line, no asset test, no
+  deadline to apply. Recount computes the likely answer and checks each hospital's written policy against it.
+- ✓ [SB 1061](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1785.27)
+  (2024, Civil Code 1785.27, Health and Safety Code 127425): no medical debt on credit reports since January 2025.
+  Recount flags hospital policies that still allow it.
+- ✓ [Medi-Cal patients can't be billed beyond share of cost](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=WIC&sectionNum=14019.4)
+  (Welfare and Institutions Code 14019.4). Recount checks this when the patient says they have Medi-Cal.
+- ✓ [Medicare QMB billing ban](https://www.cms.gov/files/document/mln7936176-prohibition-billing-qualified-medicare-beneficiaries.pdf)
+  ([42 U.S.C. 1396a(n)(3)(B)](https://www.law.cornell.edu/uscode/text/42/1396a)): providers can't bill Qualified
+  Medicare Beneficiaries for Medicare cost sharing. Recount checks this when the patient has Medicare and Medi-Cal.
+
+Recount also flags a Medicare patient's bill that shows no Medicare payment
+([42 CFR 489.21](https://www.ecfr.gov/current/title-42/section-489.21)). For uninsured patients whose income fits
+Medi-Cal, it points to retroactive Medi-Cal ([42 CFR 435.915](https://www.ecfr.gov/current/title-42/section-435.915)).
 
 **Recount does the checking from a phone in a few minutes**, and every number it shows links to the document it came
 from.
@@ -164,6 +194,13 @@ flowchart LR
 ---
 
 ## How It Works
+
+1. **Snap your bill.** Take a photo of your itemized ER bill. A clear photo is all we need.
+2. **We read every line.** We compare each charge to the prices your hospital publishes.
+3. **We flag the problems.** You see each mistake and what it costs you.
+4. **You answer 3 questions.** Who lives with you, your income, and your insurance. That's it.
+5. **You see what you really owe.** One plain answer, and the rule behind it.
+6. **Your letters are ready.** Read them, approve them, and send them yourself.
 
 <div align="center">
 
@@ -281,6 +318,10 @@ is **"You likely owe $0"**, with both rules shown.
   fragment, which never reaches a server. With an account, you can also open your own bills by signing in on any
   device. Passwords are stored hashed, and the account can be deleted along with its bills. Patients can delete a bill
   and its photo. Uploads are rate-limited.
+- **Security.** The Azure parts (Document Intelligence, Azure OpenAI, AI Search, Content Safety) are built on
+  [HIPAA-eligible Azure services](https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us). Bills
+  and photos are stored in Convex, and Claude reads them. Recount has no BAA and isn't a HIPAA covered entity, so this is
+  not a HIPAA compliance claim. Details in [docs/SECURITY-COMPLIANCE.md](docs/SECURITY-COMPLIANCE.md).
 - **Honest fallbacks.** If the live lookup or the model fails, the app uses saved data or standard letters and labels
   which one you got.
 
@@ -338,6 +379,8 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 | `convex/lib/checks.ts` | Line checks: duplicates, list price, cash price, totals |
 | `convex/lib/eobChecks.ts`, `eob.ts` | Bill vs insurance statement rules; what an insurance statement read returns |
 | `convex/lib/eligibility.ts` | Charity care rules: poverty line, hospital cutoff, 400% floor |
+| `convex/lib/coverage.ts` | Medicare and Medi-Cal rules from the coverage answer ([docs/REIMBURSEMENT.md](docs/REIMBURSEMENT.md)) |
+| `convex/lib/fhir.ts`, `convex/fhir.ts` | HL7 FHIR R4 export of a bill |
 | `convex/lib/hospital.ts`, `statewide.ts` | One hospital's reference data; matching a bill to one of 470 hospitals |
 | `convex/lib/letters.ts`, `letterCheck.ts`, `complaint.ts` | Letter templates and facts; the invented-amount check; the HCAI complaint |
 | `convex/lib/docIntel.ts` | Azure AI Document Intelligence second read of the charges |
@@ -371,3 +414,7 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 - **Accounts are optional and basic.** Without one, My bills lives on one phone and anyone with a bill's private link can
   open it. Accounts use email and password, or Google: no email check for password accounts and no password reset.
 - **Not legal or medical advice.** Recount checks a bill against public rules and prices.
+
+---
+
+Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7.
