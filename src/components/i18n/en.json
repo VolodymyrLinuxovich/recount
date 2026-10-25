@@ -1219,5 +1219,8 @@
   "pages.startOver": "Start over",
   "pages.pdfAlone": "A PDF goes on its own. For several pages, take photos.",
   "pages.tooMany": "You can send up to {max} pages. We kept the first ones.",
-  "pages.tooBig": "These photos are too big together. Remove a page or take closer photos."
+  "pages.tooBig": "These photos are too big together. Remove a page or take closer photos.",
+  "after.doneH": "When you're done",
+  "after.toBills": "Back to my bills",
+  "after.toHome": "Back to home"
 }

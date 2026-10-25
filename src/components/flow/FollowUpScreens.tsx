@@ -5,6 +5,7 @@
 // Every rule shown here is in pipeline/out/ca_law.json or on HCAI's pages. Recount never files anything.
 import { useMutation } from "convex/react";
 import { ConvexError } from "convex/values";
+import Link from "next/link";
 import { useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -294,6 +295,17 @@ export function ComplaintStep({ c, go }: ScreenProps) {
         </p>
       )}
       {approved ? <HowToFile /> : <p className="flow-reassure">{t("after.never")}</p>}
+      <nav className="fu-done" aria-label={t("after.doneH")}>
+        <p className="fu-done-h">{t("after.doneH")}</p>
+        <div className="fu-done-links">
+          <Link href="/bills" className="rc-btn rc-btn--secondary">
+            {t("after.toBills")}
+          </Link>
+          <Link href="/" className="rc-btn rc-btn--secondary">
+            {t("after.toHome")}
+          </Link>
+        </div>
+      </nav>
     </StepFrame>
   );
 }

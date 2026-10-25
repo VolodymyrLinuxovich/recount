@@ -1219,5 +1219,8 @@
   "pages.startOver": "Empezar de nuevo",
   "pages.pdfAlone": "Un PDF se envía solo. Para varias páginas, tome fotos.",
   "pages.tooMany": "Puede enviar hasta {max} páginas. Guardamos las primeras.",
-  "pages.tooBig": "Estas fotos son demasiado grandes juntas. Quite una página o tome fotos más cercanas."
+  "pages.tooBig": "Estas fotos son demasiado grandes juntas. Quite una página o tome fotos más cercanas.",
+  "after.doneH": "Cuando termine",
+  "after.toBills": "Volver a mis facturas",
+  "after.toHome": "Volver al inicio"
 }

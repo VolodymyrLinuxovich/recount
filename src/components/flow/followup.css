@@ -112,3 +112,27 @@
   gap: var(--sp-2);
   font-size: var(--fs-base);
 }
+
+/* The end of the follow-up: a way back once the complaint is done. */
+.fu-done {
+  margin-top: var(--sp-6, 32px);
+  padding-top: var(--sp-5, 24px);
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+.fu-done-h {
+  margin: 0 0 var(--sp-3, 12px);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.fu-done-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3, 12px);
+}
+.fu-done-links .rc-btn {
+  min-height: 52px;
+  min-width: 200px;
+  justify-content: center;
+}
