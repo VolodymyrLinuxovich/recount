@@ -1,0 +1,257 @@
+{
+  "files": [
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 0,
+        "cashEqualsGross": 12835,
+        "cashEqualsGrossPct": 100.0,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 12835,
+        "medianCashDiscountPct": 0.0
+      },
+      "chargeItems": 12835,
+      "consistency": {
+        "itemsMinAboveMax": 869,
+        "itemsRatesOutsideFileMinMax": 1666
+      },
+      "daysSinceUpdate": 219,
+      "hospitalName": "PRISCILLA CHAN & MARK ZUCKERBERG SAN FRANCISCO GENERAL HOSPITAL & TRAUMA CENTER",
+      "insurers": {
+        "cashAboveEveryInsurer": 11818,
+        "cashAboveEveryInsurerPct": 92.1,
+        "itemsWithCashAndInsurerRate": 12835,
+        "itemsWithInsurerRate": 12835,
+        "itemsWithPrice": 12835,
+        "medianLowestInsurerRatePctOfCash": 4.4,
+        "negotiatedDollarRates": 14320,
+        "pairedInFile": true
+      },
+      "key": "zsfg",
+      "lastUpdatedIso": "2026-03-19",
+      "lastUpdatedOn": "3/19/2026",
+      "layout": "CSV tall",
+      "olderThan12Months": false,
+      "payerPlans": null,
+      "rowsScanned": 14320,
+      "seconds": 0.01,
+      "type2Npis": {
+        "count": 4,
+        "invalid": []
+      },
+      "version": "3.0.0"
+    },
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 70597,
+        "cashEqualsGross": 355,
+        "cashEqualsGrossPct": 0.5,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 70952,
+        "medianCashDiscountPct": 70.0
+      },
+      "chargeItems": 85071,
+      "consistency": {
+        "itemsMinAboveMax": 0,
+        "itemsRatesOutsideFileMinMax": 0
+      },
+      "daysSinceUpdate": 206,
+      "hospitalName": "Ucsf Medical Center",
+      "insurers": {
+        "cashAboveEveryInsurer": 0,
+        "cashAboveEveryInsurerPct": null,
+        "itemsWithCashAndInsurerRate": 0,
+        "itemsWithInsurerRate": 13013,
+        "itemsWithPrice": 70952,
+        "medianLowestInsurerRatePctOfCash": null,
+        "negotiatedDollarRates": 88258,
+        "pairedInFile": false
+      },
+      "key": "ucsf",
+      "lastUpdatedIso": "2026-04-01",
+      "lastUpdatedOn": "2026-04-01",
+      "layout": "JSON",
+      "olderThan12Months": false,
+      "payerPlans": null,
+      "rowsScanned": 82283,
+      "seconds": 0.28,
+      "type2Npis": {
+        "count": 6,
+        "invalid": []
+      },
+      "version": "3.0.0"
+    },
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 0,
+        "cashEqualsGross": 14200,
+        "cashEqualsGrossPct": 100.0,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 14200,
+        "medianCashDiscountPct": 0.0
+      },
+      "chargeItems": 17173,
+      "consistency": {
+        "itemsMinAboveMax": 0,
+        "itemsRatesOutsideFileMinMax": 0
+      },
+      "daysSinceUpdate": 206,
+      "hospitalName": "California Pacific Medical Center- Van Ness Campus",
+      "insurers": {
+        "cashAboveEveryInsurer": 0,
+        "cashAboveEveryInsurerPct": null,
+        "itemsWithCashAndInsurerRate": 0,
+        "itemsWithInsurerRate": 2036,
+        "itemsWithPrice": 14200,
+        "medianLowestInsurerRatePctOfCash": null,
+        "negotiatedDollarRates": 9890,
+        "pairedInFile": false
+      },
+      "key": "cpmc_vanness",
+      "lastUpdatedIso": "2026-04-01",
+      "lastUpdatedOn": "2026-04-01",
+      "layout": "CSV tall",
+      "olderThan12Months": false,
+      "payerPlans": null,
+      "rowsScanned": 43767,
+      "seconds": 0.02,
+      "type2Npis": {
+        "count": 6,
+        "invalid": []
+      },
+      "version": "3.0.0"
+    },
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 0,
+        "cashEqualsGross": 8685,
+        "cashEqualsGrossPct": 100.0,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 8685,
+        "medianCashDiscountPct": 0.0
+      },
+      "chargeItems": 21122,
+      "consistency": {
+        "itemsMinAboveMax": 0,
+        "itemsRatesOutsideFileMinMax": 86
+      },
+      "daysSinceUpdate": 238,
+      "hospitalName": "Saint Francis Memorial Hospital",
+      "insurers": {
+        "cashAboveEveryInsurer": 0,
+        "cashAboveEveryInsurerPct": 0.0,
+        "itemsWithCashAndInsurerRate": 8685,
+        "itemsWithInsurerRate": 21119,
+        "itemsWithPrice": 8685,
+        "medianLowestInsurerRatePctOfCash": 54.0,
+        "negotiatedDollarRates": 414060,
+        "pairedInFile": true
+      },
+      "key": "stfrancis_hyde",
+      "lastUpdatedIso": "2026-02-28",
+      "lastUpdatedOn": "2026-02-28",
+      "layout": "JSON",
+      "olderThan12Months": false,
+      "payerPlans": null,
+      "rowsScanned": 21122,
+      "seconds": 0.32,
+      "type2Npis": {
+        "count": 3,
+        "invalid": []
+      },
+      "version": "3.0.0"
+    },
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 0,
+        "cashEqualsGross": 10600,
+        "cashEqualsGrossPct": 100.0,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 10600,
+        "medianCashDiscountPct": 0.0
+      },
+      "chargeItems": 23430,
+      "consistency": {
+        "itemsMinAboveMax": 0,
+        "itemsRatesOutsideFileMinMax": 83
+      },
+      "daysSinceUpdate": 238,
+      "hospitalName": "St. Mary's Medical Center - San Francisco",
+      "insurers": {
+        "cashAboveEveryInsurer": 5268,
+        "cashAboveEveryInsurerPct": 49.7,
+        "itemsWithCashAndInsurerRate": 10600,
+        "itemsWithInsurerRate": 23427,
+        "itemsWithPrice": 10600,
+        "medianLowestInsurerRatePctOfCash": 22.0,
+        "negotiatedDollarRates": 407783,
+        "pairedInFile": true
+      },
+      "key": "stmarys",
+      "lastUpdatedIso": "2026-02-28",
+      "lastUpdatedOn": "2026-02-28",
+      "layout": "JSON",
+      "olderThan12Months": false,
+      "payerPlans": null,
+      "rowsScanned": 23430,
+      "seconds": 0.3,
+      "type2Npis": {
+        "count": 3,
+        "invalid": []
+      },
+      "version": "3.0.0"
+    },
+    {
+      "attestationConfirmed": true,
+      "cash": {
+        "cashAboveGross": 0,
+        "cashBelowGross": 324266,
+        "cashEqualsGross": 608,
+        "cashEqualsGrossPct": 0.2,
+        "grossWithoutCash": 0,
+        "itemsWithGrossAndCash": 324874,
+        "medianCashDiscountPct": 44.0
+      },
+      "chargeItems": 328536,
+      "consistency": {
+        "itemsMinAboveMax": 0,
+        "itemsRatesOutsideFileMinMax": 0
+      },
+      "daysSinceUpdate": 206,
+      "hospitalName": "KAISER FOUNDATION HOSPITAL - SAN FRANCISCO",
+      "insurers": {
+        "cashAboveEveryInsurer": 5095,
+        "cashAboveEveryInsurerPct": 51.7,
+        "itemsWithCashAndInsurerRate": 9860,
+        "itemsWithInsurerRate": 13521,
+        "itemsWithPrice": 324874,
+        "medianLowestInsurerRatePctOfCash": 32.2,
+        "negotiatedDollarRates": 40551,
+        "pairedInFile": true
+      },
+      "key": "kaiser_sf",
+      "lastUpdatedIso": "2026-04-01",
+      "lastUpdatedOn": "4/1/2026",
+      "layout": "CSV wide",
+      "olderThan12Months": false,
+      "payerPlans": 3,
+      "rowsScanned": 328536,
+      "seconds": 0.12,
+      "type2Npis": {
+        "count": 1,
+        "invalid": []
+      },
+      "version": "3.0.1"
+    }
+  ],
+  "generatedFor": "2026-10-24"
+}

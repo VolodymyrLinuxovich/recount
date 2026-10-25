@@ -12,6 +12,7 @@ Rebuild everything: `python3 -m venv .venv && .venv/bin/pip install -r requireme
 | `hospitals.json` | 6 SF hospitals: FAP URL, free-care and discount thresholds as written, MRF URL, format, size, last-updated, billing phones | hand-curated from the FAP PDFs + MRF headers (`scripts/curated/hospitals.json`) | every FAP and MRF opened; a few hospital web pages only cited (marked) |
 | `hcai_policies.json` | HCAI policy lookup scrape: all filed charity/discount/debt-collection policy PDFs (with effective dates) for the SF hospitals, plus the 17 SF search results; per hospital also `name` (display name), `hcai_name`, `hcai_id`, `city`, `county`, `lat`, `lon` (Census geocode of the HCAI address; Mission Bay uses an OpenStreetMap fallback) | `scripts/hcai.py` | yes |
 | `prices_<key>.json` | ER-code extract from each hospital's CMS MRF: gross, discounted cash, file min/max, every payer rate, plus `summary_by_code` | `scripts/mrf_extract.py` (streams CSV tall/wide and JSON v3) | yes, straight from the files |
+| `price_audit.json` | Per price file: cash price = gross share, median cash discount, lowest insurer rate vs cash, min/max consistency, update date, attestation, NPI check digits | `price-audit/` (Rust); findings in `docs/PRICE-FILES.md` | every number recomputed by `price-audit/xcheck.py` (Python), all match |
 
 Price files: `zsfg`, `ucsf` (Parnassus/Mission Bay/Mt Zion, one file), `cpmc_vanness`, `stfrancis_hyde`, `stmarys`, `kaiser_sf`.
 

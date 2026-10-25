@@ -77,6 +77,7 @@ from.
 | **Hospital data** | Apify Actor (Python): finds and streams each hospital's CMS price file, extracts charity care limits with quotes |
 | **Policy audit** | Python: HCAI crawl, PDF text extraction, regex candidates, two Claude reviews with a quote check |
 | **Eval** | Python: synthetic SF ER bills priced from real price files, planted errors, rendered as scans, photos and PDFs |
+| **Price file audit** | Rust: streams each hospital's price file and compares the cash price with the gross charge and insurer rates ([findings](docs/PRICE-FILES.md)) |
 | **Mobile** | Expo (React Native), Android APK built with EAS |
 | **Hosting** | Vercel (web) · Convex Cloud (backend) · Apify (Actor) |
 
@@ -329,6 +330,7 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 | `actor/` | Apify Actor: price file finder and streamer, charity policy limit extractor |
 | `audit/` | Statewide HCAI crawl, extraction, rule candidates, two reviews, report |
 | `pipeline/` | Hospital index, price snapshots, income cutoffs with quotes |
+| `pipeline/price-audit/` | Rust price file audit: cash price vs gross and insurer rates, min/max consistency, NPI check digits |
 | `eval/` | Synthetic bill generator, renderer and scorer |
 | `mobile/` | Expo app on the same Convex backend |
 | `docs/HOW-IT-WORKS.md` | A code tour with line links |

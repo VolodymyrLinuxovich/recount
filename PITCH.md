@@ -1,73 +1,288 @@
-# Recount pitch (3 min) + judge Q&A (2 min)
+# Recount pitch (Cal Hacks 13.0)
 
-Judging: Sun 10:30 AM to 12:30 PM at your table. 3 min pitch, 2 min questions.
-Have the live app open on a phone AND a laptop at phone width. Run the sample once right before judges arrive so the backend is warm.
+Judging: Sun 10:30 AM to 12:30 PM at our table. 3 minutes of pitch, 2 minutes of questions.
+
+**The one rule:** every number below has a source in the last table. Don't say a number that isn't here. If a judge asks something we didn't measure, say "We didn't measure that. Here's what we did measure," and give the closest number.
+
+**The one sentence judges should repeat to each other:** "They read every California hospital's charity care policy, and 14 of them conflict with state law. Then they built the app that gets patients what the law already gives them."
+
+---
+
+## The five numbers (learn these first, in this order)
+
+| Say | Means | Never say |
+|---|---|---|
+| **470 hospitals** | Every hospital in the state's HCAI registry. We could read 463; 7 only had scanned PDFs. | "every hospital" without "on file" if pushed |
+| **14 conflict** | 14 hospitals whose written policy plainly conflicts with state law. 47 more likely do. | "break the law", "violate", "illegal" |
+| **$12,741** | The sample ER bill at SF General. Fictional patient, real published prices. | "a real patient's bill" |
+| **$349** | Two billing errors on it: a duplicate blood count ($269) and an X-ray $80 over the hospital's own list price. | "we saved $349" (we flag; the patient asks) |
+| **$0** | What a single person earning $20,000 likely owes there: 125% of poverty, and SF General's policy gives free care up to 138%. | "you owe $0" (say "likely owes") |
+
+Backup numbers, only if asked: at 4 of 6 SF hospitals the cash price is the full sticker price on every item, 2,333 policy documents, 997 sentences reviewed, 181 of 181 bill lines read right on 30 test bills, about 4 cents of model cost per bill read, about 17 seconds for the live hospital lookup.
+
+---
+
+## Words on stage
+
+- **"Conflicts with state law."** We read the written policy, not what billing actually does. A judge from a hospital or a law school will catch "breaks the law".
+- **"Likely owes."** Rules give a likely answer from the patient's own answers. The hospital still decides.
+- **"Sample bill."** Say it once, early. Alex Rivera is made up. The prices are SF General's real published charges.
+- **"Rules decide. AI reads and writes."** Repeat it. It's our answer to half the hard questions.
+- **"Recount never sends anything for you."** The patient approves and sends.
+- Don't say "HIPAA compliant", "legal advice", "guaranteed", "every hospital follows" or "the AI checked".
+- Azure is running in production (checked 2026-10-24, 5 PM): Document Intelligence does the second read of every uploaded bill's charges, Azure OpenAI is the backup model for letters and chat, AI Search finds policy passages for Lupa, and Content Safety screens the chat. Claude still does the main read and writes the letters. Don't say Azure reads the whole bill.
+- Don't promise password reset. There is none.
+
+---
+
+## Before judges arrive (10 minutes before)
+
+- [ ] Phone: brightness up, Do Not Disturb on, Wi-Fi checked, charger in.
+- [ ] Tab 1: https://recount-nu.vercel.app/audit with **PIH Health Whittier** open (type the full name; "Whittier" alone also matches Whittier Hospital Medical Center).
+- [ ] Tab 2: https://recount-nu.vercel.app home, signed out, in English.
+- [ ] Run the sample once end to end, so the backend is warm. Check the bill says "read by Claude" and the hospital data says "Fetched live". If it says "saved lookup", the Apify call failed; the demo still works, just say "saved lookup".
+- [ ] Laptop at phone width (390 x 844) with the same two tabs, as a second screen and a backup.
+- [ ] The recorded demo video downloaded on the laptop, offline. This is the fallback if the venue Wi-Fi dies.
+- [ ] A printed copy of the sample bill on the table, for "try it yourself".
+- [ ] If anyone at the venue told us about their own hospital bill, write their first name and the dollar amount on a sticky note. It replaces the 0:40 line.
+
+---
 
 ## The 3 minutes
 
-### 0:00 to 0:40. The audit (open on the "whoa" moment)
+The order is: the hidden right, the proof hospitals hide it, one patient using it, why you can trust it, the ask.
 
-Phone already on /audit with "PIH Health Whittier" open.
+### 0:00 to 0:20. The hidden right (no screen, look at the judge)
 
-> California law says that if you can't afford a hospital bill, the hospital has to discount it. It can't count your assets, can't report you to credit bureaus, and can't put a lien on your home.
-> So we asked: do hospitals follow that in their own written policies? We pulled the policies of all 470 California hospitals from the state registry, 2,333 documents. Claude read 997 suspicious sentences against the statute and had to quote the exact words. A second pass argued the hospital's side.
-> 14 hospitals plainly conflict with state law. This one, PIH Health Whittier, says it counts your assets, lets collectors report you to credit bureaus after 180 days, and allows a lien on your home. Here's the quote, page 3.
+> If you go to an ER in California without insurance and you make under about sixty-four thousand dollars a year, state law says the hospital has to discount your bill. At SF General, under about twenty-two thousand, it's free.
+> Almost nobody knows. And we wanted to know: do the hospitals' own policies even say so?
 
-### 0:40 to 0:55. One person, one bill
+### 0:20 to 0:55. The audit (Tab 1, phone toward the judge)
 
-> Now picture a patient. You go to the ER at San Francisco General without insurance, and you get a bill for twelve thousand seven hundred dollars. If you make under about sixty-four thousand a year, the law says that hospital has to discount it. Under about twenty-two thousand, it's free. Almost nobody knows. So we built the app that tells you.
+> We pulled the financial assistance policies of all 470 California hospitals on file with the state. 2,333 documents. Code found the suspicious sentences, Claude reviewed each one against the statute and had to quote the exact words, and a second review argued the hospital's side. When they disagreed, the milder verdict won.
+> 14 hospitals' written policies plainly conflict with state law. 47 more likely do.
+> Here's PIH Health Whittier.
 
-(If you talked to someone at the venue, use their story here instead, with their first name and the dollar amount. Judges remember a real person.)
+Scroll to the quotes. Read one, slowly.
 
-### 0:55 to 2:30. Live demo (phone in hand)
+> "Consider individual or family net worth, including all liquid and non-liquid assets." Since 2025, California hospitals can't count your assets. Same policy: collectors may report you to credit bureaus after 180 days, and may put a lien on the home of a patient under 400% of poverty. The page and the date are right here.
 
-1. Tap "Try a sample bill". **Say:** "Claude reads every line off the photo." While it runs: "Meanwhile our Apify Actor pulls SF General's own price file and charity policy live."
-2. Findings. **Say:** "Two problems. The blood count is billed twice: same code, same day, same amount, $269. The chest X-ray is $482, but the hospital's own published price is $402. This part is plain code, not AI. Every finding links to the hospital's file."
-3. Three questions: 1 person, 20000, no insurance. **Say:** "That's 125% of the poverty line. SF General's own policy gives free care up to 138%. So the answer is: you likely owe zero. Rules decide that, not the model, and the rule is right there."
-4. Letters. **Say:** "Claude drafts the assistance request and the dispute from only the facts on screen. Nothing is sent. The patient reads, edits, approves."
-5. Tap Español for two seconds. **Say:** "Everything the patient reads is in Spanish too. The letter stays in English for the billing office, with a Spanish copy so you know what you're signing."
+### 0:55 to 1:05. One patient (switch to Tab 2)
 
-### 2:30 to 3:00. Why it's real + ask
+> So we built the app for the patient holding the bill.
 
-> Recount works today for any California hospital bill: we read it, check eligibility and flag the hospital's policy. Price checks cover the four big SF hospitals. Model reads and writes. Code decides. Every number links to its source. Built on Claude, Convex and Apify, live at recount-nu.vercel.app. Try it with your own bill.
+If we have a venue story, use it instead: "[Name] showed us a [$amount] bill from [hospital] yesterday. This is for them."
 
-## Tailor the close per judge (one sentence)
+### 1:05 to 2:10. Live demo (phone in hand, narrate while tapping)
 
-- **Microsoft (production, real users):** "Path to production: a hospital-agnostic pipeline, a global upload rate limit, no account and no stored PII beyond the bill, and a known Claude cost: reading one bill measured about 4 cents, so roughly 10 cents per bill with the letters. Next is CMS Medicare rates for the payment cap."
-- **Anthropic (named community, Claude used thoughtfully):** "Uninsured and underinsured ER patients in California, many Spanish-speaking. Claude does the two things only it can do, reading messy photos and writing plain letters. We kept it out of eligibility on purpose, because a wrong yes costs a family real money."
-- **Apify:** "The Actor is the hardest data work in the project. It finds and streams 90 MB price files in three formats, and extracts income limits from policy PDFs with the quote behind each one. It's public on the Apify Store and runs live in the app in about 17 seconds."
-- **Convex:** "Each case is a reactive document. Scheduled actions do the reading and drafting, and the phone subscribes to a step log, so the patient watches each check land instead of a spinner. File storage holds the photo, and a limits table caps uploads per minute."
-- **People-First:** "Three questions, not a form. Spanish, large type, no account, nothing sent without approval."
+1. **Tap "Try a sample bill".**
+   > This is a sample: a $12,741 ER bill at SF General, priced from the hospital's real published charges. Claude reads every line. A second, narrow read copies only the charges column. If the two disagree, the patient is asked to tap the number on their paper. Meanwhile our Apify Actor pulls SF General's own price file and policy, live.
+2. **The two findings.**
+   > Two problems. The blood count is billed twice, same code, same day: $269. The chest X-ray is $482, and the hospital's own list price is $402. That's $349 to question. This part is plain code, not AI, and each finding links to the hospital's file.
+   > And that $402 is also SF General's "discounted cash price". No discount at all. The Medi-Cal plans in the same file pay $10 to $27 for that X-ray.
+3. **Three questions: 1 person, 20000, no insurance.**
+   > Three questions, not a form. One person, twenty thousand a year, no insurance. That's 125% of the poverty line. SF General's own policy gives free care up to 138%. So Alex likely owes zero. Rules decide that. The model never does. The rule is printed under the answer.
+4. **Letters. Tap "Es mía", show the letter, don't fill every field.**
+   > Claude drafts the assistance request and the billing dispute, using only the facts on screen. Then code checks every dollar amount in the letter against the bill. Anything it can't match is flagged for the patient. Recount sends nothing. The patient reads, edits and approves.
+5. **Tap ES for two seconds.**
+   > Every screen is in Spanish too.
 
-## Hard questions (answer in one or two sentences)
+### 2:10 to 2:40. Why you can trust it
+
+> Three checks we ran on ourselves.
+> One: we hand-checked every "conflict" flag against the PDF. Every quote was on the page it cited, and every verdict held. We also found two false-positive patterns in the "likely" flags, fixed the rule, and re-reviewed. That's why it's 14 and not more.
+> Two: we built 30 test bills from real hospital prices, with 24 planted errors, as scans, phone photos and PDFs. Claude read 181 of 181 lines right, and the app caught all 24 errors with zero false alarms.
+> Three: every bill shows who did what. Which steps were rules, which were AI, which model, and how long.
+
+### 2:40 to 3:00. Close
+
+> Recount works today for any California hospital bill. We read it, check eligibility under state law, and show if the hospital's own policy conflicts with it. Line-by-line price checks cover four San Francisco hospitals. It's live at recount-nu.vercel.app, with an Android app.
+> Check your bill. And check your hospital.
+
+Stop talking. Hand them the phone.
+
+---
+
+## 60-second version (judge is in a hurry, or a hallway)
+
+> California law makes hospitals discount ER bills for anyone uninsured under about $64,000 a year, and many give free care below about $22,000. Most patients never hear about it. We read the policies of all 470 California hospitals, and 14 of them plainly conflict with state law.
+> [Show PIH Whittier's asset quote.]
+> Then we built Recount. Snap your bill. Claude reads every line. Code checks it against the hospital's own prices and the law. On this sample, two billing errors and a likely balance of zero. Then it drafts the letters, and you send them. Rules decide, AI reads and writes, nothing is sent for you.
+
+## 15-second version (someone walking past)
+
+> 14 California hospitals have charity care policies that conflict with state law. We found them, and built an app that tells patients what they're owed. Want to see your hospital?
+
+Then open /audit and let them search.
+
+---
+
+## One sentence per judge (say it at 2:40, before the close)
+
+Pick the judge's company. One sentence only. If several are at the table, use the People-First line.
+
+- **Microsoft (Built for the Real World):** "Every bill is read twice, by two vendors with two methods: Claude reads the whole bill, Azure AI Document Intelligence reads the charges table, and code compares them line by line. On our 30 test bills Azure got 181 of 181 lines right. Azure OpenAI is the backup model, AI Search grounds the chat in hospitals' own policies, and Content Safety screens every message. Everything falls back instead of failing, and every AI call is logged on the bill."
+- **Anthropic (Claude for Public Benefit):** "The people are uninsured and underinsured ER patients in California, many Spanish-speaking. Claude does the two things only it can do well, reading messy bill photos and writing plain letters. We kept it out of every money decision on purpose, because a wrong 'you qualify' costs a family real money."
+- **Apify (Best Use and Best Actor):** "The Actor does the hardest data work: it finds a hospital's price file, streams it in any of three formats, some over 90 MB, and pulls the income limits out of its charity policy with the sentence behind each one. When it can't find a value, it returns nothing and a warning instead of guessing. It's public on the Apify Store, and the app calls it live in about 17 seconds."
+- **Convex:** "Each bill is a reactive document. Scheduled actions do the reading and drafting and write each step to a table the phone subscribes to, so the patient watches each check land instead of staring at a spinner. File storage holds the photo, auth is optional, and a limits table caps uploads."
+- **People-First / Cal Hacks:** "One question per screen, Spanish throughout, large type, no account needed, a path for helping a parent with their bill, and nothing ever sent without your approval."
+
+---
+
+## What's real, what's a sample, what isn't built
+
+Say this unprompted if a judge looks skeptical. It earns trust.
+
+| Real and live | Sample or limited | Not built or not live |
+|---|---|---|
+| The statewide audit: 470 hospitals, real policies, quotes with page and date | The bill on stage: fictional patient, real SF General prices | Price checks outside 4 SF hospitals (Saint Francis uses a saved snapshot only) |
+| Reading any uploaded bill photo or PDF | Price checks cover 17 to 23 common ER codes per hospital | Sending letters for the patient (on purpose) |
+| Eligibility under state law for any CA hospital; hospital's own free care cutoff for 159 of 470 | Test bills are generated: printed type, one layout | Follow-up after sending (check-in date, state complaint): merged to main 10/24. Open it on the live site before saying it's live |
+| Price file audit of 6 SF hospitals (Rust, offline) | | Price file audit beyond San Francisco |
+| Live Apify lookup, public Actor | | Azure reading the whole bill (it reads the charges only) |
+| Letters, Spanish, optional accounts, My bills, Android app | | Password reset |
+
+---
+
+## If the demo breaks
+
+| What happens | Say | Do |
+|---|---|---|
+| Reading spins past 30 s | "The model is slow from venue Wi-Fi. Here's the same bill finished." | Switch to the laptop tab where the sample already ran. |
+| Hospital data says "saved lookup" | "The live lookup timed out, so it used the saved one, and it tells you that. That's the fallback working." | Keep going. This is a feature. |
+| Letters say "template" | "When the model isn't available, it writes from a fixed template and labels it. It never stalls." | Keep going. |
+| Wi-Fi dies | "Let me show you the recording of the same flow." | Play the offline video from 0:30. Keep narrating live. |
+| /audit map won't load | "The data is a public file." | Open recount-nu.vercel.app/audit/findings.json, or describe PIH from memory (quotes below). |
+
+---
+
+## Hard questions (answer in one or two sentences, then stop)
+
+### Accuracy
 
 **"What if Claude misreads a number?"**
-Blurry fields are marked for the patient to check. Totals are checked against the printed total. A misread line can be corrected on screen. Eligibility uses the patient's own answers, not the photo.
+Two independent reads of the charges. If they disagree, the patient taps the number printed on their paper. Totals are checked against the printed total, any line can be corrected on screen, and eligibility comes from the patient's own answers, not the photo.
 
-**"Isn't this legal advice? Liability?"**
-No. It cites public law and the hospital's own published documents, and the patient sends the letters. It's like a tax calculator for charity care: every number links to its source.
+**"30 of 30 sounds too good."**
+It is good on clean, typical bills, and that's all it shows. They're generated: printed type, one layout, photos with tilt and blur. Crumpled, dim or handwritten bills are harder, and that's why the second read and the tap-to-confirm exist.
 
-**"How do you know the audit isn't hallucinating accusations?"**
-Regex only finds candidates. A flag needs an exact quote that breaks the rule, and a second review argues the hospital's side. When the two disagree, the milder verdict wins. That second review cleared flags, including one at SF General.
+**"Isn't 24 of 24 just your rules grading themselves?"**
+The rules alone, on a perfect reading, is a sanity check, yes. The meaningful number is end to end: Claude reads the image, then the rules run on what it read. That still caught 24 of 24 with no false alarms on the 8 clean bills.
 
-**"Why only 4 hospitals for prices?"**
-Price files are 90+ MB in three formats. We did four San Francisco hospitals properly. The Actor works on any US hospital's file, so adding hospitals is running it, not rewriting code.
+**"Why Claude and not a cheaper model?"**
+We measured. On the 16 test bills we ran through Azure's gpt-4.1-mini, it caught 8 of the 11 planted errors; it missed two bills that weren't itemized and one overpriced line. Claude caught all 24 of 24. Reading one bill costs about 4 cents.
 
-**"Does anyone actually use this / did you talk to users?"**
-[Fill in from conversations at the venue: who, what bill, what they did.]
+### The audit
 
-**"How would this make money / survive?"**
-Free for patients. The path is financial counselors, legal aid, community clinics and patient advocates who do this by hand today. The audit data is valuable to regulators and journalists.
+**"How do you know the audit isn't an AI making accusations?"**
+Code only finds candidate sentences. A flag needs an exact quote that's actually in the policy, and code rejects any quote it can't find. A second review argues the hospital's side, and the milder verdict wins. Then we hand-checked every conflict flag against the PDFs.
 
-**"What about privacy? It's medical data."**
-No account. The bill sits behind a secret link only you have. "My bills" lives on your phone. Nothing is sent to the hospital by us.
+**"Did it ever get it wrong?"**
+Yes, and we fixed it. Two "likely" patterns were false positives across hospital chains. One was the federal definition of a lien, which those hospitals then ban for eligible patients. The other was a multistate policy whose California addendum overrides it. We corrected the rule and re-reviewed. The second review also cleared a flag at SF General.
 
-**"What's the hardest technical part?"**
-Streaming 90 MB price files in three different formats to find a handful of codes, and pulling the right income limit out of policies that mix current limits with history and restated law.
+**"Couldn't a hospital sue you?"**
+They're the hospitals' own published words, next to the law, with the page and the date. We say "conflicts with the policy as written", not "breaks the law", and the page says these are our readings of public documents, not legal findings.
 
-## Before judging (checklist)
+**"Maybe the policy is outdated and billing does the right thing."**
+Possible, and we say so. But the policy is what the hospital gives the state and the patient. PIH's documents are dated July 2026.
 
-- [ ] Sample run once on the live site, in both languages.
-- [ ] Phone brightness up, Do Not Disturb on, browser tabs: /audit with "PIH Health Whittier" open FIRST, then the app start screen.
-- [ ] One printed copy of a real-looking bill for "try it yourself" (the sample bill image).
-- [ ] Know the 5 numbers by heart, in pitch order: 470 hospitals, 14 conflicts, $12,741 bill, $349 questioned, 138% ZSFG cutoff.
+### The law and the user
+
+**"Isn't this legal advice?"**
+No. It's like a tax calculator for charity care: it applies published rules to your answers and shows the source for each one. The patient decides and sends.
+
+**"Why would a hospital answer a letter?"**
+The letter asks for what the hospital's own published policy already offers, quotes it, and leaves a paper trail. The follow-up screens set a check-in date and draft a complaint to the state if they don't answer. (Check it's live before saying so.)
+
+**"Who is this for? Did you talk to anyone?"**
+[Fill in at the venue: who, which hospital, what bill, what they said. If no one: "Uninsured and underinsured ER patients. We designed it for an older Spanish-speaking parent, or the kid helping them, and had the Spanish reviewed three times."]
+
+**"Why not just call the hospital?"**
+You can, and the letter screen tells you to. But you'd need to know the law, the hospital's cutoff, its list price and which lines are wrong before you call. That's what this gives you, in about the time the call is on hold.
+
+**"Bill-checking apps already exist."**
+Most explain the bill. We check it against two things the patient can actually use: the hospital's own published prices and its legal duty to discount. And nobody else has the statewide audit, so we can tell you when your hospital's policy itself is the problem.
+
+**"Why not just pay the cash price?"**
+At 4 of the 6 San Francisco hospitals we checked, the "discounted cash price" is the full sticker price on every item: SF General, CPMC, Saint Francis and St. Mary's. At SF General, insurers' lowest rate is a median 4.4% of that cash price. So for an uninsured patient the real discount is charity care, which is what Recount goes after.
+
+**"How do you know the price data is right?"**
+All six price files pass CMS's own official validator with zero errors. Our Rust audit then reads the numbers inside, and a separate Python script recomputed every figure and matched it exactly. It also caught SF General's file contradicting itself: on 869 items its "maximum" negotiated rate is below its minimum.
+
+**"Why Rust?"**
+It's one small binary that streams any size price file in constant memory: 11 MB for Kaiser's 216 MB file, all six files in 1.3 seconds. Speed isn't the reason, since Python was fast enough. It's built to run on every hospital in the state next.
+
+### Privacy and safety
+
+**"This is medical data."**
+No account is needed. The bill sits behind a secret link only you have. Delete removes the bill, photo, steps and chat. Account delete removes everything. The chat strips anything that looks like a Social Security or bank number before storing it.
+
+### Business and scale
+
+**"How does this survive after the hackathon?"**
+Free for patients. The paying side is people who do this by hand today: financial counselors, legal aid, community clinics, patient advocates. The audit is useful to regulators and journalists.
+
+**"Does it scale past San Francisco?"**
+Eligibility and the audit already cover the whole state. Federal rules make every US hospital publish a price file, and the Actor already reads the common formats, so a new hospital means running the Actor, not writing code. Other states have their own charity care laws, and those would be new rule files.
+
+**"What did it cost to run?"**
+About 4 cents of model cost to read one bill. The audit was a one-time offline run.
+
+### Technical
+
+**"What was the hardest part?"**
+Hospital price files. They come as JSON or two CSV layouts, some over 90 MB, and you need a handful of codes out of them on a phone's time budget. Second hardest: pulling the real income limit out of policies that mix current limits, history and restated law.
+
+**"What would you do with another week?"**
+Run the price file audit on every California hospital, add price checks for more hospitals, and test with real crumpled bills from patients.
+
+---
+
+## PIH Health Whittier quotes (know these if the screen fails)
+
+- Assets, charity care policy p.4: "Consider individual or family net worth including all liquid and non-liquid assets owned"
+- Credit reporting, debt collection policy p.3: "Collection agencies may notify the credit reporting agencies of the outstanding balance to the hospital but only after 180 days"
+- Lien, debt collection policy p.3: "when income does not exceed 400% FPL, PIH's collection agency may file a lien on a primary residence"
+- Both documents effective 2026-07-10. California bans all three for patients who qualify for help.
+
+---
+
+## Sources for every number
+
+Checked 2026-10-24 against main at 618c888 and the live site.
+
+| Number | Value | Source |
+|---|---|---|
+| Hospitals on file / readable | 470 / 463 | `public/audit/findings.json` `hospitalsTotal`, `hospitalsChecked` (live file is identical) |
+| Policy documents | 2,333 | `audit/corpus/summary.json` (document slots; about 1,451 unique files) |
+| Sentences reviewed | 997 | `findings.json` `packetsReviewed` |
+| Hospitals by worst verdict | 14 conflict, 47 likely, 192 worth asking | `findings.json`, worst verdict per hospital |
+| Conflict findings | 21 | `findings.json` |
+| Top rules (conflict + likely) | credit reporting 33, assets 21, deadlines 14 | `findings.json` |
+| Hand check of conflict flags | every quote on its cited page, every verdict held (all 22 of the first run) | `docs/AUDIT-SPOTCHECK.md` |
+| Free care cutoff known | 159 of 470 | `convex/lib/hospitalIndex.json` |
+| 2026 poverty line, 1 person | $15,960 | HHS 2026 guidelines; `convex/lib/reference.ts` |
+| 400% for 1 person | $63,840 ("about $64,000") | 4 x 15,960 |
+| 138% for 1 person | $22,025 ("about $22,000") | 1.38 x 15,960 |
+| SF General free care cutoff | 138% | `convex/lib/snapshots/zsfg.json`; policy: "may not exceed 138% of the Federal poverty level" |
+| Sample bill | $12,741, 8 lines | `convex/lib/sampleBill.json` |
+| Duplicate blood count (85025) | $269 | `sampleBill.json` lines 5 and 6 |
+| Chest X-ray (71046) | billed $482, list $402 | `sampleBill.json`, `zsfg.json` |
+| Total to question | $349 | 269 + 80 |
+| Sample income | 125% of poverty | 20,000 / 15,960 = 125.3% |
+| Eval reading (Claude) | 30 of 30 bills, 181 of 181 lines | `eval/score.py --pred preds`, rerun 2026-10-24; README "The bill checks" |
+| Eval errors (Claude, end to end) | 24 of 24 caught, 0 false alarms on 8 clean bills | same run |
+| Eval (Azure gpt-4.1-mini) | 16 of the 30 bills run, 8 of 11 caught, 0 false alarms | `eval/score.py --pred preds-azure`, rerun 2026-10-24 |
+| Cost per read | about $0.04 (2,449 in, 1,422 out tokens) | `docs/NUMBERS-CHECK.md` |
+| Live Apify lookup | about 17 s | `docs/LOGBOOK.md` 03:36 |
+| Largest price file tested | 91 MB (UCSF) | `actor/README.md` |
+| Codes per hospital | 17 to 23 | `convex/lib/snapshots/*.json` |
+| Production models | read: Claude Opus 5.5. Second read of charges: Azure AI Document Intelligence (prebuilt-layout), Claude backup. Letters and chat: Claude, Azure OpenAI gpt-4.1-mini backup. Azure AI Search and Content Safety on | live `pipeline:map` on zealous-grouse-384, 2026-10-24 5 PM |
+| Document Intelligence eval | 181 of 181 lines (code and charge) on 30 bills, 8 of 8 on the sample photo, median 7.4 s, agreed with Claude on every charge | `eval/read_docintel.py`, run 2026-10-24 |
+| Upload rate limit | 60 per minute, shared | `convex/cases.ts` |
+| SF hospitals where cash price = gross on every item | 4 of 6 (SF General, CPMC, Saint Francis, St. Mary's) | `pipeline/out/price_audit.json`, `docs/PRICE-FILES.md`; matched by `xcheck.py` |
+| SF General lowest insurer rate, % of cash (median) | 4.4%; cash above every insurer on 92.1% of items | same |
+| SF General chest X-ray (71046) | gross $402 = cash $402; insurer rates $10.31 to $27.48 | `pipeline/out/prices_zsfg.json` |
+| SF General min above max | 869 items | `price_audit.json` `consistency` |
+| CMS validator on the 6 files | 0 errors (Kaiser: 1 version alert) | `@cmsgov/hpt-validator-cli` 1.10.8, v3.0, run 2026-10-24 |
+| Rust audit speed | 6 files, about 520 MB, in 1.3 s; 11 MB peak memory on Kaiser | measured 2026-10-24 |
