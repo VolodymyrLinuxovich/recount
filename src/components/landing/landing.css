@@ -1607,7 +1607,8 @@ html[data-contrast] .landing .ld-ledger-lines li.is-flag {
 .landing .ld-app {
   padding: 64px 0;
   border-top: 1px solid var(--rc-line, #e7e2f3);
-  scroll-margin-top: 68px;
+  /* No sticky header on this page: a jump to #get-app lands right at the section's top. */
+  scroll-margin-top: 0;
 }
 .landing .ld-app-head {
   display: flex;
