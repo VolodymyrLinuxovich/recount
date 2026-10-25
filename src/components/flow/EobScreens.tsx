@@ -1,7 +1,7 @@
 "use client";
 
 // The insurance statement (Explanation of Benefits, EOB): add it, wait while it's read,
-// then see the key numbers next to the bill's. The rules that compare them run on the server
+// or type its totals, then see the key numbers next to the bill's. The rules that compare them run on the server
 // (convex/lib/eobChecks.ts, docs/EOB.md); this screen only shows what they found.
 import { useMutation } from "convex/react";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import { useT } from "../i18n/I18nProvider";
 import type { Key } from "../i18n/strings";
 import { FileProblem, prepareFile } from "../prepareFile";
 import { type CaseView, type Finding, type ParsedEob, money } from "../types";
-import { billDue, eobGap, eobNumbersApply, eobStillOwes, isEobKind, targetOf } from "./eobView";
+import { billDue, eobGap, eobNumbersApply, eobStillOwes, isEobKind, parseTypedDollars, targetOf } from "./eobView";
 import { findingTitle } from "./FoundScreens";
 import { StepFrame } from "./StepFrame";
 import { canChangeEob, findingScreens } from "./steps";
@@ -32,18 +32,19 @@ function statementFile(c: CaseView): { url: string; image: boolean } | null {
 
 /* ---------- the screen ---------- */
 
-type View = "ask" | "sending" | "reading" | "error" | "result";
+type View = "ask" | "typing" | "sending" | "reading" | "error" | "result";
 
 export function EobStep({ c, go, back }: ScreenProps) {
   const { t } = useT();
   const generateUploadUrl = useMutation(api.cases.generateUploadUrl);
   const addEob = useMutation(api.cases.addEob);
-  const addSampleEob = useMutation(api.cases.addSampleEob);
   const removeEob = useMutation(api.cases.removeEob);
   const photoInput = useRef<HTMLInputElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const running = useRef(false);
-  const [busy, setBusy] = useState<null | "file" | "sample" | "remove">(null);
+  const [busy, setBusy] = useState<null | "file" | "remove">(null);
+  // The "type the amounts" form is open (from the ask, error or result view).
+  const [typing, setTyping] = useState(false);
   const [problem, setProblem] = useState<Key | null>(null);
   const [confirmRemove, setConfirmRemove] = useState(false);
 
@@ -54,7 +55,9 @@ export function EobStep({ c, go, back }: ScreenProps) {
   const onBack = beforeAnswer ? back : () => go("answer");
 
   const view: View =
-    busy === "file" || busy === "sample"
+    typing && changeable
+      ? "typing"
+      : busy === "file"
       ? "sending"
       : c.eobStatus === "reading"
         ? "reading"
@@ -101,21 +104,6 @@ export function EobStep({ c, go, back }: ScreenProps) {
       running.current = false;
       setBusy(null);
       if (input) input.value = "";
-    }
-  }
-
-  async function onSample() {
-    if (running.current || !changeable) return;
-    running.current = true;
-    setBusy("sample");
-    setProblem(null);
-    try {
-      await addSampleEob({ id: c._id as Id<"cases">, token: c.token });
-    } catch {
-      setProblem("eob.uploadFailed");
-    } finally {
-      running.current = false;
-      setBusy(null);
     }
   }
 
@@ -167,6 +155,21 @@ export function EobStep({ c, go, back }: ScreenProps) {
   const liveRegion = <p className="visually-hidden" aria-live="polite" ref={live} />;
   const photo = { label: t("eob.photo"), onClick: () => photoInput.current?.click() };
   const skip = { label: t("eob.skip"), onClick: onward };
+  const typed = c.eobSource === "typed";
+  const otherWays = changeable && (
+    <div className="step-links">
+      <button type="button" className="link-btn" onClick={() => fileInput.current?.click()}>
+        {t("eob.file")}
+      </button>
+      <button type="button" className="link-btn" onClick={() => setTyping(true)}>
+        {t("eob.typeLink")}
+      </button>
+    </div>
+  );
+
+  if (view === "typing") {
+    return <EobTypeForm c={c} onDone={() => setTyping(false)} onBack={() => setTyping(false)} />;
+  }
 
   if (view === "sending" || view === "reading") {
     const file = statementFile(c);
@@ -197,25 +200,14 @@ export function EobStep({ c, go, back }: ScreenProps) {
         phase={2}
         eyebrow={t("eob.eyebrow")}
         title={notEob ? t("eob.notEobH") : t("eob.failedH")}
-        primary={changeable ? (c.sample ? { label: t("eob.sample"), onClick: onSample } : { label: t("eob.tryAgain"), onClick: photo.onClick }) : skip}
+        primary={changeable ? { label: t("eob.tryAgain"), onClick: photo.onClick } : skip}
         secondary={changeable ? skip : undefined}
         onBack={onBack}
       >
         {inputs}
         {notEob && c.eobFileUrl && isImage(c.eobFileType, c.eobFileUrl) && <BadDocument url={c.eobFileUrl} alt={t("eob.statementAlt")} label={t("flow.invalidDoc")} />}
         <p>{notEob ? t("eob.notEobBody") : /TOO_LARGE/.test(c.eobError ?? "") ? t("eob.tooLargeBody") : /APPROVED/.test(c.eobError ?? "") ? t("eob.approvedBody") : t("eob.failedBody")}</p>
-        {changeable && (
-          <div className="step-links">
-            {c.sample && (
-              <button type="button" className="link-btn" onClick={photo.onClick}>
-                {t("eob.photoInstead")}
-              </button>
-            )}
-            <button type="button" className="link-btn" onClick={() => fileInput.current?.click()}>
-              {t("eob.file")}
-            </button>
-          </div>
-        )}
+        {otherWays}
         {problemNote}
         {liveRegion}
       </StepFrame>
@@ -230,8 +222,8 @@ export function EobStep({ c, go, back }: ScreenProps) {
         {!changeable && c.status === "approved" && <p className="found-quiet">{t("eob.locked")}</p>}
         {changeable &&
           (confirmRemove ? (
-            <div className="eob-remove" role="group" aria-label={t("eob.removeQ")}>
-              <p className="eob-remove-q">{t("eob.removeQ")}</p>
+            <div className="eob-remove" role="group" aria-label={typed ? t("eob.typeRemoveQ") : t("eob.removeQ")}>
+              <p className="eob-remove-q">{typed ? t("eob.typeRemoveQ") : t("eob.removeQ")}</p>
               <div className="eob-remove-row">
                 <button type="button" className="btn btn-big" onClick={onRemove} disabled={busy === "remove"} aria-busy={busy === "remove" || undefined}>
                   {busy === "remove" ? t("eob.removing") : t("eob.removeYes")}
@@ -243,8 +235,13 @@ export function EobStep({ c, go, back }: ScreenProps) {
             </div>
           ) : (
             <div className="step-links">
+              {typed && (
+                <button type="button" className="link-btn" onClick={() => setTyping(true)}>
+                  {t("eob.typeChange")}
+                </button>
+              )}
               <button type="button" className="link-btn" onClick={() => setConfirmRemove(true)}>
-                {t("eob.remove")}
+                {typed ? t("eob.typeRemove") : t("eob.remove")}
               </button>
             </div>
           ))}
@@ -255,7 +252,7 @@ export function EobStep({ c, go, back }: ScreenProps) {
   }
 
   // Ask: do you have insurance, and its statement?
-  const main = !changeable ? { label: t("eob.continue"), onClick: onward } : c.sample ? { label: busy === "sample" ? t("eob.sampleBusy") : t("eob.sample"), onClick: onSample } : photo;
+  const main = !changeable ? { label: t("eob.continue"), onClick: onward } : photo;
   return (
     <StepFrame phase={2} eyebrow={t("eob.eyebrow")} title={t("eob.askH")} primary={main} secondary={changeable ? skip : undefined} onBack={onBack}>
       {inputs}
@@ -268,18 +265,7 @@ export function EobStep({ c, go, back }: ScreenProps) {
       <p>{t("eob.what")}</p>
       <p>{t("eob.why")}</p>
       <p className="quiet">{t("eob.where")}</p>
-      {changeable && (
-        <div className="step-links">
-          {c.sample && (
-            <button type="button" className="link-btn" onClick={photo.onClick}>
-              {t("eob.photoInstead")}
-            </button>
-          )}
-          <button type="button" className="link-btn" onClick={() => fileInput.current?.click()}>
-            {t("eob.file")}
-          </button>
-        </div>
-      )}
+      {otherWays}
       {problemNote}
       {liveRegion}
     </StepFrame>
@@ -320,7 +306,13 @@ function EobResult({ c, eob, go }: { c: CaseView; eob: ParsedEob; go: ScreenProp
             </a>
           ))}
         <div className="eob-head-text">
-          {eob.payer && <p className="found-hospital">{t("eob.from", { payer: eob.payer })}</p>}
+          {c.eobSource === "typed" && <p className="found-hospital">{t("eob.typedFrom")}</p>}
+          {eob.payer &&
+            (c.eobSource === "typed" ? (
+              <p className="found-quiet">{t("eob.typedPayer", { payer: eob.payer })}</p>
+            ) : (
+              <p className="found-hospital">{t("eob.from", { payer: eob.payer })}</p>
+            ))}
           {eob.claimNumber && <p className="found-quiet">{t("eob.claim", { claim: eob.claimNumber })}</p>}
           {c.eobSource === "sample-source" && <p className="found-quiet">{t("eob.sampleNote")}</p>}
         </div>
@@ -392,5 +384,179 @@ function EobResult({ c, eob, go }: { c: CaseView; eob: ParsedEob; go: ScreenProp
         )}
       </section>
     </>
+  );
+}
+
+/* ---------- type the amounts instead of a photo ---------- */
+
+type Net = "in" | "out" | "unknown";
+const AMOUNT_PROBLEM: Record<"bad" | "tooBig", Key> = { bad: "eob.typeBad", tooBig: "eob.typeTooBig" };
+const asText = (x: number | null | undefined) => (x == null ? "" : String(x));
+/** The field already shows "$", so a typed or pasted one isn't repeated. */
+const noDollar = (s: string) => s.replace(/^\s*\$\s*/, "");
+
+/** One screen: what the statement says you owe (required), what the plan paid, network, insurer. */
+function EobTypeForm({ c, onDone, onBack }: { c: CaseView; onDone: () => void; onBack: () => void }) {
+  const { t, lang } = useT();
+  const setEobManual = useMutation(api.cases.setEobManual);
+  // Changing typed amounts starts from what was typed before.
+  const before = c.eobSource === "typed" ? c.eob : null;
+  const [owes, setOwes] = useState(asText(before?.totalPatientOwes));
+  const [paid, setPaid] = useState(asText(before?.totalPlanPaid));
+  const [net, setNet] = useState<Net | null>(before ? before.network : null);
+  const [payer, setPayer] = useState(before?.payer ?? "");
+  const [tried, setTried] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState<Key | null>(null);
+  const owesRef = useRef<HTMLInputElement>(null);
+  const paidRef = useRef<HTMLInputElement>(null);
+
+  const o = parseTypedDollars(owes);
+  const p = parseTypedDollars(paid);
+  const owesError: Key | null = o.problem ? AMOUNT_PROBLEM[o.problem] : o.value == null && tried ? "eob.typeOwesMissing" : null;
+  const paidError: Key | null = p.problem ? AMOUNT_PROBLEM[p.problem] : null;
+  // Only say what's wrong once they've typed something or tried to send it.
+  const showOwes = owesError && (tried || owes.trim() !== "");
+  const showPaid = paidError && (tried || paid.trim() !== "");
+
+  async function submit() {
+    setTried(true);
+    if (o.value == null || owesError || paidError) {
+      (o.value == null || owesError ? owesRef : paidRef).current?.focus();
+      return;
+    }
+    setBusy(true);
+    setFailed(null);
+    try {
+      await setEobManual({
+        id: c._id as Id<"cases">,
+        token: c.token,
+        patientOwes: o.value,
+        planPaid: p.value,
+        network: net ?? "unknown",
+        payer: payer.trim() || null,
+      });
+      onDone();
+    } catch (e) {
+      setFailed(/approved/i.test(String(e)) ? "eob.locked" : /too many/i.test(String(e)) ? "start.busy" : "eob.typeFailed");
+      setBusy(false);
+    }
+  }
+
+  const nets: [Net, Key][] = [
+    ["in", "eob.typeNetYes"],
+    ["out", "eob.typeNetNo"],
+    ["unknown", "eob.typeNetUnsure"],
+  ];
+
+  return (
+    <StepFrame
+      phase={2}
+      eyebrow={t("eob.eyebrow")}
+      title={t("eob.typeH")}
+      primary={{ label: busy ? t("eob.typeSaving") : t("eob.typeSubmit"), onClick: submit, busy }}
+      onBack={onBack}
+    >
+      <form
+        className="eob-type"
+        noValidate
+        onSubmit={(e) => {
+          e.preventDefault();
+          void submit();
+        }}
+      >
+        <p className="quiet">{t("eob.typeHelp")}</p>
+
+        <div className="q-sub">
+          <label className="q-label-sm eob-type-label" htmlFor="eob-owes">
+            {t("eob.typeOwes")}
+          </label>
+          <div className="money-input money-input-big">
+            <span aria-hidden>$</span>
+            <input
+              ref={owesRef}
+              id="eob-owes"
+              inputMode="decimal"
+              autoComplete="off"
+              required
+              aria-required="true"
+              aria-invalid={showOwes ? true : undefined}
+              aria-describedby={showOwes ? "eob-owes-err" : undefined}
+              placeholder={t("eob.typeOwesEg")}
+              value={owes}
+              onChange={(e) => setOwes(noDollar(e.target.value))}
+            />
+          </div>
+          {showOwes ? (
+            <p id="eob-owes-err" className="q-check q-check-bad" role="alert">
+              {t(owesError!)}
+            </p>
+          ) : (
+            o.value != null && <p className="q-check">{money(o.value, true, lang)}</p>
+          )}
+        </div>
+
+        <div className="q-sub">
+          <label className="q-label-sm eob-type-label" htmlFor="eob-paid">
+            {t("eob.typePaid")}
+          </label>
+          <div className="money-input money-input-big">
+            <span aria-hidden>$</span>
+            <input
+              ref={paidRef}
+              id="eob-paid"
+              inputMode="decimal"
+              autoComplete="off"
+              aria-invalid={showPaid ? true : undefined}
+              aria-describedby={showPaid ? "eob-paid-err" : undefined}
+              placeholder={t("eob.typePaidEg")}
+              value={paid}
+              onChange={(e) => setPaid(noDollar(e.target.value))}
+            />
+          </div>
+          {showPaid ? (
+            <p id="eob-paid-err" className="q-check q-check-bad" role="alert">
+              {t(paidError!)}
+            </p>
+          ) : (
+            p.value != null && <p className="q-check">{money(p.value, true, lang)}</p>
+          )}
+        </div>
+
+        <fieldset className="q-sub eob-type-net">
+          <legend className="q-label-sm eob-type-label">{t("eob.typeNet")}</legend>
+          <div className="choice choice-big eob-type-choice">
+            {nets.map(([k, label]) => (
+              <button key={k} type="button" aria-pressed={net === k} onClick={() => setNet(net === k ? null : k)}>
+                {t(label)}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+
+        <div className="q-sub">
+          <label className="q-label-sm eob-type-label" htmlFor="eob-payer">
+            {t("eob.typePayer")}
+          </label>
+          <input
+            id="eob-payer"
+            className="eob-type-text"
+            type="text"
+            autoComplete="organization"
+            maxLength={80}
+            placeholder={t("eob.typePayerEg")}
+            value={payer}
+            onChange={(e) => setPayer(e.target.value)}
+          />
+        </div>
+        {/* Enter in a field sends the form; the bar button does the same. */}
+        <button type="submit" className="visually-hidden" tabIndex={-1} aria-hidden="true" />
+      </form>
+      {failed && (
+        <p className="error-note" role="alert">
+          {t(failed)}
+        </p>
+      )}
+    </StepFrame>
   );
 }

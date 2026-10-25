@@ -65,7 +65,7 @@ export interface CaseView {
   eob?: ParsedEob | null;
   /** "NOT_AN_EOB" when the file wasn't an insurance statement; other text for other failures. */
   eobError?: string;
-  eobSource?: "claude" | "sample-source";
+  eobSource?: "claude" | "sample-source" | "typed";
   eobFileUrl?: string | null;
   eobFileType?: string;
   lettersSource?: "claude" | "template";
