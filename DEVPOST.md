@@ -146,7 +146,7 @@ claude, anthropic-api, azure-openai, azure-ai-search, azure-ai-content-safety, a
 
 ## Thanks
 
-Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7.
+Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7, and for backing our use of HCAI's official data.
 
 ## Links
 

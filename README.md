@@ -224,6 +224,14 @@ from the hospital's real published charges. Cut to about 45 seconds.</sub>
 - A **Display** mode with larger type
 - [/dashboard](https://recount-nu.vercel.app/dashboard) with live agent metrics
 
+<div align="center">
+
+<img src="docs/lupa.gif" alt="Lupa, Recount's helper chat: it says it's an automated helper that only explains this bill and California's rules, offers three questions, and starts answering Why do I owe $0 with the patient's income and the hospital's rule" width="300"/>
+
+<sub>Lupa on the sample bill.</sub>
+
+</div>
+
 **Where Claude is used, and where it is not**
 
 | Step | Who does it | Why |
@@ -424,4 +432,4 @@ Mobile: see [mobile/README.md](mobile/README.md). Actor: see [actor/README.md](a
 
 ---
 
-Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7.
+Thanks to Daniel Lui, Cal Hacks mentor, for the advice on reimbursement and HL7, and for backing our use of HCAI's official data.
