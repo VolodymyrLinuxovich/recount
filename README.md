@@ -211,11 +211,18 @@ from the hospital's real published charges. Cut to about 45 seconds.</sub>
 
 </div>
 
-**Also in the app:** **Lupa**, a helper chat that can read an attached photo or PDF and only answers bill questions
-· bills of up to 6 photo pages · the insurance statement as a photo or typed amounts · Spanish · optional accounts
-· the Android app, and iPhone via Home Screen · a follow-up check-in and a state complaint letter · "Not a valid
-document" for photos that aren't a bill · a **Display** mode with larger type · [/dashboard](https://recount-nu.vercel.app/dashboard)
-with live agent metrics.
+**Also in the app:**
+
+- **Lupa**, a helper chat that can read an attached photo or PDF and only answers bill questions
+- Bills of up to 6 photo pages
+- The insurance statement as a photo or typed amounts
+- Spanish
+- Optional accounts
+- The Android app, and iPhone via Home Screen
+- A follow-up check-in and a state complaint letter
+- "Not a valid document" for photos that aren't a bill
+- A **Display** mode with larger type
+- [/dashboard](https://recount-nu.vercel.app/dashboard) with live agent metrics
 
 **Where Claude is used, and where it is not**
 
