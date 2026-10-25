@@ -3,6 +3,7 @@
 // different ways than the Claude read. Code compares the two, line by line, before anything is checked.
 // On only when AZURE_DOCINTEL_ENDPOINT and AZURE_DOCINTEL_KEY are set; otherwise the second read
 // stays a narrow Claude read of the charges column.
+import { printedAmount } from "./amount";
 import { timeoutSignal } from "./timeout";
 
 const API_VERSION = "2024-11-30";
@@ -25,13 +26,9 @@ const CODE_HEAD = /cpt|hcpcs|proc|code/i;
 const DESC_HEAD = /desc|service|item/i;
 const NOT_A_LINE = /total|payment|adjust|balance|amount due|subtotal|insurance paid/i;
 
-/** "$1,234.50" -> 1234.5; "(25.00)" -> -25; anything else -> null. */
+/** "$1,234.50" -> 1234.5; "(25.00)" -> -25; "11963 00" (UB-04 cents box) -> 11963; anything else -> null. */
 export function money(s: string): number | null {
-  const t = s.trim().replace(/\s+/g, "");
-  const m = /^(\()?(-)?\$?(\d{1,3}(?:,\d{3})+|\d+)?(\.\d+)?(\))?$/.exec(t);
-  if (!m || (!m[3] && !m[4]) || !!m[1] !== !!m[5]) return null;
-  const n = Number(`${(m[3] ?? "0").replace(/,/g, "")}${m[4] ?? ""}`);
-  return m[1] || m[2] ? -n : n;
+  return printedAmount(s);
 }
 
 /**

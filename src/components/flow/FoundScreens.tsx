@@ -4,6 +4,7 @@
 import { useMutation } from "convex/react";
 import { useEffect, useState } from "react";
 import { api } from "../../../convex/_generated/api";
+import { balanceOnly } from "../../../convex/lib/bill";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { useT } from "../i18n/I18nProvider";
 import type { T } from "../i18n/strings";
@@ -288,8 +289,9 @@ export function FoundStep({ c, next, back, go }: ScreenProps) {
       }
   });
 
-  // Nothing readable: ask for a better photo instead of carrying on with an empty bill.
-  if (bill.lines.length === 0 && unsure.length > 0 && c.status === "needs_household")
+  // Nothing readable: ask for a better photo instead of carrying on with an empty bill. A document that
+  // only gives a balance (a summary bill, a collection letter) has no lines to read, so it isn't a retake.
+  if (bill.lines.length === 0 && !balanceOnly(bill) && unsure.length > 0 && c.status === "needs_household")
     return (
       <StepFrame
         phase={1}

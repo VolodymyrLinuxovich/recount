@@ -29,6 +29,7 @@ _sys.path.insert(0, str(_Path(__file__).resolve().parent))  # -I leaves the scri
 import argparse
 import base64
 import json
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -102,13 +103,33 @@ CHARGES_COLUMN = obj({"charges": {"type": "array", "items": {"type": "string"},
                                   "description": "Each line item's charge exactly as printed, top to bottom"}})
 
 
-def money(s: str) -> float | None:
-    """Number(x.replace(/[^0-9.\\-]/g, "")) in the app: NaN (here None) when nothing numeric is left."""
-    t = "".join(c for c in str(s) if c.isdigit() or c in ".-")
-    try:
-        return float(t) if t else 0.0  # Number("") is 0 in JS
-    except ValueError:
+_INT = r"(\d{1,3}(?:,\d{3})+|\d+)"
+_SPLIT = re.compile(rf"^{_INT}\s+(\d{{2}})$")
+_PLAIN = re.compile(rf"^{_INT}?(\.\d{{1,2}})?$")
+_NOISE = re.compile(rf"^{_INT}(\.\d{{2}})\s+\S.*$")
+
+
+def money(s) -> float | None:
+    """printedAmount in convex/lib/amount.ts: "11963 00" -> 11963.0, "135.00 45" -> 135.0, junk -> None."""
+    s = str(s or "").strip()
+    if not s:
         return None
+    neg = False
+    if s.startswith("(") and s.endswith(")"):
+        neg, s = True, s[1:-1].strip()
+    s = re.sub(r"^\$\s*", "", s)
+    if s.startswith("-"):
+        neg, s = not neg, re.sub(r"^\$\s*", "", s[1:].strip())
+    m = _SPLIT.match(s)
+    if m:
+        n = float(m[1].replace(",", "") + "." + m[2])
+    elif (m := _PLAIN.match(s)) and (m[1] or m[2]):
+        n = float((m[1] or "0").replace(",", "") + (m[2] or ""))
+    elif m := _NOISE.match(s):
+        n = float(m[1].replace(",", "") + m[2])
+    else:
+        return None
+    return -n if neg else n
 
 
 class Azure:
