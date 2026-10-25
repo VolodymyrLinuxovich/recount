@@ -194,26 +194,39 @@
   width: 100%;
 }
 
-/* On every width: hospitals checked on top, the two flag counts side by side under it, and the
-   button as wide as the cards above it. */
+/* The headline centred on top, then the three counts on one line, then the button as wide
+   as the cards. Narrow phones keep 463 on its own line with the two flag counts under it. */
 .a-hero-cta {
   min-height: 60px;
   font-size: var(--fs-md, 1.125rem);
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
-  .a-hero {
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    align-items: center;
-    gap: var(--sp-8);
-  }
-  .a-hero-side {
-    display: grid;
-    justify-items: stretch;
-  }
+.a-hero {
+  justify-items: center;
+  text-align: center;
+}
+
+.a-hero-copy {
+  max-width: 920px;
+}
+
+.a-hero-side {
+  display: grid;
+  width: 100%;
+  max-width: 960px;
+}
+
+.a-fig {
+  align-items: center;
+}
+
+@media (min-width: 560px) {
   .a-figs {
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .a-fig:first-child {
+    grid-column: auto;
   }
 }
 
