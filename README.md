@@ -33,7 +33,7 @@ for you.**
 **Live demo:** [recount-nu.vercel.app](https://recount-nu.vercel.app) (open it on a phone, tap **Try a sample bill**)<br/>
 **Demo video:** [youtu.be/24TXyeufQPs](https://youtu.be/24TXyeufQPs)
 
-<table><tr><td align="center">
+<table align="center"><tr><td align="center">
 <a href="https://recount-nu.vercel.app/app"><img src="public/app-qr.svg" alt="QR code that opens recount-nu.vercel.app/app and downloads the Android app" width="140"/></a><br/>
 <sub><b>Android:</b> scan to download the app.<br/>iPhone: open the website and add it to the Home Screen.</sub>
 </td></tr></table>
