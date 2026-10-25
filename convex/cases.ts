@@ -112,7 +112,6 @@ export const submitHousehold = mutation({
   handler: async (ctx, { id, token, ...h }) => {
     const c = await mustOwn(ctx, id, token);
     if (!c.bill) throw new ConvexError("Bill not read yet");
-    if (c.status === "drafting") return; // letters are already being written
     await limit(ctx, `draft:${id}`, 10, 10 * 60_000, "Too many changes in a row. Please wait a few minutes.");
     if (h.size < 1 || h.size > 20 || h.annualIncome < 0) throw new ConvexError("Check household size and income");
     const eligibility = assess(h, FPL, c.hospital ?? null, c.bill.amountDue ?? null, c.lang ?? "en");
