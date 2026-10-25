@@ -93,6 +93,7 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
   const messages = useQuery(api.chat.list, sessionId ? { sessionId, ...(caseId ? { caseId, token } : {}) } : "skip");
   const send = useMutation(api.chat.send);
   const uploadUrl = useMutation(api.chat.generateUploadUrl);
+  const discard = useMutation(api.chat.discardUpload);
   const [text, setText] = useState("");
   const [file, setFile] = useState(null); // { uri, type, name }
   const [menu, setMenu] = useState(false);
@@ -116,16 +117,20 @@ function ChatWindow({ t, lang, caseId, token, onClose }) {
     setError(null);
     setMenu(false);
     setSending(true);
+    let uploaded = null;
     try {
       let attach = {};
       if (file) {
         const up = await uploadFile(() => uploadUrl({ lang }), file.uri, file.type);
+        uploaded = up.storageId;
         attach = { fileId: up.storageId, fileType: up.type, fileName: file.name };
       }
       await send({ sessionId, ...(caseId ? { caseId, token } : {}), lang, content: question.slice(0, MAX_MESSAGE), ...attach });
       setText("");
       setFile(null);
     } catch (e) {
+      // The message didn't go through, so the uploaded file isn't kept.
+      if (uploaded) discard({ fileId: uploaded }).catch(() => {});
       setError(e instanceof ConvexError ? String(e.data) : t.chatFailed);
     } finally {
       setSending(false);

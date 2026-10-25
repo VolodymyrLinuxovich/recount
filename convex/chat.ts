@@ -9,6 +9,7 @@
 import { limit } from "./lib/limit";
 import { FILE_KEEP_MS, FRESH_MS, attachMessage, attachProblem, attachType, cleanFileName } from "./lib/attach";
 import { currentUser } from "./lib/user";
+import { billPages } from "./lib/pages";
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
@@ -95,6 +96,18 @@ export const generateUploadUrl = mutation({
   },
 });
 
+/** Delete a file uploaded for a message that then failed to send, so it isn't kept forever. */
+export const discardUpload = mutation({
+  args: { fileId: v.id("_storage") },
+  handler: async (ctx, { fileId }) => {
+    const meta = await ctx.db.system.get(fileId);
+    // Only a fresh upload that no message uses. Storage ids can't be guessed, so this only ever hits the caller's own file.
+    if (!meta || Date.now() - meta._creationTime > FRESH_MS) return;
+    if (await ctx.db.query("chatMessages").withIndex("by_file", (q) => q.eq("fileId", fileId)).first()) return;
+    await ctx.storage.delete(fileId);
+  },
+});
+
 /** The patient sends a message. Returns immediately; the reply streams into the same list. */
 export const send = mutation({
   args: {
@@ -138,7 +151,7 @@ export const send = mutation({
       const meta = await ctx.db.system.get(fileId);
       const reused = !!(await ctx.db.query("chatMessages").withIndex("by_file", (q) => q.eq("fileId", fileId)).first());
       const c = caseId ? await ctx.db.get(caseId) : null;
-      const caseFile = !!c && (c.fileId === fileId || c.eobFileId === fileId);
+      const caseFile = !!c && (billPages(c).some((p) => p.fileId === fileId) || c.eobFileId === fileId);
       const stale = !meta || now - meta._creationTime > FRESH_MS || reused || caseFile;
       const problem = stale ? "missing" : attachProblem(meta, fileType);
       if (problem) throw new ConvexError(attachMessage(problem, lang));

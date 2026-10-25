@@ -20,6 +20,11 @@ describe("Lupa topic gate (rules)", () => {
       expect(quickTopic(t), t).toBe("on");
   });
 
+  it("sends everyday uses of bill words to the classifier", () => {
+    for (const t of ["Write a cover letter for my job application", "How do I delete a file in Linux?", "What should my household budget be?"])
+      expect(quickTopic(t), t).toBe("unsure");
+  });
+
   it("refuses obvious off topic requests", () => {
     for (const t of [
       "Write me a short poem about cats",

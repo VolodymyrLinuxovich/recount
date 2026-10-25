@@ -95,6 +95,7 @@ export function useChat({
   const rows = useQuery(api.chat.list, sessionId ? { sessionId, caseId: id, token } : "skip");
   const sendMutation = useMutation(api.chat.send);
   const uploadUrl = useMutation(api.chat.generateUploadUrl);
+  const discard = useMutation(api.chat.discardUpload);
 
   const messages: ChatMessage[] | undefined = rows?.map((m) => ({
     id: m._id,
@@ -110,21 +111,25 @@ export function useChat({
   const send = useCallback(
     async (content: string, lang: Lang, file?: Attachment | null): Promise<SendError | null> => {
       if (!sessionId) return "failed";
+      let uploaded: Id<"_storage"> | null = null;
       try {
         let attach = {};
         if (file) {
           const res = await fetch(await uploadUrl({ lang }), { method: "POST", headers: { "Content-Type": file.type }, body: file.blob });
           if (!res.ok) return "failed";
           const { storageId } = (await res.json()) as { storageId: Id<"_storage"> };
+          uploaded = storageId;
           attach = { fileId: storageId, fileType: file.type, fileName: file.name };
         }
         await sendMutation({ sessionId, caseId: id, token, lang, content, ...attach });
         return null;
       } catch (e) {
+        // The message didn't go through, so the uploaded file isn't kept.
+        if (uploaded) discard({ fileId: uploaded }).catch(() => {});
         return readError(e);
       }
     },
-    [sendMutation, uploadUrl, sessionId, id, token],
+    [sendMutation, uploadUrl, discard, sessionId, id, token],
   );
 
   return { messages, waiting, streaming, send };

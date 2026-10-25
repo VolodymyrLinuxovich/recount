@@ -142,15 +142,23 @@ export const start = mutation({
   args: CreateArgs,
   handler: async (ctx, args) => {
     await limit(ctx, "create", 60, 60_000);
-    const morePages = args.morePages?.length ? args.morePages : undefined;
+    let morePages = args.morePages?.length ? args.morePages : undefined;
     if (morePages) {
       const lang = args.lang ?? "en";
       if (!args.fileId) throw new ConvexError(pagesMessage("count", lang));
       const ids = [args.fileId, ...morePages.map((p) => p.fileId)];
-      const types = [args.fileType ?? "", ...morePages.map((p) => p.type)];
       if (new Set(ids).size !== ids.length) throw new ConvexError(pagesMessage("count", lang));
+      // Types and sizes come from what was stored, not what the app says. A missing upload fails here.
+      const claimed = [args.fileType ?? "", ...morePages.map((p) => p.type)];
+      const types: string[] = [];
       let total = 0;
-      for (const fid of ids) total += (await ctx.db.system.get(fid))?.size ?? 0;
+      for (const [i, fid] of ids.entries()) {
+        const meta = await ctx.db.system.get(fid);
+        if (!meta) throw new ConvexError(pagesMessage("count", lang));
+        types.push(meta.contentType || claimed[i]);
+        total += meta.size;
+      }
+      morePages = morePages.map((p, i) => ({ ...p, type: types[i + 1] || p.type }));
       const problem = pagesProblem(types, total);
       if (problem) throw new ConvexError(pagesMessage(problem, lang));
     }
@@ -360,7 +368,7 @@ export const addEob = mutation({
     const c = await mustOwn(ctx, id, token);
     if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to add an insurance statement.");
     await limit(ctx, "eob", 60, 60_000);
-    if (c.eobFileId && c.eobFileId !== fileId) await ctx.storage.delete(c.eobFileId);
+    if (c.eobFileId && c.eobFileId !== fileId) await deleteStored(ctx, c.eobFileId);
     await ctx.db.patch(id, { eobFileId: fileId, eobFileType: fileType, eobStatus: "reading", eobError: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.readEob, { caseId: id });
   },
@@ -374,7 +382,7 @@ export const addSampleEob = mutation({
     if (!c.sample) throw new ConvexError("The sample insurance statement is only for the sample bill.");
     if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to add an insurance statement.");
     await limit(ctx, "eob", 60, 60_000);
-    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await deleteStored(ctx, c.eobFileId);
     await ctx.db.patch(id, { eobFileId: undefined, eobFileType: undefined, eobStatus: "reading", eobError: undefined });
     await ctx.scheduler.runAfter(0, internal.agent.readEob, { caseId: id });
   },
@@ -386,7 +394,7 @@ export const removeEob = mutation({
   handler: async (ctx, { id, token }) => {
     const c = await mustOwn(ctx, id, token);
     if (c.status === "approved") throw new ConvexError("These letters are approved. Undo the approval to remove the insurance statement.");
-    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await deleteStored(ctx, c.eobFileId);
     const clear = { eobFileId: undefined, eobFileType: undefined, eobStatus: undefined, eob: undefined, eobSource: undefined, eobError: undefined };
     if (usableEob(c)) await refreshFindings(ctx, c, null, clear);
     else await ctx.db.patch(id, clear);
@@ -457,7 +465,7 @@ export const setEobManual = mutation({
     if ([patientOwes, ...(planPaid != null ? [planPaid] : [])].some((x) => typedAmountProblem(x))) throw new ConvexError("Check the amounts");
     if ((payer ?? "").length > 200) throw new ConvexError("The insurer's name is too long");
     const eob = typedEob({ patientOwes, planPaid, network, payer });
-    if (c.eobFileId) await ctx.storage.delete(c.eobFileId);
+    await deleteStored(ctx, c.eobFileId);
     await applyReadyEob(ctx, c, eob, { eob, eobSource: "typed", eobStatus: "done", eobError: undefined, eobFileId: undefined, eobFileType: undefined });
   },
 });

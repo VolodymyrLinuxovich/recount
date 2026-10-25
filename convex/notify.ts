@@ -32,6 +32,8 @@ export const register = mutation({
 export async function notifyOnStatus(ctx: MutationCtx, c: Doc<"cases">, next: string | undefined, findings?: unknown) {
   const status = noticeFor(c.status, next);
   if (!status) return;
+  // Most bills (every web bill) have no phone registered: skip the action entirely.
+  if (!(await ctx.db.query("pushTokens").withIndex("by_case", (q) => q.eq("caseId", c._id)).first())) return;
   const n = Array.isArray(findings) ? findings.length : Array.isArray(c.findings) ? c.findings.length : 0;
   await ctx.scheduler.runAfter(0, internal.notify.send, { caseId: c._id, status, findings: n });
 }

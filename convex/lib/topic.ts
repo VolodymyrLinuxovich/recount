@@ -23,11 +23,19 @@ const DOMAIN_RE = words(
     "bills?|billed|billing|invoice|hospitals?|clinic|emergency room|ambulance|surgery|charges?|charged|overcharg\\p{L}*|cpt|hcpcs",
     "charity(?: care)?|financial (?:assistance|aid|help)|discounts?|poverty|insur\\p{L}*|eob|explanation of benefits|deductible|co-?pays?|coinsurance",
     "out[- ]of[- ]network|in[- ]network|medi-?cal|medicare|medicaid|covered california|claims?|denied|denial|appeal\\p{L}*",
-    "medical debt|debts?|collections?|collectors?|credit (?:report|score|bureau)s?|lien|garnish\\p{L}*|sued|lawsuit|payment plan|refunds?|owe|owed",
-    "recount|lupa|privacy|my (?:data|information|account)|delete|sign (?:in|up)|letters?|household|income|hcai|patient|medical|doctor",
+    "medical debt|debts?|collections?|collectors?|credit (?:report|score|bureau)s?|lien|garnish\\p{L}*|sued|lawsuit|payment plan|refunds?",
+    "recount|lupa|hcai|medical (?:bills?|debt|costs?|records?)",
     "facturas?|cobr\\p{L}*|cargos?|hospital(?:es)?|seguros?|aseguradora|deducible|copagos?|deudas?|cr[eé]dito|atenci[oó]n caritativa|ayuda financiera",
-    "descuentos?|pobreza|ingresos|hogar|cartas?|gravamen|embargo|reembolsos?|demanda|apelaci[oó]n|apelar|reclamos?|negad[oa]|plan de pagos?|debo",
-    "privacidad|borrar|m[eé]dic[oa]s?|emergencias?|paciente",
+    "descuentos?|pobreza|gravamen|embargo|reembolsos?|apelaci[oó]n|apelar|plan de pagos?|emergencias?",
+  ].join("|"),
+);
+
+/** Words that are often about a bill but also come up everywhere else ("a cover letter", "delete a file").
+ * Alone they send the question to the classifier instead of letting it straight through. */
+const WEAK_RE = words(
+  [
+    "owe|owed|privacy|my (?:data|information|account)|delete|sign (?:in|up)|letters?|household|income|patient|medical|doctor",
+    "ingresos|hogar|cartas?|demanda|reclamos?|negad[oa]|debo|privacidad|borrar|m[eé]dic[oa]s?|paciente",
   ].join("|"),
 );
 
@@ -54,10 +62,12 @@ export function quickTopic(text: string, hasFile = false): Gate {
   if (CRISIS_RE.test(t)) return "crisis";
   if (!t) return hasFile ? "on" : "unsure";
   if (SMALL_TALK_RE.test(t)) return "on";
-  const domain = DOMAIN_RE.test(t);
   const off = OFF_RE.test(t);
-  if (off && !domain && !hasFile) return "off";
-  if (off) return "unsure"; // "write a poem about my bill" or "translate this letter": let the classifier decide
+  // A weak word next to a dollar amount ("why do I owe $40?") is about a bill.
+  const domain = DOMAIN_RE.test(t) || (!off && WEAK_RE.test(t) && /\$\s?\d/.test(t));
+  const weak = !domain && WEAK_RE.test(t);
+  if (off && !domain && !weak && !hasFile) return "off";
+  if (off || weak) return "unsure"; // "write a poem about my bill", "a cover letter", "delete a file": the classifier decides
   if (domain) return "on";
   return "unsure";
 }
