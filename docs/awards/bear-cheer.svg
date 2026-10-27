@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" width="240" height="220">
+  <!-- confetti -->
+  <g>
+    <rect x="30" y="-10" width="7" height="12" fill="#97D700"><animateTransform attributeName="transform" type="translate" values="0 0; 8 230" dur="2.2s" repeatCount="indefinite"/></rect>
+    <rect x="70" y="-30" width="6" height="10" fill="#FDB515"><animateTransform attributeName="transform" type="translate" values="0 0; -6 250" dur="2.6s" repeatCount="indefinite"/></rect>
+    <rect x="120" y="-20" width="7" height="11" fill="#EE342F"><animateTransform attributeName="transform" type="translate" values="0 0; 10 240" dur="2s" repeatCount="indefinite"/></rect>
+    <rect x="170" y="-40" width="6" height="12" fill="#3B7EA1"><animateTransform attributeName="transform" type="translate" values="0 0; -8 260" dur="2.4s" repeatCount="indefinite"/></rect>
+    <rect x="210" y="-15" width="7" height="10" fill="#97D700"><animateTransform attributeName="transform" type="translate" values="0 0; 6 235" dur="2.8s" repeatCount="indefinite"/></rect>
+    <circle cx="50" cy="-50" r="4" fill="#FDB515"><animateTransform attributeName="transform" type="translate" values="0 0; 4 270" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="190" cy="-25" r="4" fill="#EE342F"><animateTransform attributeName="transform" type="translate" values="0 0; -4 245" dur="2.3s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- whole bear bounces -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 6; 0 -6; 0 6" dur="0.6s" repeatCount="indefinite"/>
+
+    <!-- left arm + pom-pom -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="-25 88 135; 20 88 135; -25 88 135" dur="0.6s" repeatCount="indefinite"/>
+      <rect x="78" y="80" width="20" height="58" rx="10" fill="#8B5A2B"/>
+      <circle cx="88" cy="74" r="16" fill="#FDB515"/>
+      <circle cx="80" cy="68" r="7" fill="#FFD25A"/>
+      <circle cx="96" cy="78" r="6" fill="#E89E00"/>
+    </g>
+    <!-- right arm + pom-pom -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="25 152 135; -20 152 135; 25 152 135" dur="0.6s" repeatCount="indefinite"/>
+      <rect x="142" y="80" width="20" height="58" rx="10" fill="#8B5A2B"/>
+      <circle cx="152" cy="74" r="16" fill="#97D700"/>
+      <circle cx="144" cy="68" r="7" fill="#B8EE3A"/>
+      <circle cx="160" cy="78" r="6" fill="#6FA300"/>
+    </g>
+
+    <!-- body -->
+    <ellipse cx="120" cy="168" rx="40" ry="38" fill="#8B5A2B"/>
+    <ellipse cx="120" cy="174" rx="25" ry="24" fill="#D9A866"/>
+    <!-- feet -->
+    <ellipse cx="100" cy="204" rx="14" ry="8" fill="#6E4520"/>
+    <ellipse cx="140" cy="204" rx="14" ry="8" fill="#6E4520"/>
+
+    <!-- head -->
+    <circle cx="94" cy="92" r="13" fill="#8B5A2B"/>
+    <circle cx="146" cy="92" r="13" fill="#8B5A2B"/>
+    <circle cx="94" cy="92" r="6" fill="#D9A866"/>
+    <circle cx="146" cy="92" r="6" fill="#D9A866"/>
+    <circle cx="120" cy="120" r="34" fill="#8B5A2B"/>
+    <ellipse cx="120" cy="132" rx="17" ry="13" fill="#D9A866"/>
+    <!-- happy closed eyes -->
+    <path d="M102 114 q6 -7 12 0" stroke="#2A1608" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M126 114 q6 -7 12 0" stroke="#2A1608" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- cheeks -->
+    <circle cx="98" cy="126" r="5" fill="#F28C8C" opacity="0.7"/>
+    <circle cx="142" cy="126" r="5" fill="#F28C8C" opacity="0.7"/>
+    <!-- nose + open mouth -->
+    <ellipse cx="120" cy="126" rx="6" ry="4" fill="#2A1608"/>
+    <path d="M110 133 q10 14 20 0 z" fill="#5A1E14"/>
+    <path d="M114 138 q6 5 12 0" fill="#F27C7C"/>
+
+    <!-- cap -->
+    <path d="M90 100 q30 -30 60 0 z" fill="#003262"/>
+    <rect x="88" y="97" width="64" height="6" rx="3" fill="#003262"/>
+    <rect x="140" y="99" width="22" height="5" rx="2.5" fill="#003262"/>
+    <circle cx="120" cy="79" r="3" fill="#FDB515"/>
+  </g>
+</svg>

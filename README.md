@@ -23,6 +23,17 @@ for you.**
 
 <br/>
 
+## 🏆 CAL HACKS 13.0 WINNER
+
+**Track: Apify · Best Actor**
+
+<img src="docs/awards/bear-cheer.svg" alt="Cheering bear" width="150"/>
+
+<table align="center"><tr>
+<td align="center"><img src="docs/awards/apify-team.jpg" alt="With the Apify team at Cal Hacks 13.0" width="420"/></td>
+<td align="center"><img src="docs/awards/apify-prize.jpg" alt="Apify prize email" width="250"/></td>
+</tr></table>
+
 </div>
 
 ---
